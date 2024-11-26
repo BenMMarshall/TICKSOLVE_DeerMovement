@@ -1,0 +1,67 @@
+# Created by use_targets().
+# Follow the comments below to fill in this target script.
+# Then follow the manual to check and run the pipeline:
+#   https://books.ropensci.org/targets/walkthrough.html#inspect-the-pipeline
+
+# Load packages required to define the pipeline:
+library(targets)
+library(tarchetypes) # Load other packages as needed.
+
+dir.create("figures", showWarnings = FALSE)
+dir.create("tables", showWarnings = FALSE)
+
+# Set target options:
+tar_option_set(
+  packages = c("tibble",
+               "here",
+               "dplyr",
+               "stringr",
+               "sf",
+               "ggplot2",
+               "ggridges",
+               "terra",
+               "tidyterra"), # Packages that your targets need for their tasks.
+  format = "qs", # Optionally set the default storage format. qs is fast.
+  #
+  # Pipelines that take a long time to run may benefit from
+  # optional distributed computing. To use this capability
+  # in tar_make(), supply a {crew} controller
+  # as discussed at https://books.ropensci.org/targets/crew.html.
+  # Choose a controller that suits your needs. For example, the following
+  # sets a controller that scales up to a maximum of two workers
+  # which run as local R processes. Each worker launches when there is work
+  # to do and exits if 60 seconds pass with no tasks to run.
+  #
+  controller = crew::crew_controller_local(workers = 2, seconds_idle = 60)
+)
+
+# Run the R scripts in the R/ folder with your custom functions:
+tar_source()
+
+# Replace the target list below with your own:
+list(
+  tar_target(
+    name = tar_deerData,
+    command = read_deer_data()
+  ),
+  tar_target(
+    name = tar_landuse,
+    command = read_landuse_data(tar_deerData)
+  ),
+  tar_target(
+    name = tar_patches,
+    command = read_patches_data()
+  ),
+  tar_target(
+    name = tar_trackingTables,
+    command = generate_tracking_table(tar_deerData)
+  ),
+  tar_target(
+    name = tar_trackingPlots,
+    command = generate_tracking_plots(tar_deerData)
+  )#,
+  # tar_target(
+  #   name = tar_studyMaps,
+  #   command = generate_study_maps(tar_deerData, tar_patches, tar_landuse)
+  # )
+)

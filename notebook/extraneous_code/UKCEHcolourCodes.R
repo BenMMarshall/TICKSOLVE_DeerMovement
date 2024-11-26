@@ -1,0 +1,26 @@
+UKCEHcolourCodes <- tibble::tribble(
+  ~value, ~alpha, ~colour, ~label,
+  "1", "255", "#33a02c", "Broadleaved woodland",
+  "2", "255", "#005000", "Coniferous woodland",
+  "3", "255", "#f0e442", "Arable",
+  "4", "255", "#01ff7c", "Improved grassland",
+  "5", "255", "#dc9909", "Neutral grassland",
+  "6", "255", "#ffc037", "Calcareous grassland",
+  "7", "255", "#b29100", "Acid grassland",
+  "8", "255", "#fd7bee", "Fen, Marsh and Swamp",
+  "9", "255", "#801a80", "Heather and shrub",
+  "10", "255", "#e68ca6", "Heather grassland",
+  "11", "255", "#cd3bb5", "Bog",
+  "12", "255", "#d2d2ff", "Inland rock",
+  "13", "255", "#00005c", "Saltwater",
+  "14", "255", "#0000ff", "Freshwater",
+  "15", "255", "#987db7", "Supralittoral rock",
+  "16", "255", "#ccb300", "Supralittoral sediment",
+  "17", "255", "#ffff80", "Littoral rock",
+  "18", "255", "#ffff80", "Littoral sediment",
+  "19", "255", "#8080ff", "Saltmarsh",
+  "20", "255", "#000000", "Urban",
+  "21", "255", "#808080", "Suburban")
+
+write.csv(UKCEHcolourCodes, here("data", "GIS data", "UKCEHcolourCodes.csv"),
+          row.names = FALSE)

@@ -1,0 +1,12 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+.Random.seed|object|8b2dea0e142a96eb|||||||||||||||
+generate_tracking_plots|function|a8c035b07dc4bb28|||||||||||||||
+generate_tracking_table|function|3914ce43cf2850f6|||||||||||||||
+read_deer_data|function|1c0a63ea0c9b65e5|||||||||||||||
+read_landuse_data|function|a70eb6e9abd10686|||||||||||||||
+read_patches_data|function|58cd1ef4eab30ceb|||||||||||||||
+tar_deerData|stem|c7d5356afabd585c|566ebced504f0215|f0ef31701e9ebe9f|-1039388040||t20053.4324506079s|0ecfb4c89265ace8|686292|qs|local|vector|||3||
+tar_landuse|stem|54cffee6bd26d2c4|9ade98fbebd966f6|773bf58f0a205053|-1042947407||t20053.4488921188s|347838954c42e1da|1005033|qs|local|vector|||10.281|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
+tar_patches|stem|d659a3079f26970f|6bdc42673a040198|10585cd083c172b2|561265787||t20053.4138170878s|42243063258e1737|1431004|qs|local|vector|||2||
+tar_trackingPlots|stem|7dd2bd1b791d02ce|b349b384a931ff92|74ac7e8e440841c7|1086976774||t20053.4487933544s|36c2a99e37fc35b7|7643955|qs|local|vector|||2.406|Removed 17 rows containing nonfinite outside the scale rangestat_density_ridges.|
+tar_trackingTables|stem|2f2bbb33fccd77ad|226069d56e77fd04|6810bab0b3141a2e|1406021826||t20053.4487939006s|460f654ac6375d0d|676|qs|local|vector|||0.015||
