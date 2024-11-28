@@ -1,12 +1,19 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|8b2dea0e142a96eb|||||||||||||||
-generate_tracking_plots|function|a8c035b07dc4bb28|||||||||||||||
+.Random.seed|object|364d4a8833b3ec91|||||||||||||||
+calculate_akdes|function|69742e0d9d981501|||||||||||||||
+generate_overview_maps|function|e2cd5df227f4b772|||||||||||||||
+generate_palettes|function|bedb4be3859d6506|||||||||||||||
+generate_tracking_plots|function|635daeb982a5128a|||||||||||||||
 generate_tracking_table|function|3914ce43cf2850f6|||||||||||||||
-read_deer_data|function|1c0a63ea0c9b65e5|||||||||||||||
-read_landuse_data|function|a70eb6e9abd10686|||||||||||||||
+plot_homeRange_sizes|function|c86367c04d966bce|||||||||||||||
+read_deer_data|function|a6a33200f32f1114|||||||||||||||
+read_landuse_data|function|b0d3e43c3469de02|||||||||||||||
 read_patches_data|function|58cd1ef4eab30ceb|||||||||||||||
-tar_deerData|stem|c7d5356afabd585c|566ebced504f0215|f0ef31701e9ebe9f|-1039388040||t20053.4324506079s|0ecfb4c89265ace8|686292|qs|local|vector|||3||
-tar_landuse|stem|54cffee6bd26d2c4|9ade98fbebd966f6|773bf58f0a205053|-1042947407||t20053.4488921188s|347838954c42e1da|1005033|qs|local|vector|||10.281|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
+tar_akdeLists|stem|43790e12de9ecdc3|51e20b3c1d015bc4|132a5c0629224359|856298492||t20055.7487066925s|0a4579670d4e4f70|13306531|qs|local|vector|||1087.328||
+tar_deerData|stem|f841ad1fdbfebe65|566ebced504f0215|22aebdacb47e1831|-1039388040||t20055.7347828283s|dc6ee22e376b2953|904747|qs|local|vector|||4.766||
+tar_homeRange_sizePlot|stem|15cd5108d708eb6f|5e82fc8c817ea1a4|b8565ae79d1e76c7|-1202349281||t20055.7487196232s|687ab6ee95812416|14286027|qs|local|vector|||0.5||
+tar_landuse|stem|12fe9b3e10442f2b|9ade98fbebd966f6|ba7515039d28e27c|-1042947407||t20055.8012944245s|122ae4688dd7995e|636181|qs|local|vector|||14|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
+tar_overview_maps|stem|5a8ba8e1ab6c6e16|7ac192b9717a51bf|bac55de836f409c2|951223795||t20055.803958958s|793fac557eb17745|241661549|qs|local|vector|||133.39||
 tar_patches|stem|d659a3079f26970f|6bdc42673a040198|10585cd083c172b2|561265787||t20053.4138170878s|42243063258e1737|1431004|qs|local|vector|||2||
-tar_trackingPlots|stem|7dd2bd1b791d02ce|b349b384a931ff92|74ac7e8e440841c7|1086976774||t20053.4487933544s|36c2a99e37fc35b7|7643955|qs|local|vector|||2.406|Removed 17 rows containing nonfinite outside the scale rangestat_density_ridges.|
-tar_trackingTables|stem|2f2bbb33fccd77ad|226069d56e77fd04|6810bab0b3141a2e|1406021826||t20053.4487939006s|460f654ac6375d0d|676|qs|local|vector|||0.015||
+tar_trackingPlots|stem|1638c47e7efa0281|b349b384a931ff92|0f8cbd65339adbd3|1086976774||t20055.7361736056s|e53e05e0b83618ae|10108797|qs|local|vector|||4.031|Removed 17 rows containing nonfinite outside the scale rangestat_density_ridges.|
+tar_trackingTables|stem|9e773296228309dc|226069d56e77fd04|7b35508dff748796|1406021826||t20055.736314507s|83fa9aa964c289d2|661|qs|local|vector|||0.016||

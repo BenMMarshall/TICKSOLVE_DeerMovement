@@ -28,10 +28,10 @@ generate_tracking_plots <- function(deerData){
       axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1),
       panel.grid.minor = element_blank(),
       panel.border = element_blank(),
-      strip.placement = "outside",
+      legend.position = "none",
       strip.background = element_blank(),
       strip.text.y.left = element_text(angle = 0, face = 2, hjust = 1, vjust = 1),
-      legend.position = "none"
+      strip.placement = "outside"
     )
 
   timelagPlot <- deerData %>%
@@ -59,8 +59,10 @@ generate_tracking_plots <- function(deerData){
       legend.position = "none"
     )
 
-  ggsave(durationPlot, filename = here("figures", "trackingDuration.png"), width = 210, height = 120, units = "mm", dpi = 300)
-  ggsave(timelagPlot, filename = here("figures", "trackingTimelag.png"), width = 180, height = 120, units = "mm", dpi = 300)
+  ggsave(durationPlot, filename = here("figures", "trackingDuration.png"),
+         width = 210, height = 120, units = "mm", dpi = 300)
+  ggsave(timelagPlot, filename = here("figures", "trackingTimelag.png"),
+         width = 180, height = 120, units = "mm", dpi = 300)
 
   return(list(
     "durationPlot" = durationPlot,

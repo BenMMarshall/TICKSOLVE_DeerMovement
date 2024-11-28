@@ -15,7 +15,9 @@ read_landuse_data <- function(deerData){
                                        "data", "LCM.tif"))
 
   landAberdeen <- crop(landRastAberdeen, st_bbox(sfDeer %>%
-                                                   filter(region == "Aberdeenshire")))
+                                                   filter(region == "Aberdeenshire")) +
+                         c(-2000, -2000, 2000, 2000)
+                       )
 
   roadsAberdeen_NO <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_NO.gml"),
                               layer = "RoadLink")
@@ -24,7 +26,16 @@ read_landuse_data <- function(deerData){
   roadsAberdeen <- rbind(roadsAberdeen_NO, roadsAberdeen_NJ)
   roadsAberdeenCrop <- sf::st_crop(roadsAberdeen, st_bbox(sfDeer %>%
                                                             filter(region == "Aberdeenshire")))
-
+  roadsAberdeenCrop <- roadsAberdeenCrop %>%
+    mutate(roadSize = case_when(
+      roadFunction == "A Road" ~ "A roads",
+      roadFunction == "B Road" ~ "B roads",
+      roadFunction %in% c("Local Access Road", "Restricted Local Access Road",
+                          "Local Road", "Minor Road", "Secondary Access Road") ~ "C roads",
+      TRUE ~ "Other"
+    )) %>%
+    mutate(roadSize = factor(roadSize,
+                             levels = c("A roads", "B roads", "C roads", "Other")))
 
 
   landRastNewForest <- terra::rast(here("data", "GIS data", "UKCEH_Landcover",
@@ -32,7 +43,9 @@ read_landuse_data <- function(deerData){
                                         "data", "LCM.tif"))
 
   landNewForest <- crop(landRastNewForest, st_bbox(sfDeer %>%
-                                                     filter(region == "New Forest")))
+                                                     filter(region == "New Forest")) +
+                          c(-2000, -2000, 2000, 2000)
+                        )
 
   landNewForest <- landNewForest %>%
     mutate(LCM_1_cat = paste0("LCM_", LCM_1))
@@ -42,12 +55,27 @@ read_landuse_data <- function(deerData){
   roadsNewForestCrop <- sf::st_crop(roadsNewForest_SY, st_bbox(sfDeer %>%
                                                                  filter(region == "New Forest")))
 
-  return(list(
-    "aber" = list(landAberdeen = landAberdeen,
-                  roadsAberdeen = roadsAberdeenCrop),
-    "wess" = list(landNewForest = landNewForest,
-                  roadsNewForest = roadsNewForestCrop)
+  roadsNewForestCrop <- roadsNewForestCrop %>%
+    mutate(roadSize = case_when(
+      roadFunction == "A Road" ~ "A roads",
+      roadFunction == "B Road" ~ "B roads",
+      roadFunction %in% c("Local Access Road", "Restricted Local Access Road",
+                          "Local Road", "Minor Road", "Secondary Access Road") ~ "C roads",
+      TRUE ~ "Other"
+    )) %>%
+    mutate(roadSize = factor(roadSize,
+                             levels = c("A roads", "B roads", "C roads", "Other")))
+
+  writeRaster(landAberdeen, filename = here("data", "GIS data", "landuseAberdeen.tif"), overwrite = TRUE)
+  writeRaster(landNewForest, filename = here("data", "GIS data", "landuseWessex.tif"), overwrite = TRUE)
+
+  landuseList <- list(
+    "aber" = list(landuse = here("data", "GIS data", "landuseAberdeen.tif"),
+                  roads = roadsAberdeenCrop),
+    "wess" = list(landuse = here("data", "GIS data", "landuseWessex.tif"),
+                  roads = roadsNewForestCrop)
   )
-  )
+
+  return(landuseList)
 
 }

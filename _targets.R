@@ -17,8 +17,11 @@ tar_option_set(
                "dplyr",
                "stringr",
                "sf",
+               "ctmm",
+               "amt",
                "ggplot2",
                "ggridges",
+               "patchwork",
                "terra",
                "tidyterra"), # Packages that your targets need for their tasks.
   format = "qs", # Optionally set the default storage format. qs is fast.
@@ -59,9 +62,21 @@ list(
   tar_target(
     name = tar_trackingPlots,
     command = generate_tracking_plots(tar_deerData)
-  )#,
+  ),
   # tar_target(
   #   name = tar_studyMaps,
   #   command = generate_study_maps(tar_deerData, tar_patches, tar_landuse)
   # )
+  tar_target(
+    name = tar_akdeLists,
+    command = calculate_akdes(tar_deerData)
+  ),
+  tar_target(
+    name = tar_homeRange_sizePlot,
+    command = plot_homeRange_sizes(tar_deerData, tar_akdeLists)
+  ),
+  tar_target(
+    name = tar_overview_maps,
+    command = generate_overview_maps(tar_deerData, tar_akdeLists, tar_landuse, tar_patches)
+  )#,
 )
