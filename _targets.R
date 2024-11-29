@@ -19,6 +19,7 @@ tar_option_set(
                "sf",
                "ctmm",
                "amt",
+               "lme4",
                "ggplot2",
                "ggridges",
                "patchwork",

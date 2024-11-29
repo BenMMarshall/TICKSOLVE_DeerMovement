@@ -9,6 +9,44 @@ read_patches_data <- function(){
   patchesWessex <- read_sf(here("data", "GIS data", "patchesWessex.geoJSON"))
   patchesAberdeen <- read_sf(here("data", "GIS data", "patchesAberdeen.geoJSON"))
 
-  return(list("aber" = patchesAberdeen,
-              "wess" = patchesWessex))
+  patchList <- list("Aberdeen" = patchesAberdeen,
+                    "Wessex" = patchesWessex)
+
+  for(pt in names(patchList)){
+
+    patches <- patchList[[pt]]
+
+    extent_m <- ext(patches)
+    # will result in a grid that has a 1 m x 1 m res
+    xRes <- abs(extent_m[1] - extent_m[2])
+    yRes <- abs(extent_m[3] - extent_m[4])
+
+    ggplot() +
+      geom_sf(data = patches, aes(), fill = "grey25")
+
+    template <- rast(vect(patches), nrows = yRes, ncols = xRes)
+
+    print("Binary Raster...")
+    binaryRaster <- rasterize(vect(patches),
+                              template)
+
+
+    print("Distance Raster...")
+    distanceRaster <- terra::distance(binaryRaster)
+
+    assign(paste0("distance", pt), here("data", "GIS data", paste0("distance", pt, ".tif")))
+
+    writeRaster(distanceRaster, filename = here("data", "GIS data", paste0("distance", pt, ".tif")),
+                overwrite = TRUE,  gdal = c("COMPRESS=LZW"))
+
+
+  }
+
+  patchList <- list("Aberdeen" = patchesAberdeen,
+                    "Wessex" = patchesWessex,
+                    "distanceAberdeen" = distanceAberdeen,
+                    "distanceWessex" = distanceWessex)
+
+  return(patchList)
+
 }

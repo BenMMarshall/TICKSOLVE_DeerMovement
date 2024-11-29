@@ -17,7 +17,7 @@ read_landuse_data <- function(deerData){
   landAberdeen <- crop(landRastAberdeen, st_bbox(sfDeer %>%
                                                    filter(region == "Aberdeenshire")) +
                          c(-2000, -2000, 2000, 2000)
-                       )
+  )
 
   roadsAberdeen_NO <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_NO.gml"),
                               layer = "RoadLink")
@@ -45,7 +45,7 @@ read_landuse_data <- function(deerData){
   landNewForest <- crop(landRastNewForest, st_bbox(sfDeer %>%
                                                      filter(region == "New Forest")) +
                           c(-2000, -2000, 2000, 2000)
-                        )
+  )
 
   landNewForest <- landNewForest %>%
     mutate(LCM_1_cat = paste0("LCM_", LCM_1))
@@ -70,10 +70,10 @@ read_landuse_data <- function(deerData){
   writeRaster(landNewForest, filename = here("data", "GIS data", "landuseWessex.tif"), overwrite = TRUE)
 
   landuseList <- list(
-    "aber" = list(landuse = here("data", "GIS data", "landuseAberdeen.tif"),
-                  roads = roadsAberdeenCrop),
-    "wess" = list(landuse = here("data", "GIS data", "landuseWessex.tif"),
-                  roads = roadsNewForestCrop)
+    "Aberdeen" = list(landuse = here("data", "GIS data", "landuseAberdeen.tif"),
+                      roads = roadsAberdeenCrop),
+    "Wessex" = list(landuse = here("data", "GIS data", "landuseWessex.tif"),
+                    roads = roadsNewForestCrop)
   )
 
   return(landuseList)

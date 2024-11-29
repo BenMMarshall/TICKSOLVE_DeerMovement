@@ -1,0 +1,112 @@
+Estrada pena 2003
+"If the time to travel from one patch to
+another is higher than the feeding time of the parasite,
+ticks from the origin patch cannot reach the destination
+patch in a single ‘‘step’’."
+"In the former,
+patches predicted as suitable may be occupied or
+empty, according to their status within the landscape
+network. In the latter, control efforts may be negated
+by colonization by ticks from nearby patches."
+"Verboom et al. (2001) introduced the key patch
+approach. They defined a key patch as one with a
+carrying capacity large enough to sustain a relatively
+large local population in a network, and close enough
+to other patches to maintain a constant exchange of
+individuals."
+"Ixodes ricinus has
+catholic feeding habits (Ta¨lleklint and Jaenson 1998)"
+
+VanAcker 2023
+Has great intro on how connectivity and landscape comp can affect animal movement
+"Landscape-dependent fragmentation (LDF) alters the
+physical configuration of habitat patches, preventing species
+from moving freely across the landscape as patches
+become increasingly isolated (Berger-Tal & Saltz, 2019;
+Magle et al., 2014)."
+
+Used ctmm to ID outliers
+used adehabitatLT to "regularize trajectory segments to a 2h fix"
+used GLMM to see if gardens visited by deer had ticks
+
+Didn't just use the habitat at a point, instead included the area around it using a buffer
+"We then estimated
+the area of med-high-dev within buffers (varying
+from 100 to 800 m at 100 m increments, thus applying
+a multi-grain assessment (McGarigal et al., 2016)) surrounding
+each used and available location."
+
+Has good starting iSSF model formulas - interesting addition of using the start land use to better ID step interactions
+
+Has good stuff in supp material how the cut-offs for deer speed in GPS data
+Has summary of speeds per 2h
+
+"As HR size increased, the percent natural landcover
+decreased while the percent urban landcover within
+the HR increased alongside habitat diversity (Figure 2b).
+A higher percent urban landcover within the HR was associated
+with larger HR size"
+
+run a null model iSSF that is just movement
+
+has good deer context stuff in discussion regarding them avoiding daylight and making use of human dominated areas
+good discussion of deer movement times in relation to tick dispersal
+
+
+Martin et al 2018
+
+starts with a great intro on connectivity
+
+"Following Bjorneraas et al. (2011), we eliminated
+potentially erroneous data points (\0.001% of
+the total locations) when two consecutive steps formed
+spikes (Bjørneraas et al. 2010) by removing location i
+when the step lengths between i-1 and i, and i and
+i ? 1 were[500 m and the relative turning angle at
+location i was\± 5 for all successive locations
+obtained every 10 min."
+
+"For each pixel of
+the map, we calculated the Euclidean distance to the
+nearest element of each of these features, because
+movement within a given habitat may be influenced by
+proximity to a second habitat (Conner et al. 2003;
+Thurfjell et al. 2014). For example, a roe deer may use
+crop fields (high quality feeding) only when in close
+proximity to woodlands (for escape refuge; see Coulon
+et al. 2008)."
+
+has great results on the interactions of distance from woodland and how selection changes the farther they travel from that safety
+Also temporal interactions
+
+"Overall, our results indicate
+that proximity to woodlands is key to the perception of
+risk when foraging in open habitats or close to humans,
+and that hedgerows may constitute a substitutable
+refuge habitat with similar forage resources
+(Morellet et al. 2011)."
+
+hint that the time animals move in relation to tick activity will impact actual functional connectivity
+"The potential role of vector species for tick transfer,
+nutrient fluxes and seed dispersal may thus be lower
+than expected from connectivity maps which pool
+seasons and periods of the day."
+
+Panzacchi et al 2015
+
+Has a great breakdown for defining barriers and corridors in connectivity
+Their approach - define landscape resistance from SSF - run circuit flow but with a varying ability for the animal to be attracted to destination - calibrate the attraction by comparing resulting paths to dBBMMs OD
+
+Kilpatrick et al 2016
+
+
+
+
+
+
+
+
+
+
+
+
