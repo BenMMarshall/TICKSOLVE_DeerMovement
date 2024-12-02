@@ -8,17 +8,26 @@
 run_rsf_models <- function(rsfDataList){
 
   rsfModelList <- vector("list", length = length(rsfDataList))
-  names(rsffModelList) <- names(rsfDataList)
+  names(rsfModelList) <- names(rsfDataList)
   for(id in names(rsfDataList)){
+    # id <- names(rsfDataList)[1]
+    focalRsfData <- rbind(rsfDataList[[id]]$usedDeer %>%
+            st_drop_geometry() %>%
+            select(x, y, Animal_ID, distancePatch, landuse, case_),
+          rsfDataList[[id]]$availPoints %>%
+            select(x, y, Animal_ID, distancePatch, landuse, case_))
 
-    form <- case_ ~ distance + landUse
+    form <- case_ ~ distancePatch + landuse + distancePatch:landuse
 
-    rsfOUT <- glmer(form,
-                    family = binomial(),
-                    data = rsfData,
-                    nAGQ = 0) # nAGQ set to zero to speed up process
+    # rsfOUT <- glmer(form,
+    rsfOUT <- glm(form,
+                  family = binomial(),
+                  data = focalRsfData)
+                  # nAGQ = 0) # nAGQ set to zero to speed up process, in glmer
 
     rsfModelList[[id]] <- rsfOUT
   }
+
+  return(rsfModelList)
 
 }

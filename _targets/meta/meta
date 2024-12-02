@@ -1,19 +1,31 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|364d4a8833b3ec91|||||||||||||||
-calculate_akdes|function|69742e0d9d981501|||||||||||||||
-generate_overview_maps|function|e2cd5df227f4b772|||||||||||||||
+.Random.seed|object|5e974af963602786|||||||||||||||
+calculate_akdes|function|a726e1c414633135|||||||||||||||
+contourAvialable|object|6dfa276ef67328bc|||||||||||||||
+extract_rsf_results|function|1ef0818b5fa5cf87|||||||||||||||
+generate_overview_maps|function|acdc56f1e881691c|||||||||||||||
 generate_palettes|function|bedb4be3859d6506|||||||||||||||
 generate_tracking_plots|function|635daeb982a5128a|||||||||||||||
 generate_tracking_table|function|3914ce43cf2850f6|||||||||||||||
+nAvailable|object|d516855f98da7f3d|||||||||||||||
 plot_homeRange_sizes|function|c86367c04d966bce|||||||||||||||
+prepare_rsf_data|function|81d096ca72f80606|||||||||||||||
+prepare_ssf_data|function|31b396af73cb4dad|||||||||||||||
 read_deer_data|function|a6a33200f32f1114|||||||||||||||
-read_landuse_data|function|b0d3e43c3469de02|||||||||||||||
-read_patches_data|function|58cd1ef4eab30ceb|||||||||||||||
-tar_akdeLists|stem|43790e12de9ecdc3|51e20b3c1d015bc4|132a5c0629224359|856298492||t20055.7487066925s|0a4579670d4e4f70|13306531|qs|local|vector|||1087.328||
+read_landuse_data|function|665ee1cbea6d20d3|||||||||||||||
+read_patches_data|function|78903ec946f7f8a9|||||||||||||||
+run_rsf_models|function|0b75f150a7328969|||||||||||||||
+tar_akdeLists|stem|6f4a2d2fb9ecb05e|51e20b3c1d015bc4|97384fae41a8b0eb|856298492||t20059.427667546s|8d90780940c4223e|13306498|qs|local|vector|||1060.125||
 tar_deerData|stem|f841ad1fdbfebe65|566ebced504f0215|22aebdacb47e1831|-1039388040||t20055.7347828283s|dc6ee22e376b2953|904747|qs|local|vector|||4.766||
-tar_homeRange_sizePlot|stem|15cd5108d708eb6f|5e82fc8c817ea1a4|b8565ae79d1e76c7|-1202349281||t20055.7487196232s|687ab6ee95812416|14286027|qs|local|vector|||0.5||
-tar_landuse|stem|12fe9b3e10442f2b|9ade98fbebd966f6|ba7515039d28e27c|-1042947407||t20055.8012944245s|122ae4688dd7995e|636181|qs|local|vector|||14|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
-tar_overview_maps|stem|5a8ba8e1ab6c6e16|7ac192b9717a51bf|bac55de836f409c2|951223795||t20055.803958958s|793fac557eb17745|241661549|qs|local|vector|||133.39||
-tar_patches|stem|d659a3079f26970f|6bdc42673a040198|10585cd083c172b2|561265787||t20053.4138170878s|42243063258e1737|1431004|qs|local|vector|||2||
+tar_homeRange_sizePlot|stem|e06eb4bd4e8fae9d|5e82fc8c817ea1a4|1a8faeafc4ffebbf|-1202349281||t20059.4335339204s|bf6739c769ce16bd|14287013|qs|local|vector|||0.391||
+tar_landuse|stem|2514449375f1a5b8|9ade98fbebd966f6|272b3059fc51c7f1|-1042947407||t20059.4104961729s|7b6e260af24ba309|636186|qs|local|vector|||14.297|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
+tar_landuseList|stem|2514449375f1a5b8|9ade98fbebd966f6|272b3059fc51c7f1|1043045520||t20059.4335198935s|7b6e260af24ba309|636186|qs|local|vector|||14.781|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
+tar_overview_maps|stem|db3abeeffeb6c022|a8b4a0dbc550a557|30c541d173875d39|951223795||t20059.4659287896s|3443a8541cb43874|241646085|qs|local|vector|||124.281||
+tar_patches|stem|d6d25fc8aed34257|6bdc42673a040198|607a84f6bc21e668|561265787||t20059.3990599721s|2eb739478038e79e|1431127|qs|local|vector|||509.703||
+tar_patchList|stem|d6d25fc8aed34257|6bdc42673a040198|607a84f6bc21e668|-2053994115||t20059.439312506s|2eb739478038e79e|1431127|qs|local|vector|||515.813||
+tar_rsf_data|stem|0b244083dedd05fe|b8ff3dd396a75fdf|06cb80431545929b|-314967242||t20059.653790815s|750f0da50c3a244e|5276364|qs|local|vector|||71.109||
+tar_rsf_models|stem|e92fcc683f252e45|55e6ba6518645b36|c4d3a4694a94c2cc|-1738740726||t20059.6110996923s|b101e45ea711ef22|40146876|qs|local|vector|||4.984|glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
+tar_rsf_outputs|stem|b8a08d0585a81ea1|2e7bda5096ec7c26|e87c65d10c867cd7|251120470||t20059.673587173s|3b99397629ce0b1e|79847433|qs|local|vector|||387.375|prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. Removed 60 rows containing missing values or values outside the scale rangegeom_line.|
 tar_trackingPlots|stem|1638c47e7efa0281|b349b384a931ff92|0f8cbd65339adbd3|1086976774||t20055.7361736056s|e53e05e0b83618ae|10108797|qs|local|vector|||4.031|Removed 17 rows containing nonfinite outside the scale rangestat_density_ridges.|
 tar_trackingTables|stem|9e773296228309dc|226069d56e77fd04|7b35508dff748796|1406021826||t20055.736314507s|83fa9aa964c289d2|661|qs|local|vector|||0.016||
+typeAvialable|object|684f65380be68543|||||||||||||||

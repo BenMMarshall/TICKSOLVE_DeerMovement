@@ -7,6 +7,9 @@
 #' @export
 read_landuse_data <- function(deerData){
 
+  # targets::tar_load("tar_deerData")
+  # deerData <- tar_deerData
+
   sfDeer <- st_as_sf(deerData, coords = c("x","y"),
                      crs = 27700)
 
@@ -14,7 +17,7 @@ read_landuse_data <- function(deerData){
                                        "UKCEH_Landcover2023_ab",
                                        "data", "LCM.tif"))
 
-  landAberdeen <- crop(landRastAberdeen, st_bbox(sfDeer %>%
+  landAberdeen <- terra::crop(landRastAberdeen, st_bbox(sfDeer %>%
                                                    filter(region == "Aberdeenshire")) +
                          c(-2000, -2000, 2000, 2000)
   )
@@ -42,7 +45,7 @@ read_landuse_data <- function(deerData){
                                         "UKCEH_Landcover2023_nf",
                                         "data", "LCM.tif"))
 
-  landNewForest <- crop(landRastNewForest, st_bbox(sfDeer %>%
+  landNewForest <- terra::crop(landRastNewForest, st_bbox(sfDeer %>%
                                                      filter(region == "New Forest")) +
                           c(-2000, -2000, 2000, 2000)
   )

@@ -9,6 +9,7 @@ library(tarchetypes) # Load other packages as needed.
 
 dir.create("figures", showWarnings = FALSE)
 dir.create("tables", showWarnings = FALSE)
+dir.create("modelOutput", showWarnings = FALSE)
 
 # Set target options:
 tar_option_set(
@@ -20,12 +21,13 @@ tar_option_set(
                "ctmm",
                "amt",
                "lme4",
+               "effects",
+               "performance",
                "ggplot2",
                "ggridges",
                "patchwork",
                "terra",
                "tidyterra"), # Packages that your targets need for their tasks.
-  format = "qs", # Optionally set the default storage format. qs is fast.
   #
   # Pipelines that take a long time to run may benefit from
   # optional distributed computing. To use this capability
@@ -35,12 +37,18 @@ tar_option_set(
   # sets a controller that scales up to a maximum of two workers
   # which run as local R processes. Each worker launches when there is work
   # to do and exits if 60 seconds pass with no tasks to run.
+  controller = crew::crew_controller_local(workers = 2, seconds_idle = 60),
   #
-  controller = crew::crew_controller_local(workers = 2, seconds_idle = 60)
+  format = "qs" # Optionally set the default storage format. qs is fast.
 )
 
 # Run the R scripts in the R/ folder with your custom functions:
 tar_source()
+
+# OPTIONS AND DECISIONS
+nAvailable <- 10
+typeAvialable <- "random"
+contourAvialable <- "99%"
 
 # Replace the target list below with your own:
 list(
@@ -49,11 +57,11 @@ list(
     command = read_deer_data()
   ),
   tar_target(
-    name = tar_landuse,
+    name = tar_landuseList,
     command = read_landuse_data(tar_deerData)
   ),
   tar_target(
-    name = tar_patches,
+    name = tar_patchList,
     command = read_patches_data()
   ),
   tar_target(
@@ -66,7 +74,7 @@ list(
   ),
   # tar_target(
   #   name = tar_studyMaps,
-  #   command = generate_study_maps(tar_deerData, tar_patches, tar_landuse)
+  #   command = generate_study_maps(tar_deerData, tar_patchList, tar_landuseList)
   # )
   tar_target(
     name = tar_akdeLists,
@@ -78,6 +86,19 @@ list(
   ),
   tar_target(
     name = tar_overview_maps,
-    command = generate_overview_maps(tar_deerData, tar_akdeLists, tar_landuse, tar_patches)
-  )#,
+    command = generate_overview_maps(tar_deerData, tar_akdeLists, tar_landuseList, tar_patchList)
+  ),
+  tar_target(
+    name = tar_rsf_data,
+    command = prepare_rsf_data(tar_deerData, tar_akdeLists, tar_landuseList, tar_patchList,
+                               nAvail = nAvailable, typeAvial = typeAvialable, conAvail = contourAvialable)
+  ),
+  tar_target(
+    name = tar_rsf_models,
+    command = run_rsf_models(tar_rsf_data)
+  ),
+  tar_target(
+    name = tar_rsf_outputs,
+    command = extract_rsf_results(tar_deerData, tar_rsf_data, tar_rsf_models, nAvail = nAvailable)
+  )
 )

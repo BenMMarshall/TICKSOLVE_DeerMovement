@@ -67,6 +67,10 @@ calculate_akdes <- function(deerData){
   # listSF <- lapply(names(listAKDE)[1:2], function(x){
     print(x)
     out <- as.sf(listAKDE[[x]], error = FALSE, level.UD = c(0.95, 0.99))
+    out <- out %>%
+      mutate(Animal_ID = str_extract(name, ".+?(?=\\s)"),
+             level = str_extract(name, "..\\%"),
+             ci = str_extract(name, "low$|est$|high$"))
     return(out)
   })
   names(listSF) <- names(listAKDE)

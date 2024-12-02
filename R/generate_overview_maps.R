@@ -30,12 +30,6 @@ generate_overview_maps <- function(deerData, akdeLists, landuseList, patches){
   # landuseList <- tar_landuse
   # patches <- tar_patches
 
-  # landAberdeen <- terra::rast(here("data", "GIS data", "landuseAberdeen.tif"))
-  # landNewForest <- terra::rast(here("data", "GIS data", "landuseWessex.tif"))
-
-  # landAberdeen <- terra::rast(landuseList$aber$landuse)
-  # landNewForest <- terra::rast(landuseList$wess$landuse)
-
   # mean(list(listAKDE$Roe15_F, listAKDE$Roe12_F))
   # mean(tar_akdeLists$akde)
 
@@ -64,21 +58,21 @@ generate_overview_maps <- function(deerData, akdeLists, landuseList, patches){
 
 
     if(focalDeer$region[1] == "Aberdeenshire"){
-      focalPatches <- patches$aber
+      focalPatches <- patches$Aberdeen
     } else {
-      focalPatches <- patches$wess
+      focalPatches <- patches$Wessex
     }
 
     if(focalDeer$region[1] == "Aberdeenshire"){
-      focalRoad <- landuseList$aber$road
+      focalRoad <- landuseList$Aberdeen$roads
     } else {
-      focalRoad <- landuseList$wess$road
+      focalRoad <- landuseList$Wessex$roads
     }
 
     if(focalDeer$region[1] == "Aberdeenshire"){
-      focalLand <- terra::rast(landuseList$aber$landuse)
+      focalLand <- terra::rast(landuseList$Aberdeen$landuse)
     } else {
-      focalLand <- terra::rast(landuseList$wess$landuse)
+      focalLand <- terra::rast(landuseList$Wessex$landuse)
     }
     focalLand <- focalLand %>%
       mutate(LCM_1_cat = paste0("LCM_", LCM_1))

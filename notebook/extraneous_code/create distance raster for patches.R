@@ -1,43 +1,48 @@
+#' Generate landscape layers from patches etc
+#'
+#' @name prepare_landscape_layers
+#' @description Creates extra landscape layers for models.
+#' @return A list of file locations of rasters to read in.
+#'
+#' @export
+prepare_landscape_layers <- function(deerData, patchList){
 
-# prepare_landscape_layers <- function(deerData, akdeLists, landuseList, patches){
+  # library(sf)
+  # library(terra)
+  # library(ggplot2)
+  #
+  # targets::tar_load("tar_deerData")
+  # targets::tar_load("tar_patches")
+  # patchList <- tar_patches
 
-library(sf)
-library(terra)
-library(ggplot2)
+  for(pt in c("Aberdeen", "Wessex")){
 
-targets::tar_load("tar_deerData")
-targets::tar_load("tar_patches")
-# patches <- patchesAberdeen
+    patches <- patchList[[pt]]
 
-for(pt in c("Aberdeen", "Wessex")){
+    extent_m <- ext(patches)
+    # will result in a grid that has a 1 m x 1 m res
+    xRes <- abs(extent_m[1] - extent_m[2])
+    yRes <- abs(extent_m[3] - extent_m[4])
 
-  patches <- patchList[[pt]]
+    # ggplot() +
+    #   geom_sf(data = patches, aes(), fill = "grey25")
 
-  extent_m <- ext(patches)
-  # will result in a grid that has a 1 m x 1 m res
-  xRes <- abs(extent_m[1] - extent_m[2])
-  yRes <- abs(extent_m[3] - extent_m[4])
+    template <- rast(vect(patches), nrows = yRes, ncols = xRes)
 
-  ggplot() +
-    geom_sf(data = patches, aes(), fill = "grey25")
-
-  template <- rast(vect(patches), nrows = yRes, ncols = xRes)
-
-  print("Binary Raster...")
-  binaryRaster <- rasterize(vect(patches),
-                            template)
+    print("Binary Raster...")
+    binaryRaster <- rasterize(vect(patches),
+                              template)
 
 
-  print("Distance Raster...")
-  distanceRaster <- terra::distance(binaryRaster)
+    print("Distance Raster...")
+    distanceRaster <- terra::distance(binaryRaster)
 
-  writeRaster(distanceRaster, filename = here("data", "GIS data", paste0("distance", pt, ".tif")),
-              overwrite = TRUE,  gdal = c("COMPRESS=LZW"))
+    writeRaster(distanceRaster, filename = here("data", "GIS data", paste0("distance", pt, ".tif")),
+                overwrite = TRUE,  gdal = c("COMPRESS=LZW"))
 
-  assign(paste0("distance", pt), distanceRaster)
+    assign(paste0("distance", pt), distanceRaster)
+
+  }
+
 
 }
-
-
-
-# }
