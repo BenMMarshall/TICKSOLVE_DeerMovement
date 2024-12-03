@@ -1,22 +1,27 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|5e974af963602786|||||||||||||||
-calculate_akdes|function|a726e1c414633135|||||||||||||||
-contourAvialable|object|6dfa276ef67328bc|||||||||||||||
-extract_rsf_results|function|1ef0818b5fa5cf87|||||||||||||||
-generate_overview_maps|function|acdc56f1e881691c|||||||||||||||
-generate_palettes|function|bedb4be3859d6506|||||||||||||||
-generate_tracking_plots|function|635daeb982a5128a|||||||||||||||
-generate_tracking_table|function|3914ce43cf2850f6|||||||||||||||
-nAvailable|object|d516855f98da7f3d|||||||||||||||
-plot_homeRange_sizes|function|c86367c04d966bce|||||||||||||||
-prepare_rsf_data|function|81d096ca72f80606|||||||||||||||
-prepare_ssf_data|function|31b396af73cb4dad|||||||||||||||
-read_deer_data|function|a6a33200f32f1114|||||||||||||||
-read_landuse_data|function|665ee1cbea6d20d3|||||||||||||||
-read_patches_data|function|78903ec946f7f8a9|||||||||||||||
-run_rsf_models|function|0b75f150a7328969|||||||||||||||
+.Random.seed|object|021d730bde6230bc|||||||||||||||
+calculate_akdes|function|34f441eccfcf4e2e|||||||||||||||
+contourAvialable|object|430de1fae42cffdd|||||||||||||||
+extract_rsf_results|function|239f9eb699e82821|||||||||||||||
+generate_overview_maps|function|de991f06a5fdb619|||||||||||||||
+generate_palettes|function|4460930932836818|||||||||||||||
+generate_tracking_plots|function|d81372d1c64cc618|||||||||||||||
+generate_tracking_table|function|52d2e7f6adef4488|||||||||||||||
+nAvailable|object|f3582cdc107e111b|||||||||||||||
+nAvailableSteps|object|f3582cdc107e111b|||||||||||||||
+plot_homeRange_sizes|function|c49416f5993ecd7d|||||||||||||||
+prepare_rsf_data|function|0161f1772018915c|||||||||||||||
+prepare_ssf_data|function|c8d9409991b34178|||||||||||||||
+read_deer_data|function|bde357aea7a76dc5|||||||||||||||
+read_landuse_data|function|87efcf4bdaad5e54|||||||||||||||
+read_patches_data|function|123d50957aece47c|||||||||||||||
+rsfFormula|object|7e94dd4eb8ae8028|||||||||||||||
+run_rsf_models|function|b77dc3c397944b1f|||||||||||||||
+slDistribution|object|7707e21e1a801ff8|||||||||||||||
+ssfFormula|object|1ad4b297a02cc676|||||||||||||||
+taDistribution|object|05bd4a9d9efecc91|||||||||||||||
 tar_akdeLists|stem|6f4a2d2fb9ecb05e|51e20b3c1d015bc4|97384fae41a8b0eb|856298492||t20059.427667546s|8d90780940c4223e|13306498|qs|local|vector|||1060.125||
-tar_deerData|stem|f841ad1fdbfebe65|566ebced504f0215|22aebdacb47e1831|-1039388040||t20055.7347828283s|dc6ee22e376b2953|904747|qs|local|vector|||4.766||
+tar_deerData|stem|127e021dac250668|dba404e43c404fd7|3af31851c3e1df08|-1039388040||t20060.5550725914s|a7980f50cf57b390|825723|qs|local|vector|||10.828|package tibble was built under R version 4.2.3. package dplyr was built under R version 4.2.3. package stringr was built under R version 4.2.3. package sf was built under R version 4.2.3. package ctmm was built under R version 4.2.3. package amt was built under R version 4.2.3. package lme4 was built under R version 4.2.3. ABI version mismatch lme4 was built with Matrix ABI version 1Current Matrix ABI version is 0Please reinstall lme4 from source or restore original Matrix package. package effects was built under R version 4.2.3. package performance was built under R version 4.2.3. package ggplot2 was built under R version 4.2.3. package ggridges was built under R version 4.2.3. package patchwork was built under R version 4.2.3. package tidyterra was built under R version 4.2.3|
 tar_homeRange_sizePlot|stem|e06eb4bd4e8fae9d|5e82fc8c817ea1a4|1a8faeafc4ffebbf|-1202349281||t20059.4335339204s|bf6739c769ce16bd|14287013|qs|local|vector|||0.391||
 tar_landuse|stem|2514449375f1a5b8|9ade98fbebd966f6|272b3059fc51c7f1|-1042947407||t20059.4104961729s|7b6e260af24ba309|636186|qs|local|vector|||14.297|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_landuseList|stem|2514449375f1a5b8|9ade98fbebd966f6|272b3059fc51c7f1|1043045520||t20059.4335198935s|7b6e260af24ba309|636186|qs|local|vector|||14.781|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
@@ -28,4 +33,26 @@ tar_rsf_models|stem|e92fcc683f252e45|55e6ba6518645b36|c4d3a4694a94c2cc|-17387407
 tar_rsf_outputs|stem|b8a08d0585a81ea1|2e7bda5096ec7c26|e87c65d10c867cd7|251120470||t20059.673587173s|3b99397629ce0b1e|79847433|qs|local|vector|||387.375|prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. Removed 60 rows containing missing values or values outside the scale rangegeom_line.|
 tar_trackingPlots|stem|1638c47e7efa0281|b349b384a931ff92|0f8cbd65339adbd3|1086976774||t20055.7361736056s|e53e05e0b83618ae|10108797|qs|local|vector|||4.031|Removed 17 rows containing nonfinite outside the scale rangestat_density_ridges.|
 tar_trackingTables|stem|9e773296228309dc|226069d56e77fd04|7b35508dff748796|1406021826||t20055.736314507s|83fa9aa964c289d2|661|qs|local|vector|||0.016||
-typeAvialable|object|684f65380be68543|||||||||||||||
+typeAvialable|object|3ad739c348467a34|||||||||||||||
+read_landuse_data|function|87efcf4bdaad5e54
+typeAvialable|object|3ad739c348467a34
+read_deer_data|function|bde357aea7a76dc5
+nAvailableSteps|object|f3582cdc107e111b
+prepare_rsf_data|function|0161f1772018915c
+extract_rsf_results|function|239f9eb699e82821
+generate_palettes|function|4460930932836818
+.Random.seed|object|4a8e6a48b86bbea9
+taDistribution|object|05bd4a9d9efecc91
+read_patches_data|function|123d50957aece47c
+calculate_akdes|function|34f441eccfcf4e2e
+rsfFormula|object|7e94dd4eb8ae8028
+plot_homeRange_sizes|function|c49416f5993ecd7d
+run_rsf_models|function|b77dc3c397944b1f
+prepare_ssf_data|function|c8d9409991b34178
+nAvailable|object|f3582cdc107e111b
+generate_tracking_plots|function|d81372d1c64cc618
+ssfFormula|object|1ad4b297a02cc676
+generate_tracking_table|function|52d2e7f6adef4488
+contourAvialable|object|430de1fae42cffdd
+slDistribution|object|7707e21e1a801ff8
+generate_overview_maps|function|de991f06a5fdb619

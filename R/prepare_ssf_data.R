@@ -6,18 +6,17 @@
 #'
 #' @export
 prepare_ssf_data <- function(deerData, landuseList, patchList,
-                             nAvail = 10){
+                             nAvail = 10, slDist = "gamma", taDist = "vonmises"){
 
   ssfDataList <- vector("list", legnth = length(unique(deerData$Animal_ID)))
   names(ssfDataList) <- unique(deerData$Animal_ID)
   for(id in unique(deerData$Animal_ID)){
+    # id <- unique(deerData$Animal_ID)[1]
 
     focalDeer <- deerData %>%
       filter(Animal_ID == id) %>%
-      st_as_sf(coords = c("x", "y"), remove = FALSE, crs = 27700)
-
-    focalHR <- akdeLists$sf[[id]] %>%
-      filter(level = conAvail)
+      # st_as_sf(coords = c("x", "y"), remove = FALSE, crs = 27700) %>%
+      make_track(.x = x, .y = y, .t = datetime, crs = 27700, id = Animal_ID)
 
     if(focalDeer$region[1] == "Aberdeenshire"){
       focalDistancePatch <- terra::rast(patchList$distanceAberdeen)
@@ -33,27 +32,24 @@ prepare_ssf_data <- function(deerData, landuseList, patchList,
     focalLand <- focalLand %>%
       mutate(LCM_1_cat = paste0("LCM_", LCM_1))
 
+    focalSteps <- focalDeer %>%
+      steps(lonlat = FALSE, keep_cols = "end")
 
-    availPoints <- sf::st_sample(, size = nrow(focalDeer) * nAvail,
-                                 type = typeAvial)
+    # focalDistancePatch <- terra::rast(here("data", "GIS data", "distanceAberdeen.tif"))
 
-    # could also be defined as an area surrounding the points
-    availPoints <- terra::extract(focalDistance, availPoints, bind = TRUE)
-    focalDeer <- terra::extract(focalDistance, focalDeer, bind = TRUE)
+    focalAllSteps <- focalSteps %>%
+      amt::random_steps(n_control = 10,
+                        sl_distr = amt::fit_distr(focalSteps$sl_, "gamma"),
+                        ta_distr = amt::fit_distr(focalSteps$ta_, "vonmises")) %>%
+      amt::extract_covariates(covariates = focalDistancePatch, where = "end") # %>%
+    # amt::extract_covariates(covariates = focalLand, where = "end")
 
-    availPoints <- terra::extract(focalLand, availPoints, bind = TRUE)
-    focalDeer <- terra::extract(focalLand, focalDeer, bind = TRUE)
-
-    availPoints$case_ <- 0
-    focalDeer$case_ <- 1
-
-    rsfDataList[[id]] <- list(
-      availPoints = availPoints,
-      usedDeer = focalDeer
+    ssfDataList[[id]] <- list(
+      steps = focalAllSteps
     )
 
   }
 
-  return(rsfDataList)
+  return(ssfDataList)
 
 }
