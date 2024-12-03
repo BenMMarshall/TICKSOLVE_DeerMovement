@@ -178,7 +178,7 @@ extract_rsf_results <- function(deerData, rsfDataList, rsfModelList, nAvail){
                     alpha = 1, width = 0.1) +
       geom_point(aes(x = Animal_ID, y = landusePrediction, shape = sig, colour = Animal_ID),
                  size = 2) +
-      coord_flip(ylim = c(0, 0.5), xlim = c(0, max(rsfDeerData$distancePatch, na.rm = TRUE))) +
+      coord_flip(ylim = c(0, 0.5)) +
       facet_grid(rows = vars(landuse), space ="free", drop = TRUE, scales = "free_y",
                  switch = "y") +
       labs(title = "Land use effect on probability of use",
