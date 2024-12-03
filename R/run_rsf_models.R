@@ -5,7 +5,7 @@
 #' @return A list of model outputs from the glmer function.
 #'
 #' @export
-run_rsf_models <- function(rsfDataList){
+run_rsf_models <- function(rsfDataList){#, rsfFormula){
 
   rsfModelList <- vector("list", length = length(rsfDataList))
   names(rsfModelList) <- names(rsfDataList)
@@ -18,6 +18,7 @@ run_rsf_models <- function(rsfDataList){
             select(x, y, Animal_ID, distancePatch, landuse, case_))
 
     form <- case_ ~ distancePatch + landuse + distancePatch:landuse
+    # form <- rsfFormula
 
     # rsfOUT <- glmer(form,
     rsfOUT <- glm(form,

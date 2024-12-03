@@ -50,14 +50,14 @@ tar_source()
 nAvailable <- 10
 typeAvialable <- "random"
 contourAvialable <- "99%"
-rsfFormula <- case_ ~ distancePatch + landuse + distancePatch:landuse
+# rsfFormula <- case_ ~ distancePatch + landuse + distancePatch:landuse
 # SSF
 nAvailableSteps <- 10
 slDistribution <- "gamma"
 taDistribution <- "vonmises"
-ssfFormula <- case_ ~ distancePatch + landuse + distancePatch:landuse +
-  sl_ + log(sl_) + cos(ta_) + log(sl_):landuse + log(sl_):distancePatch +
-  strata(step_id_)
+# ssfFormula <- case_ ~ distancePatch + landuse + distancePatch:landuse +
+#   sl_ + log(sl_) + cos(ta_) + log(sl_):landuse + log(sl_):distancePatch +
+#   strata(step_id_)
 
 # Replace the target list below with your own:
 list(
@@ -104,20 +104,20 @@ list(
   ),
   tar_target(
     name = tar_rsf_models,
-    command = run_rsf_models(tar_rsf_data, rsfFormula = rsfFormula)
+    command = run_rsf_models(tar_rsf_data)#, rsfFormula = rsfFormula)
   ),
   tar_target(
     name = tar_rsf_outputs,
     command = extract_rsf_results(tar_deerData, tar_rsf_data, tar_rsf_models, nAvail = nAvailable)
-  ),
-  tar_target(
-    name = tar_ssf_data,
-    command = prepare_ssf_data(tar_deerData, tar_landuseList, tar_patchList,
-                                  nAvail = nAvailable, slDist = slDistribution,
-                                  taDist = taDistribution)
-  ),
-  tar_target(
-    name = tar_ssf_models,
-    command = run_ssf_models(tar_ssf_data, ssfFormula = ssfFormula)
-  )
+  )# ,
+  # tar_target(
+  #   name = tar_ssf_data,
+  #   command = prepare_ssf_data(tar_deerData, tar_landuseList, tar_patchList,
+  #                                 nAvail = nAvailable, slDist = slDistribution,
+  #                                 taDist = taDistribution)
+  # ),
+  # tar_target(
+  #   name = tar_ssf_models,
+  #   command = run_ssf_models(tar_ssf_data, ssfFormula = ssfFormula)
+  # )
 )
