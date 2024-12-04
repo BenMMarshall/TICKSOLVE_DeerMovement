@@ -1,4 +1,9 @@
 
+library(sf)
+library(here)
+library(dplyr)
+library(ggplot2)
+
 targets::tar_load("tar_deerData")
 
 sfDeer <- tar_deerData %>%
@@ -13,11 +18,17 @@ patchIntersection <- sf::st_intersection(sfDeer, patchesAll)
 
 patchIntersection %>%
   group_by(Animal_ID) %>%
+  summarise(patches = n_distinct(Ptch_ID))
+
+patchIntersection %>%
+  group_by(Animal_ID) %>%
   summarise(patches = n_distinct(Ptch_ID)) %>%
   st_drop_geometry() %>%
   ggplot() +
   geom_histogram(aes(x = patches)) +
   theme_bw()
+
+# Recurse test failure ----------------------------------------------------
 
 library(recurse)
 

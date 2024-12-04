@@ -22,6 +22,9 @@ read_landuse_data <- function(deerData){
                          c(-2000, -2000, 2000, 2000)
   )
 
+  landAberdeen <- landAberdeen %>%
+    mutate(LCM_1_cat = paste0("LCM_", LCM_1))
+
   roadsAberdeen_NO <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_NO.gml"),
                               layer = "RoadLink")
   roadsAberdeen_NJ <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_NJ.gml"),
@@ -40,6 +43,14 @@ read_landuse_data <- function(deerData){
     mutate(roadSize = factor(roadSize,
                              levels = c("A roads", "B roads", "C roads", "Other")))
 
+  distanceWoodlandAberdeen <- landAberdeen %>%
+    select(LCM_1) %>%
+    filter(LCM_1 %in% 1:2) %>%
+    mutate(LCM_1 = case_when(
+      LCM_1 %in% 1:2 ~ 1,
+      TRUE ~ NA)) %>%
+      terra::distance() %>%
+    rename(distanceWoodland = LCM_1)
 
   landRastNewForest <- terra::rast(here("data", "GIS data", "UKCEH_Landcover",
                                         "UKCEH_Landcover2023_nf",
@@ -52,6 +63,14 @@ read_landuse_data <- function(deerData){
 
   landNewForest <- landNewForest %>%
     mutate(LCM_1_cat = paste0("LCM_", LCM_1))
+
+  distanceWoodlandWessex <- landNewForest %>%
+    select(LCM_1) %>%
+    filter(LCM_1 %in% 1:2) %>%
+    mutate(LCM_1 = case_when(
+      LCM_1 %in% 1:2 ~ 1,
+      TRUE ~ NA)) %>%
+    terra::distance()
 
   roadsNewForest_SY <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SU.gml"),
                                layer = "RoadLink")
@@ -69,13 +88,21 @@ read_landuse_data <- function(deerData){
     mutate(roadSize = factor(roadSize,
                              levels = c("A roads", "B roads", "C roads", "Other")))
 
-  writeRaster(landAberdeen, filename = here("data", "GIS data", "landuseAberdeen.tif"), overwrite = TRUE)
-  writeRaster(landNewForest, filename = here("data", "GIS data", "landuseWessex.tif"), overwrite = TRUE)
+  writeRaster(landAberdeen,
+              filename = here("data", "GIS data", "landuseAberdeen.tif"), overwrite = TRUE)
+  writeRaster(landNewForest,
+              filename = here("data", "GIS data", "landuseWessex.tif"), overwrite = TRUE)
+  writeRaster(distanceWoodlandAberdeen,
+              filename = here("data", "GIS data", "distanceWoodlandAberdeen.tif"), overwrite = TRUE)
+  writeRaster(distanceWoodlandWessex,
+              filename = here("data", "GIS data", "distanceWoodlandWessex.tif"), overwrite = TRUE)
 
   landuseList <- list(
     "Aberdeen" = list(landuse = here("data", "GIS data", "landuseAberdeen.tif"),
+                      distanceWoodland = here("data", "GIS data", "distanceWoodlandAberdeen.tif"),
                       roads = roadsAberdeenCrop),
     "Wessex" = list(landuse = here("data", "GIS data", "landuseWessex.tif"),
+                    distanceWoodland = here("data", "GIS data", "distanceWoodlandWessex.tif"),
                     roads = roadsNewForestCrop)
   )
 

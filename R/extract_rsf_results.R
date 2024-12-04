@@ -32,6 +32,8 @@ extract_rsf_results <- function(deerData, rsfDataList, rsfModelList, nAvail){
 
   write.csv(modelMetrics, file = here("modelOutput", "rsfIndi_modelMetrics.csv"), row.names = FALSE)
 
+  # lapply(rsfModelList, summary)
+
   predictedDistanceList <- vector("list", length = length(rsfModelList))
   names(predictedDistanceList) <- names(rsfModelList)
   predictedLanduseList <- vector("list", length = length(rsfModelList))

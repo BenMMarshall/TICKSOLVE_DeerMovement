@@ -109,13 +109,13 @@ list(
   tar_target(
     name = tar_rsf_outputs,
     command = extract_rsf_results(tar_deerData, tar_rsf_data, tar_rsf_models, nAvail = nAvailable)
-  )# ,
-  # tar_target(
-  #   name = tar_ssf_data,
-  #   command = prepare_ssf_data(tar_deerData, tar_landuseList, tar_patchList,
-  #                                 nAvail = nAvailable, slDist = slDistribution,
-  #                                 taDist = taDistribution)
-  # ),
+  ),
+  tar_target(
+    name = tar_ssf_data,
+    command = prepare_ssf_data(tar_deerData, tar_landuseList, tar_patchList,
+                                  nAvail = nAvailable, slDist = slDistribution,
+                                  taDist = taDistribution)
+  )
   # tar_target(
   #   name = tar_ssf_models,
   #   command = run_ssf_models(tar_ssf_data, ssfFormula = ssfFormula)

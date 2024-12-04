@@ -8,23 +8,37 @@
 prepare_ssf_data <- function(deerData, landuseList, patchList,
                              nAvail = 10, slDist = "gamma", taDist = "vonmises"){
 
-  ssfDataList <- vector("list", legnth = length(unique(deerData$Animal_ID)))
+  # targets::tar_load("tar_deerData")
+  # targets::tar_load("tar_landuseList")
+  # # targets::tar_load("tar_patchList")
+  # deerData <- tar_deerData
+  # landuseList <- tar_landuseList
+  # # patchList <- tar_patchList
+
+  ssfDataList <- vector("list", length = length(unique(deerData$Animal_ID)))
   names(ssfDataList) <- unique(deerData$Animal_ID)
   for(id in unique(deerData$Animal_ID)){
-    # id <- unique(deerData$Animal_ID)[1]
+    # id <- unique(deerData$Animal_ID)[15]
+
+    focalRegion <- deerData[deerData$Animal_ID == id,]$region[1]
 
     focalDeer <- deerData %>%
       filter(Animal_ID == id) %>%
       # st_as_sf(coords = c("x", "y"), remove = FALSE, crs = 27700) %>%
       make_track(.x = x, .y = y, .t = datetime, crs = 27700, id = Animal_ID)
 
-    if(focalDeer$region[1] == "Aberdeenshire"){
-      focalDistancePatch <- terra::rast(patchList$distanceAberdeen)
+    # if(focalDeer$region[1] == "Aberdeenshire"){
+    #   focalDistancePatch <- terra::rast(patchList$distanceAberdeen)
+    # } else {
+    #   focalDistancePatch <- terra::rast(patchList$distanceWessex)
+    # }
+    if(focalRegion == "Aberdeenshire"){
+      focalDistanceWoodland <- terra::rast(landuseList$Aberdeen$distanceWoodland)
     } else {
-      focalDistancePatch <- terra::rast(patchList$distanceWessex)
+      focalDistanceWoodland <- terra::rast(landuseList$Wessex$distanceWoodland)
     }
 
-    if(focalDeer$region[1] == "Aberdeenshire"){
+    if(focalRegion == "Aberdeenshire"){
       focalLand <- terra::rast(landuseList$Aberdeen$landuse)
     } else {
       focalLand <- terra::rast(landuseList$Wessex$landuse)
@@ -41,8 +55,82 @@ prepare_ssf_data <- function(deerData, landuseList, patchList,
       amt::random_steps(n_control = 10,
                         sl_distr = amt::fit_distr(focalSteps$sl_, "gamma"),
                         ta_distr = amt::fit_distr(focalSteps$ta_, "vonmises")) %>%
-      amt::extract_covariates(covariates = focalDistancePatch, where = "end") # %>%
-    # amt::extract_covariates(covariates = focalLand, where = "end")
+      amt::extract_covariates(covariates = focalDistanceWoodland, where = "end") %>%
+    # amt::extract_covariates(covariates = focalLand, where = "end") %>%
+      mutate(index = row_number())
+
+    # extract instances of paths crossing roads -------------------------------
+
+    if(focalRegion == "Aberdeenshire"){
+      focalRoads <- landuseList$Aberdeen$roads
+    } else {
+      focalRoads <- landuseList$Wessex$roads
+    }
+
+    focalRoadCrossingsList <- vector("list", length = length(unique(focalAllSteps$step_id_)))
+    names(focalRoadCrossingsList) <- unique(focalAllSteps$step_id_)
+    for(s in unique(focalAllSteps$step_id_)){
+      print(paste0("Step ", s))
+      # s <- unique(focalAllSteps$step_id_)[4]
+      focalStep <- focalAllSteps %>%
+        filter(step_id_ == s)
+      startLoc <- focalStep[1,c("x1_", "y1_")]
+
+      stepLinesList <- lapply(1:nrow(focalStep), function(x){
+        # x <- 4
+        row <- focalStep[x,]
+        pointMatrix <- rbind(matrix(as.numeric(startLoc), nrow = 1),
+                             matrix(as.numeric(row[c("x2_", "y2_")]), nrow = 1))
+        sfLine <- sf::st_linestring(pointMatrix)
+        sfLine <- st_sfc(sfLine)
+        st_crs(sfLine) <- 27700
+        # st_crs(sfLine) <- sf::st_set_crs(sfLine, 27700)
+        return(sfLine)
+      })
+      # stepLinesUnion <- do.call(st_union, stepLinesList)
+
+      roadCrossings <- unlist(lapply(stepLinesList, function(x){
+        # x <- stepLinesList[[1]]
+        crossings <- st_crosses(x, focalRoads, sparse = FALSE)
+        # print(any(crossings))
+        return(any(crossings))
+      }))
+      print(paste0(sum(roadCrossings), " / ", length(roadCrossings)))
+
+      roadCrossingsDF <- data.frame(
+        step_id_ = s,
+        Animal_ID = id,
+        roadCrossings = roadCrossings,
+        index = focalStep$index)
+
+      focalRoadCrossingsList[[s]] <- roadCrossingsDF
+
+    }
+    focalRoadCrossings <- do.call(rbind, focalRoadCrossingsList)
+
+    focalAllSteps <- focalAllSteps %>%
+      left_join(focalRoadCrossings, by = c("step_id_", "index"))
+
+    # rbind(focalAllSteps[1:2,c("x1_", "y1_")] %>%
+    #         as.matrix(),
+    #       focalAllSteps[1:2,c("x2_", "y2_")] %>%
+    #         as.matrix())
+    # focalLine <- sf::st_linestring(rbind(focalAllSteps[1,c("x1_", "y1_")] %>%
+    #                                        as.matrix(),
+    #                                      focalAllSteps[1,c("x2_", "y2_")] %>%
+    #                                        as.matrix()))
+    # testRoad1 <- sf::st_linestring(rbind(c(376702,805700), c(376860,805890)))
+    # testRoad2 <- sf::st_linestring(rbind(c(376752,805700), c(376760,805890)))
+    # ggplot() +
+    #   geom_sf(data = focalLine, colour = "red") +
+    #   geom_sf(data = testRoad1, colour = "grey50") +
+    #   geom_sf(data = testRoad2)
+    # st_crosses(focalLine, testRoad, sparse = FALSE)
+    # testRoadMulti <- st_union(testRoad1, testRoad2)
+    # st_crosses(focalLine, testRoadMulti, sparse = FALSE)
+    # ggplot() +
+    #   geom_sf(data = focalLine, colour = "red") +
+    #   geom_sf(data = testRoadMulti, colour = "grey50")
 
     ssfDataList[[id]] <- list(
       steps = focalAllSteps
