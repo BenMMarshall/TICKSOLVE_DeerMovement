@@ -70,7 +70,8 @@ read_landuse_data <- function(deerData){
     mutate(LCM_1 = case_when(
       LCM_1 %in% 1:2 ~ 1,
       TRUE ~ NA)) %>%
-    terra::distance()
+    terra::distance() %>%
+    rename(distanceWoodland = LCM_1)
 
   roadsNewForest_SY <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SU.gml"),
                                layer = "RoadLink")

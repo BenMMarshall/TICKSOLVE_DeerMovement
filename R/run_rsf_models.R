@@ -5,7 +5,7 @@
 #' @return A list of model outputs from the glmer function.
 #'
 #' @export
-run_rsf_models <- function(rsfDataList){#, rsfFormula){
+run_rsf_models <- function(rsfDataList, rsfFormula){
 
   rsfModelList <- vector("list", length = length(rsfDataList))
   names(rsfModelList) <- names(rsfDataList)

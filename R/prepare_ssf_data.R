@@ -18,8 +18,8 @@ prepare_ssf_data <- function(deerData, landuseList, patchList,
   ssfDataList <- vector("list", length = length(unique(deerData$Animal_ID)))
   names(ssfDataList) <- unique(deerData$Animal_ID)
   for(id in unique(deerData$Animal_ID)){
-    # id <- unique(deerData$Animal_ID)[15]
-
+    # id <- unique(deerData$Animal_ID)[1]
+    print(id)
     focalRegion <- deerData[deerData$Animal_ID == id,]$region[1]
 
     focalDeer <- deerData %>%
@@ -56,8 +56,25 @@ prepare_ssf_data <- function(deerData, landuseList, patchList,
                         sl_distr = amt::fit_distr(focalSteps$sl_, "gamma"),
                         ta_distr = amt::fit_distr(focalSteps$ta_, "vonmises")) %>%
       amt::extract_covariates(covariates = focalDistanceWoodland, where = "end") %>%
-    # amt::extract_covariates(covariates = focalLand, where = "end") %>%
-      mutate(index = row_number())
+      amt::extract_covariates(covariates = focalLand, where = "end") %>%
+      mutate(index = row_number()) %>%
+      mutate(landuse = factor(case_when(
+        LCM_1 %in% 1:2 ~ "Woodland",
+        LCM_1 %in% 3 ~ "Arable",
+        LCM_1 %in% 4:7 ~ "Grasslands",
+        LCM_1 %in% 9:10 ~ "Heathland",
+        LCM_1 %in% c(11,14) ~ "Aquatic",
+        LCM_1 %in% 20:21 ~ "Human Settlements",
+        TRUE ~ "Other"
+      ), levels = c(
+        "Woodland",
+        "Grasslands",
+        "Heathland",
+        "Aquatic",
+        "Arable",
+        "Human Settlements",
+        "Other"
+      )))
 
     # extract instances of paths crossing roads -------------------------------
 

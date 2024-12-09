@@ -20,6 +20,7 @@ tar_option_set(
                "sf",
                "ctmm",
                "amt",
+               "move",
                "lme4",
                "effects",
                "performance",
@@ -37,7 +38,9 @@ tar_option_set(
   # sets a controller that scales up to a maximum of two workers
   # which run as local R processes. Each worker launches when there is work
   # to do and exits if 60 seconds pass with no tasks to run.
-  controller = crew::crew_controller_local(workers = 2, seconds_idle = 60),
+
+  # controller = crew::crew_controller_local(workers = 2, seconds_idle = 60),
+
   #
   format = "qs" # Optionally set the default storage format. qs is fast.
 )
@@ -50,14 +53,19 @@ tar_source()
 nAvailable <- 10
 typeAvialable <- "random"
 contourAvialable <- "99%"
-# rsfFormula <- case_ ~ distancePatch + landuse + distancePatch:landuse
+rsfFormula <- case_ ~ distanceWoodland + landuse + distancePatch:landuse
 # SSF
 nAvailableSteps <- 10
 slDistribution <- "gamma"
 taDistribution <- "vonmises"
-# ssfFormula <- case_ ~ distancePatch + landuse + distancePatch:landuse +
-#   sl_ + log(sl_) + cos(ta_) + log(sl_):landuse + log(sl_):distancePatch +
-#   strata(step_id_)
+ssfFormula <- case_ ~ distanceWoodland + landuse + distanceWoodland:landuse +
+  roadCrossings +
+  sl_ + log(sl_) + cos(ta_) + log(sl_):landuse + log(sl_):distanceWoodland +
+  strata(step_id_)
+# dbbmm
+windowSize <- 29 #~ a week
+marginSize <- 5 #~ a day
+locationError <- 0.1
 
 # Replace the target list below with your own:
 list(
@@ -90,6 +98,13 @@ list(
     command = calculate_akdes(tar_deerData)
   ),
   tar_target(
+    name = tar_dbbmmList,
+    command = calculate_dbbmms(tar_deerData, tar_landuseList,
+                               window = windowSize,
+                               margin = marginSize,
+                               locationError = locationError)
+  ),
+  tar_target(
     name = tar_homeRange_sizePlot,
     command = plot_homeRange_sizes(tar_deerData, tar_akdeLists)
   ),
@@ -104,7 +119,7 @@ list(
   ),
   tar_target(
     name = tar_rsf_models,
-    command = run_rsf_models(tar_rsf_data)#, rsfFormula = rsfFormula)
+    command = run_rsf_models(tar_rsf_data, rsfFormula = rsfFormula)
   ),
   tar_target(
     name = tar_rsf_outputs,
@@ -115,9 +130,9 @@ list(
     command = prepare_ssf_data(tar_deerData, tar_landuseList, tar_patchList,
                                   nAvail = nAvailable, slDist = slDistribution,
                                   taDist = taDistribution)
+  ),
+  tar_target(
+    name = tar_ssf_models,
+    command = run_ssf_models(tar_ssf_data, ssfFormula = ssfFormula)
   )
-  # tar_target(
-  #   name = tar_ssf_models,
-  #   command = run_ssf_models(tar_ssf_data, ssfFormula = ssfFormula)
-  # )
 )
