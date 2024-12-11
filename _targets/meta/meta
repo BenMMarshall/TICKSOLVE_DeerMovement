@@ -14,11 +14,12 @@ nAvailable|object|d516855f98da7f3d|||||||||||||||
 nAvailableSteps|object|d516855f98da7f3d|||||||||||||||
 plot_homeRange_sizes|function|c86367c04d966bce|||||||||||||||
 prepare_rsf_data|function|81d096ca72f80606|||||||||||||||
-prepare_ssf_data|function|28e4c538e9de667a|||||||||||||||
+prepare_ssf_data|function|7af3ed59df26b31d|||||||||||||||
 read_deer_data|function|a6a33200f32f1114|||||||||||||||
 read_landuse_data|function|dfc7a3c71644843c|||||||||||||||
 read_patches_data|function|78903ec946f7f8a9|||||||||||||||
-rsfFormula|object|b1d5b77117938567|||||||||||||||
+rsfFormula|object|e44fdcd993ebd2fb|||||||||||||||
+run_pois_model|function|f4d881324f64d60e|||||||||||||||
 run_rsf_models|function|03740d01fc112cd2|||||||||||||||
 run_ssf_models|function|b1730a1356bead17|||||||||||||||
 slDistribution|object|378daf6acce8eba7|||||||||||||||
@@ -33,12 +34,41 @@ tar_landuseList|stem|5022c683484f8d82|9ade98fbebd966f6|7ebb255f375610ca|10430455
 tar_overview_maps|stem|27672a247769c969|a8b4a0dbc550a557|f0188dc6db295025|951223795||t20065.4502802437s|53cf534ccf21597c|241208695|qs|local|vector|||305.859||
 tar_patches|stem|d6d25fc8aed34257|6bdc42673a040198|607a84f6bc21e668|561265787||t20059.3990599721s|2eb739478038e79e|1431127|qs|local|vector|||509.703||
 tar_patchList|stem|d6d25fc8aed34257|6bdc42673a040198|607a84f6bc21e668|-2053994115||t20065.4307441267s|2eb739478038e79e|1431127|qs|local|vector|||525.578||
+tar_pois_model|stem||ab4be6542fa80258|c95a752e2765cd14|-1350650168||t20067.6069945052s||0|qs|local|vector|||2.188||could not find function inla
 tar_rsf_data|stem|5444f4bddd3fb761|b8ff3dd396a75fdf|3fbdbd9ac6dff6e4|-314967242||t20065.4409421931s|e91a04d31411d0e1|5286594|qs|local|vector|||234.375||
-tar_rsf_models|stem|dfc5b897c6117aee|8e856f040fb60506|abb8180220e367f1|-1738740726||t20065.49204037s|7da268df9da3ce37|45570516|qs|local|vector|||4.859|glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
+tar_rsf_models|stem|c6ecc71f79f95feb|8e856f040fb60506|a4ae6cfac77ca1d6|-1738740726||t20067.6069863946s|e38cca700da64d6e|45578797|qs|local|vector|||1.328|glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
 tar_rsf_outputs|stem|f60d70ce57f56f2b|2e7bda5096ec7c26|eee4f2af614cc576|251120470||t20065.4971818759s|4e223ec2db792ab6|85338245|qs|local|vector|||439.984|prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. Removed 60 rows containing missing values or values outside the scale rangegeom_line.|
-tar_ssf_data|stem|ca94d8079d0a1b3e|540d203994dec23b|19175f5b84d06bc5|390394694||t20065.5577859985s|c2e270bd8e0e753d|8140431|qs|local|vector|||2621.282|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
+tar_ssf_data|stem|ca94d8079d0a1b3e|540d203994dec23b|9479f8705f335e83|390394694||t20067.6069662141s|c2e270bd8e0e753d|8140431|qs|local|vector|||2536.031|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
 tar_ssf_models|stem|dde57f8bf459c498|be721ccd31e91379|0183d597a2c903df|-1267665248||t20065.5589891361s|d34fab72c2e29bce|9830524|qs|local|vector|||8.562|Loglik converged before variable  6  beta may be infinite. . Loglik converged before variable  6  beta may be infinite. . Loglik converged before variable  6,15  beta may be infinite. . Loglik converged before variable  5  beta may be infinite. . Loglik converged before variable  5,8  beta may be infinite. . Loglik converged before variable  4  beta may be infinite. . Loglik converged before variable  4,14  beta may be infinite. . Loglik converged before variable  1,6,12,14,15  beta may be infinite. . Loglik converged before variable  1,3,6,8,12,13,15,22  beta may be infinite. . Loglik converged before variable  3  beta may be infinite. . Loglik converged before variable  3,13  beta may be infinite. . Loglik converged before variable  3,4  beta may be infinite. . Loglik converged before variable  3,4,5,6,13,15  beta may be infinite. . Loglik converged before variable  1,4,5,6,12,13,21  beta may be infinite. . Loglik converged before variable  4,5,6  beta may be infinite.|
 tar_trackingPlots|stem|1638c47e7efa0281|b349b384a931ff92|0f8cbd65339adbd3|1086976774||t20065.4464622205s|e53e05e0b83618ae|10108797|qs|local|vector|||0.844|Removed 17 rows containing nonfinite outside the scale rangestat_density_ridges.|
 tar_trackingTables|stem|9e773296228309dc|226069d56e77fd04|7b35508dff748796|1406021826||t20065.4464628227s|83fa9aa964c289d2|661|qs|local|vector|||0.016||
 typeAvialable|object|684f65380be68543|||||||||||||||
 windowSize|object|ff9fb58342e8c485|||||||||||||||
+generate_tracking_plots|function|635daeb982a5128a
+contourAvialable|object|6dfa276ef67328bc
+run_ssf_models|function|b1730a1356bead17
+prepare_rsf_data|function|81d096ca72f80606
+marginSize|object|c386c7b04396aaec
+generate_tracking_table|function|3914ce43cf2850f6
+run_rsf_models|function|03740d01fc112cd2
+taDistribution|object|1716da92e4275cdd
+read_patches_data|function|78903ec946f7f8a9
+slDistribution|object|378daf6acce8eba7
+typeAvialable|object|684f65380be68543
+plot_homeRange_sizes|function|c86367c04d966bce
+nAvailable|object|d516855f98da7f3d
+read_deer_data|function|a6a33200f32f1114
+calculate_akdes|function|a726e1c414633135
+locationError|object|ff81af095a75741e
+rsfFormula|object|e44fdcd993ebd2fb
+ssfFormula|object|97cdcfbe4dc94bd3
+generate_palettes|function|bedb4be3859d6506
+run_pois_model|function|f4d881324f64d60e
+nAvailableSteps|object|d516855f98da7f3d
+read_landuse_data|function|dfc7a3c71644843c
+windowSize|object|ff9fb58342e8c485
+calculate_dbbmms|function|7a6d7321c24e85cf
+prepare_ssf_data|function|7af3ed59df26b31d
+extract_rsf_results|function|118473675c89fad9
+generate_overview_maps|function|acdc56f1e881691c
+tar_pois_model|stem|dae781c5260be077|ab4be6542fa80258|c95a752e2765cd14|-1350650168||t20067.6086088383s|a5b231ed52cb588b|196623334|qs|local|vector|||54.687||

@@ -24,28 +24,58 @@ patchList <- tar_patchList
 deerData <- tar_deerData
 
 focalPatches <- patchList$Aberdeen
+
 focalDeer <- deerData %>%
   filter(Animal_ID == "Roe04_F")
 focalData <- ssfData$Roe04_F$steps
 focalModel <- ssfModels$Roe04_F
+
 focalRoads <- landuseList$Aberdeen$roads
 focalDistance <- terra::rast(landuseList$Aberdeen$distanceWoodland)
 focalLanduse <- terra::rast(landuseList$Aberdeen$landuse)
 focalRoadsTerra <- focalLanduse
 coef(focalModel$model)
 
-plot(terra::rasterize(focalRoads, focalRoadsTerra, fun = "mean"))
 
-focalRoadsTerra <- terra::rasterize(st_buffer(focalRoads, 10), focalRoadsTerra,
-                 fun = "max", background = 0, touches = TRUE, cover = TRUE)
+ssfCoefs <- do.call(rbind, lapply(names(ssfModels), function(x){
+  mod <- ssfModels[[x]]
+  coef <- coef(mod$model)
+  conf <- confint(mod$model)
+  modelSummary <- cbind(coef, conf) %>%
+    as.data.frame()
+  modelSummary$Animal_ID <- x
+  return(modelSummary)
+}))
+ssfCoefs$term <- gsub("[[:digit:]]{0,2}$", "", row.names(ssfCoefs))
+
+naiveMeanSsfCoefs <- ssfCoefs %>%
+  group_by(term) %>%
+  summarise(meanEffect = median(coef, na.rm = TRUE))
+
+ssfMeans <- naiveMeanSsfCoefs$meanEffect
+names(ssfMeans) <- naiveMeanSsfCoefs$term
+
+meanSL_ <- mean(unlist(lapply(ssfData, function(x) x$steps$sl_)))
+meanTA_ <- mean(unlist(lapply(ssfData, function(x) x$steps$ta_)))
+
+
+# plot(terra::rasterize(focalRoads, focalRoadsTerra, fun = "mean"))
+
+focalRoadsTerra <- terra::rasterize(st_buffer(focalRoads, 20), focalRoadsTerra,
+                                    fun = "max", background = 0, touches = TRUE, cover = TRUE)
+terra::values(focalRoadsTerra) <- ifelse(terra::values(focalRoadsTerra) == 0, 0, 1)
 
 # st_buffer(focalRoads, 10) %>%
 #   ggplot() +
 #   geom_sf()
-#
-# ggplot() +
-#   geom_spatraster(data = focalRoadsTerra) +
-#   geom_sf(data = focalRoads, alpha = 0.1)
+
+# remove land use info from the road areas
+focalLanduse <- focalLanduse %>%
+  mutate(roadCrossings = terra::values(focalRoadsTerra))
+
+ggplot() +
+  geom_spatraster(data = focalLanduse, aes(fill = LCM_1))# +
+  # geom_sf(data = focalRoads, alpha = 0.1)
 
 # focalLanduse <- focalLanduse %>%
 #   mutate(landuse = factor(case_when(
@@ -67,7 +97,7 @@ focalRoadsTerra <- terra::rasterize(st_buffer(focalRoads, 10), focalRoadsTerra,
 #   )))
 
 dataLanduse <- as.data.frame(terra::values(focalLanduse)) %>%
-  dplyr::select(LCM_1) %>%
+  dplyr::select(LCM_1, roadCrossings) %>%
   dplyr::mutate(landuse = factor(case_when(
     LCM_1 %in% 1:2 ~ "Woodland",
     LCM_1 %in% 3 ~ "Arable",
@@ -85,8 +115,8 @@ dataLanduse <- as.data.frame(terra::values(focalLanduse)) %>%
     "Human Settlements",
     "Other"
   ))) %>%
-  dplyr::select(landuse)#  %>%
-  # to_dummy()
+  dplyr::select(landuse, roadCrossings)#  %>%
+# to_dummy()
 
 # colnames(dataLanduse) <- levels(focalLanduse$landuse)[[1]]$label
 
@@ -94,28 +124,38 @@ dataDistance <- as.data.frame(terra::values(focalDistance))
 
 dataMatrix <- cbind(dataLanduse, dataDistance)
 
-dataMatrix$roadCrossings <- terra::values(focalRoadsTerra)
 dataMatrix <- na.omit(dataMatrix)
+# dataMatrix$roadCrossings <- ifelse(terra::values(focalRoadsTerra) == 0, 0, 1)
+# dataMatrix <- dataMatrix %>%
+#   mutate(roadCrossings =
+#            case_when(
+#              landuse == "roadCrossings" ~ 1,
+#              TRUE ~ 0
+#            ),
+#          landuse = case_when(
+#            landuse == "roadCrossings" ~ "Grasslands",
+#            TRUE ~ landuse
+#          ))
 dataMatrix$step_id_ <- 4
-dataMatrix$sl_ <- mean(focalData$sl_)
-dataMatrix$ta_ <- mean(focalData$ta_)
+dataMatrix$sl_ <- meanSL_
+dataMatrix$ta_ <- meanTA_
 
-dataMatrix <- dataMatrix %>%
-  mutate(sl_ = case_when(
-    landuse == "Grasslands" ~ sl_ * ifelse(is.na(exp(coef(focalModel$model)["landuseGrasslands:log(sl_)"])), 1,
-                                           exp(coef(focalModel$model)["landuseGrasslands:log(sl_)"])),
-    landuse == "Heathland" ~ sl_ * ifelse(is.na(exp(coef(focalModel$model)["landuseHeathland:log(sl_)"])), 1,
-                                          exp(coef(focalModel$model)["landuseHeathland:log(sl_)"])),
-    landuse == "Aquatic" ~ sl_ * ifelse(is.na(exp(coef(focalModel$model)["landuseAquatic:log(sl_)"])), 1,
-                                        exp(coef(focalModel$model)["landuseAquatic:log(sl_)"])),
-    landuse == "Arable" ~ sl_ * ifelse(is.na(exp(coef(focalModel$model)["landuseArable:log(sl_)"])), 1,
-                                       exp(coef(focalModel$model)["landuseArable:log(sl_)"])),
-    landuse == "Human Settlements" ~ sl_ * ifelse(is.na(exp(coef(focalModel$model)["landuseHuman Settlements:log(sl_)"])), 1,
-                                                  exp(coef(focalModel$model)["landuseHuman Settlements:log(sl_)"])),
-    landuse == "Other" ~ sl_ * ifelse(is.na(exp(coef(focalModel$model)["landuseOther:log(sl_)"])), 1,
-                                      exp(coef(focalModel$model)["landuseOther:log(sl_)"])),
-    TRUE ~ mean(focalData$sl_)
-  ))
+# dataMatrix <- dataMatrix %>%
+#   mutate(sl_ = case_when(
+#     landuse == "Grasslands" ~ ssfMeans["log(sl_)"] * ifelse(is.na(exp(ssfMeans["landuseGrasslands:log(sl_)"])), 1,
+#                                                             exp(ssfMeans["landuseGrasslands:log(sl_)"])),
+#     landuse == "Heathland" ~ ssfMeans["log(sl_)"] * ifelse(is.na(exp(ssfMeans["landuseHeathland:log(sl_)"])), 1,
+#                                                            exp(ssfMeans["landuseHeathland:log(sl_)"])),
+#     landuse == "Aquatic" ~ ssfMeans["log(sl_)"] * ifelse(is.na(exp(ssfMeans["landuseAquatic:log(sl_)"])), 1,
+#                                                          exp(ssfMeans["landuseAquatic:log(sl_)"])),
+#     landuse == "Arable" ~ ssfMeans["log(sl_)"] * ifelse(is.na(exp(ssfMeans["landuseArable:log(sl_)"])), 1,
+#                                                         exp(ssfMeans["landuseArable:log(sl_)"])),
+#     landuse == "Human Settlements" ~ ssfMeans["log(sl_)"] * ifelse(is.na(exp(ssfMeans["landuseHuman Settlements:log(sl_)"])), 1,
+#                                                                    exp(ssfMeans["landuseHuman Settlements:log(sl_)"])),
+#     landuse == "Other" ~ ssfMeans["log(sl_)"] * ifelse(is.na(exp(ssfMeans["landuseOther:log(sl_)"])), 1,
+#                                                        exp(ssfMeans["landuseOther:log(sl_)"])),
+#     TRUE ~ meanSL_
+#   ))
 
 hist(focalData$sl_)
 hist(dataMatrix$sl_)
@@ -125,29 +165,31 @@ hist(dataMatrix$sl_)
 # exp(coef(focalModel$model)["landuseGrasslands:log(sl_)"])
 
 modelMatriX <- model.matrix(focalModel$model, dataMatrix)
-
+# sum(modelMatriX[,"roadCrossings"] == 1)
+# modelMatriX[,"roadCrossings"] <- dataMatrix$roadCrossings
 # predvals <- (modelMatriX %*% coef(focalModel$model)[match(colnames(modelMatriX), names(coef(focalModel$model)))])[,1]
+colnames(modelMatriX)[colnames(modelMatriX) == "roadCrossings"] <- "roadCrossingsTRUE"
 
 not_na_inf <- function(x) all(!is.na(x) & !is.infinite(x))
-
 modelMatriX <- modelMatriX %>%
   as.data.frame() %>%
   select_if(not_na_inf) %>%
   as.matrix()
 
-modelMatriX_trim <- modelMatriX[,colnames(modelMatriX) %in% names(coef(focalModel$model)[!is.na(coef(focalModel$model))])]
+modelMatriX_trim <- modelMatriX[,colnames(modelMatriX) %in% names(ssfMeans[!is.na(ssfMeans)])]
+coef_trim <- ssfMeans[names(ssfMeans) %in% colnames(modelMatriX_trim)]
 
-coef_trim <- coef(focalModel$model)[names(coef(focalModel$model)) %in% colnames(modelMatriX_trim)]
-colnames(modelMatriX_trim)
-
-predvals <- (modelMatriX_trim %*% coef_trim)[,1]
-predvals <- predvals-4 ##change intercept
+# colnames() bit so that they are ordered the same
+predvals <- (modelMatriX_trim %*% coef_trim[colnames(modelMatriX_trim)])[,1]
+# predvals <- predvals-4 ##change intercept
 ## Convert to 0-1 scale
+# dataMatrix$pred <- scales::rescale(predvals, to = c(0, 1))
 dataMatrix$pred <- inv.logit(predvals)
+
 ## Previous analyses showed that animals never used into urban areas, nor do they cross railways
 # dataMatrix$pred <- ifelse(d$prop7_lc == 1, 0, d$predi)
 # make the woodland highly used and easily moved via
-dataMatrix$pred <- ifelse(dataMatrix$landuse %in% c("Woodland"), 1, dataMatrix$pred)
+# dataMatrix$pred <- ifelse(dataMatrix$landuse %in% c("Woodland"), 1, dataMatrix$pred)
 
 ## To avoid problems with 0's in RSP, we set them to a very small value
 dataMatrix$pred <- ifelse(dataMatrix$pred == 0, 0.0000000000001, dataMatrix$pred)
@@ -210,8 +252,7 @@ nPatches <- nrow(focalPatches)
 pas <- NULL
 set.seed(0)
 sttim <- Sys.time()
-# for (i in c(1:nPatches)){
-for (i in c(1:12)){
+for (i in c(1:nPatches)){
   # i <- 2
   print(paste(i, "/", nPatches))
   # pt_win <- sample(rndpts$id, size=1, prob = (rndpts$val_win)) #draw random points (random pairs)
@@ -222,6 +263,7 @@ for (i in c(1:12)){
   edPoint <- as(sample(endPoints, size = 1), "Spatial")
   # make map
   pasT <- try(passage(tr, stPoint, edPoint, theta = 0.001), silent = FALSE)
+  # plot(pasT)
   # NB: to obtain the different models described in the paper, change theta values as described in the
   # paper. For simplicity here we produce only one model
   if (class(pasT)!="try-error"){
@@ -270,8 +312,8 @@ pas2_terra <- as(pas2, "SpatRaster")
 
 ggplot() +
   geom_spatraster(data = pas2_terra, aes(fill = layer)) +
-  geom_sf(data = focalPatches, alpha = 0.1) +
-  geom_sf(data = focalRoads, colour = "#000000") +
+  # geom_sf(data = focalPatches, alpha = 0.1) +
+  # geom_sf(data = focalRoads, colour = "#000000", alpha = 0.25) +
   coord_sf(xlim = c(max(c(ext(focalPatches)[1],
                           ext(pas2_terra)[1])),
                     min(c(ext(focalPatches)[2],
@@ -296,8 +338,8 @@ marginSize <- 5 #~ a day
 crs27700 <- sp::CRS(SRS_string = "EPSG:27700")
 
 moveObj <- move(x = focalDeer$x, y = focalDeer$y,
-                      time = focalDeer$datetime,
-                      proj = crs27700@projargs)
+                time = focalDeer$datetime,
+                proj = crs27700@projargs)
 
 # set_grid.ext <- 4
 # set_dimsize <- 640

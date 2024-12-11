@@ -100,14 +100,25 @@ ggplot(lr2$df, aes(x = elevation_end_x1, y = exp(log_rss))) +
 
 ### Bootstrap Confidence Intervals
 
-# The RSS plots above do not give any indication of model uncertainty. One method for constructing confidence intervals associated with the RSS predictions is via non-parametric bootstrapping [@fieberg2020resampling]. When using the argument `ci="boot"`  to the `log_rss()` function, the function repeatedly resamples strata with replacement, refits the model, and calculates log-RSS. Quantiles of the bootstrap log-RSS statistics are used to  construct, by default, a 95% confidence interval around the original log-RSS calculation. The size of the confidence interval and number of bootstrap iterations can be controlled by the user by changing the `ci_level` and `n_boot` arguments. `r colorize("Warning: this code can take some time to execute.", "red")`
+# The RSS plots above do not give any indication of model uncertainty. One
+# method for constructing confidence intervals associated with the RSS
+# predictions is via non-parametric bootstrapping [@fieberg2020resampling]. When
+# using the argument `ci="boot"`  to the `log_rss()` function, the function
+# repeatedly resamples strata with replacement, refits the model, and calculates
+# log-RSS. Quantiles of the bootstrap log-RSS statistics are used to  construct,
+# by default, a 95% confidence interval around the original log-RSS calculation.
+# The size of the confidence interval and number of bootstrap iterations can be
+# controlled by the user by changing the `ci_level` and `n_boot` arguments. `r
+# colorize("Warning: this code can take some time to execute.", "red")`
 # Calculate log-RSS
 lr2_ci_boot <- log_rss(m1, s1, s2, ci = "boot", ci_level = 0.95, n_boot = 1000)
 
 # Check the header of the data.frame
 head(lr2_ci_boot$df)
 
-You can see that the resulting `lr2_ci_boot`  data.frame now has columns `lwr` and `upr`, indicating the lower and upper bounds of the confidence interval. We can now add this confidence envelope to our plot.
+# You can see that the resulting `lr2_ci_boot`  data.frame now has columns `lwr`
+# and `upr`, indicating the lower and upper bounds of the confidence interval.
+# We can now add this confidence envelope to our plot.
 
 ggplot(lr2_ci_boot$df, aes(x = elevation_end_x1, y = log_rss)) +
   geom_ribbon(aes(ymin = lwr, ymax = upr),
@@ -121,7 +132,11 @@ ggplot(lr2_ci_boot$df, aes(x = elevation_end_x1, y = log_rss)) +
 
 ### Large-Sample Confidence Intervals
 
-To avoid the computational time required to calculate bootstrap confidence intervals, you may decide that using a large-sample-based confidence interval is appropriate. We can use the standard errors from our fitted model to estimate these confidence intervals based on a normal approximation to the sampling distribution of $\hat{\beta}$.
+# To avoid the computational time required to calculate bootstrap confidence
+# intervals, you may decide that using a large-sample-based confidence interval
+# is appropriate. We can use the standard errors from our fitted model to
+# estimate these confidence intervals based on a normal approximation to the
+# sampling distribution of $\hat{\beta}$.
 
 lr2_ci_se <- log_rss(m1, s1, s2, ci = "se", ci_level = 0.95)
 
@@ -152,13 +167,26 @@ ggplot(lr2_ci_both, aes(x = elevation_end_x1, y = log_rss,
 
 ## Interpreting Movement Parameters
 
-Previously, we viewed tentative estimates of parameters describing the distribution of step-lengths and turn-angles.  When estimating these parameters, however, we did not account or adjust for the influence of habitat selection. Including movement characteristics (`sl_`, `log_sl_`, and `cos_ta_`) in our iSSF allows us to update our estimates of these parameters, which describe selection-free movement distributions. Mathematical formulas required to perform these updates are given in Supplementary Appendix C. Here, we will see how to update the distributions using the functions from `amt`.
+# Previously, we viewed tentative estimates of parameters describing the
+# distribution of step-lengths and turn-angles.  When estimating these
+# parameters, however, we did not account or adjust for the influence of habitat
+# selection. Including movement characteristics (`sl_`, `log_sl_`, and
+# `cos_ta_`) in our iSSF allows us to update our estimates of these parameters,
+# which describe selection-free movement distributions. Mathematical formulas
+# required to perform these updates are given in Supplementary Appendix C. Here,
+# we will see how to update the distributions using the functions from `amt`.
 
 ### Update Step-Length Distribution
 
-In our model, we included parameters for the step length (`sl_`) and its natural logarithm (`log_sl_`). We included these parameters to update the scale and shape parameters of our tentative gamma distribution, respectively. Different terms will need to be included in the iSSF, depending on the assumed step-length distribution (for details, see Supplementary Appendix C).
+# In our model, we included parameters for the step length (`sl_`) and its
+# natural logarithm (`log_sl_`). We included these parameters to update the
+# scale and shape parameters of our tentative gamma distribution, respectively.
+# Different terms will need to be included in the iSSF, depending on the assumed
+# step-length distribution (for details, see Supplementary Appendix C).
 
-For our basic model -- where the movement parameters are *not* interacting with any covariates -- `amt` has a simple function to update the step-length distribution.
+# For our basic model -- where the movement parameters are *not* interacting
+# with any covariates -- `amt` has a simple function to update the step-length
+# distribution.
 
 # Update the distribution
 updated_sl <- update_sl_distr(m1)

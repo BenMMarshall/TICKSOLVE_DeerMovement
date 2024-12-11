@@ -53,8 +53,8 @@ prepare_ssf_data <- function(deerData, landuseList, patchList,
 
     focalAllSteps <- focalSteps %>%
       amt::random_steps(n_control = 10,
-                        sl_distr = amt::fit_distr(focalSteps$sl_, "gamma"),
-                        ta_distr = amt::fit_distr(focalSteps$ta_, "vonmises")) %>%
+                        sl_distr = amt::fit_distr(focalSteps$sl_, slDist),
+                        ta_distr = amt::fit_distr(focalSteps$ta_, taDist)) %>%
       amt::extract_covariates(covariates = focalDistanceWoodland, where = "end") %>%
       amt::extract_covariates(covariates = focalLand, where = "end") %>%
       mutate(index = row_number()) %>%

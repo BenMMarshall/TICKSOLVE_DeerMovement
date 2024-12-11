@@ -23,6 +23,8 @@ tar_option_set(
                "move",
                "lme4",
                "effects",
+               "sjmisc",
+               "INLA",
                "performance",
                "ggplot2",
                "ggridges",
@@ -53,7 +55,7 @@ tar_source()
 nAvailable <- 10
 typeAvialable <- "random"
 contourAvialable <- "99%"
-rsfFormula <- case_ ~ distanceWoodland + landuse + distancePatch:landuse
+rsfFormula <- case_ ~ distanceWoodland + landuse + distanceWoodland:landuse
 # SSF
 nAvailableSteps <- 10
 slDistribution <- "gamma"
@@ -134,5 +136,9 @@ list(
   tar_target(
     name = tar_ssf_models,
     command = run_ssf_models(tar_ssf_data, ssfFormula = ssfFormula)
+  ),
+  tar_target(
+    name = tar_pois_model,
+    command = run_pois_model(tar_ssf_data)
   )
 )
