@@ -24,6 +24,10 @@ tar_option_set(
                "lme4",
                "effects",
                "sjmisc",
+               "boot",
+               "sp",
+               "raster",
+               "gdistance",
                "INLA",
                "performance",
                "ggplot2",
@@ -41,7 +45,7 @@ tar_option_set(
   # which run as local R processes. Each worker launches when there is work
   # to do and exits if 60 seconds pass with no tasks to run.
 
-  # controller = crew::crew_controller_local(workers = 2, seconds_idle = 60),
+  controller = crew::crew_controller_local(workers = 3, seconds_idle = 60),
 
   #
   format = "qs" # Optionally set the default storage format. qs is fast.
@@ -69,8 +73,14 @@ windowSize <- 29 #~ a week
 marginSize <- 5 #~ a day
 locationError <- 0.1
 
+# connectivity passage settings
+connectSettings <- expand.grid(
+  THETA = c(0.01, 0.001, 0.0001, 0.00001),
+  patchDistance = c(300)
+)
+
 # Replace the target list below with your own:
-list(
+coreTargetList <- list(
   tar_target(
     name = tar_deerData,
     command = read_deer_data()
@@ -140,5 +150,45 @@ list(
   tar_target(
     name = tar_pois_model,
     command = run_pois_model(tar_ssf_data)
+  ),
+  tar_target(
+    name = tar_predSSFResist_location,
+    command = build_predResistance_layer(tar_ssf_data, tar_ssf_models,
+                                         tar_landuseList, tar_patchList,
+                                         tar_deerData, REGION = "Aberdeenshire")
+  ),
+  tar_map(
+    values = connectSettings,
+    tar_target(
+      name = tar_connectSSF_location,
+      command = build_connect_layer(tar_predSSFResist_location, tar_patchList,
+                                    REGION = "Aberdeenshire", prelimAggFact = 20,
+                                    seed = 2025, THETA = THETA,
+                                    patchDistance = patchDistance)
+    ),
+    tar_target(
+      name = tar_connectSSF_dbbmmmse,
+      command = calculate_dbbmm_mse(tar_deerData,
+                                    tar_dbbmmList,
+                                    tar_connectSSF_location,
+                                    REGION = "Aberdeenshire",
+                                    THETA = THETA)
+    )
   )
 )
+
+connectTargetList <- list(
+  tar_combine(
+    tar_connectSSF_list,
+    coreTargetList[[17]][grep("tar_connectSSF_location", names(coreTargetList[[17]]))],
+    command = list(!!!.x)
+  ),
+  tar_target(
+    tar_connectivitySSF_thetaMaps,
+    map_connectivity_thetas(tar_connectSSF_list, tar_landuseList, tar_patchList, REGION = "Aberdeenshire")
+  )
+)
+
+
+list(coreTargetList,
+     connectTargetList)

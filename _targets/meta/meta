@@ -1,14 +1,21 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|71cbc48b3ecd7b9c|||||||||||||||
+.Random.seed|object|a4b402d0ef6d733b|||||||||||||||
+build_connect_layer|function|985cbfe0665f29ec|||||||||||||||
+build_predResistance_layer|function|4832cbc98c2b39fd|||||||||||||||
 calculate_akdes|function|a726e1c414633135|||||||||||||||
+calculate_dbbmm_mse|function|aa036b2ac5b132f7|||||||||||||||
 calculate_dbbmms|function|7a6d7321c24e85cf|||||||||||||||
+connectSettings|object|cf1c4cc28feac6a2|||||||||||||||
+connectTargetList|object|a52c9d30ff104fb8|||||||||||||||
 contourAvialable|object|6dfa276ef67328bc|||||||||||||||
+coreTargetList|object|6b6f1f4225fb9094|||||||||||||||
 extract_rsf_results|function|118473675c89fad9|||||||||||||||
 generate_overview_maps|function|acdc56f1e881691c|||||||||||||||
 generate_palettes|function|bedb4be3859d6506|||||||||||||||
 generate_tracking_plots|function|635daeb982a5128a|||||||||||||||
 generate_tracking_table|function|3914ce43cf2850f6|||||||||||||||
 locationError|object|ff81af095a75741e|||||||||||||||
+map_connectivity_thetas|function|38ccced7f9917241|||||||||||||||
 marginSize|object|c386c7b04396aaec|||||||||||||||
 nAvailable|object|d516855f98da7f3d|||||||||||||||
 nAvailableSteps|object|d516855f98da7f3d|||||||||||||||
@@ -26,6 +33,23 @@ slDistribution|object|378daf6acce8eba7|||||||||||||||
 ssfFormula|object|97cdcfbe4dc94bd3|||||||||||||||
 taDistribution|object|1716da92e4275cdd|||||||||||||||
 tar_akdeLists|stem|6f4a2d2fb9ecb05e|51e20b3c1d015bc4|97384fae41a8b0eb|856298492||t20065.4382256552s|8d90780940c4223e|13306498|qs|local|vector|||1166.328||
+tar_connect_dbbmmmse_0.001_300|stem|da1cf69197921c06|494756f757e8e662|7f427b2a4112b4ed|-1682529053||t20073.8260868675s|4702e5d68d5cb8ce|360|qs|local|vector|||5.297||
+tar_connect_dbbmmmse_0.01_300|stem|7dd4389e4e765a06|65f998b9d82713ea|b7b98376239ded1e|-736622581||t20073.8264660803s|4702e5d68d5cb8ce|360|qs|local|vector|||5.344||
+tar_connect_dbbmmmse_1e.04_300|stem|a97d13fb441b84c6|e01138cec521fc74|3b7f1d5b9b3f3e22|-307292614||t20073.8307453937s|4702e5d68d5cb8ce|360|qs|local|vector|||4.688||
+tar_connect_dbbmmmse_1e.05_300|stem|0624d814c7581038|19c312e20ff8f13e|355044928aa1be4c|1193983583||t20073.8265380258s|4702e5d68d5cb8ce|360|qs|local|vector|||5.531||
+tar_connect_list|stem|721871a05ca12771|f7ea0dfd88452c5e|9670e6ce3b9f3e72|-621201881||t20073.6538557039s|b3acff78117e63c5|263|qs|local|vector|||0||
+tar_connect_location_0.001_1000|stem||9dd605aaf8a673f6|ebec8a7a4edbc79c|59618156||t20073.6154290225s||0|qs|local|vector|||6.485||could not find function transition
+tar_connect_location_0.001_300|stem|0af7a99de0350b9e|e3847b30d4df3131|17965af800edd2b8|1072218889||t20073.6486846098s|8d348a957fc393b0|181|qs|local|vector|||388.921||
+tar_connect_location_0.01_1000|stem||2517375eaa3a0501|0f505d8fe81c9891|905069639||t20073.6148111135s||0|qs|local|vector|||112.063||no method or default for coercing NULL to SpatRaster
+tar_connect_location_0.01_300|stem|4db3547299b97234|55be136d62c37bad|17965af800edd2b8|399797058||t20073.6395548601s|31cf8697cc750540|180|qs|local|vector|||403.109||
+tar_connect_location_1e.04_300|stem|433a2d7137c92c09|979e3410e93671c2|17965af800edd2b8|1126387254||t20073.6441832223s|216fa2272502dc69|182|qs|local|vector|||399.891||
+tar_connectivity_thetaMaps|stem|a7d0cb691e074fea|baf1d7e412056c1e|bdf5652c740b85cb|803068592||t20073.8145661198s|d890688e8836a743|4001642|qs|local|vector|||0.047||
+tar_connectivitySSF_thetaMaps|stem|a1c7a40510d3e305|54c0232dff00c2cf|08b102942e8160b6|-1281289065||t20073.8307858564s|79bc61de5f5a7c0b|3989518|qs|local|vector|||6.563||
+tar_connectSSF_list|stem|d0233c83bdc9b5b8|b914a8729711246e|8870557ce7bb3c48|330667073||t20073.8306853547s|0bf64ef51e816249|272|qs|local|vector|||0||
+tar_connectSSF_location_0.001_300|stem|0af7a99de0350b9e|1d62d0400f659af2|d2be8c8d3085d4ab|1578099735||t20073.8260035846s|8d348a957fc393b0|181|qs|local|vector|||431.453||
+tar_connectSSF_location_0.01_300|stem|4db3547299b97234|ae0314bbc704273e|d2be8c8d3085d4ab|167993504||t20073.8263893251s|31cf8697cc750540|180|qs|local|vector|||463.688||
+tar_connectSSF_location_1e.04_300|stem|433a2d7137c92c09|1bc0cff9378c355c|d2be8c8d3085d4ab|303523222||t20073.8306830499s|216fa2272502dc69|182|qs|local|vector|||397.047||
+tar_connectSSF_location_1e.05_300|stem|470dc64ba5454b8a|1390d20e0e9234f3|d2be8c8d3085d4ab|1465185346||t20073.8264639833s|216fa2272502dc69|182|qs|local|vector|||470.14||
 tar_dbbmmList|stem|c0e5ba783433d1ce|5354b9a3a6b87439|978e1493ab1fbc1d|-1338950325||t20066.6900426449s|9c7da021201534b3|29681103|qs|local|vector|||165.719||
 tar_deerData|stem|f841ad1fdbfebe65|566ebced504f0215|22aebdacb47e1831|-1039388040||t20065.4247226574s|dc6ee22e376b2953|904747|qs|local|vector|||5.234||
 tar_homeRange_sizePlot|stem|e06eb4bd4e8fae9d|5e82fc8c817ea1a4|1a8faeafc4ffebbf|-1202349281||t20065.4464704905s|bf6739c769ce16bd|14287013|qs|local|vector|||0.25||
@@ -34,41 +58,15 @@ tar_landuseList|stem|5022c683484f8d82|9ade98fbebd966f6|7ebb255f375610ca|10430455
 tar_overview_maps|stem|27672a247769c969|a8b4a0dbc550a557|f0188dc6db295025|951223795||t20065.4502802437s|53cf534ccf21597c|241208695|qs|local|vector|||305.859||
 tar_patches|stem|d6d25fc8aed34257|6bdc42673a040198|607a84f6bc21e668|561265787||t20059.3990599721s|2eb739478038e79e|1431127|qs|local|vector|||509.703||
 tar_patchList|stem|d6d25fc8aed34257|6bdc42673a040198|607a84f6bc21e668|-2053994115||t20065.4307441267s|2eb739478038e79e|1431127|qs|local|vector|||525.578||
-tar_pois_model|stem||ab4be6542fa80258|c95a752e2765cd14|-1350650168||t20067.6069945052s||0|qs|local|vector|||2.188||could not find function inla
+tar_pois_model|stem|dae781c5260be077|ab4be6542fa80258|c95a752e2765cd14|-1350650168||t20067.6086088383s|a5b231ed52cb588b|196623334|qs|local|vector|||54.687||
+tar_predResist_location|stem|d0a70c1b24f7a40c|cc02fca1c8844f20|a0aff3ee36a19ad8|1594166547||t20073.6668431018s|f8c1d755d5d31832|173|qs|local|vector|||128.5||
+tar_predSSFResist_location|stem|d0a70c1b24f7a40c|cc02fca1c8844f20|a0aff3ee36a19ad8|-2111250181||t20073.8210085805s|f8c1d755d5d31832|173|qs|local|vector|||134.438||
 tar_rsf_data|stem|5444f4bddd3fb761|b8ff3dd396a75fdf|3fbdbd9ac6dff6e4|-314967242||t20065.4409421931s|e91a04d31411d0e1|5286594|qs|local|vector|||234.375||
 tar_rsf_models|stem|c6ecc71f79f95feb|8e856f040fb60506|a4ae6cfac77ca1d6|-1738740726||t20067.6069863946s|e38cca700da64d6e|45578797|qs|local|vector|||1.328|glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
-tar_rsf_outputs|stem|f60d70ce57f56f2b|2e7bda5096ec7c26|eee4f2af614cc576|251120470||t20065.4971818759s|4e223ec2db792ab6|85338245|qs|local|vector|||439.984|prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. Removed 60 rows containing missing values or values outside the scale rangegeom_line.|
+tar_rsf_outputs|stem|ae799fb2c8c1d93b|2e7bda5096ec7c26|79c9cefe118c4297|251120470||t20073.6726065842s|ad1db0ec2a52334b|85368183|qs|local|vector|||405.609|prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. Removed 60 rows containing missing values or values outside the scale rangegeom_line.|
 tar_ssf_data|stem|ca94d8079d0a1b3e|540d203994dec23b|9479f8705f335e83|390394694||t20067.6069662141s|c2e270bd8e0e753d|8140431|qs|local|vector|||2536.031|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
 tar_ssf_models|stem|dde57f8bf459c498|be721ccd31e91379|0183d597a2c903df|-1267665248||t20065.5589891361s|d34fab72c2e29bce|9830524|qs|local|vector|||8.562|Loglik converged before variable  6  beta may be infinite. . Loglik converged before variable  6  beta may be infinite. . Loglik converged before variable  6,15  beta may be infinite. . Loglik converged before variable  5  beta may be infinite. . Loglik converged before variable  5,8  beta may be infinite. . Loglik converged before variable  4  beta may be infinite. . Loglik converged before variable  4,14  beta may be infinite. . Loglik converged before variable  1,6,12,14,15  beta may be infinite. . Loglik converged before variable  1,3,6,8,12,13,15,22  beta may be infinite. . Loglik converged before variable  3  beta may be infinite. . Loglik converged before variable  3,13  beta may be infinite. . Loglik converged before variable  3,4  beta may be infinite. . Loglik converged before variable  3,4,5,6,13,15  beta may be infinite. . Loglik converged before variable  1,4,5,6,12,13,21  beta may be infinite. . Loglik converged before variable  4,5,6  beta may be infinite.|
 tar_trackingPlots|stem|1638c47e7efa0281|b349b384a931ff92|0f8cbd65339adbd3|1086976774||t20065.4464622205s|e53e05e0b83618ae|10108797|qs|local|vector|||0.844|Removed 17 rows containing nonfinite outside the scale rangestat_density_ridges.|
 tar_trackingTables|stem|9e773296228309dc|226069d56e77fd04|7b35508dff748796|1406021826||t20065.4464628227s|83fa9aa964c289d2|661|qs|local|vector|||0.016||
 typeAvialable|object|684f65380be68543|||||||||||||||
 windowSize|object|ff9fb58342e8c485|||||||||||||||
-generate_tracking_plots|function|635daeb982a5128a
-contourAvialable|object|6dfa276ef67328bc
-run_ssf_models|function|b1730a1356bead17
-prepare_rsf_data|function|81d096ca72f80606
-marginSize|object|c386c7b04396aaec
-generate_tracking_table|function|3914ce43cf2850f6
-run_rsf_models|function|03740d01fc112cd2
-taDistribution|object|1716da92e4275cdd
-read_patches_data|function|78903ec946f7f8a9
-slDistribution|object|378daf6acce8eba7
-typeAvialable|object|684f65380be68543
-plot_homeRange_sizes|function|c86367c04d966bce
-nAvailable|object|d516855f98da7f3d
-read_deer_data|function|a6a33200f32f1114
-calculate_akdes|function|a726e1c414633135
-locationError|object|ff81af095a75741e
-rsfFormula|object|e44fdcd993ebd2fb
-ssfFormula|object|97cdcfbe4dc94bd3
-generate_palettes|function|bedb4be3859d6506
-run_pois_model|function|f4d881324f64d60e
-nAvailableSteps|object|d516855f98da7f3d
-read_landuse_data|function|dfc7a3c71644843c
-windowSize|object|ff9fb58342e8c485
-calculate_dbbmms|function|7a6d7321c24e85cf
-prepare_ssf_data|function|7af3ed59df26b31d
-extract_rsf_results|function|118473675c89fad9
-generate_overview_maps|function|acdc56f1e881691c
-tar_pois_model|stem|dae781c5260be077|ab4be6542fa80258|c95a752e2765cd14|-1350650168||t20067.6086088383s|a5b231ed52cb588b|196623334|qs|local|vector|||54.687||
