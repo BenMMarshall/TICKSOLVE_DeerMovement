@@ -37,8 +37,11 @@ calculate_dbbmm_mse <- function(deerData, dbbmmList, connectRasterLoc, REGION, T
     MSEList[[id]] <- MSE
   }
   MSEdf <- as.data.frame(do.call(rbind, MSEList))
+  MSEdf <- MSEdf %>%
+    dplyr::rename("mse" = V1)
   MSEdf$Animal_ID <- row.names(MSEdf)
   MSEdf$theta <- THETA
+  MSEdf$model <- str_extract(connectRasterLoc, pattern = "SSF|Pois")
   return(MSEdf)
 
 }

@@ -6,8 +6,8 @@
 #'
 #' @export
 build_connect_layer <- function(predRasterLoc, patchList, REGION, prelimAggFact = NA,
-                                seed = 2025, THETA = 0.001,
-                                patchDistance = 300){
+                                seed = 2025, THETA, repeatsPerPair,
+                                patchDistance){
 
   print(REGION)
   print(THETA)
@@ -38,7 +38,9 @@ build_connect_layer <- function(predRasterLoc, patchList, REGION, prelimAggFact 
   minDist <- patchDistance
   units(minDist) <- units::as_units("m")
   closePolys <- which(patchDistanceMatrix < minDist, arr.ind = TRUE)
-
+  # remove the start ends that are the same patch
+  closePolys <- closePolys[!apply(closePolys, 1, function(x) if(x[1] == x[2]) return(TRUE) else return(FALSE)),]
+  closePolys <- closePolys[rep(seq_len(nrow(closePolys)), each = repeatsPerPair),]
   # closePolys[2,1]
   # closePolys[2,2]
   # startPoints <- st_sample(focalPatches[closePolys[2,1],], size = c(1,1), type = "random")
@@ -98,9 +100,9 @@ build_connect_layer <- function(predRasterLoc, patchList, REGION, prelimAggFact 
                             ext(pas_terra)[4]))),
              expand = 0)
 
-
   connectRasterLoc <- here("data", "GIS data",
-                           paste0("connectTerra_", sub("shire", "", REGION), "_theta_", THETA, ".tif"))
+                           paste0("connectTerra", str_extract(predRasterLoc, pattern = "SSF|Pois"),
+                                  "_", sub("shire", "", REGION), "_theta_", THETA, ".tif"))
 
   terra::writeRaster(pas,
                      filename = connectRasterLoc,

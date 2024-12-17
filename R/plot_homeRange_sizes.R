@@ -7,12 +7,13 @@
 #' @export
 plot_homeRange_sizes <- function(deerData, akdeLists){
 
+  paletteList <- load_deer_palette()
+
   # targets::tar_load("tar_akdeLists")
   # targets::tar_load("tar_deerData")
   #
   # akdeLists <- tar_akdeLists
   # deerData <- tar_deerData
-
   # library(here)
   # library(dplyr)
   # library(ggplot2)
@@ -26,22 +27,23 @@ plot_homeRange_sizes <- function(deerData, akdeLists){
     left_join(deerData %>%
                 group_by(Animal_ID, region, Sex) %>%
                 slice_head(n = 1) %>%
-                select(Animal_ID, region, Sex))
+                dplyr::select(Animal_ID, region, Sex))
 
 
   areaPlot <- allAreas %>%
     filter(!str_detect(Animal_ID, "Fallow")) %>%
     ggplot() +
     geom_errorbar(aes(x = Animal_ID, ymin = low, ymax = high,
-                      colour = level, group = level),
+                      colour = as.factor(level), group = as.factor(level)),
                   position = position_dodge(width = 0.2), width = 0.25) +
     geom_point(aes(x = Animal_ID, y = est,
-                   colour = level, group = level, shape = Sex), position = position_dodge(width = 0.2)) +
+                   colour = as.factor(level), group = as.factor(level), shape = Sex), position = position_dodge(width = 0.2)) +
     geom_hline(data = allAreas %>%
                  filter(!str_detect(Animal_ID, "Fallow")) %>%
                  group_by(level) %>%
                  summarise(mean = mean(est)),
-               aes(yintercept = mean, colour = level), linetype = 2) +
+               aes(yintercept = mean, colour = as.factor(level)), linetype = 2) +
+    scale_colour_manual(values = unname(paletteList$highMidLowPal)) +
     coord_flip() +
     facet_grid(rows = vars(region), scales = "free_y", space = "free_y", switch = "y",
                axes = "all_y") +

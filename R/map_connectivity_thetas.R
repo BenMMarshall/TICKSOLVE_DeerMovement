@@ -33,11 +33,16 @@ map_connectivity_thetas <- function(connectRasterLocations, landuseList, patchLi
   focalPatches <- patchList[[sub("shire", "", REGION)]]
   focalRoads <- landuseList[[sub("shire", "", REGION)]]$roads
 
+  paletteList <- load_deer_palette()
+
   (thetaMaps <- ggplot() +
     geom_spatraster(data = connectRaster) +
     # geom_sf(data = focalPatches, fill = NA, colour = "grey75", linewidth = 0.01) +
     # geom_sf(data = focalRoads, colour = "#000000", alpha = 0.25) +
-    facet_wrap(~lyr, ncol = 2) +
+      scale_fill_gradient(high = scales::muted(paletteList$highWhitePal[1]),
+                          low = paletteList$highWhitePal[2],
+                          na.value = paletteList$baseGrey) +
+    facet_wrap(~lyr, ncol = 3) +
     coord_sf(xlim = c(max(c(ext(focalPatches)[1],
                             ext(connectRaster)[1])),
                       min(c(ext(focalPatches)[2],
@@ -47,11 +52,11 @@ map_connectivity_thetas <- function(connectRasterLocations, landuseList, patchLi
                       min(c(ext(focalPatches)[4],
                             ext(connectRaster)[4]))),
              expand = 0) +
-    labs(fill = "Random walk count") +
+    labs(fill = "Connectivity") +
     theme_bw() +
     theme(
-      text = element_text(colour = "grey25"),
-      line = element_line(colour = "grey25"),
+      text = element_text(colour = paletteList$baseGrey),
+      line = element_line(colour = paletteList$baseGrey),
       axis.title = element_text(face = 2),
       panel.grid.minor = element_blank(),
       panel.border = element_blank(),
@@ -61,10 +66,11 @@ map_connectivity_thetas <- function(connectRasterLocations, landuseList, patchLi
       # legend.position = "none"
     ))
 
-  ggsave(plot = thetaMaps, filename = here("figures", "thetaMaps_ssf.png"),
-         width = 240, height = 200, units = "mm", dpi = 300)
+  ggsave(plot = thetaMaps, filename = here("figures",
+                                           paste0("thetaMaps_",
+                                                  str_extract(connectRasterLocations, pattern = "SSF|Pois"), ".png")),
+         width = 300, height = 200, units = "mm", dpi = 300)
 
   return(thetaMaps)
 
 }
-

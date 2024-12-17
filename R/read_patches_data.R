@@ -6,14 +6,16 @@
 #'
 #' @export
 read_patches_data <- function(){
-  patchesWessex <- read_sf(here("data", "GIS data", "patchesWessex.geoJSON"))
-  patchesAberdeen <- read_sf(here("data", "GIS data", "patchesAberdeen.geoJSON"))
+  patchesWessex <- read_sf(here("data", "GIS data", "patchesWessex.geoJSON")) %>%
+    filter(!duplicated(Ptch_ID))
+  patchesAberdeen <- read_sf(here("data", "GIS data", "patchesAberdeen.geoJSON")) %>%
+    filter(!duplicated(Ptch_ID))
 
   patchList <- list("Aberdeen" = patchesAberdeen,
                     "Wessex" = patchesWessex)
 
   for(pt in names(patchList)){
-
+    # pt <- names(patchList)[1]
     patches <- patchList[[pt]]
 
     extent_m <- ext(patches)

@@ -5,7 +5,7 @@
 #' @return abc
 #'
 #' @export
-build_predResistance_layer <- function(ssfData, ssfModels, landuseList, patchList, deerData, REGION){
+build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patchList, deerData, REGION){
 
   # library(here)
   # library(dplyr)
@@ -47,36 +47,52 @@ build_predResistance_layer <- function(ssfData, ssfModels, landuseList, patchLis
   focalRoadsTerra <- focalLanduse
   focalDeerIDs <- unique(focalDeer$Animal_ID)
 
-  ssfCoefs <- do.call(rbind, lapply(names(ssfModels), function(x){
-    mod <- ssfModels[[x]]
-    coef <- coef(mod$model)
-    conf <- confint(mod$model)
-    modelSummary <- cbind(coef, conf) %>%
-      as.data.frame()
-    modelSummary$Animal_ID <- x
-    return(modelSummary)
-  }))
-  ssfCoefs$term <- gsub("[[:digit:]]{0,2}$", "", row.names(ssfCoefs))
+  if(!class(ssfPoismodel) == "inla"){
 
-  naiveMeanSsfCoefs <- ssfCoefs %>%
-    # remove deer for other region
-    filter(Animal_ID %in% focalDeerIDs) %>%
-    group_by(term) %>%
-    summarise(meanEffect = median(coef, na.rm = TRUE))
+    ssfCoefs <- do.call(rbind, lapply(names(ssfPoismodel), function(x){
+      mod <- ssfPoismodel[[x]]
+      coef <- coef(mod$model)
+      conf <- confint(mod$model)
+      modelSummary <- cbind(coef, conf) %>%
+        as.data.frame()
+      modelSummary$Animal_ID <- x
+      return(modelSummary)
+    }))
+    ssfCoefs$term <- gsub("[[:digit:]]{0,2}$", "", row.names(ssfCoefs))
 
-  ssfMeans <- naiveMeanSsfCoefs$meanEffect
-  names(ssfMeans) <- naiveMeanSsfCoefs$term
+    naiveMeanSsfCoefs <- ssfCoefs %>%
+      # remove deer for other region
+      filter(Animal_ID %in% focalDeerIDs) %>%
+      group_by(term) %>%
+      summarise(meanEffect = median(coef, na.rm = TRUE))
+
+    ssfMeans <- naiveMeanSsfCoefs$meanEffect
+    names(ssfMeans) <- naiveMeanSsfCoefs$term
+
+  } else if(class(ssfPoismodel) == "inla"){
+
+    poisSumm <- summary(ssfPoismodel)
+    poisCoefDF <- as.data.frame(poisSumm$fixed)
+    poisCoefDF$term <- rownames(poisCoefDF)
+    poisCoef <- poisCoefDF$mean
+    names(poisCoef) <- poisCoefDF$term
+
+  }
 
   # get the mean step and turn for focal deer, again region specific
   meanSL_ <- mean(unlist(lapply(ssfData[names(ssfData) %in% focalDeerIDs], function(x) x$steps$sl_)))
   meanTA_ <- mean(unlist(lapply(ssfData[names(ssfData) %in% focalDeerIDs], function(x) x$steps$ta_)))
 
   # plot(terra::rasterize(focalRoads, focalRoadsTerra, fun = "mean"))
-
+  ########################################################################################################################
+  ######### ROAD BUFFERED TO APPEAR ON AGG LANDSCAPE, CAN BE MINIMISED FOR HIGHER RES LANDSCAPE ##########################
+  ########################################################################################################################
   focalRoadsTerra <- terra::rasterize(st_buffer(focalRoads, 20), focalRoadsTerra,
                                       fun = "max", background = 0, touches = TRUE, cover = TRUE)
   terra::values(focalRoadsTerra) <- ifelse(terra::values(focalRoadsTerra) == 0, 0, 1)
-
+  ########################################################################################################################
+  ########################################################################################################################
+  ########################################################################################################################
   # st_buffer(focalRoads, 10) %>%
   #   ggplot() +
   #   geom_sf()
@@ -121,18 +137,32 @@ build_predResistance_layer <- function(ssfData, ssfModels, landuseList, patchLis
 
   # hist(focalData$sl_)
   # hist(dataMatrix$sl_)
+  if(!class(ssfPoismodel) == "inla"){
 
-  modelMatriX <- model.matrix(ssfModels[[1]]$model, dataMatrix)
-  colnames(modelMatriX)[colnames(modelMatriX) == "roadCrossings"] <- "roadCrossingsTRUE"
+    modelMatriX <- model.matrix(ssfPoismodel[[1]]$model, dataMatrix)
+    colnames(modelMatriX)[colnames(modelMatriX) == "roadCrossings"] <- "roadCrossingsTRUE"
 
-  not_na_inf <- function(x) all(!is.na(x) & !is.infinite(x))
-  modelMatriX <- modelMatriX %>%
-    as.data.frame() %>%
-    select_if(not_na_inf) %>%
-    as.matrix()
+    not_na_inf <- function(x) all(!is.na(x) & !is.infinite(x))
+    modelMatriX <- modelMatriX %>%
+      as.data.frame() %>%
+      select_if(not_na_inf) %>%
+      as.matrix()
 
-  modelMatriX_trim <- modelMatriX[,colnames(modelMatriX) %in% names(ssfMeans[!is.na(ssfMeans)])]
-  coef_trim <- ssfMeans[names(ssfMeans) %in% colnames(modelMatriX_trim)]
+    modelMatriX_trim <- modelMatriX[,colnames(modelMatriX) %in% names(ssfMeans[!is.na(ssfMeans)])]
+    coef_trim <- ssfMeans[names(ssfMeans) %in% colnames(modelMatriX_trim)]
+
+  } else if(class(ssfPoismodel) == "inla"){
+
+    landuseWide <- dataMatrix %>%
+      to_dummy(landuse)
+    names(landuseWide) <- levels(dataMatrix$landuse)
+    modelMatriX <- cbind(dataMatrix, landuseWide)
+
+    modelMatriX_trim <- modelMatriX[,colnames(modelMatriX) %in% names(poisCoef[!is.na(poisCoef)])]
+    modelMatriX_trim <- as.matrix(modelMatriX_trim)
+    coef_trim <- poisCoef[names(poisCoef) %in% colnames(modelMatriX_trim)]
+
+  }
 
   # colnames() bit so that they are ordered the same
   predvals <- (modelMatriX_trim %*% coef_trim[colnames(modelMatriX_trim)])[,1]
@@ -151,7 +181,15 @@ build_predResistance_layer <- function(ssfData, ssfModels, landuseList, patchLis
     geom_spatraster(data = predictionTerra, aes(fill = pred)) +
     geom_sf(data = focalRoads, aes(), alpha = 0.2)
 
-  predRasterLoc <- here("data", "GIS data", paste0("predictionTerra_", sub("shire", "", REGION), ".tif"))
+  if(!class(ssfPoismodel) == "inla"){
+
+    predRasterLoc <- here("data", "GIS data", paste0("predictionTerraSSF_", sub("shire", "", REGION), ".tif"))
+
+  } else if(class(ssfPoismodel) == "inla"){
+
+    predRasterLoc <- here("data", "GIS data", paste0("predictionTerraPois_", sub("shire", "", REGION), ".tif"))
+
+  }
 
   terra::writeRaster(predictionTerra,
                      filename = predRasterLoc,

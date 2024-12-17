@@ -75,8 +75,9 @@ locationError <- 0.1
 
 # connectivity passage settings
 connectSettings <- expand.grid(
-  THETA = c(0.01, 0.001, 0.0001, 0.00001),
-  patchDistance = c(300)
+  THETA = c(0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001),
+  repeatsPerPair = 1,
+  patchDistance = c(1200)
 )
 
 # Replace the target list below with your own:
@@ -148,12 +149,18 @@ coreTargetList <- list(
     command = run_ssf_models(tar_ssf_data, ssfFormula = ssfFormula)
   ),
   tar_target(
+    name = tar_predSSFResist_location,
+    command = build_predResistance_layer(tar_ssf_data, tar_ssf_models,
+                                         tar_landuseList, tar_patchList,
+                                         tar_deerData, REGION = "Aberdeenshire")
+  ),
+  tar_target(
     name = tar_pois_model,
     command = run_pois_model(tar_ssf_data)
   ),
   tar_target(
-    name = tar_predSSFResist_location,
-    command = build_predResistance_layer(tar_ssf_data, tar_ssf_models,
+    name = tar_predPoisResist_location,
+    command = build_predResistance_layer(tar_ssf_data, tar_pois_model,
                                          tar_landuseList, tar_patchList,
                                          tar_deerData, REGION = "Aberdeenshire")
   ),
@@ -163,7 +170,7 @@ coreTargetList <- list(
       name = tar_connectSSF_location,
       command = build_connect_layer(tar_predSSFResist_location, tar_patchList,
                                     REGION = "Aberdeenshire", prelimAggFact = 20,
-                                    seed = 2025, THETA = THETA,
+                                    seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair,
                                     patchDistance = patchDistance)
     ),
     tar_target(
@@ -174,18 +181,55 @@ coreTargetList <- list(
                                     REGION = "Aberdeenshire",
                                     THETA = THETA)
     )
+  ),
+  tar_map(
+    values = connectSettings,
+    tar_target(
+      name = tar_connectPois_location,
+      command = build_connect_layer(tar_predPoisResist_location, tar_patchList,
+                                    REGION = "Aberdeenshire", prelimAggFact = 20,
+                                    seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair,
+                                    patchDistance = patchDistance)
+    ),
+    tar_target(
+      name = tar_connectPois_dbbmmmse,
+      command = calculate_dbbmm_mse(tar_deerData,
+                                    tar_dbbmmList,
+                                    tar_connectPois_location,
+                                    REGION = "Aberdeenshire",
+                                    THETA = THETA)
+    )
   )
 )
 
 connectTargetList <- list(
   tar_combine(
     tar_connectSSF_list,
-    coreTargetList[[17]][grep("tar_connectSSF_location", names(coreTargetList[[17]]))],
+    coreTargetList[[18]][grep("tar_connectSSF_location", names(coreTargetList[[18]]))],
     command = list(!!!.x)
+  ),
+  tar_combine(
+    tar_mseSSF_list,
+    coreTargetList[[18]][grep("SSF_dbbmmmse", names(coreTargetList[[18]]))],
+    command = rbind(!!!.x)
   ),
   tar_target(
     tar_connectivitySSF_thetaMaps,
     map_connectivity_thetas(tar_connectSSF_list, tar_landuseList, tar_patchList, REGION = "Aberdeenshire")
+  ),
+  tar_combine(
+    tar_connectPois_list,
+    coreTargetList[[19]][grep("tar_connectPois_location", names(coreTargetList[[19]]))],
+    command = list(!!!.x)
+  ),
+  tar_combine(
+    tar_msePois_list,
+    coreTargetList[[19]][grep("Pois_dbbmmmse", names(coreTargetList[[19]]))],
+    command = rbind(!!!.x)
+  ),
+  tar_target(
+    tar_connectivityPois_thetaMaps,
+    map_connectivity_thetas(tar_connectPois_list, tar_landuseList, tar_patchList, REGION = "Aberdeenshire")
   )
 )
 
