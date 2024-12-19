@@ -23,6 +23,10 @@ load_deer_palette <- function(){
   names(highMidLowPal) <- c("high", "mid", "low")
 
   baseGrey <- "#303030"
+  noSigGrey <- "#505050"
+
+  highSigLowSigNoSig <- c(corePal[2], corePal[4], noSigGrey)
+  names(highSigLowSigNoSig) <- c("Significant +", "Significant -", "Not Significant")
 
   paletteList <- list(
     corePal = corePal,
@@ -30,7 +34,8 @@ load_deer_palette <- function(){
     deerSexPal = deerSexPal,
     highWhitePal = highWhitePal,
     highMidLowPal = highMidLowPal,
-    baseGrey = baseGrey
+    baseGrey = baseGrey,
+    highSigLowSigNoSig = highSigLowSigNoSig
   )
 
   return(paletteList)

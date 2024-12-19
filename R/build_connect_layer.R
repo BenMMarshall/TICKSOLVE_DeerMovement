@@ -9,6 +9,17 @@ build_connect_layer <- function(predRasterLoc, patchList, REGION, prelimAggFact 
                                 seed = 2025, THETA, repeatsPerPair,
                                 patchDistance){
 
+  # targets::tar_load("tar_predPoisResist_location")
+  # targets::tar_load("tar_patchList")
+  # predRasterLoc <- tar_predPoisResist_location
+  # focalPatches <- tar_patchList
+  # REGION = "Aberdeenshire"
+  # prelimAggFact = 20
+  # seed = 2025
+  # THETA = 0.01
+  # repeatsPerPair = 1
+  # patchDistance = 500
+
   print(REGION)
   print(THETA)
 
@@ -60,7 +71,7 @@ build_connect_layer <- function(predRasterLoc, patchList, REGION, prelimAggFact 
   set.seed(0)
   sttim <- Sys.time()
   for (i in c(1:nPatchesClose)){
-    # i <- 2
+    # i <- 4
     print(paste(i, "/", nPatchesClose))
     # pt_win <- sample(rndpts$id, size=1, prob = (rndpts$val_win)) #draw random points (random pairs)
     # pt_cal <- sample(rndpts$id, size=1, prob = (rndpts$val_cal))
@@ -69,7 +80,8 @@ build_connect_layer <- function(predRasterLoc, patchList, REGION, prelimAggFact 
     stPoint <- as(st_sample(focalPatches[closePolys[i,1],], size = c(1,1), type = "random"), "Spatial")
     edPoint <- as(st_sample(focalPatches[closePolys[i,2],], size = c(1,1), type = "random"), "Spatial")
     # make map
-    pasT <- try(gdistance::passage(transitionLayer, stPoint, edPoint, theta = THETA), silent = FALSE)
+    pasT <- try(gdistance::passage(transitionLayer, stPoint, edPoint, theta = THETA,
+                                   totalNet = "net"), silent = FALSE)
     # plot(pasT)
     # NB: to obtain the different models described in the paper, change theta values as described in the
     # paper. For simplicity here we produce only one model

@@ -7,7 +7,7 @@
 #' @export
 generate_palettes <- function(){
 
-  UKCEHcolourCodes <- read.csv(here("data", "GIS data", "UKCEHcolourCodes.csv"))
+  UKCEHcolourCodes <- read.csv(here::here("data", "GIS data", "UKCEHcolourCodes.csv"))
 
   UKCEHcoloursVecColour <- UKCEHcolourCodes$colour
   names(UKCEHcoloursVecColour) <- paste0("LCM_", UKCEHcolourCodes$value)

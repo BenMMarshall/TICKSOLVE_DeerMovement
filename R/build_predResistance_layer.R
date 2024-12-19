@@ -58,7 +58,7 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
       modelSummary$Animal_ID <- x
       return(modelSummary)
     }))
-    ssfCoefs$term <- gsub("[[:digit:]]{0,2}$", "", row.names(ssfCoefs))
+    ssfCoefs$term <- gsub("[[:digit:]]+$", "", row.names(ssfCoefs))
 
     naiveMeanSsfCoefs <- ssfCoefs %>%
       # remove deer for other region

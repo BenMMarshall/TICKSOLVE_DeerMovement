@@ -1,16 +1,30 @@
 
 targets::tar_load("tar_connectSSF_list")
+targets::tar_load("tar_msePois_df")
 targets::tar_load("tar_patchList")
+# THETA <- 0.1
 
 patchList <- tar_patchList
-connectTerra <- terra::rast(tar_connectSSF_list$tar_connectSSF_location_0.001_1_1200)
+mseList <- tar_msePois_df
+connectTerraAddr <- tar_connectSSF_list
+# connectTerra <- terra::rast(tar_connectSSF_list[[1]])
+
+meanMSE <- mseList %>%
+  group_by(theta) %>%
+  summarise(meanMSE = mean(mse))
+
+bestTheta <- meanMSE[meanMSE$meanMSE == min(meanMSE$meanMSE),]$theta
+
+connectTerraAddr <- connectTerraAddr[str_detect(names(connectTerraAddr), sub("e-", "e.", as.character(bestTheta)))]
+connectTerra <- terra::rast(connectTerraAddr[[1]])
+
+paletteListpaletteListpaletteList <- load_deer_palette()
+
 
 focalPatches <- patchList$Aberdeen %>%
   filter(!duplicated(Ptch_ID))
 
 names(connectTerra) <- "connectivity"
-
-colorspace::lighten("#DCBD0A", amount = 0.9)
 
 (connectRasterPlot <- ggplot() +
   geom_spatraster(data = connectTerra, aes()) +
@@ -18,7 +32,7 @@ colorspace::lighten("#DCBD0A", amount = 0.9)
   # geom_sf(data = focalRoads, colour = "#000000", alpha = 0.25) +
   scale_fill_gradient(high = scales::muted("#B54D17"),
                        low = "#ffffff",
-                       na.value = "#333333") +
+                       na.value = paletteList$baseGrey) +
   labs(fill = "Connectivity", title = "By Cell Connectivity") +
   coord_sf(xlim = c(max(c(ext(focalPatches)[1],
                           ext(connectTerra)[1])),
@@ -31,8 +45,8 @@ colorspace::lighten("#DCBD0A", amount = 0.9)
            expand = 0, crs = st_crs(27700)) +
   theme_bw() +
   theme(
-    text = element_text(colour = "grey25"),
-    line = element_line(colour = "grey25"),
+    text = element_text(colour = paletteList$baseGrey),
+    line = element_line(colour = paletteList$baseGrey),
     plot.title = element_text(face = 2),
     axis.title = element_text(face = 2),
     panel.grid.minor = element_blank(),
@@ -57,10 +71,10 @@ patchMeanScore <- terra::extract(connectTerra, patchMeanScore, fun = median,
 meanConnectPatchPlot <- ggplot() +
   geom_spatraster(data = connectTerra, aes(fill  = connectivity), alpha = 0.5) +
   geom_sf(data = patchMeanScore, aes(fill = meanConnectivity),
-          colour = "#333333") +
+          colour = paletteList$baseGrey) +
   scale_fill_gradient(high = scales::muted("#B54D17"),
                       low = "#ffffff",
-                      na.value = "#333333") +
+                      na.value = paletteList$baseGrey) +
   labs(fill = "Connectivity", title = "Mean Connectivity") +
   # geom_sf(data = focalRoads, colour = "#000000", alpha = 0.25) +
   coord_sf(xlim = c(max(c(ext(focalPatches)[1],
@@ -74,8 +88,8 @@ meanConnectPatchPlot <- ggplot() +
            expand = 0, crs = st_crs(27700)) +
   theme_bw() +
   theme(
-    text = element_text(colour = "grey25"),
-    line = element_line(colour = "grey25"),
+    text = element_text(colour = paletteList$baseGrey),
+    line = element_line(colour = paletteList$baseGrey),
     plot.title = element_text(face = 2),
     axis.title = element_text(face = 2),
     panel.grid.minor = element_blank(),
@@ -89,10 +103,10 @@ meanConnectPatchPlot <- ggplot() +
 maxConnectPatchPlot <- ggplot() +
   geom_spatraster(data = connectTerra, aes(), alpha = 0.5) +
   geom_sf(data = patchMeanScore, aes(fill = maxConnectivity),
-          colour = "#333333") +
+          colour = paletteList$baseGrey) +
   scale_fill_gradient(high = scales::muted("#B54D17"),
                       low = "#ffffff",
-                      na.value = "#333333") +
+                      na.value = paletteList$baseGrey) +
   labs(fill = "Connectivity", title = "Max Connectivity") +
   # geom_sf(data = focalRoads, colour = "#000000", alpha = 0.25) +
   coord_sf(xlim = c(max(c(ext(focalPatches)[1],
@@ -106,8 +120,8 @@ maxConnectPatchPlot <- ggplot() +
            expand = 0, crs = st_crs(27700)) +
   theme_bw() +
   theme(
-    text = element_text(colour = "grey25"),
-    line = element_line(colour = "grey25"),
+    text = element_text(colour = paletteList$baseGrey),
+    line = element_line(colour = paletteList$baseGrey),
     plot.title = element_text(face = 2),
     axis.title = element_text(face = 2),
     panel.grid.minor = element_blank(),
@@ -121,10 +135,10 @@ maxConnectPatchPlot <- ggplot() +
 medianConnectPatchPlot <- ggplot() +
   geom_spatraster(data = connectTerra, aes(), alpha = 0.5) +
   geom_sf(data = patchMeanScore, aes(fill = medianConnectivity),
-          colour = "#333333") +
+          colour = paletteList$baseGrey) +
   scale_fill_gradient(high = scales::muted("#B54D17"),
                       low = "#ffffff",
-                      na.value = "#333333") +
+                      na.value = paletteList$baseGrey) +
   labs(fill = "Connectivity", title = "Median Connectivity") +
   # geom_sf(data = focalRoads, colour = "#000000", alpha = 0.25) +
   coord_sf(xlim = c(max(c(ext(focalPatches)[1],
@@ -138,8 +152,8 @@ medianConnectPatchPlot <- ggplot() +
            expand = 0, crs = st_crs(27700)) +
   theme_bw() +
   theme(
-    text = element_text(colour = "grey25"),
-    line = element_line(colour = "grey25"),
+    text = element_text(colour = paletteList$baseGrey),
+    line = element_line(colour = paletteList$baseGrey),
     plot.title = element_text(face = 2),
     axis.title = element_text(face = 2),
     panel.grid.minor = element_blank(),
@@ -156,4 +170,12 @@ medianConnectPatchPlot <- ggplot() +
   (maxConnectPatchPlot + medianConnectPatchPlot +
      theme(axis.text.y = element_blank(),
            axis.ticks.y = element_blank())) +
-  plot_layout(guides = "collect")
+  plot_layout(guides = "collect") +
+  plot_annotation(
+    title = paste0(REGION, " Landscape connectivity and patches"),
+    subtitle = paste0("theta = ", THETA, ", max patch distance = ", patchDistance,
+                      ", repeats per pair = ", repeatsPerPair, ", MSE = ", format(meanMSE, digits = 4))) &
+  theme(plot.title = element_text(hjust = 0, face = 2),
+        plot.subtitle = element_text(hjust = 0, face = 3),
+        text = element_text(colour = paletteList$baseGrey))
+
