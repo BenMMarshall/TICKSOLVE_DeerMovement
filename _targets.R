@@ -111,6 +111,10 @@ coreTargetList <- list(
     command = calculate_akdes(tar_deerData)
   ),
   tar_target(
+    name = tar_akdeSummary,
+    command = extract_akde_summaries(tar_deerData, tar_akdeLists)
+  ),
+  tar_target(
     name = tar_dbbmmList,
     command = calculate_dbbmms(tar_deerData, tar_landuseList,
                                window = windowSize,
@@ -205,12 +209,12 @@ coreTargetList <- list(
 connectTargetList <- list(
   tar_combine(
     tar_connectSSF_list,
-    coreTargetList[[18]][grep("tar_connectSSF_location", names(coreTargetList[[18]]))],
+    coreTargetList[[19]][grep("tar_connectSSF_location", names(coreTargetList[[19]]))],
     command = list(!!!.x)
   ),
   tar_combine(
     tar_mseSSF_list,
-    coreTargetList[[18]][grep("SSF_dbbmmmse", names(coreTargetList[[18]]))],
+    coreTargetList[[19]][grep("SSF_dbbmmmse", names(coreTargetList[[19]]))],
     command = rbind(!!!.x)
   ),
   tar_target(
@@ -219,12 +223,12 @@ connectTargetList <- list(
   ),
   tar_combine(
     tar_connectPois_list,
-    coreTargetList[[19]][grep("tar_connectPois_location", names(coreTargetList[[19]]))],
+    coreTargetList[[20]][grep("tar_connectPois_location", names(coreTargetList[[20]]))],
     command = list(!!!.x)
   ),
   tar_combine(
     tar_msePois_list,
-    coreTargetList[[19]][grep("Pois_dbbmmmse", names(coreTargetList[[19]]))],
+    coreTargetList[[20]][grep("Pois_dbbmmmse", names(coreTargetList[[20]]))],
     command = rbind(!!!.x)
   ),
   tar_target(
