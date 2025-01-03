@@ -58,6 +58,7 @@ lapply(names(akdeLists$vario), function(x){
   title(x)
   dev.off()
 })
+library(ggplot2)
 
 library(ggplot2)
 
