@@ -70,6 +70,10 @@ map_connectivity_thetas <- function(connectRasterLocations, landuseList, patchLi
                                            paste0("thetaMaps_",
                                                   str_extract(connectRasterLocations, pattern = "SSF|Pois"), ".png")),
          width = 300, height = 200, units = "mm", dpi = 300)
+  ggsave(plot = thetaMaps, filename = here("figures",
+                                           paste0("thetaMaps_",
+                                                  str_extract(connectRasterLocations, pattern = "SSF|Pois"), ".pdf")),
+         width = 300, height = 200, units = "mm")
 
   return(thetaMaps)
 

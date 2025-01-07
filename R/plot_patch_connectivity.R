@@ -1,13 +1,22 @@
-plot_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, REGION){
+#' Map out patch summaries
+#'
+#' @name plot_patch_connectivity
+#' @description abc
+#' @return abc
+#'
+#' @export
+plot_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, REGION, SELECTEDPATCHES){
 
   # targets::tar_load("tar_connectSSF_list")
   # targets::tar_load("tar_msePois_df")
   # targets::tar_load("tar_patchList")
   # THETA <- 0.1
   # patchList <- tar_patchList
-  # mseList <- tar_msePois_df
-  # connectTerraAddr <- tar_connectSSF_list
+  # MSEdf <- tar_msePois_df
+  # connectRasterLocations <- tar_connectSSF_list
   # connectTerra <- terra::rast(tar_connectSSF_list[[1]])
+  # targets::tar_source()
+  # REGION <- "Aberdeenshire"
 
   paletteList <- load_deer_palette()
 
@@ -24,7 +33,9 @@ plot_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, RE
   paletteListpaletteListpaletteList <- load_deer_palette()
 
   focalPatches <- patchList[[sub("shire", "", REGION)]] %>%
-    filter(!duplicated(Ptch_ID))
+    filter(!duplicated(Ptch_ID)) %>%
+    mutate(selected = factor(ifelse(Ptch_ID %in% SELECTEDPATCHES, "Selected", "Not selected"),
+                             levels = c("Not selected", "Selected")))
 
   method <- str_extract(connectTerraAddr, "SSF|Pois")
 
@@ -62,25 +73,26 @@ plot_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, RE
       ))
 
   patchMeanScore <- terra::extract(connectTerra, focalPatches, fun = mean,
-                                   bind = TRUE) %>%
+                                   bind = TRUE, na.rm = TRUE) %>%
     rename(meanConnectivity = connectivity)
 
   patchMeanScore <- terra::extract(connectTerra, patchMeanScore, fun = max,
-                                   bind = TRUE) %>%
+                                   bind = TRUE, na.rm = TRUE) %>%
     rename(maxConnectivity = connectivity)
 
   patchMeanScore <- terra::extract(connectTerra, patchMeanScore, fun = median,
-                                   bind = TRUE) %>%
+                                   bind = TRUE, na.rm = TRUE) %>%
     rename(medianConnectivity = connectivity)
 
   meanConnectPatchPlot <- ggplot() +
-    # geom_spatraster(data = connectTerra, aes(fill  = connectivity), alpha = 0.5) +
-    geom_sf(data = patchMeanScore, aes(fill = meanConnectivity),
-            colour = paletteList$baseGrey) +
+    geom_spatraster(data = connectTerra, aes(), alpha = 0.35) +
+    geom_sf(data = patchMeanScore, aes(fill = meanConnectivity, colour = selected, linewidth = selected)) +
+    scale_linewidth_manual(values = c(0, 0.25)) +
+    scale_colour_manual(values = c(NA, "#303030")) +
     scale_fill_gradient(high = scales::muted("#B54D17"),
                         low = "#ffffff",
                         na.value = paletteList$baseGrey) +
-    labs(fill = "Connectivity", title = "Mean Connectivity") +
+    labs(fill = "Connectivity", title = "Mean Connectivity", colour = "Selected Patches", linewidth = "Selected Patches") +
     # geom_sf(data = focalRoads, colour = "#000000", alpha = 0.25) +
     coord_sf(xlim = c(max(c(ext(focalPatches)[1],
                             ext(connectTerra)[1])),
@@ -106,13 +118,14 @@ plot_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, RE
     )
 
   maxConnectPatchPlot <- ggplot() +
-    geom_spatraster(data = connectTerra, aes(), alpha = 0.5) +
-    geom_sf(data = patchMeanScore, aes(fill = maxConnectivity),
-            colour = paletteList$baseGrey) +
+    geom_spatraster(data = connectTerra, aes(), alpha = 0.35) +
+    geom_sf(data = patchMeanScore, aes(fill = maxConnectivity, colour = selected, linewidth = selected)) +
+    scale_linewidth_manual(values = c(0, 0.25)) +
+    scale_colour_manual(values = c(NA, "#303030")) +
     scale_fill_gradient(high = scales::muted("#B54D17"),
                         low = "#ffffff",
                         na.value = paletteList$baseGrey) +
-    labs(fill = "Connectivity", title = "Max Connectivity") +
+    labs(fill = "Connectivity", title = "Max Connectivity", colour = "Selected Patches", linewidth = "Selected Patches") +
     # geom_sf(data = focalRoads, colour = "#000000", alpha = 0.25) +
     coord_sf(xlim = c(max(c(ext(focalPatches)[1],
                             ext(connectTerra)[1])),
@@ -138,13 +151,14 @@ plot_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, RE
     )
 
   medianConnectPatchPlot <- ggplot() +
-    # geom_spatraster(data = connectTerra, aes(), alpha = 0.5) +
-    geom_sf(data = patchMeanScore, aes(fill = medianConnectivity),
-            colour = paletteList$baseGrey) +
+    geom_spatraster(data = connectTerra, aes(), alpha = 0.35) +
+    geom_sf(data = patchMeanScore, aes(fill = medianConnectivity, colour = selected, linewidth = selected)) +
+    scale_linewidth_manual(values = c(0, 0.25)) +
+    scale_colour_manual(values = c(NA, "#303030")) +
     scale_fill_gradient(high = scales::muted("#B54D17"),
                         low = "#ffffff",
                         na.value = paletteList$baseGrey) +
-    labs(fill = "Connectivity", title = "Median Connectivity") +
+    labs(fill = "Connectivity", title = "Median Connectivity", colour = "Selected Patches", linewidth = "Selected Patches") +
     # geom_sf(data = focalRoads, colour = "#000000", alpha = 0.25) +
     coord_sf(xlim = c(max(c(ext(focalPatches)[1],
                             ext(connectTerra)[1])),
@@ -189,6 +203,8 @@ plot_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, RE
 
   ggsave(plot = comboPlot, filename = here::here("figures", paste0("patchConnectivity_", method, "_", REGION, ".png")),
          width = 220, height = 180, units = "mm", dpi = 300)
+  ggsave(plot = comboPlot, filename = here::here("figures", paste0("patchConnectivity_", method, "_", REGION, ".pdf")),
+         width = 220, height = 180, units = "mm")
 
   return(comboPlot)
 

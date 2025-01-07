@@ -64,6 +64,8 @@ plot_homeRange_sizes <- function(deerData, akdeLists){
 
   ggsave(areaPlot, filename = here("figures", "homeRangeAreaPlot.png"),
          width = 210, height = 120, units = "mm", dpi = 300)
+  ggsave(areaPlot, filename = here("figures", "homeRangeAreaPlot.pdf"),
+         width = 210, height = 120, units = "mm")
 
   return(areaPlot)
 

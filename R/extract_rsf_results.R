@@ -230,6 +230,15 @@ extract_rsf_results <- function(deerData, rsfDataList, rsfModelList, nAvail){
   ggsave(plot = interaction,
          filename = here("modelOutput", paste0("rsfIndi_effectInteraction", ".png")),
          width = 240, height = 220, units = "mm", dpi = 300)
+  ggsave(plot = distancePop,
+         filename = here("modelOutput", paste0("rsfIndi_effectDistance", ".pdf")),
+         width = 240, height = 220, units = "mm")
+  ggsave(plot = landusePop,
+         filename = here("modelOutput", paste0("rsfIndi_effectLanduse", ".pdf")),
+         width = 240, height = 220, units = "mm")
+  ggsave(plot = interaction,
+         filename = here("modelOutput", paste0("rsfIndi_effectInteraction", ".pdf")),
+         width = 240, height = 220, units = "mm")
 
   # guide_area() + distancePop + landusePop + interaction +
   #   plot_layout(guides = "collect") &

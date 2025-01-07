@@ -61,6 +61,8 @@ plot_pois_coefs <- function(poisModel){
 
   ggsave(plot = poisCoef_plot, filename = here::here("modelOutput", paste0("poisCoef.png")),
          width = 160, height = 100, units = "mm", dpi = 300)
+  ggsave(plot = poisCoef_plot, filename = here::here("modelOutput", paste0("poisCoef.pdf")),
+         width = 160, height = 100, units = "mm")
 
   return(poisCoef_plot)
 

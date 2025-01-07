@@ -55,6 +55,9 @@ tar_option_set(
 # Run the R scripts in the R/ folder with your custom functions:
 tar_source()
 
+selectedPatches <- read.csv(file = here::here("data", "GIS data", "abdn_final_patches.csv"))
+selectedPatches <- selectedPatches$Patch_ID
+
 # OPTIONS AND DECISIONS
 # RSF
 nAvailable <- 10
@@ -82,8 +85,8 @@ locationError <- 0.1
 # )
 connectSettings <- expand.grid(
   THETA = c(0.1, 0.001, 0.00001),
-  repeatsPerPair = 1,
-  patchDistance = c(500)
+  repeatsPerPair = 5,
+  patchDistance = c(1000)
 )
 
 # Replace the target list below with your own:
@@ -187,7 +190,7 @@ coreTargetList <- list(
     tar_target(
       name = tar_connectSSF_location,
       command = build_connect_layer(tar_predSSFResist_location, tar_patchList,
-                                    REGION = "Aberdeenshire", prelimAggFact = 20,
+                                    REGION = "Aberdeenshire", prelimAggFact = 10,
                                     seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair,
                                     patchDistance = patchDistance)
     ),
@@ -205,7 +208,7 @@ coreTargetList <- list(
     tar_target(
       name = tar_connectPois_location,
       command = build_connect_layer(tar_predPoisResist_location, tar_patchList,
-                                    REGION = "Aberdeenshire", prelimAggFact = 20,
+                                    REGION = "Aberdeenshire", prelimAggFact = 10,
                                     seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair,
                                     patchDistance = patchDistance)
     ),
@@ -237,7 +240,8 @@ connectTargetList <- list(
   ),
   tar_target(
     tar_patchSSF_plot,
-    plot_patch_connectivity(tar_mseSSF_df, tar_connectSSF_list, tar_patchList, REGION = "Aberdeenshire")
+    plot_patch_connectivity(tar_mseSSF_df, tar_connectSSF_list, tar_patchList, REGION = "Aberdeenshire",
+                            SELECTEDPATCHES = selectedPatches)
   ),
   tar_combine(
     tar_connectPois_list,
@@ -255,7 +259,13 @@ connectTargetList <- list(
   ),
   tar_target(
     tar_patchPois_plot,
-    plot_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire")
+    plot_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire",
+                            SELECTEDPATCHES = selectedPatches)
+  ),
+  tar_target(
+    tar_patchPois_summaryPlot,
+    plot_patch_summary(tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire",
+                       SELECTEDPATCHES = selectedPatches)
   )
 )
 

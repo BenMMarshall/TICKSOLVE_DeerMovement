@@ -68,6 +68,10 @@ generate_tracking_plots <- function(deerData){
          width = 210, height = 120, units = "mm", dpi = 300)
   ggsave(timelagPlot, filename = here("figures", "trackingTimelag.png"),
          width = 180, height = 120, units = "mm", dpi = 300)
+  ggsave(durationPlot, filename = here("figures", "trackingDuration.pdf"),
+         width = 210, height = 120, units = "mm")
+  ggsave(timelagPlot, filename = here("figures", "trackingTimelag.pdf"),
+         width = 180, height = 120, units = "mm")
 
   return(list(
     "durationPlot" = durationPlot,

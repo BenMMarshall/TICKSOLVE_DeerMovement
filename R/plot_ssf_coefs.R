@@ -127,6 +127,8 @@ plot_ssf_coefs <- function(deerData, ssfModels, REGION){
 
     ggsave(plot = ssfCoef_plot, filename = here::here("modelOutput", paste0("ssfCoef_", sub(":", "__", t), ".png")),
            width = 210, height = 160, units = "mm", dpi = 300)
+    ggsave(plot = ssfCoef_plot, filename = here::here("modelOutput", paste0("ssfCoef_", sub(":", "__", t), ".pdf")),
+           width = 210, height = 160, units = "mm")
 
   }
 
