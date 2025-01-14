@@ -30,6 +30,7 @@ tar_option_set(
                "gdistance",
                "INLA",
                "performance",
+               "JuliaCall",
                "ggplot2",
                "ggtext",
                "ggridges",
@@ -83,10 +84,11 @@ locationError <- 0.1
 #   repeatsPerPair = 1,
 #   patchDistance = c(1200)
 # )
+patchDistance <- 1000
 connectSettings <- expand.grid(
   THETA = c(0.1, 0.001, 0.00001),
   repeatsPerPair = 5,
-  patchDistance = c(1000)
+  patchDistance = patchDistance
 )
 
 # Replace the target list below with your own:
@@ -220,6 +222,16 @@ coreTargetList <- list(
                                     REGION = "Aberdeenshire",
                                     THETA = THETA)
     )
+  ),
+  tar_target(
+    name = tar_circuitscape_data,
+    command = prepare_circuitscape_data(tar_predSSFResist_location, tar_patchList, REGION = "Aberdeenshire",
+                                        prelimAggFact = 10,
+                                        patchDistance = patchDistance)
+  ),
+  tar_target(
+    name = tar_circuitscape_files,
+    command = run_julia_circuitscape(model = "pois", tar_circuitscape_data)
   )
 )
 
