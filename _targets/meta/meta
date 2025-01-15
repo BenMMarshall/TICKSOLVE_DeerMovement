@@ -1,5 +1,5 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|a2e171c27be3d46a|||||||||||||||
+.Random.seed|object|f3c2859242b567d7|||||||||||||||
 build_connect_layer|function|dddb2ea7a3550255|||||||||||||||
 build_predResistance_layer|function|3187fda970c5d3b5|||||||||||||||
 calculate_akdes|function|a726e1c414633135|||||||||||||||
@@ -8,7 +8,7 @@ calculate_dbbmms|function|7a6d7321c24e85cf|||||||||||||||
 connectSettings|object|b04a948c6dbd088a|||||||||||||||
 connectTargetList|object|6331246545a7bdf1|||||||||||||||
 contourAvialable|object|6dfa276ef67328bc|||||||||||||||
-coreTargetList|object|f689e4b32067ca0e|||||||||||||||
+coreTargetList|object|029696ca0631c2e9|||||||||||||||
 extract_akde_summaries|function|4a1a2dca1bcdca05|||||||||||||||
 extract_rsf_results|function|200d4a2dba9d5e39|||||||||||||||
 generate_overview_maps|function|a64d3de9e803b42a|||||||||||||||
@@ -150,7 +150,7 @@ tar_connectSSF_location_1e.05_5_1000|stem|65caacdc84931212|c79a07815146b7cb|0d6b
 tar_connectSSF_location_1e.06_1_1200|stem|9afdac17831666b9|c1fcf07e018faa65|36e464ca2ba26354|-1890295764||t20074.7161685501s|38030177dc1ffde5|184|qs|local|vector|||741.672||
 tar_connectSSF_location_1e.06_1200|stem|9afdac17831666b9|019b04c0db34e765|32abf49cbc724ca6|568835669||t20074.5184370453s|38030177dc1ffde5|184|qs|local|vector|||815.906||
 tar_dbbmmList|stem|c0e5ba783433d1ce|5354b9a3a6b87439|978e1493ab1fbc1d|-1338950325||t20066.6900426449s|9c7da021201534b3|29681103|qs|local|vector|||165.719||
-tar_deerData|stem|f841ad1fdbfebe65|566ebced504f0215|22aebdacb47e1831|-1039388040||t20065.4247226574s|dc6ee22e376b2953|904747|qs|local|vector|||5.234||
+tar_deerData|stem|df6bf2d882a04e83|566ebced504f0215|22aebdacb47e1831|-1039388040||t20098.566704182s|e11716e163a60248|904744|qs|local|vector|||11.562|package tibble was built under R version 4.2.3. package dplyr was built under R version 4.2.3. package stringr was built under R version 4.2.3. package sf was built under R version 4.2.3. package ctmm was built under R version 4.2.3. package amt was built under R version 4.2.3. package move was built under R version 4.2.3. package raster was built under R version 4.2.3. package lme4 was built under R version 4.2.3. ABI version mismatch lme4 was built with Matrix ABI version 1Current Matrix ABI version is 0Please reinstall lme4 from source or restore original Matrix package. package effects was built under R version 4.2.3. package gdistance was built under R version 4.2.3. package igraph was built under R version 4.2.3. package INLA was built under R version 4.2.3. package performance was built under R version 4.2.3. package ggplot2 was built under R version 4.2.3. package ggtext was built under R version 4.2.3. package ggridges was built under R version 4.2.3. package patchwork was built under R version 4.2.3. package tidyterra was built under R version 4.2.3|
 tar_homeRange_sizePlot|stem|2c32ec3fbeb94493|5e82fc8c817ea1a4|04a49a7f9d5f38a5|-1202349281||t20094.519109613s|031d85312c2e1d87|14349685|qs|local|vector|||5.688||
 tar_landuse|stem|2514449375f1a5b8|9ade98fbebd966f6|272b3059fc51c7f1|-1042947407||t20059.4104961729s|7b6e260af24ba309|636186|qs|local|vector|||14.297|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_landuseList|stem|5022c683484f8d82|9ade98fbebd966f6|7ebb255f375610ca|1043045520||t20065.5274460614s|38ba723c9054dab1|635855|qs|local|vector|||22.453|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|

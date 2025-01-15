@@ -72,3 +72,25 @@ deerData %>%
 
 COL <- color(akdeLists$tele$Roe08_M,by='time')
 plot(akdeLists$tele$Roe08_M,col=COL)
+
+
+targets::tar_load("tar_deerData")
+
+library(ggplot2)
+library(ggridges)
+library(lubridate)
+library(dplyr)
+library(suncalc)
+
+
+tar_deerData %>%
+  mutate(sunUp = ifelse(datetime > suncalc::getSunlightTimes(date = datetime,
+                                                         lat = mean(Latitude), lon = mean(Longitude))$sunrise &
+                    datetime < suncalc::getSunlightTimes(date = datetime,
+                                                         lat = mean(Latitude), lon = mean(Longitude))$sunset, TRUE, FALSE))
+
+tar_deerData %>%
+  mutate(hour = hour(datetime)) %>%
+  ggplot() +
+  geom_density_ridges(aes(x = step, y = Animal_ID, fill = hour %in% c(6, 9, 12, 15))) +
+  scale_x_log10()
