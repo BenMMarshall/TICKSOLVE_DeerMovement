@@ -5,7 +5,7 @@
 #' @return A list of Aberdeen and Wessex land data.
 #'
 #' @export
-read_landuse_data <- function(deerData){
+read_landuse_data <- function(deerData, prelimAggFact){
 
   # targets::tar_load("tar_deerData")
   # deerData <- tar_deerData
@@ -13,16 +13,20 @@ read_landuse_data <- function(deerData){
   sfDeer <- st_as_sf(deerData, coords = c("x","y"),
                      crs = 27700)
 
+  hedgerowData <- st_read(here("data", "GIS data", "UKCEH_Hedgerow", "GB_WLF_V1_0.gdb"))
+
+# ABERDEEN ----------------------------------------------------------------
+
   landRastAberdeen <- terra::rast(here("data", "GIS data", "UKCEH_Landcover",
                                        "UKCEH_Landcover2023_ab",
                                        "data", "LCM.tif"))
 
-  landAberdeen <- terra::crop(landRastAberdeen, st_bbox(sfDeer %>%
+  landuseAberdeen <- terra::crop(landRastAberdeen, st_bbox(sfDeer %>%
                                                    filter(region == "Aberdeenshire")) +
                          c(-2000, -2000, 2000, 2000)
   )
 
-  landAberdeen <- landAberdeen %>%
+  landuseAberdeen <- landuseAberdeen %>%
     mutate(LCM_1_cat = paste0("LCM_", LCM_1))
 
   roadsAberdeen_NO <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_NO.gml"),
@@ -43,7 +47,7 @@ read_landuse_data <- function(deerData){
     mutate(roadSize = factor(roadSize,
                              levels = c("A roads", "B roads", "C roads", "Other")))
 
-  distanceWoodlandAberdeen <- landAberdeen %>%
+  distanceWoodlandAberdeen <- landuseAberdeen %>%
     select(LCM_1) %>%
     filter(LCM_1 %in% 1:2) %>%
     mutate(LCM_1 = case_when(
@@ -52,19 +56,53 @@ read_landuse_data <- function(deerData){
       terra::distance() %>%
     rename(distanceWoodland = LCM_1)
 
-  landRastNewForest <- terra::rast(here("data", "GIS data", "UKCEH_Landcover",
+  hedgesAberdeen <- st_crop(hedgerowData, landuseAberdeen)
+  hedgesAberdeenRast <- rast(landuseAberdeen)
+  hedgesAberdeenRast <- terra::rasterize(st_buffer(hedgesAberdeen, prelimAggFact+2), hedgesAberdeenRast,
+                                         fun = "max", background = NA, touches = TRUE) %>%
+    terra::distance() %>%
+    rename(distanceHedges = layer)
+
+  landuseAberdeen <- landuseAberdeen %>%
+    mutate(landuse = factor(case_when(
+      LCM_1 %in% 1 ~ "Deciduous Broadleaf Forest",
+      LCM_1 %in% 2 ~ "Evergreen Needleleaf Forest",
+      LCM_1 %in% 3 ~ "Cropland",
+      LCM_1 %in% 4 ~ "Tall Grassland",
+      LCM_1 %in% 5:7 ~ "Short Grassland",
+      LCM_1 %in% 9:10 ~ "Open Shrubland",
+      LCM_1 %in% c(12,15,16,17,18) ~ "Barren",
+      LCM_1 %in% c(8,11,19) ~ "Permanent Wetland",
+      LCM_1 %in% 20:21 ~ "Human Settlements",
+      TRUE ~ "Other"
+    ), levels = c(
+      "Deciduous Broadleaf Forest",
+      "Evergreen Needleleaf Forest",
+      "Cropland",
+      "Tall Grassland",
+      "Short Grassland",
+      "Open Shrubland",
+      "Barren",
+      "Permanent Wetland",
+      "Human Settlements",
+      "Other"
+    )))
+
+# WESSEX ------------------------------------------------------------------
+
+  landRastWessex <- terra::rast(here("data", "GIS data", "UKCEH_Landcover",
                                         "UKCEH_Landcover2023_nf",
                                         "data", "LCM.tif"))
 
-  landNewForest <- terra::crop(landRastNewForest, st_bbox(sfDeer %>%
-                                                     filter(region == "New Forest")) +
+  landuseWessex <- terra::crop(landRastWessex, st_bbox(sfDeer %>%
+                                                     filter(region == "Wessex")) +
                           c(-2000, -2000, 2000, 2000)
   )
 
-  landNewForest <- landNewForest %>%
+  landuseWessex <- landuseWessex %>%
     mutate(LCM_1_cat = paste0("LCM_", LCM_1))
 
-  distanceWoodlandWessex <- landNewForest %>%
+  distanceWoodlandWessex <- landuseWessex %>%
     select(LCM_1) %>%
     filter(LCM_1 %in% 1:2) %>%
     mutate(LCM_1 = case_when(
@@ -73,12 +111,12 @@ read_landuse_data <- function(deerData){
     terra::distance() %>%
     rename(distanceWoodland = LCM_1)
 
-  roadsNewForest_SY <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SU.gml"),
+  roadsWessex_SY <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SU.gml"),
                                layer = "RoadLink")
-  roadsNewForestCrop <- sf::st_crop(roadsNewForest_SY, st_bbox(sfDeer %>%
-                                                                 filter(region == "New Forest")))
+  roadsWessexCrop <- sf::st_crop(roadsWessex_SY, st_bbox(sfDeer %>%
+                                                                 filter(region == "Wessex")))
 
-  roadsNewForestCrop <- roadsNewForestCrop %>%
+  roadsWessexCrop <- roadsWessexCrop %>%
     mutate(roadSize = case_when(
       roadFunction == "A Road" ~ "A roads",
       roadFunction == "B Road" ~ "B roads",
@@ -89,22 +127,71 @@ read_landuse_data <- function(deerData){
     mutate(roadSize = factor(roadSize,
                              levels = c("A roads", "B roads", "C roads", "Other")))
 
-  writeRaster(landAberdeen,
+  hedgesWessex <- st_crop(hedgerowData, landuseWessex)
+  hedgesWessexRast <- rast(landuseWessex)
+  hedgesWessexRast <- terra::rasterize(st_buffer(hedgesWessex, prelimAggFact+2), hedgesWessexRast,
+                                         fun = "max", background = NA, touches = TRUE) %>%
+    terra::distance() %>%
+    rename(distanceHedges = layer)
+
+  landuseWessex <- landuseWessex %>%
+    mutate(landuse = factor(case_when(
+      LCM_1 %in% 1 ~ "Deciduous Broadleaf Forest",
+      LCM_1 %in% 2 ~ "Evergreen Needleleaf Forest",
+      LCM_1 %in% 3 ~ "Cropland",
+      LCM_1 %in% 4 ~ "Tall Grassland",
+      LCM_1 %in% 5:7 ~ "Short Grassland",
+      LCM_1 %in% 9:10 ~ "Open Shrubland",
+      LCM_1 %in% c(12,15,16,17,18) ~ "Barren",
+      LCM_1 %in% c(8,11,19) ~ "Permanent Wetland",
+      LCM_1 %in% 20:21 ~ "Human Settlements",
+      TRUE ~ "Other"
+    ), levels = c(
+      "Deciduous Broadleaf Forest",
+      "Evergreen Needleleaf Forest",
+      "Cropland",
+      "Tall Grassland",
+      "Short Grassland",
+      "Open Shrubland",
+      "Barren",
+      "Permanent Wetland",
+      "Human Settlements",
+      "Other"
+    )))
+
+# EXPORT -----------------------------------------------------
+
+
+  writeRaster(landuseAberdeen,
               filename = here("data", "GIS data", "landuseAberdeen.tif"), overwrite = TRUE)
-  writeRaster(landNewForest,
+
+  writeRaster(landuseWessex,
               filename = here("data", "GIS data", "landuseWessex.tif"), overwrite = TRUE)
+
+
   writeRaster(distanceWoodlandAberdeen,
               filename = here("data", "GIS data", "distanceWoodlandAberdeen.tif"), overwrite = TRUE)
+
   writeRaster(distanceWoodlandWessex,
               filename = here("data", "GIS data", "distanceWoodlandWessex.tif"), overwrite = TRUE)
+
+
+  writeRaster(hedgesAberdeenRast,
+              filename = here("data", "GIS data", "distanceHedgesAberdeen.tif"), overwrite = TRUE)
+
+  writeRaster(hedgesWessexRast,
+              filename = here("data", "GIS data", "distanceHedgesWessex.tif"), overwrite = TRUE)
+
 
   landuseList <- list(
     "Aberdeen" = list(landuse = here("data", "GIS data", "landuseAberdeen.tif"),
                       distanceWoodland = here("data", "GIS data", "distanceWoodlandAberdeen.tif"),
+                      distanceHedges = here("data", "GIS data", "distanceHedgesAberdeen.tif"),
                       roads = roadsAberdeenCrop),
     "Wessex" = list(landuse = here("data", "GIS data", "landuseWessex.tif"),
                     distanceWoodland = here("data", "GIS data", "distanceWoodlandWessex.tif"),
-                    roads = roadsNewForestCrop)
+                    distanceHedges = here("data", "GIS data", "distanceHedgesWessex.tif"),
+                    roads = roadsWessexCrop)
   )
 
   return(landuseList)

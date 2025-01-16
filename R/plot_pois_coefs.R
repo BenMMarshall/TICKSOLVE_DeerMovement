@@ -9,6 +9,7 @@ plot_pois_coefs <- function(poisModel){
 
   # targets::tar_load("tar_pois_model")
   # poisModel <- tar_pois_model
+  # poisModel <- inlaOUT
 
   poisFixed <- poisModel$summary.fixed %>%
     as.data.frame()
@@ -20,12 +21,18 @@ plot_pois_coefs <- function(poisModel){
 
   poisFixed <- poisFixed %>%
     mutate(termType = case_when(
-      term %in% c("roadCrossings", "distanceWoodland") ~ "Non-landuse",
+      term %in% c("roadCrossings", "distanceWoodland", "distanceHedges") ~ "Non-landuse",
       TRUE ~ "Landuse"
     )) %>%
     rename(lower = `0.025quant`, upper = `0.975quant`) %>%
     mutate(sig = ifelse(lower > 0, "Significant +", ifelse(upper < 0, "Significant -", "Not Significant"))) %>%
     left_join(sigColourDF, by = "sig") %>%
+    mutate(term = case_when(
+      str_detect(term, "\\.") ~ str_replace_all(term, "\\.", " "),
+      str_detect(term, "distance") ~ str_replace_all(term, "distance", "Distance to "),
+      term == "roadCrossings" ~ "Road Crossing",
+      TRUE ~ term
+    )) %>%
     mutate(term_colour = glue::glue("<i style='color:{colour}'>{term}</i>"),
            term_colour = ifelse(sig == "Not Significant", term_colour,
                                 glue::glue("<b>{term_colour}</b>"))) %>%

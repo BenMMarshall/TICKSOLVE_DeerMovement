@@ -69,9 +69,14 @@ rsfFormula <- case_ ~ distanceWoodland + landuse + distanceWoodland:landuse
 nAvailableSteps <- 10
 slDistribution <- "gamma"
 taDistribution <- "vonmises"
-ssfFormula <- case_ ~ distanceWoodland + landuse + distanceWoodland:landuse +
+ssfFormula <- case_ ~ landuse +
+  distanceWoodland +
+  distanceHedges +
+  distanceWoodland:landuse +
   roadCrossings +
-  sl_ + log(sl_) + cos(ta_) + log(sl_):landuse + log(sl_):distanceWoodland +
+  sl_ + log(sl_) + cos(ta_) +
+  log(sl_):landuse +
+  log(sl_):distanceWoodland +
   strata(step_id_)
 # dbbmm
 windowSize <- 29 #~ a week
@@ -87,9 +92,11 @@ locationError <- 0.1
 patchDistance <- 1000
 connectSettings <- expand.grid(
   THETA = c(0.1, 0.001, 0.00001),
-  repeatsPerPair = 5,
+  repeatsPerPair = 1,
   patchDistance = patchDistance
 )
+
+aggFact <- 10
 
 # Replace the target list below with your own:
 coreTargetList <- list(
@@ -99,7 +106,7 @@ coreTargetList <- list(
   ),
   tar_target(
     name = tar_landuseList,
-    command = read_landuse_data(tar_deerData)
+    command = read_landuse_data(tar_deerData, prelimAggFact = aggFact)
   ),
   tar_target(
     name = tar_patchList,
@@ -171,7 +178,7 @@ coreTargetList <- list(
     name = tar_predSSFResist_location,
     command = build_predResistance_layer(tar_ssf_data, tar_ssf_models,
                                          tar_landuseList, tar_patchList,
-                                         tar_deerData, REGION = "Aberdeenshire")
+                                         tar_deerData, REGION = "Aberdeenshire", prelimAggFact = aggFact)
   ),
   tar_target(
     name = tar_pois_model,
@@ -185,14 +192,14 @@ coreTargetList <- list(
     name = tar_predPoisResist_location,
     command = build_predResistance_layer(tar_ssf_data, tar_pois_model,
                                          tar_landuseList, tar_patchList,
-                                         tar_deerData, REGION = "Aberdeenshire")
+                                         tar_deerData, REGION = "Aberdeenshire", prelimAggFact = aggFact)
   ),
   tar_map(
     values = connectSettings,
     tar_target(
       name = tar_connectSSF_location,
       command = build_connect_layer(tar_predSSFResist_location, tar_patchList,
-                                    REGION = "Aberdeenshire", prelimAggFact = 10,
+                                    REGION = "Aberdeenshire", prelimAggFact = aggFact,
                                     seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair,
                                     patchDistance = patchDistance)
     ),
@@ -210,7 +217,7 @@ coreTargetList <- list(
     tar_target(
       name = tar_connectPois_location,
       command = build_connect_layer(tar_predPoisResist_location, tar_patchList,
-                                    REGION = "Aberdeenshire", prelimAggFact = 10,
+                                    REGION = "Aberdeenshire", prelimAggFact = aggFact,
                                     seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair,
                                     patchDistance = patchDistance)
     ),
@@ -222,17 +229,17 @@ coreTargetList <- list(
                                     REGION = "Aberdeenshire",
                                     THETA = THETA)
     )
-  ),
-  tar_target(
-    name = tar_circuitscape_data,
-    command = prepare_circuitscape_data(tar_predSSFResist_location, tar_patchList, REGION = "Aberdeenshire",
-                                        prelimAggFact = 10,
-                                        patchDistance = patchDistance)
-  ),
-  tar_target(
-    name = tar_circuitscape_files,
-    command = run_julia_circuitscape(model = "pois", tar_circuitscape_data)
-  )
+  )#,
+  # tar_target(
+  #   name = tar_circuitscape_data,
+  #   command = prepare_circuitscape_data(tar_predPoisResist_location, tar_patchList, REGION = "Aberdeenshire",
+  #                                       prelimAggFact = aggFact,
+  #                                       patchDistance = patchDistance)
+  # ),
+  # tar_target(
+  #   name = tar_circuitscape_files,
+  #   command = run_julia_circuitscape(model = "pois", tar_circuitscape_data)
+  # )
 )
 
 connectTargetList <- list(

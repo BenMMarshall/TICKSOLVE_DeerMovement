@@ -5,7 +5,8 @@
 #' @return abc
 #'
 #' @export
-build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patchList, deerData, REGION){
+build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patchList, deerData, REGION,
+                                       prelimAggFact){
 
   # library(here)
   # library(dplyr)
@@ -20,13 +21,15 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
   # library(ggplot2)
   #
   # targets::tar_load("tar_ssf_models")
+  # targets::tar_load("tar_pois_model")
   # targets::tar_load("tar_ssf_data")
   # targets::tar_load("tar_deerData")
   # targets::tar_load("tar_patchList")
   # targets::tar_load("tar_landuseList")
   #
   # ssfData <- tar_ssf_data
-  # ssfModels <- tar_ssf_models
+  # ssfPoismodel <- tar_ssf_models
+  # ssfPoismodel <- tar_pois_model
   # landuseList <- tar_landuseList
   # patchList <- tar_patchList
   # deerData <- tar_deerData
@@ -41,7 +44,8 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
   # focalModel <- ssfModels$Roe04_F
 
   focalRoads <- landuseList[[sub("shire", "", REGION)]]$roads
-  focalDistance <- terra::rast(landuseList[[sub("shire", "", REGION)]]$distanceWoodland)
+  focalDistanceWoodland <- terra::rast(landuseList[[sub("shire", "", REGION)]]$distanceWoodland)
+  focalDistanceHedges <- terra::rast(landuseList[[sub("shire", "", REGION)]]$distanceHedges)
   focalLanduse <- terra::rast(landuseList[[sub("shire", "", REGION)]]$landuse)
   # duplicate landuse raster for reference when rasterising the road data
   focalRoadsTerra <- focalLanduse
@@ -87,8 +91,8 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
   ########################################################################################################################
   ######### ROAD BUFFERED TO APPEAR ON AGG LANDSCAPE, CAN BE MINIMISED FOR HIGHER RES LANDSCAPE ##########################
   ########################################################################################################################
-  focalRoadsTerra <- terra::rasterize(st_buffer(focalRoads, 20), focalRoadsTerra,
-                                      fun = "max", background = 0, touches = TRUE, cover = TRUE)
+  focalRoadsTerra <- terra::rasterize(st_buffer(focalRoads, prelimAggFact+2), focalRoadsTerra,
+                                      fun = "max", background = 0, touches = TRUE)
   terra::values(focalRoadsTerra) <- ifelse(terra::values(focalRoadsTerra) == 0, 0, 1)
   ########################################################################################################################
   ########################################################################################################################
@@ -102,38 +106,37 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
     mutate(roadCrossings = terra::values(focalRoadsTerra))
 
   ggplot() +
-    geom_spatraster(data = focalLanduse, aes(fill = LCM_1))# +
+    geom_spatraster(data = focalLanduse, aes(fill = landuse))# +
   # geom_sf(data = focalRoads, alpha = 0.1)
 
   dataLanduse <- as.data.frame(terra::values(focalLanduse)) %>%
-    dplyr::select(LCM_1, roadCrossings) %>%
-    dplyr::mutate(landuse = factor(case_when(
-      LCM_1 %in% 1:2 ~ "Woodland",
-      LCM_1 %in% 3 ~ "Arable",
-      LCM_1 %in% 4:7 ~ "Grasslands",
-      LCM_1 %in% 9:10 ~ "Heathland",
-      LCM_1 %in% c(11,14) ~ "Aquatic",
-      LCM_1 %in% 20:21 ~ "Human Settlements",
-      TRUE ~ "Other"
-    ), levels = c(
-      "Woodland",
-      "Grasslands",
-      "Heathland",
-      "Aquatic",
-      "Arable",
-      "Human Settlements",
-      "Other"
-    ))) %>%
     dplyr::select(landuse, roadCrossings)
 
-  dataDistance <- as.data.frame(terra::values(focalDistance))
+  dataDistanceWoodland <- as.data.frame(terra::values(focalDistanceWoodland))
+  dataDistanceHedges <- as.data.frame(terra::values(focalDistanceHedges))
 
-  dataMatrix <- cbind(dataLanduse, dataDistance)
+  dataMatrix <- cbind(dataLanduse, dataDistanceWoodland)
+  dataMatrix <- cbind(dataMatrix, dataDistanceHedges)
 
   dataMatrix <- na.omit(dataMatrix)
   dataMatrix$step_id_ <- 4
   dataMatrix$sl_ <- meanSL_
   dataMatrix$ta_ <- meanTA_
+
+  dataMatrix <- dataMatrix %>%
+    mutate(landuse = as.character(case_when(
+      landuse == 1 ~ "Deciduous Broadleaf Forest",
+      landuse == 2 ~ "Evergreen Needleleaf Forest",
+      landuse == 3 ~ "Cropland",
+      landuse == 4 ~ "Tall Grassland",
+      landuse == 5 ~ "Short Grassland",
+      landuse == 6 ~ "Open Shrubland",
+      landuse == 7 ~ "Barren",
+      landuse == 8 ~ "Permanent Wetland",
+      landuse == 9 ~ "Human Settlements",
+      landuse == 10 ~ "Other"
+      ))
+    )
 
   # hist(focalData$sl_)
   # hist(dataMatrix$sl_)
@@ -151,17 +154,22 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
     modelMatriX_trim <- modelMatriX[,colnames(modelMatriX) %in% names(ssfMeans[!is.na(ssfMeans)])]
     coef_trim <- ssfMeans[names(ssfMeans) %in% colnames(modelMatriX_trim)]
 
+    rm(modelMatriX)
+
   } else if(class(ssfPoismodel) == "inla"){
 
+    landuseNames <- gsub(" ", "\\.", levels(focalLanduse$landuse)[[1]]$label)
+    landuseNames <- landuseNames[!landuseNames %in% c("Barren", "Other")]
     landuseWide <- dataMatrix %>%
       to_dummy(landuse)
-    names(landuseWide) <- levels(dataMatrix$landuse)
+    names(landuseWide) <- landuseNames
     modelMatriX <- cbind(dataMatrix, landuseWide)
 
     modelMatriX_trim <- modelMatriX[,colnames(modelMatriX) %in% names(poisCoef[!is.na(poisCoef)])]
     modelMatriX_trim <- as.matrix(modelMatriX_trim)
     coef_trim <- poisCoef[names(poisCoef) %in% colnames(modelMatriX_trim)]
 
+    rm(modelMatriX)
   }
 
   # colnames() bit so that they are ordered the same

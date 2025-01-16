@@ -7,54 +7,71 @@
 #' @export
 prepare_circuitscape_data <- function(predRasterLoc, patchList, REGION, prelimAggFact = 10, patchDistance){
 
+  # targets::tar_load("tar_predPoisResist_location")
+  # targets::tar_load("tar_patchList")
+  # REGION = "Aberdeenshire"
+  # prelimAggFact = 10
+  # patchDistance = 1000
+  # predRasterLoc <- tar_predPoisResist_location
+  # patchList <- tar_patchList
+
   predictionTerra <- terra::rast(predRasterLoc)
 
   focalPatches <- patchList[[sub("shire", "", REGION)]]
 
+  template <- terra::rast(predictionTerra)
+
+  binaryRaster <- terra::rasterize(vect(focalPatches %>% mutate(Ptch_ID = as.numeric(Ptch_ID))),
+                                   template, field = "Ptch_ID")
+
+  unique(as.character(values(binaryRaster$Ptch_ID)))
+
   focalPatches <- focalPatches %>%
-    filter(!duplicated(Ptch_ID)) %>%
+    filter(Ptch_ID %in% unique(as.character(values(binaryRaster$Ptch_ID)))) %>%
     mutate(NumID = row_number())
 
   patchDistanceMatrix <- sf::st_distance(focalPatches)
   minDist <- patchDistance
   units(minDist) <- units::as_units("m")
 
+  ### TO TURN ON ABOVE EDIT THE ini model file.
+
+  # matrix distance methods -------------------------------------------------
+  # also not working, just returns zeroes
+
+  patchDistanceMatrix <- apply(patchDistanceMatrix, 2, as.numeric)
+  patchDistanceMatrix <- apply(patchDistanceMatrix, 2, round)
+  # patchDistanceMatrix <- apply(patchDistanceMatrix, 2, as.integer)
+
+  write.table(patchDistanceMatrix, file = here::here("data", "GIS data", "circuitscape", "pairwiseDistances.txt"),
+              row.names = FALSE, col.names = FALSE, sep = '\t', quote = FALSE)
+
+  minMaxText <- paste("min 1\nmax", patchDistance)
+  pairwiseDistancesTxt <- readLines(here::here("data", "GIS data", "circuitscape", "pairwiseDistances.txt"))
+  pairwiseDistancesTxt <- c(minMaxText, pairwiseDistancesTxt)
+  writeLines(pairwiseDistancesTxt, here::here("data", "GIS data", "circuitscape", "pairwiseDistances.txt"))
+
+
+  # exclusions based on distance --------------------------------------------
+  # circuitscape julia this doesn't work: https://github.com/Circuitscape/Circuitscape.jl/issues/341
+  # known issue
   rowInclusionList <- vector("list", nrow(patchDistanceMatrix))
-  # for(r in 1:nrow(patchDistanceMatrix)){
-  for(r in 1:1){
-    # r <- 1
+  for(r in unique(focalPatches$Ptch_ID)){
+    # r <- unique(focalPatches$Ptch_ID)[1]
     rowInclusionList[[r]] <- data.frame(mode = r,
-                                        include = focalPatches$NumID[patchDistanceMatrix[r,] < minDist]) %>%
+                                        include = focalPatches$Ptch_ID[patchDistanceMatrix[which(unique(focalPatches$Ptch_ID) == r),] < minDist]) %>%
       filter(!include == r)
   }
   pairsInclusion <- do.call(rbind, rowInclusionList)
 
-  # pairsInclusion <- expand.grid(mode = unique(values(binaryRaster)),
-  #             include = unique(values(binaryRaster))) %>%
-  #   filter(!is.na(mode)) %>%
-  #   filter(!is.na(include))
-
   write.table(pairsInclusion, file = here::here("data", "GIS data", "circuitscape", "pairInclusion.txt"),
               row.names = FALSE, sep = '\t', quote = FALSE)
-
-  # extent_m <- terra::ext(focalPatches)
-  # # will result in a grid that has a 1 m x 1 m res
-  # xRes <- abs(extent_m[1] - extent_m[2])
-  # yRes <- abs(extent_m[3] - extent_m[4])
-
-  template <- terra::rast(predictionTerra)
-
-  binaryRaster <- terra::rasterize(vect(focalPatches),
-                                   template, field = "NumID")
-
-  # binaryRaster <- binaryRaster %>%
-  #   dplyr::mutate(NumID = as.numeric(NumID))
 
   patchCircuitTerraLoc <- here::here("data", "GIS data", "nodesCircuitTerra_Aberdeen.tif")
   predictionCircuitTerraLoc <- here::here("data", "GIS data", "predictionCircuitTerra_Aberdeen.tif")
 
-  predictionTerra <- raster::aggregate(predictionTerra, fact = 10, fun = max)
-  binaryRaster <- raster::aggregate(binaryRaster, fact = 10, fun = max)
+  # predictionTerra <- raster::aggregate(predictionTerra, fact = 10, fun = max)
+  # binaryRaster <- raster::aggregate(binaryRaster, fact = 10, fun = max)
 
   terra::writeRaster(binaryRaster, patchCircuitTerraLoc,
                      overwrite = TRUE)

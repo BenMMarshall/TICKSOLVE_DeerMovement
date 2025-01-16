@@ -1,0 +1,56 @@
+---
+title: "Roe Deer Movement"
+author1: "Benjamin Michael Marshall*"
+author2: "---**"
+affiliation1: "---"
+affiliation2: "---"
+corresponding1: "benjaminmichaelmarshall@gmail.com"
+corresponding2: "---"
+date: "`r Sys.Date()`"
+output:
+  bookdown::pdf_document2:
+    template: main.tex
+    keep_tex: true
+    highlight: monochrome
+    fig_caption: true
+    dev: pdf
+    extra_dependencies: ["float"]
+  bookdown::html_document2:
+    theme: yeti
+    highlight: monochrome
+    fig_caption: true
+link-citations: yes
+linkcolor: gray
+bibliography: [deerMovement_refs.bib, packages_refs.bib]
+# csl: peerj.csl
+editor_options: 
+  markdown: 
+    wrap: sentence
+abstract: abstract text
+keywords: Movement ecology, step selection function, poisson, habitat preference, habitat selection, animal movement, roe deer
+---
+
+# Introduction
+
+# Methods
+
+# Results
+
+# Discussion
+
+## Conlcusions
+
+# Acknowledgements
+
+
+# Software availablity
+
+# Data availabilty
+
+# Author Contributions
+
+# Supplementary Material
+
+\clearpage
+
+# References

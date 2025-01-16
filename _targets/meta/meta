@@ -1,14 +1,15 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|f3c2859242b567d7|||||||||||||||
+.Random.seed|object|a7fa1cb4a41bdd60|||||||||||||||
+aggFact|object|d516855f98da7f3d|||||||||||||||
 build_connect_layer|function|dddb2ea7a3550255|||||||||||||||
-build_predResistance_layer|function|3187fda970c5d3b5|||||||||||||||
+build_predResistance_layer|function|6d64c8bb93ae97fc|||||||||||||||
 calculate_akdes|function|a726e1c414633135|||||||||||||||
 calculate_dbbmm_mse|function|d460657c9b004785|||||||||||||||
 calculate_dbbmms|function|7a6d7321c24e85cf|||||||||||||||
-connectSettings|object|b04a948c6dbd088a|||||||||||||||
-connectTargetList|object|6331246545a7bdf1|||||||||||||||
+connectSettings|object|da28fc3ee7051fa4|||||||||||||||
+connectTargetList|object|2ed71b5d44b5aca7|||||||||||||||
 contourAvialable|object|6dfa276ef67328bc|||||||||||||||
-coreTargetList|object|029696ca0631c2e9|||||||||||||||
+coreTargetList|object|26bfef619a1f80a3|||||||||||||||
 extract_akde_summaries|function|4a1a2dca1bcdca05|||||||||||||||
 extract_rsf_results|function|200d4a2dba9d5e39|||||||||||||||
 generate_overview_maps|function|a64d3de9e803b42a|||||||||||||||
@@ -25,27 +26,27 @@ patchDistance|object|d887885b74fc7404|||||||||||||||
 plot_homeRange_sizes|function|b124ee932f0d57db|||||||||||||||
 plot_patch_connectivity|function|9fb7d206389687c3|||||||||||||||
 plot_patch_summary|function|c68ab07b34f7d4e3|||||||||||||||
-plot_pois_coefs|function|8695fe9f5095209b|||||||||||||||
+plot_pois_coefs|function|cfec6b0e59683d07|||||||||||||||
 plot_ssf_coefs|function|1509e7192397b88d|||||||||||||||
-prepare_circuitscape_data|function|cc7c98c5e446661d|||||||||||||||
-prepare_rsf_data|function|81d096ca72f80606|||||||||||||||
-prepare_ssf_data|function|7af3ed59df26b31d|||||||||||||||
-read_deer_data|function|a6a33200f32f1114|||||||||||||||
-read_landuse_data|function|dfc7a3c71644843c|||||||||||||||
+prepare_circuitscape_data|function|fdd57871e3953e99|||||||||||||||
+prepare_rsf_data|function|a7467f485f4157b2|||||||||||||||
+prepare_ssf_data|function|f61731a6cef36df6|||||||||||||||
+read_deer_data|function|82f8e50b48a14ac9|||||||||||||||
+read_landuse_data|function|d5b61922d8357aa5|||||||||||||||
 read_patches_data|function|45f720ba561c305b|||||||||||||||
 rsfFormula|object|e44fdcd993ebd2fb|||||||||||||||
-run_julia_circuitscape|function|6d82edf2cdaaa2a6|||||||||||||||
-run_pois_model|function|f4d881324f64d60e|||||||||||||||
+run_julia_circuitscape|function|b930d6e805026e1b|||||||||||||||
+run_pois_model|function|a34eeffe8fa04b48|||||||||||||||
 run_rsf_models|function|03740d01fc112cd2|||||||||||||||
 run_ssf_models|function|b1730a1356bead17|||||||||||||||
 selectedPatches|object|d18965f2badcd28d|||||||||||||||
 slDistribution|object|378daf6acce8eba7|||||||||||||||
-ssfFormula|object|97cdcfbe4dc94bd3|||||||||||||||
+ssfFormula|object|ce61344dcb0e3a2a|||||||||||||||
 taDistribution|object|1716da92e4275cdd|||||||||||||||
 tar_akdeLists|stem|6f4a2d2fb9ecb05e|51e20b3c1d015bc4|97384fae41a8b0eb|856298492||t20065.4382256552s|8d90780940c4223e|13306498|qs|local|vector|||1166.328||
 tar_akdeSummary|stem|f91b5683b517a0cb|f3f6fd0e72aeab2c|e2ddb7438346d1a4|-1306586415||t20076.444708134s|bea3f4a73fd45c9f|4035|qs|local|vector|||19.953||
-tar_circuitscape_data|stem|c53ec5d19e9df266|815349c3c9f8de50|f999ce71675e4cac|-1895862094||t20101.7019283814s|65517ab569876e8b|212|qs|local|vector|||7.438||
-tar_circuitscape_files|stem|75e8ca1bc668fdc8|80dea33cc669dfd0|0600ececcf1f7aa8|-490663222||t20101.7027178904s|b7e0f11567be2f58|371|qs|local|vector|||68.188||
+tar_circuitscape_data|stem|c53ec5d19e9df266|c1a2566ccea8d572|33d6e01a1af74871|-1895862094||t20104.6318621671s|65517ab569876e8b|212|qs|local|vector|||17.563||
+tar_circuitscape_files|stem|d410eed2bc4c165b|80dea33cc669dfd0|0600ececcf1f7aa8|-490663222||t20104.6138312559s|b6a3947d99208431|149|qs|local|vector|||27.25||
 tar_connect_dbbmmmse_0.001_300|stem|da1cf69197921c06|494756f757e8e662|7f427b2a4112b4ed|-1682529053||t20073.8260868675s|4702e5d68d5cb8ce|360|qs|local|vector|||5.297||
 tar_connect_dbbmmmse_0.01_300|stem|7dd4389e4e765a06|65f998b9d82713ea|b7b98376239ded1e|-736622581||t20073.8264660803s|4702e5d68d5cb8ce|360|qs|local|vector|||5.344||
 tar_connect_dbbmmmse_1e.04_300|stem|a97d13fb441b84c6|e01138cec521fc74|3b7f1d5b9b3f3e22|-307292614||t20073.8307453937s|4702e5d68d5cb8ce|360|qs|local|vector|||4.688||
@@ -150,10 +151,10 @@ tar_connectSSF_location_1e.05_5_1000|stem|65caacdc84931212|c79a07815146b7cb|0d6b
 tar_connectSSF_location_1e.06_1_1200|stem|9afdac17831666b9|c1fcf07e018faa65|36e464ca2ba26354|-1890295764||t20074.7161685501s|38030177dc1ffde5|184|qs|local|vector|||741.672||
 tar_connectSSF_location_1e.06_1200|stem|9afdac17831666b9|019b04c0db34e765|32abf49cbc724ca6|568835669||t20074.5184370453s|38030177dc1ffde5|184|qs|local|vector|||815.906||
 tar_dbbmmList|stem|c0e5ba783433d1ce|5354b9a3a6b87439|978e1493ab1fbc1d|-1338950325||t20066.6900426449s|9c7da021201534b3|29681103|qs|local|vector|||165.719||
-tar_deerData|stem|df6bf2d882a04e83|566ebced504f0215|22aebdacb47e1831|-1039388040||t20098.566704182s|e11716e163a60248|904744|qs|local|vector|||11.562|package tibble was built under R version 4.2.3. package dplyr was built under R version 4.2.3. package stringr was built under R version 4.2.3. package sf was built under R version 4.2.3. package ctmm was built under R version 4.2.3. package amt was built under R version 4.2.3. package move was built under R version 4.2.3. package raster was built under R version 4.2.3. package lme4 was built under R version 4.2.3. ABI version mismatch lme4 was built with Matrix ABI version 1Current Matrix ABI version is 0Please reinstall lme4 from source or restore original Matrix package. package effects was built under R version 4.2.3. package gdistance was built under R version 4.2.3. package igraph was built under R version 4.2.3. package INLA was built under R version 4.2.3. package performance was built under R version 4.2.3. package ggplot2 was built under R version 4.2.3. package ggtext was built under R version 4.2.3. package ggridges was built under R version 4.2.3. package patchwork was built under R version 4.2.3. package tidyterra was built under R version 4.2.3|
+tar_deerData|stem|9adef37866d7f82f|566ebced504f0215|7791f88285ae7530|-1039388040||t20104.413397947s|860323ef24e00859|904393|qs|local|vector|||7.453||
 tar_homeRange_sizePlot|stem|2c32ec3fbeb94493|5e82fc8c817ea1a4|04a49a7f9d5f38a5|-1202349281||t20094.519109613s|031d85312c2e1d87|14349685|qs|local|vector|||5.688||
 tar_landuse|stem|2514449375f1a5b8|9ade98fbebd966f6|272b3059fc51c7f1|-1042947407||t20059.4104961729s|7b6e260af24ba309|636186|qs|local|vector|||14.297|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
-tar_landuseList|stem|5022c683484f8d82|9ade98fbebd966f6|7ebb255f375610ca|1043045520||t20065.5274460614s|38ba723c9054dab1|635855|qs|local|vector|||22.453|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
+tar_landuseList|stem|69a048daf6768ad0|571c16275a0f3f67|48a6d7c0aa976727|1043045520||t20104.4921483666s|b432091faf7e53bb|635819|qs|local|vector|||165.937|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_msePois_df|stem|566a37aed748e661|fd9cf854a82f5506|ed897aaeae7fa95f|451420258||t20094.3119135642s|ef57bb77e73b0d6d|788|qs|local|vector|||0||
 tar_msePois_list|stem|215a33190b71d939|f58174489d84c8a8|9726446b8f102ae5|-138912978||t20076.5447523246s|92f12605e75fe984|785|qs|local|vector|||0||
 tar_mseSSF_df|stem|e10e2a82105744ae|d327e39a9eb38ab2|64fd9a5c8fbeb87e|-1343766652||t20094.3198785592s|a8790ebdabde5cc9|782|qs|local|vector|||0||
@@ -164,16 +165,16 @@ tar_patchList|stem|6da040da99f44068|6bdc42673a040198|72f61af1432c09e3|-205399411
 tar_patchPois_plot|stem|10014e27cfe5abd5|6bb74ba4f2c05aa5|0f86577ab38a59bc|-155401431||t20094.5232034957s|d07a616db1d859f5|3178821|qs|local|vector|||12.953||
 tar_patchPois_summaryPlot|stem|6b6a1cd99ec247ec|1ccf80512e9aa3e1|1ceef5e280940bce|535454467||t20094.5390033654s|6a373643ec9bfb89|3061140|qs|local|vector|||23.313|log10 transformation introduced infinite values.. log10 transformation introduced infinite values.. st_centroid assumes attributes are constant over geometries. log10 transformation introduced infinite values.. log10 transformation introduced infinite values.|
 tar_patchSSF_plot|stem|f372a4010aabe14f|6edffd15faa50bef|fc6c461559b1c57b|-1951447803||t20094.523220083s|4218d601d5af9c82|3178857|qs|local|vector|||13||
-tar_pois_model|stem|dae781c5260be077|ab4be6542fa80258|c95a752e2765cd14|-1350650168||t20067.6086088383s|a5b231ed52cb588b|196623334|qs|local|vector|||54.687||
+tar_pois_model|stem|fc90e62782d938ea|ab4be6542fa80258|8fcdce4ebf701f64|-1350650168||t20104.5668861054s|e0a7f257230c24a9|225716992|qs|local|vector|||88.656||
 tar_pois_plot|stem|1a926fbb16a7f704|f4ec209193180b8d|e6e3c4b53b2cfcf4|-1564965099||t20094.5202121719s|de86f9f747211268|196940687|qs|local|vector|||3.906||
-tar_predPoisResist_location|stem|69bf86a61c498dc2|e39761bc32697711|ffd8e74c19f7236b|-837149021||t20076.5295156094s|af94fcb8e6165bbe|176|qs|local|vector|||62.875||
+tar_predPoisResist_location|stem|400a06cc9ecf29c9|a68f8146c46b9408|d3d8f582a0281581|-837149021||t20104.7115792244s|b6a3947d99208431|149|qs|local|vector|||23.156||
 tar_predResist_location|stem|d0a70c1b24f7a40c|cc02fca1c8844f20|a0aff3ee36a19ad8|1594166547||t20073.6668431018s|f8c1d755d5d31832|173|qs|local|vector|||128.5||
 tar_predSSFResist_location|stem|d8e4f477414cf2c5|cc02fca1c8844f20|b9edb70b415c8e75|-2111250181||t20076.5304439503s|7abe23fc6ac7bb03|175|qs|local|vector|||132.11||
 tar_rsf_data|stem|5444f4bddd3fb761|b8ff3dd396a75fdf|0c815b2b8ce65e57|-314967242||t20074.6608359851s|e91a04d31411d0e1|5286594|qs|local|vector|||189.796||
 tar_rsf_models|stem|c6ecc71f79f95feb|8e856f040fb60506|a4ae6cfac77ca1d6|-1738740726||t20067.6069863946s|e38cca700da64d6e|45578797|qs|local|vector|||1.328|glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
 tar_rsf_outputs|stem|bda4b71d8ce3f562|2e7bda5096ec7c26|fe75e49bb757ecc8|251120470||t20094.5840604937s|82120226e3e6a127|85365333|qs|local|vector|||414.781|prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. Removed 60 rows containing missing values or values outside the scale rangegeom_line.. Removed 60 rows containing missing values or values outside the scale rangegeom_line.|
-tar_ssf_data|stem|ca94d8079d0a1b3e|540d203994dec23b|7d7736a6955d50f4|390394694||t20074.6867028328s|c2e270bd8e0e753d|8140431|qs|local|vector|||2424|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
-tar_ssf_models|stem|dde57f8bf459c498|be721ccd31e91379|0183d597a2c903df|-1267665248||t20065.5589891361s|d34fab72c2e29bce|9830524|qs|local|vector|||8.562|Loglik converged before variable  6  beta may be infinite. . Loglik converged before variable  6  beta may be infinite. . Loglik converged before variable  6,15  beta may be infinite. . Loglik converged before variable  5  beta may be infinite. . Loglik converged before variable  5,8  beta may be infinite. . Loglik converged before variable  4  beta may be infinite. . Loglik converged before variable  4,14  beta may be infinite. . Loglik converged before variable  1,6,12,14,15  beta may be infinite. . Loglik converged before variable  1,3,6,8,12,13,15,22  beta may be infinite. . Loglik converged before variable  3  beta may be infinite. . Loglik converged before variable  3,13  beta may be infinite. . Loglik converged before variable  3,4  beta may be infinite. . Loglik converged before variable  3,4,5,6,13,15  beta may be infinite. . Loglik converged before variable  1,4,5,6,12,13,21  beta may be infinite. . Loglik converged before variable  4,5,6  beta may be infinite.|
+tar_ssf_data|stem|fdef9395b799b798|540d203994dec23b|09306b90dffc80ea|390394694||t20104.5229132121s|27541b877b872b04|8698003|qs|local|vector|||2334.359|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
+tar_ssf_models|stem|34def520d25fd5f1|be721ccd31e91379|ca2a42f92e979c57|-1267665248||t20104.6711494563s|dfdfd91bb0bed139|10492183|qs|local|vector|||18.063|Loglik converged before variable  8  beta may be infinite. . Loglik converged before variable  8,9  beta may be infinite. . Loglik converged before variable  4,8  beta may be infinite. . Loglik converged before variable  2  beta may be infinite. . Loglik converged before variable  2,12  beta may be infinite. . Loglik converged before variable  4,7,9,17,18,19,22  beta may be infinite. . Loglik converged before variable  4,7,9,17,18,19,22,33  beta may be infinite. . Loglik converged before variable  8,9,10,17,18,22,23,33  beta may be infinite. . Loglik converged before variable  4,9,10,17,18,19,22,23,24,28  beta may be infinite. . Loglik converged before variable  4,5,8,10,12,17,18,19,20,28,32  beta may be infinite. . Loglik converged before variable  4,5  beta may be infinite. . Loglik converged before variable  5,20  beta may be infinite. . Loglik converged before variable  5,9,10,17,18  beta may be infinite. . Loglik converged before variable  2,5,8,9,10,17,18,19,20,23,33  beta may be infinite. . Loglik converged before variable  2,4,8,9,17,26  beta may be infinite. . Loglik converged before variable  2,4,8,9  beta may be infinite.|
 tar_ssf_plots|stem|9c3264882975ab44|ec74e82715547c30|614b2e2326a63e87|1588734551||t20094.5202250806s|d11c323f1f3dbaab|10390286|qs|local|vector|||6.687||
 tar_trackingPlots|stem|ea9863322417ab0c|b349b384a931ff92|2c23759cdfccb741|1086976774||t20094.5201030746s|483263f300a486c2|9775386|qs|local|vector|||5.515|Removed 17 rows containing nonfinite outside the scale rangestat_density_ridges.. Removed 17 rows containing nonfinite outside the scale rangestat_density_ridges.|
 tar_trackingTables|stem|9e773296228309dc|226069d56e77fd04|7b35508dff748796|1406021826||t20065.4464628227s|83fa9aa964c289d2|661|qs|local|vector|||0.016||

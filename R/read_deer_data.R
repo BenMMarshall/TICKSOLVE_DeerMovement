@@ -27,7 +27,11 @@ read_deer_data <- function(){
     mutate(timelag = as.numeric(difftime(datetime, lag(datetime), units = "secs"))) %>%
     left_join(deerMetaData %>%
                 select(Animal_ID, "Name" = Collar.ID, Sex)) %>%
-    ungroup()
+    ungroup() %>%
+    mutate(region = case_when(
+      region == "New Forest" ~ "Wessex",
+      TRUE ~ region
+    ))
 
   deerData$Animal_ID <- gsub("^R", "Roe", deerData$Animal_ID)
   deerData$Animal_ID <- gsub("^F", "Fallow", deerData$Animal_ID)
@@ -38,7 +42,7 @@ read_deer_data <- function(){
   ### DEER MISALLOCATED TO NEW FOREST WHEN IN ABERDEEN
   ##########################################
   deerData %>%
-    filter(region == "New Forest", Latitude > 54)
+    filter(region == "Wessex", Latitude > 54)
   ### T3HS-7359
   deerData[deerData$Name == "T3HS-7359",]$region <- "Aberdeenshire"
 

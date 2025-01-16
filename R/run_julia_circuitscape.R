@@ -22,7 +22,7 @@ run_julia_circuitscape <- function(model, circuitScapeData){
   julia_command("using Circuitscape")
   JuliaCall::julia_call('compute', normalizePath(iniFile))
 
-  circuitscapeLocations <- list.files(here("data", "GIS data", "circuitscape"), pattern = "pois.*?.asc$",
+  circuitscapeLocations <- list.files(here::here("data", "GIS data", "circuitscape"), pattern = "pois.*?.asc$",
                                       full.names = TRUE)
 
   return(circuitscapeLocations)
