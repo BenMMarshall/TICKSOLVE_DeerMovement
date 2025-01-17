@@ -34,6 +34,103 @@ keywords: Movement ecology, step selection function, poisson, habitat preference
 
 # Methods
 
+## Study Area
+
+<!-- resampling of data, overview of data quantity -->
+
+## Home Range Esimation
+
+We estimated roe deer home range using autocorrelated kernel density estimators.
+This process consisted of fitting a number of continuous time movement models to an individuals movement data, selecting the best fitting movement model, and extracting a suitable range contour from the resulting utilisation distribution.
+We fit the following models (following the default process provided by the ctmm package): OU, OUF, IID etc here.
+We used AIC to determine the best fitting movement model on an individual basis, and used that single best fitting model for all further estimations.
+
+Before committing to the estimations of home range size we examined whether the roe deer exhibited stable ranges through the visual inspection of variograms.
+A stable range should be reveal by a clear asymptote in the variogram.
+We paired these visual inspections with a judgement of effective sample size to help gasuge our confident in the area estimates (DEFINTION OF ESS HERE WOULD BE GOOD).
+All our individuals showed effective sample sizes _____, leading us to be confident in overall home range estimates.
+
+[PMREL goes in here somewhere]
+
+Having determine the data suitability for home range estimations, we extracted the 95% contours from the weighted AKDE estimate, alongside 95% CI surrounding that contour.
+We selected 95% as a balance between a generous estimate of home range, while also avoiding the undue influence of the most extremely outlying movements.
+To generate an overall home range estimate for UK roe deer, we averaged all home ranges using the weighted mean function provided by the ctmm package.
+This way the home range mean is weighted by the confidence (i.e., ESS) surrounding each home range.
+
+## Habitat Selection
+
+To determine habitat selection of roe deer we focused on the Aberdeen sub-sample as those individuals were tracked for longer periods of time providing the opportunity for a stable overall population estimate. 
+We determined selection using two methods: an integrated step selection function and a poisson model (Muff et al paper CITE).
+
+Both methods require a comparison of use (i.e., GPS locations of the deer) to available points (i.e., randomly generated locations the deer could that travelled).
+For each confirmed deer location we generated __ random alternative locations they could have travelled to.
+The location of these random locations was governed by two distributions.
+A gamma distribution that random step lengths were drawn from, and a von Mises distribution that random turn directions were drawn from.
+Both distribution where calibrated (e.g., shape, size, mu, and kappa) by the underlying movement data.
+The same data was used in both modelling approaches.
+
+Once all random locations had been generated we extracted a suite of environmental conditions at all those locations.
+First was the land use type.
+[NEED SOMETHING ON RESOLUTION]
+We used the land use data provided by UKCEH (CITE AND DETAILS HERE).
+We recategoriesd the UKCEH land use categories into __ more general categories that reduced instances of limited interaction with the deer movement data thereby aiding habitat selection model convergence and avoided extreme, unstable selection estimates.
+<!-- also made the results compatible with efforts to model deer tick dymanics -->
+We also acquired woody linear feature (i.e., hedgerows) data from UKCEH (CITE AND DETAILS).
+We converted the polygon spatial data into a raster, where 1 == hedgerow, and used that rasterisation to generate a distance to hedgerow raster for the entire study landscape.
+We conducted the same process to create a distance to woodland raster, where we calculated the distance from any area the UKCEH land use data classed as deciduous or coniferous woodland.
+These distance rasters allowed for easy extraction of the distance to the nearest hedgerow and woodland for all locations.
+We acquired road data from OPEN STREET MAP (CITE HERE with DETAILS). 
+We created a binary variable describing crossing events for all steps, with all steps that crossed one or more of the roads being classed as 1.
+This binary variable allowed us to estimate the likelihood deer cross a road and therefore the level of barrier roads present.
+
+<!-- Integrated Step Selection Functions -->
+For the iSSFs we ran a single model for each individual deer.
+<!-- make sure to mention whehther it was all deer or just aberdeen deer - SURELY SHOUDL ONLY BE ABERDEEN SO WE CAN USE WESSEX AS A VALID INDEPENDENT VALIDATION SET -->
+The model formulae consisted of land use (__ category variable, with decidious woodland placed as the reference category), distance to woodland (continous in m), distance to hedgerow (continuous in m), road crossing (binary).
+In addition to these selection focused predictors, we several movement predictors including step length, turn angle, log step length, cos turn angle, as well as the interaction between step length and land use, step length and distance to woodland.
+<!-- make sure this all matches up with what is actually run -->
+<!-- Poisson Model -->
+The Poisson model was a single population level model that included all the individuals data.
+The formula was largely the same as the iSSF, except for the removal of the movement predictors and interactions, and the addition of fixed gaussian process to allow for selection effect to vary by individual. <!-- check termiloogy here  -->
+Previous work has demonstrate that the inclusions of those aid bias reduction in iSSFs but can lead to increased bias and more variable estimates when placed in the Poisson model approach.
+<!-- no movement aspects in formula, can cite Muff et al and Marshall et al (preprint), suggesting that its leads to more vairable estimates  -->
+
+## Translating Preferences into Connectivity
+
+Once we had estimates of selection and effect for all the environmental aspects of interest, we spatially mapped those estimated covariates back onto the landscape, resulting in a map of resistance.
+For the iSSF the covariates we used consisted of the median estimate for each predictor, and as some required a required a step length and turn angle, we elected to use the mean of both to generate all resistance maps.
+For both methods we ignored the uncertainty surrounding the selection estimates, instead relying on just the point estimates for the resistance mapping.
+<!-- invert logit to standardise them and flip them to movement ease -->
+
+<!-- Random Shortest Paths -->
+We used two methods to simulate potential connectivity across the landscapes.
+The first was random shortest paths, that consists of generating random walks between locations.
+This method was used to show the connectivity of areas used by RIENDEER(?), and offers a mechanism for calibrating the connectivity maps to both the habitat selection and movement path characteristics.
+<!-- CITE THE REINDEER MOVEMENT PAPER -->
+We used habitat patches as the sources of our random locations.
+Each patch had __ start and end locations generated within it, we then ran walks from these locations to all other patch locations within ____ m of that patch.
+<!-- We selected ___ m as that represented ___ of the average range longest x axis. -->
+Once every walk was complete, the resulting rasters describing the likelihood of a deer crossing a cell are complied into a single landscape raster describing connectivity.
+A key consideration in these walks is how random the paths are.
+We elected to run walks at __ levels of randomness (with 1 being close to a least cost path, and ____ being the most random and diffuse walks).
+To determine what level of randomness best reflected the realised movements of the deer, we compared the resulting connectivity maps to dynamic Brownian Bridge Movement Models.
+Dynamic Brownian Bridge Movement Models run a series of random walks between defined start and end points, from the summation of these walks you can extract a rasterised occurrence distribution.
+Critically the dBBMM walks are calibrated to the movement capacity of the animal through rolling window (i.e., a number of data points) that summarises the movement rate during that time.
+Additionally within that window, a margin (a subset of data points) is used to detect any sudden changes in movement capacity that may be reflect of behavioural/movement mode changes.
+Therefore the dBBMMs provide a estimate of how diffuse the movements could be between known locations.
+We compared the dBBMMs to the connectivity maps constructed with varying levels of randomness, and used mean squared least [EXTACT TERM HERE] to determine which level of randomness best fit the movement data.
+<!-- Circuitscape -->
+The second method we used to create connectivity maps was circuitscape.
+<!-- Explainer why circuitscape is good to use in two sentences here -->
+Circuitscape invlove treating the landscape as wired circuit with differing levels of resistance between nodes (inputs and grounds).
+In much the same way as the random shortest paths, we selected pairs of nodes (habitat patches) within ___ m to run circuitscape between.
+
+
+## Projecting to Wessex
+We elected to retain the Wessex Roe Deer data for model validation, as compared to Aberdeen the tracking was conducted for a shorter period with fewer individuals.
+We compared the known locations of deer to the connectivity maps to test their ability to predict deer movements.
+<!-- precision recall?? -->
+
 # Results
 
 # Discussion
@@ -44,6 +141,21 @@ keywords: Movement ecology, step selection function, poisson, habitat preference
 
 
 # Software availablity
+
+AKDES
+ctmm
+
+ISSF
+amt
+
+POISSON
+INLA
+
+RANDOM PATHS
+gdistance
+
+CIRCUITSCAPE
+circuitscape, juliacall
 
 # Data availabilty
 
