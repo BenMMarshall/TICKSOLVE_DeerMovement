@@ -122,14 +122,16 @@ We compared the dBBMMs to the connectivity maps constructed with varying levels 
 <!-- Circuitscape -->
 The second method we used to create connectivity maps was circuitscape.
 <!-- Explainer why circuitscape is good to use in two sentences here -->
-Circuitscape invlove treating the landscape as wired circuit with differing levels of resistance between nodes (inputs and grounds).
+Circuitscape involve treating the landscape as wired circuit with differing levels of resistance between nodes (inputs and grounds).
 In much the same way as the random shortest paths, we selected pairs of nodes (habitat patches) within ___ m to run circuitscape between.
 
 
 ## Projecting to Wessex
 We elected to retain the Wessex Roe Deer data for model validation, as compared to Aberdeen the tracking was conducted for a shorter period with fewer individuals.
 We compared the known locations of deer to the connectivity maps to test their ability to predict deer movements.
-<!-- precision recall?? -->
+<!-- precision recall?? might not be possible as no binary -->
+<!-- Root Mean Squared Error (RSME) -->
+<!-- logistic regression -->
 
 # Results
 
