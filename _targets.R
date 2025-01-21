@@ -48,7 +48,7 @@ tar_option_set(
   # to do and exits if 60 seconds pass with no tasks to run.
 
   controller = crew::crew_controller_local(workers = 3, seconds_idle = 60),
-
+  error = "continue",
   #
   format = "qs" # Optionally set the default storage format. qs is fast.
 )
@@ -63,7 +63,7 @@ selectedPatches <- selectedPatches$Patch_ID
 # RSF
 nAvailable <- 10
 typeAvialable <- "random"
-contourAvialable <- "99%"
+contourAvialable <- "95%"
 rsfFormula <- case_ ~ distanceWoodland + landuse + distanceWoodland:landuse
 # SSF
 nAvailableSteps <- 10
@@ -89,7 +89,7 @@ locationError <- 0.1
 #   repeatsPerPair = 1,
 #   patchDistance = c(1200)
 # )
-patchDistance <- 1000
+patchDistance <- 250
 connectSettings <- expand.grid(
   THETA = c(0.1, 0.001, 0.00001),
   repeatsPerPair = 1,

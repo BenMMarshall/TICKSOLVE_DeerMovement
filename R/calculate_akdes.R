@@ -12,11 +12,12 @@ calculate_akdes <- function(deerData){
   # deerData$datetime <- as.POSIXct(deerData$datetime, format = "%Y-%m-%d %H:%M:%S")
   deerData <- as.data.frame(deerData)
 
+  # best to leave in the default lat lon format, the projection argument appears
+  # to incorrectly project areas, not sure if issue here or in other processes,
+  # but default works
   teleObj <- ctmm::as.telemetry(deerData,
                                 timeformat = "%Y-%m-%d %H:%M:%S",
-                                timezone = "UTC",
-                                projection = sp::CRS(SRS_string = "EPSG:27700"))
-
+                                timezone = "UTC")
 
   print("teleObj")
 

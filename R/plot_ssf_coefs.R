@@ -15,6 +15,8 @@ plot_ssf_coefs <- function(deerData, ssfModels, REGION){
   #
   # targets::tar_source()
   # deerData <- tar_deerData
+  # ssfModels <- tar_ssf_models
+  # REGION <- "Aberdeenshire"
 
   paletteList <- load_deer_palette()
 
@@ -22,7 +24,6 @@ plot_ssf_coefs <- function(deerData, ssfModels, REGION){
     filter(region == REGION) %>%
     pull(Animal_ID) %>% unique()
 
-  # ssfModels <- tar_ssf_models
   ssfModels <- ssfModels[aberDeer]
 
   ssfCoefs <- do.call(rbind, lapply(names(ssfModels), function(x){
@@ -67,10 +68,16 @@ plot_ssf_coefs <- function(deerData, ssfModels, REGION){
            Animal_ID_colour = ifelse(sig == "Not Significant", Animal_ID_colour,
                                      glue::glue("<b>{Animal_ID_colour}</b>")))
 
-  ssfCoef_plotList <- vector("list", length = length(unique(ssfCoefs_long$term)))
-  names(ssfCoef_plotList) <- unique(ssfCoefs_long$term)
-  for(t in unique(ssfCoefs_long$term)){
-    # t <- unique(ssfCoefs_long$term)[1]
+  ssfTerms <- ssfCoefs_long %>%
+    filter(!is.na(coef)) %>%
+    group_by(term) %>%
+    count() %>%
+    filter(n > 1) %>%
+    pull(term) %>% unique()
+  ssfCoef_plotList <- vector("list", length = length(ssfTerms))
+  names(ssfCoef_plotList) <- ssfTerms
+  for(t in ssfTerms){
+    # t <- ssfTerms[1]
     ssfCoefs_curr <- ssfCoefs_long %>%
       filter(term == t) %>%
       arrange(term, coef) %>%
