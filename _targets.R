@@ -48,7 +48,7 @@ tar_option_set(
   # to do and exits if 60 seconds pass with no tasks to run.
 
   controller = crew::crew_controller_local(workers = 3, seconds_idle = 60),
-  error = "continue",
+  # error = "continue",
   #
   format = "qs" # Optionally set the default storage format. qs is fast.
 )
@@ -147,19 +147,19 @@ coreTargetList <- list(
     name = tar_overview_maps,
     command = generate_overview_maps(tar_deerData, tar_akdeLists, tar_landuseList, tar_patchList)
   ),
-  tar_target(
-    name = tar_rsf_data,
-    command = prepare_rsf_data(tar_deerData, tar_akdeLists, tar_landuseList, tar_patchList,
-                               nAvail = nAvailable, typeAvial = typeAvialable, conAvail = contourAvialable)
-  ),
-  tar_target(
-    name = tar_rsf_models,
-    command = run_rsf_models(tar_rsf_data, rsfFormula = rsfFormula)
-  ),
-  tar_target(
-    name = tar_rsf_outputs,
-    command = extract_rsf_results(tar_deerData, tar_rsf_data, tar_rsf_models, nAvail = nAvailable)
-  ),
+  # tar_target(
+  #   name = tar_rsf_data,
+  #   command = prepare_rsf_data(tar_deerData, tar_akdeLists, tar_landuseList, tar_patchList,
+  #                              nAvail = nAvailable, typeAvial = typeAvialable, conAvail = contourAvialable)
+  # ),
+  # tar_target(
+  #   name = tar_rsf_models,
+  #   command = run_rsf_models(tar_rsf_data, rsfFormula = rsfFormula)
+  # ),
+  # tar_target(
+  #   name = tar_rsf_outputs,
+  #   command = extract_rsf_results(tar_deerData, tar_rsf_data, tar_rsf_models, nAvail = nAvailable)
+  # ),
   tar_target(
     name = tar_ssf_data,
     command = prepare_ssf_data(tar_deerData, tar_landuseList, tar_patchList,
@@ -229,7 +229,7 @@ coreTargetList <- list(
                                     REGION = "Aberdeenshire",
                                     THETA = THETA)
     )
-  )#,
+  )
   # tar_target(
   #   name = tar_circuitscape_data,
   #   command = prepare_circuitscape_data(tar_predPoisResist_location, tar_patchList, REGION = "Aberdeenshire",
@@ -245,12 +245,12 @@ coreTargetList <- list(
 connectTargetList <- list(
   tar_combine(
     tar_connectSSF_list,
-    coreTargetList[[21]][grep("tar_connectSSF_location", names(coreTargetList[[21]]))],
+    coreTargetList[[18]][grep("tar_connectSSF_location", names(coreTargetList[[18]]))],
     command = list(!!!.x)
   ),
   tar_combine(
     tar_mseSSF_df,
-    coreTargetList[[21]][grep("SSF_dbbmmmse", names(coreTargetList[[21]]))],
+    coreTargetList[[18]][grep("SSF_dbbmmmse", names(coreTargetList[[18]]))],
     command = rbind(!!!.x)
   ),
   tar_target(
@@ -264,12 +264,12 @@ connectTargetList <- list(
   ),
   tar_combine(
     tar_connectPois_list,
-    coreTargetList[[22]][grep("tar_connectPois_location", names(coreTargetList[[22]]))],
+    coreTargetList[[19]][grep("tar_connectPois_location", names(coreTargetList[[19]]))],
     command = list(!!!.x)
   ),
   tar_combine(
     tar_msePois_df,
-    coreTargetList[[22]][grep("Pois_dbbmmmse", names(coreTargetList[[22]]))],
+    coreTargetList[[19]][grep("Pois_dbbmmmse", names(coreTargetList[[19]]))],
     command = rbind(!!!.x)
   ),
   tar_target(
@@ -285,9 +285,33 @@ connectTargetList <- list(
     tar_patchPois_summaryPlot,
     plot_patch_summary(tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire",
                        SELECTEDPATCHES = selectedPatches)
+  ),
+  tar_target(
+    name = tar_predPoisResist_locationWessex,
+    command = build_predResistance_layer(tar_ssf_data, tar_pois_model,
+                                         tar_landuseList, tar_patchList,
+                                         tar_deerData, REGION = "Wessex", prelimAggFact = aggFact)
+  ),
+  tar_target(
+    name = tar_connectPois_locationWessex,
+    command = build_connect_layer(tar_predPoisResist_locationWessex, tar_patchList,
+                                  REGION = "Wessex", prelimAggFact = aggFact,
+                                  seed = 2025, repeatsPerPair = NA,
+                                  patchDistance = patchDistance, MSEdf = tar_msePois_df)
+  ),
+  tar_target(
+    name = tar_validation_data,
+    command = extract_connectivity_locations(connectRasterLocations = tar_connectPois_list,
+                                             connectRasterLocationWessex = tar_connectPois_locationWessex,
+                                             deerData = tar_deerData,
+                                             MSEdf = tar_msePois_df,
+                                             deerData = tar_deerData,
+                                             nAvail = nAvailable,
+                                             conAvail = contourAvialable,
+                                             typeAvial = typeAvialable,
+                                             seed = 2025)
   )
 )
-
 
 list(coreTargetList,
      connectTargetList)

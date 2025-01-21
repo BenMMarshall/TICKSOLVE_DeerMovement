@@ -19,6 +19,22 @@ library(tidyterra)
 # deerData <- tar_deerData
 # akdeLists <- tar_akdeLists
 
+# extract_connectivity_locations <- function(
+    # connectlayersAber,
+    # connectlayersWessex,
+    # MSEdf,
+    # deerData,
+    # conAvail,
+    # nAvail,
+    # typeAvial,
+    # seed = 2025,
+# ){
+#
+# }
+
+
+set.seed(seed)
+
 conAvail <- "99%"
 nAvail <- 10
 typeAvial <- "random"

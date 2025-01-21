@@ -1,15 +1,15 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|35d3fc3ff53c4e6f|||||||||||||||
+.Random.seed|object|2645198de8ba08e2|||||||||||||||
 aggFact|object|d516855f98da7f3d|||||||||||||||
-build_connect_layer|function|dddb2ea7a3550255|||||||||||||||
+build_connect_layer|function|dcae8333f9e7287f|||||||||||||||
 build_predResistance_layer|function|6d64c8bb93ae97fc|||||||||||||||
 calculate_akdes|function|2192df08ee8ea6f9|||||||||||||||
 calculate_dbbmm_mse|function|d460657c9b004785|||||||||||||||
 calculate_dbbmms|function|7a6d7321c24e85cf|||||||||||||||
 connectSettings|object|69ca4f055229a7aa|||||||||||||||
-connectTargetList|object|256b9320873dd358|||||||||||||||
+connectTargetList|object|0c778a346a84ac2c|||||||||||||||
 contourAvialable|object|1fad89499ff2daae|||||||||||||||
-coreTargetList|object|f87ae024798c8b89|||||||||||||||
+coreTargetList|object|c28a4a22c477a57d|||||||||||||||
 extract_akde_summaries|function|4a1a2dca1bcdca05|||||||||||||||
 extract_rsf_results|function|200d4a2dba9d5e39|||||||||||||||
 generate_overview_maps|function|a64d3de9e803b42a|||||||||||||||
@@ -87,7 +87,7 @@ tar_connectPois_dbbmmmse_1e.06_1_1200|stem|fb09d34cbe26cecb|fdc4e5fda8bdf1dd|c7b
 tar_connectPois_dbbmmmse_1e.06_1200|stem|8a0b76ab2c6a93a2|3c333adea79e950a|a1fd71a791560fd7|-1396095190||t20074.5106119696s|218ce91cd4e12ad3|358|qs|local|vector|||4.656||
 tar_connectPois_list|stem|35fe32ada3f9c07e|8f06ba0c0ceb06eb|98dd988ddea1fb1d|-1753174068||t20109.5978960973s|981ec44736cc86ff|248|qs|local|vector|||0||
 tar_connectPois_location_0.001_1_1200|stem|408ef1214f034070|a96fd88864704b35|a8ac63e3a07f6355|566405602||t20074.7145182291s|dcb6f4f9bcb93dc6|186|qs|local|vector|||788.813||
-tar_connectPois_location_0.001_1_250|stem|6fbc01f0a2b1e55f|c231b133adf5e24e|fa86a8196dc15d4a|-1867434085||t20109.5956156998s|514534cdb13dcc77|156|qs|local|vector|||1800.485||
+tar_connectPois_location_0.001_1_250|stem|6fbc01f0a2b1e55f|c231b133adf5e24e|236c13b37e2d4552|-1867434085||t20109.7159435651s|514534cdb13dcc77|156|qs|local|vector|||1697.547||
 tar_connectPois_location_0.001_1_500|stem|408ef1214f034070|50741640f1f63c1e|d0474a4b2b39c79a|-202558392||t20076.619416051s|dcb6f4f9bcb93dc6|186|qs|local|vector|||522.297||
 tar_connectPois_location_0.001_1200|stem|408ef1214f034070|232353ef8d527b66|3ae7798473a2c3ac|895932157||t20074.4777504327s|dcb6f4f9bcb93dc6|186|qs|local|vector|||1122.969||
 tar_connectPois_location_0.001_300|stem|408ef1214f034070|682737137d3dce86|3ae7798473a2c3ac|-2068263410||t20074.4286253096s|dcb6f4f9bcb93dc6|186|qs|local|vector|||463.625||
@@ -96,7 +96,7 @@ tar_connectPois_location_0.01_1_1200|stem|5f2d0a152a24b114|2f69fa501618e501|a8ac
 tar_connectPois_location_0.01_1200|stem|5f2d0a152a24b114|3c2e9da54bb7c208|3ae7798473a2c3ac|815283500||t20074.4784210661s|c46a94e42a62e426|185|qs|local|vector|||1175.812||
 tar_connectPois_location_0.01_300|stem|5f2d0a152a24b114|72c83c875b38f157|3ae7798473a2c3ac|-549562396||t20074.4231981418s|c46a94e42a62e426|185|qs|local|vector|||465.062||
 tar_connectPois_location_0.1_1_1200|stem|0817db0d3e6334bf|59aa83438a83164f|a8ac63e3a07f6355|-1859926954||t20074.7058657751s|46c3705007889b1f|183|qs|local|vector|||791.203||
-tar_connectPois_location_0.1_1_250|stem|f74e8d306589594f|62ac798af9231922|fa86a8196dc15d4a|-885338246||t20109.5666784495s|069a55b7c9ffa65a|155|qs|local|vector|||1629.328||
+tar_connectPois_location_0.1_1_250|stem|f74e8d306589594f|62ac798af9231922|236c13b37e2d4552|-885338246||t20109.7155091998s|069a55b7c9ffa65a|155|qs|local|vector|||1659.985||
 tar_connectPois_location_0.1_1_500|stem|0817db0d3e6334bf|1bfa53b45cacf654|d0474a4b2b39c79a|-1016709038||t20076.6194542834s|46c3705007889b1f|183|qs|local|vector|||525.578||
 tar_connectPois_location_0.1_1200|stem|0817db0d3e6334bf|d20cf45dc6fdb3f8|3ae7798473a2c3ac|1468000365||t20074.5106615932s|46c3705007889b1f|183|qs|local|vector|||1169.547||
 tar_connectPois_location_0.1_5_1000|stem|f74e8d306589594f|4400d0e54711a3ea|d0474a4b2b39c79a|1460539394||t20093.9909366591s|069a55b7c9ffa65a|155|qs|local|vector|||22420.531||
@@ -104,13 +104,14 @@ tar_connectPois_location_1e.04_1_1200|stem|f324292e5a7bccb5|c73de3b885d33e33|a8a
 tar_connectPois_location_1e.04_1200|stem|f324292e5a7bccb5|c770e2fea276ed3d|3ae7798473a2c3ac|-847823281||t20074.4887461299s|c46a94e42a62e426|185|qs|local|vector|||1119.875||
 tar_connectPois_location_1e.04_300|stem|f324292e5a7bccb5|71bcbe0ec599e7a7|3ae7798473a2c3ac|-634521003||t20074.423694966s|c46a94e42a62e426|185|qs|local|vector|||506.859||
 tar_connectPois_location_1e.05_1_1200|stem|791dbe72c05c40c2|51c77c2955010da9|a8ac63e3a07f6355|1796943325||t20074.6975287024s|c46a94e42a62e426|185|qs|local|vector|||865.39||
-tar_connectPois_location_1e.05_1_250|stem|bb61e9f8e0f1884f|bb7bc8aec23d4f70|fa86a8196dc15d4a|1875749079||t20108.4371569099s|514534cdb13dcc77|156|qs|local|vector|||1508.656||
+tar_connectPois_location_1e.05_1_250|stem|bb61e9f8e0f1884f|bb7bc8aec23d4f70|236c13b37e2d4552|1875749079||t20109.7157220585s|514534cdb13dcc77|156|qs|local|vector|||1678.437||
 tar_connectPois_location_1e.05_1_500|stem|791dbe72c05c40c2|c17be5df653fd969|d0474a4b2b39c79a|-441543294||t20076.6194424578s|c46a94e42a62e426|185|qs|local|vector|||524.578||
 tar_connectPois_location_1e.05_1200|stem|791dbe72c05c40c2|ff1a4e87433bfa21|3ae7798473a2c3ac|-106396337||t20074.4907605588s|c46a94e42a62e426|185|qs|local|vector|||1118.813||
 tar_connectPois_location_1e.05_300|stem|791dbe72c05c40c2|376e10cad31f6a0a|3ae7798473a2c3ac|-1621449130||t20074.4288099109s|c46a94e42a62e426|185|qs|local|vector|||466.109||
 tar_connectPois_location_1e.05_5_1000|stem|bb61e9f8e0f1884f|21fbb2c40d3b9207|d0474a4b2b39c79a|-2020786836||t20093.9948130033s|514534cdb13dcc77|156|qs|local|vector|||22755.485||
 tar_connectPois_location_1e.06_1_1200|stem|2083497e948f2c4d|175a37d07f9577da|a8ac63e3a07f6355|-1164391183||t20074.6966469151s|c46a94e42a62e426|185|qs|local|vector|||790.344||
 tar_connectPois_location_1e.06_1200|stem|2083497e948f2c4d|c7fae003477f0f4a|3ae7798473a2c3ac|-1247227747||t20074.5105487832s|c46a94e42a62e426|185|qs|local|vector|||1159.766||
+tar_connectPois_locationWessex|stem|51a4bb0be137a69a|2ae855c16d010415|abd4d09901bf1d96|-2017631618||t20109.7201184931s|069a55b7c9ffa65a|155|qs|local|vector|||48.891||
 tar_connectSSF_dbbmmmse_0.001_1_1200|stem|6c2ff68b114ce5f6|439ac88a3cf1cfdf|3a8020d07787df0c|194589055||t20074.7237729611s|0d7ff1cbf08dc586|377|qs|local|vector|||4.656||
 tar_connectSSF_dbbmmmse_0.001_1_250|stem|b59bbe0eda402e0d|7cb6e9c94cd05c04|47bca42327ffb065|-1825086899||t20109.6144242912s|7a4f34d5f31c5e1b|378|qs|local|vector|||5.844||
 tar_connectSSF_dbbmmmse_0.001_1_500|stem|65cfd61a3844787d|7b73f16c9d4123b8|8a53f548920ebc18|772416692||t20076.5446554735s|0d7ff1cbf08dc586|377|qs|local|vector|||5.235||
@@ -180,11 +181,12 @@ tar_patchSSF_plot|stem|e72ac155672ac668|6edffd15faa50bef|17f23c76ea5624b6|-19514
 tar_pois_model|stem|fc90e62782d938ea|ab4be6542fa80258|8fcdce4ebf701f64|-1350650168||t20104.5668861054s|e0a7f257230c24a9|225716992|qs|local|vector|||88.656||
 tar_pois_plot|stem|f82479e880e64932|f4ec209193180b8d|78aecc1201b709dd|-1564965099||t20109.5478186493s|f647e71ec5261cfd|226205843|qs|local|vector|||0.484||
 tar_predPoisResist_location|stem|400a06cc9ecf29c9|a68f8146c46b9408|d3d8f582a0281581|-837149021||t20104.7115792244s|b6a3947d99208431|149|qs|local|vector|||23.156||
+tar_predPoisResist_locationWessex|stem|6a1330447a91b4e3|f9c0233b8021a1e1|d3d8f582a0281581|-460945527||t20109.6540064744s|b6a3947d99208431|149|qs|local|vector|||6.797||
 tar_predResist_location|stem|d0a70c1b24f7a40c|cc02fca1c8844f20|a0aff3ee36a19ad8|1594166547||t20073.6668431018s|f8c1d755d5d31832|173|qs|local|vector|||128.5||
 tar_predSSFResist_location|stem|3454326a2d30f696|4eefafe3ccbcc17a|60640e2fd056c40c|-2111250181||t20109.5491806934s|402e589872025b0a|147|qs|local|vector|||142.031||
-tar_rsf_data|stem|5444f4bddd3fb761|b8ff3dd396a75fdf|400ac252ec1abb61|-314967242||t20074.6608359851s||5286594|qs|local|vector|||0.063||object focalRegion not found
+tar_rsf_data|stem|5444f4bddd3fb761|b8ff3dd396a75fdf|400ac252ec1abb61|-314967242||t20074.6608359851s||5286594|qs|local|vector|||3.953||object focalRegion not found
 tar_rsf_models|stem|c6ecc71f79f95feb|8e856f040fb60506|a4ae6cfac77ca1d6|-1738740726||t20067.6069863946s|e38cca700da64d6e|45578797|qs|local|vector|||1.328|glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
-tar_rsf_outputs|stem|bda4b71d8ce3f562|2e7bda5096ec7c26|1074f5150616b4dd|251120470||t20094.5840604937s||85365333|qs|local|vector|||0||could not load dependency tar_rsf_data of target tar_rsf_outputs. Expecting a single string value typecharacter extent0.
+tar_rsf_outputs|stem|bda4b71d8ce3f562|2e7bda5096ec7c26|1074f5150616b4dd|251120470||t20094.5840604937s||85365333|qs|local|vector|||0.016||could not load dependency tar_rsf_data of target tar_rsf_outputs. Expecting a single string value typecharacter extent0.
 tar_ssf_data|stem|fdef9395b799b798|540d203994dec23b|09306b90dffc80ea|390394694||t20104.5229132121s|27541b877b872b04|8698003|qs|local|vector|||2334.359|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
 tar_ssf_models|stem|34def520d25fd5f1|be721ccd31e91379|ca2a42f92e979c57|-1267665248||t20104.6711494563s|dfdfd91bb0bed139|10492183|qs|local|vector|||18.063|Loglik converged before variable  8  beta may be infinite. . Loglik converged before variable  8,9  beta may be infinite. . Loglik converged before variable  4,8  beta may be infinite. . Loglik converged before variable  2  beta may be infinite. . Loglik converged before variable  2,12  beta may be infinite. . Loglik converged before variable  4,7,9,17,18,19,22  beta may be infinite. . Loglik converged before variable  4,7,9,17,18,19,22,33  beta may be infinite. . Loglik converged before variable  8,9,10,17,18,22,23,33  beta may be infinite. . Loglik converged before variable  4,9,10,17,18,19,22,23,24,28  beta may be infinite. . Loglik converged before variable  4,5,8,10,12,17,18,19,20,28,32  beta may be infinite. . Loglik converged before variable  4,5  beta may be infinite. . Loglik converged before variable  5,20  beta may be infinite. . Loglik converged before variable  5,9,10,17,18  beta may be infinite. . Loglik converged before variable  2,5,8,9,10,17,18,19,20,23,33  beta may be infinite. . Loglik converged before variable  2,4,8,9,17,26  beta may be infinite. . Loglik converged before variable  2,4,8,9  beta may be infinite.|
 tar_ssf_plots|stem|6613c0b8b5753d8c|ec74e82715547c30|2eda9ef83caf1b68|1588734551||t20109.5979297166s|6b5b8a48e82e09bb|11111111|qs|local|vector|||11.578||

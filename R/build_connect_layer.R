@@ -6,8 +6,8 @@
 #'
 #' @export
 build_connect_layer <- function(predRasterLoc, patchList, REGION, prelimAggFact = NA,
-                                seed = 2025, THETA, repeatsPerPair,
-                                patchDistance){
+                                seed = 2025, THETA = NULL, repeatsPerPair,
+                                patchDistance, MSEdf = NULL){
 
   # targets::tar_load("tar_predPoisResist_location")
   # targets::tar_load("tar_patchList")
@@ -20,8 +20,13 @@ build_connect_layer <- function(predRasterLoc, patchList, REGION, prelimAggFact 
   # repeatsPerPair = 1
   # patchDistance = 500
 
-  print(REGION)
-  print(THETA)
+  if(!is.null(MSEdf)){
+    meanMSE <- MSEdf %>%
+      group_by(theta) %>%
+      summarise(meanMSE = mean(mse))
+
+    THETA <- meanMSE[meanMSE$meanMSE == min(meanMSE$meanMSE),]$theta
+  }
 
   focalPatches <- patchList[[sub("shire", "", REGION)]]
 
