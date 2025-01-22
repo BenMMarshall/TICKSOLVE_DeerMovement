@@ -98,6 +98,8 @@ connectSettings <- expand.grid(
 
 aggFact <- 10
 
+buffers <- c(0, 50, 100, 200, 500)
+
 # Replace the target list below with your own:
 coreTargetList <- list(
   tar_target(
@@ -163,8 +165,8 @@ coreTargetList <- list(
   tar_target(
     name = tar_ssf_data,
     command = prepare_ssf_data(tar_deerData, tar_landuseList, tar_patchList,
-                                  nAvail = nAvailable, slDist = slDistribution,
-                                  taDist = taDistribution)
+                               nAvail = nAvailable, slDist = slDistribution,
+                               taDist = taDistribution)
   ),
   tar_target(
     name = tar_ssf_models,
@@ -282,8 +284,13 @@ connectTargetList <- list(
                             SELECTEDPATCHES = selectedPatches)
   ),
   tar_target(
+    tar_patch_summaryPois,
+    summarise_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire",
+                       SELECTEDPATCHES = selectedPatches, buffers = buffers)
+  ),
+  tar_target(
     tar_patchPois_summaryPlot,
-    plot_patch_summary(tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire",
+    plot_patch_summary(tar_patch_summaryPois, tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire",
                        SELECTEDPATCHES = selectedPatches)
   ),
   tar_target(
@@ -303,13 +310,21 @@ connectTargetList <- list(
     name = tar_validation_data,
     command = extract_connectivity_locations(connectRasterLocations = tar_connectPois_list,
                                              connectRasterLocationWessex = tar_connectPois_locationWessex,
+                                             akdeLists = tar_akdeLists,
                                              deerData = tar_deerData,
                                              MSEdf = tar_msePois_df,
-                                             deerData = tar_deerData,
                                              nAvail = nAvailable,
                                              conAvail = contourAvialable,
                                              typeAvial = typeAvialable,
                                              seed = 2025)
+  ),
+  tar_target(
+    name = tar_connectivityValue_plots,
+    command = plot_connectivity_distributions(tar_validation_data)
+  ),
+  tar_target(
+    name = tar_connectivityValue_models,
+    command = test_validation_data(tar_validation_data)
   )
 )
 

@@ -1,5 +1,5 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|2645198de8ba08e2|||||||||||||||
+.Random.seed|object|148bf0e9488238cd|||||||||||||||
 aggFact|object|d516855f98da7f3d|||||||||||||||
 build_connect_layer|function|dcae8333f9e7287f|||||||||||||||
 build_predResistance_layer|function|6d64c8bb93ae97fc|||||||||||||||
@@ -7,10 +7,11 @@ calculate_akdes|function|2192df08ee8ea6f9|||||||||||||||
 calculate_dbbmm_mse|function|d460657c9b004785|||||||||||||||
 calculate_dbbmms|function|7a6d7321c24e85cf|||||||||||||||
 connectSettings|object|69ca4f055229a7aa|||||||||||||||
-connectTargetList|object|0c778a346a84ac2c|||||||||||||||
+connectTargetList|object|fd253adda5a64828|||||||||||||||
 contourAvialable|object|1fad89499ff2daae|||||||||||||||
-coreTargetList|object|c28a4a22c477a57d|||||||||||||||
+coreTargetList|object|74d8be7f07256f06|||||||||||||||
 extract_akde_summaries|function|4a1a2dca1bcdca05|||||||||||||||
+extract_connectivity_locations|function|944dcaf3b05a04d9|||||||||||||||
 extract_rsf_results|function|200d4a2dba9d5e39|||||||||||||||
 generate_overview_maps|function|a64d3de9e803b42a|||||||||||||||
 generate_palettes|function|14279570f6a672fe|||||||||||||||
@@ -23,6 +24,7 @@ marginSize|object|c386c7b04396aaec|||||||||||||||
 nAvailable|object|d516855f98da7f3d|||||||||||||||
 nAvailableSteps|object|d516855f98da7f3d|||||||||||||||
 patchDistance|object|926fba0b13bbd9f6|||||||||||||||
+plot_connectivity_distributions|function|b31059772d8918d9|||||||||||||||
 plot_homeRange_sizes|function|b124ee932f0d57db|||||||||||||||
 plot_patch_connectivity|function|9fb7d206389687c3|||||||||||||||
 plot_patch_summary|function|c68ab07b34f7d4e3|||||||||||||||
@@ -192,5 +194,6 @@ tar_ssf_models|stem|34def520d25fd5f1|be721ccd31e91379|ca2a42f92e979c57|-12676652
 tar_ssf_plots|stem|6613c0b8b5753d8c|ec74e82715547c30|2eda9ef83caf1b68|1588734551||t20109.5979297166s|6b5b8a48e82e09bb|11111111|qs|local|vector|||11.578||
 tar_trackingPlots|stem|faa86ce36354bc3d|b349b384a931ff92|d5519d402cf5bde3|1086976774||t20109.5476033588s|32cd049dc3272e88|9693787|qs|local|vector|||1.937|Removed 17 rows containing nonfinite outside the scale rangestat_density_ridges.. Removed 17 rows containing nonfinite outside the scale rangestat_density_ridges.|
 tar_trackingTables|stem|9e773296228309dc|226069d56e77fd04|3a83340953dfd73b|1406021826||t20109.5475757446s|83fa9aa964c289d2|661|qs|local|vector|||4.172||
+tar_validation_data|stem|47a793f425e8ba4b|f30d1ecab7add7d7|d1dfd53f90171a48|-1003667960||t20110.4756177537s|c0c64caa71455fa1|6883732|qs|local|vector|||18.61|package tibble was built under R version 4.2.3. package dplyr was built under R version 4.2.3. package stringr was built under R version 4.2.3. package sf was built under R version 4.2.3. package ctmm was built under R version 4.2.3. package amt was built under R version 4.2.3. package move was built under R version 4.2.3. package raster was built under R version 4.2.3. package effects was built under R version 4.2.3. package gdistance was built under R version 4.2.3. package igraph was built under R version 4.2.3. package INLA was built under R version 4.2.3. package performance was built under R version 4.2.3. package ggplot2 was built under R version 4.2.3. package ggtext was built under R version 4.2.3. package ggridges was built under R version 4.2.3. package patchwork was built under R version 4.2.3. package tidyterra was built under R version 4.2.3|
 typeAvialable|object|684f65380be68543|||||||||||||||
 windowSize|object|ff9fb58342e8c485|||||||||||||||

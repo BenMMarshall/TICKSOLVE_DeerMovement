@@ -5,7 +5,7 @@
 #' @return abc
 #'
 #' @export
-plot_patch_summary <- function(MSEdf, connectRasterLocations, patchList, REGION, SELECTEDPATCHES){
+plot_patch_summary <- function(bufferSummaries, MSEdf, connectRasterLocations, patchList, REGION, SELECTEDPATCHES){
 
   # library(dplyr)
   # library(here)
@@ -46,61 +46,6 @@ plot_patch_summary <- function(MSEdf, connectRasterLocations, patchList, REGION,
   method <- str_extract(connectTerraAddr, "SSF|Pois")
 
   names(connectTerra) <- "connectivity"
-
-  buffers <- c(0, 50, 100, 200, 500)
-  patchesBufferedList <- vector("list", length(buffers))
-  names(patchesBufferedList) <- paste0("buffer_", buffers)
-  for(b in buffers){
-
-    currPatches <- st_buffer(focalPatches, b)
-
-    if(b == 0){
-      currPatches <- focalPatches
-    }
-
-    patchMeanScore <- terra::extract(connectTerra, currPatches, fun = mean,
-                                     bind = TRUE, na.rm = TRUE) %>%
-      dplyr::select(Ptch_ID, connectivity) %>%
-      mutate(buffer = b,
-             summaryMethod = "mean") %>%
-      as.data.frame()
-
-    patchMaxScore <- terra::extract(connectTerra, currPatches, fun = max,
-                                    bind = TRUE, na.rm = TRUE) %>%
-      dplyr::select(Ptch_ID, connectivity) %>%
-      mutate(buffer = b,
-             summaryMethod = "max") %>%
-      as.data.frame()
-
-    patchMedScore <- terra::extract(connectTerra, currPatches, fun = median,
-                                    bind = TRUE, na.rm = TRUE) %>%
-      dplyr::select(Ptch_ID, connectivity) %>%
-      mutate(buffer = b,
-             summaryMethod = "median") %>%
-      as.data.frame()
-
-    patchesBufferedList[[paste0("buffer_", b)]] <- patchMeanScore %>%
-      rbind(patchMaxScore) %>%
-      rbind(patchMedScore)
-
-  }
-
-  bufferSummaries <- do.call(rbind, patchesBufferedList)
-
-  patchAreas <- data.frame(Ptch_ID = focalPatches$Ptch_ID,
-                           area_ha = as.numeric(units::set_units(st_area(focalPatches), "ha")))
-
-  bufferSummaries <- bufferSummaries %>%
-    left_join(patchAreas)
-
-  selectedPatches <- read.csv(file = here("data", "GIS data", "patches", "Abdnshire", "Abdnshire", "abdn_final_patches.csv"))
-  # selectedPatches$Patch_ID
-
-  bufferSummaries <- bufferSummaries %>%
-    mutate(selected = factor(ifelse(Ptch_ID %in% selectedPatches$Patch_ID, "Selected", "Not selected"),
-                             levels = c("Not selected", "Selected")))
-
-  paletteList
 
   focalPatches <- focalPatches %>%
     mutate(selected = factor(ifelse(Ptch_ID %in% selectedPatches$Patch_ID, "Selected", "Not selected"),
