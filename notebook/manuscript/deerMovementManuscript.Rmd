@@ -37,6 +37,7 @@ keywords: Movement ecology, step selection function, poisson, habitat preference
 ## Study Area
 
 <!-- resampling of data, overview of data quantity -->
+<!-- removed first week of data -->
 
 ## Home Range Esimation
 
@@ -56,6 +57,8 @@ Having determine the data suitability for home range estimations, we extracted t
 We selected 95% as a balance between a generous estimate of home range, while also avoiding the undue influence of the most extremely outlying movements.
 To generate an overall home range estimate for UK roe deer, we averaged all home ranges using the weighted mean function provided by the ctmm package.
 This way the home range mean is weighted by the confidence (i.e., ESS) surrounding each home range.
+
+We retained 99% estimates for guiding the between patch conenctivity to maximise the repeated between patch modelling, ie connecting as many patches as would be likely for an individual roe deer in the course of their life.
 
 ## Habitat Selection
 
@@ -109,7 +112,7 @@ This method was used to show the connectivity of areas used by RIENDEER(?), and 
 <!-- CITE THE REINDEER MOVEMENT PAPER -->
 We used habitat patches as the sources of our random locations.
 Each patch had __ start and end locations generated within it, we then ran walks from these locations to all other patch locations within ____ m of that patch.
-<!-- We selected ___ m as that represented ___ of the average range longest x axis. -->
+We selected ___ m as that represented the mean longest axis of the 99% HR estimate of the deer (excluding outlying non-contiguous portions of the area polygons).
 Once every walk was complete, the resulting rasters describing the likelihood of a deer crossing a cell are complied into a single landscape raster describing connectivity.
 A key consideration in these walks is how random the paths are.
 We elected to run walks at __ levels of randomness (with 1 being close to a least cost path, and ____ being the most random and diffuse walks).

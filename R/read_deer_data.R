@@ -70,6 +70,15 @@ read_deer_data <- function(){
   deerTrackList <- vector("list", length = length(unique(sfDeer$Animal_ID)))
   names(deerTrackList) <- unique(sfDeer$Animal_ID)
   for(id in unique(sfDeer$Animal_ID)){
+    # id <- unique(sfDeer$Animal_ID)[1]
+
+    sfDeer %>%
+      filter(Animal_ID == id,
+             !datetime == min(datetime)) %>%
+      mutate(cumulativeLag = cumsum(timelag)) %>%
+      filter(cumulativeLag >= 7*24*60*60)
+      # select(datetime, cumulativeLag)
+
     # id <- "Roe14_M"
     # id <- "Fallow02_F"
     deerTrack <- make_track(sfDeer %>%

@@ -42,9 +42,9 @@ plot_connectivity_distributions <- function(validData){
   densityOfConnectivityAber <- validDataPlottable %>%
     filter(region == "Aberdeenshire") %>%
     ggplot() +
-    geom_density_ridges(aes(x = connectivityNorm, y = areaCol,
+    geom_density_ridges(aes(x = connectivity, y = areaCol,
                             fill = areaCol), colour = NA) +
-    stat_summary(aes(x = connectivityNorm, y = areaCol, colour = areaCol),
+    stat_summary(aes(x = connectivity, y = areaCol, colour = areaCol),
                  shape = "|",
                  size = 0.25,
                  position = position_nudge(y = -0.05),

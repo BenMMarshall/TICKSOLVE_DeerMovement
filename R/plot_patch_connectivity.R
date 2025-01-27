@@ -5,7 +5,7 @@
 #' @return abc
 #'
 #' @export
-plot_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, REGION, SELECTEDPATCHES){
+plot_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, REGION){
 
   # targets::tar_load("tar_connectSSF_list")
   # targets::tar_load("tar_msePois_df")
@@ -17,6 +17,8 @@ plot_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, RE
   # connectTerra <- terra::rast(tar_connectSSF_list[[1]])
   # targets::tar_source()
   # REGION <- "Aberdeenshire"
+
+  SELECTEDPATCHES <- patchList$AberdeenSelected$Ptch_ID
 
   paletteList <- load_deer_palette()
 

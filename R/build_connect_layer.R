@@ -5,9 +5,8 @@
 #' @return abc
 #'
 #' @export
-build_connect_layer <- function(predRasterLoc, patchList, REGION, prelimAggFact = NA,
-                                seed = 2025, THETA = NULL, repeatsPerPair,
-                                patchDistance, MSEdf = NULL){
+build_connect_layer <- function(predRasterLoc, patchList, akdeSummary, REGION, prelimAggFact = NA,
+                                seed = 2025, THETA = NULL, repeatsPerPair, MSEdf = NULL){
 
   # targets::tar_load("tar_predPoisResist_location")
   # targets::tar_load("tar_patchList")
@@ -19,6 +18,8 @@ build_connect_layer <- function(predRasterLoc, patchList, REGION, prelimAggFact 
   # THETA = 0.01
   # repeatsPerPair = 1
   # patchDistance = 500
+
+  patchDistance <- mean(as.numeric(akdeSummary$longestAxisSummary$longestAxisRange_m))
 
   if(!is.null(MSEdf)){
     meanMSE <- MSEdf %>%

@@ -5,7 +5,7 @@
 #' @return abc
 #'
 #' @export
-plot_patch_summary <- function(bufferSummaries, MSEdf, connectRasterLocations, patchList, REGION, SELECTEDPATCHES){
+plot_patch_summary <- function(bufferSummaries, MSEdf, connectRasterLocations, patchList, REGION){
 
   # library(dplyr)
   # library(here)
@@ -25,6 +25,8 @@ plot_patch_summary <- function(bufferSummaries, MSEdf, connectRasterLocations, p
   # connectTerra <- terra::rast(tar_connectSSF_list[[1]])
   # targets::tar_source()
   # REGION <- "Aberdeenshire"
+
+  SELECTEDPATCHES <- patchList$AberdeenSelected$Ptch_ID
 
   paletteList <- load_deer_palette()
 
@@ -48,7 +50,7 @@ plot_patch_summary <- function(bufferSummaries, MSEdf, connectRasterLocations, p
   names(connectTerra) <- "connectivity"
 
   focalPatches <- focalPatches %>%
-    mutate(selected = factor(ifelse(Ptch_ID %in% selectedPatches$Patch_ID, "Selected", "Not selected"),
+    mutate(selected = factor(ifelse(Ptch_ID %in% SELECTEDPATCHES, "Selected", "Not selected"),
                              levels = c("Not selected", "Selected")))
 
   (patchSummaryPlot <- bufferSummaries %>%

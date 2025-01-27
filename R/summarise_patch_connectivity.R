@@ -5,7 +5,7 @@
 #' @return abc
 #'
 #' @export
-summarise_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, REGION, SELECTEDPATCHES,
+summarise_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, REGION,
                                          buffers){
 
   # library(dplyr)
@@ -26,6 +26,8 @@ summarise_patch_connectivity <- function(MSEdf, connectRasterLocations, patchLis
   # connectTerra <- terra::rast(tar_connectSSF_list[[1]])
   # targets::tar_source()
   # REGION <- "Aberdeenshire"
+
+  SELECTEDPATCHES <- patchList$AberdeenSelected$Ptch_ID
 
   paletteList <- load_deer_palette()
 
@@ -87,18 +89,19 @@ summarise_patch_connectivity <- function(MSEdf, connectRasterLocations, patchLis
 
   bufferSummaries <- do.call(rbind, patchesBufferedList)
 
-  patchAreas <- data.frame(Ptch_ID = focalPatches$Ptch_ID,
-                           area_ha = as.numeric(units::set_units(st_area(focalPatches), "ha")))
+  # st_crs(patchList$AberdeenSelected) <- st_crs(27700)
+
+  patchAreas <- data.frame(Ptch_ID = as.character(patchList$AberdeenSelected$Ptch_ID),
+                           area_ha = as.numeric(units::set_units(st_area(patchList$AberdeenSelected), "ha")))
 
   bufferSummaries <- bufferSummaries %>%
+    left_join(patchList$AberdeenSelected %>%
+                st_drop_geometry() %>%
+                mutate(Ptch_ID = as.character(Ptch_ID))) %>%
     left_join(patchAreas)
 
-  selectedPatches <- read.csv(file = here("data", "GIS data",
-                                          "patches", "Abdnshire", "Abdnshire", "abdn_final_patches.csv"))
-  # selectedPatches$Patch_ID
-
   bufferSummaries <- bufferSummaries %>%
-    mutate(selected = factor(ifelse(Ptch_ID %in% selectedPatches$Patch_ID, "Selected", "Not selected"),
+    mutate(selected = factor(ifelse(Ptch_ID %in% as.character(patchList$AberdeenSelected$Ptch_ID), "Selected", "Not selected"),
                              levels = c("Not selected", "Selected")))
 
   return(bufferSummaries)

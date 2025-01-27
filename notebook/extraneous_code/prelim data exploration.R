@@ -114,7 +114,7 @@ deerData %>%
 # Patches -----------------------------------------------------------------
 
 # aberdeenPatches <- read_sf(here("data", "GIS data", "patches",
-#                             "shapefiles", "all_patches_abdn.shp"))
+#                             "Abdnshire", "Abdnshire", "Abdn_final_patches.shp"))
 #
 # aberdeenPatches %>%
 #   ggplot() +
@@ -127,13 +127,21 @@ deerData %>%
 #   ggplot() +
 #   geom_sf(aes(fill = ar_km_s))
 #
+# wessexPatches <- wessexPatches %>%
+#   filter(!duplicated(Ptch_ID)) %>%
+#   mutate(id = row_number()) %>%
+#   select(Ptch_ID, id)
+#
+# aberdeenPatches <- aberdeenPatches %>%
+#   rename(Ptch_ID = lyr.1)
+#
 # st_write(wessexPatches, here("data", "GIS data", "patchesWessex.geoJSON"),
 #          driver = "geoJSON", append = FALSE)
 # st_write(aberdeenPatches, here("data", "GIS data", "patchesAberdeen.geoJSON"),
 #          driver = "geoJSON", append = FALSE)
-
-patchesWessex <- read_sf(here("data", "GIS data", "patchesWessex.geoJSON"))
-patchesAberdeen <- read_sf(here("data", "GIS data", "patchesAberdeen.geoJSON"))
+#
+# patchesWessex <- read_sf(here("data", "GIS data", "patchesWessex.geoJSON"))
+# patchesAberdeen <- read_sf(here("data", "GIS data", "patchesAberdeen.geoJSON"))
 
 st_crs(patchesWessex)
 
