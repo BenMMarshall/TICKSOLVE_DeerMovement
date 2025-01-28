@@ -95,7 +95,7 @@ connectSettings <- expand.grid(
   repeatsPerPair = 1
 )
 
-aggFact <- 10
+aggFact <- 20
 
 buffers <- c(0, 50, 100, 200, 500)
 
@@ -106,12 +106,12 @@ coreTargetList <- list(
     command = read_deer_data()
   ),
   tar_target(
-    name = tar_landuseList,
-    command = read_landuse_data(tar_deerData, prelimAggFact = aggFact)
-  ),
-  tar_target(
     name = tar_patchList,
     command = read_patches_data()
+  ),
+  tar_target(
+    name = tar_landuseList,
+    command = read_landuse_data(tar_deerData, tar_patchList, prelimAggFact = aggFact)
   ),
   tar_target(
     name = tar_trackingTables,
@@ -205,10 +205,16 @@ coreTargetList <- list(
                                     seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair)
     ),
     tar_target(
+      name = tar_connectStanSSF_location,
+      command = standardise_connect_layer(tar_connectSSF_location,
+                                          REGION = "Aberdeenshire",
+                                          THETA = THETA)
+    ),
+    tar_target(
       name = tar_connectSSF_dbbmmmse,
       command = calculate_dbbmm_mse(tar_deerData,
                                     tar_dbbmmList,
-                                    tar_connectSSF_location,
+                                    tar_connectStanSSF_location,
                                     REGION = "Aberdeenshire",
                                     THETA = THETA)
     )
@@ -223,10 +229,16 @@ coreTargetList <- list(
                                     seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair)
     ),
     tar_target(
+      name = tar_connectStanPois_location,
+      command = standardise_connect_layer(tar_connectPois_location,
+                                          REGION = "Aberdeenshire",
+                                          THETA = THETA)
+    ),
+    tar_target(
       name = tar_connectPois_dbbmmmse,
       command = calculate_dbbmm_mse(tar_deerData,
                                     tar_dbbmmList,
-                                    tar_connectPois_location,
+                                    tar_connectStanPois_location,
                                     REGION = "Aberdeenshire",
                                     THETA = THETA)
     )
@@ -246,7 +258,7 @@ coreTargetList <- list(
 connectTargetList <- list(
   tar_combine(
     tar_connectSSF_list,
-    coreTargetList[[18]][grep("tar_connectSSF_location", names(coreTargetList[[18]]))],
+    coreTargetList[[18]][grep("tar_connectStanSSF_location", names(coreTargetList[[18]]))],
     command = list(!!!.x)
   ),
   tar_combine(
@@ -264,7 +276,7 @@ connectTargetList <- list(
   ),
   tar_combine(
     tar_connectPois_list,
-    coreTargetList[[19]][grep("tar_connectPois_location", names(coreTargetList[[19]]))],
+    coreTargetList[[19]][grep("tar_connectStanPois_location", names(coreTargetList[[19]]))],
     command = list(!!!.x)
   ),
   tar_combine(
@@ -316,12 +328,12 @@ connectTargetList <- list(
                                              seed = 2025)
   ),
   tar_target(
-    name = tar_connectivityValue_plots,
-    command = plot_connectivity_distributions(tar_validation_data)
-  ),
-  tar_target(
     name = tar_connectivityValue_models,
     command = test_validation_data(tar_validation_data)
+  ),
+  tar_target(
+    name = tar_connectivityValue_plots,
+    command = plot_connectivity_distributions(tar_validation_data, tar_connectivityValue_models)
   )
 )
 

@@ -5,7 +5,7 @@
 #' @return A list of Aberdeen and Wessex land data.
 #'
 #' @export
-read_landuse_data <- function(deerData, prelimAggFact){
+read_landuse_data <- function(deerData, patchList, prelimAggFact){
 
   # targets::tar_load("tar_deerData")
   # deerData <- tar_deerData
@@ -21,10 +21,8 @@ read_landuse_data <- function(deerData, prelimAggFact){
                                        "UKCEH_Landcover2023_ab",
                                        "data", "LCM.tif"))
 
-  landuseAberdeen <- terra::crop(landRastAberdeen, st_bbox(sfDeer %>%
-                                                   filter(region == "Aberdeenshire")) +
-                         c(-2000, -2000, 2000, 2000)
-  )
+  landuseAberdeen <- terra::crop(landRastAberdeen, st_bbox(patchList$Aberdeen)) #+
+                         #c(-2000, -2000, 2000, 2000)
 
   landuseAberdeen <- landuseAberdeen %>%
     mutate(LCM_1_cat = paste0("LCM_", LCM_1))
@@ -34,8 +32,7 @@ read_landuse_data <- function(deerData, prelimAggFact){
   roadsAberdeen_NJ <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_NJ.gml"),
                               layer = "RoadLink")
   roadsAberdeen <- rbind(roadsAberdeen_NO, roadsAberdeen_NJ)
-  roadsAberdeenCrop <- sf::st_crop(roadsAberdeen, st_bbox(sfDeer %>%
-                                                            filter(region == "Aberdeenshire")))
+  roadsAberdeenCrop <- sf::st_crop(roadsAberdeen, st_bbox(patchList$AberdeenSelected))
   roadsAberdeenCrop <- roadsAberdeenCrop %>%
     mutate(roadSize = case_when(
       roadFunction == "A Road" ~ "A roads",

@@ -4,6 +4,7 @@ library(here)
 library(sf)
 library(dplyr)
 
+# remotes::install_github("BAAQMD/geotools")
 aberdeenPatches <- read_sf(here("data", "GIS data", "patches",
                                 "shapefiles", "all_patches_abdn.shp"))
 aberdeenPatchesSelected <- read_sf(here("data", "GIS data", "patches",

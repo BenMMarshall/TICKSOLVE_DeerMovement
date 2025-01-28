@@ -5,17 +5,20 @@
 #' @return abc
 #'
 #' @export
-plot_connectivity_distributions <- function(validData){
+plot_connectivity_distributions <- function(validData, connectivityValue_models){
 
   # library(here)
   # library(dplyr)
   # library(ggplot2)
   # library(ggridges)
   # library(ggtext)
+  # library(lme4)
   #
   # targets::tar_load("tar_validation_data")
   # targets::tar_source()
   # validData <- tar_validation_data
+  # targets::tar_load("tar_connectivityValue_models")
+  # connectivityValue_models <- tar_connectivityValue_models
 
   paletteList <- load_deer_palette()
 
@@ -39,11 +42,24 @@ plot_connectivity_distributions <- function(validData){
 
   names(areaPal) <- levels(validDataPlottable$areaCol)
 
+  connectEffectAber <- lme4::fixef(connectivityValue_models$glmFitAber)[2]
+  connectEffectAber_p <- summary(connectivityValue_models$glmFitAber)$coefficients[2,4]
+
+  modelLabelAber <- data.frame(id = "Roe_01_F",
+                               areaCol = "<i style='color:#505050'>Landscape</i>",
+                               connectivity = Inf,
+                               label = paste0("Connectivity effect on use:unused = ", round(connectEffectAber, digits = 2),
+                                              "<i><br>(plogis = ", round(plogis(connectEffectAber)*100, digits = 2), "%; p-value = ",
+                                              round(connectEffectAber_p, digits = 3), ")</i>"))
+
   densityOfConnectivityAber <- validDataPlottable %>%
     filter(region == "Aberdeenshire") %>%
     ggplot() +
     geom_density_ridges(aes(x = connectivity, y = areaCol,
                             fill = areaCol), colour = NA) +
+    # geom_richtext(data = modelLabelAber,
+    #           aes(x = connectivity, y = areaCol, label = label),
+    #           hjust = 1, vjust = 1, size = 2) +
     stat_summary(aes(x = connectivity, y = areaCol, colour = areaCol),
                  shape = "|",
                  size = 0.25,
@@ -56,11 +72,13 @@ plot_connectivity_distributions <- function(validData){
     scale_colour_manual(values = areaPal) +
     scale_fill_manual(values = areaPal) +
     facet_grid(rows = vars(id), switch = "y") +
-    labs(y = "Density by metric and individual", x = "Connectivity") +
+    labs(y = "Density by metric and individual", x = "Connectivity",
+         caption = modelLabelAber$label) +
     theme_bw() +
     theme(
       text = element_text(colour = "grey25"),
       line = element_line(colour = "grey25"),
+      plot.caption = element_markdown(),
       axis.title = element_text(face = 2),
       axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 1),
       axis.text = element_markdown(),
@@ -76,6 +94,16 @@ plot_connectivity_distributions <- function(validData){
          width = 230, height = 210, units = "mm", dpi = 300)
   ggsave(densityOfConnectivityAber, filename = here("figures", "densityOfConnectivity_Aberdeen.pdf"),
          width = 230, height = 210, units = "mm")
+
+  connectEffectWess <- lme4::fixef(connectivityValue_models$glmFitWess)[2]
+  connectEffectWess_p <- summary(connectivityValue_models$glmFitWess)$coefficients[2,4]
+
+  modelLabelWess <- data.frame(id = "Roe_01_F",
+                               areaCol = "<i style='color:#505050'>Landscape</i>",
+                               connectivity = Inf,
+                               label = paste0("Connectivity effect on use:unused = ", round(connectEffectWess, digits = 2),
+                                              "<i><br>(plogis = ", round(plogis(connectEffectWess)*100, digits = 2), "%; p-value = ",
+                                              round(connectEffectWess_p, digits = 3), ")</i>"))
 
   densityOfConnectivityWess <- validDataPlottable %>%
     filter(region == "Wessex") %>%
@@ -94,11 +122,13 @@ plot_connectivity_distributions <- function(validData){
     scale_colour_manual(values = areaPal) +
     scale_fill_manual(values = areaPal) +
     facet_grid(rows = vars(id), switch = "y") +
-    labs(y = "Density by metric and individual", x = "Connectivity") +
+    labs(y = "Density by metric and individual", x = "Connectivity",
+         caption = modelLabelWess$label) +
     theme_bw() +
     theme(
       text = element_text(colour = "grey25"),
       line = element_line(colour = "grey25"),
+      plot.caption = element_markdown(),
       axis.title = element_text(face = 2),
       axis.text.x = element_text(angle = 0, hjust = 0.5, vjust = 1),
       axis.text = element_markdown(),

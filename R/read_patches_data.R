@@ -9,7 +9,7 @@ read_patches_data <- function(){
 
   patchesWessex <- read_sf(here("data", "GIS data", "patchesWessex.geoJSON"))
   patchesAberdeen <- read_sf(here("data", "GIS data", "patchesAberdeen.geoJSON"))
-  selectedPatchesAberdeen <- read_sf(here("data", "GIS data", "patchesAberdeen_sampled.geoJSON"))
+  selectedPatchesAberdeen <- read_sf(here("data", "GIS data", "patchesAberdeen_selected.geoJSON"))
 
   metricsAberdeen <- read.csv(here("data", "GIS data", "aberdeen_site_metrics.csv"))
 
