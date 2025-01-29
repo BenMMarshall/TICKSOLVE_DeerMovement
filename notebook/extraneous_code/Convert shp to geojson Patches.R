@@ -6,7 +6,7 @@ library(dplyr)
 
 # remotes::install_github("BAAQMD/geotools")
 aberdeenPatches <- read_sf(here("data", "GIS data", "patches",
-                                "shapefiles", "all_patches_abdn.shp"))
+                                "patchesAberdeen_2025-01-29", "Aberdeenshire_all_patches_polygon.shp"))
 aberdeenPatchesSelected <- read_sf(here("data", "GIS data", "patches",
                                         "Abdnshire", "Abdnshire", "Abdn_final_patches.shp"))
 
@@ -27,6 +27,7 @@ wessexPatches <- wessexPatches %>%
   select(Ptch_ID, id)
 
 aberdeenPatches <- aberdeenPatches %>%
+  rename(Ptch_ID = lyr.1) %>%
   filter(!duplicated(Ptch_ID)) %>%
   mutate(id = row_number()) %>%
   select(Ptch_ID, id)

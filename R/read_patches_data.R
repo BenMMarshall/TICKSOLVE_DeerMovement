@@ -17,6 +17,23 @@ read_patches_data <- function(){
     left_join(metricsAberdeen %>%
                 rename(Ptch_ID = patch.id))
 
+  # min(st_area(selectedPatchesAberdeen))
+  # areaPatches <- st_area(patchesAberdeen)
+  # areaPatches <- units::set_units(areaPatches, "m^2")
+  # patchesAberdeen <- patchesAberdeen %>%
+  #   mutate(area_m = as.numeric(areaPatches))
+  # patchesAberdeen %>%
+  #   filter(area_m > 170000) %>% dim()
+  # # units::set_units(units::set_units(65, "ha"), "m^2")
+  # patchesAberdeen %>%
+  #   ggplot() +
+  #   geom_sf(aes(), fill = "grey50") +
+  #   geom_sf(data = selectedPatchesAberdeen, aes(fill = as.factor(Ptch_ID))) +
+  #   geom_sf(data = patchesAberdeen %>%
+  #             filter(area_m > 170000), aes(), fill = NA,
+  #           colour = "red") +
+  #   theme_bw()
+
   # patchList <- list("Aberdeen" = patchesAberdeen,
   #                   "Wessex" = patchesWessex)
 

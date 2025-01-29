@@ -112,6 +112,7 @@ This method was used to show the connectivity of areas used by RIENDEER(?), and 
 <!-- CITE THE REINDEER MOVEMENT PAPER -->
 We used habitat patches as the sources of our random locations.
 Each patch had __ start and end locations generated within it, we then ran walks from these locations to all other patch locations within ____ m of that patch.
+<!-- excluded patches smaller than the smallest selected patch area -->
 We selected ___ m as that represented the mean longest axis of the 99% HR estimate of the deer (excluding outlying non-contiguous portions of the area polygons).
 Once every walk was complete, the resulting rasters describing the likelihood of a deer crossing a cell are complied into a single landscape raster describing connectivity.
 A key consideration in these walks is how random the paths are.

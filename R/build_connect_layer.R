@@ -6,7 +6,8 @@
 #'
 #' @export
 build_connect_layer <- function(predRasterLoc, patchList, akdeSummary, REGION, prelimAggFact = NA,
-                                seed = 2025, THETA = NULL, repeatsPerPair, MSEdf = NULL){
+                                seed = 2025, THETA = NULL, repeatsPerPair, MSEdf = NULL,
+                                MINPATCHSIZE){
 
   # targets::tar_load("tar_predPoisResist_location")
   # targets::tar_load("tar_patchList")
@@ -30,6 +31,9 @@ build_connect_layer <- function(predRasterLoc, patchList, akdeSummary, REGION, p
   }
 
   focalPatches <- patchList[[sub("shire", "", REGION)]]
+
+  focalPatches <- focalPatches %>%
+    filter(area_m > MINPATCHSIZE)
 
   predictionTerra <- raster::raster(predRasterLoc)
 

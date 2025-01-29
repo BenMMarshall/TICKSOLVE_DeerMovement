@@ -15,23 +15,24 @@ standardise_connect_layer <- function(connectRasterLoc,
   # connectTerraPois_Aberdeen_theta_1e-04
   connectTerra <- terra::rast(connectRasterLoc)
   names(connectTerra) <- "connectivity"
-
-  bestNormResults <- bestNormalize(
-    x = values(connectTerra),
-    standardize = TRUE,
-    allow_exp = TRUE,
-    # allow_orderNorm = FALSE,
-    # out_of_sample = FALSE,
-    k = 10,
-    r = 5,
-  )
-
-  saveRDS(bestNormResults, here("data", "modelOutput",
-                                paste0("bestNormResults_", REGION, "_theta_", THETA, ".rds")))
-
   standardise_01 <- function(x){(x-min(x))/(max(x)-min(x))}
 
-  values(connectTerra) <- standardise_01(bestNormResults$x.t)
+  # bestNormResults <- bestNormalize(
+  #   x = values(connectTerra),
+  #   standardize = TRUE,
+  #   allow_exp = TRUE,
+  #   # allow_orderNorm = FALSE,
+  #   # out_of_sample = FALSE,
+  #   k = 10,
+  #   r = 5,
+  # )
+  #
+  # saveRDS(bestNormResults, here("data", "modelOutput",
+  #                               paste0("bestNormResults_", REGION, "_theta_", THETA, ".rds")))
+  #
+  # values(connectTerra) <- standardise_01(bestNormResults$x.t)
+
+  values(connectTerra) <- standardise_01(values(connectTerra))
 
   connectRasterStanLoc <- here("data", "GIS data",
                            paste0("connectTerraStandard", str_extract(connectRasterLoc, pattern = "SSF|Pois"),

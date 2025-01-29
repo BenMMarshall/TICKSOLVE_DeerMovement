@@ -96,6 +96,8 @@ connectSettings <- expand.grid(
 )
 
 aggFact <- 20
+## derivied from the selected Aberdeen patch data
+minPatchSize_m2 <- 170000
 
 buffers <- c(0, 50, 100, 200, 500)
 
@@ -202,7 +204,8 @@ coreTargetList <- list(
       command = build_connect_layer(tar_predSSFResist_location, tar_patchList,
                                     tar_akdeSummary,
                                     REGION = "Aberdeenshire", prelimAggFact = aggFact,
-                                    seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair)
+                                    seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair,
+                                    MINPATCHSIZE = minPatchSize_m2)
     ),
     tar_target(
       name = tar_connectStanSSF_location,
@@ -226,7 +229,8 @@ coreTargetList <- list(
       command = build_connect_layer(tar_predPoisResist_location, tar_patchList,
                                     tar_akdeSummary,
                                     REGION = "Aberdeenshire", prelimAggFact = aggFact,
-                                    seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair)
+                                    seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair,
+                                    MINPATCHSIZE = minPatchSize_m2)
     ),
     tar_target(
       name = tar_connectStanPois_location,
