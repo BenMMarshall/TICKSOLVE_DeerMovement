@@ -35,6 +35,7 @@ aberdeenPatches <- aberdeenPatches %>%
 aberdeenPatchesSelected <- aberdeenPatchesSelected %>%
   rename(Ptch_ID = lyr.1)
 
+st_crs(aberdeenPatches) <- st_crs(27700)
 st_crs(aberdeenPatchesSelected) <- st_crs(27700)
 
 st_write(wessexPatches, here("data", "GIS data", "patchesWessex.geoJSON"),

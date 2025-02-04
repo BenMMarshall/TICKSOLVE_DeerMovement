@@ -97,9 +97,9 @@ connectSettings <- expand.grid(
 
 aggFact <- 20
 ## derivied from the selected Aberdeen patch data
-minPatchSize_m2 <- 170000
+minPatchSize_m2 <- 100000
 
-buffers <- c(0, 50, 100, 200, 500)
+buffers <- c(0, 100, 200, 500, 750)
 
 # Replace the target list below with your own:
 coreTargetList <- list(
@@ -123,10 +123,6 @@ coreTargetList <- list(
     name = tar_trackingPlots,
     command = generate_tracking_plots(tar_deerData)
   ),
-  # tar_target(
-  #   name = tar_studyMaps,
-  #   command = generate_study_maps(tar_deerData, tar_patchList, tar_landuseList)
-  # )
   tar_target(
     name = tar_akdeLists,
     command = calculate_akdes(tar_deerData)
@@ -134,6 +130,10 @@ coreTargetList <- list(
   tar_target(
     name = tar_akdeSummary,
     command = extract_akde_summaries(tar_deerData, tar_akdeLists)
+  ),
+  tar_target(
+    name = tar_distancePatch_plot,
+    command = plot_distance_to_patch(tar_deerData, tar_patchList, tar_akdeSummary)
   ),
   tar_target(
     name = tar_dbbmmList,
@@ -262,12 +262,12 @@ coreTargetList <- list(
 connectTargetList <- list(
   tar_combine(
     tar_connectSSF_list,
-    coreTargetList[[18]][grep("tar_connectStanSSF_location", names(coreTargetList[[18]]))],
+    coreTargetList[[19]][grep("tar_connectStanSSF_location", names(coreTargetList[[19]]))],
     command = list(!!!.x)
   ),
   tar_combine(
     tar_mseSSF_df,
-    coreTargetList[[18]][grep("SSF_dbbmmmse", names(coreTargetList[[18]]))],
+    coreTargetList[[19]][grep("SSF_dbbmmmse", names(coreTargetList[[19]]))],
     command = rbind(!!!.x)
   ),
   tar_target(
@@ -280,12 +280,12 @@ connectTargetList <- list(
   ),
   tar_combine(
     tar_connectPois_list,
-    coreTargetList[[19]][grep("tar_connectStanPois_location", names(coreTargetList[[19]]))],
+    coreTargetList[[20]][grep("tar_connectStanPois_location", names(coreTargetList[[20]]))],
     command = list(!!!.x)
   ),
   tar_combine(
     tar_msePois_df,
-    coreTargetList[[19]][grep("Pois_dbbmmmse", names(coreTargetList[[19]]))],
+    coreTargetList[[20]][grep("Pois_dbbmmmse", names(coreTargetList[[20]]))],
     command = rbind(!!!.x)
   ),
   tar_target(

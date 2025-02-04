@@ -9,6 +9,8 @@ read_landuse_data <- function(deerData, patchList, prelimAggFact){
 
   # targets::tar_load("tar_deerData")
   # deerData <- tar_deerData
+  # targets::tar_load("tar_patchList")
+  # patchList <- tar_patchList
 
   sfDeer <- st_as_sf(deerData, coords = c("x","y"),
                      crs = 27700)
@@ -43,6 +45,16 @@ read_landuse_data <- function(deerData, patchList, prelimAggFact){
     )) %>%
     mutate(roadSize = factor(roadSize,
                              levels = c("A roads", "B roads", "C roads", "Other")))
+
+  # roadsAberdeenRast <- terra::rast(landuseAberdeen)
+  # roadsAberdeenRast <- terra::rasterize(st_buffer(roadsAberdeenCrop, prelimAggFact+2), roadsAberdeenRast,
+  #                                        fun = "max", background = NA, touches = TRUE) %>%
+  #   terra::distance() %>%
+  #   rename(distanceRoads = layer)
+  # writeRaster(roadsAberdeenRast,
+  #             filename = here("data", "GIS data", "tempExtras", "roadsAberdeenRast.tif"), overwrite = TRUE)
+  # st_write(roadsAberdeenCrop, here("data", "GIS data", "tempExtras", "roadsAberdeen.geoJSON"),
+  #          driver = "geoJSON", append = FALSE)
 
   distanceWoodlandAberdeen <- landuseAberdeen %>%
     select(LCM_1) %>%

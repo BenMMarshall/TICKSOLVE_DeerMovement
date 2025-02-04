@@ -34,44 +34,46 @@ read_patches_data <- function(){
   #           colour = "red") +
   #   theme_bw()
 
-  # patchList <- list("Aberdeen" = patchesAberdeen,
-  #                   "Wessex" = patchesWessex)
+  patchList_temp <- list("Aberdeen" = patchesAberdeen,
+                    "Wessex" = patchesWessex)
 
-  # for(pt in names(patchList)){
-  #   # pt <- names(patchList)[1]
-  #   patches <- patchList[[pt]]
-  #
-  #   extent_m <- ext(patches)
-  #   # will result in a grid that has a 1 m x 1 m res
-  #   xRes <- abs(extent_m[1] - extent_m[2])
-  #   yRes <- abs(extent_m[3] - extent_m[4])
-  #
-  #   ggplot() +
-  #     geom_sf(data = patches, aes(), fill = "grey25")
-  #
-  #   template <- rast(vect(patches), nrows = yRes, ncols = xRes)
-  #
-  #   print("Binary Raster...")
-  #   binaryRaster <- rasterize(vect(patches),
-  #                             template)
-  #
-  #
-  #   print("Distance Raster...")
-  #   distanceRaster <- terra::distance(binaryRaster)
-  #
-  #   assign(paste0("distance", pt), here("data", "GIS data", paste0("distance", pt, ".tif")))
-  #
-  #   writeRaster(distanceRaster, filename = here("data", "GIS data", paste0("distance", pt, ".tif")),
-  #               overwrite = TRUE,  gdal = c("COMPRESS=LZW"))
-  #
-  #
-  # }
+  for(pt in names(patchList_temp)){
+    # pt <- names(patchList)[1]
+    patches <- patchList_temp[[pt]]
+
+    if(str_detect(pt, "Selected")){
+      {next}
+    }
+
+    extent_m <- ext(patches)
+    # will result in a grid that has a 1 m x 1 m res
+    xRes <- abs(extent_m[1] - extent_m[2])
+    yRes <- abs(extent_m[3] - extent_m[4])
+
+    # ggplot() +
+    #   geom_sf(data = patches, aes(), fill = "grey25")
+    # 10m res
+    template <- rast(vect(patches), nrows = yRes/10, ncols = xRes/10)
+
+    print("Binary Raster...")
+    binaryRaster <- rasterize(vect(patches),
+                              template)
+
+    print("Distance Raster...")
+    distanceRaster <- terra::distance(binaryRaster)
+
+    assign(paste0("distancePatch", pt), here("data", "GIS data", paste0("distancePatch", pt, ".tif")))
+
+    writeRaster(distanceRaster, filename = here("data", "GIS data", paste0("distancePatch", pt, ".tif")),
+                overwrite = TRUE,  gdal = c("COMPRESS=LZW"))
+
+  }
 
   patchList <- list("Aberdeen" = patchesAberdeen,
                     "Wessex" = patchesWessex,
-                    "AberdeenSelected" = selectedPatchesAberdeen
-                    # "distanceAberdeen" = distanceAberdeen,
-                    # "distanceWessex" = distanceWessex
+                    "AberdeenSelected" = selectedPatchesAberdeen,
+                    "distancePatchAberdeen" = distancePatchAberdeen,
+                    "distancePatchWessex" = distancePatchWessex
                     )
 
   return(patchList)

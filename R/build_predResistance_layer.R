@@ -65,8 +65,8 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
     ssfCoefs$term <- gsub("[[:digit:]]+$", "", row.names(ssfCoefs))
 
     naiveMeanSsfCoefs <- ssfCoefs %>%
-      # remove deer for other region
-      filter(Animal_ID %in% focalDeerIDs) %>%
+      # can remove deer for other region
+      # filter(Animal_ID %in% focalDeerIDs) %>%
       group_by(term) %>%
       summarise(meanEffect = median(coef, na.rm = TRUE))
 

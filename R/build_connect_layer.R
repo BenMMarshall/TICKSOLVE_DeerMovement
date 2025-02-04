@@ -20,7 +20,7 @@ build_connect_layer <- function(predRasterLoc, patchList, akdeSummary, REGION, p
   # repeatsPerPair = 1
   # patchDistance = 500
 
-  patchDistance <- mean(as.numeric(akdeSummary$longestAxisSummary$longestAxisRange_m))
+  patchDistance <- mean(as.numeric(akdeSummary$longestAxisSummary$longestAxisRange_m))/2
 
   if(!is.null(MSEdf)){
     meanMSE <- MSEdf %>%
@@ -33,6 +33,7 @@ build_connect_layer <- function(predRasterLoc, patchList, akdeSummary, REGION, p
   focalPatches <- patchList[[sub("shire", "", REGION)]]
 
   focalPatches <- focalPatches %>%
+    mutate(area_m = as.numeric(st_area(.))) %>%
     filter(area_m > MINPATCHSIZE)
 
   predictionTerra <- raster::raster(predRasterLoc)

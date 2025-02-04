@@ -15,6 +15,10 @@ prepare_ssf_data <- function(deerData, landuseList, patchList,
   # landuseList <- tar_landuseList
   # # patchList <- tar_patchList
 
+  # only run models in Roe deer
+  deerData <- deerData %>%
+    filter(!str_detect(Animal_ID, "Fallow"))
+
   ssfDataList <- vector("list", length = length(unique(deerData$Animal_ID)))
   names(ssfDataList) <- unique(deerData$Animal_ID)
   for(id in unique(deerData$Animal_ID)){
