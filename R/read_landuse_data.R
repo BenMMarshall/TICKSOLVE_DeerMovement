@@ -20,7 +20,7 @@ read_landuse_data <- function(deerData, patchList, prelimAggFact){
 # ABERDEEN ----------------------------------------------------------------
 
   landRastAberdeen <- terra::rast(here("data", "GIS data", "UKCEH_Landcover",
-                                       "UKCEH_Landcover2023_ab",
+                                       "UKCEH_Landcover2023_ab_25res",
                                        "data", "LCM.tif"))
 
   landuseAberdeen <- terra::crop(landRastAberdeen, st_bbox(patchList$Aberdeen)) #+
@@ -100,7 +100,7 @@ read_landuse_data <- function(deerData, patchList, prelimAggFact){
 # WESSEX ------------------------------------------------------------------
 
   landRastWessex <- terra::rast(here("data", "GIS data", "UKCEH_Landcover",
-                                        "UKCEH_Landcover2023_nf",
+                                        "UKCEH_Landcover2023_nf_25res",
                                         "data", "LCM.tif"))
 
   landuseWessex <- terra::crop(landRastWessex, st_bbox(sfDeer %>%

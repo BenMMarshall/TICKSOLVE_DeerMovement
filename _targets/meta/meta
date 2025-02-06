@@ -1,16 +1,16 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|9ed2db41a9eaadb1|||||||||||||||
+.Random.seed|object|c420a0502d3c8be1|||||||||||||||
 aggFact|object|6347f0df4a6e5234|||||||||||||||
 buffers|object|53de5747bf520065|||||||||||||||
 build_connect_layer|function|7dc4cfc7adbcf4fe|||||||||||||||
-build_predResistance_layer|function|fb32f490e6b763ff|||||||||||||||
+build_predResistance_layer|function|06b5b0216e8f427a|||||||||||||||
 calculate_akdes|function|2192df08ee8ea6f9|||||||||||||||
 calculate_dbbmm_mse|function|d460657c9b004785|||||||||||||||
 calculate_dbbmms|function|7a6d7321c24e85cf|||||||||||||||
 connectSettings|object|4653282ee81bacfc|||||||||||||||
-connectTargetList|object|9c4152438d830a74|||||||||||||||
+connectTargetList|object|04b734505d4764ad|||||||||||||||
 contourAvialable|object|1fad89499ff2daae|||||||||||||||
-coreTargetList|object|3365790ebb0b2521|||||||||||||||
+coreTargetList|object|41d33cf821ca27b4|||||||||||||||
 extract_akde_summaries|function|744ec9b901f9846d|||||||||||||||
 extract_connectivity_locations|function|944dcaf3b05a04d9|||||||||||||||
 extract_rsf_results|function|200d4a2dba9d5e39|||||||||||||||
@@ -22,7 +22,7 @@ load_deer_palette|function|f1143426f7e122cf|||||||||||||||
 locationError|object|ff81af095a75741e|||||||||||||||
 map_connectivity_thetas|function|6087148c3973d514|||||||||||||||
 marginSize|object|c386c7b04396aaec|||||||||||||||
-minPatchSize_m2|object|186a9761fbdfa992|||||||||||||||
+minPatchSize_m2|object|4453d6f14899f422|||||||||||||||
 nAvailable|object|d516855f98da7f3d|||||||||||||||
 nAvailableSteps|object|d516855f98da7f3d|||||||||||||||
 patchDistance|object|926fba0b13bbd9f6|||||||||||||||
@@ -33,6 +33,7 @@ plot_patch_connectivity|function|f7755dd5765590ba|||||||||||||||
 plot_patch_summary|function|dd3c9394bd8faf08|||||||||||||||
 plot_pois_coefs|function|cfec6b0e59683d07|||||||||||||||
 plot_ssf_coefs|function|1c375e42af7b7f97|||||||||||||||
+poisFormula|object|7430658a3b1ae991|||||||||||||||
 prepare_circuitscape_data|function|fdd57871e3953e99|||||||||||||||
 prepare_rsf_data|function|a7467f485f4157b2|||||||||||||||
 prepare_ssf_data|function|6bbca1a5dd434c0d|||||||||||||||
@@ -41,7 +42,7 @@ read_landuse_data|function|cb01c05851e8c0c8|||||||||||||||
 read_patches_data|function|e6bd9a4411fca257|||||||||||||||
 rsfFormula|object|e44fdcd993ebd2fb|||||||||||||||
 run_julia_circuitscape|function|b930d6e805026e1b|||||||||||||||
-run_pois_model|function|a34eeffe8fa04b48|||||||||||||||
+run_pois_model|function|897b4b0a0db81d94|||||||||||||||
 run_rsf_models|function|03740d01fc112cd2|||||||||||||||
 run_ssf_models|function|b1730a1356bead17|||||||||||||||
 selectedPatches|object|d18965f2badcd28d|||||||||||||||
@@ -98,7 +99,7 @@ tar_connectPois_dbbmmmse_1e.05_5_1000|stem|2c6b619aebb507e3|c7af0b297ef85d88|e27
 tar_connectPois_dbbmmmse_1e.06_1_1200|stem|fb09d34cbe26cecb|fdc4e5fda8bdf1dd|c7bbbd7c5ae755bc|1399086964||t20074.6967080377s|42efc20a5d07f525|384|qs|local|vector|||4.765||
 tar_connectPois_dbbmmmse_1e.06_1200|stem|8a0b76ab2c6a93a2|3c333adea79e950a|a1fd71a791560fd7|-1396095190||t20074.5106119696s|218ce91cd4e12ad3|358|qs|local|vector|||4.656||
 tar_connectPois_list|stem|a564bb7cf7f7a482|e7f1196e07efcfb2|22e96d0d3ac1607b|-1753174068||t20122.827298891s|926fba0b13bbd9f6|250|qs|local|vector|||0||
-tar_connectPois_location_0.001_1|stem|6fbc01f0a2b1e55f|0ec627806252ac24|01edb69eba525ec2|-58013933||t20122.7568485314s|514534cdb13dcc77|156|qs|local|vector|||5551.578||
+tar_connectPois_location_0.001_1|stem|6fbc01f0a2b1e55f|0ec627806252ac24|2bf2ec6505b19887|-58013933||t20122.7568485314s||156|qs|local|vector|||0||could not load dependency tar_predPoisResist_location of target tar_connectPois_location_0.001_1. Expecting a single string value typecharacter extent0.
 tar_connectPois_location_0.001_1_1200|stem|408ef1214f034070|a96fd88864704b35|a8ac63e3a07f6355|566405602||t20074.7145182291s|dcb6f4f9bcb93dc6|186|qs|local|vector|||788.813||
 tar_connectPois_location_0.001_1_250|stem|6fbc01f0a2b1e55f|c231b133adf5e24e|236c13b37e2d4552|-1867434085||t20109.7159435651s|514534cdb13dcc77|156|qs|local|vector|||1697.547||
 tar_connectPois_location_0.001_1_500|stem|408ef1214f034070|50741640f1f63c1e|d0474a4b2b39c79a|-202558392||t20076.619416051s|dcb6f4f9bcb93dc6|186|qs|local|vector|||522.297||
@@ -108,7 +109,7 @@ tar_connectPois_location_0.001_5_1000|stem|6fbc01f0a2b1e55f|1114780867b08155|d04
 tar_connectPois_location_0.01_1_1200|stem|5f2d0a152a24b114|2f69fa501618e501|a8ac63e3a07f6355|559729913||t20074.7053299748s|c46a94e42a62e426|185|qs|local|vector|||787.829||
 tar_connectPois_location_0.01_1200|stem|5f2d0a152a24b114|3c2e9da54bb7c208|3ae7798473a2c3ac|815283500||t20074.4784210661s|c46a94e42a62e426|185|qs|local|vector|||1175.812||
 tar_connectPois_location_0.01_300|stem|5f2d0a152a24b114|72c83c875b38f157|3ae7798473a2c3ac|-549562396||t20074.4231981418s|c46a94e42a62e426|185|qs|local|vector|||465.062||
-tar_connectPois_location_0.1_1|stem|f74e8d306589594f|d79e90c4bba47b61|01edb69eba525ec2|-2057012902||t20122.7553587725s|069a55b7c9ffa65a|155|qs|local|vector|||5422.907||
+tar_connectPois_location_0.1_1|stem|f74e8d306589594f|d79e90c4bba47b61|2bf2ec6505b19887|-2057012902||t20122.7553587725s||155|qs|local|vector|||0||could not load dependency tar_predPoisResist_location of target tar_connectPois_location_0.1_1. Expecting a single string value typecharacter extent0.
 tar_connectPois_location_0.1_1_1200|stem|0817db0d3e6334bf|59aa83438a83164f|a8ac63e3a07f6355|-1859926954||t20074.7058657751s|46c3705007889b1f|183|qs|local|vector|||791.203||
 tar_connectPois_location_0.1_1_250|stem|f74e8d306589594f|62ac798af9231922|236c13b37e2d4552|-885338246||t20109.7155091998s|069a55b7c9ffa65a|155|qs|local|vector|||1659.985||
 tar_connectPois_location_0.1_1_500|stem|0817db0d3e6334bf|1bfa53b45cacf654|d0474a4b2b39c79a|-1016709038||t20076.6194542834s|46c3705007889b1f|183|qs|local|vector|||525.578||
@@ -117,7 +118,7 @@ tar_connectPois_location_0.1_5_1000|stem|f74e8d306589594f|4400d0e54711a3ea|d0474
 tar_connectPois_location_1e.04_1_1200|stem|f324292e5a7bccb5|c73de3b885d33e33|a8ac63e3a07f6355|-811405505||t20074.707513411s|c46a94e42a62e426|185|qs|local|vector|||856.86||
 tar_connectPois_location_1e.04_1200|stem|f324292e5a7bccb5|c770e2fea276ed3d|3ae7798473a2c3ac|-847823281||t20074.4887461299s|c46a94e42a62e426|185|qs|local|vector|||1119.875||
 tar_connectPois_location_1e.04_300|stem|f324292e5a7bccb5|71bcbe0ec599e7a7|3ae7798473a2c3ac|-634521003||t20074.423694966s|c46a94e42a62e426|185|qs|local|vector|||506.859||
-tar_connectPois_location_1e.05_1|stem|bb61e9f8e0f1884f|9ffa82bc63082564|01edb69eba525ec2|128096955||t20122.8272962751s|514534cdb13dcc77|156|qs|local|vector|||6079.86||
+tar_connectPois_location_1e.05_1|stem|bb61e9f8e0f1884f|9ffa82bc63082564|2bf2ec6505b19887|128096955||t20122.8272962751s||156|qs|local|vector|||0.016||could not load dependency tar_predPoisResist_location of target tar_connectPois_location_1e.05_1. Expecting a single string value typecharacter extent0.
 tar_connectPois_location_1e.05_1_1200|stem|791dbe72c05c40c2|51c77c2955010da9|a8ac63e3a07f6355|1796943325||t20074.6975287024s|c46a94e42a62e426|185|qs|local|vector|||865.39||
 tar_connectPois_location_1e.05_1_250|stem|bb61e9f8e0f1884f|bb7bc8aec23d4f70|236c13b37e2d4552|1875749079||t20109.7157220585s|514534cdb13dcc77|156|qs|local|vector|||1678.437||
 tar_connectPois_location_1e.05_1_500|stem|791dbe72c05c40c2|c17be5df653fd969|d0474a4b2b39c79a|-441543294||t20076.6194424578s|c46a94e42a62e426|185|qs|local|vector|||524.578||
@@ -207,9 +208,9 @@ tar_patchList|stem|4af4a6b0e8e78eb6|6bdc42673a040198|400da4f9f0542fd8|-205399411
 tar_patchPois_plot|stem|91b32dce2e48e8fe|db5b434b3ee2cd59|b4d76ad5f707fc77|-155401431||t20122.8275380875s|3ac7ebf08a019c1c|7458369|qs|local|vector|||12.688||
 tar_patchPois_summaryPlot|stem|2c1c8472800e5d43|41557460ce3e4eb1|696d31b950daca99|535454467||t20109.5982313157s||3067597|qs|local|vector|||0.016||could not load dependency tar_patch_summaryPois of target tar_patchPois_summaryPlot. Expecting a single string value typecharacter extent0.
 tar_patchSSF_plot|stem|e72ac155672ac668|50ee65c5ed47eeac|a863f8b7eb0c35a8|-1951447803||t20109.6144988084s||3187855|qs|local|vector|||0.109||no method or default for coercing NULL to SpatRaster
-tar_pois_model|stem|8d7804e632dabc21|ab4be6542fa80258|26329747ab2cb537|-1350650168||t20122.6776405895s|081c2dded2de1505|220850579|qs|local|vector|||84.141||
+tar_pois_model|stem|ddd3b51f05959a91|ab4be6542fa80258|a0a8d90f9cfed79c|-1350650168||t20125.5872101761s|d29a4640ecf7449b|260970802|qs|local|vector|||221.266||
 tar_pois_plot|stem|1f9dc47a5b424a43|f4ec209193180b8d|23f962dc3598eec4|-1564965099||t20122.678117186s|07615692b091997b|221372045|qs|local|vector|||0.484||
-tar_predPoisResist_location|stem|400a06cc9ecf29c9|a68f8146c46b9408|18adfbc3e98940d8|-837149021||t20122.6784740748s|b6a3947d99208431|149|qs|local|vector|||66.437||
+tar_predPoisResist_location|stem|400a06cc9ecf29c9|a68f8146c46b9408|e14ea0079d058c63|-837149021||t20125.5878830947s|b6a3947d99208431|149|qs|local|vector|||51.156||
 tar_predPoisResist_locationWessex|stem|6a1330447a91b4e3|f9c0233b8021a1e1|18adfbc3e98940d8|-460945527||t20122.6778619746s|b6a3947d99208431|149|qs|local|vector|||6.656||
 tar_predResist_location|stem|d0a70c1b24f7a40c|cc02fca1c8844f20|a0aff3ee36a19ad8|1594166547||t20073.6668431018s|f8c1d755d5d31832|173|qs|local|vector|||128.5||
 tar_predSSFResist_location|stem|3454326a2d30f696|4eefafe3ccbcc17a|e4af385af1f9d7f9|-2111250181||t20122.6813340544s|402e589872025b0a|147|qs|local|vector|||385.328||
@@ -225,3 +226,55 @@ tar_validation_data|stem|477c48a10988e4eb|f30d1ecab7add7d7|4f4f141fee07832c|-100
 test_validation_data|function|7deacb89460f47c2|||||||||||||||
 typeAvialable|object|684f65380be68543|||||||||||||||
 windowSize|object|ff9fb58342e8c485|||||||||||||||
+generate_tracking_table|function|3914ce43cf2850f6
+load_deer_palette|function|f1143426f7e122cf
+test_validation_data|function|7deacb89460f47c2
+build_connect_layer|function|7dc4cfc7adbcf4fe
+extract_connectivity_locations|function|944dcaf3b05a04d9
+calculate_dbbmm_mse|function|d460657c9b004785
+slDistribution|object|378daf6acce8eba7
+run_pois_model|function|897b4b0a0db81d94
+aggFact|object|6347f0df4a6e5234
+standardise_connect_layer|function|85f8fe8cc1272490
+generate_palettes|function|14279570f6a672fe
+.Random.seed|object|2a2b149da7c6caec
+read_landuse_data|function|cb01c05851e8c0c8
+marginSize|object|c386c7b04396aaec
+taDistribution|object|1716da92e4275cdd
+build_predResistance_layer|function|06b5b0216e8f427a
+calculate_dbbmms|function|7a6d7321c24e85cf
+extract_akde_summaries|function|744ec9b901f9846d
+nAvailableSteps|object|d516855f98da7f3d
+coreTargetList|object|41d33cf821ca27b4
+typeAvialable|object|684f65380be68543
+ssfFormula|object|ce61344dcb0e3a2a
+prepare_rsf_data|function|a7467f485f4157b2
+locationError|object|ff81af095a75741e
+extract_rsf_results|function|200d4a2dba9d5e39
+run_ssf_models|function|b1730a1356bead17
+prepare_ssf_data|function|6bbca1a5dd434c0d
+rsfFormula|object|e44fdcd993ebd2fb
+run_julia_circuitscape|function|b930d6e805026e1b
+buffers|object|53de5747bf520065
+connectTargetList|object|04b734505d4764ad
+contourAvialable|object|1fad89499ff2daae
+prepare_circuitscape_data|function|fdd57871e3953e99
+windowSize|object|ff9fb58342e8c485
+read_patches_data|function|e6bd9a4411fca257
+calculate_akdes|function|2192df08ee8ea6f9
+nAvailable|object|d516855f98da7f3d
+read_deer_data|function|51d0f06bc0c39b5d
+minPatchSize_m2|object|4453d6f14899f422
+run_rsf_models|function|03740d01fc112cd2
+connectSettings|object|4653282ee81bacfc
+plot_homeRange_sizes|function|b124ee932f0d57db
+summarise_patch_connectivity|function|92afa5aaa82d916d
+plot_patch_connectivity|function|f7755dd5765590ba
+map_connectivity_thetas|function|6087148c3973d514
+plot_connectivity_distributions|function|0aab6b43e204be3e
+plot_pois_coefs|function|cfec6b0e59683d07
+plot_patch_summary|function|dd3c9394bd8faf08
+generate_tracking_plots|function|ab5f74a24c745970
+plot_ssf_coefs|function|1c375e42af7b7f97
+plot_distance_to_patch|function|6990492cd62dc778
+generate_overview_maps|function|a64d3de9e803b42a

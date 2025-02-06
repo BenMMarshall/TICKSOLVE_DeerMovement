@@ -9,16 +9,23 @@ build_connect_layer <- function(predRasterLoc, patchList, akdeSummary, REGION, p
                                 seed = 2025, THETA = NULL, repeatsPerPair, MSEdf = NULL,
                                 MINPATCHSIZE){
 
+  # library(here)
+  # library(dplyr)
+  # library(sf)
+  # library(terra)
   # targets::tar_load("tar_predPoisResist_location")
   # targets::tar_load("tar_patchList")
   # predRasterLoc <- tar_predPoisResist_location
-  # focalPatches <- tar_patchList
+  # patchList <- tar_patchList
   # REGION = "Aberdeenshire"
-  # prelimAggFact = 20
+  # prelimAggFact = NA
+  # prelimAggFact = 10
   # seed = 2025
   # THETA = 0.01
   # repeatsPerPair = 1
-  # patchDistance = 500
+  # patchDistance = 750
+  # MINPATCHSIZE <- 10000
+  # MINPATCHSIZE <- 5000
 
   patchDistance <- mean(as.numeric(akdeSummary$longestAxisSummary$longestAxisRange_m))/2
 
@@ -47,6 +54,7 @@ build_connect_layer <- function(predRasterLoc, patchList, akdeSummary, REGION, p
   transitionLayer <- gdistance::transition(predictionTerra, transitionFunction = min, directions = 8) # conductance between pixels = 1/friction map
   # tr #class TransitionLayer
   # plot(raster(tr))
+  rm(predictionTerra)
 
   transitionLayer <- gdistance::geoCorrection(transitionLayer, multpl = FALSE, scl = TRUE)
 
@@ -81,7 +89,8 @@ build_connect_layer <- function(predRasterLoc, patchList, akdeSummary, REGION, p
   pas <- NULL
   set.seed(0)
   sttim <- Sys.time()
-  for (i in c(1:nPatchesClose)){
+  # for (i in c(1:nPatchesClose)){
+  for (i in c(1:5)){
     # i <- 4
     print(paste(i, "/", nPatchesClose))
     # pt_win <- sample(rndpts$id, size=1, prob = (rndpts$val_win)) #draw random points (random pairs)

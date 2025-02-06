@@ -6,7 +6,7 @@
 #'
 #' @export
 build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patchList, deerData, REGION,
-                                       prelimAggFact){
+                                       prelimAggFact, inlaFormula = NULL){
 
   # library(here)
   # library(dplyr)
@@ -85,7 +85,9 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
 
   # get the mean step and turn for focal deer, again region specific
   meanSL_ <- mean(unlist(lapply(ssfData[names(ssfData) %in% focalDeerIDs], function(x) x$steps$sl_)))
+  meanlog_SL_ <- mean(log(unlist(lapply(ssfData[names(ssfData) %in% focalDeerIDs], function(x) x$steps$sl_))))
   meanTA_ <- mean(unlist(lapply(ssfData[names(ssfData) %in% focalDeerIDs], function(x) x$steps$ta_)))
+  meancosTA_ <- mean(cos(unlist(lapply(ssfData[names(ssfData) %in% focalDeerIDs], function(x) x$steps$ta_))))
 
   # plot(terra::rasterize(focalRoads, focalRoadsTerra, fun = "mean"))
   ########################################################################################################################
@@ -126,7 +128,9 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
   dataMatrix <- na.omit(dataMatrix)
   dataMatrix$step_id_ <- 4
   dataMatrix$sl_ <- meanSL_
+  dataMatrix$log_sl <- meanlog_SL_
   dataMatrix$ta_ <- meanTA_
+  dataMatrix$cos_ta <- meancosTA_
 
   dataMatrix <- dataMatrix %>%
     mutate(landuse = as.character(case_when(
@@ -170,7 +174,14 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
     names(landuseWide) <- landuseNames
     modelMatriX <- cbind(dataMatrix, landuseWide)
 
-    modelMatriX_trim <- modelMatriX[,colnames(modelMatriX) %in% names(poisCoef[!is.na(poisCoef)])]
+    textForm <- gsub("\n", "", as.character(ssfPoismodel$.args$formula)[3])
+    textForm <- str_remove(textForm, " \\+ f\\((.*?$)")
+    textForm <- paste0("~ ", textForm)
+
+    modelMatriX_trim <- model.matrix(as.formula(textForm),
+                                     data = modelMatriX)
+
+    # modelMatriX_trim <- modelMatriX[,colnames(modelMatriX_trim) %in% names(poisCoef[!is.na(poisCoef)])]
     modelMatriX_trim <- as.matrix(modelMatriX_trim)
     coef_trim <- poisCoef[names(poisCoef) %in% colnames(modelMatriX_trim)]
 

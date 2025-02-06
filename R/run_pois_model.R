@@ -14,6 +14,87 @@ run_pois_model <- function(ssfDataList){
   # library(INLA)
   # ssfDataList <- tar_ssf_data
 
+  inlaFormula <- y ~ -1 +
+    distanceWoodland +
+    distanceHedges +
+    # Deciduous.Broadleaf.Forest +
+    Evergreen.Needleleaf.Forest +
+    Cropland +
+    Tall.Grassland +
+    Short.Grassland +
+    Open.Shrubland +
+    Permanent.Wetland +
+    Human.Settlements +
+    # Other +
+    roadCrossings +
+    # step and turn
+    sl_ +
+    log_sl +
+    cos_ta +
+    # step interactions
+    sl_:Evergreen.Needleleaf.Forest +
+    sl_:Cropland +
+    sl_:Tall.Grassland +
+    sl_:Short.Grassland +
+    sl_:Open.Shrubland +
+    sl_:Permanent.Wetland +
+    sl_:Human.Settlements +
+    # log step interactions
+    log_sl:Evergreen.Needleleaf.Forest +
+    log_sl:Cropland +
+    log_sl:Tall.Grassland +
+    log_sl:Short.Grassland +
+    log_sl:Open.Shrubland +
+    log_sl:Permanent.Wetland +
+    log_sl:Human.Settlements +
+    # random effects
+    f(step_id, model="iid", hyper = list(theta = list(initial = log(1e-6), fixed = TRUE))) +
+    f(id1, distanceWoodland, values = 1:length(unique(poisModelData$id)), model="iid",
+      hyper = list(theta = list(initial = log(1), fixed = FALSE,
+                                prior = "pc.prec", param = c(3, 0.05)))) +
+    f(id2, distanceHedges, values = 1:length(unique(poisModelData$id)), model="iid",
+      hyper = list(theta = list(initial = log(1), fixed = FALSE,
+                                prior = "pc.prec", param = c(3, 0.05)))) +
+    # f(id3, Deciduous.Broadleaf.Forest, values = 1:length(unique(poisModelData$id)), model="iid",
+    #   hyper = list(theta = list(initial = log(1), fixed = FALSE,
+    #                             prior = "pc.prec", param = c(3, 0.05)))) +
+    f(id4, Evergreen.Needleleaf.Forest, values = 1:length(unique(poisModelData$id)), model="iid",
+      hyper = list(theta = list(initial = log(1), fixed = FALSE,
+                                prior = "pc.prec", param = c(3, 0.05)))) +
+    f(id5, Cropland, values = 1:length(unique(poisModelData$id)), model="iid",
+      hyper = list(theta = list(initial = log(1), fixed = FALSE,
+                                prior = "pc.prec", param = c(3, 0.05)))) +
+    f(id6, Tall.Grassland, values = 1:length(unique(poisModelData$id)), model="iid",
+      hyper = list(theta = list(initial = log(1), fixed = FALSE,
+                                prior = "pc.prec", param = c(3, 0.05)))) +
+    f(id7, Short.Grassland, values = 1:length(unique(poisModelData$id)), model="iid",
+      hyper = list(theta = list(initial = log(1), fixed = FALSE,
+                                prior = "pc.prec", param = c(3, 0.05)))) +
+    f(id8, Open.Shrubland, values = 1:length(unique(poisModelData$id)), model="iid",
+      hyper = list(theta = list(initial = log(1), fixed = FALSE,
+                                prior = "pc.prec", param = c(3, 0.05)))) +
+    f(id9, Permanent.Wetland, values = 1:length(unique(poisModelData$id)), model="iid",
+      hyper = list(theta = list(initial = log(1), fixed = FALSE,
+                                prior = "pc.prec", param = c(3, 0.05)))) +
+    f(id10, Human.Settlements, values = 1:length(unique(poisModelData$id)), model="iid",
+      hyper = list(theta = list(initial = log(1), fixed = FALSE,
+                                prior = "pc.prec", param = c(3, 0.05)))) +
+    # f(id11, Other, values = 1:length(unique(poisModelData$id)), model="iid",
+    #   hyper = list(theta = list(initial = log(1), fixed = FALSE,
+    #                             prior = "pc.prec", param = c(3, 0.05)))) +
+    f(id12, roadCrossings, values = 1:length(unique(poisModelData$id)), model="iid",
+      hyper = list(theta = list(initial = log(1), fixed = FALSE,
+                                prior = "pc.prec", param = c(3, 0.05)))) +
+    f(id13, sl_, values = 1:length(unique(poisModelData$id)), model="iid",
+      hyper = list(theta = list(initial = log(1), fixed = FALSE,
+                                prior = "pc.prec", param = c(3, 0.05)))) +
+    f(id14, log_sl, values = 1:length(unique(poisModelData$id)), model="iid",
+      hyper = list(theta = list(initial = log(1), fixed = FALSE,
+                                prior = "pc.prec", param = c(3, 0.05)))) +
+    f(id15, cos_ta, values = 1:length(unique(poisModelData$id)), model="iid",
+      hyper = list(theta = list(initial = log(1), fixed = FALSE,
+                                prior = "pc.prec", param = c(3, 0.05))))
+
   ssfData <- do.call(rbind, lapply(ssfDataList, function(x){x$steps}))
 
   poisModelData <- ssfData %>%
@@ -61,57 +142,9 @@ run_pois_model <- function(ssfDataList){
   poisModelData$id10 <- poisModelData$id
   poisModelData$id11 <- poisModelData$id
   poisModelData$id12 <- poisModelData$id
-
-  inlaFormula <- y ~ -1 +
-    distanceWoodland +
-    distanceHedges +
-    # Deciduous.Broadleaf.Forest +
-    Evergreen.Needleleaf.Forest +
-    Cropland +
-    Tall.Grassland +
-    Short.Grassland +
-    Open.Shrubland +
-    Permanent.Wetland +
-    Human.Settlements +
-    # Other +
-    roadCrossings +
-    f(step_id, model="iid", hyper = list(theta = list(initial = log(1e-6), fixed = TRUE))) +
-    f(id1, distanceWoodland, values = 1:length(unique(poisModelData$id)), model="iid",
-      hyper = list(theta = list(initial = log(1), fixed = FALSE,
-                                prior = "pc.prec", param = c(3, 0.05)))) +
-    f(id2, distanceHedges, values = 1:length(unique(poisModelData$id)), model="iid",
-      hyper = list(theta = list(initial = log(1), fixed = FALSE,
-                                prior = "pc.prec", param = c(3, 0.05)))) +
-    # f(id3, Deciduous.Broadleaf.Forest, values = 1:length(unique(poisModelData$id)), model="iid",
-    #   hyper = list(theta = list(initial = log(1), fixed = FALSE,
-    #                             prior = "pc.prec", param = c(3, 0.05)))) +
-    f(id4, Evergreen.Needleleaf.Forest, values = 1:length(unique(poisModelData$id)), model="iid",
-      hyper = list(theta = list(initial = log(1), fixed = FALSE,
-                                prior = "pc.prec", param = c(3, 0.05)))) +
-    f(id5, Cropland, values = 1:length(unique(poisModelData$id)), model="iid",
-      hyper = list(theta = list(initial = log(1), fixed = FALSE,
-                                prior = "pc.prec", param = c(3, 0.05)))) +
-    f(id6, Tall.Grassland, values = 1:length(unique(poisModelData$id)), model="iid",
-      hyper = list(theta = list(initial = log(1), fixed = FALSE,
-                                prior = "pc.prec", param = c(3, 0.05)))) +
-    f(id7, Short.Grassland, values = 1:length(unique(poisModelData$id)), model="iid",
-      hyper = list(theta = list(initial = log(1), fixed = FALSE,
-                                prior = "pc.prec", param = c(3, 0.05)))) +
-    f(id8, Open.Shrubland, values = 1:length(unique(poisModelData$id)), model="iid",
-      hyper = list(theta = list(initial = log(1), fixed = FALSE,
-                                prior = "pc.prec", param = c(3, 0.05)))) +
-    f(id9, Permanent.Wetland, values = 1:length(unique(poisModelData$id)), model="iid",
-      hyper = list(theta = list(initial = log(1), fixed = FALSE,
-                                prior = "pc.prec", param = c(3, 0.05)))) +
-    f(id10, Human.Settlements, values = 1:length(unique(poisModelData$id)), model="iid",
-      hyper = list(theta = list(initial = log(1), fixed = FALSE,
-                                prior = "pc.prec", param = c(3, 0.05)))) +
-    # f(id11, Other, values = 1:length(unique(poisModelData$id)), model="iid",
-    #   hyper = list(theta = list(initial = log(1), fixed = FALSE,
-    #                             prior = "pc.prec", param = c(3, 0.05)))) +
-    f(id12, roadCrossings, values = 1:length(unique(poisModelData$id)), model="iid",
-      hyper = list(theta = list(initial = log(1), fixed = FALSE,
-                                prior = "pc.prec", param = c(3, 0.05))))
+  poisModelData$id13 <- poisModelData$id
+  poisModelData$id14 <- poisModelData$id
+  poisModelData$id15 <- poisModelData$id
 
   # natural model
   inlaOUT <- inla(inlaFormula,

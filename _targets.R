@@ -48,7 +48,7 @@ tar_option_set(
   # to do and exits if 60 seconds pass with no tasks to run.
 
   controller = crew::crew_controller_local(workers = 3, seconds_idle = 60),
-  error = "continue",
+  # error = "continue",
   #
   format = "qs" # Optionally set the default storage format. qs is fast.
 )
@@ -79,15 +79,6 @@ ssfFormula <- case_ ~ landuse +
   log(sl_):distanceWoodland +
   strata(step_id_)
 
-poisFormula <- case_ ~ landuse +
-  distanceWoodland +
-  distanceHedges +
-  distanceWoodland:landuse +
-  roadCrossings +
-  sl_ + log(sl_) + cos(ta_) +
-  log(sl_):landuse +
-  log(sl_):distanceWoodland +
-  strata(step_id_)
 # dbbmm
 windowSize <- 29 #~ a week
 marginSize <- 5 #~ a day
@@ -106,7 +97,7 @@ connectSettings <- expand.grid(
 )
 
 aggFact <- 20
-## derivied from the selected Aberdeen patch data
+## derived from the selected Aberdeen patch data
 minPatchSize_m2 <- 5000
 
 buffers <- c(0, 100, 200, 500, 750)
@@ -195,7 +186,7 @@ coreTargetList <- list(
   ),
   tar_target(
     name = tar_pois_model,
-    command = run_pois_model(tar_ssf_data, poisFormula = poisFormula)
+    command = run_pois_model(tar_ssf_data)
   ),
   tar_target(
     name = tar_pois_plot,
