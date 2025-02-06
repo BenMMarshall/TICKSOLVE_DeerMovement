@@ -91,8 +91,13 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
   ########################################################################################################################
   ######### ROAD BUFFERED TO APPEAR ON AGG LANDSCAPE, CAN BE MINIMISED FOR HIGHER RES LANDSCAPE ##########################
   ########################################################################################################################
-  focalRoadsTerra <- terra::rasterize(st_buffer(focalRoads, prelimAggFact+2), focalRoadsTerra,
-                                      fun = "max", background = 0, touches = TRUE)
+  if(!is.na(prelimAggFact)){
+    focalRoadsTerra <- terra::rasterize(st_buffer(focalRoads, 2), focalRoadsTerra,
+                                        fun = "max", background = 0, touches = TRUE)
+  } else {
+    focalRoadsTerra <- terra::rasterize(st_buffer(focalRoads, prelimAggFact+2), focalRoadsTerra,
+                                        fun = "max", background = 0, touches = TRUE)
+  }
   terra::values(focalRoadsTerra) <- ifelse(terra::values(focalRoadsTerra) == 0, 0, 1)
   ########################################################################################################################
   ########################################################################################################################
@@ -105,8 +110,8 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
   focalLanduse <- focalLanduse %>%
     mutate(roadCrossings = terra::values(focalRoadsTerra))
 
-  ggplot() +
-    geom_spatraster(data = focalLanduse, aes(fill = landuse))# +
+  # ggplot() +
+  #   geom_spatraster(data = focalLanduse, aes(fill = landuse))# +
   # geom_sf(data = focalRoads, alpha = 0.1)
 
   dataLanduse <- as.data.frame(terra::values(focalLanduse)) %>%
@@ -135,7 +140,7 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
       landuse == 8 ~ "Permanent Wetland",
       landuse == 9 ~ "Human Settlements",
       landuse == 10 ~ "Other"
-      ))
+    ))
     )
 
   # hist(focalData$sl_)

@@ -78,6 +78,16 @@ ssfFormula <- case_ ~ landuse +
   log(sl_):landuse +
   log(sl_):distanceWoodland +
   strata(step_id_)
+
+poisFormula <- case_ ~ landuse +
+  distanceWoodland +
+  distanceHedges +
+  distanceWoodland:landuse +
+  roadCrossings +
+  sl_ + log(sl_) + cos(ta_) +
+  log(sl_):landuse +
+  log(sl_):distanceWoodland +
+  strata(step_id_)
 # dbbmm
 windowSize <- 29 #~ a week
 marginSize <- 5 #~ a day
@@ -97,7 +107,7 @@ connectSettings <- expand.grid(
 
 aggFact <- 20
 ## derivied from the selected Aberdeen patch data
-minPatchSize_m2 <- 100000
+minPatchSize_m2 <- 5000
 
 buffers <- c(0, 100, 200, 500, 750)
 
@@ -185,7 +195,7 @@ coreTargetList <- list(
   ),
   tar_target(
     name = tar_pois_model,
-    command = run_pois_model(tar_ssf_data)
+    command = run_pois_model(tar_ssf_data, poisFormula = poisFormula)
   ),
   tar_target(
     name = tar_pois_plot,
