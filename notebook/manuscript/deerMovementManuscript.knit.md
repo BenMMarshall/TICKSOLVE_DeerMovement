@@ -6,7 +6,7 @@ affiliation1: "---"
 affiliation2: "---"
 corresponding1: "benjaminmichaelmarshall@gmail.com"
 corresponding2: "---"
-date: "`r Sys.Date()`"
+date: "2025-02-05"
 output:
   bookdown::pdf_document2:
     template: main.tex
@@ -163,9 +163,8 @@ The expectation was that the model coefficients would indicate that deer locatio
 
 # Software availablity
 
-```{r packageText, child="packageParagraph.txt", eval=TRUE}
 
-```
+For all analysis we used R (v.4.2.2) [@base], and R Studio (v.2024.09.1+394) [@rstudio]. For analysis of animal movement data we used amt (v.0.2.2.0) [@amt], ctmm (v.1.2.0) [@ctmm], and move (v.4.2.4) [@move]. For general data manipulation we used glue (v.1.7.0) [@glue], sjmisc (v.2.8.10) [@sjmisc], tidyverse (v.2.0.0) [@tidyverse], and units (v.0.8.5) [@units]. For project and code management we used here (v.1.0.1) [@here], tarchetypes (v.0.9.0) [@tarchetypes], and targets (v.1.9.1) [@targets]. For visualisation we used the following as expansions from the tidyverse suite of packages: ggdist (v.3.3.2) [@ggdist2024a;@ggdist2024b], ggridges (v.0.5.6) [@ggridges], ggtext (v.0.1.2) [@ggtext], patchwork (v.1.2.0) [@patchwork], and scales (v.1.3.0) [@scales]. Other pacakges we used were boot (v.1.3.28) [@boot2021;@boot1997], crew (v.0.10.2) [@crew], and usethis (v.2.2.3) [@usethis]. To generate typeset outputs we used bookdown (v.0.41) [@bookdown2024;@bookdown2016], and rmarkdown (v.2.28) [@rmarkdown2024;@rmarkdown2018;@rmarkdown2020]. To manipulate and manage spatial data we used gdistance (v.1.6.4) [@gdistance], raster (v.3.6.26) [@raster], sf (v.1.0.16) [@sf2023;@sf2018], sp (v.2.1.4) [@sp2005;@sp2013], terra (v.1.7.78) [@terra], and tidyterra (v.0.6.0) [@R-tidyterra]. To run models and explore model outputs we used effects (v.4.2.2) [@effects2019;@effects2018;@effects2003;@effects2009], INLA (v.23.4.24) [@@INLA2013b;@@INLA2015d;@INLA2017e;@INLA2018f;@INLA2016g;@INLA2017h;@INLA2018i], lme4 (v.1.1.36) [@lme4], and performance (v.0.13.0) [@performance].
 
 <!-- CIRCUITSCAPE -->
 <!-- circuitscape, juliacall -->

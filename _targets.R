@@ -30,7 +30,7 @@ tar_option_set(
                "gdistance",
                "INLA",
                "performance",
-               "JuliaCall",
+               # "JuliaCall",
                "ggplot2",
                "ggtext",
                "ggridges",
