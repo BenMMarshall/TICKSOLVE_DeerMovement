@@ -36,7 +36,9 @@ tar_option_set(
                "ggridges",
                "patchwork",
                "terra",
-               "tidyterra"), # Packages that your targets need for their tasks.
+               "tidyterra",
+               "foreach",
+               "doParallel"), # Packages that your targets need for their tasks.
   #
   # Pipelines that take a long time to run may benefit from
   # optional distributed computing. To use this capability
@@ -47,7 +49,7 @@ tar_option_set(
   # which run as local R processes. Each worker launches when there is work
   # to do and exits if 60 seconds pass with no tasks to run.
 
-  controller = crew::crew_controller_local(workers = 3, seconds_idle = 60),
+  # controller = crew::crew_controller_local(workers = 3, seconds_idle = 60),
   # error = "continue",
   #
   format = "qs" # Optionally set the default storage format. qs is fast.
@@ -93,12 +95,14 @@ locationError <- 0.1
 # patchDistance <- 250
 connectSettings <- expand.grid(
   THETA = c(0.1, 0.001, 0.00001),
-  repeatsPerPair = 1
+  repeatsPerPair = 3
 )
 
-aggFact <- 20
+aggFact <- NA
 ## derived from the selected Aberdeen patch data
 minPatchSize_m2 <- 5000
+setCropArea <- 750
+useCores <- 12
 
 buffers <- c(0, 100, 200, 500, 750)
 
@@ -170,27 +174,27 @@ coreTargetList <- list(
                                nAvail = nAvailable, slDist = slDistribution,
                                taDist = taDistribution)
   ),
-  tar_target(
-    name = tar_ssf_models,
-    command = run_ssf_models(tar_ssf_data, ssfFormula = ssfFormula)
-  ),
-  tar_target(
-    name = tar_ssf_plots,
-    command = plot_ssf_coefs(tar_deerData, tar_ssf_models, REGION = "Aberdeenshire")
-  ),
-  tar_target(
-    name = tar_predSSFResist_location,
-    command = build_predResistance_layer(tar_ssf_data, tar_ssf_models,
-                                         tar_landuseList, tar_patchList,
-                                         tar_deerData, REGION = "Aberdeenshire", prelimAggFact = aggFact)
-  ),
+  # tar_target(
+  #   name = tar_ssf_models,
+  #   command = run_ssf_models(tar_ssf_data, ssfFormula = ssfFormula)
+  # ),
+  # tar_target(
+  #   name = tar_ssf_plots,
+  #   command = plot_ssf_coefs(tar_deerData, tar_ssf_models, REGION = "Aberdeenshire")
+  # ),
+  # tar_target(
+  #   name = tar_predSSFResist_location,
+  #   command = build_predResistance_layer(tar_ssf_data, tar_ssf_models,
+  #                                        tar_landuseList, tar_patchList,
+  #                                        tar_deerData, REGION = "Aberdeenshire", prelimAggFact = aggFact)
+  # ),
   tar_target(
     name = tar_pois_model,
     command = run_pois_model(tar_ssf_data)
   ),
   tar_target(
     name = tar_pois_plot,
-    command = plot_pois_coefs(tar_pois_model)
+    command = export_pois_coefs(tar_pois_model)
   ),
   tar_target(
     name = tar_predPoisResist_location,
@@ -198,31 +202,36 @@ coreTargetList <- list(
                                          tar_landuseList, tar_patchList,
                                          tar_deerData, REGION = "Aberdeenshire", prelimAggFact = aggFact)
   ),
-  tar_map(
-    values = connectSettings,
-    tar_target(
-      name = tar_connectSSF_location,
-      command = build_connect_layer(tar_predSSFResist_location, tar_patchList,
-                                    tar_akdeSummary,
-                                    REGION = "Aberdeenshire", prelimAggFact = aggFact,
-                                    seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair,
-                                    MINPATCHSIZE = minPatchSize_m2)
-    ),
-    tar_target(
-      name = tar_connectStanSSF_location,
-      command = standardise_connect_layer(tar_connectSSF_location,
-                                          REGION = "Aberdeenshire",
-                                          THETA = THETA)
-    ),
-    tar_target(
-      name = tar_connectSSF_dbbmmmse,
-      command = calculate_dbbmm_mse(tar_deerData,
-                                    tar_dbbmmList,
-                                    tar_connectStanSSF_location,
-                                    REGION = "Aberdeenshire",
-                                    THETA = THETA)
-    )
+  tar_target(
+    name = tar_poisResist_map,
+    command = plot_conductance_map(tar_predPoisResist_location, tar_patchList,
+                                   REGION = "Aberdeenshire")
   ),
+  # tar_map(
+  #   values = connectSettings,
+  #   tar_target(
+  #     name = tar_connectSSF_location,
+  #     command = build_connect_layer(tar_predSSFResist_location, tar_patchList,
+  #                                   tar_akdeSummary,
+  #                                   REGION = "Aberdeenshire", prelimAggFact = aggFact,
+  #                                   seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair,
+  #                                   MINPATCHSIZE = minPatchSize_m2, cropArea = setCropArea, cores = useCores)
+  #   ),
+  #   tar_target(
+  #     name = tar_connectStanSSF_location,
+  #     command = standardise_connect_layer(tar_connectSSF_location,
+  #                                         REGION = "Aberdeenshire",
+  #                                         THETA = THETA)
+  #   ),
+  #   tar_target(
+  #     name = tar_connectSSF_dbbmmmse,
+  #     command = calculate_dbbmm_mse(tar_deerData,
+  #                                   tar_dbbmmList,
+  #                                   tar_connectStanSSF_location,
+  #                                   REGION = "Aberdeenshire",
+  #                                   THETA = THETA)
+  #   )
+  # ),
   tar_map(
     values = connectSettings,
     tar_target(
@@ -231,13 +240,13 @@ coreTargetList <- list(
                                     tar_akdeSummary,
                                     REGION = "Aberdeenshire", prelimAggFact = aggFact,
                                     seed = 2025, THETA = THETA, repeatsPerPair = repeatsPerPair,
-                                    MINPATCHSIZE = minPatchSize_m2)
+                                    MINPATCHSIZE = minPatchSize_m2, cropArea = setCropArea, cores = useCores)
     ),
     tar_target(
       name = tar_connectStanPois_location,
       command = standardise_connect_layer(tar_connectPois_location,
                                           REGION = "Aberdeenshire",
-                                          THETA = THETA)
+                                          THETA = THETA, MSEdf = NULL)
     ),
     tar_target(
       name = tar_connectPois_dbbmmmse,
@@ -261,32 +270,32 @@ coreTargetList <- list(
 )
 
 connectTargetList <- list(
-  tar_combine(
-    tar_connectSSF_list,
-    coreTargetList[[19]][grep("tar_connectStanSSF_location", names(coreTargetList[[19]]))],
-    command = list(!!!.x)
-  ),
-  tar_combine(
-    tar_mseSSF_df,
-    coreTargetList[[19]][grep("SSF_dbbmmmse", names(coreTargetList[[19]]))],
-    command = rbind(!!!.x)
-  ),
-  tar_target(
-    tar_connectivitySSF_thetaMaps,
-    map_connectivity_thetas(tar_connectSSF_list, tar_landuseList, tar_patchList, REGION = "Aberdeenshire")
-  ),
-  tar_target(
-    tar_patchSSF_plot,
-    plot_patch_connectivity(tar_mseSSF_df, tar_connectSSF_list, tar_patchList, REGION = "Aberdeenshire")
-  ),
+  # tar_combine(
+  #   tar_connectSSF_list,
+  #   coreTargetList[[19]][grep("tar_connectStanSSF_location", names(coreTargetList[[19]]))],
+  #   command = list(!!!.x)
+  # ),
+  # tar_combine(
+  #   tar_mseSSF_df,
+  #   coreTargetList[[19]][grep("SSF_dbbmmmse", names(coreTargetList[[19]]))],
+  #   command = rbind(!!!.x)
+  # ),
+  # tar_target(
+  #   tar_connectivitySSF_thetaMaps,
+  #   map_connectivity_thetas(tar_connectSSF_list, tar_landuseList, tar_patchList, REGION = "Aberdeenshire")
+  # ),
+  # tar_target(
+  #   tar_patchSSF_plot,
+  #   plot_patch_connectivity(tar_mseSSF_df, tar_connectSSF_list, tar_patchList, REGION = "Aberdeenshire")
+  # ),
   tar_combine(
     tar_connectPois_list,
-    coreTargetList[[20]][grep("tar_connectStanPois_location", names(coreTargetList[[20]]))],
+    coreTargetList[[17]][grep("tar_connectStanPois_location", names(coreTargetList[[17]]))],
     command = list(!!!.x)
   ),
   tar_combine(
     tar_msePois_df,
-    coreTargetList[[20]][grep("Pois_dbbmmmse", names(coreTargetList[[20]]))],
+    coreTargetList[[17]][grep("Pois_dbbmmmse", names(coreTargetList[[17]]))],
     command = rbind(!!!.x)
   ),
   tar_target(
@@ -294,13 +303,18 @@ connectTargetList <- list(
     map_connectivity_thetas(tar_connectPois_list, tar_landuseList, tar_patchList, REGION = "Aberdeenshire")
   ),
   tar_target(
-    tar_patchPois_plot,
-    plot_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire")
+    tar_patchPois_MMMplot,
+    plot_patch_MMMconnectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire")
   ),
   tar_target(
     tar_patch_summaryPois,
     summarise_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire",
                                  buffers = buffers)
+  ),
+  tar_target(
+    tar_patchPois_plot,
+    plot_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire",
+                            tar_patch_summaryPois)
   ),
   tar_target(
     tar_patchPois_summaryPlot,
@@ -317,13 +331,20 @@ connectTargetList <- list(
     command = build_connect_layer(tar_predPoisResist_locationWessex, tar_patchList,
                                   tar_akdeSummary,
                                   REGION = "Wessex", prelimAggFact = aggFact,
-                                  seed = 2025, repeatsPerPair = NA,
-                                  MSEdf = tar_msePois_df)
+                                  seed = 2025, repeatsPerPair = connectSettings$repeatsPerPair[1],
+                                  MSEdf = tar_msePois_df,
+                                  MINPATCHSIZE = minPatchSize_m2, cropArea = setCropArea, cores = useCores)
+  ),
+  tar_target(
+    name = tar_connectStanPois_locationWessex,
+    command = standardise_connect_layer(tar_connectPois_locationWessex,
+                                        REGION = "Wessex",
+                                        THETA = NULL, MSEdf = tar_msePois_df)
   ),
   tar_target(
     name = tar_validation_data,
     command = extract_connectivity_locations(connectRasterLocations = tar_connectPois_list,
-                                             connectRasterLocationWessex = tar_connectPois_locationWessex,
+                                             connectRasterLocationWessex = tar_connectStanPois_locationWessex,
                                              akdeLists = tar_akdeLists,
                                              deerData = tar_deerData,
                                              MSEdf = tar_msePois_df,
@@ -339,6 +360,21 @@ connectTargetList <- list(
   tar_target(
     name = tar_connectivityValue_plots,
     command = plot_connectivity_distributions(tar_validation_data, tar_connectivityValue_models)
+  ),
+  tar_target(
+    name = tar_package_text,
+    command = create_package_txt(excludes = c("bestNormalize", "JuliaCall", "recurse", "roxygen2", "suncalc", "survival"))
+  ),
+  tar_target(
+    name = tar_render_out,
+    command = render_rmd(fileIN = here::here("notebook", "manuscript", "deerMovementManuscript.Rmd"),
+                         fileOUT = here::here("notebook", "manuscript", "deerMovementManuscript.pdf"),
+                         tar_pois_plot,
+                         tar_patchPois_summaryPlot,
+                         tar_connectivityValue_plots,
+                         tar_package_text,
+                         tar_poisResist_map,
+                         tar_connectivityPois_thetaMaps)
   )
 )
 

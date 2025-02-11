@@ -34,10 +34,24 @@ keywords: Movement ecology, step selection function, poisson, habitat preference
 
 # Methods
 
+``` {r libraries}
+library(here)
+library(dplyr)
+library(stringr)
+```
+
 ## Study Area
 
 <!-- resampling of data, overview of data quantity -->
 <!-- removed first week of data -->
+
+```{r trackingDuration, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Duration"}
+knitr::include_graphics(here::here("figures", "trackingDuration.png"))
+```
+
+```{r trackingTimelags, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Time lags."}
+knitr::include_graphics(here::here("figures", "trackingTimelag.png"))
+```
 
 ## Home Range Esimation
 
@@ -110,6 +124,10 @@ For the iSSF the covariates we used consisted of the median estimate for each pr
 For both methods we ignored the uncertainty surrounding the selection estimates, instead relying on just the point estimates for the resistance mapping.
 <!-- invert logit to standardise them and flip them to movement ease -->
 
+```{r conductancePlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Conductance"}
+knitr::include_graphics(here::here("figures", "resistanceConductanceMap_Pois_Aberdeenshire.png"))
+```
+
 <!-- Random Shortest Paths -->
 We used two methods to simulate potential connectivity across the landscapes.
 The first was random shortest paths, that consists of generating random walks between locations.
@@ -118,12 +136,23 @@ This method was used to show the connectivity of areas used by RIENDEER(?), and 
 We used habitat patches as the sources of our random locations.
 Each patch had __ start and end locations generated within it, we then ran walks from these locations to all other patch locations within 750 m of that patch.
 <!-- excluded patches smaller than the smallest selected patch area -->
-We elected not to generate start or end points in patches less than 10ha in areas, following <!-- cite -->. 
+We elected not to generate start or end points in patches less than 0.5ha in areas, following <!-- cite -->. 
 This was due to these patches being unlikely to host deer populations and the reduction in origin patches aided computational costs.
 We selected 750 m as that represented the mean longest axis of the 99% HR estimate of the deer (excluding outlying non-contiguous portions of the area polygons).
+
+```{r distanceDistributionPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Distance."}
+knitr::include_graphics(here::here("figures", "distanceDistributionPlot.png"))
+```
+
+
 Once every walk was complete, the resulting rasters describing the likelihood of a deer crossing a cell are complied into a single landscape raster describing connectivity and standardised between 0 and 1 (where 0 is low connectivity and 1 is high connectivity).
 A key consideration in these walks is how random the paths are.
 We elected to run walks at __ different levels of randomness (theta; with 1 being close to a least cost path, and ____ being the most random and diffuse walks).
+
+```{r thetaPlot, echo=FALSE, out.width='100%', fig.align="centre", fig.cap="The connectivity maps under differing levels of theta (randomness) in the random shortest paths between patches. The colour scale is squarerooted to better differeniate low conenctivity areas."}
+knitr::include_graphics(here::here("figures", "thetaMaps_Pois.png"))
+```
+
 To determine what level of randomness best reflected the realised movements of the deer, we compared the resulting connectivity maps to dynamic Brownian Bridge Movement Models.
 Dynamic Brownian Bridge Movement Models run a series of random walks between defined start and end points, from the summation of these walks you can extract a rasterised occurrence distribution.
 Critically the dBBMM walks are calibrated to the movement capacity of the animal through rolling window (i.e., a number of data points) that summarises the movement rate during that time.
@@ -144,6 +173,13 @@ The model was supplied with the known locations of deer as well as ___ randomly 
 We formulated the model to predict whether a point was used or random based on the connectivity values, and we included a random effect for deer ID.
 The expectation was that the model coefficients would indicate that deer locations were positively associated with higher connectivity values.
 
+```{r densityOfConnectivityAberdeen, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Connectivity values distribitions."}
+knitr::include_graphics(here::here("figures", "densityOfConnectivity_Aberdeen.png"))
+```
+
+```{r densityOfConnectivityWessex, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Connectivity values distribitions."}
+knitr::include_graphics(here::here("figures", "densityOfConnectivity_Wessex.png"))
+```
 
 <!-- ## Projecting to Wessex -->
 <!-- We elected to retain the Wessex Roe Deer data for model validation, as compared to Aberdeen the tracking was conducted for a shorter period with fewer individuals. -->
@@ -153,6 +189,54 @@ The expectation was that the model coefficients would indicate that deer locatio
 <!-- logistic regression -->
 
 # Results
+
+```{r homeRangeSummary}
+akdeSummary <- read.csv(here::here("tables", "allAKDESummary_Aberdeen.csv"))
+
+totalAberRange <- akdeSummary %>% 
+  filter(level == 0.95) %>% 
+  filter(str_detect(Animal_ID, "Roe")) %>% 
+  pull(est) %>% range()
+
+totalAberRange <- paste0(round(totalAberRange, digits = 1), collapse = " to ")
+
+aberMean <- readRDS(here::here("modelOutput", "aberdeenMeanAKDE.rds"))
+
+ctmmMean <- paste0(round(aberMean$CI[1,2], digits = 1),
+       " ha (95% CI ", round(aberMean$CI[1,1], digits = 1),
+       "-", round(aberMean$CI[1,3], digits = 1),
+       ")")
+
+```
+
+Home range sizes
+`totalAberRange`
+`ctmmMean`
+
+```{r homeRangeSize, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Home range size."}
+knitr::include_graphics(here::here("figures", "homeRangeAreaPlot.png"))
+```
+
+Habitat selection preferences
+
+```{r poisCoef}
+poisCoef <- read.csv(here::here("tables", "poisFixed.csv"))
+```
+
+log_sl impacts the shape parameter - so like shifting the mean up as it gets bigger
+sl_ impacts the scale parameter - so increases mean greater variance and less of a peak
+<!-- shape parameter α and a scale parameter θ -->
+
+```{r poisCoefPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Poisson coefficients."}
+knitr::include_graphics(here::here("figures", "poisCoef.png"))
+```
+
+Connectivity maps and validation
+
+```{r poisConnect, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Poisson coefficients."}
+knitr::include_graphics(here::here("figures", "patchConnectivity_Pois_Aberdeenshire.png"))
+```
+
 
 # Discussion
 

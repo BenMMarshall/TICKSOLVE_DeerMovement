@@ -11,15 +11,11 @@ map_connectivity_thetas <- function(connectRasterLocations, landuseList, patchLi
   # library(ggplot2)
   # library(stringr)
   #
-  # targets::tar_load("tar_connect_location_0.01_300")
-  # targets::tar_load("tar_connect_location_0.001_300")
-  # targets::tar_load("tar_connect_location_1e.04_300")
+  # targets::tar_load("tar_connectPois_list")
   # targets::tar_load("tar_patchList")
+  # targets::tar_load("tar_msePois_df")
   #
-  # connectRasterLocations <- c(
-  #   tar_connect_location_0.01_300,
-  #   tar_connect_location_0.001_300,
-  #   tar_connect_location_1e.04_300)
+  # connectRasterLocations <- tar_connectPois_list
   # names(connectRasterLocations) <- connectRasterLocations
 
   # targets::tar_load("tar_patchList")
@@ -41,7 +37,7 @@ map_connectivity_thetas <- function(connectRasterLocations, landuseList, patchLi
     # geom_sf(data = focalRoads, colour = "#000000", alpha = 0.25) +
       scale_fill_gradient(high = scales::muted(paletteList$highWhitePal[1]),
                           low = paletteList$highWhitePal[2],
-                          na.value = paletteList$baseGrey) +
+                          na.value = paletteList$baseGrey, trans = "sqrt") +
     facet_wrap(~lyr, ncol = 3) +
     coord_sf(xlim = c(max(c(ext(focalPatches)[1],
                             ext(connectRaster)[1])),
@@ -51,7 +47,8 @@ map_connectivity_thetas <- function(connectRasterLocations, landuseList, patchLi
                             ext(connectRaster)[3])),
                       min(c(ext(focalPatches)[4],
                             ext(connectRaster)[4]))),
-             expand = 0) +
+             expand = 0, datum = st_crs(27700)) +
+      scale_x_continuous(breaks = seq(340000, 380000, 20000)) +
     labs(fill = "Connectivity") +
     theme_bw() +
     theme(
@@ -68,12 +65,12 @@ map_connectivity_thetas <- function(connectRasterLocations, landuseList, patchLi
 
   ggsave(plot = thetaMaps, filename = here("figures",
                                            paste0("thetaMaps_",
-                                                  str_extract(connectRasterLocations, pattern = "SSF|Pois"), ".png")),
-         width = 300, height = 200, units = "mm", dpi = 300)
+                                                  str_extract(connectRasterLocations[1], pattern = "SSF|Pois"), ".png")),
+         width = 300, height = 100, units = "mm", dpi = 300)
   ggsave(plot = thetaMaps, filename = here("figures",
                                            paste0("thetaMaps_",
-                                                  str_extract(connectRasterLocations, pattern = "SSF|Pois"), ".pdf")),
-         width = 300, height = 200, units = "mm")
+                                                  str_extract(connectRasterLocations[1], pattern = "SSF|Pois"), ".pdf")),
+         width = 300, height = 100, units = "mm")
 
   return(thetaMaps)
 

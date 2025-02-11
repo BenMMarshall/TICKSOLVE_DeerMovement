@@ -28,6 +28,9 @@ extract_akde_summaries <- function(deerData, akdeLists){
   aberMean <- mean(akdeLists$fits[aberDeer])
   summary(aberMean)
 
+  saveRDS(summary(aberMean),
+          file = here::here("modelOutput", "aberdeenMeanAKDE.rds"))
+
   # plot(akdeLists$vario$Fallow02_F)
   # summary(akdeLists$fits[["Fallow02_F"]])$DOF["area"]
   ESSDF <- do.call(rbind, lapply(names(akdeLists$fits), function(x){

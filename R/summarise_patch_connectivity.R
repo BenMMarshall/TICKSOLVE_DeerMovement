@@ -16,14 +16,14 @@ summarise_patch_connectivity <- function(MSEdf, connectRasterLocations, patchLis
   # library(sf)
   # library(ggplot2)
   #
-  # targets::tar_load("tar_connectSSF_list")
+  # targets::tar_load("tar_connectPois_list")
   # targets::tar_load("tar_msePois_df")
   # targets::tar_load("tar_patchList")
   # THETA <- 0.1
   # patchList <- tar_patchList
   # MSEdf <- tar_msePois_df
-  # connectRasterLocations <- tar_connectSSF_list
-  # connectTerra <- terra::rast(tar_connectSSF_list[[1]])
+  # connectRasterLocations <- tar_connectPois_list
+  # connectTerra <- terra::rast(tar_connectPois_list[[3]])
   # targets::tar_source()
   # REGION <- "Aberdeenshire"
 
@@ -53,7 +53,7 @@ summarise_patch_connectivity <- function(MSEdf, connectRasterLocations, patchLis
   patchesBufferedList <- vector("list", length(buffers))
   names(patchesBufferedList) <- paste0("buffer_", buffers)
   for(b in buffers){
-
+    # b <- buffers[3]
     currPatches <- st_buffer(focalPatches, b)
 
     if(b == 0){
@@ -95,6 +95,7 @@ summarise_patch_connectivity <- function(MSEdf, connectRasterLocations, patchLis
                            area_ha = as.numeric(units::set_units(st_area(patchList$AberdeenSelected), "ha")))
 
   bufferSummaries <- bufferSummaries %>%
+    mutate(Ptch_ID = as.character(Ptch_ID)) %>%
     left_join(patchList$AberdeenSelected %>%
                 st_drop_geometry() %>%
                 mutate(Ptch_ID = as.character(Ptch_ID))) %>%

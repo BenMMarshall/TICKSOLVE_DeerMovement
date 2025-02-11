@@ -15,14 +15,14 @@ plot_patch_summary <- function(bufferSummaries, MSEdf, connectRasterLocations, p
   # library(sf)
   # library(ggplot2)
   #
-  # targets::tar_load("tar_connectSSF_list")
+  # targets::tar_load("tar_connectPois_list")
   # targets::tar_load("tar_msePois_df")
   # targets::tar_load("tar_patchList")
   # THETA <- 0.1
   # patchList <- tar_patchList
   # MSEdf <- tar_msePois_df
-  # connectRasterLocations <- tar_connectSSF_list
-  # connectTerra <- terra::rast(tar_connectSSF_list[[1]])
+  # connectRasterLocations <- tar_connectPois_list
+  # connectTerra <- terra::rast(tar_connectPois_list[[1]])
   # targets::tar_source()
   # REGION <- "Aberdeenshire"
 

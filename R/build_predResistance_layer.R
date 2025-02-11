@@ -34,6 +34,7 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
   # patchList <- tar_patchList
   # deerData <- tar_deerData
 
+  # REGION <- "Wessex"
   # REGION <- "Aberdeenshire"
 
   focalPatches <- patchList[[sub("shire", "", REGION)]]
@@ -93,7 +94,7 @@ build_predResistance_layer <- function(ssfData, ssfPoismodel, landuseList, patch
   ########################################################################################################################
   ######### ROAD BUFFERED TO APPEAR ON AGG LANDSCAPE, CAN BE MINIMISED FOR HIGHER RES LANDSCAPE ##########################
   ########################################################################################################################
-  if(!is.na(prelimAggFact)){
+  if(is.na(prelimAggFact)){
     focalRoadsTerra <- terra::rasterize(st_buffer(focalRoads, 2), focalRoadsTerra,
                                         fun = "max", background = 0, touches = TRUE)
   } else {

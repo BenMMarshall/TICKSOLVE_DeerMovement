@@ -48,6 +48,44 @@
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 %% lines to get the code chunks working
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textbf{#1}}
+\newcommand{\AnnotationTok}[1]{\textit{#1}}
+\newcommand{\AttributeTok}[1]{#1}
+\newcommand{\BaseNTok}[1]{#1}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textit{#1}}
+\newcommand{\CommentVarTok}[1]{\textit{#1}}
+\newcommand{\ConstantTok}[1]{#1}
+\newcommand{\ControlFlowTok}[1]{\textbf{#1}}
+\newcommand{\DataTypeTok}[1]{\underline{#1}}
+\newcommand{\DecValTok}[1]{#1}
+\newcommand{\DocumentationTok}[1]{\textit{#1}}
+\newcommand{\ErrorTok}[1]{\textbf{#1}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{#1}
+\newcommand{\FunctionTok}[1]{#1}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textit{#1}}
+\newcommand{\KeywordTok}[1]{\textbf{#1}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{#1}
+\newcommand{\OtherTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textbf{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{#1}
+\newcommand{\SpecialStringTok}[1]{#1}
+\newcommand{\StringTok}[1]{#1}
+\newcommand{\VariableTok}[1]{#1}
+\newcommand{\VerbatimStringTok}[1]{#1}
+\newcommand{\WarningTok}[1]{\textit{#1}}
 
 %% lines to enable bulletpoints in a new notation style
 \providecommand{\tightlist}{%
@@ -96,7 +134,23 @@ Movement ecology, step selection function, poisson, habitat preference, habitat 
 
 \section{Methods}\label{methods}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(here)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(stringr)}
+\end{Highlighting}
+\end{Shaded}
+
 \subsection{Study Area}\label{study-area}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../../figures/trackingDuration} \caption{Duration}\label{fig:trackingDuration}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../../figures/trackingTimelag} \caption{Time lags.}\label{fig:trackingTimelags}
+\end{figure}
 
 \subsection{Home Range Esimation}\label{home-range-esimation}
 
@@ -161,17 +215,31 @@ Once we had estimates of selection and effect for all the environmental aspects 
 For the iSSF the covariates we used consisted of the median estimate for each predictor, and as some required a required a step length and turn angle, we elected to use the mean of both to generate all resistance maps.
 For both methods we ignored the uncertainty surrounding the selection estimates, instead relying on just the point estimates for the resistance mapping.
 
+\begin{figure}
+\includegraphics[width=1\linewidth]{../../figures/resistanceConductanceMap_Pois_Aberdeenshire} \caption{Conductance}\label{fig:conductancePlot}
+\end{figure}
+
 We used two methods to simulate potential connectivity across the landscapes.
 The first was random shortest paths, that consists of generating random walks between locations.
 This method was used to show the connectivity of areas used by RIENDEER(?), and offers a mechanism for calibrating the connectivity maps to both the habitat selection and movement path characteristics.
 We used habitat patches as the sources of our random locations.
 Each patch had \_\_ start and end locations generated within it, we then ran walks from these locations to all other patch locations within 750 m of that patch.
-We elected not to generate start or end points in patches less than 10ha in areas, following .
+We elected not to generate start or end points in patches less than 0.5ha in areas, following .
 This was due to these patches being unlikely to host deer populations and the reduction in origin patches aided computational costs.
 We selected 750 m as that represented the mean longest axis of the 99\% HR estimate of the deer (excluding outlying non-contiguous portions of the area polygons).
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../../figures/distanceDistributionPlot} \caption{Distance.}\label{fig:distanceDistributionPlot}
+\end{figure}
+
 Once every walk was complete, the resulting rasters describing the likelihood of a deer crossing a cell are complied into a single landscape raster describing connectivity and standardised between 0 and 1 (where 0 is low connectivity and 1 is high connectivity).
 A key consideration in these walks is how random the paths are.
 We elected to run walks at \_\_ different levels of randomness (theta; with 1 being close to a least cost path, and \_\_\_\_ being the most random and diffuse walks).
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../../figures/thetaMaps_Pois} \caption{The connectivity maps under differing levels of theta (randomness) in the random shortest paths between patches. The colour scale is squarerooted to better differeniate low conenctivity areas.}\label{fig:thetaPlot}
+\end{figure}
+
 To determine what level of randomness best reflected the realised movements of the deer, we compared the resulting connectivity maps to dynamic Brownian Bridge Movement Models.
 Dynamic Brownian Bridge Movement Models run a series of random walks between defined start and end points, from the summation of these walks you can extract a rasterised occurrence distribution.
 Critically the dBBMM walks are calibrated to the movement capacity of the animal through rolling window (i.e., a number of data points) that summarises the movement rate during that time.
@@ -187,7 +255,61 @@ The model was supplied with the known locations of deer as well as \_\_\_ random
 We formulated the model to predict whether a point was used or random based on the connectivity values, and we included a random effect for deer ID.
 The expectation was that the model coefficients would indicate that deer locations were positively associated with higher connectivity values.
 
+\begin{figure}
+\includegraphics[width=1\linewidth]{../../figures/densityOfConnectivity_Aberdeen} \caption{Connectivity values distribitions.}\label{fig:densityOfConnectivityAberdeen}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../../figures/densityOfConnectivity_Wessex} \caption{Connectivity values distribitions.}\label{fig:densityOfConnectivityWessex}
+\end{figure}
+
 \section{Results}\label{results}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{akdeSummary }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(here}\SpecialCharTok{::}\FunctionTok{here}\NormalTok{(}\StringTok{"tables"}\NormalTok{, }\StringTok{"allAKDESummary\_Aberdeen.csv"}\NormalTok{))}
+
+\NormalTok{totalAberRange }\OtherTok{\textless{}{-}}\NormalTok{ akdeSummary }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(level }\SpecialCharTok{==} \FloatTok{0.95}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(Animal\_ID, }\StringTok{"Roe"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pull}\NormalTok{(est) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{range}\NormalTok{()}
+
+\NormalTok{totalAberRange }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(totalAberRange, }\AttributeTok{digits =} \DecValTok{1}\NormalTok{), }\AttributeTok{collapse =} \StringTok{" to "}\NormalTok{)}
+
+\NormalTok{aberMean }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(here}\SpecialCharTok{::}\FunctionTok{here}\NormalTok{(}\StringTok{"modelOutput"}\NormalTok{, }\StringTok{"aberdeenMeanAKDE.rds"}\NormalTok{))}
+
+\NormalTok{ctmmMean }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{round}\NormalTok{(aberMean}\SpecialCharTok{$}\NormalTok{CI[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{], }\AttributeTok{digits =} \DecValTok{1}\NormalTok{),}
+       \StringTok{" ha (95\% CI "}\NormalTok{, }\FunctionTok{round}\NormalTok{(aberMean}\SpecialCharTok{$}\NormalTok{CI[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{], }\AttributeTok{digits =} \DecValTok{1}\NormalTok{),}
+       \StringTok{"{-}"}\NormalTok{, }\FunctionTok{round}\NormalTok{(aberMean}\SpecialCharTok{$}\NormalTok{CI[}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{], }\AttributeTok{digits =} \DecValTok{1}\NormalTok{),}
+       \StringTok{")"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Home range sizes
+\texttt{totalAberRange}
+\texttt{ctmmMean}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../../figures/homeRangeAreaPlot} \caption{Home range size.}\label{fig:homeRangeSize}
+\end{figure}
+
+Habitat selection preferences
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{poisCoef }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(here}\SpecialCharTok{::}\FunctionTok{here}\NormalTok{(}\StringTok{"tables"}\NormalTok{, }\StringTok{"poisFixed.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../../figures/poisCoef} \caption{Poisson coefficients.}\label{fig:poisCoefPlot}
+\end{figure}
+
+Connectivity maps and validation
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{../../figures/patchConnectivity_Pois_Aberdeenshire} \caption{Poisson coefficients.}\label{fig:poisConnect}
+\end{figure}
 
 \section{Discussion}\label{discussion}
 
@@ -197,7 +319,7 @@ The expectation was that the model coefficients would indicate that deer locatio
 
 \section{Software availablity}\label{software-availablity}
 
-For all analysis we used R (v.4.2.2) (\citeproc{ref-base}{R Core Team 2022}), and R Studio (v.2024.09.1+394) (\citeproc{ref-rstudio}{Posit team 2024}). For analysis of animal movement data we used amt (v.0.2.2.0) (\citeproc{ref-amt}{Signer, Fieberg, and Avgar 2019}), ctmm (v.1.2.0) (\citeproc{ref-ctmm}{Christen H. Fleming and Calabrese 2023}), and move (v.4.2.4) (\citeproc{ref-move}{Kranstauber, Smolla, and Scharf 2023}). For general data manipulation we used glue (v.1.7.0) (\citeproc{ref-glue}{Hester and Bryan 2024}), sjmisc (v.2.8.10) (\citeproc{ref-sjmisc}{Lüdecke 2018}), tidyverse (v.2.0.0) (\citeproc{ref-tidyverse}{Wickham et al. 2019}), and units (v.0.8.5) (\citeproc{ref-units}{E. Pebesma, Mailund, and Hiebert 2016}). For project and code management we used here (v.1.0.1) (\citeproc{ref-here}{Müller 2020}), tarchetypes (v.0.9.0) (\citeproc{ref-tarchetypes}{Landau 2021a}), and targets (v.1.9.1) (\citeproc{ref-targets}{Landau 2021b}). For visualisation we used the following as expansions from the tidyverse suite of packages: ggdist (v.3.3.2) (\citeproc{ref-ggdist2024a}{Kay 2024b}, \citeproc{ref-ggdist2024b}{2024a}), ggridges (v.0.5.6) (\citeproc{ref-ggridges}{Wilke 2024}), ggtext (v.0.1.2) (\citeproc{ref-ggtext}{Wilke and Wiernik 2022}), patchwork (v.1.2.0) (\citeproc{ref-patchwork}{Pedersen 2024}), and scales (v.1.3.0) (\citeproc{ref-scales}{Wickham, Pedersen, and Seidel 2023}). Other pacakges we used were boot (v.1.3.28) (\citeproc{ref-boot2021}{Canty and Ripley 2021}; \citeproc{ref-boot1997}{Davison and Hinkley 1997}), crew (v.0.10.2) (\citeproc{ref-crew}{Landau 2024}), and usethis (v.2.2.3) (\citeproc{ref-usethis}{Wickham et al. 2024}). To generate typeset outputs we used bookdown (v.0.41) (\citeproc{ref-bookdown2024}{Xie 2024}, \citeproc{ref-bookdown2016}{2016}), and rmarkdown (v.2.28) (\citeproc{ref-rmarkdown2024}{Allaire et al. 2024}; \citeproc{ref-rmarkdown2018}{Xie, Allaire, and Grolemund 2018}; \citeproc{ref-rmarkdown2020}{Xie, Dervieux, and Riederer 2020}). To manipulate and manage spatial data we used gdistance (v.1.6.4) (\citeproc{ref-gdistance}{van Etten 2017}), raster (v.3.6.26) (\citeproc{ref-raster}{Hijmans 2023}), sf (v.1.0.16) (\citeproc{ref-sf2023}{E. Pebesma and Bivand 2023}; \citeproc{ref-sf2018}{E. Pebesma 2018}), sp (v.2.1.4) (\citeproc{ref-sp2005}{E. J. Pebesma and Bivand 2005}; \citeproc{ref-sp2013}{Bivand, Pebesma, and Gomez-Rubio 2013}), terra (v.1.7.78) (\citeproc{ref-terra}{Hijmans 2024}), and tidyterra (v.0.6.0) (\citeproc{ref-R-tidyterra}{Hernangómez 2023}). To run models and explore model outputs we used effects (v.4.2.2) (\citeproc{ref-effects2019}{Fox and Weisberg 2019}, \citeproc{ref-effects2018}{2018}; \citeproc{ref-effects2003}{Fox 2003}; \citeproc{ref-effects2009}{Fox and Hong 2009}), INLA (v.23.4.24) (@ \citeproc{ref-INLA2013b}{Martins et al. 2013}; @ \citeproc{ref-INLA2015d}{Lindgren and Rue 2015}; \citeproc{ref-INLA2017e}{Rue et al. 2017}; \citeproc{ref-INLA2018f}{Bakka et al. 2018}; \citeproc{ref-INLA2016g}{De Coninck et al. 2016}; \citeproc{ref-INLA2017h}{Verbosio et al. 2017}; \citeproc{ref-INLA2018i}{Kourounis, Fuchs, and Schenk 2018}), lme4 (v.1.1.36) (\citeproc{ref-lme4}{Bates et al. 2015}), and performance (v.0.13.0) (\citeproc{ref-performance}{Lüdecke et al. 2021}).
+For all analysis we used R (v.4.4.2) (\citeproc{ref-base}{R Core Team 2024}), and R Studio (v.2024.12.0+467) (\citeproc{ref-rstudio}{Posit team 2024}). For analysis of animal movement data we used amt (v.0.2.2.0) (\citeproc{ref-amt}{Signer, Fieberg, and Avgar 2019}), ctmm (v.1.2.0) (\citeproc{ref-ctmm}{Christen H. Fleming and Calabrese 2023}), and move (v.4.2.6) (\citeproc{ref-move}{Kranstauber, Smolla, and Scharf 2024}). For general data manipulation we used glue (v.1.8.0) (\citeproc{ref-glue}{Hester and Bryan 2024}), sjmisc (v.2.8.10) (\citeproc{ref-sjmisc}{Lüdecke 2018}), tidyverse (v.2.0.0) (\citeproc{ref-tidyverse}{Wickham et al. 2019}), and units (v.0.8.5) (\citeproc{ref-units}{E. Pebesma, Mailund, and Hiebert 2016}). For project and code management we used here (v.1.0.1) (\citeproc{ref-here}{Müller 2020}), tarchetypes (v.0.11.0) (\citeproc{ref-tarchetypes}{Landau 2021a}), and targets (v.1.9.0) (\citeproc{ref-targets}{Landau 2021b}). For visualisation we used the following as expansions from the tidyverse suite of packages: ggdist (v.3.3.2) (\citeproc{ref-ggdist2024a}{Kay 2024b}, \citeproc{ref-ggdist2024b}{2024a}), ggridges (v.0.5.6) (\citeproc{ref-ggridges}{Wilke 2024}), ggtext (v.0.1.2) (\citeproc{ref-ggtext}{Wilke and Wiernik 2022}), patchwork (v.1.3.0) (\citeproc{ref-patchwork}{Pedersen 2024}), and scales (v.1.3.0) (\citeproc{ref-scales}{Wickham, Pedersen, and Seidel 2023}). Other packages we used were boot (v.1.3.31) (\citeproc{ref-boot2024}{Angelo Canty and B. D. Ripley 2024}; \citeproc{ref-boot1997}{A. C. Davison and D. V. Hinkley 1997}), doParallel (v.1.0.17) (\citeproc{ref-doParallel}{Corporation and Weston 2022}), foreach (v.1.5.2) (\citeproc{ref-foreach}{Microsoft and Weston 2022}), and usethis (v.3.0.0) (\citeproc{ref-usethis}{Wickham et al. 2024}). To generate typeset outputs we used bookdown (v.0.42) (\citeproc{ref-bookdown2025}{Xie 2025}, \citeproc{ref-bookdown2016}{2016}), and rmarkdown (v.2.29) (\citeproc{ref-rmarkdown2024}{Allaire et al. 2024}; \citeproc{ref-rmarkdown2018}{Xie, Allaire, and Grolemund 2018}; \citeproc{ref-rmarkdown2020}{Xie, Dervieux, and Riederer 2020}). To manipulate and manage spatial data we used gdistance (v.1.6.4) (\citeproc{ref-gdistance}{van Etten 2017}), raster (v.3.6.30) (\citeproc{ref-raster}{Hijmans 2024a}), sf (v.1.0.19) (\citeproc{ref-sf2023}{E. Pebesma and Bivand 2023}; \citeproc{ref-sf2018}{E. Pebesma 2018}), sp (v.2.1.4) (\citeproc{ref-sp2005}{E. J. Pebesma and Bivand 2005}; \citeproc{ref-sp2013}{Bivand, Pebesma, and Gomez-Rubio 2013}), terra (v.1.7.83) (\citeproc{ref-terra}{Hijmans 2024b}), and tidyterra (v.0.6.1) (\citeproc{ref-R-tidyterra}{Hernangómez 2023}). To run models and explore model outputs we used effects (v.4.2.2) (\citeproc{ref-effects2019}{Fox and Weisberg 2019}, \citeproc{ref-effects2018}{2018}; \citeproc{ref-effects2003}{Fox 2003}; \citeproc{ref-effects2009}{Fox and Hong 2009}), INLA (v.24.6.27) (@ \citeproc{ref-INLA2013b}{Martins et al. 2013}; @ \citeproc{ref-INLA2015d}{Lindgren and Rue 2015}; \citeproc{ref-INLA2017e}{Rue et al. 2017}; \citeproc{ref-INLA2018f}{Bakka et al. 2018}; \citeproc{ref-INLA2016g}{De Coninck et al. 2016}; \citeproc{ref-INLA2017h}{Verbosio et al. 2017}; \citeproc{ref-INLA2018i}{Kourounis, Fuchs, and Schenk 2018}), lme4 (v.1.1.35.5) (\citeproc{ref-lme4}{Bates et al. 2015}), and performance (v.0.12.4) (\citeproc{ref-performance}{Lüdecke et al. 2021}).
 
 \section{Data availabilty}\label{data-availabilty}
 
@@ -212,8 +334,14 @@ For all analysis we used R (v.4.2.2) (\citeproc{ref-base}{R Core Team 2022}), an
 
 \phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-boot1997}
+A. C. Davison, and D. V. Hinkley. 1997. \emph{Bootstrap Methods and Their Applications}. Cambridge: Cambridge University Press. \href{https://doi:10.1017/CBO9780511802843}{doi:10.1017/CBO9780511802843}.
+
 \bibitem[\citeproctext]{ref-rmarkdown2024}
 Allaire, JJ, Yihui Xie, Christophe Dervieux, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, et al. 2024. \emph{{rmarkdown}: Dynamic Documents for r}. \url{https://github.com/rstudio/rmarkdown}.
+
+\bibitem[\citeproctext]{ref-boot2024}
+Angelo Canty, and B. D. Ripley. 2024. \emph{{boot}: Bootstrap r (s-Plus) Functions}.
 
 \bibitem[\citeproctext]{ref-INLA2018f}
 Bakka, Haakon, Håvard Rue, Geir-Arne Fuglstad, Andrea I. Riebler, David Bolin, Janine Illian, Elias Krainski, Daniel P. Simpson, and Finn K. Lindgren. 2018. {``Spatial Modelling with {INLA}: {A} Review.''} \emph{WIRES (Invited Extended Review)} xx (Feb): xx--. \url{http://arxiv.org/abs/1802.06350}.
@@ -227,11 +355,8 @@ Bivand, Roger S., Edzer Pebesma, and Virgilio Gomez-Rubio. 2013. \emph{Applied S
 \bibitem[\citeproctext]{ref-Calabrese2016}
 Calabrese, Justin M., Chris H. Fleming, and Eliezer Gurarie. 2016. {``Ctmm: An {R} {Package} for {Analyzing} {Animal} {Relocation} {Data} {As} a {Continuous}-{Time} {Stochastic} {Process}.''} \emph{Methods in Ecology and Evolution} 7 (9): 1124--32. \url{https://doi.org/10.1111/2041-210X.12559}.
 
-\bibitem[\citeproctext]{ref-boot2021}
-Canty, Angelo, and B. D. Ripley. 2021. \emph{{boot}: Bootstrap r (s-Plus) Functions}.
-
-\bibitem[\citeproctext]{ref-boot1997}
-Davison, A. C., and D. V. Hinkley. 1997. \emph{Bootstrap Methods and Their Applications}. Cambridge: Cambridge University Press. \url{http://statwww.epfl.ch/davison/BMA/}.
+\bibitem[\citeproctext]{ref-doParallel}
+Corporation, Microsoft, and Steve Weston. 2022. \emph{{doParallel}: Foreach Parallel Adaptor for the {``{parallel}''} Package}. \url{https://CRAN.R-project.org/package=doParallel}.
 
 \bibitem[\citeproctext]{ref-INLA2016g}
 De Coninck, Arne, Bernard De Baets, Drosos Kourounis, Fabio Verbosio, Olaf Schenk, Steven Maenhout, and Jan Fostier. 2016. {``{Needles}: Toward Large-Scale Genomic Prediction with Marker-by-Environment Interaction.''} \emph{Genetics} 203 (1): 543--55. \url{https://doi.org/10.1534/genetics.115.179887}.
@@ -264,10 +389,10 @@ Hernangómez, Diego. 2023. {``Using the {tidyverse} with {terra} Objects: The {t
 Hester, Jim, and Jennifer Bryan. 2024. \emph{{glue}: Interpreted String Literals}. \url{https://CRAN.R-project.org/package=glue}.
 
 \bibitem[\citeproctext]{ref-raster}
-Hijmans, Robert J. 2023. \emph{{raster}: Geographic Data Analysis and Modeling}. \url{https://CRAN.R-project.org/package=raster}.
+Hijmans, Robert J. 2024a. \emph{{raster}: Geographic Data Analysis and Modeling}. \url{https://CRAN.R-project.org/package=raster}.
 
 \bibitem[\citeproctext]{ref-terra}
----------. 2024. \emph{{terra}: Spatial Data Analysis}. \url{https://CRAN.R-project.org/package=terra}.
+---------. 2024b. \emph{{terra}: Spatial Data Analysis}. \url{https://CRAN.R-project.org/package=terra}.
 
 \bibitem[\citeproctext]{ref-ggdist2024b}
 Kay, Matthew. 2024a. \emph{{ggdist}: Visualizations of Distributions and Uncertainty}. \url{https://doi.org/10.5281/zenodo.3879620}.
@@ -279,16 +404,13 @@ Kay, Matthew. 2024a. \emph{{ggdist}: Visualizations of Distributions and Uncerta
 Kourounis, D., A. Fuchs, and O. Schenk. 2018. {``Towards the Next Generation of Multiperiod Optimal Power Flow Solvers.''} \emph{IEEE Transactions on Power Systems} PP (99): 1--10. \url{https://doi.org/10.1109/TPWRS.2017.2789187}.
 
 \bibitem[\citeproctext]{ref-move}
-Kranstauber, Bart, Marco Smolla, and Anne K Scharf. 2023. \emph{{move}: Visualizing and Analyzing Animal Track Data}. \url{https://CRAN.R-project.org/package=move}.
+Kranstauber, Bart, Marco Smolla, and Anne K Scharf. 2024. \emph{{move}: Visualizing and Analyzing Animal Track Data}. \url{https://CRAN.R-project.org/package=move}.
 
 \bibitem[\citeproctext]{ref-tarchetypes}
 Landau, William Michael. 2021a. \emph{{tarchetypes}: Archetypes for Targets}.
 
 \bibitem[\citeproctext]{ref-targets}
 ---------. 2021b. {``The Targets r Package: A Dynamic Make-Like Function-Oriented Pipeline Toolkit for Reproducibility and High-Performance Computing.''} \emph{Journal of Open Source Software} 6 (57): 2959. \url{https://doi.org/10.21105/joss.02959}.
-
-\bibitem[\citeproctext]{ref-crew}
----------. 2024. \emph{{crew}: A Distributed Worker Launcher Framework}. \url{https://CRAN.R-project.org/package=crew}.
 
 \bibitem[\citeproctext]{ref-INLA2015d}
 Lindgren, Finn, and Håvard Rue. 2015. {``Bayesian Spatial Modelling with {R}-{INLA}.''} \emph{Journal of Statistical Software} 63 (19): 1--25. \url{http://www.jstatsoft.org/v63/i19/}.
@@ -301,6 +423,9 @@ Lüdecke, Daniel, Mattan S. Ben-Shachar, Indrajeet Patil, Philip Waggoner, and D
 
 \bibitem[\citeproctext]{ref-INLA2013b}
 Martins, Thiago G., Daniel Simpson, Finn Lindgren, and Håvard Rue. 2013. {``Bayesian Computing with {INLA}: {N}ew Features.''} \emph{Computational Statistics and Data Analysis} 67: 68--83.
+
+\bibitem[\citeproctext]{ref-foreach}
+Microsoft, and Steve Weston. 2022. \emph{{foreach}: Provides Foreach Looping Construct}. \url{https://CRAN.R-project.org/package=foreach}.
 
 \bibitem[\citeproctext]{ref-here}
 Müller, Kirill. 2020. \emph{{here}: A Simpler Way to Find Your Files}. \url{https://CRAN.R-project.org/package=here}.
@@ -324,7 +449,7 @@ Pedersen, Thomas Lin. 2024. \emph{{patchwork}: The Composer of Plots}. \url{http
 Posit team. 2024. \emph{{RStudio}: Integrated Development Environment for r}. Boston, MA: Posit Software, PBC. \url{http://www.posit.co/}.
 
 \bibitem[\citeproctext]{ref-base}
-R Core Team. 2022. \emph{{R}: A Language and Environment for Statistical Computing}. Vienna, Austria: R Foundation for Statistical Computing. \url{https://www.R-project.org/}.
+R Core Team. 2024. \emph{{R}: A Language and Environment for Statistical Computing}. Vienna, Austria: R Foundation for Statistical Computing. \url{https://www.R-project.org/}.
 
 \bibitem[\citeproctext]{ref-INLA2017e}
 Rue, Håvard, Andrea I. Riebler, Sigrunn H. Sørbye, Janine B. Illian, Daniel P. Simpson, and Finn K. Lindgren. 2017. {``Bayesian Computing with {INLA}: {A} Review.''} \emph{Annual Reviews of Statistics and Its Applications} 4 (March): 395--421. \url{http://arxiv.org/abs/1604.00860}.
@@ -359,8 +484,8 @@ Wilke, Claus O., and Brenton M. Wiernik. 2022. \emph{{ggtext}: Improved Text Ren
 \bibitem[\citeproctext]{ref-bookdown2016}
 Xie, Yihui. 2016. \emph{{bookdown}: Authoring Books and Technical Documents with {R} Markdown}. Boca Raton, Florida: Chapman; Hall/CRC. \url{https://bookdown.org/yihui/bookdown}.
 
-\bibitem[\citeproctext]{ref-bookdown2024}
----------. 2024. \emph{{bookdown}: Authoring Books and Technical Documents with r Markdown}. \url{https://github.com/rstudio/bookdown}.
+\bibitem[\citeproctext]{ref-bookdown2025}
+---------. 2025. \emph{{bookdown}: Authoring Books and Technical Documents with r Markdown}. \url{https://github.com/rstudio/bookdown}.
 
 \bibitem[\citeproctext]{ref-rmarkdown2018}
 Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. \emph{R Markdown: The Definitive Guide}. Boca Raton, Florida: Chapman; Hall/CRC. \url{https://bookdown.org/yihui/rmarkdown}.

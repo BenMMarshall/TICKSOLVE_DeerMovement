@@ -174,7 +174,9 @@ generate_overview_maps <- function(deerData, akdeLists, landuseList, patches){
     comboPlot <- LCM1Plot + LCM2Plot +
       patchwork::plot_layout(guides = "collect")
 
-    ggsave(plot = comboPlot, filename = here("figures", paste0("overviewMaps_", animal, ".png")),
+    dir.create(here::here("figures", "overviewMaps"), showWarnings = FALSE)
+
+    ggsave(plot = comboPlot, filename = here("figures", "overviewMaps", paste0("overviewMaps_", animal, ".png")),
            width = 320, height = 220, units = "mm", dpi = 300)
 
     plotList[[animal]] <- comboPlot

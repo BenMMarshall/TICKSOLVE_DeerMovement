@@ -1,6 +1,6 @@
 standardise_connect_layer <- function(connectRasterLoc,
                                       REGION,
-                                      THETA){
+                                      THETA = NULL, MSEdf = NULL){
 
   # library(terra)
   # library(tidyterra)
@@ -16,6 +16,13 @@ standardise_connect_layer <- function(connectRasterLoc,
   connectTerra <- terra::rast(connectRasterLoc)
   names(connectTerra) <- "connectivity"
   standardise_01 <- function(x){(x-min(x))/(max(x)-min(x))}
+
+  if(!is.null(MSEdf)){
+    meanMSE <- MSEdf %>%
+      group_by(theta) %>%
+      summarise(meanMSE = mean(mse))
+    THETA <- meanMSE[meanMSE$meanMSE == min(meanMSE$meanMSE),]$theta
+  }
 
   # bestNormResults <- bestNormalize(
   #   x = values(connectTerra),
