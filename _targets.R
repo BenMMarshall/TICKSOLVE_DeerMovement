@@ -104,7 +104,25 @@ minPatchSize_m2 <- 5000
 setCropArea <- 750
 useCores <- 12
 
-buffers <- c(0, 100, 200, 500, 750)
+buffers <- c(0, 750)
+
+inputList <- list(
+  nAvailable = nAvailable,
+  typeAvialable = typeAvialable,
+  nAvailableSteps = nAvailableSteps,
+  slDistribution = slDistribution,
+  taDistribution = taDistribution,
+  windowSize = windowSize,
+  marginSize = marginSize,
+  locationError = locationError,
+  theta = connectSettings$THETA,
+  repeatsPerPair = connectSettings$repeatsPerPair,
+  minPatchSize_m2 = minPatchSize_m2,
+  setCropArea = setCropArea,
+  buffers = buffers
+)
+
+saveRDS(inputList, file = here::here("data", "inputList.rds"))
 
 # Replace the target list below with your own:
 coreTargetList <- list(

@@ -116,6 +116,9 @@ extract_akde_summaries <- function(deerData, akdeLists){
   }
   longestAxisSummary <- do.call(rbind, longestAxisList)
 
+  write.csv(longestAxisSummary,
+            file = here::here("tables", "longestAxisSummary.csv"), row.names = FALSE)
+
   return(list(allAreas = allAKDESummary,
               ctmmMean = aberMean,
               longestAxisSummary = longestAxisSummary))

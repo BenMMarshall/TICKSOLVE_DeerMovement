@@ -6,9 +6,12 @@ library(here)
 library(ggplot2)
 library(patchwork)
 
-targets::tar_load("tar_connectPois_location_1e.05_1")
+targets::tar_load("tar_connectStanPois_location_1e.05_3")
 targets::tar_load("tar_patchList")
-connectTerra <- terra::rast(tar_connectPois_location_1e.05_1)
+
+connectTerra <- terra::rast(
+  here("data", "GIS data", str_split(tar_connectStanPois_location_1e.05_3, "/")[[1]][6])
+)
 names(connectTerra) <- "connectivity"
 patchList <- tar_patchList
 

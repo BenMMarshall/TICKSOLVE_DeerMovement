@@ -57,7 +57,7 @@ create_package_txt <- function(excludes = NULL, rstudioVersion = "2024.12.0+467"
     # focus on the most relevant. INLA citation docs suggest citing some of the ones
     # they provide so I think this is ok.
     packagesDataframe$inTextString[packagesDataframe$pkg == "INLA"] <-
-      gsub("INLA2009a;|INLA2011c;|;INLA2017e;INLA2018f;INLA2016g;INLA2017h;INLA2018i",
+      gsub("@INLA2009a;|@INLA2011c;|;@INLA2017e;@INLA2018f;@INLA2016g;@INLA2017h;@INLA2018i",
            "",
            packagesDataframe$inTextString[packagesDataframe$pkg == "INLA"])
   }

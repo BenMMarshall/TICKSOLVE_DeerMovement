@@ -22,7 +22,7 @@ output:
 link-citations: yes
 linkcolor: gray
 bibliography: [deerMovement_refs.bib, packages_refs.bib]
-# csl: peerj.csl
+csl: peerj.csl
 editor_options: 
   markdown: 
     wrap: sentence
@@ -34,10 +34,13 @@ keywords: Movement ecology, step selection function, poisson, habitat preference
 
 # Methods
 
-``` {r libraries}
+``` {r librariesInputs, echo=FALSE, message=FALSE, warnings=FALSE}
 library(here)
 library(dplyr)
 library(stringr)
+
+inputList <- readRDS(file = here::here("data", "inputList.rds"))
+
 ```
 
 ## Study Area
@@ -55,73 +58,126 @@ knitr::include_graphics(here::here("figures", "trackingTimelag.png"))
 
 ## Home Range Esimation
 
+```{r homeRangeSummary, echo=FALSE, message=FALSE}
+akdeSummary <- read.csv(here::here("tables", "allAKDESummary_Aberdeen.csv"))
+
+essOverall <- paste0(round(range(akdeSummary$DOF_area), digits = 1), collapse = " and ")
+
+totalAberRange <- akdeSummary %>% 
+  filter(level == 0.95) %>% 
+  filter(str_detect(Animal_ID, "Roe")) %>% 
+  pull(est) %>% range()
+
+totalAberRange <- paste0(round(totalAberRange, digits = 1), collapse = " to ")
+
+aberMean <- readRDS(here::here("modelOutput", "aberdeenMeanAKDE.rds"))
+
+ctmmMean <- paste0(round(aberMean$CI[1,2], digits = 1),
+       " ha (95% CI ", round(aberMean$CI[1,1], digits = 1),
+       "-", round(aberMean$CI[1,3], digits = 1),
+       ")")
+
+longestAxisSummary <- read.csv(file = here::here("tables", "longestAxisSummary.csv"))
+longestAxisText <- mean(as.numeric(longestAxisSummary$longestAxisRange_m))/2
+
+bestModels <- akdeSummary %>% 
+  filter(level == 0.95, region == "Aberdeenshire") %>% 
+  pull(bestModel) %>% table()
+
+bestModels <- paste0(paste0(names(bestModels), " ", bestModels), collapse = "; ")
+
+```
+
 We estimated roe deer home range using autocorrelated kernel density estimators [@ctmm; @Calabrese2016; @Fleming2015; @Fleming2017].
 This process consisted of fitting a number of continuous time movement models to an individuals movement data, selecting the best fitting movement model, and extracting a suitable range contour from the resulting utilisation distribution.
-We fit the following models (following the default process provided by the ctmm package): OU, OUF, IID etc here.
-We used AIC to determine the best fitting movement model on an individual basis, and used that single best fitting model for all further estimations.
+We fit the following models (following the default process provided by the ctmm package): Ornstein-Uhlenbeck (OU), Ornstein–Uhlenbeck Foraging (OUF), and Independent Identically Distributed (IID), all in both isotropic and anisotropic forms.
+We elected to use perturbative hybrid residual maximum likelihood (pHREML) and [@fleming_overcoming_2019; @silva_autocorrelationinformed_2022] AICc to determine the best fitting movement model on an individual basis, and used that single best fitting model for all further estimations.
 
 Before committing to the estimations of home range size we examined whether the roe deer exhibited stable ranges through the visual inspection of variograms.
 A stable range should be reveal by a clear asymptote in the variogram.
-We paired these visual inspections with a judgement of effective sample size to help gasuge our confident in the area estimates (DEFINTION OF ESS HERE WOULD BE GOOD)  <!--CITE-->.
-All our individuals showed effective sample sizes _____, leading us to be confident in overall home range estimates.
-
-[PMREL goes in here somewhere] [@silva_autocorrelationinformed_2022]
+We paired these visual inspections with a judgement of effective sample size to help gauge our confident in the area estimates (effective sample size approximating the overall tracking duration divided by the mean time taken to cross the home range).  [@silva_autocorrelationinformed_2022].
+All our individuals showed effective sample sizes between `r essOverall`, leading us to be confident in overall home range estimates.
 
 Having determine the data suitability for home range estimations, we extracted the 95% and 99% contours from the weighted AKDE estimate, alongside 95% CI surrounding that contour.
 We selected 95% as a balance between a generous estimate of home range, while also avoiding the undue influence of the most extremely outlying movements.
-To generate an overall home range estimate for UK roe deer, we averaged all home ranges using the weighted mean function provided by the ctmm package [@ctmm; @silva_autocorrelationinformed_2022].
+To generate an overall home range estimate for Aberdeen roe deer, we averaged the home ranges using the weighted mean function provided by the ctmm package [@ctmm; @silva_autocorrelationinformed_2022].
 This way the home range mean is weighted by the confidence (i.e., ESS) surrounding each home range.
 
-We retained 99% estimates for guiding the between patch conenctivity to maximise the repeated between patch modelling, ie connecting as many patches as would be likely for an individual roe deer in the course of their life.
-We calculated the widest dimension of each home range polygon (or largest polygon if the home range area was non-contiguous), and halved that to serve as a proxy for the distance deer could travel between patches.
+We retained 99% estimates for guiding the between patch connectivity to maximise the repeated between patch modelling, i.e., connecting as many patches as would be likely for an individual roe deer in the course of their life.
+We calculated the widest dimension of each home range polygon (or largest polygon if the home range area was non-contiguous), and halved that to serve as a proxy for the distance deer could travel between patches (`r round(longestAxisText, digits = 0)` m).
 A mean of this longest dimension was used to limit which patches could be considered likely to be travelled between by deer.
 To confirm this approach, we determined the distance from patch for every deer location that fell outside a patch.
-We examined the distribution of these distance values that revealed that 95% of all deer movements fell within the mean of half longest dimension of the 99% home range area.
+We examined the distribution of these distance values that revealed that 95% of all deer movements fell within the mean of half longest dimension of the 99% home range area (Fig. \@ref(fig:distanceDistributionPlot)).
+
+```{r distanceDistributionPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Distance."}
+knitr::include_graphics(here::here("figures", "distanceDistributionPlot.png"))
+```
 
 ## Habitat Selection
 
 <!-- To determine habitat selection of roe deer we focused on the Aberdeen sub-sample as those individuals were tracked for longer periods of time providing the opportunity for a stable overall population estimate.  -->
-We determined selection using two methods: an integrated step selection function and a poisson model (Muff et al paper CITE).
+<!-- We determined selection using two methods: an integrated step selection function and a poisson model (Muff et al paper CITE). -->
 
-Both methods require a comparison of use (i.e., GPS locations of the deer) to available points (i.e., randomly generated locations the deer could that travelled).
-For each confirmed deer location we generated __ random alternative locations they could have travelled to.
+We used the reformulated Poisson model approach described by Muff et al <!--- CITE ---> to generate estimates of habitat selection as well as gauge deer's movement capabilities in relation to different aspects of the landscape.
+
+The model required data pertaining to the used locations (i.e., GPS locations of the deer) and comparable data on randomly generated available points (i.e., randomly generated locations the deer could that travelled).
+For each confirmed deer location we generated `r inputList$nAvailableSteps` random alternative locations they could have travelled to.
 The location of these random locations was governed by two distributions.
-A gamma distribution that random step lengths were drawn from, and a von Mises distribution that random turn directions were drawn from.
-Both distribution where calibrated (e.g., shape, size, mu, and kappa) by the underlying movement data.
-The same data was used in both modelling approaches.
+A `r str_to_sentence(inputList$slDistribution)` distribution that random step lengths were drawn from, and a Von Mises distribution that random turn directions were drawn from.
+<!-- Both distribution where calibrated (e.g., shape, size, mu, and kappa) by the underlying movement data. -->
+<!-- The same data was used in both modelling approaches. -->
 
 Once all random locations had been generated we extracted a suite of environmental conditions at all those locations.
-First was the land use type.
-Using the 25m resolution.
-[NEED SOMETHING ON RESOLUTION]
-We used the land use data provided by UKCEH (CITE AND DETAILS HERE).
-We recategoriesd the UKCEH land use categories into __ more general categories that reduced instances of limited interaction with the deer movement data thereby aiding habitat selection model convergence and avoided extreme, unstable selection estimates.
+First was the land use type as described by the 2023 UKCEH land cover maps, which is a 25m resolution classified raster originally based on Sentinel-2 imagery <!-- cite UKCEH documentation -->.
+Validation of these data suggest 83% accuracy <!-- near direct quote -->.
+<!-- Marston et al. (2024c) -->
+<!-- Marston, C., Morton, R.D., O’Neil, A.W., and Rowland, C.S. (2024c). Land Cover Map 2023 (25m rasterised land parcels, GB). NERC EDS Environmental Information Data Centre. -->
+<!-- https://doi.org/10.5285/ab10ea4a-1788-4d25-a6df-f1aff829dfff -->
+The UKCEH land cover data comprises of 21 land cover classes, broadly following the Biodiversity Broad Habitats <!-- cite Jackson 2000 -->.
+<!-- Jackson D.L. (2000). Guidance on the interpretation of the Biodiversity Broad Habitat Classification -->
+<!-- (terrestrial and freshwater types): Definitions and the relationship with other classifications, JNCC -->
+<!-- Report 307, 73 pages, ISSN 0963 8091(http://www.jncc.gov.uk/page-2433) -->
+
+We recategorised these land use types categories into 10 more general categories that reduced instances of limited interaction with the deer movement data thereby aiding habitat selection model convergence and avoided extreme, unstable selection estimates.
 <!-- also made the results compatible with efforts to model deer tick dymanics -->
-We also acquired woody linear feature (i.e., hedgerows) data from UKCEH (CITE AND DETAILS).
+
+In addition to land use types, we also acquired woody linear feature (i.e., hedgerows) data from UKCEH <!-- CITE scholefield -->.
+This dataset maps the woody linear features across the UK (e.g., woodland) as polylines, based on Ordnance Survey maps and the 2007 UKCEH Land Cover Map <!-- cite morton et al 2011 -->.
+
+<!-- Scholefield, P.A.; Morton, R.D.; Rowland, C.S.; Henrys, P.A.; Howard, D.C.; Norton, L.R. (2016). Woody linear features framework, Great Britain v.1.0. NERC Environmental Information Data Centre. -->
+<!-- https://doi.org/10.5285/d7da6cb9-104b-4dbc-b709-c1f7ba94fb16 -->
+
+<!-- MORTON, D., ROWLAND, C., WOOD, C., MEEK, L., MARSTON, C., SMITH, G., WADSWORTH, R., SIMPSON, I.C., (2011) FINAL REPORT FOR LCM2007 - THE NEW UK LAND COVER MAP. COUNTRYSIDE SURVEY TECHNICAL REPORT NO. 11/07 NERC/CENTRE FOR ECOLOGY & HYDROLOGY 112PP. (CEH PROJECT NUMBER: C03259) -->
+
 We converted the polygon spatial data into a raster, where 1 == hedgerow, and used that rasterisation to generate a distance to hedgerow raster for the entire study landscape.
 We conducted the same process to create a distance to woodland raster, where we calculated the distance from any area the UKCEH land use data classed as deciduous or coniferous woodland.
 These distance rasters allowed for easy extraction of the distance to the nearest hedgerow and woodland for all locations.
-We acquired road data from OS map open GOV licensed (CITE HERE with DETAILS). 
+
+We acquired road data from OS map open GOV licensed <!--- cite Ordance survey -->. 
 We created a binary variable describing crossing events for all steps, with all steps that crossed one or more of the roads being classed as 1.
 This binary variable allowed us to estimate the likelihood deer cross a road and therefore the level of barrier roads present.
+<!-- Ordnance Survey 2024 OS Open Roads v.2.4 © Crown copyright -->
+<!-- https://osdatahub.os.uk/downloads/open/OpenRoads -->
 
-<!-- Integrated Step Selection Functions -->
-For the iSSFs we ran a single model for each individual deer.
-<!-- make sure to mention whehther it was all deer or just aberdeen deer - SURELY SHOUDL ONLY BE ABERDEEN SO WE CAN USE WESSEX AS A VALID INDEPENDENT VALIDATION SET -->
-The model formulae consisted of land use (__ category variable, with decidious woodland placed as the reference category), distance to woodland (continous in m), distance to hedgerow (continuous in m), road crossing (binary).
-In addition to these selection focused predictors, we several movement predictors including step length, turn angle, log step length, cos turn angle, as well as the interaction between step length and land use, step length and distance to woodland.
-<!-- make sure this all matches up with what is actually run -->
+To ensure compatibility between all data sources, we ensured all data was projected into the British National Grid (BNG) coordinate reference system (OSGB36, epsg: 27700) before undertaking analysis.
+
 <!-- Poisson Model -->
-The Poisson model was a single population level model that included all the individuals data.
-The formula was largely the same as the iSSF, except for the removal of the movement predictors and interactions, and the addition of fixed gaussian process to allow for selection effect to vary by individual. <!-- check termiloogy here  -->
-Previous work has demonstrate that the inclusions of those aid bias reduction in iSSFs but can lead to increased bias and more variable estimates when placed in the Poisson model approach.
-<!-- no movement aspects in formula, can cite Muff et al and Marshall et al (preprint), suggesting that its leads to more vairable estimates  -->
+The Poisson model formulae consisted of land use (a 8-term category variable formed into 7 dummy variables, with deciduous woodland placed as the reference category, barren and other excluded), distance to woodland (continuous in m), distance to hedgerow (continuous in m), road crossing (binary).
+In addition to these selection focused predictors, we several movement predictors including step length, log step length, and cos turn angle, as well as the interaction between step length and log of step length with all land use types.
+As the population Possion model contained all individuals the formula required in the inclusion of fixed Gaussian processes accounting for the time step as well as the individual.
+<!-- double check the wording here -->
+This formulation, namely the fixed Gaussian processes, as described by Muff et al <!--- CITE --> allows for the efficient estimation of population level selection using integrated nested Laplace approximation (INLA) <!-- pick an INLA Cite for here -->.
+
+<!-- if no movement aspects in formula, can cite Muff et al and Marshall et al (preprint), suggesting that its leads to more vairable estimates  -->
 
 ## Translating Preferences into Connectivity
 
-Once we had estimates of selection and effect for all the environmental aspects of interest, we spatially mapped those estimated covariates back onto the landscape, resulting in a map of resistance.
-For the iSSF the covariates we used consisted of the median estimate for each predictor, and as some required a required a step length and turn angle, we elected to use the mean of both to generate all resistance maps.
-For both methods we ignored the uncertainty surrounding the selection estimates, instead relying on just the point estimates for the resistance mapping.
+Once we had estimates of selection and effect for all the environmental aspects of interest, we spatially mapped those estimated covariates back onto the landscape, resulting in a map of conductance (Fig. \@ref:(figconductancePlot)).
+This process took the form of generating a model matrix based on all environmental covariates at each cell in the overall landscape raster and using the fitted Poisson model coefficients to calculate predicted deer use for each cell.
+For roads we rasterised the road polyline data and used the road crossing coefficient to create a conductance value for the road cells.
+For the covariates that involved movement interactions, we used the mean step and turn angle in calculations of predicted use.
+We replaced any areas with 0 conductance with 1e-12 to avoid any dead-ends or any absolute barriers.
+For we ignored the uncertainty surrounding the selection estimates, instead relying on just the point estimates for the resistance mapping.
 <!-- invert logit to standardise them and flip them to movement ease -->
 
 ```{r conductancePlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Conductance"}
@@ -129,25 +185,29 @@ knitr::include_graphics(here::here("figures", "resistanceConductanceMap_Pois_Abe
 ```
 
 <!-- Random Shortest Paths -->
-We used two methods to simulate potential connectivity across the landscapes.
-The first was random shortest paths, that consists of generating random walks between locations.
+We used random shortest paths, that consists of generating random walks between locations, to simulate potential connectivity across the landscapes.
 This method was used to show the connectivity of areas used by RIENDEER(?), and offers a mechanism for calibrating the connectivity maps to both the habitat selection and movement path characteristics.
 <!-- CITE THE REINDEER MOVEMENT PAPER -->
 We used habitat patches as the sources of our random locations.
-Each patch had __ start and end locations generated within it, we then ran walks from these locations to all other patch locations within 750 m of that patch.
+We limited calculations of random shortest paths to pairs of patches that existed within 750 m of each other.
+We selected 750 m as that represented the mean longest axis of the 99% HR estimate of the deer (excluding outlying non-contiguous portions of the area polygons).
+For every pairing, we generated `r inputList$repeatsPerPair[1]` start and end locations in each patch and ran random shortest paths between these locations.
+We repeated this for every pairing of patches.
 <!-- excluded patches smaller than the smallest selected patch area -->
 We elected not to generate start or end points in patches less than 0.5ha in areas, following <!-- cite -->. 
 This was due to these patches being unlikely to host deer populations and the reduction in origin patches aided computational costs.
-We selected 750 m as that represented the mean longest axis of the 99% HR estimate of the deer (excluding outlying non-contiguous portions of the area polygons).
-
-```{r distanceDistributionPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Distance."}
-knitr::include_graphics(here::here("figures", "distanceDistributionPlot.png"))
-```
-
+<!-- double check patch numbers if wessex is updated -->
+The 0.5 ha threshold meant that 3415 Aberdeen patches and 154 Wessex patches were included in the generation of random shortest paths, thereby necessitating optimisations for the sake of compute time.
+Instead of considering the entire landscape when calculating the paths, the vast majority of which would not play a role between two neighbouring patches, we cropped the conductance raster to only include at area surrounding the randomly selected start and end points.
+This cropped area was `r inputList$setCropArea`m in all directions from the start and end points; where start and end points exceeded four times `r inputList$setCropArea`m apart from each other we extended the cropped area to half the distance between the two points in all directions.
+This was required to avoid prohibitively computational intensive paths (i.e., those that encompassed nearly the entire landscape) caused by patches with large areas.
+A further optimisation was required to run the random shortest paths efficiently, we limited the distance between start and end location to four times the mean longest axis of the 99% HR estimate (4 times `r round(longestAxisText, digits = 0)` m).
+This adaptive cropping allowed for much faster calculation, while retaining sufficient raster landscape for circuitous paths to be estimated.
 
 Once every walk was complete, the resulting rasters describing the likelihood of a deer crossing a cell are complied into a single landscape raster describing connectivity and standardised between 0 and 1 (where 0 is low connectivity and 1 is high connectivity).
+
 A key consideration in these walks is how random the paths are.
-We elected to run walks at __ different levels of randomness (theta; with 1 being close to a least cost path, and ____ being the most random and diffuse walks).
+We elected to run walks at `r length(inputList$theta)` different levels of randomness (theta; with 1 being close to a least cost path, and `r inputList$theta[length(inputList$theta)]` being the most random and diffuse walks; Fig. \@ref(fig:thetaPlot)).
 
 ```{r thetaPlot, echo=FALSE, out.width='100%', fig.align="centre", fig.cap="The connectivity maps under differing levels of theta (randomness) in the random shortest paths between patches. The colour scale is squarerooted to better differeniate low conenctivity areas."}
 knitr::include_graphics(here::here("figures", "thetaMaps_Pois.png"))
@@ -155,11 +215,13 @@ knitr::include_graphics(here::here("figures", "thetaMaps_Pois.png"))
 
 To determine what level of randomness best reflected the realised movements of the deer, we compared the resulting connectivity maps to dynamic Brownian Bridge Movement Models.
 Dynamic Brownian Bridge Movement Models run a series of random walks between defined start and end points, from the summation of these walks you can extract a rasterised occurrence distribution.
+<!-- cite move and kransturber here -->
 Critically the dBBMM walks are calibrated to the movement capacity of the animal through rolling window (i.e., a number of data points) that summarises the movement rate during that time.
 Additionally within that window, a margin (a subset of data points) is used to detect any sudden changes in movement capacity that may be reflect of behavioural/movement mode changes.
 Therefore the dBBMMs provide a estimate of how diffuse the movements could be between known locations.
-We ran dBBMMs for all roe deer with a window size of __ and a margin of __, that provided estimates of motion variance on roughly a weekly sliding window with the allowance of sudden motion variance changes day to day (margin).
-We compared the dBBMMs to the connectivity maps constructed with varying levels of randomness, and used mean squared least [EXTACT TERM HERE] to determine which level of randomness best fit the movement data.
+We ran dBBMMs for all roe deer with a window size of `r inputList$windowSize` and a margin of `r inputList$marginSize`, that provided estimates of motion variance on roughly a weekly sliding window with the allowance of sudden motion variance changes day to day (margin).
+We compared the dBBMMs to the connectivity maps constructed with varying levels of randomness, and used mean squared error to determine which level of randomness best fit the movement data.
+We used the connectivity map created using that theta value for all subsequent analysis.
 <!-- Circuitscape -->
 <!-- The second method we used to create connectivity maps was circuitscape. -->
 <!-- Explainer why circuitscape is good to use in two sentences here -->
@@ -169,7 +231,7 @@ We compared the dBBMMs to the connectivity maps constructed with varying levels 
 ## Validation
 
 We examined whether the connectivity maps generated matched the observed movements of roe deer using a logistic regression.
-The model was supplied with the known locations of deer as well as ___ randomly generated points across the landscape, all of which had associated connectivity values.
+The model was supplied with the known locations of deer as well as `r inputList$nAvailable` randomly generated points per known deer location across the landscape, all of which had associated connectivity values.
 We formulated the model to predict whether a point was used or random based on the connectivity values, and we included a random effect for deer ID.
 The expectation was that the model coefficients would indicate that deer locations were positively associated with higher connectivity values.
 
@@ -190,42 +252,94 @@ knitr::include_graphics(here::here("figures", "densityOfConnectivity_Wessex.png"
 
 # Results
 
-```{r homeRangeSummary}
-akdeSummary <- read.csv(here::here("tables", "allAKDESummary_Aberdeen.csv"))
-
-totalAberRange <- akdeSummary %>% 
-  filter(level == 0.95) %>% 
-  filter(str_detect(Animal_ID, "Roe")) %>% 
-  pull(est) %>% range()
-
-totalAberRange <- paste0(round(totalAberRange, digits = 1), collapse = " to ")
-
-aberMean <- readRDS(here::here("modelOutput", "aberdeenMeanAKDE.rds"))
-
-ctmmMean <- paste0(round(aberMean$CI[1,2], digits = 1),
-       " ha (95% CI ", round(aberMean$CI[1,1], digits = 1),
-       "-", round(aberMean$CI[1,3], digits = 1),
-       ")")
-
-```
-
-Home range sizes
-`totalAberRange`
-`ctmmMean`
+For our Aberdeen Roe Deer home range sizes ranged from `r totalAberRange`ha (95% contour point estimates), with a weighted mean of `r ctmmMean`.
+Largely the deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (__IDs HERE__).
+All bar two individuals found OU models to fit best, with the remaining two being better described by OUF models.
+All best fitting models were anisotropic, suggesting these Roe Deer are inhabiting non-uniform home ranges (i.e., not being as wide as they are tall).
 
 ```{r homeRangeSize, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Home range size."}
 knitr::include_graphics(here::here("figures", "homeRangeAreaPlot.png"))
 ```
 
-Habitat selection preferences
-
-```{r poisCoef}
+```{r poisCoef, echo=FALSE, message=FALSE}
 poisCoef <- read.csv(here::here("tables", "poisFixed.csv"))
+
+poisCoef <- poisCoef %>% 
+  mutate(intext = paste0(signif(mean, digits = 2),
+                         "; 95% CI ", signif(lower, digits = 2), " to ", 
+                         signif(upper, digits = 2)))
+
+distWoodCoef <- poisCoef %>% 
+  filter(term == "Distance to Woodland") %>%
+  pull(intext)
+distHedgeCoef <- poisCoef %>% 
+  filter(term == "Distance to Hedges") %>%
+  pull(intext)
+roadCrossCoef <- poisCoef %>% 
+  filter(term == "Road Crossing") %>%
+  pull(intext)
+
+shrubCoef <- poisCoef %>% 
+  filter(term == "Open Shrubland") %>%
+  pull(intext)
+tallGCoef <- poisCoef %>% 
+  filter(term == "Tall Grassland") %>%
+  pull(intext)
+
+tallG_sl_Coef <- poisCoef %>% 
+  filter(term == "Tall Grassland:sl_") %>%
+  pull(intext)
+tallG_logsl_Coef <- poisCoef %>% 
+  filter(term == "Tall Grassland:log_sl") %>%
+  pull(intext)
+
+shortG_sl_Coef <- poisCoef %>% 
+  filter(term == "Short Grassland:sl_") %>%
+  pull(intext)
+shortG_logsl_Coef <- poisCoef %>% 
+  filter(term == "Short Grassland:log_sl") %>%
+  pull(intext)
+
+crop_sl_Coef <- poisCoef %>% 
+  filter(term == "Cropland:sl_") %>%
+  pull(intext)
+crop_logsl_Coef <- poisCoef %>% 
+  filter(term == "Cropland:log_sl") %>%
+  pull(intext)
+
+humanCoef <- poisCoef %>% 
+  filter(term == "Human Settlements") %>%
+  pull(intext)
+# Human Settlements	Landuse	
+# Evergreen Needleleaf Forest	Landuse	
+# Cropland	Landuse	
+# Tall Grassland	Landuse	
+# Permanent Wetland	Landuse	
+# Short Grassland	Landuse	
+# Open Shrubland
+
+
 ```
 
-log_sl impacts the shape parameter - so like shifting the mean up as it gets bigger
-sl_ impacts the scale parameter - so increases mean greater variance and less of a peak
+The Poisson habitat selection model reveal a general tendency for Roe Deer to remain closer to the woodland patches (`r distWoodCoef`), and with no significant care for hedgerows (`r distHedgeCoef`; Fig. \@ref(fig:poisCoefPlot))).
+The model also revealed that roads play a significant role in reducing connectivity across the landscape, with a significantly negative coefficient (`r roadCrossCoef`).
+
+Overall selection revealed significant selection for open shrubland (`r shrubCoef`) and tall grassland (`r tallGCoef`), with other relationships being less clear.
+Movement was most impacted by short grassland, tall grassland, and cropland, all showing the same pattern.
+These step lengths in these land uses to be lower, as seen in coeficeints for log step length (short grassland `r shortG_sl_Coef`; tall grassland `r tallG_sl_Coef`; cropland `r crop_sl_Coef`) but with a larger tail to the gamma distribution (i.e, larger coefficient for step lengths; short grassland `r shortG_logsl_Coef`; tall grassland `r tallG_logsl_Coef`; cropland `r crop_logsl_Coef`).
+
+Estimates regarding human settlements were paired with very wide confidence intervals (`r humanCoef`), likely a result of minimal interaction with the tracked deer making estimation difficult.
+There are therefore treated as the point estimate suggests as areas of very low conductivity in further analysis.
+
+<!-- tendency to choose open shubrland and tall grass where possible, but avoiding cropland and needdleleaf forest -->
+<!-- only part of picture as movements tended to be lower in grasslands and cropland as seen in log_sl but with a larger tail to the gamma distribution (i.e, more variable as reflected in the increase in sl_). -->
+
+<!-- extreme answers for human settlement due to exposure, not a big deal treated as low conductivity  -->
+
+<!-- sl_ impacts the scale parameter - so increases mean greater variance and less of a peak? -->
+<!-- log_sl impacts the shape parameter - so like shifting the mean up as it gets bigger? -->
 <!-- shape parameter α and a scale parameter θ -->
+
 
 ```{r poisCoefPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Poisson coefficients."}
 knitr::include_graphics(here::here("figures", "poisCoef.png"))
