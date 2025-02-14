@@ -1,10 +1,10 @@
 ---
 title: "Roe Deer Movement"
-author1: "Benjamin Michael Marshall*"
+author1: "---*"
 author2: "---**"
 affiliation1: "---"
 affiliation2: "---"
-corresponding1: "benjaminmichaelmarshall@gmail.com"
+corresponding1: "---"
 corresponding2: "---"
 date: "`r Sys.Date()`"
 output:
@@ -21,7 +21,7 @@ output:
     fig_caption: true
 link-citations: yes
 linkcolor: gray
-bibliography: [deerMovement_refs.bib, packages_refs.bib]
+bibliography: [deerMovement_refs.bib, packages_refs.bib, packagesRstudio_refs.bib]
 csl: peerj.csl
 editor_options: 
   markdown: 
@@ -48,11 +48,11 @@ inputList <- readRDS(file = here::here("data", "inputList.rds"))
 <!-- resampling of data, overview of data quantity -->
 <!-- removed first week of data -->
 
-```{r trackingDuration, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Duration"}
+```{r trackingDuration, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Duration"}
 knitr::include_graphics(here::here("figures", "trackingDuration.png"))
 ```
 
-```{r trackingTimelags, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Time lags."}
+```{r trackingTimelags, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Time lags."}
 knitr::include_graphics(here::here("figures", "trackingTimelag.png"))
 ```
 
@@ -109,7 +109,7 @@ A mean of this longest dimension was used to limit which patches could be consid
 To confirm this approach, we determined the distance from patch for every deer location that fell outside a patch.
 We examined the distribution of these distance values that revealed that 95% of all deer movements fell within the mean of half longest dimension of the 99% home range area (Fig. \@ref(fig:distanceDistributionPlot)).
 
-```{r distanceDistributionPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Distance."}
+```{r distanceDistributionPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Distance."}
 knitr::include_graphics(here::here("figures", "distanceDistributionPlot.png"))
 ```
 
@@ -118,7 +118,7 @@ knitr::include_graphics(here::here("figures", "distanceDistributionPlot.png"))
 <!-- To determine habitat selection of roe deer we focused on the Aberdeen sub-sample as those individuals were tracked for longer periods of time providing the opportunity for a stable overall population estimate.  -->
 <!-- We determined selection using two methods: an integrated step selection function and a poisson model (Muff et al paper CITE). -->
 
-We used the reformulated Poisson model approach described by Muff et al <!--- CITE ---> to generate estimates of habitat selection as well as gauge deer's movement capabilities in relation to different aspects of the landscape.
+We used the reformulated Poisson model approach described by @muff_accounting_2020 to generate estimates of habitat selection as well as gauge deer's movement capabilities in relation to different aspects of the landscape.
 
 The model required data pertaining to the used locations (i.e., GPS locations of the deer) and comparable data on randomly generated available points (i.e., randomly generated locations the deer could that travelled).
 For each confirmed deer location we generated `r inputList$nAvailableSteps` random alternative locations they could have travelled to.
@@ -128,36 +128,23 @@ A `r str_to_sentence(inputList$slDistribution)` distribution that random step le
 <!-- The same data was used in both modelling approaches. -->
 
 Once all random locations had been generated we extracted a suite of environmental conditions at all those locations.
-First was the land use type as described by the 2023 UKCEH land cover maps, which is a 25m resolution classified raster originally based on Sentinel-2 imagery <!-- cite UKCEH documentation -->.
-Validation of these data suggest 83% accuracy <!-- near direct quote -->.
-<!-- Marston et al. (2024c) -->
-<!-- Marston, C., Morton, R.D., O’Neil, A.W., and Rowland, C.S. (2024c). Land Cover Map 2023 (25m rasterised land parcels, GB). NERC EDS Environmental Information Data Centre. -->
-<!-- https://doi.org/10.5285/ab10ea4a-1788-4d25-a6df-f1aff829dfff -->
-The UKCEH land cover data comprises of 21 land cover classes, broadly following the Biodiversity Broad Habitats <!-- cite Jackson 2000 -->.
-<!-- Jackson D.L. (2000). Guidance on the interpretation of the Biodiversity Broad Habitat Classification -->
-<!-- (terrestrial and freshwater types): Definitions and the relationship with other classifications, JNCC -->
-<!-- Report 307, 73 pages, ISSN 0963 8091(http://www.jncc.gov.uk/page-2433) -->
+First was the land use type as described by the 2023 UKCEH land cover maps, which is a 25m resolution classified raster originally based on Sentinel-2 imagery [@morton_land_2024].
+Validation of these data suggest 83% accuracy [@morton_land_2024].
+The UKCEH land cover data comprises of 21 land cover classes, broadly following the Biodiversity Broad Habitats [@jackson_guidance_2000].
 
 We recategorised these land use types categories into 10 more general categories that reduced instances of limited interaction with the deer movement data thereby aiding habitat selection model convergence and avoided extreme, unstable selection estimates.
 <!-- also made the results compatible with efforts to model deer tick dymanics -->
 
-In addition to land use types, we also acquired woody linear feature (i.e., hedgerows) data from UKCEH <!-- CITE scholefield -->.
-This dataset maps the woody linear features across the UK (e.g., woodland) as polylines, based on Ordnance Survey maps and the 2007 UKCEH Land Cover Map <!-- cite morton et al 2011 -->.
-
-<!-- Scholefield, P.A.; Morton, R.D.; Rowland, C.S.; Henrys, P.A.; Howard, D.C.; Norton, L.R. (2016). Woody linear features framework, Great Britain v.1.0. NERC Environmental Information Data Centre. -->
-<!-- https://doi.org/10.5285/d7da6cb9-104b-4dbc-b709-c1f7ba94fb16 -->
-
-<!-- MORTON, D., ROWLAND, C., WOOD, C., MEEK, L., MARSTON, C., SMITH, G., WADSWORTH, R., SIMPSON, I.C., (2011) FINAL REPORT FOR LCM2007 - THE NEW UK LAND COVER MAP. COUNTRYSIDE SURVEY TECHNICAL REPORT NO. 11/07 NERC/CENTRE FOR ECOLOGY & HYDROLOGY 112PP. (CEH PROJECT NUMBER: C03259) -->
+In addition to land use types, we also acquired woody linear feature (i.e., hedgerows) data from UKCEH [@scholefield_woody_2016].
+This dataset maps the woody linear features across the UK (e.g., woodland) as polylines, based on Ordnance Survey maps and the 2007 UKCEH Land Cover Map [@morton_final_2011].
 
 We converted the polygon spatial data into a raster, where 1 == hedgerow, and used that rasterisation to generate a distance to hedgerow raster for the entire study landscape.
 We conducted the same process to create a distance to woodland raster, where we calculated the distance from any area the UKCEH land use data classed as deciduous or coniferous woodland.
 These distance rasters allowed for easy extraction of the distance to the nearest hedgerow and woodland for all locations.
 
-We acquired road data from OS map open GOV licensed <!--- cite Ordance survey -->. 
+We acquired road data from OS map open GOV licensed [@ordnance_survey_os_2024]. 
 We created a binary variable describing crossing events for all steps, with all steps that crossed one or more of the roads being classed as 1.
 This binary variable allowed us to estimate the likelihood deer cross a road and therefore the level of barrier roads present.
-<!-- Ordnance Survey 2024 OS Open Roads v.2.4 © Crown copyright -->
-<!-- https://osdatahub.os.uk/downloads/open/OpenRoads -->
 
 To ensure compatibility between all data sources, we ensured all data was projected into the British National Grid (BNG) coordinate reference system (OSGB36, epsg: 27700) before undertaking analysis.
 
@@ -166,8 +153,7 @@ The Poisson model formulae consisted of land use (a 8-term category variable for
 In addition to these selection focused predictors, we several movement predictors including step length, log step length, and cos turn angle, as well as the interaction between step length and log of step length with all land use types.
 As the population Possion model contained all individuals the formula required in the inclusion of fixed Gaussian processes accounting for the time step as well as the individual.
 <!-- double check the wording here -->
-This formulation, namely the fixed Gaussian processes, as described by Muff et al <!--- CITE --> allows for the efficient estimation of population level selection using integrated nested Laplace approximation (INLA) <!-- pick an INLA Cite for here -->.
-
+This formulation, namely the fixed Gaussian processes, as described by @muff_accounting_2020 allows for the efficient estimation of population level selection using integrated nested Laplace approximation (INLA) [@INLA2013b;@INLA2015d]
 <!-- if no movement aspects in formula, can cite Muff et al and Marshall et al (preprint), suggesting that its leads to more vairable estimates  -->
 
 ## Translating Preferences into Connectivity
@@ -180,14 +166,14 @@ We replaced any areas with 0 conductance with 1e-12 to avoid any dead-ends or an
 For we ignored the uncertainty surrounding the selection estimates, instead relying on just the point estimates for the resistance mapping.
 <!-- invert logit to standardise them and flip them to movement ease -->
 
-```{r conductancePlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Conductance"}
+```{r conductancePlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Conductance"}
 knitr::include_graphics(here::here("figures", "resistanceConductanceMap_Pois_Aberdeenshire.png"))
 ```
 
 <!-- Random Shortest Paths -->
 We used random shortest paths, that consists of generating random walks between locations, to simulate potential connectivity across the landscapes.
-This method was used to show the connectivity of areas used by RIENDEER(?), and offers a mechanism for calibrating the connectivity maps to both the habitat selection and movement path characteristics.
-<!-- CITE THE REINDEER MOVEMENT PAPER -->
+This method was used to show the connectivity of areas used by reindeer, and offers a mechanism for calibrating the connectivity maps to both the habitat selection and movement path characteristics [@panzacchi_predicting_2016].
+
 We used habitat patches as the sources of our random locations.
 We limited calculations of random shortest paths to pairs of patches that existed within 750 m of each other.
 We selected 750 m as that represented the mean longest axis of the 99% HR estimate of the deer (excluding outlying non-contiguous portions of the area polygons).
@@ -209,13 +195,12 @@ Once every walk was complete, the resulting rasters describing the likelihood of
 A key consideration in these walks is how random the paths are.
 We elected to run walks at `r length(inputList$theta)` different levels of randomness (theta; with 1 being close to a least cost path, and `r inputList$theta[length(inputList$theta)]` being the most random and diffuse walks; Fig. \@ref(fig:thetaPlot)).
 
-```{r thetaPlot, echo=FALSE, out.width='100%', fig.align="centre", fig.cap="The connectivity maps under differing levels of theta (randomness) in the random shortest paths between patches. The colour scale is squarerooted to better differeniate low conenctivity areas."}
+```{r thetaPlot, echo=FALSE, out.width='100%', fig.align="centre", fig.pos = "h", fig.cap="The connectivity maps under differing levels of theta (randomness) in the random shortest paths between patches. The colour scale is squarerooted to better differeniate low conenctivity areas."}
 knitr::include_graphics(here::here("figures", "thetaMaps_Pois.png"))
 ```
 
-To determine what level of randomness best reflected the realised movements of the deer, we compared the resulting connectivity maps to dynamic Brownian Bridge Movement Models.
+To determine what level of randomness best reflected the realised movements of the deer, we compared the resulting connectivity maps to dynamic Brownian Bridge Movement Models [@Kranstauber2012; @move].
 Dynamic Brownian Bridge Movement Models run a series of random walks between defined start and end points, from the summation of these walks you can extract a rasterised occurrence distribution.
-<!-- cite move and kransturber here -->
 Critically the dBBMM walks are calibrated to the movement capacity of the animal through rolling window (i.e., a number of data points) that summarises the movement rate during that time.
 Additionally within that window, a margin (a subset of data points) is used to detect any sudden changes in movement capacity that may be reflect of behavioural/movement mode changes.
 Therefore the dBBMMs provide a estimate of how diffuse the movements could be between known locations.
@@ -235,30 +220,27 @@ The model was supplied with the known locations of deer as well as `r inputList$
 We formulated the model to predict whether a point was used or random based on the connectivity values, and we included a random effect for deer ID.
 The expectation was that the model coefficients would indicate that deer locations were positively associated with higher connectivity values.
 
-```{r densityOfConnectivityAberdeen, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Connectivity values distribitions."}
-knitr::include_graphics(here::here("figures", "densityOfConnectivity_Aberdeen.png"))
-```
-
-```{r densityOfConnectivityWessex, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Connectivity values distribitions."}
-knitr::include_graphics(here::here("figures", "densityOfConnectivity_Wessex.png"))
-```
-
 <!-- ## Projecting to Wessex -->
 <!-- We elected to retain the Wessex Roe Deer data for model validation, as compared to Aberdeen the tracking was conducted for a shorter period with fewer individuals. -->
 <!-- We compared the known locations of deer to the connectivity maps to test their ability to predict deer movements. -->
 <!-- precision recall?? might not be possible as no binary -->
 <!-- Root Mean Squared Error (RSME) -->
 <!-- logistic regression -->
+\clearpage
 
 # Results
 
 For our Aberdeen Roe Deer home range sizes ranged from `r totalAberRange`ha (95% contour point estimates), with a weighted mean of `r ctmmMean`.
-Largely the deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (__IDs HERE__).
+Largely the deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8, Roe Deer 3).
 All bar two individuals found OU models to fit best, with the remaining two being better described by OUF models.
 All best fitting models were anisotropic, suggesting these Roe Deer are inhabiting non-uniform home ranges (i.e., not being as wide as they are tall).
 
-```{r homeRangeSize, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Home range size."}
+```{r homeRangeSize, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Home range size."}
 knitr::include_graphics(here::here("figures", "homeRangeAreaPlot.png"))
+```
+
+```{r variogramPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Variogram plot."}
+knitr::include_graphics(here::here("figures", "varioRoePlot.png"))
 ```
 
 ```{r poisCoef, echo=FALSE, message=FALSE}
@@ -340,26 +322,31 @@ There are therefore treated as the point estimate suggests as areas of very low 
 <!-- log_sl impacts the shape parameter - so like shifting the mean up as it gets bigger? -->
 <!-- shape parameter α and a scale parameter θ -->
 
-
-```{r poisCoefPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Poisson coefficients."}
+```{r poisCoefPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Poisson coefficients."}
 knitr::include_graphics(here::here("figures", "poisCoef.png"))
 ```
 
-Connectivity maps and validation
+## Connectivity maps
 
-```{r poisConnect, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.cap="Poisson coefficients."}
+```{r poisConnect, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Poisson coefficients."}
 knitr::include_graphics(here::here("figures", "patchConnectivity_Pois_Aberdeenshire.png"))
 ```
 
+## Validation
 
-# Discussion
+```{r densityOfConnectivityAberdeen, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Connectivity values distribitions."}
+knitr::include_graphics(here::here("figures", "densityOfConnectivity_Aberdeen.png"))
+```
 
-## Conlcusions
+```{r densityOfConnectivityWessex, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Connectivity values distribitions."}
+knitr::include_graphics(here::here("figures", "densityOfConnectivity_Wessex.png"))
+```
+
+\clearpage
 
 # Acknowledgements
 
-
-# Software availablity
+## Software availablity
 
 ```{r packageText, child="packageParagraph.txt", eval=TRUE}
 
@@ -368,9 +355,9 @@ knitr::include_graphics(here::here("figures", "patchConnectivity_Pois_Aberdeensh
 <!-- CIRCUITSCAPE -->
 <!-- circuitscape, juliacall -->
 
-# Data availabilty
+## Data availabilty
 
-# Author Contributions
+## Author Contributions
 
 # Supplementary Material
 

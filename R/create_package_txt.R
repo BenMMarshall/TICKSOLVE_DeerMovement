@@ -40,6 +40,7 @@ create_package_txt <- function(excludes = NULL, rstudioVersion = "2024.12.0+467"
   #     sub("@", "@R-tidyterra", packagesDataframe[packagesDataframe$pkg == "tidyterra",]$inTextString)
   # }
 
+  # issues with rstudio in targets pipeline, deal with it as anothter step
   packagesDataframe <- packagesDataframe %>%
     rbind(data.frame(
       pkg = "R Studio",
@@ -51,6 +52,15 @@ create_package_txt <- function(excludes = NULL, rstudioVersion = "2024.12.0+467"
       ) %>%
       dplyr::select(-citekeys)
     )
+
+  writeLines("@Manual{rstudio,
+    title = {{RStudio}: Integrated Development Environment for R},
+    author = {{Posit team}},
+    organization = {Posit Software, PBC},
+    address = {Boston, MA},
+    year = {2024},
+    url = {http://www.posit.co/},
+  }", here::here("notebook", "manuscript", "packagesRstudio_refs.bib"))
 
   if(any(packagesDataframe$pkg == "INLA")){
     # INLA has huge amounts of cites, we'll remove some of the INLA citations to

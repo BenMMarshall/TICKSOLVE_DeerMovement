@@ -18,11 +18,13 @@ plot_patch_summary <- function(bufferSummaries, MSEdf, connectRasterLocations, p
   # targets::tar_load("tar_connectPois_list")
   # targets::tar_load("tar_msePois_df")
   # targets::tar_load("tar_patchList")
+  # targets::tar_load("tar_patch_summaryPois")
   # THETA <- 0.1
   # patchList <- tar_patchList
   # MSEdf <- tar_msePois_df
   # connectRasterLocations <- tar_connectPois_list
   # connectTerra <- terra::rast(tar_connectPois_list[[1]])
+  # bufferSummaries <- tar_patch_summaryPois
   # targets::tar_source()
   # REGION <- "Aberdeenshire"
 
@@ -150,15 +152,15 @@ plot_patch_summary <- function(bufferSummaries, MSEdf, connectRasterLocations, p
     ))
 
   (patchOnlySelected <- bufferSummaries %>%
-    filter(!is.na(connectivity), buffer == 100, summaryMethod == "mean", selected == "Selected") %>%
+    filter(!is.na(connectivity), buffer == 750, summaryMethod == "mean", selected == "Selected") %>%
     ggplot() +
     geom_vline(xintercept = 0, alpha = 0.2) +
     geom_hline(yintercept = 0, alpha = 0.2) +
     geom_point(aes(x = area_ha, y = connectivity, colour = selected), alpha = 0.85, size = 2) +
     geom_text(aes(x = area_ha, y = connectivity, colour = selected, label = Ptch_ID), alpha = 1,
-              hjust = 0.5, vjust = 0, fontface = 2, position = position_nudge(y = 0.05)) +
+              hjust = 0.5, vjust = 0, fontface = 2) +
     scale_x_log10() +
-    facet_grid(cols = vars(buffer), rows = vars(summaryMethod)) +
+    # facet_grid(cols = vars(buffer)) +
     scale_colour_manual(values = unname(paletteList$highSigLowSigNoSig[2])) +
     labs(y = "Connectivity", x = "Area (ha)", colour = "Selected patches") +
     coord_cartesian(clip = "off") +

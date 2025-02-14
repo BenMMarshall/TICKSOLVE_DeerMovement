@@ -57,7 +57,7 @@
 \pagestyle{fancy}
 
 \title{Roe Deer Movement}
-\author[1]{Benjamin Michael Marshall*}
+\author[1]{---*}
 \author[2]{---**}
 \author[3]{}
 \author[4]{}
@@ -73,7 +73,7 @@
 \affil[5]{}
 \affil[6]{}
 \affil[7]{}
-\affil[*]{\href{mailto:benjaminmichaelmarshall@gmail.com}{\nolinkurl{benjaminmichaelmarshall@gmail.com}}}
+\affil[*]{---}
 \affil[**]{---}
 
 \maketitle
@@ -96,21 +96,13 @@ Movement ecology, step selection function, poisson, habitat preference, habitat 
 
 \section{Methods}\label{methods}
 
-\begin{verbatim}
-## Warning: package 'dplyr' was built under R version 4.2.3
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: package 'stringr' was built under R version 4.2.3
-\end{verbatim}
-
 \subsection{Study Area}\label{study-area}
 
-\begin{figure}
+\begin{figure}[h]
 \includegraphics[width=1\linewidth]{../../figures/trackingDuration} \caption{Duration}\label{fig:trackingDuration}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
 \includegraphics[width=1\linewidth]{../../figures/trackingTimelag} \caption{Time lags.}\label{fig:trackingTimelags}
 \end{figure}
 
@@ -137,13 +129,13 @@ A mean of this longest dimension was used to limit which patches could be consid
 To confirm this approach, we determined the distance from patch for every deer location that fell outside a patch.
 We examined the distribution of these distance values that revealed that 95\% of all deer movements fell within the mean of half longest dimension of the 99\% home range area (Fig. \ref{fig:distanceDistributionPlot}).
 
-\begin{figure}
+\begin{figure}[h]
 \includegraphics[width=1\linewidth]{../../figures/distanceDistributionPlot} \caption{Distance.}\label{fig:distanceDistributionPlot}
 \end{figure}
 
 \subsection{Habitat Selection}\label{habitat-selection}
 
-We used the reformulated Poisson model approach described by Muff et al to generate estimates of habitat selection as well as gauge deer's movement capabilities in relation to different aspects of the landscape.
+We used the reformulated Poisson model approach described by Muff, Signer \& Fieberg (\citeproc{ref-muff_accounting_2020}{2020}) to generate estimates of habitat selection as well as gauge deer's movement capabilities in relation to different aspects of the landscape.
 
 The model required data pertaining to the used locations (i.e., GPS locations of the deer) and comparable data on randomly generated available points (i.e., randomly generated locations the deer could that travelled).
 For each confirmed deer location we generated 10 random alternative locations they could have travelled to.
@@ -151,20 +143,20 @@ The location of these random locations was governed by two distributions.
 A Gamma distribution that random step lengths were drawn from, and a Von Mises distribution that random turn directions were drawn from.
 
 Once all random locations had been generated we extracted a suite of environmental conditions at all those locations.
-First was the land use type as described by the 2023 UKCEH land cover maps, which is a 25m resolution classified raster originally based on Sentinel-2 imagery .
-Validation of these data suggest 83\% accuracy .
-The UKCEH land cover data comprises of 21 land cover classes, broadly following the Biodiversity Broad Habitats .
+First was the land use type as described by the 2023 UKCEH land cover maps, which is a 25m resolution classified raster originally based on Sentinel-2 imagery (\citeproc{ref-morton_land_2024}{Morton et al., 2024}).
+Validation of these data suggest 83\% accuracy (\citeproc{ref-morton_land_2024}{Morton et al., 2024}).
+The UKCEH land cover data comprises of 21 land cover classes, broadly following the Biodiversity Broad Habitats (\citeproc{ref-jackson_guidance_2000}{Jackson, 2000}).
 
 We recategorised these land use types categories into 10 more general categories that reduced instances of limited interaction with the deer movement data thereby aiding habitat selection model convergence and avoided extreme, unstable selection estimates.
 
-In addition to land use types, we also acquired woody linear feature (i.e., hedgerows) data from UKCEH .
-This dataset maps the woody linear features across the UK (e.g., woodland) as polylines, based on Ordnance Survey maps and the 2007 UKCEH Land Cover Map .
+In addition to land use types, we also acquired woody linear feature (i.e., hedgerows) data from UKCEH (\citeproc{ref-scholefield_woody_2016}{Scholefield et al., 2016}).
+This dataset maps the woody linear features across the UK (e.g., woodland) as polylines, based on Ordnance Survey maps and the 2007 UKCEH Land Cover Map (\citeproc{ref-morton_final_2011}{Morton et al., 2011}).
 
 We converted the polygon spatial data into a raster, where 1 == hedgerow, and used that rasterisation to generate a distance to hedgerow raster for the entire study landscape.
 We conducted the same process to create a distance to woodland raster, where we calculated the distance from any area the UKCEH land use data classed as deciduous or coniferous woodland.
 These distance rasters allowed for easy extraction of the distance to the nearest hedgerow and woodland for all locations.
 
-We acquired road data from OS map open GOV licensed .
+We acquired road data from OS map open GOV licensed (\citeproc{ref-ordnance_survey_os_2024}{Ordnance Survey, 2024}).
 We created a binary variable describing crossing events for all steps, with all steps that crossed one or more of the roads being classed as 1.
 This binary variable allowed us to estimate the likelihood deer cross a road and therefore the level of barrier roads present.
 
@@ -173,7 +165,7 @@ To ensure compatibility between all data sources, we ensured all data was projec
 The Poisson model formulae consisted of land use (a 8-term category variable formed into 7 dummy variables, with deciduous woodland placed as the reference category, barren and other excluded), distance to woodland (continuous in m), distance to hedgerow (continuous in m), road crossing (binary).
 In addition to these selection focused predictors, we several movement predictors including step length, log step length, and cos turn angle, as well as the interaction between step length and log of step length with all land use types.
 As the population Possion model contained all individuals the formula required in the inclusion of fixed Gaussian processes accounting for the time step as well as the individual.
-This formulation, namely the fixed Gaussian processes, as described by Muff et al allows for the efficient estimation of population level selection using integrated nested Laplace approximation (INLA) .
+This formulation, namely the fixed Gaussian processes, as described by Muff, Signer \& Fieberg (\citeproc{ref-muff_accounting_2020}{2020}) allows for the efficient estimation of population level selection using integrated nested Laplace approximation (INLA) (\citeproc{ref-INLA2013b}{Martins et al., 2013}; \citeproc{ref-INLA2015d}{Lindgren \& Rue, 2015})
 
 \subsection{Translating Preferences into Connectivity}\label{translating-preferences-into-connectivity}
 
@@ -184,12 +176,13 @@ For the covariates that involved movement interactions, we used the mean step an
 We replaced any areas with 0 conductance with 1e-12 to avoid any dead-ends or any absolute barriers.
 For we ignored the uncertainty surrounding the selection estimates, instead relying on just the point estimates for the resistance mapping.
 
-\begin{figure}
+\begin{figure}[h]
 \includegraphics[width=1\linewidth]{../../figures/resistanceConductanceMap_Pois_Aberdeenshire} \caption{Conductance}\label{fig:conductancePlot}
 \end{figure}
 
 We used random shortest paths, that consists of generating random walks between locations, to simulate potential connectivity across the landscapes.
-This method was used to show the connectivity of areas used by RIENDEER(?), and offers a mechanism for calibrating the connectivity maps to both the habitat selection and movement path characteristics.
+This method was used to show the connectivity of areas used by reindeer, and offers a mechanism for calibrating the connectivity maps to both the habitat selection and movement path characteristics (\citeproc{ref-panzacchi_predicting_2016}{Panzacchi et al., 2016}).
+
 We used habitat patches as the sources of our random locations.
 We limited calculations of random shortest paths to pairs of patches that existed within 750 m of each other.
 We selected 750 m as that represented the mean longest axis of the 99\% HR estimate of the deer (excluding outlying non-contiguous portions of the area polygons).
@@ -209,11 +202,11 @@ Once every walk was complete, the resulting rasters describing the likelihood of
 A key consideration in these walks is how random the paths are.
 We elected to run walks at 3 different levels of randomness (theta; with 1 being close to a least cost path, and \ensuremath{10^{-5}} being the most random and diffuse walks; Fig. \ref{fig:thetaPlot}).
 
-\begin{figure}
+\begin{figure}[h]
 \includegraphics[width=1\linewidth]{../../figures/thetaMaps_Pois} \caption{The connectivity maps under differing levels of theta (randomness) in the random shortest paths between patches. The colour scale is squarerooted to better differeniate low conenctivity areas.}\label{fig:thetaPlot}
 \end{figure}
 
-To determine what level of randomness best reflected the realised movements of the deer, we compared the resulting connectivity maps to dynamic Brownian Bridge Movement Models.
+To determine what level of randomness best reflected the realised movements of the deer, we compared the resulting connectivity maps to dynamic Brownian Bridge Movement Models (\citeproc{ref-Kranstauber2012}{Kranstauber et al., 2012}; \citeproc{ref-move}{Kranstauber, Smolla \& Scharf, 2024}).
 Dynamic Brownian Bridge Movement Models run a series of random walks between defined start and end points, from the summation of these walks you can extract a rasterised occurrence distribution.
 Critically the dBBMM walks are calibrated to the movement capacity of the animal through rolling window (i.e., a number of data points) that summarises the movement rate during that time.
 Additionally within that window, a margin (a subset of data points) is used to detect any sudden changes in movement capacity that may be reflect of behavioural/movement mode changes.
@@ -229,23 +222,21 @@ The model was supplied with the known locations of deer as well as 10 randomly g
 We formulated the model to predict whether a point was used or random based on the connectivity values, and we included a random effect for deer ID.
 The expectation was that the model coefficients would indicate that deer locations were positively associated with higher connectivity values.
 
-\begin{figure}
-\includegraphics[width=1\linewidth]{../../figures/densityOfConnectivity_Aberdeen} \caption{Connectivity values distribitions.}\label{fig:densityOfConnectivityAberdeen}
-\end{figure}
-
-\begin{figure}
-\includegraphics[width=1\linewidth]{../../figures/densityOfConnectivity_Wessex} \caption{Connectivity values distribitions.}\label{fig:densityOfConnectivityWessex}
-\end{figure}
+\clearpage
 
 \section{Results}\label{results}
 
-For our Aberdeen Roe Deer home range sizes ranged from 32.2 to 122.5, with a weighted mean of 65.3 ha (95\% CI 55.5-75.8).
-Largely the deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period.
+For our Aberdeen Roe Deer home range sizes ranged from 32.2 to 122.5ha (95\% contour point estimates), with a weighted mean of 65.3 ha (95\% CI 55.5-75.8).
+Largely the deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8, Roe Deer 3).
 All bar two individuals found OU models to fit best, with the remaining two being better described by OUF models.
 All best fitting models were anisotropic, suggesting these Roe Deer are inhabiting non-uniform home ranges (i.e., not being as wide as they are tall).
 
-\begin{figure}
+\begin{figure}[h]
 \includegraphics[width=1\linewidth]{../../figures/homeRangeAreaPlot} \caption{Home range size.}\label{fig:homeRangeSize}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{../../figures/varioRoePlot} \caption{Variogram plot.}\label{fig:variogramPlot}
 \end{figure}
 
 The Poisson habitat selection model reveal a general tendency for Roe Deer to remain closer to the woodland patches (-0.0051; 95\% CI -0.0082 to -0.0023), and with no significant care for hedgerows (-0.00091; 95\% CI -0.0019 to 1e-04; Fig. \ref{fig:poisCoefPlot})).
@@ -258,29 +249,37 @@ These step lengths in these land uses to be lower, as seen in coeficeints for lo
 Estimates regarding human settlements were paired with very wide confidence intervals (-70; 95\% CI -180 to 36), likely a result of minimal interaction with the tracked deer making estimation difficult.
 There are therefore treated as the point estimate suggests as areas of very low conductivity in further analysis.
 
-\begin{figure}
+\begin{figure}[h]
 \includegraphics[width=1\linewidth]{../../figures/poisCoef} \caption{Poisson coefficients.}\label{fig:poisCoefPlot}
 \end{figure}
 
-Connectivity maps and validation
+\subsection{Connectivity maps}\label{connectivity-maps}
 
-\begin{figure}
+\begin{figure}[h]
 \includegraphics[width=1\linewidth]{../../figures/patchConnectivity_Pois_Aberdeenshire} \caption{Poisson coefficients.}\label{fig:poisConnect}
 \end{figure}
 
-\section{Discussion}\label{discussion}
+\subsection{Validation}\label{validation-1}
 
-\subsection{Conlcusions}\label{conlcusions}
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{../../figures/densityOfConnectivity_Aberdeen} \caption{Connectivity values distribitions.}\label{fig:densityOfConnectivityAberdeen}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{../../figures/densityOfConnectivity_Wessex} \caption{Connectivity values distribitions.}\label{fig:densityOfConnectivityWessex}
+\end{figure}
+
+\clearpage
 
 \section{Acknowledgements}\label{acknowledgements}
 
-\section{Software availablity}\label{software-availablity}
+\subsection{Software availablity}\label{software-availablity}
 
-For all analysis we used R (v.4.4.2) (\citeproc{ref-base}{R Core Team, 2024}), and R Studio (v.2024.12.0+467) (\citeproc{ref-rstudio}{Posit team, 2024}). For analysis of animal movement data we used amt (v.0.2.2.0) (\citeproc{ref-amt}{Signer, Fieberg \& Avgar, 2019}), ctmm (v.1.2.0) (\citeproc{ref-ctmm}{Fleming \& Calabrese, 2023}), and move (v.4.2.6) (\citeproc{ref-move}{Kranstauber, Smolla \& Scharf, 2024}). For general data manipulation we used glue (v.1.8.0) (\citeproc{ref-glue}{Hester \& Bryan, 2024}), sjmisc (v.2.8.10) (\citeproc{ref-sjmisc}{Lüdecke, 2018}), tidyverse (v.2.0.0) (\citeproc{ref-tidyverse}{Wickham et al., 2019}), and units (v.0.8.5) (\citeproc{ref-units}{Pebesma, Mailund \& Hiebert, 2016}). For project and code management we used here (v.1.0.1) (\citeproc{ref-here}{Müller, 2020}), tarchetypes (v.0.11.0) (\citeproc{ref-tarchetypes}{Landau, 2021a}), and targets (v.1.9.0) (\citeproc{ref-targets}{Landau, 2021b}). For visualisation we used the following as expansions from the tidyverse suite of packages: ggdist (v.3.3.2) (\citeproc{ref-ggdist2024a}{Kay, 2024a},\citeproc{ref-ggdist2024b}{b}), ggridges (v.0.5.6) (\citeproc{ref-ggridges}{Wilke, 2024}), ggtext (v.0.1.2) (\citeproc{ref-ggtext}{Wilke \& Wiernik, 2022}), patchwork (v.1.3.0) (\citeproc{ref-patchwork}{Pedersen, 2024}), and scales (v.1.3.0) (\citeproc{ref-scales}{Wickham, Pedersen \& Seidel, 2023}). Other packages we used were boot (v.1.3.31) (\citeproc{ref-boot1997}{A. C. Davison \& D. V. Hinkley, 1997}; \citeproc{ref-boot2024}{Angelo Canty \& B. D. Ripley, 2024}), doParallel (v.1.0.17) (\citeproc{ref-doParallel}{Corporation \& Weston, 2022}), foreach (v.1.5.2) (\citeproc{ref-foreach}{Microsoft \& Weston, 2022}), and usethis (v.3.0.0) (\citeproc{ref-usethis}{Wickham et al., 2024}). To generate typeset outputs we used bookdown (v.0.42) (\citeproc{ref-bookdown2016}{Xie, 2016}, \citeproc{ref-bookdown2025}{2025}), and rmarkdown (v.2.29) (\citeproc{ref-rmarkdown2018}{Xie, Allaire \& Grolemund, 2018}; \citeproc{ref-rmarkdown2020}{Xie, Dervieux \& Riederer, 2020}; \citeproc{ref-rmarkdown2024}{Allaire et al., 2024}). To manipulate and manage spatial data we used gdistance (v.1.6.4) (\citeproc{ref-gdistance}{van Etten, 2017}), raster (v.3.6.30) (\citeproc{ref-raster}{Hijmans, 2024a}), sf (v.1.0.19) (\citeproc{ref-sf2018}{Pebesma, 2018}; \citeproc{ref-sf2023}{Pebesma \& Bivand, 2023}), sp (v.2.1.4) (\citeproc{ref-sp2005}{Pebesma \& Bivand, 2005}; \citeproc{ref-sp2013}{Bivand, Pebesma \& Gomez-Rubio, 2013}), terra (v.1.7.83) (\citeproc{ref-terra}{Hijmans, 2024b}), and tidyterra (v.0.6.1) (\citeproc{ref-R-tidyterra}{Hernangómez, 2023}). To run models and explore model outputs we used effects (v.4.2.2) (\citeproc{ref-effects2003}{Fox, 2003}; \citeproc{ref-effects2009}{Fox \& Hong, 2009}; \citeproc{ref-effects2018}{Fox \& Weisberg, 2018}, \citeproc{ref-effects2019}{2019}), INLA (v.24.6.27) (@ \citeproc{ref-INLA2013b}{Martins et al., 2013}; @ \citeproc{ref-INLA2015d}{Lindgren \& Rue, 2015}; \citeproc{ref-INLA2016g}{De Coninck et al., 2016}; \citeproc{ref-INLA2017e}{Rue et al., 2017}; \citeproc{ref-INLA2017h}{Verbosio et al., 2017}; \citeproc{ref-INLA2018f}{Bakka et al., 2018}; \citeproc{ref-INLA2018i}{Kourounis, Fuchs \& Schenk, 2018}), lme4 (v.1.1.35.5) (\citeproc{ref-lme4}{Bates et al., 2015}), and performance (v.0.12.4) (\citeproc{ref-performance}{Lüdecke et al., 2021}).
+For all analysis we used R (v.4.4.2) (\citeproc{ref-base}{R Core Team, 2024}), and R Studio (v.2024.12.0+467) (\citeproc{ref-rstudio}{Posit team, 2024}). For analysis of animal movement data we used amt (v.0.2.2.0) (\citeproc{ref-amt}{Signer, Fieberg \& Avgar, 2019}), ctmm (v.1.2.0) (\citeproc{ref-ctmm}{Fleming \& Calabrese, 2023}), and move (v.4.2.6) (\citeproc{ref-move}{Kranstauber, Smolla \& Scharf, 2024}). For general data manipulation we used glue (v.1.8.0) (\citeproc{ref-glue}{Hester \& Bryan, 2024}), sjmisc (v.2.8.10) (\citeproc{ref-sjmisc}{Lüdecke, 2018}), tidyverse (v.2.0.0) (\citeproc{ref-tidyverse}{Wickham et al., 2019}), and units (v.0.8.5) (\citeproc{ref-units}{Pebesma, Mailund \& Hiebert, 2016}). For project and code management we used here (v.1.0.1) (\citeproc{ref-here}{Müller, 2020}), tarchetypes (v.0.11.0) (\citeproc{ref-tarchetypes}{Landau, 2021a}), and targets (v.1.9.0) (\citeproc{ref-targets}{Landau, 2021b}). For visualisation we used the following as expansions from the tidyverse suite of packages: ggdist (v.3.3.2) (\citeproc{ref-ggdist2024a}{Kay, 2024a},\citeproc{ref-ggdist2024b}{b}), ggridges (v.0.5.6) (\citeproc{ref-ggridges}{Wilke, 2024}), ggtext (v.0.1.2) (\citeproc{ref-ggtext}{Wilke \& Wiernik, 2022}), patchwork (v.1.3.0) (\citeproc{ref-patchwork}{Pedersen, 2024}), and scales (v.1.3.0) (\citeproc{ref-scales}{Wickham, Pedersen \& Seidel, 2023}). Other packages we used were boot (v.1.3.31) (\citeproc{ref-boot1997}{A. C. Davison \& D. V. Hinkley, 1997}; \citeproc{ref-boot2024}{Angelo Canty \& B. D. Ripley, 2024}), circular (v.0.5.1) (\citeproc{ref-circular}{Agostinelli \& Lund, 2024}), doParallel (v.1.0.17) (\citeproc{ref-doParallel}{Corporation \& Weston, 2022}), foreach (v.1.5.2) (\citeproc{ref-foreach}{Microsoft \& Weston, 2022}), knitr (v.1.49) (\citeproc{ref-knitr2014}{Xie, 2014}, \citeproc{ref-knitr2015}{2015}, \citeproc{ref-knitr2024}{2024}), and usethis (v.3.0.0) (\citeproc{ref-usethis}{Wickham et al., 2024}). To generate typeset outputs we used bookdown (v.0.42) (\citeproc{ref-bookdown2016}{Xie, 2016}, \citeproc{ref-bookdown2025}{2025}), and rmarkdown (v.2.29) (\citeproc{ref-rmarkdown2018}{Xie, Allaire \& Grolemund, 2018}; \citeproc{ref-rmarkdown2020}{Xie, Dervieux \& Riederer, 2020}; \citeproc{ref-rmarkdown2024}{Allaire et al., 2024}). To manipulate and manage spatial data we used gdistance (v.1.6.4) (\citeproc{ref-gdistance}{van Etten, 2017}), raster (v.3.6.30) (\citeproc{ref-raster}{Hijmans, 2024a}), sf (v.1.0.19) (\citeproc{ref-sf2018}{Pebesma, 2018}; \citeproc{ref-sf2023}{Pebesma \& Bivand, 2023}), sp (v.2.1.4) (\citeproc{ref-sp2005}{Pebesma \& Bivand, 2005}; \citeproc{ref-sp2013}{Bivand, Pebesma \& Gomez-Rubio, 2013}), terra (v.1.7.83) (\citeproc{ref-terra}{Hijmans, 2024b}), and tidyterra (v.0.6.1) (\citeproc{ref-R-tidyterra}{Hernangómez, 2023}). To run models and explore model outputs we used effects (v.4.2.2) (\citeproc{ref-effects2003}{Fox, 2003}; \citeproc{ref-effects2009}{Fox \& Hong, 2009}; \citeproc{ref-effects2018}{Fox \& Weisberg, 2018}, \citeproc{ref-effects2019}{2019}), INLA (v.24.6.27) (\citeproc{ref-INLA2013b}{Martins et al., 2013}; \citeproc{ref-INLA2015d}{Lindgren \& Rue, 2015}), lme4 (v.1.1.35.5) (\citeproc{ref-lme4}{Bates et al., 2015}), and performance (v.0.12.4) (\citeproc{ref-performance}{Lüdecke et al., 2021}).
 
-\section{Data availabilty}\label{data-availabilty}
+\subsection{Data availabilty}\label{data-availabilty}
 
-\section{Author Contributions}\label{author-contributions}
+\subsection{Author Contributions}\label{author-contributions}
 
 \section{Supplementary Material}\label{supplementary-material}
 
@@ -294,14 +293,14 @@ For all analysis we used R (v.4.4.2) (\citeproc{ref-base}{R Core Team, 2024}), a
 \bibitem[\citeproctext]{ref-boot1997}
 A. C. Davison, D. V. Hinkley. 1997. \emph{\href{https://doi:10.1017/CBO9780511802843}{Bootstrap methods and their applications}}. Cambridge: Cambridge University Press.
 
+\bibitem[\citeproctext]{ref-circular}
+Agostinelli C, Lund U. 2024. \emph{\href{https://CRAN.R-project.org/package=circular}{{R} package \texttt{circular}: Circular statistics (version 0.5-1)}}.
+
 \bibitem[\citeproctext]{ref-rmarkdown2024}
 Allaire J, Xie Y, Dervieux C, McPherson J, Luraschi J, Ushey K, Atkins A, Wickham H, Cheng J, Chang W, Iannone R. 2024. \emph{\href{https://github.com/rstudio/rmarkdown}{{rmarkdown}: Dynamic documents for r}}.
 
 \bibitem[\citeproctext]{ref-boot2024}
 Angelo Canty, B. D. Ripley. 2024. \emph{{boot}: Bootstrap r (s-plus) functions}.
-
-\bibitem[\citeproctext]{ref-INLA2018f}
-Bakka H, Rue H, Fuglstad G-A, Riebler AI, Bolin D, Illian J, Krainski E, Simpson DP, Lindgren FK. 2018. \href{http://arxiv.org/abs/1802.06350}{Spatial modelling with {INLA}: {A} review}. \emph{WIRES (Invited extended review)} xx:xx--xx.
 
 \bibitem[\citeproctext]{ref-lme4}
 Bates D, Mächler M, Bolker B, Walker S. 2015. Fitting linear mixed-effects models using {lme4}. \emph{Journal of Statistical Software} 67:1--48. DOI: \href{https://doi.org/10.18637/jss.v067.i01}{10.18637/jss.v067.i01}.
@@ -314,9 +313,6 @@ Calabrese JM, Fleming CH, Gurarie E. 2016. Ctmm: An {R} {Package} for {Analyzing
 
 \bibitem[\citeproctext]{ref-doParallel}
 Corporation M, Weston S. 2022. \emph{\href{https://CRAN.R-project.org/package=doParallel}{{doParallel}: Foreach parallel adaptor for the {``{parallel}''} package}}.
-
-\bibitem[\citeproctext]{ref-INLA2016g}
-De Coninck A, De Baets B, Kourounis D, Verbosio F, Schenk O, Maenhout S, Fostier J. 2016. {Needles}: Toward large-scale genomic prediction with marker-by-environment interaction. \emph{Genetics} 203:543--555. DOI: \href{https://doi.org/10.1534/genetics.115.179887}{10.1534/genetics.115.179887}.
 
 \bibitem[\citeproctext]{ref-Fleming2017}
 Fleming CH, Calabrese JM. 2017. A new kernel density estimator for accurate home-range and species-range area estimation. \emph{Methods in Ecology and Evolution} 8:571--579. DOI: \href{https://doi.org/10.1111/2041-210X.12673}{10.1111/2041-210X.12673}.
@@ -354,14 +350,17 @@ Hijmans RJ. 2024a. \emph{\href{https://CRAN.R-project.org/package=raster}{{raste
 \bibitem[\citeproctext]{ref-terra}
 Hijmans RJ. 2024b. \emph{\href{https://CRAN.R-project.org/package=terra}{{terra}: Spatial data analysis}}.
 
+\bibitem[\citeproctext]{ref-jackson_guidance_2000}
+Jackson D. 2000. \emph{\href{http://www.jncc.gov.uk/page-2433}{Guidance on the interpretation of the {Biodiversity} {Broad} {Habitat} {Classification} (terrestrial and freshwater types): {Definitions} and the relationship with other habitat classifications}}. Joint Nature Conservation Committee.
+
 \bibitem[\citeproctext]{ref-ggdist2024a}
 Kay M. 2024a. {ggdist}: Visualizations of distributions and uncertainty in the grammar of graphics. \emph{IEEE Transactions on Visualization and Computer Graphics} 30:414--424. DOI: \href{https://doi.org/10.1109/TVCG.2023.3327195}{10.1109/TVCG.2023.3327195}.
 
 \bibitem[\citeproctext]{ref-ggdist2024b}
 Kay M. 2024b. \emph{{ggdist}: Visualizations of distributions and uncertainty}. DOI: \href{https://doi.org/10.5281/zenodo.3879620}{10.5281/zenodo.3879620}.
 
-\bibitem[\citeproctext]{ref-INLA2018i}
-Kourounis D, Fuchs A, Schenk O. 2018. \href{https://doi.org/10.1109/TPWRS.2017.2789187}{Towards the next generation of multiperiod optimal power flow solvers}. \emph{IEEE Transactions on Power Systems} PP:1--10.
+\bibitem[\citeproctext]{ref-Kranstauber2012}
+Kranstauber B, Kays R, Lapoint SD, Wikelski M, Safi K. 2012. A dynamic {Brownian} bridge movement model to estimate utilization distributions for heterogeneous animal movement. \emph{Journal of Animal Ecology} 81:738--746. DOI: \href{https://doi.org/10.1111/j.1365-2656.2012.01955.x}{10.1111/j.1365-2656.2012.01955.x}.
 
 \bibitem[\citeproctext]{ref-move}
 Kranstauber B, Smolla M, Scharf AK. 2024. \emph{\href{https://CRAN.R-project.org/package=move}{{move}: Visualizing and analyzing animal track data}}.
@@ -387,8 +386,23 @@ Martins TG, Simpson D, Lindgren F, Rue H. 2013. Bayesian computing with {INLA}: 
 \bibitem[\citeproctext]{ref-foreach}
 Microsoft, Weston S. 2022. \emph{\href{https://CRAN.R-project.org/package=foreach}{{foreach}: Provides foreach looping construct}}.
 
+\bibitem[\citeproctext]{ref-morton_land_2024}
+Morton RD, Marston CG, O'Neil AW, Rowland CS. 2024. Land {Cover} {Map} 2023 (25m rasterised land parcels, {GB}). DOI: \href{https://doi.org/10.5285/AB10EA4A-1788-4D25-A6DF-F1AFF829DFFF}{10.5285/AB10EA4A-1788-4D25-A6DF-F1AFF829DFFF}.
+
+\bibitem[\citeproctext]{ref-morton_final_2011}
+Morton D, Rowland C, Wood C, Meek L, Marston C, Smith G, Wadsworth R, Simpson I. 2011. \emph{Final report for {LCM2007}-the new {UK} land cover map. {Countryside} survey technical report no 11/07}. NERC/CENTRE FOR ECOLOGY \& HYDROLOGY.
+
+\bibitem[\citeproctext]{ref-muff_accounting_2020}
+Muff S, Signer J, Fieberg J. 2020. Accounting for individual‐specific variation in habitat‐selection studies: {Efficient} estimation of mixed‐effects models using {Bayesian} or frequentist computation. \emph{Journal of Animal Ecology} 89:80--92. DOI: \href{https://doi.org/10.1111/1365-2656.13087}{10.1111/1365-2656.13087}.
+
 \bibitem[\citeproctext]{ref-here}
 Müller K. 2020. \emph{\href{https://CRAN.R-project.org/package=here}{{here}: A simpler way to find your files}}.
+
+\bibitem[\citeproctext]{ref-ordnance_survey_os_2024}
+Ordnance Survey. 2024. \href{https://osdatahub.os.uk/downloads/open/OpenRoads}{{OS} {Open} {Roads} v.2.4}.
+
+\bibitem[\citeproctext]{ref-panzacchi_predicting_2016}
+Panzacchi M, Van Moorter B, Strand O, Saerens M, Kivimäki I, St. Clair CC, Herfindal I, Boitani L. 2016. Predicting the \emph{continuum} between corridors and barriers to animal movements using {Step} {Selection} {Functions} and {Randomized} {Shortest} {Paths}. \emph{Journal of Animal Ecology} 85:32--42. DOI: \href{https://doi.org/10.1111/1365-2656.12386}{10.1111/1365-2656.12386}.
 
 \bibitem[\citeproctext]{ref-sf2018}
 Pebesma E. 2018. {Simple Features for R: Standardized Support for Spatial Vector Data}. \emph{{The R Journal}} 10:439--446. DOI: \href{https://doi.org/10.32614/RJ-2018-009}{10.32614/RJ-2018-009}.
@@ -411,8 +425,8 @@ Posit team. 2024. \emph{\href{http://www.posit.co/}{{RStudio}: Integrated develo
 \bibitem[\citeproctext]{ref-base}
 R Core Team. 2024. \emph{\href{https://www.R-project.org/}{{R}: A language and environment for statistical computing}}. Vienna, Austria: R Foundation for Statistical Computing.
 
-\bibitem[\citeproctext]{ref-INLA2017e}
-Rue H, Riebler AI, Sørbye SH, Illian JB, Simpson DP, Lindgren FK. 2017. \href{http://arxiv.org/abs/1604.00860}{Bayesian computing with {INLA}: {A} review}. \emph{Annual Reviews of Statistics and Its Applications} 4:395--421.
+\bibitem[\citeproctext]{ref-scholefield_woody_2016}
+Scholefield PA, Morton RD, Rowland CS, Henrys PA, Howard DC, Norton LR. 2016. Woody linear features framework, {Great} {Britain} v.1.0. DOI: \href{https://doi.org/10.5285/D7DA6CB9-104B-4DBC-B709-C1F7BA94FB16}{10.5285/D7DA6CB9-104B-4DBC-B709-C1F7BA94FB16}.
 
 \bibitem[\citeproctext]{ref-amt}
 Signer J, Fieberg J, Avgar T. 2019. Animal movement tools (amt): R package for managing tracking data and conducting habitat selection analyses. \emph{Ecology and Evolution} 9:880--890.
@@ -422,9 +436,6 @@ Silva I, Fleming CH, Noonan MJ, Alston J, Folta C, Fagan WF, Calabrese JM. 2022.
 
 \bibitem[\citeproctext]{ref-gdistance}
 van Etten J. 2017. R package gdistance: Distances and routes on geographical grids. \emph{Journal of Statistical Software} 76:1--21. DOI: \href{https://doi.org/10.18637/jss.v076.i13}{10.18637/jss.v076.i13}.
-
-\bibitem[\citeproctext]{ref-INLA2017h}
-Verbosio F, De Coninck A, Kourounis D, Schenk O. 2017. \href{https://doi.org/10.1016/j.jocs.2017.08.013}{Enhancing the scalability of selected inversion factorization algorithms in genomic prediction}. \emph{Journal of Computational Science} 22:99--108.
 
 \bibitem[\citeproctext]{ref-tidyverse}
 Wickham H, Averick M, Bryan J, Chang W, McGowan LD, François R, Grolemund G, Hayes A, Henry L, Hester J, Kuhn M, Pedersen TL, Miller E, Bache SM, Müller K, Ooms J, Robinson D, Seidel DP, Spinu V, Takahashi K, Vaughan D, Wilke C, Woo K, Yutani H. 2019. Welcome to the {tidyverse}. \emph{Journal of Open Source Software} 4:1686. DOI: \href{https://doi.org/10.21105/joss.01686}{10.21105/joss.01686}.
@@ -441,8 +452,17 @@ Wilke CO. 2024. \emph{\href{https://CRAN.R-project.org/package=ggridges}{{ggridg
 \bibitem[\citeproctext]{ref-ggtext}
 Wilke CO, Wiernik BM. 2022. \emph{\href{https://CRAN.R-project.org/package=ggtext}{{ggtext}: Improved text rendering support for {``{ggplot2}''}}}.
 
+\bibitem[\citeproctext]{ref-knitr2014}
+Xie Y. 2014. {knitr}: A comprehensive tool for reproducible research in {R}. In: Stodden V, Leisch F, Peng RD eds. \emph{Implementing reproducible computational research}. Chapman; Hall/CRC,.
+
+\bibitem[\citeproctext]{ref-knitr2015}
+Xie Y. 2015. \emph{\href{https://yihui.org/knitr/}{Dynamic documents with {R} and knitr}}. Boca Raton, Florida: Chapman; Hall/CRC.
+
 \bibitem[\citeproctext]{ref-bookdown2016}
 Xie Y. 2016. \emph{\href{https://bookdown.org/yihui/bookdown}{{bookdown}: Authoring books and technical documents with {R} markdown}}. Boca Raton, Florida: Chapman; Hall/CRC.
+
+\bibitem[\citeproctext]{ref-knitr2024}
+Xie Y. 2024. \emph{\href{https://yihui.org/knitr/}{{knitr}: A general-purpose package for dynamic report generation in r}}.
 
 \bibitem[\citeproctext]{ref-bookdown2025}
 Xie Y. 2025. \emph{\href{https://github.com/rstudio/bookdown}{{bookdown}: Authoring books and technical documents with r markdown}}.

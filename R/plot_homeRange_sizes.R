@@ -29,8 +29,8 @@ plot_homeRange_sizes <- function(deerData, akdeLists){
                 slice_head(n = 1) %>%
                 dplyr::select(Animal_ID, region, Sex))
 
-
   areaPlot <- allAreas %>%
+    filter(level == 0.95) %>%
     filter(!str_detect(Animal_ID, "Fallow")) %>%
     ggplot() +
     geom_errorbar(aes(x = Animal_ID, ymin = low, ymax = high,
@@ -39,6 +39,7 @@ plot_homeRange_sizes <- function(deerData, akdeLists){
     geom_point(aes(x = Animal_ID, y = est,
                    colour = as.factor(level), group = as.factor(level), shape = Sex), position = position_dodge(width = 0.2)) +
     geom_hline(data = allAreas %>%
+                 filter(level == 0.95) %>%
                  filter(!str_detect(Animal_ID, "Fallow")) %>%
                  group_by(level) %>%
                  summarise(mean = mean(est)),

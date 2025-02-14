@@ -170,6 +170,10 @@ coreTargetList <- list(
     command = plot_homeRange_sizes(tar_deerData, tar_akdeLists)
   ),
   tar_target(
+    name = tar_variograms,
+    command = plot_variograms(tar_akdeLists)
+  ),
+  tar_target(
     name = tar_overview_maps,
     command = generate_overview_maps(tar_deerData, tar_akdeLists, tar_landuseList, tar_patchList)
   ),
@@ -308,12 +312,12 @@ connectTargetList <- list(
   # ),
   tar_combine(
     tar_connectPois_list,
-    coreTargetList[[17]][grep("tar_connectStanPois_location", names(coreTargetList[[17]]))],
+    coreTargetList[[18]][grep("tar_connectStanPois_location", names(coreTargetList[[18]]))],
     command = list(!!!.x)
   ),
   tar_combine(
     tar_msePois_df,
-    coreTargetList[[17]][grep("Pois_dbbmmmse", names(coreTargetList[[17]]))],
+    coreTargetList[[18]][grep("Pois_dbbmmmse", names(coreTargetList[[18]]))],
     command = rbind(!!!.x)
   ),
   tar_target(
@@ -333,6 +337,10 @@ connectTargetList <- list(
     tar_patchPois_plot,
     plot_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire",
                             tar_patch_summaryPois)
+  ),
+  tar_target(
+    tar_funcStruc_plot,
+    plot_funcStruc_comparison(tar_msePois_df, tar_connectPois_list, tar_patchList)
   ),
   tar_target(
     tar_patchPois_summaryPlot,
@@ -388,11 +396,14 @@ connectTargetList <- list(
     command = render_rmd(fileIN = here::here("notebook", "manuscript", "deerMovementManuscript.Rmd"),
                          fileOUT = here::here("notebook", "manuscript", "deerMovementManuscript.pdf"),
                          tar_pois_plot,
+                         tar_variograms,
+                         tar_homeRange_sizePlot,
                          tar_patchPois_summaryPlot,
                          tar_connectivityValue_plots,
                          tar_package_text,
                          tar_poisResist_map,
-                         tar_connectivityPois_thetaMaps)
+                         tar_connectivityPois_thetaMaps),
+    cue = tar_cue(mode = "always")
   )
 )
 

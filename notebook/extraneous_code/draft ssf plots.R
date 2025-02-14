@@ -463,7 +463,7 @@ wet_sl <- update_gamma(
   beta_log_sl = m3$model$coefficients["log_sl_"] +
     m3$model$coefficients["log_sl_:landuseC_startwet"])
 
-We can follow a similar process with the turn-angle distribution.
+# We can follow a similar process with the turn-angle distribution.
 
 # Forest turn-angle distribution
 forest_ta <- update_vonmises(
@@ -609,7 +609,7 @@ hi_sl <- update_gamma(
   beta_log_sl = m4$model$coefficients["log_sl_"] +
     2 * m4$model$coefficients["log_sl_:elevation_start"])
 
-Similarly, we calculate updated turn-angle distributions for each of these 3 values of `elevation`.
+# Similarly, we calculate updated turn-angle distributions for each of these 3 values of `elevation`.
 
 # low turn-angle distribution
 low_ta <- update_vonmises(

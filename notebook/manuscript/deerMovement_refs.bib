@@ -75,3 +75,124 @@
 	pages = {1679--1689},
 	file = {Full Text:C\:\\Users\\benma\\Zotero\\storage\\EDBQSAUI\\Fleming et al. - 2019 - Overcoming the challenge of small effective sample.pdf:application/pdf},
 }
+
+@misc{morton_land_2024,
+	title = {Land {Cover} {Map} 2023 (25m rasterised land parcels, {GB})},
+	copyright = {Licence terms and conditions apply},
+	url = {https://catalogue.ceh.ac.uk/id/ab10ea4a-1788-4d25-a6df-f1aff829dfff},
+	doi = {10.5285/AB10EA4A-1788-4D25-A6DF-F1AFF829DFFF},
+	abstract = {This is a 25m pixel data set representing the land surface of Great Britain, classified into 21 UKCEH land cover classes, based upon Biodiversity Action Plan broad habitats. It is a three-band raster in GeoTiff format, produced by rasterising three properties of the classified land parcels dataset. The first band gives the most likely land cover type; the second band gives the per-parcel probability of the land cover, the third band is a measure of parcel purity. The probability and purity bands (scaled 0 to 100) combine to give an indication of uncertainty. A full description of this and all UKCEH LCM2023 products are available from the LCM2023 product documentation.},
+	language = {en},
+	urldate = {2025-02-14},
+	publisher = {NERC EDS Environmental Information Data Centre},
+	author = {Morton, R.D. and Marston, C.G. and O’Neil, A.W. and Rowland, C.S.},
+	collaborator = {Marston, C.G. and {UK Centre For Ecology \& Hydrology} and {NERC EDS Environmental Information Data Centre}},
+	year = {2024},
+	keywords = {Biodiversity Action Plan, Great Britain, habitat, land cover, Land cover, map},
+	annote = {Methods
+UKCEH’s automated land cover algorithms classify 10 m pixels across the whole of UK. Training data were automatically selected from stable land covers over the interval of 2020 to 2022. A Random Forest classifier used these to classify four composite images representing per season median surface reflectance. Seasonal images were integrated with context layers (e.g., height, aspect, slope, coastal proximity, urban proximity and so forth) to reduce confusion among classes with similar spectra.
+Land cover was validated by organising the 10 m pixel classification into a land parcel framework (the LCM2023 classified land parcels product). The classified land parcels were compared to known land cover producing a confusion matrix to determine overall and per class accuracy. Details are available from the product documentation.
+The 25 m rasterised land parcels product is created by pixelating the corresponding land parcel product.},
+}
+
+@techreport{jackson_guidance_2000,
+	title = {Guidance on the interpretation of the {Biodiversity} {Broad} {Habitat} {Classification} (terrestrial and freshwater types): {Definitions} and the relationship with other habitat classifications},
+	url = {http://www.jncc.gov.uk/page-2433},
+	number = {307 ISSN 0963 8091},
+	institution = {Joint Nature Conservation Committee},
+	author = {Jackson, DL},
+	year = {2000},
+}
+
+
+@misc{scholefield_woody_2016,
+	title = {Woody linear features framework, {Great} {Britain} v.1.0},
+	copyright = {Bespoke licensing terms apply to these data. If you choose to download the data, the CEH Data Licensing team will contact you to negotiate a licence},
+	url = {https://catalogue.ceh.ac.uk/id/d7da6cb9-104b-4dbc-b709-c1f7ba94fb16},
+	doi = {10.5285/D7DA6CB9-104B-4DBC-B709-C1F7BA94FB16},
+	abstract = {A modelled dataset derived from a range of national datasets, describing the distribution of woody linear feature boundaries in Great Britain. The dataset presents linear features which have a high likelihood of being a woody linear feature. The dataset was created by a predictive model developed at the Centre for Ecology \&amp; Hydrology, Lancaster in 2016.},
+	language = {en},
+	urldate = {2025-02-14},
+	publisher = {NERC EDS Environmental Information Data Centre},
+	author = {Scholefield, P.A. and Morton, R.D. and Rowland, C.S. and Henrys, P.A. and Howard, D.C. and Norton, L.R.},
+	collaborator = {Scholefield, P.A. and {NERC EDS Environmental Information Data Centre}},
+	year = {2016},
+	keywords = {Biodiversity, Land cover, hedge, hedgerows, linear features},
+	annote = {Methods
+The dataset is the output from a model which classifies the attributes of each linear feature within a linear framework (based upon the simplified version of Ordnance Survey MasterMap).
+The following approach was taken: Areas of the framework were masked out where woody linear features were unlikely to be found or where it would be impossible to detect them, i.e. where land was higher than 350 m, urban, wooded or in a coastal tide-washed area. OS Land-Form PANORAMA/LCM2007 were used to do this. Boundary height information was calculated from a DTM (NEXTMap 5m). Boundaries with woody linear features were identified from this calculated height data using thresholds for different vegetation height attributes for a given length of boundary, namely: minimum vegetation height -0.13 m (accounting for the presence of a ditch adjacent to the woody feature) to maximum vegetation height 58 m (the maximum height for a tree in GB), and mean vegetation height 0.58 m (accounting for gappy features). The dataset presents linear features which have a high likelihood of being a woody linear feature.},
+}
+
+@techreport{morton_final_2011,
+	title = {Final report for {LCM2007}-the new {UK} land cover map. {Countryside} survey technical report no 11/07},
+	number = {CEH PROJECT NUMBER: C03259},
+	institution = {NERC/CENTRE FOR ECOLOGY \& HYDROLOGY},
+	author = {Morton, D and Rowland, C and Wood, C and Meek, L and Marston, C and Smith, G and Wadsworth, R and Simpson, I},
+	year = {2011},
+	note = {Publisher: NERC/Centre for Ecology \& Hydrology},
+}
+
+@misc{ordnance_survey_os_2024,
+	title = {{OS} {Open} {Roads} v.2.4},
+	copyright = {Crown copyright},
+	url = {https://osdatahub.os.uk/downloads/open/OpenRoads},
+	author = {{Ordnance Survey}},
+	year = {2024},
+}
+
+@article{muff_accounting_2020,
+	title = {Accounting for individual‐specific variation in habitat‐selection studies: {Efficient} estimation of mixed‐effects models using {Bayesian} or frequentist computation},
+	volume = {89},
+	issn = {0021-8790, 1365-2656},
+	shorttitle = {Accounting for individual‐specific variation in habitat‐selection studies},
+	url = {https://onlinelibrary.wiley.com/doi/10.1111/1365-2656.13087},
+	doi = {10.1111/1365-2656.13087},
+	language = {en},
+	number = {1},
+	urldate = {2021-08-29},
+	journal = {Journal of Animal Ecology},
+	author = {Muff, Stefanie and Signer, Johannes and Fieberg, John},
+	editor = {Wal, Eric Vander},
+	month = jan,
+	year = {2020},
+	pages = {80--92},
+	file = {Muff et al. - 2020 - Accounting for individual‐specific variation in ha.pdf:C\:\\Users\\benja\\Zotero\\storage\\Z4VL46TM\\Muff et al. - 2020 - Accounting for individual‐specific variation in ha.pdf:application/pdf},
+}
+
+
+@article{panzacchi_predicting_2016,
+	title = {Predicting the \textit{continuum} between corridors and barriers to animal movements using {Step} {Selection} {Functions} and {Randomized} {Shortest} {Paths}},
+	volume = {85},
+	copyright = {http://onlinelibrary.wiley.com/termsAndConditions\#vor},
+	issn = {0021-8790, 1365-2656},
+	url = {https://besjournals.onlinelibrary.wiley.com/doi/10.1111/1365-2656.12386},
+	doi = {10.1111/1365-2656.12386},
+	language = {en},
+	number = {1},
+	urldate = {2025-02-14},
+	journal = {Journal of Animal Ecology},
+	author = {Panzacchi, Manuela and Van Moorter, Bram and Strand, Olav and Saerens, Marco and Kivimäki, Ilkka and St. Clair, Colleen C. and Herfindal, Ivar and Boitani, Luigi},
+	editor = {Börger, Luca},
+	month = jan,
+	year = {2016},
+	pages = {32--42},
+	file = {PDF:C\:\\Users\\benja\\Zotero\\storage\\TGWP9BA5\\Panzacchi et al. - 2016 - Predicting the continuum between corridors and barriers to animal movements using Step Select.pdf:application/pdf},
+}
+
+
+@article{Kranstauber2012,
+	title = {A dynamic {Brownian} bridge movement model to estimate utilization distributions for heterogeneous animal movement},
+	volume = {81},
+	issn = {00218790},
+	doi = {10.1111/j.1365-2656.2012.01955.x},
+	abstract = {1. The recently developed Brownian bridge movement model (BBMM) has advantages over traditional methods because it quantifies the utilization distribution of an animal based on its movement path rather than individual points and accounts for temporal autocorrelation and high data volumes. However, the BBMM assumes unrealistic homogeneous movement behaviour across all data. 2. Accurate quantification of the utilization distribution is important for identifying the way animals use the landscape. 3. We improve the BBMM by allowing for changes in behaviour, using likelihood statistics to determine change points along the animal's movement path. 4. This novel extension, outperforms the current BBMM as indicated by simulations and examples of a territorial mammal and a migratory bird. The unique ability of our model to work with tracks that are not sampled regularly is especially important for GPS tags that have frequent failed fixes or dynamic sampling schedules. Moreover, our model extension provides a useful one-dimensional measure of behavioural change along animal tracks. 5. This new method provides a more accurate utilization distribution that better describes the space use of realistic, behaviourally heterogeneous tracks.},
+	number = {4},
+	journal = {Journal of Animal Ecology},
+	author = {Kranstauber, Bart and Kays, Roland and Lapoint, Scott D. and Wikelski, Martin and Safi, Kamran},
+	year = {2012},
+	pmid = {22348740},
+	note = {ISBN: 1365-2656},
+	keywords = {GPS, ★, Home range, Behavioural change, Utilization distribution, Encounter probability},
+	pages = {738--746},
+	file = {Kranstauber et al. - 2012 - A dynamic Brownian bridge movement model to estima.pdf:C\:\\Users\\benja\\Zotero\\storage\\922U8GXA\\Kranstauber et al. - 2012 - A dynamic Brownian bridge movement model to estima.pdf:application/pdf},
+}
