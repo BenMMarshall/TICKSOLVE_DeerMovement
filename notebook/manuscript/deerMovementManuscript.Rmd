@@ -27,10 +27,8 @@ editor_options:
   markdown: 
     wrap: sentence
 abstract: abstract text
-keywords: Movement ecology, step selection function, poisson, habitat preference, habitat selection, animal movement, roe deer
+keywords: Movement ecology, step selection function, poisson, habitat preference, habitat selection, animal movement, roe deer, Capreolus capreolus
 ---
-
-# Introduction
 
 # Methods
 
@@ -41,18 +39,52 @@ library(stringr)
 
 inputList <- readRDS(file = here::here("data", "inputList.rds"))
 
+
 ```
 
-## Study Area
+## Roe Deer Tracking
 
 <!-- resampling of data, overview of data quantity -->
 <!-- removed first week of data -->
+```{r trackingSummary, echo=FALSE, message=FALSE}
+trackingSummary <- read.csv(here("tables", "trackingSummary.csv")) %>% 
+  filter(str_detect(Animal_ID, "Roe"))
+meanDatapointsInText <- paste0(signif(mean(trackingSummary$nFixes), digits = 4), 
+                               " SD±",
+                               signif(sd(trackingSummary$nFixes), digits = 4))
 
-```{r trackingDuration, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Duration"}
+meanDurationInText <- paste0(signif(mean(trackingSummary$durationDays), digits = 4), 
+                               " SD±",
+                               signif(sd(trackingSummary$durationDays), digits = 4))
+
+meanFixDayInText <- paste0(signif(mean(trackingSummary$fixesPerDay), digits = 4), 
+                               " SD±",
+                               signif(sd(trackingSummary$fixesPerDay), digits = 4))
+```
+
+```{r trackingSummaryTable, echo=FALSE, message=FALSE}
+kableExtra::kbl(trackingSummary, caption = "Summary of tracking data used in analysis.",
+             col.names = c("Deer ID",
+                           "Duration (days)",
+                           "Number of fixes",
+                           "Fixes per day",
+                           "Mean time lag between fixes (hours)"), booktabs = TRUE) %>%
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position")) %>% 
+  kableExtra::footnote("Deer ID suffix denote the sex of the individual deer.")
+
+```
+
+We retrieved movement data from `r nrow(trackingSummary)` GPS collars worn by Roe Deer, 13 in Aberdeen, 2 in Wessex.
+We re-sampled the Roe Deer data to a more consistent rate, aiming for a standard 3 hour time lag between locations (with a 1 hour tolerance). 
+We additionally filtered out the first week's worth of data to avoid the impacts of capture/immediate post-release movements that may have been atypical (\@ref(tab:trackingSummaryTable)).
+This resulted in `r sum(trackingSummary$nFixes)` location fixes, with a mean of `r meanDatapointsInText` per individuals, spread across an mean of `r meanDurationInText` days per individual.
+Overall this resulted in an average of `r meanFixDayInText` fixes per day per individual.
+
+```{r trackingDuration, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Dates of data collection and overall duration or deer tracking by individual."}
 knitr::include_graphics(here::here("figures", "trackingDuration.png"))
 ```
 
-```{r trackingTimelags, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Time lags."}
+```{r trackingTimelags, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Distribution of time lags after resampling and filtering. N.b. x axis is log scaled."}
 knitr::include_graphics(here::here("figures", "trackingTimelag.png"))
 ```
 
@@ -109,7 +141,7 @@ A mean of this longest dimension was used to limit which patches could be consid
 To confirm this approach, we determined the distance from patch for every deer location that fell outside a patch.
 We examined the distribution of these distance values that revealed that 95% of all deer movements fell within the mean of half longest dimension of the 99% home range area (Fig. \@ref(fig:distanceDistributionPlot)).
 
-```{r distanceDistributionPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Distance."}
+```{r distanceDistributionPlot, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Distribution of the distances deer locations were from patches when outside of a patch."}
 knitr::include_graphics(here::here("figures", "distanceDistributionPlot.png"))
 ```
 
@@ -166,7 +198,7 @@ We replaced any areas with 0 conductance with 1e-12 to avoid any dead-ends or an
 For we ignored the uncertainty surrounding the selection estimates, instead relying on just the point estimates for the resistance mapping.
 <!-- invert logit to standardise them and flip them to movement ease -->
 
-```{r conductancePlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Conductance"}
+```{r conductancePlot, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Conductance map of Aberdeen landscape developed from the coefficients of the Poisson habitat selection model. Higher values indicate easier movement for Roe Deer. Axis are m in British National Grid coordinate system."}
 knitr::include_graphics(here::here("figures", "resistanceConductanceMap_Pois_Aberdeenshire.png"))
 ```
 
@@ -183,7 +215,7 @@ We repeated this for every pairing of patches.
 We elected not to generate start or end points in patches less than 0.5ha in areas, following <!-- cite -->. 
 This was due to these patches being unlikely to host deer populations and the reduction in origin patches aided computational costs.
 <!-- double check patch numbers if wessex is updated -->
-The 0.5 ha threshold meant that 3415 Aberdeen patches and 154 Wessex patches were included in the generation of random shortest paths, thereby necessitating optimisations for the sake of compute time.
+The 0.5 ha threshold meant that 3415 Aberdeen patches and 7564 Wessex patches were included in the generation of random shortest paths, thereby necessitating optimisations for the sake of compute time.
 Instead of considering the entire landscape when calculating the paths, the vast majority of which would not play a role between two neighbouring patches, we cropped the conductance raster to only include at area surrounding the randomly selected start and end points.
 This cropped area was `r inputList$setCropArea`m in all directions from the start and end points; where start and end points exceeded four times `r inputList$setCropArea`m apart from each other we extended the cropped area to half the distance between the two points in all directions.
 This was required to avoid prohibitively computational intensive paths (i.e., those that encompassed nearly the entire landscape) caused by patches with large areas.
@@ -195,7 +227,7 @@ Once every walk was complete, the resulting rasters describing the likelihood of
 A key consideration in these walks is how random the paths are.
 We elected to run walks at `r length(inputList$theta)` different levels of randomness (theta; with 1 being close to a least cost path, and `r inputList$theta[length(inputList$theta)]` being the most random and diffuse walks; Fig. \@ref(fig:thetaPlot)).
 
-```{r thetaPlot, echo=FALSE, out.width='100%', fig.align="centre", fig.pos = "h", fig.cap="The connectivity maps under differing levels of theta (randomness) in the random shortest paths between patches. The colour scale is squarerooted to better differeniate low conenctivity areas."}
+```{r thetaPlot, echo=FALSE, out.width='100%', fig.align="centre", fig.pos = "h", fig.cap="The connectivity maps under differing levels of theta (randomness) in the random shortest paths between patches. The colour scale is squarerooted to better differeniate low conenctivity areas. Axis are m in British National Grid coordinate system."}
 knitr::include_graphics(here::here("figures", "thetaMaps_Pois.png"))
 ```
 
@@ -230,16 +262,16 @@ The expectation was that the model coefficients would indicate that deer locatio
 
 # Results
 
-For our Aberdeen Roe Deer home range sizes ranged from `r totalAberRange`ha (95% contour point estimates), with a weighted mean of `r ctmmMean`.
-Largely the deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8, Roe Deer 3).
+For our Aberdeen Roe Deer home range sizes ranged from `r totalAberRange`ha (95% contour point estimates), with a weighted mean of `r ctmmMean` (Fig. \@ref(fig:homeRangeSize)).
+Largely the deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8, Roe Deer 3; Fig. \@ref(fig:variogramPlot)).
 All bar two individuals found OU models to fit best, with the remaining two being better described by OUF models.
 All best fitting models were anisotropic, suggesting these Roe Deer are inhabiting non-uniform home ranges (i.e., not being as wide as they are tall).
 
-```{r homeRangeSize, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Home range size."}
+```{r homeRangeSize, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Home range size as estimated via the Autocorrelated Kernel Density Estimators. Depicted are the 95% contour with 95% confidence intervals surrounding that estimate. The vertical line shows the naive mean of all home range estimates."}
 knitr::include_graphics(here::here("figures", "homeRangeAreaPlot.png"))
 ```
 
-```{r variogramPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Variogram plot."}
+```{r variogramPlot, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h",  fig.cap="Variograms showing the autocorrelative structure of the Roe Deer movement data, revealing the level of range residency each individual displayed."}
 knitr::include_graphics(here::here("figures", "varioRoePlot.png"))
 ```
 
@@ -303,12 +335,12 @@ humanCoef <- poisCoef %>%
 
 ```
 
-The Poisson habitat selection model reveal a general tendency for Roe Deer to remain closer to the woodland patches (`r distWoodCoef`), and with no significant care for hedgerows (`r distHedgeCoef`; Fig. \@ref(fig:poisCoefPlot))).
+The Poisson habitat selection model reveal a general tendency for Roe Deer to remain closer to the woodland patches (`r distWoodCoef`), and with no significant care for hedgerows (`r distHedgeCoef`; Fig. \@ref(fig:poisCoefPlot)).
 The model also revealed that roads play a significant role in reducing connectivity across the landscape, with a significantly negative coefficient (`r roadCrossCoef`).
 
 Overall selection revealed significant selection for open shrubland (`r shrubCoef`) and tall grassland (`r tallGCoef`), with other relationships being less clear.
 Movement was most impacted by short grassland, tall grassland, and cropland, all showing the same pattern.
-These step lengths in these land uses to be lower, as seen in coeficeints for log step length (short grassland `r shortG_sl_Coef`; tall grassland `r tallG_sl_Coef`; cropland `r crop_sl_Coef`) but with a larger tail to the gamma distribution (i.e, larger coefficient for step lengths; short grassland `r shortG_logsl_Coef`; tall grassland `r tallG_logsl_Coef`; cropland `r crop_logsl_Coef`).
+These step lengths in these land uses to be lower, as seen in coeficeints for log step length (; short grassland `r shortG_logsl_Coef`; tall grassland `r tallG_logsl_Coef`; cropland `r crop_logsl_Coef`) but with a larger tail to the gamma distribution (i.e, larger coefficient for step lengths (short grassland `r shortG_sl_Coef`; tall grassland `r tallG_sl_Coef`; cropland `r crop_sl_Coef`).
 
 Estimates regarding human settlements were paired with very wide confidence intervals (`r humanCoef`), likely a result of minimal interaction with the tracked deer making estimation difficult.
 There are therefore treated as the point estimate suggests as areas of very low conductivity in further analysis.
@@ -322,24 +354,34 @@ There are therefore treated as the point estimate suggests as areas of very low 
 <!-- log_sl impacts the shape parameter - so like shifting the mean up as it gets bigger? -->
 <!-- shape parameter α and a scale parameter θ -->
 
-```{r poisCoefPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Poisson coefficients."}
+```{r poisCoefPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Coefficient estimates, with 95% confidence intervals, from the Poisson model of habitat selection. Major outlying estimates have been replaced with labels to aid visualisation. Colour highlights and bolding reflect the significantly negative (light orange) and significantly positive (dark orange) coefficients."}
 knitr::include_graphics(here::here("figures", "poisCoef.png"))
 ```
 
 ## Connectivity maps
 
-```{r poisConnect, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Poisson coefficients."}
+(Fig. \@ref(fig:poisConnect))
+
+```{r poisConnect, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="The resulting connectivity map for the Aberdeen landscape displayed on a cell by cell level and summarised by patch. Selected patches are highlighted in orange. Lower panel shows how the selected (tick sampled) patches relate to the overall distribution of patch connectivity values. N.b. connectivity scale is square-rooted. Axis are m in British National Grid coordinate system."}
 knitr::include_graphics(here::here("figures", "patchConnectivity_Pois_Aberdeenshire.png"))
 ```
 
 ## Validation
 
-```{r densityOfConnectivityAberdeen, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Connectivity values distribitions."}
+(Fig. \@ref(fig:densityOfConnectivityAberdeen))
+(Fig. \@ref(fig:densityOfConnectivityWessex))
+(Fig. \@ref(fig:strucFuncComparison))
+
+```{r densityOfConnectivityAberdeen, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Distribution of connectivity values at known deer locations and randomly generated locations across the Aberdeen landscape, as well as random locations generated within the 95% home range. Lower caption describes the results of the logisitic regression testing whether connectivity can predict whether the location was random or a known deer location."}
 knitr::include_graphics(here::here("figures", "densityOfConnectivity_Aberdeen.png"))
 ```
 
-```{r densityOfConnectivityWessex, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Connectivity values distribitions."}
+```{r densityOfConnectivityWessex, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Distribution of connectivity values at known deer locations and randomly generated locations across the Wessex landscape, as well as random locations generated within the 95% home range. Lower caption describes the results of the logisitic regression testing whether connectivity can predict whether the location was random or a known deer location."}
 knitr::include_graphics(here::here("figures", "densityOfConnectivity_Wessex.png"))
+```
+
+```{r strucFuncComparison, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="A comparison between the mean connectivity values derived from deer movement data and the structural metrics of connectivity on a patch by patch basis. Outlying patch areas are replaced with labels indicating their size in square kilometres. Boxes on the right describe the linear relationship between the two variables."}
+knitr::include_graphics(here::here("figures", "funcStrucConnectPlot.png"))
 ```
 
 \clearpage

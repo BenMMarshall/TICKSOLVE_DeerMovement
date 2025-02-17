@@ -87,23 +87,58 @@ abstract text
 
 \section*{Keywords}
 
-Movement ecology, step selection function, poisson, habitat preference, habitat selection, animal movement, roe deer
+Movement ecology, step selection function, poisson, habitat preference, habitat selection, animal movement, roe deer, Capreolus capreolus
 
 \clearpage
 \pagestyle{fancy}
 
-\section{Introduction}\label{introduction}
-
 \section{Methods}\label{methods}
 
-\subsection{Study Area}\label{study-area}
+\subsection{Roe Deer Tracking}\label{roe-deer-tracking}
+
+\begin{table}[!h]
+\centering
+\caption{\label{tab:trackingSummaryTable}Summary of tracking data used in analysis.}
+\centering
+\begin{tabular}[t]{lrrrl}
+\toprule
+Deer ID & Duration (days) & Number of fixes & Fixes per day & Mean time lag between fixes (hours)\\
+\midrule
+\cellcolor{gray!10}{Roe01\_F} & \cellcolor{gray!10}{252.50} & \cellcolor{gray!10}{1799} & \cellcolor{gray!10}{7.12} & \cellcolor{gray!10}{3.37 ±1.49}\\
+Roe02\_F & 255.50 & 1805 & 7.06 & 3.4 ±1.61\\
+\cellcolor{gray!10}{Roe03\_M} & \cellcolor{gray!10}{49.88} & \cellcolor{gray!10}{305} & \cellcolor{gray!10}{6.11} & \cellcolor{gray!10}{3.94 ±1.81}\\
+Roe04\_F & 248.50 & 1787 & 7.19 & 3.34 ±1.45\\
+\cellcolor{gray!10}{Roe05\_F} & \cellcolor{gray!10}{101.88} & \cellcolor{gray!10}{676} & \cellcolor{gray!10}{6.64} & \cellcolor{gray!10}{3.62 ±1.18}\\
+\addlinespace
+Roe06\_F & 282.50 & 1938 & 6.86 & 3.5 ±1.57\\
+\cellcolor{gray!10}{Roe07\_F} & \cellcolor{gray!10}{52.92} & \cellcolor{gray!10}{368} & \cellcolor{gray!10}{6.95} & \cellcolor{gray!10}{3.46 ±1.67}\\
+Roe08\_M & 250.50 & 1799 & 7.18 & 3.34 ±1.42\\
+\cellcolor{gray!10}{Roe09\_M} & \cellcolor{gray!10}{254.50} & \cellcolor{gray!10}{1821} & \cellcolor{gray!10}{7.16} & \cellcolor{gray!10}{3.36 ±1.44}\\
+Roe10\_F & 270.50 & 1873 & 6.92 & 3.47 ±1.6\\
+\addlinespace
+\cellcolor{gray!10}{Roe11\_F} & \cellcolor{gray!10}{67.88} & \cellcolor{gray!10}{548} & \cellcolor{gray!10}{8.07} & \cellcolor{gray!10}{2.98 ±0.15}\\
+Roe12\_F & 139.88 & 1120 & 8.01 & 3 ±0.21\\
+\cellcolor{gray!10}{Roe13\_F} & \cellcolor{gray!10}{280.50} & \cellcolor{gray!10}{1931} & \cellcolor{gray!10}{6.88} & \cellcolor{gray!10}{3.49 ±1.53}\\
+Roe14\_M & 149.88 & 1201 & 8.01 & 3 ±0.18\\
+\cellcolor{gray!10}{Roe15\_F} & \cellcolor{gray!10}{282.50} & \cellcolor{gray!10}{1932} & \cellcolor{gray!10}{6.84} & \cellcolor{gray!10}{3.51 ±1.59}\\
+\bottomrule
+\multicolumn{5}{l}{\rule{0pt}{1em}\textit{Note: }}\\
+\multicolumn{5}{l}{\rule{0pt}{1em}Deer ID suffix denote the sex of the individual deer.}\\
+\end{tabular}
+\end{table}
+
+We retrieved movement data from 15 GPS collars worn by Roe Deer, 13 in Aberdeen, 2 in Wessex.
+We re-sampled the Roe Deer data to a more consistent rate, aiming for a standard 3 hour time lag between locations (with a 1 hour tolerance).
+We additionally filtered out the first week's worth of data to avoid the impacts of capture/immediate post-release movements that may have been atypical (\ref{tab:trackingSummaryTable}).
+This resulted in 20903 location fixes, with a mean of 1394 SD±627.9 per individuals, spread across an mean of 196 SD±90.99 days per individual.
+Overall this resulted in an average of 7.133 SD±0.5359 fixes per day per individual.
 
 \begin{figure}[h]
-\includegraphics[width=1\linewidth]{../../figures/trackingDuration} \caption{Duration}\label{fig:trackingDuration}
+\includegraphics[width=0.75\linewidth]{../../figures/trackingDuration} \caption{Dates of data collection and overall duration or deer tracking by individual.}\label{fig:trackingDuration}
 \end{figure}
 
 \begin{figure}[h]
-\includegraphics[width=1\linewidth]{../../figures/trackingTimelag} \caption{Time lags.}\label{fig:trackingTimelags}
+\includegraphics[width=0.75\linewidth]{../../figures/trackingTimelag} \caption{Distribution of time lags after resampling and filtering. N.b. x axis is log scaled.}\label{fig:trackingTimelags}
 \end{figure}
 
 \subsection{Home Range Esimation}\label{home-range-esimation}
@@ -130,7 +165,7 @@ To confirm this approach, we determined the distance from patch for every deer l
 We examined the distribution of these distance values that revealed that 95\% of all deer movements fell within the mean of half longest dimension of the 99\% home range area (Fig. \ref{fig:distanceDistributionPlot}).
 
 \begin{figure}[h]
-\includegraphics[width=1\linewidth]{../../figures/distanceDistributionPlot} \caption{Distance.}\label{fig:distanceDistributionPlot}
+\includegraphics[width=0.75\linewidth]{../../figures/distanceDistributionPlot} \caption{Distribution of the distances deer locations were from patches when outside of a patch.}\label{fig:distanceDistributionPlot}
 \end{figure}
 
 \subsection{Habitat Selection}\label{habitat-selection}
@@ -177,7 +212,7 @@ We replaced any areas with 0 conductance with 1e-12 to avoid any dead-ends or an
 For we ignored the uncertainty surrounding the selection estimates, instead relying on just the point estimates for the resistance mapping.
 
 \begin{figure}[h]
-\includegraphics[width=1\linewidth]{../../figures/resistanceConductanceMap_Pois_Aberdeenshire} \caption{Conductance}\label{fig:conductancePlot}
+\includegraphics[width=0.75\linewidth]{../../figures/resistanceConductanceMap_Pois_Aberdeenshire} \caption{Conductance map of Aberdeen landscape developed from the coefficients of the Poisson habitat selection model. Higher values indicate easier movement for Roe Deer. Axis are m in British National Grid coordinate system.}\label{fig:conductancePlot}
 \end{figure}
 
 We used random shortest paths, that consists of generating random walks between locations, to simulate potential connectivity across the landscapes.
@@ -190,7 +225,7 @@ For every pairing, we generated 3 start and end locations in each patch and ran 
 We repeated this for every pairing of patches.
 We elected not to generate start or end points in patches less than 0.5ha in areas, following .
 This was due to these patches being unlikely to host deer populations and the reduction in origin patches aided computational costs.
-The 0.5 ha threshold meant that 3415 Aberdeen patches and 154 Wessex patches were included in the generation of random shortest paths, thereby necessitating optimisations for the sake of compute time.
+The 0.5 ha threshold meant that 3415 Aberdeen patches and 7564 Wessex patches were included in the generation of random shortest paths, thereby necessitating optimisations for the sake of compute time.
 Instead of considering the entire landscape when calculating the paths, the vast majority of which would not play a role between two neighbouring patches, we cropped the conductance raster to only include at area surrounding the randomly selected start and end points.
 This cropped area was 750m in all directions from the start and end points; where start and end points exceeded four times 750m apart from each other we extended the cropped area to half the distance between the two points in all directions.
 This was required to avoid prohibitively computational intensive paths (i.e., those that encompassed nearly the entire landscape) caused by patches with large areas.
@@ -203,7 +238,7 @@ A key consideration in these walks is how random the paths are.
 We elected to run walks at 3 different levels of randomness (theta; with 1 being close to a least cost path, and \ensuremath{10^{-5}} being the most random and diffuse walks; Fig. \ref{fig:thetaPlot}).
 
 \begin{figure}[h]
-\includegraphics[width=1\linewidth]{../../figures/thetaMaps_Pois} \caption{The connectivity maps under differing levels of theta (randomness) in the random shortest paths between patches. The colour scale is squarerooted to better differeniate low conenctivity areas.}\label{fig:thetaPlot}
+\includegraphics[width=1\linewidth]{../../figures/thetaMaps_Pois} \caption{The connectivity maps under differing levels of theta (randomness) in the random shortest paths between patches. The colour scale is squarerooted to better differeniate low conenctivity areas. Axis are m in British National Grid coordinate system.}\label{fig:thetaPlot}
 \end{figure}
 
 To determine what level of randomness best reflected the realised movements of the deer, we compared the resulting connectivity maps to dynamic Brownian Bridge Movement Models (\citeproc{ref-Kranstauber2012}{Kranstauber et al., 2012}; \citeproc{ref-move}{Kranstauber, Smolla \& Scharf, 2024}).
@@ -226,47 +261,57 @@ The expectation was that the model coefficients would indicate that deer locatio
 
 \section{Results}\label{results}
 
-For our Aberdeen Roe Deer home range sizes ranged from 32.2 to 122.5ha (95\% contour point estimates), with a weighted mean of 65.3 ha (95\% CI 55.5-75.8).
-Largely the deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8, Roe Deer 3).
+For our Aberdeen Roe Deer home range sizes ranged from 32.2 to 122.5ha (95\% contour point estimates), with a weighted mean of 65.3 ha (95\% CI 55.5-75.8) (Fig. \ref{fig:homeRangeSize}).
+Largely the deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8, Roe Deer 3; Fig. \ref{fig:variogramPlot}).
 All bar two individuals found OU models to fit best, with the remaining two being better described by OUF models.
 All best fitting models were anisotropic, suggesting these Roe Deer are inhabiting non-uniform home ranges (i.e., not being as wide as they are tall).
 
 \begin{figure}[h]
-\includegraphics[width=1\linewidth]{../../figures/homeRangeAreaPlot} \caption{Home range size.}\label{fig:homeRangeSize}
+\includegraphics[width=0.75\linewidth]{../../figures/homeRangeAreaPlot} \caption{Home range size as estimated via the Autocorrelated Kernel Density Estimators. Depicted are the 95\% contour with 95\% confidence intervals surrounding that estimate. The vertical line shows the naive mean of all home range estimates.}\label{fig:homeRangeSize}
 \end{figure}
 
 \begin{figure}[h]
-\includegraphics[width=1\linewidth]{../../figures/varioRoePlot} \caption{Variogram plot.}\label{fig:variogramPlot}
+\includegraphics[width=0.75\linewidth]{../../figures/varioRoePlot} \caption{Variograms showing the autocorrelative structure of the Roe Deer movement data, revealing the level of range residency each individual displayed.}\label{fig:variogramPlot}
 \end{figure}
 
-The Poisson habitat selection model reveal a general tendency for Roe Deer to remain closer to the woodland patches (-0.0051; 95\% CI -0.0082 to -0.0023), and with no significant care for hedgerows (-0.00091; 95\% CI -0.0019 to 1e-04; Fig. \ref{fig:poisCoefPlot})).
+The Poisson habitat selection model reveal a general tendency for Roe Deer to remain closer to the woodland patches (-0.0051; 95\% CI -0.0082 to -0.0023), and with no significant care for hedgerows (-0.00091; 95\% CI -0.0019 to 1e-04; Fig. \ref{fig:poisCoefPlot}).
 The model also revealed that roads play a significant role in reducing connectivity across the landscape, with a significantly negative coefficient (-0.76; 95\% CI -1.2 to -0.35).
 
 Overall selection revealed significant selection for open shrubland (1.5; 95\% CI 0.56 to 2.2) and tall grassland (0.57; 95\% CI 0.17 to 1), with other relationships being less clear.
 Movement was most impacted by short grassland, tall grassland, and cropland, all showing the same pattern.
-These step lengths in these land uses to be lower, as seen in coeficeints for log step length (short grassland 0.0044; 95\% CI 0.0018 to 0.007; tall grassland 0.00049; 95\% CI 5.4e-05 to 0.00092; cropland 0.0012; 95\% CI 0.00064 to 0.0017) but with a larger tail to the gamma distribution (i.e, larger coefficient for step lengths; short grassland -0.76; 95\% CI -1.2 to -0.32; tall grassland -0.18; 95\% CI -0.25 to -0.12; cropland -0.16; 95\% CI -0.24 to -0.076).
+These step lengths in these land uses to be lower, as seen in coeficeints for log step length (; short grassland -0.76; 95\% CI -1.2 to -0.32; tall grassland -0.18; 95\% CI -0.25 to -0.12; cropland -0.16; 95\% CI -0.24 to -0.076) but with a larger tail to the gamma distribution (i.e, larger coefficient for step lengths (short grassland 0.0044; 95\% CI 0.0018 to 0.007; tall grassland 0.00049; 95\% CI 5.4e-05 to 0.00092; cropland 0.0012; 95\% CI 0.00064 to 0.0017).
 
 Estimates regarding human settlements were paired with very wide confidence intervals (-70; 95\% CI -180 to 36), likely a result of minimal interaction with the tracked deer making estimation difficult.
 There are therefore treated as the point estimate suggests as areas of very low conductivity in further analysis.
 
 \begin{figure}[h]
-\includegraphics[width=1\linewidth]{../../figures/poisCoef} \caption{Poisson coefficients.}\label{fig:poisCoefPlot}
+\includegraphics[width=1\linewidth]{../../figures/poisCoef} \caption{Coefficient estimates, with 95\% confidence intervals, from the Poisson model of habitat selection. Major outlying estimates have been replaced with labels to aid visualisation. Colour highlights and bolding reflect the significantly negative (light orange) and significantly positive (dark orange) coefficients.}\label{fig:poisCoefPlot}
 \end{figure}
 
 \subsection{Connectivity maps}\label{connectivity-maps}
 
+(Fig. \ref{fig:poisConnect})
+
 \begin{figure}[h]
-\includegraphics[width=1\linewidth]{../../figures/patchConnectivity_Pois_Aberdeenshire} \caption{Poisson coefficients.}\label{fig:poisConnect}
+\includegraphics[width=1\linewidth]{../../figures/patchConnectivity_Pois_Aberdeenshire} \caption{The resulting connectivity map for the Aberdeen landscape displayed on a cell by cell level and summarised by patch. Selected patches are highlighted in orange. Lower panel shows how the selected (tick sampled) patches relate to the overall distribution of patch connectivity values. N.b. connectivity scale is square-rooted. Axis are m in British National Grid coordinate system.}\label{fig:poisConnect}
 \end{figure}
 
 \subsection{Validation}\label{validation-1}
 
+(Fig. \ref{fig:densityOfConnectivityAberdeen})
+(Fig. \ref{fig:densityOfConnectivityWessex})
+(Fig. \ref{fig:strucFuncComparison})
+
 \begin{figure}[h]
-\includegraphics[width=1\linewidth]{../../figures/densityOfConnectivity_Aberdeen} \caption{Connectivity values distribitions.}\label{fig:densityOfConnectivityAberdeen}
+\includegraphics[width=1\linewidth]{../../figures/densityOfConnectivity_Aberdeen} \caption{Distribution of connectivity values at known deer locations and randomly generated locations across the Aberdeen landscape, as well as random locations generated within the 95\% home range. Lower caption describes the results of the logisitic regression testing whether connectivity can predict whether the location was random or a known deer location.}\label{fig:densityOfConnectivityAberdeen}
 \end{figure}
 
 \begin{figure}[h]
-\includegraphics[width=1\linewidth]{../../figures/densityOfConnectivity_Wessex} \caption{Connectivity values distribitions.}\label{fig:densityOfConnectivityWessex}
+\includegraphics[width=1\linewidth]{../../figures/densityOfConnectivity_Wessex} \caption{Distribution of connectivity values at known deer locations and randomly generated locations across the Wessex landscape, as well as random locations generated within the 95\% home range. Lower caption describes the results of the logisitic regression testing whether connectivity can predict whether the location was random or a known deer location.}\label{fig:densityOfConnectivityWessex}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{../../figures/funcStrucConnectPlot} \caption{A comparison between the mean connectivity values derived from deer movement data and the structural metrics of connectivity on a patch by patch basis. Outlying patch areas are replaced with labels indicating their size in square kilometres. Boxes on the right describe the linear relationship between the two variables.}\label{fig:strucFuncComparison}
 \end{figure}
 
 \clearpage

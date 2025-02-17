@@ -61,7 +61,8 @@ export_pois_coefs <- function(poisModel){
                                 glue::glue("<b>{term_colour}</b>")))
 
   (poisCoef_plot <- poisFixed %>%
-    ggplot() +
+      filter(!termType == "Core movement") %>%
+      ggplot() +
       geom_vline(xintercept = 0, linetype = 2, color = "grey50") +
       geom_errorbarh(aes(xmin = lower, xmax = upper, y = term_colour, color = sig), height = 0.2,
                      alpha = 0.35) +
