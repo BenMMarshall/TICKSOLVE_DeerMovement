@@ -5,7 +5,7 @@
 #' @return abc
 #'
 #' @export
-summarise_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, REGION,
+summarise_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, selectedPatchList, REGION,
                                          buffers){
 
   # library(dplyr)
@@ -27,7 +27,7 @@ summarise_patch_connectivity <- function(MSEdf, connectRasterLocations, patchLis
   # targets::tar_source()
   # REGION <- "Aberdeenshire"
 
-  SELECTEDPATCHES <- patchList$AberdeenSelected$Ptch_ID
+  SELECTEDPATCHES <- selectedPatchList$AberdeenSelected$Ptch_ID
 
   paletteList <- load_deer_palette()
 

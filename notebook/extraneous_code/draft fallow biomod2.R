@@ -2,6 +2,7 @@ library(here)
 library(dplyr)
 library(terra)
 library(biomod2)
+library(CoordinateCleaner)
 
 #### TEMP EXAMPLE BIOCLIM DATA
 # Load environmental variables extracted from BIOCLIM (bio_3, bio_4, bio_7, bio_11 & bio_12)
@@ -11,6 +12,25 @@ TEMP_myExpl <- rast(bioclim_current)
 
 occData <- read.csv(here("data", "GBIF data", "fallowUK.csv"),
                     sep = "\t")
+
+flags <- clean_coordinates(x = occData,
+                           lon = "decimalLongitude",
+                           lat = "decimalLatitude",
+                           species = "species",
+                           tests = c("capitals", "centroids",
+                                     "equal", "zeros",
+                                     "outliers"),
+                           capitals_rad = 10000,
+                           centroids_rad = 1000,
+                           outliers_mtp = 5,
+                           outliers_method = "quantile",
+                           outliers_size = 7)
+
+# flags[!flags$.summary,]
+# summary(flags)
+# plot(flags, lon = "decimalLongitude", lat = "decimalLatitude")
+
+occData <- occData[flags$.summary,]
 
 occData$resp <- 1
 occData$decimalLatitude
@@ -22,7 +42,7 @@ myBiomodData.multi <- BIOMOD_FormatingData(resp.var = occData$resp,
                                            resp.xy = occData[, c("decimalLongitude",
                                                                  "decimalLatitude")],
                                            resp.name = occData$verbatimScientificName[1],
-                                           PA.nb.rep = 3,
+                                           PA.nb.rep = 1,
                                            PA.nb.absences = 1000,
                                            PA.strategy = "sre")
 myBiomodData.multi
@@ -39,7 +59,10 @@ head(cv.e)
 # Model single models
 myBiomodModelOut <- BIOMOD_Modeling(bm.format = myBiomodData.multi,
                                     modeling.id = "AllModels",
-                                    models = c("GAM", "GLM"),
+                                    models = c("ANN",
+                                               "GBM", "GLM",
+                                               "MAXNET",
+                                               "RF", "XGBOOST"),
                                     CV.strategy = "user.defined",
                                     CV.user.table = cv.e,
                                     # CV.strategy = 'random',
@@ -49,7 +72,7 @@ myBiomodModelOut <- BIOMOD_Modeling(bm.format = myBiomodData.multi,
                                     var.import = 3,
                                     metric.eval = c('TSS','ROC'),
                                     seed.val = 2025,
-                                    nb.cpu = 2)
+                                    nb.cpu = 6)
 myBiomodModelOut
 
 # Get evaluation scores & variables importance
@@ -136,3 +159,117 @@ ggplot() +
 
 ## could then examine which best ensemble projection matches the movement data
 ## we have and use that
+targets::tar_source()
+stack <- read_stack_layers()
+
+ggplot() +
+  geom_spatraster(data = stack %>%
+                    dplyr::select(contains("distance"))) +
+  facet_wrap(facet = vars(lyr))
+
+ggplot() +
+  geom_spatraster(data = stack %>%
+                    dplyr::select(!contains("distance"))) +
+  facet_wrap(facet = vars(lyr))
+
+seaClip <- rnaturalearth::ne_download(scale = 10, type = 'land', category = 'physical', returnclass = "sf")
+plot(seaClip)
+seaClip <- st_transform(seaClip, crs(landuseWessex))
+plot(st_crop(seaClip, landuseWessex))
+
+r <- rast(ncols=5, nrows=5, xmin=0, xmax=1, ymin=0, ymax=1, crs="")
+r <- init(r, 1:6)
+x <- rast(ncols=5, nrows=5, xmin=0, xmax=1, ymin=0, ymax=1, crs="")
+x <- init(x, c(1, NA))
+plot(x)
+plot(r*x)
+
+
+x <- subst(r, 3, 7)
+x <- subst(r, 2:3, NA)
+x <- subst(x, NA, 10)
+
+# multiple output layers
+z <- subst(r, 2:3, cbind(20,30))
+
+# multiple input layers
+rr <- c(r, r+1, r+2)
+m <- rbind(c(1:3), c(3:5))
+zz <- subst(rr, m, c(100, 200))
+
+
+# check forecast ----------------------------------------------------------
+
+targets::tar_load("tar_biomodForecast")
+
+projOUT <- terra::unwrap(tar_biomodForecast@proj.out@val)
+projEMmeanTSS <- projOUT %>%
+  dplyr::select(contains("EMmeanByTSS"))
+names(projEMmeanTSS) <- "projOcc"
+
+targets::tar_load("tar_patchList")
+targets::tar_load("tar_deerData")
+library(stringr)
+
+ggplot() +
+  geom_spatraster(data = projEMmeanTSS, aes(fill = projOcc)) +
+  geom_sf(data = tar_patchList$Wessex, alpha = 0.5, colour = NA, fill = "white") +
+  geom_point(data = tar_deerData %>% filter(str_detect(Animal_ID, "Fall")), aes(x = x, y = y),
+             size = 0.5)
+
+targets::tar_load("tar_biomodEns")
+
+bm_PlotResponseCurves(bm.out = tar_biomodEns,
+                      models.chosen = get_built_models(tar_biomodEns)[str_detect(get_built_models(tar_biomodEns), "EMmeanByTSS")],
+                      fixed.var = 'mean')
+
+
+# human footprint ---------------------------------------------------------
+
+hfData <- terra::rast(here("data", "Human Footprint", "hfp2022.tif"))
+UKbbox <- st_bbox(c(xmin = -900000, xmax = 200000, ymin = 5500000, ymax = 7000000))
+hfDataCrop <- terra::crop(hfData, UKbbox)
+hfDataBNG <- terra::project(hfDataCrop, landuseWessex)
+plot(hfDataBNG)
+rescale <- function(x){(x-min(x, na.rm = TRUE))/(max(x, na.rm = TRUE)-min(x, na.rm = TRUE))}
+hfDataBNG <- hfDataBNG %>%
+  mutate(hfp2022 = rescale(hfp2022))
+
+pseudoWeighted <- spatSample(hfDataBNG, 1000, method = "weights",
+                             na.rm = TRUE, as.df = TRUE, values = TRUE,
+                             xy = TRUE)
+
+pseudoNoWeighted <- spatSample(hfDataBNG, 1000, method = "random",
+                             na.rm = TRUE, as.df = TRUE, values = TRUE,
+                             xy = TRUE)
+
+ggplot() +
+  geom_spatraster(data = hfDataBNG) +
+  geom_point(data = pseudoNoWeighted, aes(x = x, y = y), colour = "red") +
+  geom_point(data = pseudoWeighted, aes(x = x, y = y))
+
+ggplot() +
+  geom_density(data = pseudoNoWeighted, aes(x = hfp2022), colour = "red") +
+  geom_density(data = pseudoWeighted, aes(x = hfp2022))
+
+
+# -------------------------------------------------------------------------
+View(tar_pseudoAbs$pa.tab)
+tar_pseudoAbs$sp
+
+BIOMOD_FormatingData(resp.var = tar_occData$resp,
+                     expl.var = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
+                                                  tar_sdm_layers),
+                     resp.xy = st_coordinates(tar_occData),
+                     resp.name = "Dama.dama",
+                     PA.strategy = "user.defined",
+                     PA.user.table = tar_pseudoAbs)
+
+BIOMOD_FormatingData(resp.var = ifelse(tar_pseudoAbs$sp == 1, 1, NA),
+                     expl.var = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
+                                                  tar_sdm_layers),
+                     resp.xy = tar_pseudoAbs$xy,
+                     resp.name = "Dama.dama",
+                     PA.strategy = "user.defined",
+                     filter.raster = TRUE,
+                     PA.user.table = tar_pseudoAbs)

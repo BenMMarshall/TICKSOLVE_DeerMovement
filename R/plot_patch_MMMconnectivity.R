@@ -5,7 +5,7 @@
 #' @return abc
 #'
 #' @export
-plot_patch_MMMconnectivity <- function(MSEdf, connectRasterLocations, patchList, REGION){
+plot_patch_MMMconnectivity <- function(MSEdf, connectRasterLocations, patchList, selectedPatchList, REGION){
 
   # targets::tar_load("tar_connectPois_list")
   # targets::tar_load("tar_msePois_df")
@@ -18,7 +18,7 @@ plot_patch_MMMconnectivity <- function(MSEdf, connectRasterLocations, patchList,
   # targets::tar_source()
   # REGION <- "Aberdeenshire"
 
-  SELECTEDPATCHES <- patchList$AberdeenSelected$Ptch_ID
+  SELECTEDPATCHES <- selectedPatchList$AberdeenSelected$Ptch_ID
 
   paletteList <- load_deer_palette()
 

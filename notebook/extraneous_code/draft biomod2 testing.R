@@ -1,12 +1,12 @@
 # install.packages("biomod2")
 
-# install.packages("gam")
-# install.packages("mgcv")
-# install.packages("earth")
-# install.packages("maxnet")
-# install.packages("randomForest")
-# install.packages("xgboost")
-# install.packages("ENMeval")
+install.packages("gam")
+install.packages("mgcv")
+install.packages("earth")
+install.packages("maxnet")
+install.packages("randomForest")
+install.packages("xgboost")
+install.packages("ENMeval")
 
 library(biomod2)
 library(terra)
@@ -40,6 +40,15 @@ plot(myBiomodData)
 
 # Transform true absences into potential pseudo-absences
 myResp.PA <- ifelse(myResp == 1, 1, NA)
+myResp.PA.vect <- vect(cbind(myRespXY, myResp.PA), geom = c("X_WGS84","Y_WGS84"))
+# user.defined method
+myPAtable <- data.frame(PA1 = ifelse(myResp == 1, TRUE, FALSE),
+                        PA2 = ifelse(myResp == 1, TRUE, FALSE))
+for (i in 1:ncol(myPAtable)) myPAtable[sample(which(myPAtable[, i] == FALSE), 500), i] = TRUE
+PA.u <- bm_PseudoAbsences(resp.var = myResp.PA.vect,
+                          expl.var = myExpl,
+                          strategy = 'user.defined',
+                          user.table = myPAtable)
 
 # Format Data with pseudo-absences : random method
 myBiomodData.multi <- BIOMOD_FormatingData(resp.var = myResp.PA,

@@ -5,7 +5,7 @@
 #' @return abc
 #'
 #' @export
-plot_funcStruc_comparison <- function(MSEdf, connectRasterLocations, patchList){
+plot_funcStruc_comparison <- function(MSEdf, connectRasterLocations, patchList, selectedPatchList){
 
   # library(terra)
   # library(tidyterra)
@@ -34,7 +34,7 @@ plot_funcStruc_comparison <- function(MSEdf, connectRasterLocations, patchList){
                                                         sub("e-", "e.", as.character(bestTheta)))]
   connectTerra <- terra::rast(connectTerraAddr[[1]])
 
-  focalPatches <- patchList$AberdeenSelected
+  focalPatches <- selectedPatchList$AberdeenSelected
 
   b <- 750
   currPatches <- st_buffer(focalPatches, b)

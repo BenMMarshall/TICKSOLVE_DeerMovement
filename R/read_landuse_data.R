@@ -124,10 +124,23 @@ read_landuse_data <- function(deerData, patchList, prelimAggFact){
     terra::distance() %>%
     rename(distanceWoodland = LCM_1)
 
-  roadsWessex_SY <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SU.gml"),
+  roadsWessex_SU <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SU.gml"),
                             layer = "RoadLink")
-  roadsWessexCrop <- sf::st_crop(roadsWessex_SY, st_bbox(sfDeer %>%
-                                                           filter(region == "Wessex")))
+  roadsWessex_ST <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_ST.gml"),
+                            layer = "RoadLink")
+  roadsWessex_SZ <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SZ.gml"),
+                            layer = "RoadLink")
+  roadsWessex_SY <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SY.gml"),
+                            layer = "RoadLink")
+  roadsWessexCrop_SU <- sf::st_crop(roadsWessex_SU, st_bbox(patchList$Wessex))
+  roadsWessexCrop_ST <- sf::st_crop(roadsWessex_ST, st_bbox(patchList$Wessex)) %>%
+    dplyr::select(-name2)
+  roadsWessexCrop_SZ <- sf::st_crop(roadsWessex_SZ, st_bbox(patchList$Wessex))
+  roadsWessexCrop_SY <- sf::st_crop(roadsWessex_SY, st_bbox(patchList$Wessex))
+
+  roadsWessexCrop <- rbind(roadsWessexCrop_SU,
+                           rbind(roadsWessexCrop_ST,
+                                 rbind(roadsWessexCrop_SZ, roadsWessexCrop_SY)))
 
   roadsWessexCrop <- roadsWessexCrop %>%
     mutate(roadSize = case_when(

@@ -5,7 +5,7 @@
 #' @return abc
 #'
 #' @export
-plot_patch_summary <- function(bufferSummaries, MSEdf, connectRasterLocations, patchList, REGION){
+plot_patch_summary <- function(bufferSummaries, MSEdf, connectRasterLocations, patchList, selectedPatchList, REGION){
 
   # library(dplyr)
   # library(here)
@@ -28,7 +28,7 @@ plot_patch_summary <- function(bufferSummaries, MSEdf, connectRasterLocations, p
   # targets::tar_source()
   # REGION <- "Aberdeenshire"
 
-  SELECTEDPATCHES <- patchList$AberdeenSelected$Ptch_ID
+  SELECTEDPATCHES <- selectedPatchList$AberdeenSelected$Ptch_ID
 
   paletteList <- load_deer_palette()
 

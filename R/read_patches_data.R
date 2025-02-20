@@ -9,13 +9,7 @@ read_patches_data <- function(){
 
   patchesWessex <- read_sf(here("data", "GIS data", "patchesWessex.geoJSON"))
   patchesAberdeen <- read_sf(here("data", "GIS data", "patchesAberdeen.geoJSON"))
-  selectedPatchesAberdeen <- read_sf(here("data", "GIS data", "patchesAberdeen_selected.geoJSON"))
 
-  metricsAberdeen <- read.csv(here("data", "GIS data", "aberdeen_site_metrics.csv"))
-
-  selectedPatchesAberdeen <- selectedPatchesAberdeen %>%
-    left_join(metricsAberdeen %>%
-                rename(Ptch_ID = patch.id))
 
   # min(st_area(selectedPatchesAberdeen))
   # areaPatches <- st_area(patchesAberdeen)
@@ -71,11 +65,28 @@ read_patches_data <- function(){
 
   patchList <- list("Aberdeen" = patchesAberdeen,
                     "Wessex" = patchesWessex,
-                    "AberdeenSelected" = selectedPatchesAberdeen,
-                    "distancePatchAberdeen" = distancePatchAberdeen,
                     "distancePatchWessex" = distancePatchWessex
                     )
 
   return(patchList)
+
+}
+
+#' @export
+read_selectedPatches_data <- function(){
+
+  selectedPatchesAberdeen <- read_sf(here("data", "GIS data", "patchesAberdeen_selected.geoJSON"))
+  selectedPatchesWessex <- read_sf(here("data", "GIS data", "patchesWessex_selected.geoJSON"))
+
+  metricsAberdeen <- read.csv(here("data", "GIS data", "aberdeen_site_metrics.csv"))
+
+  selectedPatchesAberdeen <- selectedPatchesAberdeen %>%
+    left_join(metricsAberdeen %>%
+                rename(Ptch_ID = patch.id))
+
+  selectedPatchList <- list("AberdeenSelected" = selectedPatchesAberdeen,
+                            "distancePatchAberdeen" = distancePatchAberdeen)
+
+  return(selectedPatchList)
 
 }

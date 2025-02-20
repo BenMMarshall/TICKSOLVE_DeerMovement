@@ -38,7 +38,10 @@ tar_option_set(
                "terra",
                "tidyterra",
                "foreach",
-               "doParallel"), # Packages that your targets need for their tasks.
+               "doParallel",
+               "CoordinateCleaner",
+               "biomod2"
+               ), # Packages that your targets need for their tasks.
   #
   # Pipelines that take a long time to run may benefit from
   # optional distributed computing. To use this capability
@@ -133,6 +136,10 @@ coreTargetList <- list(
   tar_target(
     name = tar_patchList,
     command = read_patches_data()
+  ),
+  tar_target(
+    name = tar_selectedPatchList,
+    command = read_selectedPatches_data()
   ),
   tar_target(
     name = tar_landuseList,
@@ -312,12 +319,12 @@ connectTargetList <- list(
   # ),
   tar_combine(
     tar_connectPois_list,
-    coreTargetList[[18]][grep("tar_connectStanPois_location", names(coreTargetList[[18]]))],
+    coreTargetList[[19]][grep("tar_connectStanPois_location", names(coreTargetList[[19]]))],
     command = list(!!!.x)
   ),
   tar_combine(
     tar_msePois_df,
-    coreTargetList[[18]][grep("Pois_dbbmmmse", names(coreTargetList[[18]]))],
+    coreTargetList[[19]][grep("Pois_dbbmmmse", names(coreTargetList[[19]]))],
     command = rbind(!!!.x)
   ),
   tar_target(
@@ -326,25 +333,26 @@ connectTargetList <- list(
   ),
   tar_target(
     tar_patchPois_MMMplot,
-    plot_patch_MMMconnectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire")
+    plot_patch_MMMconnectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, tar_selectedPatchList, REGION = "Aberdeenshire")
   ),
   tar_target(
     tar_patch_summaryPois,
-    summarise_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire",
+    summarise_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, tar_selectedPatchList, REGION = "Aberdeenshire",
                                  buffers = buffers)
   ),
   tar_target(
     tar_patchPois_plot,
-    plot_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire",
+    plot_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, tar_selectedPatchList, REGION = "Aberdeenshire",
                             tar_patch_summaryPois)
   ),
   tar_target(
     tar_funcStruc_plot,
-    plot_funcStruc_comparison(tar_msePois_df, tar_connectPois_list, tar_patchList)
+    plot_funcStruc_comparison(tar_msePois_df, tar_connectPois_list, tar_patchList, tar_selectedPatchList)
   ),
   tar_target(
     tar_patchPois_summaryPlot,
-    plot_patch_summary(tar_patch_summaryPois, tar_msePois_df, tar_connectPois_list, tar_patchList, REGION = "Aberdeenshire")
+    plot_patch_summary(tar_patch_summaryPois, tar_msePois_df, tar_connectPois_list, tar_patchList, tar_selectedPatchList,
+                       REGION = "Aberdeenshire")
   ),
   tar_target(
     name = tar_predPoisResist_locationWessex,
@@ -407,5 +415,92 @@ connectTargetList <- list(
   )
 )
 
+# SDM pipeline ------------------------------------------------------------
+
+aggFact_SDM <- 10
+
+coreSDMList <- list(
+  tar_target(
+    name = tar_sdm_layers,
+    command = prepare_sdm_layer(prelimAggFact = aggFact_SDM)
+  ),
+  tar_target(
+    name = tar_occData,
+    command = read_clean_occData(tar_sdm_layers)
+  ),
+  # tar_target(
+  #   name = tar_pseudoAbs,
+  #   command = create_psuedo_abs(occData,
+  #                               hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
+  #                               nPointMultiplier = 3, nReps = 10)
+  # ),
+  tar_target(
+    name = tar_biomodData,
+    command = BIOMOD_FormatingData(resp.var = tar_occData$resp,
+                                   expl.var = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
+                                                                tar_sdm_layers),
+                                   resp.xy = st_coordinates(tar_occData),
+                                   resp.name = "Dama.dama",
+                                   #     # advice from biomod2’s team:
+                                   # # - random selection of PA when high specificity is valued over high sensitivity
+                                   # # - number of PA = 3 times the number of presences
+                                   # # - 10 repetitions
+                                   PA.strategy = "random",
+                                   PA.nb.rep = 2,
+                                   PA.nb.absences = 1000,
+                                   filter.raster = TRUE
+                                   # PA.strategy = "user.defined",
+                                   # PA.user.table = tar_pseudoAbs
+                                   )
+  ),
+  tar_target(
+    name = tar_biomodModels,
+    command = BIOMOD_Modeling(bm.format = tar_biomodData,
+                              modeling.id = "AllModels",
+                              models = c("ANN",
+                                         "GBM", "GLM",
+                                         "MAXNET",
+                                         "RF", "XGBOOST"),
+                              CV.strategy = "user.defined",
+                              CV.user.table = bm_CrossValidation(bm.format = tar_biomodData,
+                                                                 strategy = "block",
+                                                                 balance = "env",
+                                                                 strat = "both"),
+                              # CV.strategy = "random",
+                              # CV.nb.rep = 2,
+                              # CV.perc = 0.8,
+                              OPT.strategy = "bigboss",
+                              var.import = 3,
+                              metric.eval = c("TSS","ROC"),
+                              seed.val = 2025,
+                              nb.cpu = 6)
+  ),
+  tar_target(
+    name = tar_biomodEns,
+    command = BIOMOD_EnsembleModeling(bm.mod = tar_biomodModels,
+                                      models.chosen = "all",
+                                      em.by = "all",
+                                      em.algo = c("EMmean", "EMcv", "EMci",
+                                                  "EMmedian", "EMca", "EMwmean"),
+                                      metric.select = c("TSS"),
+                                      metric.select.thresh = c(0.7),
+                                      metric.eval = c("TSS", "ROC"),
+                                      var.import = 3,
+                                      EMci.alpha = 0.05,
+                                      EMwmean.decay = "proportional")
+  ),
+  tar_target(
+    name = tar_biomodForecast,
+    command = BIOMOD_EnsembleForecasting(bm.em = tar_biomodEns,
+                                         proj.name = "CurrentEM",
+                                         new.env = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")) %>%
+                                           crop(tar_patchList$Wessex),
+                                         models.chosen = "all",
+                                         metric.binary = "all",
+                                         metric.filter = "all")
+  )
+)
+
 list(coreTargetList,
-     connectTargetList)
+     connectTargetList,
+     coreSDMList)
