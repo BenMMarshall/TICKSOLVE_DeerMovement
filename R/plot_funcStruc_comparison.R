@@ -68,7 +68,7 @@ plot_funcStruc_comparison <- function(MSEdf, connectRasterLocations, patchList){
 
   labelData <- rbind(rbind(areaLab, isoLab), decidLab) %>%
     mutate(patchVariable = case_when(
-      patchVariable == "area_km_sq" ~ "Area\n(square km)",
+      patchVariable == "area_km_sq" ~ "Patch Area\n(square km)",
       patchVariable == "iso_mean" ~ "Mean ISO\n(square km)",
       patchVariable == "decid" ~ "Percentage\ndeciduous\nwoodland\n(%)",
       TRUE ~ patchVariable
@@ -83,7 +83,7 @@ plot_funcStruc_comparison <- function(MSEdf, connectRasterLocations, patchList){
     arrange(connectivity) %>%
     mutate(hjust = c(1.2, 0.5, -0.2)) %>%
     mutate(patchVariable = case_when(
-      patchVariable == "area_km_sq" ~ "Area\n(square km)",
+      patchVariable == "area_km_sq" ~ "Patch Area\n(square km)",
       patchVariable == "iso_mean" ~ "Mean ISO\n(square km)",
       patchVariable == "decid" ~ "Percentage\ndeciduous\nwoodland\n(%)",
       TRUE ~ patchVariable
@@ -94,7 +94,7 @@ plot_funcStruc_comparison <- function(MSEdf, connectRasterLocations, patchList){
     tidyr::pivot_longer(cols = c(area_km_sq, iso_mean, decid),
                         names_to = "patchVariable", values_to = "patchValue") %>%
     mutate(patchVariable = case_when(
-      patchVariable == "area_km_sq" ~ "Area\n(square km)",
+      patchVariable == "area_km_sq" ~ "Patch Area\n(square km)",
       patchVariable == "iso_mean" ~ "Mean ISO\n(square km)",
       patchVariable == "decid" ~ "Percentage\ndeciduous\nwoodland\n(%)",
       TRUE ~ patchVariable

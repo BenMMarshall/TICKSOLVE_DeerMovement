@@ -1,0 +1,8 @@
+
+create GB wide rasters of:
+  - distance to road
+  - distance to woodland (any type)
+  - land use types, simplified to 8 categories, should likely be created as dummy vars
+  - distance to urban
+  - distance to hedgerow
+
