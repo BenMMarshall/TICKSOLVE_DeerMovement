@@ -8,8 +8,9 @@
 calculate_dbbmm_mse <- function(deerData, dbbmmList, connectRasterLoc, REGION, THETA){
 
   # targets::tar_load("tar_dbbmmList")
+  # targets::tar_load("tar_connectStanPois_location_0.001_6")
   # REGION
-  # connectRasterLoc
+  # connectRasterLoc <- tar_connectStanPois_location_0.001_6
   # dbbmmList <- tar_dbbmmList
 
   connectRaster <- raster::raster(connectRasterLoc)

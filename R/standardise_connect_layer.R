@@ -1,3 +1,10 @@
+#' Set connect layers between 0 and 1
+#'
+#' @name standardise_connect_layer
+#' @description abc
+#' @return abc
+#'
+#' @export
 standardise_connect_layer <- function(connectRasterLoc,
                                       REGION,
                                       THETA = NULL, MSEdf = NULL){

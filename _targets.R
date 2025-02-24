@@ -71,7 +71,7 @@ typeAvialable <- "random"
 contourAvialable <- "95%"
 rsfFormula <- case_ ~ distanceWoodland + landuse + distanceWoodland:landuse
 # SSF
-nAvailableSteps <- 10
+nAvailableSteps <- 25
 slDistribution <- "gamma"
 taDistribution <- "vonmises"
 ssfFormula <- case_ ~ landuse +
@@ -98,7 +98,7 @@ locationError <- 0.1
 # patchDistance <- 250
 connectSettings <- expand.grid(
   THETA = c(0.1, 0.001, 0.00001),
-  repeatsPerPair = 3
+  repeatsPerPair = 6
 )
 
 aggFact <- NA

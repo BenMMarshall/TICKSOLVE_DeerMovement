@@ -10,7 +10,6 @@ read_patches_data <- function(){
   patchesWessex <- read_sf(here("data", "GIS data", "patchesWessex.geoJSON"))
   patchesAberdeen <- read_sf(here("data", "GIS data", "patchesAberdeen.geoJSON"))
 
-
   # min(st_area(selectedPatchesAberdeen))
   # areaPatches <- st_area(patchesAberdeen)
   # areaPatches <- units::set_units(areaPatches, "m^2")
