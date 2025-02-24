@@ -432,8 +432,9 @@ coreSDMList <- list(
   #   name = tar_pseudoAbs,
   #   command = create_psuedo_abs(occData,
   #                               hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
-  #                               nPointMultiplier = 3, nReps = 10)
+  #                               nPointMultiplier = 3, nReps = 3)
   # ),
+  ## repeats and npoint are not actaully implemented, they are hard coded
   tar_target(
     name = tar_biomodData,
     command = BIOMOD_FormatingData(resp.var = tar_occData$resp,
@@ -449,6 +450,7 @@ coreSDMList <- list(
                                    PA.nb.rep = 2,
                                    PA.nb.absences = 1000,
                                    filter.raster = TRUE
+                                   # PA.nb.rep = 2,
                                    # PA.strategy = "user.defined",
                                    # PA.user.table = tar_pseudoAbs
                                    )

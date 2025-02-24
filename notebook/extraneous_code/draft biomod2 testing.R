@@ -1,12 +1,12 @@
 # install.packages("biomod2")
 
-install.packages("gam")
-install.packages("mgcv")
-install.packages("earth")
-install.packages("maxnet")
-install.packages("randomForest")
-install.packages("xgboost")
-install.packages("ENMeval")
+# install.packages("gam")
+# install.packages("mgcv")
+# install.packages("earth")
+# install.packages("maxnet")
+# install.packages("randomForest")
+# install.packages("xgboost")
+# install.packages("ENMeval")
 
 library(biomod2)
 library(terra)
@@ -56,8 +56,9 @@ myBiomodData.multi <- BIOMOD_FormatingData(resp.var = myResp.PA,
                                            resp.xy = myRespXY,
                                            resp.name = myRespName,
                                            PA.nb.rep = 3,
-                                           PA.nb.absences = 1000,
-                                           PA.strategy = "sre")
+                                           # PA.nb.absences = 1000,
+                                           PA.user.table = PA.u$pa.tab,
+                                           PA.strategy = "user.defined")
 myBiomodData.multi
 summary(myBiomodData.multi)
 plot(myBiomodData.multi)

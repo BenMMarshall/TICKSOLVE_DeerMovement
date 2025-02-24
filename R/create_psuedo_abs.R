@@ -6,7 +6,7 @@
 #'
 #' @export
 create_psuedo_abs <- function(occData, hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
-                              nPointMultiplier = 3, nReps = 10){
+                              nPointMultiplier = 3, nReps = 3){
   # occData <- tar_occData
   hfData <- terra::rast(hfBiasLayer)
   UKbbox <- st_bbox(c(xmin = -900000, xmax = 200000, ymin = 5500000, ymax = 7000000))
@@ -27,7 +27,7 @@ create_psuedo_abs <- function(occData, hfBiasLayer = here("data", "Human Footpri
   # - number of PA = 3 times the number of presences
   # - 10 repetitions
 
-  pseudoWeighted <- spatSample(hfDataBNG, nrow(occData)*3*10, method = "weights",
+  pseudoWeighted <- spatSample(hfDataBNG, nrow(occData)*3*3, method = "weights",
                                na.rm = TRUE, as.df = TRUE, values = TRUE,
                                xy = TRUE)
 
@@ -42,14 +42,15 @@ create_psuedo_abs <- function(occData, hfBiasLayer = here("data", "Human Footpri
 
   PAtable <- data.frame(PA1 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
                         PA2 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        PA3 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        PA4 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        PA5 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        PA6 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        PA7 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        PA8 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        PA9 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        PA10 = ifelse(fullRespData$resp == 1, TRUE, FALSE))
+                        PA3 = ifelse(fullRespData$resp == 1, TRUE, FALSE)#,
+                        # PA4 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+                        # PA5 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+                        # PA6 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+                        # PA7 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+                        # PA8 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+                        # PA9 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+                        # PA10 = ifelse(fullRespData$resp == 1, TRUE, FALSE)
+                        )
 
   for (i in 1:ncol(PAtable)) PAtable[sample(which(PAtable[, i] == FALSE), nrow(occData)*3), i] = TRUE
 
