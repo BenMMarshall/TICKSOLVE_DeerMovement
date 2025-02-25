@@ -124,7 +124,7 @@ build_connect_layer <- function(predRasterLoc, patchList, akdeSummary, REGION, p
     # passageList <- list()
     # for(i in 1:nPatchesClose){
     # passageList <- foreach(i = 1:100, .errorhandling = "pass") %dopar% {
-    passageList <- foreach(i = 1:nPatchesClose, .errorhandling = "pass") %dopar% {
+    passageList <- foreach(i = 1:nPatchesClose) %dopar% {
       # i <- 1
       pointDist <- units::set_units(patchDistance*20, "m")
       print(paste(i, "/", nPatchesClose))

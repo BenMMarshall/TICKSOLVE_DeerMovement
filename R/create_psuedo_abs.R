@@ -5,54 +5,76 @@
 #' @return A bm_PseudoAbsences object
 #'
 #' @export
-create_psuedo_abs <- function(occData, hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
+create_psuedo_abs <- function(occData, hfBiasLayer = here::here("data", "Human Footprint", "hfp2022.tif"),
                               nPointMultiplier = 3, nReps = 3){
+  # targets::tar_load("tar_occData")
+  targets::tar_source()
   # occData <- tar_occData
   hfData <- terra::rast(hfBiasLayer)
   UKbbox <- st_bbox(c(xmin = -900000, xmax = 200000, ymin = 5500000, ymax = 7000000))
   hfDataCrop <- terra::crop(hfData, UKbbox)
   hfDataBNG <- terra::project(hfDataCrop, crs("epsg:27700"))
+  hfDataBNG <- terra::crop(hfDataBNG, st_bbox(occData))
   # plot(hfDataBNG)
   rescale <- function(x){(x-min(x, na.rm = TRUE))/(max(x, na.rm = TRUE) - min(x, na.rm = TRUE))}
   hfDataBNG <- hfDataBNG %>%
     mutate(hfp2022 = rescale(hfp2022))
 
+  hfData25m <- terra::disagg(hfDataBNG, fact = 1060.333 / 25)
+
   occDataSimple <- occData %>%
     mutate(x = st_coordinates(occData)[,1],
            y = st_coordinates(occData)[,2]) %>%
+    select(x, y, resp) %>%
+    st_drop_geometry()
+
+  weightedRandom <- spatSample(hfData25m, nrow(occData)*nPointMultiplier*nReps, method = "weights",
+                               na.rm = TRUE, as.df = TRUE, values = TRUE,
+                               xy = TRUE)
+
+  weightedRandom <- weightedRandom %>%
+    mutate(resp = NA) %>%
     select(x, y, resp)
+
+  fullRespData <- rbind(occDataSimple, weightedRandom)
 
   # advice from biomod2’s team:
   # - random selection of PA when high specificity is valued over high sensitivity
   # - number of PA = 3 times the number of presences
   # - 10 repetitions
 
-  pseudoWeighted <- spatSample(hfDataBNG, nrow(occData)*3*3, method = "weights",
-                               na.rm = TRUE, as.df = TRUE, values = TRUE,
-                               xy = TRUE)
+  # pseudoWeighted <- spatSample(hfDataBNG, nrow(occData)*3*3, method = "weights",
+  #                              na.rm = TRUE, as.df = TRUE, values = TRUE,
+  #                              xy = TRUE)
 
-  pseudoWeighted <- st_as_sf(pseudoWeighted, coords = c("x", "y"), crs = 27700)
-  pseudoWeighted <- pseudoWeighted %>%
-    mutate(resp = 0) %>%
-    mutate(x = st_coordinates(pseudoWeighted)[,1],
-           y = st_coordinates(pseudoWeighted)[,2]) %>%
-    select(x, y, resp)
+  # pseudoWeighted <- st_as_sf(pseudoWeighted, coords = c("x", "y"), crs = 27700)
+  # pseudoWeighted <- pseudoWeighted %>%
+  #   mutate(resp = 0) %>%
+  #   mutate(x = st_coordinates(pseudoWeighted)[,1],
+  #          y = st_coordinates(pseudoWeighted)[,2]) %>%
+  #   select(x, y, resp)
 
-  fullRespData <- rbind(occDataSimple, pseudoWeighted)
+  # fullRespData <- rbind(occDataSimple, pseudoWeighted)
 
-  PAtable <- data.frame(PA1 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        PA2 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        PA3 = ifelse(fullRespData$resp == 1, TRUE, FALSE)#,
-                        # PA4 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        # PA5 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        # PA6 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        # PA7 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        # PA8 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        # PA9 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
-                        # PA10 = ifelse(fullRespData$resp == 1, TRUE, FALSE)
-                        )
+  PAtable <- as.data.frame(matrix(FALSE, nrow = nrow(fullRespData), ncol = nReps))
+  names(PAtable) <- paste0("PA", 1:nReps)
+  # known locations always included
+  PAtable[which(fullRespData$resp == TRUE),] <- TRUE
 
-  for (i in 1:ncol(PAtable)) PAtable[sample(which(PAtable[, i] == FALSE), nrow(occData)*3), i] = TRUE
+  # PAtable <- data.frame(PA1 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+  #                       PA2 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+  #                       PA3 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+  #                       PA4 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+  #                       PA5 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+  #                       PA6 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+  #                       PA7 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+  #                       PA8 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+  #                       PA9 = ifelse(fullRespData$resp == 1, TRUE, FALSE),
+  #                       PA10 = ifelse(fullRespData$resp == 1, TRUE, FALSE)
+  #                       )
+
+  for (i in 1:ncol(PAtable)) PAtable[sample(which(PAtable[, i] == FALSE),
+                                            nrow(occData)*nPointMultiplier), i] = TRUE
 
   envLayers <- read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
                     tar_sdm_layers)

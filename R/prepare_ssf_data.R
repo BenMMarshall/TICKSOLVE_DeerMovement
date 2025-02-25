@@ -55,7 +55,7 @@ prepare_ssf_data <- function(deerData, landuseList, patchList,
     # focalDistancePatch <- terra::rast(here("data", "GIS data", "distanceAberdeen.tif"))
 
     focalAllSteps <- focalSteps %>%
-      amt::random_steps(n_control = 10,
+      amt::random_steps(n_control = nAvail,
                         sl_distr = amt::fit_distr(focalSteps$sl_, slDist),
                         ta_distr = amt::fit_distr(focalSteps$ta_, taDist)) %>%
       amt::extract_covariates(covariates = focalDistanceWoodland, where = "end") %>%

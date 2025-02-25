@@ -49,7 +49,7 @@ plot_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, se
       geom_spatraster(data = connectTerra, aes()) +
       # geom_sf(data = focalPatches, alpha = 0.1) +
       # geom_sf(data = focalRoads, colour = "#000000", alpha = 0.25) +
-      scale_fill_gradient(high = scales::muted("#B54D17"),
+      scale_fill_gradient(high = scales::muted(paletteList$highSigLowSigNoSig[1]),
                           low = "#ffffff",
                           na.value = paletteList$baseGrey, trans = "sqrt") +
       labs(fill = "Connectivity", title = "By Cell Connectivity") +
@@ -86,7 +86,7 @@ plot_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, se
       geom_sf(data = patchMeanScore, aes(fill = meanConnectivity, colour = selected, linewidth = selected)) +
       scale_linewidth_manual(values = c(0, 0.25)) +
       scale_colour_manual(values = c(NA, unname(paletteList$highSigLowSigNoSig[2]))) +
-      scale_fill_gradient(high = scales::muted("#B54D17"),
+      scale_fill_gradient(high = scales::muted(paletteList$highSigLowSigNoSig[1]),
                           low = "#ffffff",
                           na.value = paletteList$baseGrey, trans = "sqrt") +
       labs(fill = "Connectivity", title = "Mean Connectivity", colour = "Selected Patches", linewidth = "Selected Patches") +

@@ -13,7 +13,7 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
     prelimAggFact <- 0
   }
 
-  rescale <- function(x){(x-min(x))/(max(x)-min(x))}
+  rescale <- function(x){(x-min(x, na.rm = TRUE))/(max(x, na.rm = TRUE)-min(x, na.rm = TRUE))}
 
   # WESSEX ------------------------------------------------------------------
 
@@ -35,8 +35,7 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
       LCM_1 %in% 1:2 ~ 1,
       TRUE ~ NA)) %>%
     terra::distance() %>%
-    rename(distanceWoodland = LCM_1) %>%
-    mutate(distanceWoodland = rescale(distanceWoodland))
+    rename(distanceWoodland = LCM_1)
 
   if(prelimAggFact > 0 | !is.null(prelimAggFact) | !is.na(prelimAggFact)){
     distanceWoodlandWessex <- terra::aggregate(distanceWoodlandWessex, fact = prelimAggFact,
@@ -80,8 +79,7 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
   distanceRoadsWessex <- terra::rasterize(st_buffer(roadsWessexCrop, prelimAggFact+2), distanceRoadsWessex,
                                           fun = "max", background = NA, touches = TRUE) %>%
     terra::distance() %>%
-    rename(distanceRoads = layer) %>%
-    mutate(distanceRoads = rescale(distanceRoads))
+    rename(distanceRoads = layer)
 
   hedgesWessex <- st_crop(hedgerowData, landuseWessex)
   distanceHedgesWessex <- rast(landuseWessex)
@@ -92,8 +90,7 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
   distanceHedgesWessex <- terra::rasterize(st_buffer(hedgesWessex, prelimAggFact+2), distanceHedgesWessex,
                                            fun = "max", background = NA, touches = TRUE) %>%
     terra::distance() %>%
-    rename(distanceHedges = layer) %>%
-    mutate(distanceHedges = rescale(distanceHedges))
+    rename(distanceHedges = layer)
 
   landuseWessex <- landuseWessex %>%
     mutate(landuse = factor(case_when(
@@ -148,8 +145,7 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
       distanceHumanSettlementsWessex <- singleUse %>%
         mutate(landuse = ifelse(landuse == 0, NA, 1)) %>%
         terra::distance() %>%
-        rename(distanceHumanSettlement = landuse) %>%
-        mutate(distanceHumanSettlement = rescale(distanceHumanSettlement))
+        rename(distanceHumanSettlement = landuse)
 
       if(prelimAggFact > 0 | !is.null(prelimAggFact) | !is.na(prelimAggFact)){
         distanceHumanSettlementsWessex <- terra::aggregate(distanceHumanSettlementsWessex, fact = prelimAggFact,
@@ -182,18 +178,26 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
   distanceRoadsWessex <- distanceRoadsWessex %>%
     crop(singleUse)
   distanceRoadsWessex <- distanceRoadsWessex * seaNAcut
+  distanceRoadsWessex <- distanceRoadsWessex %>%
+    mutate(distanceRoads = rescale(distanceRoads))
 
   distanceWoodlandWessex <- distanceWoodlandWessex %>%
     crop(singleUse)
   distanceWoodlandWessex <- distanceWoodlandWessex * seaNAcut
+  distanceWoodlandWessex <- distanceWoodlandWessex %>%
+    mutate(distanceWoodland = rescale(distanceWoodland))
 
   distanceHedgesWessex <- distanceHedgesWessex %>%
     crop(singleUse)
   distanceHedgesWessex <- distanceHedgesWessex * seaNAcut
+  distanceHedgesWessex <- distanceHedgesWessex %>%
+    mutate(distanceHedges = rescale(distanceHedges))
 
   distanceHumanSettlementsWessex <- distanceHumanSettlementsWessex %>%
     crop(singleUse)
   distanceHumanSettlementsWessex <- distanceHumanSettlementsWessex * seaNAcut
+  distanceHumanSettlementsWessex <- distanceHumanSettlementsWessex %>%
+    mutate(distanceHumanSettlement = rescale(distanceHumanSettlement))
 
   writeRaster(distanceRoadsWessex,
               filename = distanceRoadsWessexLocation, overwrite = TRUE)

@@ -418,6 +418,10 @@ connectTargetList <- list(
 # SDM pipeline ------------------------------------------------------------
 
 aggFact_SDM <- 10
+# block size for omniscape. 5000m for min patch size. 5000/25 = 200, so perhaps a
+# bs of 7 would be suitable. 7x7=49. Would be ~ four sources per smallest patch.
+bs <- 9
+sr <- 750
 
 coreSDMList <- list(
   tar_target(
@@ -425,46 +429,46 @@ coreSDMList <- list(
     command = prepare_sdm_layer(prelimAggFact = aggFact_SDM)
   ),
   tar_target(
-    name = tar_occData,
-    command = read_clean_occData(tar_sdm_layers)
+    name = tar_occData_fallow,
+    command = read_cleanFallow_occData(tar_sdm_layers)
   ),
-  # tar_target(
-  #   name = tar_pseudoAbs,
-  #   command = create_psuedo_abs(occData,
-  #                               hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
-  #                               nPointMultiplier = 3, nReps = 3)
-  # ),
-  ## repeats and npoint are not actaully implemented, they are hard coded
   tar_target(
-    name = tar_biomodData,
-    command = BIOMOD_FormatingData(resp.var = tar_occData$resp,
+    name = tar_pseudoAbs_fallow,
+    command = create_psuedo_abs(tar_occData_fallow,
+                                hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
+                                nPointMultiplier = 3, nReps = 3)
+  ),
+  # repeats and npoint are not actaully implemented, they are hard coded
+  tar_target(
+    name = tar_biomodData_fallow,
+    command = BIOMOD_FormatingData(resp.var = tar_pseudoAbs_fallow$sp,
                                    expl.var = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
                                                                 tar_sdm_layers),
-                                   resp.xy = st_coordinates(tar_occData),
+                                   resp.xy = tar_pseudoAbs_fallow$xy,
                                    resp.name = "Dama.dama",
                                    #     # advice from biomod2’s team:
                                    # # - random selection of PA when high specificity is valued over high sensitivity
                                    # # - number of PA = 3 times the number of presences
                                    # # - 10 repetitions
-                                   PA.strategy = "random",
-                                   PA.nb.rep = 2,
-                                   PA.nb.absences = 1000,
-                                   filter.raster = TRUE
+                                   # PA.strategy = "random",
                                    # PA.nb.rep = 2,
-                                   # PA.strategy = "user.defined",
-                                   # PA.user.table = tar_pseudoAbs
+                                   # PA.nb.absences = 1000,
+                                   filter.raster = TRUE,
+                                   PA.nb.rep = 2,
+                                   PA.strategy = "user.defined",
+                                   PA.user.table = tar_pseudoAbs_fallow$pa.tab
                                    )
   ),
   tar_target(
-    name = tar_biomodModels,
-    command = BIOMOD_Modeling(bm.format = tar_biomodData,
+    name = tar_biomodModels_fallow,
+    command = BIOMOD_Modeling(bm.format = tar_biomodData_fallow,
                               modeling.id = "AllModels",
                               models = c("ANN",
                                          "GBM", "GLM",
                                          "MAXNET",
                                          "RF", "XGBOOST"),
                               CV.strategy = "user.defined",
-                              CV.user.table = bm_CrossValidation(bm.format = tar_biomodData,
+                              CV.user.table = bm_CrossValidation(bm.format = tar_biomodData_fallow,
                                                                  strategy = "block",
                                                                  balance = "env",
                                                                  strat = "both"),
@@ -478,30 +482,65 @@ coreSDMList <- list(
                               nb.cpu = 6)
   ),
   tar_target(
-    name = tar_biomodEns,
-    command = BIOMOD_EnsembleModeling(bm.mod = tar_biomodModels,
+    name = tar_biomodEns_fallow,
+    command = BIOMOD_EnsembleModeling(bm.mod = tar_biomodModels_fallow,
                                       models.chosen = "all",
                                       em.by = "all",
                                       em.algo = c("EMmean", "EMcv", "EMci",
                                                   "EMmedian", "EMca", "EMwmean"),
                                       metric.select = c("TSS"),
-                                      metric.select.thresh = c(0.7),
+                                      metric.select.thresh = c(0.5),
                                       metric.eval = c("TSS", "ROC"),
                                       var.import = 3,
                                       EMci.alpha = 0.05,
                                       EMwmean.decay = "proportional")
   ),
   tar_target(
-    name = tar_biomodForecast,
-    command = BIOMOD_EnsembleForecasting(bm.em = tar_biomodEns,
+    name = tar_biomodForecast_fallow,
+    command = BIOMOD_EnsembleForecasting(bm.em = tar_biomodEns_fallow,
                                          proj.name = "CurrentEM",
                                          new.env = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")) %>%
                                            crop(tar_patchList$Wessex),
                                          models.chosen = "all",
                                          metric.binary = "all",
-                                         metric.filter = "all")
+                                         metric.filter = "all",
+                                         output.format = ".tif")
+  ),
+  tar_target(
+    name = tar_projLayer_fallow,
+    command = save_proj_layer(tar_biomodForecast_fallow)
+  ),
+  tar_target(
+    name = tar_ssfFallow_data,
+    command = prepare_ssfFallow_data(tar_deerData, tar_landuseList, tar_patchList, cores = 12,
+                                     nAvail = nAvailable, slDist = slDistribution,
+                                     taDist = taDistribution)
+  ),
+  tar_target(
+    name = tar_poisFallow_model,
+    command = run_poisFallow_model(tar_ssfFallow_data)
+  ),
+  tar_target(
+    name = tar_predPoisResist_fallow,
+    command = build_predResistanceFallow_layer(tar_ssfFallow_data, tar_poisFallow_model,
+                                               tar_projLayer_fallow,
+                                               prelimAggFact = aggFact_SDM)
+  ),
+  tar_target(
+    name = tar_longestFallow,
+    command = extract_akdeFallow_longest(tar_akdeLists)
+  ),
+  tar_target(
+    name = tar_omniLayers,
+    command = build_omniscape_layer(tar_predPoisResist_fallow, tar_patchList, #tar_longestFallow,
+                                    blockSize = bs, searchRadius = sr, reRun = FALSE)
+  ),
+  tar_target(
+    name = tar_occSDMOmni_plots,
+    command = plot_occSDMOmni_inOut(tar_omniLayers)
   )
 )
+
 
 list(coreTargetList,
      connectTargetList,
