@@ -81,10 +81,10 @@ read_selectedPatches_data <- function(){
 
   selectedPatchesAberdeen <- selectedPatchesAberdeen %>%
     left_join(metricsAberdeen %>%
-                rename(Ptch_ID = patch.id))
+                rename(site_id = site.id) %>% select(-patch.id))
 
   selectedPatchList <- list("AberdeenSelected" = selectedPatchesAberdeen,
-                            "distancePatchAberdeen" = distancePatchAberdeen)
+                            "WessexSelected" = selectedPatchesWessex)
 
   return(selectedPatchList)
 

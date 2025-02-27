@@ -1,11 +1,11 @@
-#' Extract Patch Connectivity
+#' Summarise Patch Connectivity
 #'
 #' @name extract_patch_connectivity
 #' @description abc
 #' @return abc
 #'
 #' @export
-extract_patch_connectivity <- function(MSEdf = NULL, connectRasterLocations, patchList, selectedPatchList, REGION,
+extract_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, selectedPatchList, REGION,
                                          buffers){
 
   # library(dplyr)
@@ -27,23 +27,22 @@ extract_patch_connectivity <- function(MSEdf = NULL, connectRasterLocations, pat
   # connectRasterLocations <- tar_connectPois_list
   # connectTerra <- terra::rast(tar_connectPois_list[[3]])
   # targets::tar_source()
-  # REGION <- "Wessex"
   # REGION <- "Aberdeenshire"
   # buffers <- c(0, 750)
 
+  SELECTEDPATCHES <- selectedPatchList$AberdeenSelected$Ptch_ID
+
   paletteList <- load_deer_palette()
 
-  if(!is.null(MSEdf)){
-    meanMSE <- MSEdf %>%
-      group_by(theta) %>%
-      summarise(meanMSE = mean(mse))
-    bestTheta <- meanMSE[meanMSE$meanMSE == min(meanMSE$meanMSE),]$theta
-    connectTerraAddr <- connectRasterLocations[str_detect(names(connectRasterLocations),
-                                                          sub("e-", "e.", as.character(bestTheta)))]
-    connectTerra <- terra::rast(connectTerraAddr[[1]])
-  } else {
-    connectTerra <- terra::rast(connectRasterLocations)
-  }
+  meanMSE <- MSEdf %>%
+    group_by(theta) %>%
+    summarise(meanMSE = mean(mse))
+
+  bestTheta <- meanMSE[meanMSE$meanMSE == min(meanMSE$meanMSE),]$theta
+
+  connectTerraAddr <- connectRasterLocations[str_detect(names(connectRasterLocations),
+                                                        sub("e-", "e.", as.character(bestTheta)))]
+  connectTerra <- terra::rast(connectTerraAddr[[1]])
 
   paletteListpaletteListpaletteList <- load_deer_palette()
 
@@ -113,15 +112,6 @@ extract_patch_connectivity <- function(MSEdf = NULL, connectRasterLocations, pat
     selectedPatchesBufferedList[[paste0("buffer_", b)]] <- patchMeanScore
   }
   selectedBufferSummaries <- do.call(rbind, selectedPatchesBufferedList)
-
-  exportConnectValue <- selectedBufferSummaries %>%
-    filter(buffer == 750) %>%
-    select(Ptch_ID, site_id, wood_name, connectivity, buffer, summaryMethod) %>%
-    mutate(region = sub("shire", "", REGION))
-
-  write.csv(exportConnectValue, here("tables",
-                                     paste0("connectivityValues_", sub("shire", "", REGION), ".csv")),
-            row.names = FALSE)
 
   # st_crs(patchList$AberdeenSelected) <- st_crs(27700)
   bufferSummaries <- bufferSummaries %>%

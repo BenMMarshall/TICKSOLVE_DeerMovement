@@ -5,7 +5,7 @@
 #' @return abc
 #'
 #' @export
-plot_funcStruc_comparison <- function(MSEdf, connectRasterLocations, patchList, selectedPatchList){
+plot_funcStruc_comparison <- function(patchData){
 
   # library(terra)
   # library(tidyterra)
@@ -17,49 +17,60 @@ plot_funcStruc_comparison <- function(MSEdf, connectRasterLocations, patchList, 
   # library(patchwork)
   # library(stringr)
 
-  # targets::tar_load("tar_connectPois_list")
+  # targets::tar_load("tar_patch_summaryPois")
   # targets::tar_load("tar_msePois_df")
   # targets::tar_load("tar_patchList")
   # targets::tar_source()
+  # patchData <- bufferSummariesAll
+  # patchData <- tar_patch_summaryPois
+
+  # aberdeenSelectedCovar <- read.csv(here::here("data", "GIS data", "aberdeen_site_metrics.csv"))
+  # patchData %>%
+  #   left_join(aberdeenSelectedCovar %>%
+  #               mutate(Ptch_ID = as.character(patch.id)))
 
   paletteList <- load_deer_palette()
 
-  meanMSE <- MSEdf %>%
-    group_by(theta) %>%
-    summarise(meanMSE = mean(mse))
+  # meanMSE <- MSEdf %>%
+  #   group_by(theta) %>%
+  #   summarise(meanMSE = mean(mse))
+  #
+  # bestTheta <- meanMSE[meanMSE$meanMSE == min(meanMSE$meanMSE),]$theta
+  #
+  # connectTerraAddr <- connectRasterLocations[str_detect(names(connectRasterLocations),
+  #                                                       sub("e-", "e.", as.character(bestTheta)))]
+  # connectTerra <- terra::rast(connectTerraAddr[[1]])
+  #
+  # focalPatches <- selectedPatchList$AberdeenSelected
 
-  bestTheta <- meanMSE[meanMSE$meanMSE == min(meanMSE$meanMSE),]$theta
+  # b <- 750
+  # currPatches <- st_buffer(focalPatches, b)
+  # patchMeanScore <- terra::extract(connectTerra, currPatches, fun = mean,
+  #                                  bind = TRUE, na.rm = TRUE) %>%
+  #   # dplyr::select(Ptch_ID, connectivity) %>%
+  #   mutate(buffer = b,
+  #          summaryMethod = "mean") %>%
+  #   as.data.frame()
 
-  connectTerraAddr <- connectRasterLocations[str_detect(names(connectRasterLocations),
-                                                        sub("e-", "e.", as.character(bestTheta)))]
-  connectTerra <- terra::rast(connectTerraAddr[[1]])
+  selectedPatchData <- patchData %>%
+    filter(buffer == 750) %>%
+    filter(selected == "Selected")
 
-  focalPatches <- selectedPatchList$AberdeenSelected
-
-  b <- 750
-  currPatches <- st_buffer(focalPatches, b)
-  patchMeanScore <- terra::extract(connectTerra, currPatches, fun = mean,
-                                   bind = TRUE, na.rm = TRUE) %>%
-    # dplyr::select(Ptch_ID, connectivity) %>%
-    mutate(buffer = b,
-           summaryMethod = "mean") %>%
-    as.data.frame()
-
-  conAreaOUT <- lm(connectivity ~ area_km_sq, data = patchMeanScore)
+  conAreaOUT <- lm(connectivity ~ area_km_sq, data = selectedPatchData)
   areaLab <- data.frame(patchVariable = "area_km_sq",
                         modLabel = paste0("Coef: ", signif(summary(conAreaOUT)$coef[2,1], digits = 2),
                                           "<br><i>p-value</i>: ", signif(summary(conAreaOUT)$coef[2,4], digits = 2),
                                           "<br><i>R<sup>2</sup></i>: ", signif(performance::r2(conAreaOUT)[1]$R2, digits = 2)),
                         yPos = 1.5)
 
-  conIsoOUT <- lm(connectivity ~ iso_mean, data = patchMeanScore)
+  conIsoOUT <- lm(connectivity ~ iso_mean, data = selectedPatchData)
   isoLab <- data.frame(patchVariable = "iso_mean",
                        modLabel = paste0("Coef: ", signif(summary(conIsoOUT)$coef[2,1], digits = 2),
                                          "<br><i>p-value</i>: ", signif(summary(conIsoOUT)$coef[2,4], digits = 2),
                                          "<br><i>R<sup>2</sup></i>: ", signif(performance::r2(conIsoOUT)[1]$R2, digits = 2)),
                        yPos = 175)
 
-  conDecOUT <- lm(connectivity ~ decid, data = patchMeanScore)
+  conDecOUT <- lm(connectivity ~ decid, data = selectedPatchData)
   decidLab <- data.frame(patchVariable = "decid",
                          modLabel = paste0("Coef: ", signif(summary(conDecOUT)$coef[2,1], digits = 2),
                                            "<br><i>p-value</i>: ", signif(summary(conDecOUT)$coef[2,4], digits = 2),
@@ -74,7 +85,7 @@ plot_funcStruc_comparison <- function(MSEdf, connectRasterLocations, patchList, 
       TRUE ~ patchVariable
     ))
 
-  largePatchLabels <- patchMeanScore %>%
+  largePatchLabels <- selectedPatchData %>%
     filter(area_km_sq > 2.8) %>%
     select(Ptch_ID, connectivity, area_km_sq) %>%
     tidyr::pivot_longer(cols = c(area_km_sq),
@@ -89,7 +100,7 @@ plot_funcStruc_comparison <- function(MSEdf, connectRasterLocations, patchList, 
       TRUE ~ patchVariable
     ))
 
-  funcStrucPlot <- patchMeanScore %>%
+  funcStrucPlot <- selectedPatchData %>%
     mutate(area_km_sq = ifelse(area_km_sq > 2.8, 2.8, area_km_sq)) %>%
     tidyr::pivot_longer(cols = c(area_km_sq, iso_mean, decid),
                         names_to = "patchVariable", values_to = "patchValue") %>%

@@ -15,36 +15,38 @@ calculate_akdes|function|2192df08ee8ea6f9|||||||||||||||
 calculate_dbbmm_mse|function|d460657c9b004785|||||||||||||||
 calculate_dbbmms|function|7a6d7321c24e85cf|||||||||||||||
 connectSettings|object|597d46847c0f2126|||||||||||||||
-connectTargetList|object|4c1826c7e5adc699|||||||||||||||
+connectTargetList|object|38c5db2f17bf1886|||||||||||||||
 contourAvialable|object|1fad89499ff2daae|||||||||||||||
-coreSDMList|object|96fcc7914a9ae486|||||||||||||||
-coreTargetList|object|ce350e50750054e6|||||||||||||||
+coreSDMList|object|39854fa1255ad208|||||||||||||||
+coreTargetList|object|9af488e51a6c09f1|||||||||||||||
 create_package_txt|function|68434bfa00bd3fcc|||||||||||||||
 create_psuedo_abs|function|5d738d0b223ebd78|||||||||||||||
 export_pois_coefs|function|22457d22481c5e87|||||||||||||||
 extract_akde_summaries|function|f056d329a7b7ccfc|||||||||||||||
 extract_akdeFallow_longest|function|e8c62e28c532987b|||||||||||||||
 extract_connectivity_locations|function|944dcaf3b05a04d9|||||||||||||||
+extract_patch_connectivity|function|e1ba5af0eb44773f|||||||||||||||
 extract_rsf_results|function|200d4a2dba9d5e39|||||||||||||||
 generate_overview_maps|function|c9b608824a68460a|||||||||||||||
 generate_palettes|function|14279570f6a672fe|||||||||||||||
 generate_tracking_plots|function|ab5f74a24c745970|||||||||||||||
 generate_tracking_table|function|3914ce43cf2850f6|||||||||||||||
-inputList|object|25fcd0f5b7939b5a|||||||||||||||
+inputList|object|9b9ee66b2eea9c17|||||||||||||||
 load_deer_palette|function|f1143426f7e122cf|||||||||||||||
 locationError|object|ff81af095a75741e|||||||||||||||
 map_connectivity_thetas|function|4b863a5633bab936|||||||||||||||
 marginSize|object|c386c7b04396aaec|||||||||||||||
 minPatchSize_m2|object|4453d6f14899f422|||||||||||||||
 nAvailable|object|d516855f98da7f3d|||||||||||||||
-nAvailableSteps|object|5328423ee29e059b|||||||||||||||
+nAvailableSteps|object|d516855f98da7f3d|||||||||||||||
 patchDistance|object|926fba0b13bbd9f6|||||||||||||||
 plot_conductance_map|function|a2c416d29000d428|||||||||||||||
 plot_connectivity_distributions|function|0aab6b43e204be3e|||||||||||||||
 plot_distance_to_patch|function|6990492cd62dc778|||||||||||||||
-plot_funcStruc_comparison|function|2b5299d883c77478|||||||||||||||
+plot_funcStruc_comparison|function|61b1f9a16e457063|||||||||||||||
 plot_homeRange_sizes|function|5c3784d1113284ed|||||||||||||||
-plot_patch_connectivity|function|d59ea3ad4e48b0c6|||||||||||||||
+plot_occSDMOmni_inOut|function|56723e0bf7608778|||||||||||||||
+plot_patch_connectivity|function|868cc251555f97ac|||||||||||||||
 plot_patch_MMMconnectivity|function|5f2bb36be4ae0337|||||||||||||||
 plot_patch_summary|function|d2c17bc150c2c021|||||||||||||||
 plot_pois_coefs|function|cfec6b0e59683d07|||||||||||||||
@@ -61,7 +63,7 @@ read_cleanFallow_occData|function|c902fd23e69ddade|||||||||||||||
 read_deer_data|function|51d0f06bc0c39b5d|||||||||||||||
 read_landuse_data|function|509ed78005ba4ef4|||||||||||||||
 read_patches_data|function|c8fe2a56a109685c|||||||||||||||
-read_selectedPatches_data|function|c7c0e71062626464|||||||||||||||
+read_selectedPatches_data|function|fe38f0735932c907|||||||||||||||
 read_stack_layers|function|b464e553b7f110b4|||||||||||||||
 render_rmd|function|b9d183184e3f651e|||||||||||||||
 rsfFormula|object|e44fdcd993ebd2fb|||||||||||||||
@@ -77,7 +79,7 @@ slDistribution|object|378daf6acce8eba7|||||||||||||||
 sr|object|9ed1990733649bbf|||||||||||||||
 ssfFormula|object|ce61344dcb0e3a2a|||||||||||||||
 standardise_connect_layer|function|0a3b7be0d9976fb6|||||||||||||||
-summarise_patch_connectivity|function|e771484f596cd284|||||||||||||||
+summarise_patch_connectivity|function|17eb367ec64f1d5d|||||||||||||||
 taDistribution|object|1716da92e4275cdd|||||||||||||||
 tar_akdeLists|stem|2951099ef4e0e8c6|51e20b3c1d015bc4|489323ecff14c748|856298492||t20109.5625450174s|e27903b50905bb25|13233398|qs|local|vector|||1297.328||
 tar_akdeSummary|stem|8b43c4997363a751|f3f6fd0e72aeab2c|0d1cc6663f36f5a2|-1306586415||t20133.5525167052s|77d5cda3e9028061|4322|qs|local|vector|||18.875|repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for|
@@ -102,7 +104,7 @@ tar_connect_location_0.01_1000|stem||2517375eaa3a0501|0f505d8fe81c9891|905069639
 tar_connect_location_0.01_300|stem|4db3547299b97234|55be136d62c37bad|17965af800edd2b8|399797058||t20073.6395548601s|31cf8697cc750540|180|qs|local|vector|||403.109||
 tar_connect_location_1e.04_300|stem|433a2d7137c92c09|979e3410e93671c2|17965af800edd2b8|1126387254||t20073.6441832223s|216fa2272502dc69|182|qs|local|vector|||399.891||
 tar_connectivity_thetaMaps|stem|a7d0cb691e074fea|baf1d7e412056c1e|bdf5652c740b85cb|803068592||t20073.8145661198s|d890688e8836a743|4001642|qs|local|vector|||0.047||
-tar_connectivityPois_thetaMaps|stem|41233a9e5d72f358|843af2e26c00aac7|80f1d98969c848c9|1772820026||t20130.6667228315s|5fc67f73f33bc597|6906432|qs|local|vector|||9.422||
+tar_connectivityPois_thetaMaps|stem|0ed0bf72f339de96|843af2e26c00aac7|060a61d4b788fbda|1772820026||t20145.5354838454s|a3ae037b3761d90f|14218298|qs|local|vector|||9.922||
 tar_connectivitySSF_thetaMaps|stem|2da73cf19691d9ff|54c0232dff00c2cf|edbaf6d48a3faea4|-1281289065||t20122.8235416859s|1795cdbe9826d617|4721936|qs|local|vector|||12.781|filename must have length 1, not 3. Only the first,  FProjectsTICKSOLVE_DeerMovementfiguresthetaMaps_SSF.png, will be used.. filename must have length 1, not 3. Only the first,  FProjectsTICKSOLVE_DeerMovementfiguresthetaMaps_SSF.pdf, will be used.|
 tar_connectivityValue_models|stem|96e93e852b6ff407|1a311f282a0f8bc4|fbe56f24bc4b00c7|-2036217244||t20130.5600359461s|f81d5103172f50a6|27569031|qs|local|vector|||17.844||
 tar_connectivityValue_plots|stem|4f6b22faf95b6eef|02cb1915b4dbc8a7|4efeafe4898d40ce|-1177731451||t20130.56010396s|a02d35e6bcfa2e33|76228222|qs|local|vector|||5.125||
@@ -140,7 +142,7 @@ tar_connectPois_dbbmmmse_1e.05_5_1000|stem|2c6b619aebb507e3|c7af0b297ef85d88|e27
 tar_connectPois_dbbmmmse_1e.05_6|stem|a5f88b50a7a4013e|563076a77750f23d|6695cf9a776590df|1717185327||t20143.3671623742s|42efc20a5d07f525|384|qs|local|vector|||32.015||
 tar_connectPois_dbbmmmse_1e.06_1_1200|stem|fb09d34cbe26cecb|fdc4e5fda8bdf1dd|c7bbbd7c5ae755bc|1399086964||t20074.6967080377s|42efc20a5d07f525|384|qs|local|vector|||4.765||
 tar_connectPois_dbbmmmse_1e.06_1200|stem|8a0b76ab2c6a93a2|3c333adea79e950a|a1fd71a791560fd7|-1396095190||t20074.5106119696s|218ce91cd4e12ad3|358|qs|local|vector|||4.656||
-tar_connectPois_list|stem|f7d2635ba19f496c|b133710fe416089d|5a6b145d879197b1|-1753174068||t20140.0229118934s|32da600b172cf8c3|251|qs|local|vector|||0||
+tar_connectPois_list|stem|f7d2635ba19f496c|b133710fe416089d|5a6b145d879197b1|-1753174068||t20145.5353635948s|32da600b172cf8c3|251|qs|local|vector|||0||
 tar_connectPois_location_0.001_1|stem|6fbc01f0a2b1e55f|0ec627806252ac24|2bf2ec6505b19887|-58013933||t20122.7568485314s||156|qs|local|vector|||0||could not load dependency tar_predPoisResist_location of target tar_connectPois_location_0.001_1. Expecting a single string value typecharacter extent0.
 tar_connectPois_location_0.001_1_1200|stem|408ef1214f034070|a96fd88864704b35|a8ac63e3a07f6355|566405602||t20074.7145182291s|dcb6f4f9bcb93dc6|186|qs|local|vector|||788.813||
 tar_connectPois_location_0.001_1_250|stem|6fbc01f0a2b1e55f|c231b133adf5e24e|236c13b37e2d4552|-1867434085||t20109.7159435651s|514534cdb13dcc77|156|qs|local|vector|||1697.547||
@@ -149,7 +151,7 @@ tar_connectPois_location_0.001_1200|stem|408ef1214f034070|232353ef8d527b66|3ae77
 tar_connectPois_location_0.001_3|stem|6fbc01f0a2b1e55f|f714c37bce02e213|24c0fa88d6a5994f|-1000775310||t20130.1092533316s|514534cdb13dcc77|156|qs|local|vector|||7703.156||
 tar_connectPois_location_0.001_300|stem|408ef1214f034070|682737137d3dce86|3ae7798473a2c3ac|-2068263410||t20074.4286253096s|dcb6f4f9bcb93dc6|186|qs|local|vector|||463.625||
 tar_connectPois_location_0.001_5_1000|stem|6fbc01f0a2b1e55f|1114780867b08155|d0474a4b2b39c79a|2012317838||t20093.9955229834s|514534cdb13dcc77|156|qs|local|vector|||22816.797||
-tar_connectPois_location_0.001_6|stem|6fbc01f0a2b1e55f|c24b03e6df261e93|f7c5400f1d3307a4|1956513182||t20140.4547667705s|514534cdb13dcc77|156|qs|local|vector|||13036.984||
+tar_connectPois_location_0.001_6|stem|6fbc01f0a2b1e55f|c24b03e6df261e93|b6111fcec7e400aa|1956513182||t20145.5352807294s|514534cdb13dcc77|156|qs|local|vector|||0||
 tar_connectPois_location_0.01_1_1200|stem|5f2d0a152a24b114|2f69fa501618e501|a8ac63e3a07f6355|559729913||t20074.7053299748s|c46a94e42a62e426|185|qs|local|vector|||787.829||
 tar_connectPois_location_0.01_1200|stem|5f2d0a152a24b114|3c2e9da54bb7c208|3ae7798473a2c3ac|815283500||t20074.4784210661s|c46a94e42a62e426|185|qs|local|vector|||1175.812||
 tar_connectPois_location_0.01_300|stem|5f2d0a152a24b114|72c83c875b38f157|3ae7798473a2c3ac|-549562396||t20074.4231981418s|c46a94e42a62e426|185|qs|local|vector|||465.062||
@@ -160,7 +162,7 @@ tar_connectPois_location_0.1_1_500|stem|0817db0d3e6334bf|1bfa53b45cacf654|d0474a
 tar_connectPois_location_0.1_1200|stem|0817db0d3e6334bf|d20cf45dc6fdb3f8|3ae7798473a2c3ac|1468000365||t20074.5106615932s|46c3705007889b1f|183|qs|local|vector|||1169.547||
 tar_connectPois_location_0.1_3|stem|f74e8d306589594f|f8c41e8c01d1d18e|24c0fa88d6a5994f|-492966673||t20129.9311412564s|069a55b7c9ffa65a|155|qs|local|vector|||7762.359||
 tar_connectPois_location_0.1_5_1000|stem|f74e8d306589594f|4400d0e54711a3ea|d0474a4b2b39c79a|1460539394||t20093.9909366591s|069a55b7c9ffa65a|155|qs|local|vector|||22420.531||
-tar_connectPois_location_0.1_6|stem|f74e8d306589594f|b7f93543a50b5839|f7c5400f1d3307a4|1398216725||t20140.6070484055s|069a55b7c9ffa65a|155|qs|local|vector|||13157.109||
+tar_connectPois_location_0.1_6|stem|f74e8d306589594f|b7f93543a50b5839|b6111fcec7e400aa|1398216725||t20145.5353302414s|069a55b7c9ffa65a|155|qs|local|vector|||0.078||
 tar_connectPois_location_1e.04_1_1200|stem|f324292e5a7bccb5|c73de3b885d33e33|a8ac63e3a07f6355|-811405505||t20074.707513411s|c46a94e42a62e426|185|qs|local|vector|||856.86||
 tar_connectPois_location_1e.04_1200|stem|f324292e5a7bccb5|c770e2fea276ed3d|3ae7798473a2c3ac|-847823281||t20074.4887461299s|c46a94e42a62e426|185|qs|local|vector|||1119.875||
 tar_connectPois_location_1e.04_300|stem|f324292e5a7bccb5|71bcbe0ec599e7a7|3ae7798473a2c3ac|-634521003||t20074.423694966s|c46a94e42a62e426|185|qs|local|vector|||506.859||
@@ -172,7 +174,7 @@ tar_connectPois_location_1e.05_1200|stem|791dbe72c05c40c2|ff1a4e87433bfa21|3ae77
 tar_connectPois_location_1e.05_3|stem|bb61e9f8e0f1884f|09e0ab1c8a93432d|24c0fa88d6a5994f|-520253873||t20130.0200963555s|514534cdb13dcc77|156|qs|local|vector|||7685.719||
 tar_connectPois_location_1e.05_300|stem|791dbe72c05c40c2|376e10cad31f6a0a|3ae7798473a2c3ac|-1621449130||t20074.4288099109s|c46a94e42a62e426|185|qs|local|vector|||466.109||
 tar_connectPois_location_1e.05_5_1000|stem|bb61e9f8e0f1884f|21fbb2c40d3b9207|d0474a4b2b39c79a|-2020786836||t20093.9948130033s|514534cdb13dcc77|156|qs|local|vector|||22755.485||
-tar_connectPois_location_1e.05_6|stem|bb61e9f8e0f1884f|cf192993d69dbe01|f7c5400f1d3307a4|-127498889||t20140.7594288053s|514534cdb13dcc77|156|qs|local|vector|||13165.656||
+tar_connectPois_location_1e.05_6|stem|bb61e9f8e0f1884f|cf192993d69dbe01|b6111fcec7e400aa|-127498889||t20145.5353303631s|514534cdb13dcc77|156|qs|local|vector|||0||
 tar_connectPois_location_1e.06_1_1200|stem|2083497e948f2c4d|175a37d07f9577da|a8ac63e3a07f6355|-1164391183||t20074.6966469151s|c46a94e42a62e426|185|qs|local|vector|||790.344||
 tar_connectPois_location_1e.06_1200|stem|2083497e948f2c4d|c7fae003477f0f4a|3ae7798473a2c3ac|-1247227747||t20074.5105487832s|c46a94e42a62e426|185|qs|local|vector|||1159.766||
 tar_connectPois_locationWessex|stem|daff47d66b1e3987|30c42e2c3e2d7bdb|d16ea0b4a78260ce|-2017631618||t20140.022912067s|f84fd0305bad89a6|150|qs|local|vector|||0||
@@ -250,8 +252,8 @@ tar_connectStanSSF_location_1e.05_1|stem|01acf74760573bc3|dbeaef37757f9efa|31745
 tar_dbbmmList|stem|4a402d32d77eafba|5354b9a3a6b87439|f923a07537595ab2|-1338950325||t20140.0199082957s|144cf9c962083d23|5366342|qs|local|vector|||121.156||
 tar_deerData|stem|9adef37866d7f82f|566ebced504f0215|1bf6d0d595cb356a|-1039388040||t20115.4977617666s|860323ef24e00859|904393|qs|local|vector|||5.859||
 tar_distancePatch_plot|stem|70b8d924d1e828a0|6746b068d96614af|c99fe0dbce490405|-1649390097||t20122.6143635299s|ed2506a742431cea|3487034|qs|local|vector|||5.406||
-tar_funcStruc_plot|stem|daa7e40b241020e6|d0287d67383025e1|999690f4931c749e|1285321700||t20133.5541252336s|992f94f8c565c710|1663147|qs|local|vector|||21.797|extract transforming vector data to the CRS of the raster|
-tar_homeRange_sizePlot|stem|c897fe9d9f804dd7|5e82fc8c817ea1a4|b8f84d9cbd31b020|-1202349281||t20133.6526008293s|74d2aeb4075e715a|14458308|qs|local|vector|||0.532||
+tar_funcStruc_plot|stem|d27558ac428f57bd|2f7bf4ac54810195|ef7b86a4c582169e|1285321700||t20146.4179440216s|0984bc32486253ab|230527|qs|local|vector|||1.828||
+tar_homeRange_sizePlot|stem|e9f31e34d48fb01b|5e82fc8c817ea1a4|c44945058ea357b2|-1202349281||t20145.5352092233s|6862b9874cea86dc|14445234|qs|local|vector|||2.047||
 tar_landuse|stem|2514449375f1a5b8|9ade98fbebd966f6|272b3059fc51c7f1|-1042947407||t20059.4104961729s|7b6e260af24ba309|636186|qs|local|vector|||14.297|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_landuseList|stem|1d95ed7f11fb977f|39e1e1b524863f89|56e6620817c20829|1043045520||t20139.8678402794s|741813d4e90a7ce1|9556232|qs|local|vector|||198.656|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_longestFallow|stem|33a25b98a95a923d|f17ecc649504a9a6|e5ff4f25c1c3b5f7|-835242355||t20144.5482311371s|d5bf79044af760da|286|qs|local|vector|||0.11|repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant|
@@ -264,7 +266,7 @@ tar_occData_fallow|stem|c9da4f31b89f1928|5e8f6a943a32115d|30137f47115aa8bf|17555
 tar_omniLayers|stem|605d7141b4c7a1b1|7413958ececf62ea|b7526458da81b685|560333710||t20144.644805207s|f8c1d755d5d31832|173|qs|local|vector|||310.906||
 tar_overview_maps|stem|3ed44cd8bccde83a|a8b4a0dbc550a557|3bd4fc0c9a8278fc|951223795||t20130.5957463962s|c653448837b5569c|432573694|qs|local|vector|||366.703||
 tar_package_text|stem|703bcee81ed20ff4|3af2cae99fbada6a|6ae16693c6018983|389537711||t20133.5645866525s|0f5cc5be67b9db73|64|qs|local|vector|||5.187||
-tar_patch_summaryPois|stem|fcfca430e9894fb1|e51354f19d1344f0|83f1f3a57d7ab5d8|-997496096||t20133.5538706365s|538de5c6a4ed469e|111403|qs|local|vector|||116.922|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
+tar_patch_summaryPois|stem|3ad6abaa60e714ef|4b2081ea46bf8873|3123362ff7e430da|-997496096||t20146.4148960948s|9dacdd3691fe3a07|46351|qs|local|vector|||47.813|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
 tar_patches|stem|d6d25fc8aed34257|6bdc42673a040198|607a84f6bc21e668|561265787||t20059.3990599721s|2eb739478038e79e|1431127|qs|local|vector|||509.703||
 tar_patchList|stem|7a2196f10fd3acb7|6bdc42673a040198|9e1c7e8d8a6432f1|-2053994115||t20139.8655387974s|f0a2fab4f777e7a1|1165207|qs|local|vector|||10.953||
 tar_patchPois_MMMplot|stem|e9242f913dc95cca|81ebca09beefc989|56db6496c932ea6e|-277519523||t20130.6214968286s|6408fb4cd1cc3740|7606857|qs|local|vector|||31.172|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
@@ -272,9 +274,9 @@ tar_patchPois_plot|stem|410260392913b9ce|9d0a830ac93ba77d|674962a75f9d5267|-1554
 tar_patchPois_summaryPlot|stem|9b42208de295dc8e|41557460ce3e4eb1|0655ec04c22c06e7|535454467||t20133.5567479482s|f0e0880fb6c56b05|6799543|qs|local|vector|||3.609|log10 transformation introduced infinite values.. Removed 20310 rows containing missing values or values outside the scale rangegeom_point.. log10 transformation introduced infinite values.. Removed 20310 rows containing missing values or values outside the scale rangegeom_point.. st_centroid assumes attributes are constant over geometries. log10 transformation introduced infinite values.. log10 transformation introduced infinite values.|
 tar_patchSSF_plot|stem|e72ac155672ac668|50ee65c5ed47eeac|a863f8b7eb0c35a8|-1951447803||t20109.6144988084s||3187855|qs|local|vector|||0.109||no method or default for coercing NULL to SpatRaster
 tar_pois_model|stem|0496f18d68b75dcf|ab4be6542fa80258|864e638ddb500e56|-1350650168||t20140.021643479s|8f0ace4445bdc11f|258343657|qs|local|vector|||148.344||
-tar_pois_plot|stem|627e7cb9c126e92c|63f5f78b87a33b49|22c3442b165f3362|-1564965099||t20130.6666032054s|31801647ae698b25|257729095|qs|local|vector|||0.985||
+tar_pois_plot|stem|d4405ea46b433c69|63f5f78b87a33b49|439bfb07b989df9d|-1564965099||t20145.5352796176s|4b2f698cd8ba559d|257721806|qs|local|vector|||0.859||
 tar_poisFallow_model|stem|60cab93e1606c71d|1c566566aec240c6|c31b6a8e99824be8|-1381565268||t20143.6244716149s|eb60bbbeda76a062|5493738|qs|local|vector|||1.375||
-tar_poisResist_map|stem|88e510d96b6aafa0|b5b031816c6ba61c|ef48791f94c1964e|-2042474352||t20130.6307035409s|2e2a2d243fc88d69|1968877|qs|local|vector|||4.625||
+tar_poisResist_map|stem|096ef3769fe9fa10|b5b031816c6ba61c|1007dcaa4632b60a|-2042474352||t20145.535329175s|f134b7440ae556e2|2217757|qs|local|vector|||3.969||
 tar_predPoisResist_fallow|stem|4d50d3e138bfdab0|6ed2b3be1774e69f|0b9c117a64c501da|-1209717757||t20144.6412066466s|5a04a740e1697d34|146|qs|local|vector|||32.953|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_predPoisResist_location|stem|400a06cc9ecf29c9|a68f8146c46b9408|f827fb544020aca1|-837149021||t20140.0218400447s|b6a3947d99208431|149|qs|local|vector|||16.906||
 tar_predPoisResist_locationWessex|stem|6a1330447a91b4e3|f9c0233b8021a1e1|f827fb544020aca1|-460945527||t20140.0221192071s|b6a3947d99208431|149|qs|local|vector|||24.109||
@@ -284,12 +286,14 @@ tar_proj_layer|stem|80ba1e766969cd7e|bd46f2742d2970f6|65f03d78cd5d9eb6|-19289288
 tar_projLayer_fallow|stem|80ba1e766969cd7e|0d4fc6ed26893760|ae66d00d08db28ae|-52975448||t20144.6408246603s|b3893c47d2f8b380|144|qs|local|vector|||0.047||
 tar_pseudoAbs|stem|bde0f31745189a1f|4cb94ea0c70df639|805ab43dc6fb64a9|333898822||t20143.4434215361s|3d7bc7c1a9144a4a|76953|qs|local|vector|||32.297||
 tar_pseudoAbs_fallow|stem|799dcad8283ac1ef|c5f115f61811f137|dd1b28446ca75922|1514514200||t20144.6386662615s|0fc4f82d916dceb2|125907|qs|local|vector|||51.406||
+tar_render_movement|stem|abb6860ebcfbd485|91f0c353f9fd7a49|bdb7e5e4de9d4d9f|-912747596||t20145.6084217127s|de65cec3ae558fa1|142|qs|local|vector|||1.562||
 tar_render_out|stem|5119daf42d58e0a7|ec07eaddb568f59a|8aca943a0a259b34|-1423037440||t20133.7231602176s|0f26fa93438a7837|141|qs|local|vector|||2.406|Package xcolor Warning Package option usenames is obsolete and ignored on input line 265.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. Package xcolor Warning Package option usenames is obsolete and ignored on input line 265.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.|
 tar_rsf_data|stem|5444f4bddd3fb761|b8ff3dd396a75fdf|400ac252ec1abb61|-314967242||t20074.6608359851s||5286594|qs|local|vector|||3.953||object focalRegion not found
 tar_rsf_models|stem|c6ecc71f79f95feb|8e856f040fb60506|a4ae6cfac77ca1d6|-1738740726||t20067.6069863946s|e38cca700da64d6e|45578797|qs|local|vector|||1.328|glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
 tar_rsf_outputs|stem|bda4b71d8ce3f562|2e7bda5096ec7c26|1074f5150616b4dd|251120470||t20094.5840604937s||85365333|qs|local|vector|||0.016||could not load dependency tar_rsf_data of target tar_rsf_outputs. Expecting a single string value typecharacter extent0.
 tar_sdm_layers|stem|40cf16546b5b8589|2b34ef61a7df169b|4e7c734ea433c3a6|1222101680||t20144.678405581s|6ce28c86f98a8d6a|265|qs|local|vector|||495.672|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
-tar_ssf_data|stem|5912375d0e8b0408|540d203994dec23b|e1d564d93aaec857|390394694||t20140.0185055839s|bc7ee4510adbf2d8|8474981|qs|local|vector|||9247.375|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
+tar_selectedPatchList|stem|81541558008a6703|755a9bd2f4b99ba0|727a192a0b995d09|-328935544||t20145.6252030751s|98f2f83d25bab8f2|35583|qs|local|vector|||4.234||
+tar_ssf_data|stem|5912375d0e8b0408|cdfe9500554cf21c|2d0bebfba3a691e4|390394694||t20145.5351837923s|bc7ee4510adbf2d8|8474981|qs|local|vector|||9652.11|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
 tar_ssf_models|stem|3be5088c90190445|be721ccd31e91379|8c9f4d7616be7ffd|-1267665248||t20122.6768698276s|0dfeb4b6af4bcea9|10213833|qs|local|vector|||25.297|Loglik converged before variable  8  beta may be infinite. . Loglik converged before variable  8,9  beta may be infinite. . Loglik converged before variable  4,8  beta may be infinite. . Loglik converged before variable  2  beta may be infinite. . Loglik converged before variable  2,12  beta may be infinite. . Loglik converged before variable  4,7,9,17,18,19,22  beta may be infinite. . Loglik converged before variable  4,7,9,17,18,19,22,33  beta may be infinite. . Loglik converged before variable  8,9,10,17,18,22,23,33  beta may be infinite. . Loglik converged before variable  4,9,10,17,18,19,22,23,24,28  beta may be infinite. . Loglik converged before variable  4,5,8,10,12,17,18,19,20,28,32  beta may be infinite. . Loglik converged before variable  4,5  beta may be infinite. . Loglik converged before variable  5,20  beta may be infinite. . Loglik converged before variable  5,8,9,20  beta may be infinite. . Loglik converged before variable  2,8,9,17  beta may be infinite.|
 tar_ssf_plots|stem|620259e89d1f0821|ec74e82715547c30|87c4f3501fbe9fa4|1588734551||t20122.6770964621s|d81b98e30ace2d44|11068095|qs|local|vector|||17.61||
 tar_ssfFallow_data|stem|2f5d863445076fb1|612e047537b76af8|8e2b2bc929504fb5|-351733756||t20143.6244551587s|ae43319cefc54c62|161682|qs|local|vector|||120.469|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|

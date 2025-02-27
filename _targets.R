@@ -69,9 +69,9 @@ tar_source()
 nAvailable <- 10
 typeAvialable <- "random"
 contourAvialable <- "95%"
-rsfFormula <- case_ ~ distanceWoodland + landuse + distanceWoodland:landuse
+# rsfFormula <- case_ ~ distanceWoodland + landuse + distanceWoodland:landuse
 # SSF
-nAvailableSteps <- 25
+nAvailableSteps <- 10
 slDistribution <- "gamma"
 taDistribution <- "vonmises"
 ssfFormula <- case_ ~ landuse +
@@ -200,7 +200,7 @@ coreTargetList <- list(
   tar_target(
     name = tar_ssf_data,
     command = prepare_ssf_data(tar_deerData, tar_landuseList, tar_patchList,
-                               nAvail = nAvailable, slDist = slDistribution,
+                               nAvail = nAvailableSteps, slDist = slDistribution,
                                taDist = taDistribution)
   ),
   # tar_target(
@@ -337,8 +337,8 @@ connectTargetList <- list(
   ),
   tar_target(
     tar_patch_summaryPois,
-    summarise_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, tar_selectedPatchList, REGION = "Aberdeenshire",
-                                 buffers = buffers)
+    extract_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, tar_selectedPatchList, REGION = "Aberdeenshire",
+                               buffers = buffers)
   ),
   tar_target(
     tar_patchPois_plot,
@@ -347,7 +347,7 @@ connectTargetList <- list(
   ),
   tar_target(
     tar_funcStruc_plot,
-    plot_funcStruc_comparison(tar_msePois_df, tar_connectPois_list, tar_patchList, tar_selectedPatchList)
+    plot_funcStruc_comparison(tar_patch_summaryPois)
   ),
   tar_target(
     tar_patchPois_summaryPlot,
@@ -400,12 +400,18 @@ connectTargetList <- list(
     command = create_package_txt(excludes = c("bestNormalize", "JuliaCall", "recurse", "roxygen2", "suncalc", "survival"))
   ),
   tar_target(
-    name = tar_render_out,
+    name = tar_render_movement,
     command = render_rmd(fileIN = here::here("notebook", "manuscript", "deerMovementManuscript.Rmd"),
-                         fileOUT = here::here("notebook", "manuscript", "deerMovementManuscript.pdf"),
+                         fileOUT = here::here("notebook", "manuscript", "deerMovementManuscript.html"),
                          tar_pois_plot,
                          tar_variograms,
-                         tar_homeRange_sizePlot,
+                         tar_homeRange_sizePlot),
+    cue = tar_cue(mode = "always")
+  ),
+  tar_target(
+    name = tar_render_connectivity,
+    command = render_rmd(fileIN = here::here("notebook", "manuscript", "deerConnectivityManuscript.Rmd"),
+                         fileOUT = here::here("notebook", "manuscript", "deerConnectivityManuscript.pdf"),
                          tar_patchPois_summaryPlot,
                          tar_connectivityValue_plots,
                          tar_package_text,
