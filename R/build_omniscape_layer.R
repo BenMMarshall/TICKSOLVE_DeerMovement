@@ -1,17 +1,25 @@
 build_omniscape_layer <- function(predRasterLoc, patchList, #longestAxisSummary,
                                   blockSize, searchRadius, reRun){
 
+  # library(dplyr)
+  # library(terra)
+  # library(tidyterra)
   # targets::tar_load("tar_predPoisResist_fallow")
   # targets::tar_load("tar_patchList")
   # prelimAggFact = 10
   # predRasterLoc <- tar_predPoisResist_fallow
   # patchList <- tar_patchList
-
-  # longestMean <- mean(longestAxisSummary$longestAxisRange_m)
+  # blockSize <- 15
+  # searchRadius <- 750
 
   resistanceTerra <- terra::rast(predRasterLoc)
+  terra::values(resistanceTerra) <- ifelse(is.na(terra::values(resistanceTerra)),
+                                    max(terra::values(resistanceTerra), na.rm = TRUE),
+                                    terra::values(resistanceTerra))
 
-  focalPatches <- patchList$Wessex
+  focalPatches <- patchList$Wessex %>%
+    mutate(area_km2 = as.numeric(units::set_units(sf::st_area(.), "km2"))) %>%
+    filter(area_km2 > 0.005)
 
   template <- terra::rast(resistanceTerra)
 
@@ -65,7 +73,21 @@ build_omniscape_layer <- function(predRasterLoc, patchList, #longestAxisSummary,
     "write_raw_currmap" => "true")'
     )
 
-    JuliaCall::julia_setup()
+    # Set system-wide environment variables
+    #
+    # To set JULIA_NUM_THREADS for all Julia sessions:
+    #
+    #   Open the Start menu and search for "Environment Variables".
+    # Select "Edit the system environment variables".
+    # In the System Properties window, in the Advanced pane, click on the "Environment Variables" button.
+    # In the Environment Variables window, under "System variables", click "New".
+    # Set the variable name to JULIA_NUM_THREADS and the value as required.
+    # OK everything and close the windows.
+
+    # JuliaCall::julia_setup(installJulia = TRUE, install = TRUE)
+    JuliaCall::julia_setup(JULIA_HOME = "C:/Users/benja/.julia/juliaup/julia-1.11.2+0.x64.w64.mingw32/bin",
+                           version = "1.11.2")
+    JuliaCall::julia_command("Threads.nthreads()")
     JuliaCall::julia_install_package_if_needed("Omniscape")
     JuliaCall::julia_library("Omniscape")
 

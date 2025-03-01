@@ -3,94 +3,22 @@ name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iterat
 <<<<<<< Updated upstream|||||||||||||||||
 =======|||||||||||||||||
 >>>>>>> Stashed changes|||||||||||||||||
-aggFact|object|18f8c83bc88d6445|||||||||||||||
-aggFact_SDM|object|d516855f98da7f3d|||||||||||||||
-bs|object|befd3de8c7957969|||||||||||||||
-buffers|object|3d27737c1ea4b8a4|||||||||||||||
-build_connect_layer|function|d53c141bcb701ff4|||||||||||||||
-build_omniscape_layer|function|b8bcabc75f980b07|||||||||||||||
-build_predResistance_layer|function|1ee7504347841c09|||||||||||||||
-build_predResistanceFallow_layer|function|7bb29c41bfb8a55b|||||||||||||||
-calculate_akdes|function|2192df08ee8ea6f9|||||||||||||||
-calculate_dbbmm_mse|function|d460657c9b004785|||||||||||||||
-calculate_dbbmms|function|7a6d7321c24e85cf|||||||||||||||
-connectSettings|object|597d46847c0f2126|||||||||||||||
-connectTargetList|object|38c5db2f17bf1886|||||||||||||||
-contourAvialable|object|1fad89499ff2daae|||||||||||||||
-coreSDMList|object|39854fa1255ad208|||||||||||||||
-coreTargetList|object|9af488e51a6c09f1|||||||||||||||
-create_package_txt|function|68434bfa00bd3fcc|||||||||||||||
-create_psuedo_abs|function|5d738d0b223ebd78|||||||||||||||
-export_pois_coefs|function|22457d22481c5e87|||||||||||||||
-extract_akde_summaries|function|f056d329a7b7ccfc|||||||||||||||
-extract_akdeFallow_longest|function|e8c62e28c532987b|||||||||||||||
-extract_connectivity_locations|function|944dcaf3b05a04d9|||||||||||||||
-extract_patch_connectivity|function|e1ba5af0eb44773f|||||||||||||||
-extract_rsf_results|function|200d4a2dba9d5e39|||||||||||||||
-generate_overview_maps|function|c9b608824a68460a|||||||||||||||
-generate_palettes|function|14279570f6a672fe|||||||||||||||
-generate_tracking_plots|function|ab5f74a24c745970|||||||||||||||
-generate_tracking_table|function|3914ce43cf2850f6|||||||||||||||
-inputList|object|9b9ee66b2eea9c17|||||||||||||||
-load_deer_palette|function|f1143426f7e122cf|||||||||||||||
-locationError|object|ff81af095a75741e|||||||||||||||
-map_connectivity_thetas|function|4b863a5633bab936|||||||||||||||
-marginSize|object|c386c7b04396aaec|||||||||||||||
-minPatchSize_m2|object|4453d6f14899f422|||||||||||||||
-nAvailable|object|d516855f98da7f3d|||||||||||||||
-nAvailableSteps|object|d516855f98da7f3d|||||||||||||||
 patchDistance|object|926fba0b13bbd9f6|||||||||||||||
-plot_conductance_map|function|a2c416d29000d428|||||||||||||||
-plot_connectivity_distributions|function|0aab6b43e204be3e|||||||||||||||
-plot_distance_to_patch|function|6990492cd62dc778|||||||||||||||
-plot_funcStruc_comparison|function|61b1f9a16e457063|||||||||||||||
-plot_homeRange_sizes|function|5c3784d1113284ed|||||||||||||||
-plot_occSDMOmni_inOut|function|56723e0bf7608778|||||||||||||||
-plot_patch_connectivity|function|868cc251555f97ac|||||||||||||||
-plot_patch_MMMconnectivity|function|5f2bb36be4ae0337|||||||||||||||
-plot_patch_summary|function|d2c17bc150c2c021|||||||||||||||
-plot_pois_coefs|function|cfec6b0e59683d07|||||||||||||||
-plot_ssf_coefs|function|1c375e42af7b7f97|||||||||||||||
-plot_variograms|function|7f2e3dc4682f917f|||||||||||||||
 poisFormula|object|7430658a3b1ae991|||||||||||||||
-prepare_circuitscape_data|function|fdd57871e3953e99|||||||||||||||
-prepare_rsf_data|function|a7467f485f4157b2|||||||||||||||
-prepare_sdm_layer|function|8f052e235f3f3cc2|||||||||||||||
-prepare_ssf_data|function|5e0d0a690d255b26|||||||||||||||
-prepare_ssfFallow_data|function|87ef1de10a911b24|||||||||||||||
 read_clean_occData|function|534d487814d711ad|||||||||||||||
-read_cleanFallow_occData|function|c902fd23e69ddade|||||||||||||||
-read_deer_data|function|51d0f06bc0c39b5d|||||||||||||||
-read_landuse_data|function|509ed78005ba4ef4|||||||||||||||
-read_patches_data|function|c8fe2a56a109685c|||||||||||||||
-read_selectedPatches_data|function|fe38f0735932c907|||||||||||||||
-read_stack_layers|function|b464e553b7f110b4|||||||||||||||
-render_rmd|function|b9d183184e3f651e|||||||||||||||
 rsfFormula|object|e44fdcd993ebd2fb|||||||||||||||
-run_julia_circuitscape|function|b930d6e805026e1b|||||||||||||||
-run_pois_model|function|897b4b0a0db81d94|||||||||||||||
-run_poisFallow_model|function|d58ff01c2b6dd428|||||||||||||||
-run_rsf_models|function|03740d01fc112cd2|||||||||||||||
-run_ssf_models|function|b1730a1356bead17|||||||||||||||
-save_proj_layer|function|dc1350e7d18b42db|||||||||||||||
 selectedPatches|object|d18965f2badcd28d|||||||||||||||
-setCropArea|object|9ed1990733649bbf|||||||||||||||
-slDistribution|object|378daf6acce8eba7|||||||||||||||
-sr|object|9ed1990733649bbf|||||||||||||||
-ssfFormula|object|ce61344dcb0e3a2a|||||||||||||||
-standardise_connect_layer|function|0a3b7be0d9976fb6|||||||||||||||
 summarise_patch_connectivity|function|17eb367ec64f1d5d|||||||||||||||
-taDistribution|object|1716da92e4275cdd|||||||||||||||
 tar_akdeLists|stem|2951099ef4e0e8c6|51e20b3c1d015bc4|489323ecff14c748|856298492||t20109.5625450174s|e27903b50905bb25|13233398|qs|local|vector|||1297.328||
 tar_akdeSummary|stem|8b43c4997363a751|f3f6fd0e72aeab2c|0d1cc6663f36f5a2|-1306586415||t20133.5525167052s|77d5cda3e9028061|4322|qs|local|vector|||18.875|repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for|
 tar_biomodData|stem|60b91934e1ab42b9|4c660b7f317f1904|76b5bce85e6c51e4|1903022112||t20143.4461712827s|a27bc3b86e6b2861|86438|qs|local|vector|||0.235||
-tar_biomodData_fallow|stem|ba1748caf8f1d725|0627d6e13c39328b|0b375ce5593719be|-804801279||t20144.6386690015s|ec782c0ad62161bb|141052|qs|local|vector|||0.219||
+tar_biomodData_fallow|stem|9663a7145ab6fb32|4536d0bce36feb0e|0b375ce5593719be|-804801279||t20147.9451640247s|f9e9561d966383f7|251457|qs|local|vector|||5.891||
 tar_biomodEns|stem|17c39a863bf5d3d4|c75807ad29e26b0a|3548a63a1d032cf0|-1389890781||t20143.451998064s|16c3bffeb8397412|66704|qs|local|vector|||53.031|executing dopar sequentially no parallel backend registered. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim ha|
-tar_biomodEns_fallow|stem|b74153aa90529ba4|f6d868f2d502d6b4|bc7c90c9de2a53e9|1291006823||t20144.6407740856s|ec4acec4337edde3|105462|qs|local|vector|||18.015|prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, n|
+tar_biomodEns_fallow|stem|a8a84bd0b302270c|f6d868f2d502d6b4|96a5fdd0c62f4048|1291006823||t20147.9559329507s|5377b83bf1ca9a15|116452|qs|local|vector|||708.296|prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, n|
 tar_biomodForecast|stem|a5acfef5c4413aa8|b7ce678156245e46|94032f5d1a00ecf6|-248390797||t20143.4646095307s|71cf818916110e63|1168279|qs|local|vector|||9.078|executing dopar sequentially no parallel backend registered. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases|
-tar_biomodForecast_fallow|stem|df8aa8cbdb05bada|58f5e91d4fc907bf|61bec1771280996b|440623924||t20144.6408240694s|6f2c913326110c14|1043575|qs|local|vector|||4.282|prediction from rankdeficient fit attr, nonestim has doubtful cases|
+tar_biomodForecast_fallow|stem|b22cbae14e404ea0|58f5e91d4fc907bf|913c4a4fc05f6e5c|440623924||t20147.9946849581s|4d742b551d738b6d|101171159|qs|local|vector|||3347.453|prediction from rankdeficient fit attr, nonestim has doubtful cases|
 tar_biomodModels|stem|902cb649802c566c|d136c21cf119b9ae|45ff92a8a30b2572|1705484674||t20143.4493447694s|0af8e5cb37bd5a0d|12533|qs|local|vector|||101.625|CV.do.full.model has been disabled because _allData_allRun is not provided in CV.user.table. Parallelisation with foreach is not available for Windows. Sorry.. executing dopar sequentially no parallel backend registered. variable 12 Permanent_Wetland has no variation.. variable 12 Permanent_Wetland has no variation.. variable 12 Permanent_Wetland has no variation.. variable 12 Permanent_Wetland has no variation.. variable 5 Barren has no variation.. variable 12 Permanent_Wetland has no variation.. variable 5 Barren has no variation.. variable 12 Permanent_Wetland has no variation.. variable 5 Barren has no variation.. variable 12 Permanent_Wetland has no variation.. variable 5 Barren has no variation.. variable 12 Permanent_Wetland has no variation.. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit|
-tar_biomodModels_fallow|stem|982c801412bcee68|09f3d817cd21cb67|eb5738810cedfe59|-542729538||t20144.6405653927s|d4b58cdd2cb92641|12506|qs|local|vector|||163.828|CV.do.full.model has been disabled because _allData_allRun is not provided in CV.user.table. Parallelisation with foreach is not available for Windows. Sorry.. executing dopar sequentially no parallel backend registered. variable 12 Permanent_Wetland has no variation.. variable 12 Permanent_Wetland has no variation.. variable 12 Permanent_Wetland has no variation.. variable 12 Permanent_Wetland has no variation.. variable 11 Other has no variation.. variable 12 Permanent_Wetland has no variation.. variable 11 Other has no variation.. variable 12 Permanent_Wetland has no variation.. variable 11 Other has no variation.. variable 12 Permanent_Wetland has no variation.. variable 11 Other has no variation.. variable 12 Permanent_Wetland has no variation.. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit|
+tar_biomodModels_fallow|stem|8b2387096cb20b4b|09f3d817cd21cb67|96902601f748f652|-542729538||t20147.9477348541s|0c7e45ce96385a0b|13041|qs|local|vector|||182.984|CV.do.full.model has been disabled because _allData_allRun is not provided in CV.user.table. Parallelisation with foreach is not available for Windows. Sorry.. executing dopar sequentially no parallel backend registered. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, non|
 tar_circuitscape_data|stem|c53ec5d19e9df266|c1a2566ccea8d572|33d6e01a1af74871|-1895862094||t20104.6318621671s|65517ab569876e8b|212|qs|local|vector|||17.563||
 tar_circuitscape_files|stem|d410eed2bc4c165b|80dea33cc669dfd0|0600ececcf1f7aa8|-490663222||t20104.6138312559s|b6a3947d99208431|149|qs|local|vector|||27.25||
 tar_connect_dbbmmmse_0.001_300|stem|da1cf69197921c06|494756f757e8e662|7f427b2a4112b4ed|-1682529053||t20073.8260868675s|4702e5d68d5cb8ce|360|qs|local|vector|||5.297||
@@ -177,7 +105,7 @@ tar_connectPois_location_1e.05_5_1000|stem|bb61e9f8e0f1884f|21fbb2c40d3b9207|d04
 tar_connectPois_location_1e.05_6|stem|bb61e9f8e0f1884f|cf192993d69dbe01|b6111fcec7e400aa|-127498889||t20145.5353303631s|514534cdb13dcc77|156|qs|local|vector|||0||
 tar_connectPois_location_1e.06_1_1200|stem|2083497e948f2c4d|175a37d07f9577da|a8ac63e3a07f6355|-1164391183||t20074.6966469151s|c46a94e42a62e426|185|qs|local|vector|||790.344||
 tar_connectPois_location_1e.06_1200|stem|2083497e948f2c4d|c7fae003477f0f4a|3ae7798473a2c3ac|-1247227747||t20074.5105487832s|c46a94e42a62e426|185|qs|local|vector|||1159.766||
-tar_connectPois_locationWessex|stem|daff47d66b1e3987|30c42e2c3e2d7bdb|d16ea0b4a78260ce|-2017631618||t20140.022912067s|f84fd0305bad89a6|150|qs|local|vector|||0||
+tar_connectPois_locationWessex|stem|daff47d66b1e3987|30c42e2c3e2d7bdb|488e805a36289d1a|-2017631618||t20147.6932493975s|f84fd0305bad89a6|150|qs|local|vector|||34803.578||
 tar_connectSSF_dbbmmmse_0.001_1|stem|82f990d6e169e3af|f4a2f08320d46188|e7f20e6708748829|-3733486||t20122.7520933919s|0bf64ef51e816249|272|qs|local|vector|||6.063||
 tar_connectSSF_dbbmmmse_0.001_1_1200|stem|6c2ff68b114ce5f6|439ac88a3cf1cfdf|3a8020d07787df0c|194589055||t20074.7237729611s|0d7ff1cbf08dc586|377|qs|local|vector|||4.656||
 tar_connectSSF_dbbmmmse_0.001_1_250|stem|b59bbe0eda402e0d|7cb6e9c94cd05c04|47bca42327ffb065|-1825086899||t20109.6144242912s|7a4f34d5f31c5e1b|378|qs|local|vector|||5.844||
@@ -245,7 +173,7 @@ tar_connectStanPois_location_0.1_6|stem|fab11e8833b6c930|d99838c2c66ffd92|12d5b2
 tar_connectStanPois_location_1e.05_1|stem|d8125088b247c789|4545a17dfdd7af28|db711ff2a6719b23|672391482||t20122.8272968653s|5b53d96c56a085a8|163|qs|local|vector|||0.032||
 tar_connectStanPois_location_1e.05_3|stem|d8125088b247c789|d6293d0a2f973c1e|80b229ebb6794f9d|-557851158||t20130.5569889354s|5b53d96c56a085a8|163|qs|local|vector|||0.578||
 tar_connectStanPois_location_1e.05_6|stem|d8125088b247c789|02925b71ff6eb906|5efba7da8cfc6762|1518216909||t20143.3659944616s|5b53d96c56a085a8|163|qs|local|vector|||0.281||
-tar_connectStanPois_locationWessex|stem|12fdc2c18e2f3b77|637598758b823b7c|5f14e45d9d7ece0f|943577448||t20130.5597282007s|62801cc8727d3ecd|162|qs|local|vector|||0.453||
+tar_connectStanPois_locationWessex|stem|12fdc2c18e2f3b77|637598758b823b7c|589d73a48575c279|943577448||t20147.6932541699s|62801cc8727d3ecd|162|qs|local|vector|||0.391||
 tar_connectStanSSF_location_0.001_1|stem|6e5d36434bae071d|3cf85b21435532e9|04c7de44b50383f1|-240808609||t20122.7519954204s|fe51d37b9c2ffbfd|161|qs|local|vector|||0.016||
 tar_connectStanSSF_location_0.1_1|stem|4cc25b666c573644|441e8ff76fb3eb6f|108b1dffe6cc24f8|-111109772||t20122.8233510628s|997e63b0c4f07439|157|qs|local|vector|||0.016||
 tar_connectStanSSF_location_1e.05_1|stem|01acf74760573bc3|dbeaef37757f9efa|3174504967ff13f1|1320690415||t20122.8174332031s|fe51d37b9c2ffbfd|161|qs|local|vector|||0.031||
@@ -263,7 +191,7 @@ tar_mseSSF_df|stem|3cc4e6db475b6299|af6cf48356beddf3|c9bc4b22c976f0e0|-134376665
 tar_mseSSF_list|stem|12fcfa90819029bf|550cb1e54b1fe33a|b38db51db504e0b4|-1764485844||t20076.5447013864s|27083857e01302b7|776|qs|local|vector|||0||
 tar_occData|stem|5779a60359102d64|a5e3d84fece418b8|dad5a84274f49024|1914464755||t20139.6848170941s|5c603ceb9c33dd3b|25977|qs|local|vector|||2.907|attribute variables are assumed to be spatially constant throughout all geometries|
 tar_occData_fallow|stem|c9da4f31b89f1928|5e8f6a943a32115d|30137f47115aa8bf|1755585944||t20144.6380712276s|41279b39cd01ae3c|14370|qs|local|vector|||11.563|attribute variables are assumed to be spatially constant throughout all geometries|
-tar_omniLayers|stem|605d7141b4c7a1b1|7413958ececf62ea|b7526458da81b685|560333710||t20144.644805207s|f8c1d755d5d31832|173|qs|local|vector|||310.906||
+tar_omniLayers|stem|bdd982fbaafad201|7413958ececf62ea|e8e9c0cfd7996dcb|560333710||t20148.5266137486s|6dba06bb5782f84f|68|qs|local|vector|||5.688||
 tar_overview_maps|stem|3ed44cd8bccde83a|a8b4a0dbc550a557|3bd4fc0c9a8278fc|951223795||t20130.5957463962s|c653448837b5569c|432573694|qs|local|vector|||366.703||
 tar_package_text|stem|703bcee81ed20ff4|3af2cae99fbada6a|6ae16693c6018983|389537711||t20133.5645866525s|0f5cc5be67b9db73|64|qs|local|vector|||5.187||
 tar_patch_summaryPois|stem|3ad6abaa60e714ef|4b2081ea46bf8873|3123362ff7e430da|-997496096||t20146.4148960948s|9dacdd3691fe3a07|46351|qs|local|vector|||47.813|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
@@ -277,13 +205,13 @@ tar_pois_model|stem|0496f18d68b75dcf|ab4be6542fa80258|864e638ddb500e56|-13506501
 tar_pois_plot|stem|d4405ea46b433c69|63f5f78b87a33b49|439bfb07b989df9d|-1564965099||t20145.5352796176s|4b2f698cd8ba559d|257721806|qs|local|vector|||0.859||
 tar_poisFallow_model|stem|60cab93e1606c71d|1c566566aec240c6|c31b6a8e99824be8|-1381565268||t20143.6244716149s|eb60bbbeda76a062|5493738|qs|local|vector|||1.375||
 tar_poisResist_map|stem|096ef3769fe9fa10|b5b031816c6ba61c|1007dcaa4632b60a|-2042474352||t20145.535329175s|f134b7440ae556e2|2217757|qs|local|vector|||3.969||
-tar_predPoisResist_fallow|stem|4d50d3e138bfdab0|6ed2b3be1774e69f|0b9c117a64c501da|-1209717757||t20144.6412066466s|5a04a740e1697d34|146|qs|local|vector|||32.953|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
+tar_predPoisResist_fallow|stem|4d50d3e138bfdab0|6ed2b3be1774e69f|0dbed403214a25cf|-1209717757||t20148.391665325s|5a04a740e1697d34|146|qs|local|vector|||36.938|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_predPoisResist_location|stem|400a06cc9ecf29c9|a68f8146c46b9408|f827fb544020aca1|-837149021||t20140.0218400447s|b6a3947d99208431|149|qs|local|vector|||16.906||
 tar_predPoisResist_locationWessex|stem|6a1330447a91b4e3|f9c0233b8021a1e1|f827fb544020aca1|-460945527||t20140.0221192071s|b6a3947d99208431|149|qs|local|vector|||24.109||
 tar_predResist_location|stem|d0a70c1b24f7a40c|cc02fca1c8844f20|a0aff3ee36a19ad8|1594166547||t20073.6668431018s|f8c1d755d5d31832|173|qs|local|vector|||128.5||
 tar_predSSFResist_location|stem|3454326a2d30f696|4eefafe3ccbcc17a|e4af385af1f9d7f9|-2111250181||t20122.6813340544s|402e589872025b0a|147|qs|local|vector|||385.328||
 tar_proj_layer|stem|80ba1e766969cd7e|bd46f2742d2970f6|65f03d78cd5d9eb6|-1928928823||t20143.6314484267s|b3893c47d2f8b380|144|qs|local|vector|||0.078||
-tar_projLayer_fallow|stem|80ba1e766969cd7e|0d4fc6ed26893760|ae66d00d08db28ae|-52975448||t20144.6408246603s|b3893c47d2f8b380|144|qs|local|vector|||0.047||
+tar_projLayer_fallow|stem|80ba1e766969cd7e|0d4fc6ed26893760|ae681f42efe09ceb|-52975448||t20147.9946983609s|b3893c47d2f8b380|144|qs|local|vector|||1.125||
 tar_pseudoAbs|stem|bde0f31745189a1f|4cb94ea0c70df639|805ab43dc6fb64a9|333898822||t20143.4434215361s|3d7bc7c1a9144a4a|76953|qs|local|vector|||32.297||
 tar_pseudoAbs_fallow|stem|799dcad8283ac1ef|c5f115f61811f137|dd1b28446ca75922|1514514200||t20144.6386662615s|0fc4f82d916dceb2|125907|qs|local|vector|||51.406||
 tar_render_movement|stem|abb6860ebcfbd485|91f0c353f9fd7a49|bdb7e5e4de9d4d9f|-912747596||t20145.6084217127s|de65cec3ae558fa1|142|qs|local|vector|||1.562||
@@ -291,7 +219,7 @@ tar_render_out|stem|5119daf42d58e0a7|ec07eaddb568f59a|8aca943a0a259b34|-14230374
 tar_rsf_data|stem|5444f4bddd3fb761|b8ff3dd396a75fdf|400ac252ec1abb61|-314967242||t20074.6608359851s||5286594|qs|local|vector|||3.953||object focalRegion not found
 tar_rsf_models|stem|c6ecc71f79f95feb|8e856f040fb60506|a4ae6cfac77ca1d6|-1738740726||t20067.6069863946s|e38cca700da64d6e|45578797|qs|local|vector|||1.328|glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
 tar_rsf_outputs|stem|bda4b71d8ce3f562|2e7bda5096ec7c26|1074f5150616b4dd|251120470||t20094.5840604937s||85365333|qs|local|vector|||0.016||could not load dependency tar_rsf_data of target tar_rsf_outputs. Expecting a single string value typecharacter extent0.
-tar_sdm_layers|stem|40cf16546b5b8589|2b34ef61a7df169b|4e7c734ea433c3a6|1222101680||t20144.678405581s|6ce28c86f98a8d6a|265|qs|local|vector|||495.672|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
+tar_sdm_layers|stem|40cf16546b5b8589|2b34ef61a7df169b|06aa15b4814d8454|1222101680||t20147.9434303823s|6ce28c86f98a8d6a|265|qs|local|vector|||522.829|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_selectedPatchList|stem|81541558008a6703|755a9bd2f4b99ba0|727a192a0b995d09|-328935544||t20145.6252030751s|98f2f83d25bab8f2|35583|qs|local|vector|||4.234||
 tar_ssf_data|stem|5912375d0e8b0408|cdfe9500554cf21c|2d0bebfba3a691e4|390394694||t20145.5351837923s|bc7ee4510adbf2d8|8474981|qs|local|vector|||9652.11|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
 tar_ssf_models|stem|3be5088c90190445|be721ccd31e91379|8c9f4d7616be7ffd|-1267665248||t20122.6768698276s|0dfeb4b6af4bcea9|10213833|qs|local|vector|||25.297|Loglik converged before variable  8  beta may be infinite. . Loglik converged before variable  8,9  beta may be infinite. . Loglik converged before variable  4,8  beta may be infinite. . Loglik converged before variable  2  beta may be infinite. . Loglik converged before variable  2,12  beta may be infinite. . Loglik converged before variable  4,7,9,17,18,19,22  beta may be infinite. . Loglik converged before variable  4,7,9,17,18,19,22,33  beta may be infinite. . Loglik converged before variable  8,9,10,17,18,22,23,33  beta may be infinite. . Loglik converged before variable  4,9,10,17,18,19,22,23,24,28  beta may be infinite. . Loglik converged before variable  4,5,8,10,12,17,18,19,20,28,32  beta may be infinite. . Loglik converged before variable  4,5  beta may be infinite. . Loglik converged before variable  5,20  beta may be infinite. . Loglik converged before variable  5,8,9,20  beta may be infinite. . Loglik converged before variable  2,8,9,17  beta may be infinite.|
@@ -301,7 +229,155 @@ tar_trackingPlots|stem|faa86ce36354bc3d|b349b384a931ff92|d5519d402cf5bde3|108697
 tar_trackingTables|stem|9e773296228309dc|226069d56e77fd04|3a83340953dfd73b|1406021826||t20109.5475757446s|83fa9aa964c289d2|661|qs|local|vector|||4.172||
 tar_validation_data|stem|0535dd3d26d176ad|8207c24f5f650e67|8c8ce141edc678ee|-1003667960||t20130.5598259996s|0ef3d2b85926e85d|7119965|qs|local|vector|||8.328|st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to the CRS of the raster. st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to the CRS of the raster. st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to the CRS of the raster. st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to the CRS of the raster. st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to the CRS of the raster. st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to the CRS of the raster. st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to the CRS of the raster. st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to the CRS of the raster. st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to the CRS of the raster. st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to the CRS of the raster. st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to the CRS of the raster. st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to the CRS of the raster. st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to the CRS of the raster. st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to the CRS of the raster. st_crs  replacing crs does not reproject data use st_transform for that. extract transforming vector data to t|
 tar_variograms|stem|a959bac0f91c0da0|7c4094e450d61f64|5d57f75796041dc8|1785791848||t20133.6526268108s|fd8c4f5d81732a6c|18171054|qs|local|vector|||2.157||
-test_validation_data|function|7deacb89460f47c2|||||||||||||||
+calculate_dbbmm_mse|function|d460657c9b004785|||||||||||||||
+locationError|object|ff81af095a75741e|||||||||||||||
+run_ssf_models|function|b1730a1356bead17|||||||||||||||
+load_deer_palette|function|f1143426f7e122cf|||||||||||||||
+generate_tracking_table|function|3914ce43cf2850f6|||||||||||||||
 typeAvialable|object|684f65380be68543|||||||||||||||
+nAvailableSteps|object|d516855f98da7f3d|||||||||||||||
+connectSettings|object|597d46847c0f2126|||||||||||||||
+standardise_connect_layer|function|0a3b7be0d9976fb6|||||||||||||||
+bs|object|87c2fdbe3686b6eb|||||||||||||||
 useCores|object|bfdfb93adc61812f|||||||||||||||
+nAvailable|object|d516855f98da7f3d|||||||||||||||
+build_predResistanceFallow_layer|function|7bb29c41bfb8a55b|||||||||||||||
+calculate_dbbmms|function|7a6d7321c24e85cf|||||||||||||||
+create_package_txt|function|68434bfa00bd3fcc|||||||||||||||
+render_rmd|function|b9d183184e3f651e|||||||||||||||
+prepare_ssfFallow_data|function|87ef1de10a911b24|||||||||||||||
+prepare_circuitscape_data|function|fdd57871e3953e99|||||||||||||||
+read_cleanFallow_occData|function|c902fd23e69ddade|||||||||||||||
+buffers|object|3d27737c1ea4b8a4|||||||||||||||
+generate_palettes|function|14279570f6a672fe|||||||||||||||
+prepare_ssf_data|function|5e0d0a690d255b26|||||||||||||||
+extract_connectivity_locations|function|944dcaf3b05a04d9|||||||||||||||
+connectTargetList|object|38c5db2f17bf1886|||||||||||||||
+coreTargetList|object|9af488e51a6c09f1|||||||||||||||
+read_landuse_data|function|509ed78005ba4ef4|||||||||||||||
+minPatchSize_m2|object|4453d6f14899f422|||||||||||||||
+build_connect_layer|function|d53c141bcb701ff4|||||||||||||||
+read_stack_layers|function|b464e553b7f110b4|||||||||||||||
+run_julia_circuitscape|function|b930d6e805026e1b|||||||||||||||
+taDistribution|object|1716da92e4275cdd|||||||||||||||
 windowSize|object|ff9fb58342e8c485|||||||||||||||
+setCropArea|object|9ed1990733649bbf|||||||||||||||
+read_patches_data|function|c8fe2a56a109685c|||||||||||||||
+read_selectedPatches_data|function|fe38f0735932c907|||||||||||||||
+save_proj_layer|function|dc1350e7d18b42db|||||||||||||||
+test_validation_data|function|7deacb89460f47c2|||||||||||||||
+ssfFormula|object|ce61344dcb0e3a2a|||||||||||||||
+slDistribution|object|378daf6acce8eba7|||||||||||||||
+calculate_akdes|function|2192df08ee8ea6f9|||||||||||||||
+build_predResistance_layer|function|1ee7504347841c09|||||||||||||||
+sr|object|a96ddcadcd7fbd5f|||||||||||||||
+run_rsf_models|function|03740d01fc112cd2|||||||||||||||
+extract_akdeFallow_longest|function|e8c62e28c532987b|||||||||||||||
+run_poisFallow_model|function|d58ff01c2b6dd428|||||||||||||||
+aggFact_SDM|object|18f8c83bc88d6445|||||||||||||||
+extract_akde_summaries|function|f056d329a7b7ccfc|||||||||||||||
+contourAvialable|object|1fad89499ff2daae|||||||||||||||
+extract_rsf_results|function|200d4a2dba9d5e39|||||||||||||||
+read_deer_data|function|51d0f06bc0c39b5d|||||||||||||||
+build_omniscape_layer|function|867e19b725f71745|||||||||||||||
+run_pois_model|function|897b4b0a0db81d94|||||||||||||||
+prepare_sdm_layer|function|3a0b5e2acc0e6bd3|||||||||||||||
+inputList|object|9b9ee66b2eea9c17|||||||||||||||
+aggFact|object|18f8c83bc88d6445|||||||||||||||
+coreSDMList|object|14cc2613c9cdcd59|||||||||||||||
+marginSize|object|c386c7b04396aaec|||||||||||||||
+prepare_rsf_data|function|a7467f485f4157b2|||||||||||||||
+generate_tracking_plots|function|ab5f74a24c745970|||||||||||||||
+extract_patch_connectivity|function|e1ba5af0eb44773f|||||||||||||||
+plot_pois_coefs|function|cfec6b0e59683d07|||||||||||||||
+plot_distance_to_patch|function|6990492cd62dc778|||||||||||||||
+plot_funcStruc_comparison|function|61b1f9a16e457063|||||||||||||||
+plot_conductance_map|function|a2c416d29000d428|||||||||||||||
+map_connectivity_thetas|function|4b863a5633bab936|||||||||||||||
+plot_ssf_coefs|function|1c375e42af7b7f97|||||||||||||||
+plot_patch_MMMconnectivity|function|5f2bb36be4ae0337|||||||||||||||
+plot_patch_summary|function|d2c17bc150c2c021|||||||||||||||
+export_pois_coefs|function|22457d22481c5e87|||||||||||||||
+plot_homeRange_sizes|function|5c3784d1113284ed|||||||||||||||
+plot_patch_connectivity|function|868cc251555f97ac|||||||||||||||
+plot_connectivity_distributions|function|0aab6b43e204be3e|||||||||||||||
+plot_variograms|function|7f2e3dc4682f917f|||||||||||||||
+generate_overview_maps|function|c9b608824a68460a|||||||||||||||
+create_psuedo_abs|function|5d738d0b223ebd78|||||||||||||||
+plot_occSDMOmni_inOut|function|56723e0bf7608778|||||||||||||||
+calculate_dbbmm_mse|function|d460657c9b004785
+locationError|object|ff81af095a75741e
+run_ssf_models|function|b1730a1356bead17
+load_deer_palette|function|f1143426f7e122cf
+generate_tracking_table|function|3914ce43cf2850f6
+typeAvialable|object|684f65380be68543
+nAvailableSteps|object|d516855f98da7f3d
+connectSettings|object|597d46847c0f2126
+standardise_connect_layer|function|0a3b7be0d9976fb6
+bs|object|87c2fdbe3686b6eb
+useCores|object|bfdfb93adc61812f
+nAvailable|object|d516855f98da7f3d
+build_predResistanceFallow_layer|function|7bb29c41bfb8a55b
+calculate_dbbmms|function|7a6d7321c24e85cf
+create_package_txt|function|68434bfa00bd3fcc
+render_rmd|function|b9d183184e3f651e
+prepare_ssfFallow_data|function|87ef1de10a911b24
+prepare_circuitscape_data|function|fdd57871e3953e99
+read_cleanFallow_occData|function|c902fd23e69ddade
+buffers|object|3d27737c1ea4b8a4
+generate_palettes|function|14279570f6a672fe
+prepare_ssf_data|function|5e0d0a690d255b26
+extract_connectivity_locations|function|944dcaf3b05a04d9
+connectTargetList|object|38c5db2f17bf1886
+coreTargetList|object|9af488e51a6c09f1
+read_landuse_data|function|509ed78005ba4ef4
+minPatchSize_m2|object|4453d6f14899f422
+build_connect_layer|function|d53c141bcb701ff4
+read_stack_layers|function|b464e553b7f110b4
+run_julia_circuitscape|function|b930d6e805026e1b
+taDistribution|object|1716da92e4275cdd
+windowSize|object|ff9fb58342e8c485
+setCropArea|object|9ed1990733649bbf
+read_patches_data|function|c8fe2a56a109685c
+read_selectedPatches_data|function|fe38f0735932c907
+save_proj_layer|function|dc1350e7d18b42db
+test_validation_data|function|7deacb89460f47c2
+ssfFormula|object|ce61344dcb0e3a2a
+slDistribution|object|378daf6acce8eba7
+calculate_akdes|function|2192df08ee8ea6f9
+build_predResistance_layer|function|1ee7504347841c09
+sr|object|ec08120faca9b709
+run_rsf_models|function|03740d01fc112cd2
+extract_akdeFallow_longest|function|e8c62e28c532987b
+run_poisFallow_model|function|d58ff01c2b6dd428
+aggFact_SDM|object|18f8c83bc88d6445
+extract_akde_summaries|function|f056d329a7b7ccfc
+contourAvialable|object|1fad89499ff2daae
+extract_rsf_results|function|200d4a2dba9d5e39
+read_deer_data|function|51d0f06bc0c39b5d
+build_omniscape_layer|function|867e19b725f71745
+run_pois_model|function|897b4b0a0db81d94
+prepare_sdm_layer|function|3a0b5e2acc0e6bd3
+inputList|object|9b9ee66b2eea9c17
+aggFact|object|18f8c83bc88d6445
+coreSDMList|object|14cc2613c9cdcd59
+marginSize|object|c386c7b04396aaec
+prepare_rsf_data|function|a7467f485f4157b2
+generate_tracking_plots|function|ab5f74a24c745970
+extract_patch_connectivity|function|e1ba5af0eb44773f
+plot_pois_coefs|function|cfec6b0e59683d07
+plot_distance_to_patch|function|6990492cd62dc778
+plot_funcStruc_comparison|function|61b1f9a16e457063
+plot_conductance_map|function|a2c416d29000d428
+map_connectivity_thetas|function|4b863a5633bab936
+plot_ssf_coefs|function|1c375e42af7b7f97
+plot_patch_MMMconnectivity|function|5f2bb36be4ae0337
+plot_patch_summary|function|d2c17bc150c2c021
+export_pois_coefs|function|22457d22481c5e87
+plot_homeRange_sizes|function|5c3784d1113284ed
+plot_patch_connectivity|function|868cc251555f97ac
+plot_connectivity_distributions|function|0aab6b43e204be3e
+plot_variograms|function|7f2e3dc4682f917f
+generate_overview_maps|function|c9b608824a68460a
+create_psuedo_abs|function|5d738d0b223ebd78
+plot_occSDMOmni_inOut|function|56723e0bf7608778

@@ -17,8 +17,6 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
 
   # WESSEX ------------------------------------------------------------------
 
-  hedgerowData <- st_read(here("data", "GIS data", "UKCEH_Hedgerow", "GB_WLF_V1_0.gdb"))
-
   landuseWessex <- terra::rast(here("data", "GIS data", "UKCEH_Landcover",
                                     "UKCEH_Landcover2023_nf_25res",
                                     "data", "LCM.tif"))
@@ -37,10 +35,12 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
     terra::distance() %>%
     rename(distanceWoodland = LCM_1)
 
-  if(prelimAggFact > 0 | !is.null(prelimAggFact) | !is.na(prelimAggFact)){
+  if(prelimAggFact >= 1 & !is.null(prelimAggFact) & !is.na(prelimAggFact)){
     distanceWoodlandWessex <- terra::aggregate(distanceWoodlandWessex, fact = prelimAggFact,
                                                fun = "mean")
   }
+
+  hedgerowData <- st_read(here("data", "GIS data", "UKCEH_Hedgerow", "GB_WLF_V1_0.gdb"))
 
   roadsWessex_SU <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SU.gml"),
                             layer = "RoadLink")
@@ -72,7 +72,7 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
                              levels = c("A roads", "B roads", "C roads", "Other")))
 
   distanceRoadsWessex <- terra::rast(landuseWessex)
-  if(prelimAggFact > 0 | !is.null(prelimAggFact) | !is.na(prelimAggFact)){
+  if(prelimAggFact >= 1 & !is.null(prelimAggFact) & !is.na(prelimAggFact)){
     distanceRoadsWessex <- terra::aggregate(distanceRoadsWessex, fact = prelimAggFact,
                                             fun = "mean")
   }
@@ -81,9 +81,11 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
     terra::distance() %>%
     rename(distanceRoads = layer)
 
+  print("Roads complete")
+
   hedgesWessex <- st_crop(hedgerowData, landuseWessex)
   distanceHedgesWessex <- rast(landuseWessex)
-  if(prelimAggFact > 0 | !is.null(prelimAggFact) | !is.na(prelimAggFact)){
+  if(prelimAggFact >= 1 & !is.null(prelimAggFact) & !is.na(prelimAggFact)){
     distanceHedgesWessex <- terra::aggregate(distanceHedgesWessex, fact = prelimAggFact,
                                              fun = "mean")
   }
@@ -91,6 +93,8 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
                                            fun = "max", background = NA, touches = TRUE) %>%
     terra::distance() %>%
     rename(distanceHedges = layer)
+
+  print("Hedges complete")
 
   landuseWessex <- landuseWessex %>%
     mutate(landuse = factor(case_when(
@@ -126,10 +130,12 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
     mutate(landuse = ifelse(!is.na(LCM_1), 1, NA)) %>%
     dplyr::select(landuse)
 
-  if(prelimAggFact > 0 | !is.null(prelimAggFact) | !is.na(prelimAggFact)){
+  if(prelimAggFact >= 1 & !is.null(prelimAggFact) & !is.na(prelimAggFact)){
     seaNAcut <- terra::aggregate(seaNAcut, fact = prelimAggFact,
                                  fun = "max")
   }
+
+  print("Sea NA complete")
 
   for(land in landuseTypes){
     # land <- "Cropland"
@@ -147,7 +153,7 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
         terra::distance() %>%
         rename(distanceHumanSettlement = landuse)
 
-      if(prelimAggFact > 0 | !is.null(prelimAggFact) | !is.na(prelimAggFact)){
+      if(prelimAggFact >= 1 & !is.null(prelimAggFact) & !is.na(prelimAggFact)){
         distanceHumanSettlementsWessex <- terra::aggregate(distanceHumanSettlementsWessex, fact = prelimAggFact,
                                                            fun = "mean")
       }
@@ -157,7 +163,7 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
 
     names(singleUse) <- gsub(" ", "_", land)
 
-    if(prelimAggFact > 0 | !is.null(prelimAggFact) | !is.na(prelimAggFact)){
+    if(prelimAggFact >= 1 & !is.null(prelimAggFact) & !is.na(prelimAggFact)){
       singleUse <- terra::aggregate(singleUse, fact = prelimAggFact, fun = "min")
     }
 
@@ -169,6 +175,8 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
                                 paste0("landuseWessex_", gsub(" ", "_", land), ".tif")),
                 overwrite = TRUE)
   }
+
+  print("Land use complete")
 
   distanceRoadsWessexLocation <- here("data", "GIS data", "SDM Layers", "distanceRoadsWessex.tif")
   distanceWoodlandWessexLocation <- here("data", "GIS data", "SDM Layers", "distanceWoodlandWessex.tif")

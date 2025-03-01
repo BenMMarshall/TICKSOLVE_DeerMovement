@@ -423,11 +423,11 @@ connectTargetList <- list(
 
 # SDM pipeline ------------------------------------------------------------
 
-aggFact_SDM <- 10
-# block size for omniscape. 5000m for min patch size. 5000/25 = 200, so perhaps a
-# bs of 7 would be suitable. 7x7=49. Would be ~ four sources per smallest patch.
-bs <- 9
-sr <- 750
+aggFact_SDM <- NA
+# block size for omniscape. 5000m each side for min patch size. 5000/25 = 200, so perhaps a
+# bs of 7 would be suitable. 7x7=49. Would be ~ four sources per smallest patch. - seems too high
+bs <- 31
+sr <- 1500
 
 coreSDMList <- list(
   tar_target(
@@ -460,7 +460,7 @@ coreSDMList <- list(
                                    # PA.nb.rep = 2,
                                    # PA.nb.absences = 1000,
                                    filter.raster = TRUE,
-                                   PA.nb.rep = 2,
+                                   # PA.nb.rep = 2,
                                    PA.strategy = "user.defined",
                                    PA.user.table = tar_pseudoAbs_fallow$pa.tab
                                    )
