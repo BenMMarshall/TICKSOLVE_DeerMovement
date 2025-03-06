@@ -41,7 +41,7 @@ tar_option_set(
                "doParallel",
                "CoordinateCleaner",
                "biomod2"
-               ), # Packages that your targets need for their tasks.
+  ), # Packages that your targets need for their tasks.
   #
   # Pipelines that take a long time to run may benefit from
   # optional distributed computing. To use this capability
@@ -426,14 +426,19 @@ connectTargetList <- list(
 aggFact_SDM <- NA
 # block size for omniscape. 5000m each side for min patch size. 5000/25 = 200, so perhaps a
 # bs of 7 would be suitable. 7x7=49. Would be ~ four sources per smallest patch. - seems too high
-bs <- 31
-sr <- 1500
+bs_fallow <- 31
+sr_fallow <- 1500
+bs_rodent <- 31
+sr_rodent <- 100
 
 coreSDMList <- list(
   tar_target(
     name = tar_sdm_layers,
     command = prepare_sdm_layer(prelimAggFact = aggFact_SDM)
   ),
+  ##############
+  # fallow occ #
+  ##############
   tar_target(
     name = tar_occData_fallow,
     command = read_cleanFallow_occData(tar_sdm_layers)
@@ -444,7 +449,22 @@ coreSDMList <- list(
                                 hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
                                 nPointMultiplier = 3, nReps = 3)
   ),
-  # repeats and npoint are not actaully implemented, they are hard coded
+  ##############
+  # rodent occ #
+  ##############
+  tar_target(
+    name = tar_occData_rodent,
+    command = read_cleanRodent_occData(tar_sdm_layers)
+  ),
+  tar_target(
+    name = tar_pseudoAbs_rodent,
+    command = create_psuedo_abs(tar_occData_rodent,
+                                hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
+                                nPointMultiplier = 3, nReps = 3)
+  ),
+  ##############
+  # fallow SDM #
+  ##############
   tar_target(
     name = tar_biomodData_fallow,
     command = BIOMOD_FormatingData(resp.var = tar_pseudoAbs_fallow$sp,
@@ -463,7 +483,7 @@ coreSDMList <- list(
                                    # PA.nb.rep = 2,
                                    PA.strategy = "user.defined",
                                    PA.user.table = tar_pseudoAbs_fallow$pa.tab
-                                   )
+    )
   ),
   tar_target(
     name = tar_biomodModels_fallow,
@@ -516,6 +536,83 @@ coreSDMList <- list(
     name = tar_projLayer_fallow,
     command = save_proj_layer(tar_biomodForecast_fallow)
   ),
+  ##############
+  # rodent SDM #
+  ##############
+  tar_target(
+    name = tar_biomodData_rodent,
+    command = BIOMOD_FormatingData(resp.var = tar_pseudoAbs_rodent$sp,
+                                   expl.var = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
+                                                                tar_sdm_layers),
+                                   resp.xy = tar_pseudoAbs_rodent$xy,
+                                   resp.name = "Dama.dama",
+                                   #     # advice from biomod2’s team:
+                                   # # - random selection of PA when high specificity is valued over high sensitivity
+                                   # # - number of PA = 3 times the number of presences
+                                   # # - 10 repetitions
+                                   # PA.strategy = "random",
+                                   # PA.nb.rep = 2,
+                                   # PA.nb.absences = 1000,
+                                   filter.raster = TRUE,
+                                   # PA.nb.rep = 2,
+                                   PA.strategy = "user.defined",
+                                   PA.user.table = tar_pseudoAbs_rodent$pa.tab
+    )
+  ),
+  tar_target(
+    name = tar_biomodModels_rodent,
+    command = BIOMOD_Modeling(bm.format = tar_biomodData_rodent,
+                              modeling.id = "AllModels",
+                              models = c("ANN",
+                                         "GBM", "GLM",
+                                         "MAXNET",
+                                         "RF", "XGBOOST"),
+                              CV.strategy = "user.defined",
+                              CV.user.table = bm_CrossValidation(bm.format = tar_biomodData_rodent,
+                                                                 strategy = "block",
+                                                                 balance = "env",
+                                                                 strat = "both"),
+                              # CV.strategy = "random",
+                              # CV.nb.rep = 2,
+                              # CV.perc = 0.8,
+                              OPT.strategy = "bigboss",
+                              var.import = 3,
+                              metric.eval = c("TSS","ROC"),
+                              seed.val = 2025,
+                              nb.cpu = 6)
+  ),
+  tar_target(
+    name = tar_biomodEns_rodent,
+    command = BIOMOD_EnsembleModeling(bm.mod = tar_biomodModels_rodent,
+                                      models.chosen = "all",
+                                      em.by = "all",
+                                      em.algo = c("EMmean", "EMcv", "EMci",
+                                                  "EMmedian", "EMca", "EMwmean"),
+                                      metric.select = c("TSS"),
+                                      metric.select.thresh = c(0.5),
+                                      metric.eval = c("TSS", "ROC"),
+                                      var.import = 3,
+                                      EMci.alpha = 0.05,
+                                      EMwmean.decay = "proportional")
+  ),
+  tar_target(
+    name = tar_biomodForecast_rodent,
+    command = BIOMOD_EnsembleForecasting(bm.em = tar_biomodEns_rodent,
+                                         proj.name = "CurrentEM",
+                                         new.env = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")) %>%
+                                           crop(tar_patchList$Wessex),
+                                         models.chosen = "all",
+                                         metric.binary = "all",
+                                         metric.filter = "all",
+                                         output.format = ".tif")
+  ),
+  tar_target(
+    name = tar_projLayer_rodent,
+    command = save_proj_layer(tar_biomodForecast_rodent)
+  ),
+  ##################
+  # fallow Poisson #
+  ##################
   tar_target(
     name = tar_ssfFallow_data,
     command = prepare_ssfFallow_data(tar_deerData, tar_landuseList, tar_patchList, cores = 12,
@@ -536,18 +633,38 @@ coreSDMList <- list(
     name = tar_longestFallow,
     command = extract_akdeFallow_longest(tar_akdeLists)
   ),
+  ####################
+  # fallow omniscape #
+  ####################
   tar_target(
-    name = tar_omniLayers,
+    name = tar_omniLayers_fallow,
     command = build_omniscape_layer(tar_predPoisResist_fallow, tar_patchList, #tar_longestFallow,
-                                    blockSize = bs, searchRadius = sr, reRun = FALSE)
+                                    blockSize = bs_fallow, searchRadius = sr_fallow, reRun = FALSE)
   ),
   tar_target(
-    name = tar_occSDMOmni_plots,
+    name = tar_occSDMOmni_plots_fallow,
     command = plot_occSDMOmni_inOut(hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
                                     tar_projLayer_fallow,
                                     tar_predPoisResist_fallow,
-                                    tar_omniLayers,
+                                    tar_omniLayers_fallow,
                                     tar_pseudoAbs_fallow,
+                                    sdmLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")))
+  ),
+  ####################
+  # rodent omniscape #
+  ####################
+  tar_target(
+    name = tar_omniLayers_rodent,
+    command = build_omniscape_layer(tar_predPoisResist_rodent, tar_patchList, #tar_longestrodent,
+                                    blockSize = bs_rodent, searchRadius = sr_rodent, reRun = FALSE)
+  ),
+  tar_target(
+    name = tar_occSDMOmni_plots_rodent,
+    command = plot_occSDMOmni_inOut(hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
+                                    tar_projLayer_rodent,
+                                    tar_predPoisResist_rodent,
+                                    tar_omniLayers_rodent,
+                                    tar_pseudoAbs_rodent,
                                     sdmLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")))
   )
 )
