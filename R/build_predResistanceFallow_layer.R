@@ -34,6 +34,7 @@ build_predResistanceFallow_layer <- function(ssfData, ssfPoismodel, projLayer,
 
   # REGION <- "Wessex"
   # REGION <- "Aberdeenshire"
+  # prelimAggFact <- NA
 
   # focalData <- ssfData$Roe04_F$steps
   # focalModel <- ssfModels$Roe04_F
@@ -84,14 +85,14 @@ build_predResistanceFallow_layer <- function(ssfData, ssfPoismodel, projLayer,
   ########################################################################################################################
   ######### ROAD BUFFERED TO APPEAR ON AGG LANDSCAPE, CAN BE MINIMISED FOR HIGHER RES LANDSCAPE ##########################
   ########################################################################################################################
-  if(is.na(prelimAggFact)){
+  if(is.na(prelimAggFact) | is.null(prelimAggFact)){
     focalRoadsTerra <- terra::rasterize(st_buffer(focalRoads, 2), focalRoadsTerra,
                                         fun = "max", background = 0, touches = TRUE)
   } else {
     focalRoadsTerra <- terra::rasterize(st_buffer(focalRoads, prelimAggFact+2), focalRoadsTerra,
                                         fun = "max", background = 0, touches = TRUE)
   }
-  terra::values(focalRoadsTerra) <- ifelse(terra::values(focalRoadsTerra) == 0, NA, roadCrossProb)
+  terra::values(focalRoadsTerra) <- ifelse(terra::values(focalRoadsTerra) == 0, 0, roadCrossProb)
   ########################################################################################################################
   ########################################################################################################################
   ########################################################################################################################
@@ -105,7 +106,11 @@ build_predResistanceFallow_layer <- function(ssfData, ssfPoismodel, projLayer,
 
   # plot(terra::cover(focalRoadsTerra, projTerra, values = NA))
 
-  projTerra <- terra::cover(focalRoadsTerra, projTerra, values = NA)
+  # where conductance is greater than the road permeability, reduce the conductance by the road permeability,
+  # if the conductance is already very low due to other factor, retain those low values
+  terra::values(projTerra)[which(terra::values(projTerra) > roadCrossProb)] <-
+    terra::values(projTerra)[which(terra::values(projTerra) > roadCrossProb)] -
+    terra::values(focalRoadsTerra)[which(terra::values(projTerra) > roadCrossProb)]
 
   ## To avoid problems with 0's in RSP, we set them to a very small value
   values(projTerra) <- ifelse(values(projTerra) == 0, 0.0000000000001, values(projTerra))

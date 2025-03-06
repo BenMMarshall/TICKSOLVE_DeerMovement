@@ -543,7 +543,12 @@ coreSDMList <- list(
   ),
   tar_target(
     name = tar_occSDMOmni_plots,
-    command = plot_occSDMOmni_inOut(tar_omniLayers)
+    command = plot_occSDMOmni_inOut(hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
+                                    tar_projLayer_fallow,
+                                    tar_predPoisResist_fallow,
+                                    tar_omniLayers,
+                                    tar_pseudoAbs_fallow,
+                                    sdmLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")))
   )
 )
 

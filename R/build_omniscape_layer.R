@@ -13,9 +13,9 @@ build_omniscape_layer <- function(predRasterLoc, patchList, #longestAxisSummary,
   # searchRadius <- 750
 
   resistanceTerra <- terra::rast(predRasterLoc)
-  terra::values(resistanceTerra) <- ifelse(is.na(terra::values(resistanceTerra)),
-                                    max(terra::values(resistanceTerra), na.rm = TRUE),
-                                    terra::values(resistanceTerra))
+  # terra::values(resistanceTerra) <- ifelse(is.na(terra::values(resistanceTerra)),
+  #                                   max(terra::values(resistanceTerra), na.rm = TRUE),
+  #                                   terra::values(resistanceTerra))
 
   focalPatches <- patchList$Wessex %>%
     mutate(area_km2 = as.numeric(units::set_units(sf::st_area(.), "km2"))) %>%

@@ -5,7 +5,12 @@
 #' @return abc
 #'
 #' @export
-plot_occSDMOmni_inOut <- function(...){
+plot_occSDMOmni_inOut <- function(hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
+                                  projLayer_fallow,
+                                  predPoisResist_fallow,
+                                  omniLayers,
+                                  pseudoAbs_fallow,
+                                  sdmLayers){
 
   # targets::tar_source()
   # targets::tar_load("tar_projLayer_fallow")
@@ -18,14 +23,18 @@ plot_occSDMOmni_inOut <- function(...){
   # projLayer_fallow <- tar_projLayer_fallow
   # predPoisResist_fallow <-tar_predPoisResist_fallow
   # omniLayers <- tar_omniLayers
+  # sdmLayers <- read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"))
+
   sourceOmniTerra <- rast(here::here("data", "GIS data", "sourceOmniWessex.tif"))
 
-  hfData <- rast(here("data", "Human Footprint", "hfp2022.tif"))
+  hfData <- rast(hfBiasLayer)
   UKbbox <- st_bbox(c(xmin = -900000, xmax = 200000, ymin = 5500000, ymax = 7000000))
   hfDataCrop <- terra::crop(hfData, UKbbox)
   hfDataBNG <- terra::project(hfDataCrop, crs("epsg:27700"))
-  hfDataBNG <- terra::crop(hfDataBNG, st_bbox(as.data.frame(pseudoAbs_fallow$xy) %>%
-                                                st_as_sf(coords = c("x", "y"), crs = 27700)))
+  pseudobbox <- st_bbox(data.frame(x = pseudoAbs_fallow$xy[,"x"],
+                                   y = pseudoAbs_fallow$xy[,"y"]) %>%
+            st_as_sf(coords = c("x", "y"), crs = 27700))
+  hfDataBNG <- terra::crop(hfDataBNG, pseudobbox)
   # plot(hfDataBNG)
   rescale <- function(x){(x-min(x, na.rm = TRUE))/(max(x, na.rm = TRUE) - min(x, na.rm = TRUE))}
   hfDataBNG <- hfDataBNG %>%
@@ -34,8 +43,6 @@ plot_occSDMOmni_inOut <- function(...){
   projLayer_fallow <- rast(projLayer_fallow)
   predPoisResist_fallow <-rast(predPoisResist_fallow)
   omniLayers <- rast(omniLayers)
-
-  sdmLayers <- read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"))
 
   occDataPlottable <- data.frame(
     x = pseudoAbs_fallow$xy[,"x"],
@@ -127,7 +134,7 @@ plot_occSDMOmni_inOut <- function(...){
     ggplotThemeCombo
 
   sourceLayer_plot <- ggplot() +
-    geom_spatraster(data = sourceOmniTerraLoc, aes(fill = Ptch_ID)) +
+    geom_spatraster(data = sourceOmniTerra, aes(fill = Ptch_ID)) +
     scale_fill_gradient(high = scales::muted(paletteList$highSigLowSigNoSig[1]),
                         low = "#ffffff",
                         na.value = paletteList$baseGrey) +

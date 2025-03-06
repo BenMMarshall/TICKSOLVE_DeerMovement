@@ -42,46 +42,46 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
 
   hedgerowData <- st_read(here("data", "GIS data", "UKCEH_Hedgerow", "GB_WLF_V1_0.gdb"))
 
-  roadsWessex_SU <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SU.gml"),
-                            layer = "RoadLink")
-  roadsWessex_ST <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_ST.gml"),
-                            layer = "RoadLink")
-  roadsWessex_SZ <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SZ.gml"),
-                            layer = "RoadLink")
-  roadsWessex_SY <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SY.gml"),
-                            layer = "RoadLink")
-  roadsWessexCrop_SU <- sf::st_crop(roadsWessex_SU, st_bbox(landuseWessex))
-  roadsWessexCrop_ST <- sf::st_crop(roadsWessex_ST, st_bbox(landuseWessex)) %>%
-    dplyr::select(-name2)
-  roadsWessexCrop_SZ <- sf::st_crop(roadsWessex_SZ, st_bbox(landuseWessex))
-  roadsWessexCrop_SY <- sf::st_crop(roadsWessex_SY, st_bbox(landuseWessex))
-
-  roadsWessexCrop <- rbind(roadsWessexCrop_SU,
-        rbind(roadsWessexCrop_ST,
-              rbind(roadsWessexCrop_SZ, roadsWessexCrop_SY)))
-
-  roadsWessexCrop <- roadsWessexCrop %>%
-    mutate(roadSize = case_when(
-      roadFunction == "A Road" ~ "A roads",
-      roadFunction == "B Road" ~ "B roads",
-      roadFunction %in% c("Local Access Road", "Restricted Local Access Road",
-                          "Local Road", "Minor Road", "Secondary Access Road") ~ "C roads",
-      TRUE ~ "Other"
-    )) %>%
-    mutate(roadSize = factor(roadSize,
-                             levels = c("A roads", "B roads", "C roads", "Other")))
-
-  distanceRoadsWessex <- terra::rast(landuseWessex)
-  if(prelimAggFact >= 1 & !is.null(prelimAggFact) & !is.na(prelimAggFact)){
-    distanceRoadsWessex <- terra::aggregate(distanceRoadsWessex, fact = prelimAggFact,
-                                            fun = "mean")
-  }
-  distanceRoadsWessex <- terra::rasterize(st_buffer(roadsWessexCrop, prelimAggFact+2), distanceRoadsWessex,
-                                          fun = "max", background = NA, touches = TRUE) %>%
-    terra::distance() %>%
-    rename(distanceRoads = layer)
-
-  print("Roads complete")
+  # roadsWessex_SU <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SU.gml"),
+  #                           layer = "RoadLink")
+  # roadsWessex_ST <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_ST.gml"),
+  #                           layer = "RoadLink")
+  # roadsWessex_SZ <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SZ.gml"),
+  #                           layer = "RoadLink")
+  # roadsWessex_SY <- st_read(here("data", "GIS data", "os_roads", "OSOpenRoads_SY.gml"),
+  #                           layer = "RoadLink")
+  # roadsWessexCrop_SU <- sf::st_crop(roadsWessex_SU, st_bbox(landuseWessex))
+  # roadsWessexCrop_ST <- sf::st_crop(roadsWessex_ST, st_bbox(landuseWessex)) %>%
+  #   dplyr::select(-name2)
+  # roadsWessexCrop_SZ <- sf::st_crop(roadsWessex_SZ, st_bbox(landuseWessex))
+  # roadsWessexCrop_SY <- sf::st_crop(roadsWessex_SY, st_bbox(landuseWessex))
+  #
+  # roadsWessexCrop <- rbind(roadsWessexCrop_SU,
+  #       rbind(roadsWessexCrop_ST,
+  #             rbind(roadsWessexCrop_SZ, roadsWessexCrop_SY)))
+  #
+  # roadsWessexCrop <- roadsWessexCrop %>%
+  #   mutate(roadSize = case_when(
+  #     roadFunction == "A Road" ~ "A roads",
+  #     roadFunction == "B Road" ~ "B roads",
+  #     roadFunction %in% c("Local Access Road", "Restricted Local Access Road",
+  #                         "Local Road", "Minor Road", "Secondary Access Road") ~ "C roads",
+  #     TRUE ~ "Other"
+  #   )) %>%
+  #   mutate(roadSize = factor(roadSize,
+  #                            levels = c("A roads", "B roads", "C roads", "Other")))
+  #
+  # distanceRoadsWessex <- terra::rast(landuseWessex)
+  # if(prelimAggFact >= 1 & !is.null(prelimAggFact) & !is.na(prelimAggFact)){
+  #   distanceRoadsWessex <- terra::aggregate(distanceRoadsWessex, fact = prelimAggFact,
+  #                                           fun = "mean")
+  # }
+  # distanceRoadsWessex <- terra::rasterize(st_buffer(roadsWessexCrop, prelimAggFact+2), distanceRoadsWessex,
+  #                                         fun = "max", background = NA, touches = TRUE) %>%
+  #   terra::distance() %>%
+  #   rename(distanceRoads = layer)
+  #
+  # print("Roads complete")
 
   hedgesWessex <- st_crop(hedgerowData, landuseWessex)
   distanceHedgesWessex <- rast(landuseWessex)
@@ -178,16 +178,16 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
 
   print("Land use complete")
 
-  distanceRoadsWessexLocation <- here("data", "GIS data", "SDM Layers", "distanceRoadsWessex.tif")
+  # distanceRoadsWessexLocation <- here("data", "GIS data", "SDM Layers", "distanceRoadsWessex.tif")
   distanceWoodlandWessexLocation <- here("data", "GIS data", "SDM Layers", "distanceWoodlandWessex.tif")
   distanceHedgesWessexLocation <- here("data", "GIS data", "SDM Layers", "distanceHedgesWessex.tif")
   distanceHumanSettlementsWessexLocation <- here("data", "GIS data", "SDM Layers", "distanceHumanSettlementsWessex.tif")
 
-  distanceRoadsWessex <- distanceRoadsWessex %>%
-    crop(singleUse)
-  distanceRoadsWessex <- distanceRoadsWessex * seaNAcut
-  distanceRoadsWessex <- distanceRoadsWessex %>%
-    mutate(distanceRoads = rescale(distanceRoads))
+  # distanceRoadsWessex <- distanceRoadsWessex %>%
+  #   crop(singleUse)
+  # distanceRoadsWessex <- distanceRoadsWessex * seaNAcut
+  # distanceRoadsWessex <- distanceRoadsWessex %>%
+  #   mutate(distanceRoads = rescale(distanceRoads))
 
   distanceWoodlandWessex <- distanceWoodlandWessex %>%
     crop(singleUse)
@@ -207,8 +207,8 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
   distanceHumanSettlementsWessex <- distanceHumanSettlementsWessex %>%
     mutate(distanceHumanSettlement = rescale(distanceHumanSettlement))
 
-  writeRaster(distanceRoadsWessex,
-              filename = distanceRoadsWessexLocation, overwrite = TRUE)
+  # writeRaster(distanceRoadsWessex,
+  #             filename = distanceRoadsWessexLocation, overwrite = TRUE)
 
   writeRaster(distanceWoodlandWessex,
               filename = distanceWoodlandWessexLocation, overwrite = TRUE)
@@ -220,7 +220,7 @@ prepare_sdm_layer <- function(prelimAggFact = NULL){
               filename = distanceHumanSettlementsWessexLocation, overwrite = TRUE)
 
   return(list(
-    distanceRoadsWessexLocation = distanceRoadsWessexLocation,
+    # distanceRoadsWessexLocation = distanceRoadsWessexLocation,
     distanceWoodlandWessexLocation = distanceWoodlandWessexLocation,
     distanceHedgesWessexLocation = distanceHedgesWessexLocation,
     distanceHumanSettlementsWessexLocation = distanceHumanSettlementsWessexLocation
