@@ -545,7 +545,7 @@ coreSDMList <- list(
                                    expl.var = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
                                                                 tar_sdm_layers),
                                    resp.xy = tar_pseudoAbs_rodent$xy,
-                                   resp.name = "Dama.dama",
+                                   resp.name = "Rodent",
                                    #     # advice from biomod2’s team:
                                    # # - random selection of PA when high specificity is valued over high sensitivity
                                    # # - number of PA = 3 times the number of presences
@@ -589,7 +589,7 @@ coreSDMList <- list(
                                       em.algo = c("EMmean", "EMcv", "EMci",
                                                   "EMmedian", "EMca", "EMwmean"),
                                       metric.select = c("TSS"),
-                                      metric.select.thresh = c(0.5),
+                                      metric.select.thresh = c(0.25),
                                       metric.eval = c("TSS", "ROC"),
                                       var.import = 3,
                                       EMci.alpha = 0.05,
@@ -639,7 +639,8 @@ coreSDMList <- list(
   tar_target(
     name = tar_omniLayers_fallow,
     command = build_omniscape_layer(tar_predPoisResist_fallow, tar_patchList, #tar_longestFallow,
-                                    blockSize = bs_fallow, searchRadius = sr_fallow, reRun = FALSE)
+                                    blockSize = bs_fallow, searchRadius = sr_fallow, reRun = FALSE,
+                                    projName = "omniscape_output_fallow")
   ),
   tar_target(
     name = tar_occSDMOmni_plots_fallow,
@@ -655,8 +656,9 @@ coreSDMList <- list(
   ####################
   tar_target(
     name = tar_omniLayers_rodent,
-    command = build_omniscape_layer(tar_predPoisResist_rodent, tar_patchList, #tar_longestrodent,
-                                    blockSize = bs_rodent, searchRadius = sr_rodent, reRun = FALSE)
+    command = build_omniscape_layer(tar_projLayer_rodent, tar_patchList, #tar_longestrodent,
+                                    blockSize = bs_rodent, searchRadius = sr_rodent, reRun = FALSE,
+                                    projName = "omniscape_output_rodent")
   ),
   tar_target(
     name = tar_occSDMOmni_plots_rodent,

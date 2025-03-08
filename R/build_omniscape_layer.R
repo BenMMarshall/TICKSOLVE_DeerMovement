@@ -1,5 +1,5 @@
 build_omniscape_layer <- function(predRasterLoc, patchList, #longestAxisSummary,
-                                  blockSize, searchRadius, reRun){
+                                  blockSize, searchRadius, reRun, projName){
 
   # library(dplyr)
   # library(terra)
@@ -29,7 +29,11 @@ build_omniscape_layer <- function(predRasterLoc, patchList, #longestAxisSummary,
   binaryRaster <- binaryRaster %>%
     mutate(Ptch_ID = ifelse(!is.na(Ptch_ID), 1, 0))
 
-  resistanceOmniTerraLoc <- here::here("data", "GIS data", "resistanceOmniWessex.tif")
+  if(str_detect(projName, "rodent")){
+    resistanceOmniTerraLoc <- here::here("data", "GIS data", "resistanceOmniWessex_rodent.tif")
+  } else {
+    resistanceOmniTerraLoc <- here::here("data", "GIS data", "resistanceOmniWessex_fallow.tif")
+  }
   sourceOmniTerraLoc <- here::here("data", "GIS data", "sourceOmniWessex.tif")
 
   # resistanceTerra <- raster::aggregate(resistanceTerra, fact = 10, fun = max)
@@ -45,7 +49,7 @@ build_omniscape_layer <- function(predRasterLoc, patchList, #longestAxisSummary,
   #   sourceOmniTerraLoc = sourceOmniTerraLoc
   # )
   # return(fileList)
-  outFolders <- list.files(pattern = "omniscape_output", full.names = TRUE)
+  outFolders <- list.files(pattern = projName, full.names = TRUE)
   if(reRun == TRUE | length(outFolders) == 0){
 
     if(length(outFolders) > 0){
@@ -64,13 +68,14 @@ build_omniscape_layer <- function(predRasterLoc, patchList, #longestAxisSummary,
       '"radius"', ' => "', as.numeric(searchRadius), '",\n',
       '"block_size"', ' => "', as.numeric(blockSize), '",\n',
       # other settings in single string
-      '"project_name" => "omniscape_output",
-    "source_from_resistance" => "false",
-    "calc_normalized_current" => "true",
-    "calc_flow_potential" => "true",
-    "parallelize" => "true",
-    "parallel_batch_size" => "20",
-    "write_raw_currmap" => "true")'
+      # '"project_name" => "omniscape_output",
+      '"project_name"', ' => "', projName, '",
+      "source_from_resistance" => "false",
+      "calc_normalized_current" => "true",
+      "calc_flow_potential" => "true",
+      "parallelize" => "true",
+      "parallel_batch_size" => "20",
+      "write_raw_currmap" => "true")'
     )
 
     # Set system-wide environment variables
@@ -100,30 +105,30 @@ build_omniscape_layer <- function(predRasterLoc, patchList, #longestAxisSummary,
     # JuliaCall::julia_command('resistance, wkt, transform = Omniscape.read_raster("F:/Projects/TICKSOLVE_DeerMovement/data/GIS data/resistanceOmniWessex.tif", Float64)')
     # JuliaCall::julia_command('source, wkt, transform = Omniscape.read_raster("F:/Projects/TICKSOLVE_DeerMovement/data/GIS data/sourceOmniWessex.tif", Float64)')
     # JuliaCall::julia_command('config = Dict{String, String}(
-    #   "resistance_file" => "F:/Projects/TICKSOLVE_DeerMovement/data/GIS data/resistanceOmniWessex.tif",
-    #   "source_file" => "F:/Projects/TICKSOLVE_DeerMovement/data/GIS data/sourceOmniWessex.tif",
-    #   "radius" => "250",
-    #   "block_size" => "9",
-    #   "project_name" => "omniscape_output",
-    #   "source_from_resistance" => "false",
-    #   "calc_normalized_current" => "true",
-    #   "calc_flow_potential" => "true",
-    #   "parallelize" => "true",
-    #   "parallel_batch_size" => "20",
-    #   "write_raw_currmap" => "true")')
-    JuliaCall::julia_command('currmap, flow_pot, norm_current = run_omniscape(config,
+      #   "resistance_file" => "F:/Projects/TICKSOLVE_DeerMovement/data/GIS data/resistanceOmniWessex.tif",
+      #   "source_file" => "F:/Projects/TICKSOLVE_DeerMovement/data/GIS data/sourceOmniWessex.tif",
+      #   "radius" => "250",
+      #   "block_size" => "9",
+      #   "project_name" => "omniscape_output",
+      #   "source_from_resistance" => "false",
+      #   "calc_normalized_current" => "true",
+      #   "calc_flow_potential" => "true",
+      #   "parallelize" => "true",
+      #   "parallel_batch_size" => "20",
+      #   "write_raw_currmap" => "true")')
+      JuliaCall::julia_command('currmap, flow_pot, norm_current = run_omniscape(config,
                                                 resistance,
                                                 source_strength = source,
                                                 wkt = wkt,
                                                 geotransform = transform,
                                                 write_outputs = true)')
 
-  }
+      }
 
-  omniscapeLocations <- list.files(here::here("omniscape_output"),
+  omniscapeLocations <- list.files(here::here(projName),
                                    pattern = "*?.tif$",
                                    full.names = TRUE)
 
   return(omniscapeLocations)
 
-}
+  }
