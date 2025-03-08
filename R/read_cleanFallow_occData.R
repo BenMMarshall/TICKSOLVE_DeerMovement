@@ -1,6 +1,6 @@
 #' Read fallow occ data
 #'
-#' @name read_clean_occData
+#' @name read_cleanFallow_occData
 #' @description Read in a clean occ data for UK fallow
 #' @return A sf occ data
 #'
@@ -46,10 +46,21 @@ read_cleanFallow_occData <- function(sdmLayers){
                         remove = FALSE) %>%
     st_transform(27700)
 
-  occDataWessex <- st_crop(occDataSF, st_bbox(terra::rast(sdmLayers$distanceWoodlandWessexLocation)))
+  # crop to GB area only - exclude NI
+  gbGADM <- readRDS(here("data", "GIS data", "gadm", "gadm41_GBR_2_pk.rds"))
+  gbGADM <- st_as_sf(gbGADM)
+  gbGADM <- st_transform(gbGADM, 27700)
+  gbOnly <- gbGADM %>%
+    filter(!GID_1 == "GBR.2_1")
+  gbUnion <- st_union(gbOnly)
+  intersects <- st_intersects(occDataSF, gbUnion, sparse = FALSE)
 
-  occDataWessex$resp <- 1
+  occDataGB <- occDataSF[intersects,]
 
-  return(occDataWessex)
+  # occDataWessex <- st_crop(occDataSF, st_bbox(terra::rast(sdmLayers$distanceWoodlandWessexLocation)))
+
+  occDataGB$resp <- 1
+
+  return(occDataGB)
 
 }
