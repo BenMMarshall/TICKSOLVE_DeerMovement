@@ -42,6 +42,26 @@ inputList <- readRDS(file = here::here("data", "inputList.rds"))
 
 ```
 
+## Estimating Preference and Probability of Occurrence
+
+For the Roe Deer we made use of previously conducted analysis on their movements that aimed to dertmeine their preference for various land use types, as well as how their movements are altered when within them <CITE>.
+We took the coefficients of the population level poisson habitat preference model as a basis to estimate landscape level Roe Deer functional connectivity.
+
+For Fallow Deer and Rodents, we lacked sufficient movement data to undertake the a similar procedure.
+Instead we followed the workflow outlined by ___ <CITE>, using species distribution modelling to generate reasonable estimations of landscape resistance and then applying a circuit-theory approach <CITE - check wording> to determine how interconnected selected woodland patches were.
+
+We collated occurrence data from GBIF and NBAtlass <CITE> for the Fallow Deer and Rodents, using searches from "Dama dama", "Myodes glareolus", "Apodemus sylvaticus", "Sciurus carolinensis", and "Sciurus vulgaris".
+We downloaded all records within the UK, for all species.
+We filtered the records as to only include those made via human observations, were recorded to sub-25m accuracy, and had verified species identities.
+Once filtered we used CoordinateCleaner <CITE> to eliminate records that likely contained location errors.
+Namely we removed records within 10km of a capital, within 1km of a country centroid, had identical decimal latitude and longitudes, had zero in either latitude or longitude, or were identified as outliers. 
+We used the quantile method of identifying outliers, removing those records beyond 5 times the interquartile range of minimum distances to the next neighbour.
+Finally, we thinned the both the Fallow Deer and Rodent data so that no occurrence shared a raster cell with another occurrence.
+
+<!-- GBIF has specific DOIs to add -->
+
+We used the biomod2 package to manage species distrbution modelling. 
+
 ## Translating Preferences into Connectivity
 
 Once we had estimates of selection and effect for all the environmental aspects of interest, we spatially mapped those estimated covariates back onto the landscape, resulting in a map of conductance (Fig. \@ref:(figconductancePlot)).
@@ -51,6 +71,10 @@ For the covariates that involved movement interactions, we used the mean step an
 We replaced any areas with 0 conductance with 1e-12 to avoid any dead-ends or any absolute barriers.
 For we ignored the uncertainty surrounding the selection estimates, instead relying on just the point estimates for the resistance mapping.
 <!-- invert logit to standardise them and flip them to movement ease -->
+
+For the Fallow Deer and Rodents the underlying conductance layer was generated from the final ensemble species distribution model.
+In the case of the Fallow Deer we have sufficient data to parametrise the raod resistance based on the results of the Fallow Deer Poisson model; therefore, we alter the resistance of the cells that corresponded to the presence of a road in the same way as described for the Roe Deer.
+We did not have comparable road crossing data for the rodents, meaning that their conductance raster equalled one describing probability of occurence. 
 
 ```{r conductancePlot, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Conductance map of Aberdeen landscape developed from the coefficients of the Poisson habitat selection model. Higher values indicate easier movement for Roe Deer. Axis are m in British National Grid coordinate system."}
 knitr::include_graphics(here::here("figures", "resistanceConductanceMap_Pois_Aberdeenshire.png"))

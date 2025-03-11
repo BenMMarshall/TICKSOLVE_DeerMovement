@@ -40,6 +40,7 @@ tar_option_set(
                "foreach",
                "doParallel",
                "CoordinateCleaner",
+               "fasterRaster",
                "biomod2"
   ), # Packages that your targets need for their tasks.
   #
@@ -436,9 +437,7 @@ coreSDMList <- list(
     name = tar_sdm_layers,
     command = prepare_sdm_layer(prelimAggFact = aggFact_SDM)
   ),
-  ##############
-  # fallow occ #
-  ##############
+  # fallow occ ----
   tar_target(
     name = tar_occData_fallow,
     command = read_cleanFallow_occData(tar_sdm_layers)
@@ -449,9 +448,7 @@ coreSDMList <- list(
                                 hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
                                 nPointMultiplier = 3, nReps = 3)
   ),
-  ##############
-  # rodent occ #
-  ##############
+  # rodent occ ----
   tar_target(
     name = tar_occData_rodent,
     command = read_cleanRodent_occData(tar_sdm_layers)
@@ -462,9 +459,7 @@ coreSDMList <- list(
                                 hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
                                 nPointMultiplier = 3, nReps = 3)
   ),
-  ##############
-  # fallow SDM #
-  ##############
+  # fallow SDM ----
   tar_target(
     name = tar_biomodData_fallow,
     command = BIOMOD_FormatingData(resp.var = tar_pseudoAbs_fallow$sp,
@@ -536,9 +531,7 @@ coreSDMList <- list(
     name = tar_projLayer_fallow,
     command = save_proj_layer(tar_biomodForecast_fallow)
   ),
-  ##############
-  # rodent SDM #
-  ##############
+  # rodent SDM ----
   tar_target(
     name = tar_biomodData_rodent,
     command = BIOMOD_FormatingData(resp.var = tar_pseudoAbs_rodent$sp,
@@ -589,7 +582,7 @@ coreSDMList <- list(
                                       em.algo = c("EMmean", "EMcv", "EMci",
                                                   "EMmedian", "EMca", "EMwmean"),
                                       metric.select = c("TSS"),
-                                      metric.select.thresh = c(0.25),
+                                      metric.select.thresh = c(0.5),
                                       metric.eval = c("TSS", "ROC"),
                                       var.import = 3,
                                       EMci.alpha = 0.05,
@@ -610,9 +603,7 @@ coreSDMList <- list(
     name = tar_projLayer_rodent,
     command = save_proj_layer(tar_biomodForecast_rodent)
   ),
-  ##################
-  # fallow Poisson #
-  ##################
+  # fallow Poisson ----
   tar_target(
     name = tar_ssfFallow_data,
     command = prepare_ssfFallow_data(tar_deerData, tar_landuseList, tar_patchList, cores = 12,
@@ -633,9 +624,7 @@ coreSDMList <- list(
     name = tar_longestFallow,
     command = extract_akdeFallow_longest(tar_akdeLists)
   ),
-  ####################
-  # fallow omniscape #
-  ####################
+  # fallow omniscape ----
   tar_target(
     name = tar_omniLayers_fallow,
     command = build_omniscape_layer(tar_predPoisResist_fallow, tar_patchList, #tar_longestFallow,
@@ -651,9 +640,7 @@ coreSDMList <- list(
                                     tar_pseudoAbs_fallow,
                                     sdmLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")))
   ),
-  ####################
-  # rodent omniscape #
-  ####################
+  # rodent omniscape ----
   tar_target(
     name = tar_omniLayers_rodent,
     command = build_omniscape_layer(tar_projLayer_rodent, tar_patchList, #tar_longestrodent,

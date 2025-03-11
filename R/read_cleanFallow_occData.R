@@ -47,6 +47,10 @@ read_cleanFallow_occData <- function(sdmLayers){
     st_transform(27700)
 
   # crop to GB area only - exclude NI
+  geodata::gadm(country = "GB",
+                path = here("data", "GIS data"),
+                level = 2,
+                version = "latest")
   gbGADM <- readRDS(here("data", "GIS data", "gadm", "gadm41_GBR_2_pk.rds"))
   gbGADM <- st_as_sf(gbGADM)
   gbGADM <- st_transform(gbGADM, 27700)
