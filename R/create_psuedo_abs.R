@@ -6,13 +6,14 @@
 #'
 #' @export
 create_psuedo_abs <- function(occData, hfBiasLayer = here::here("data", "Human Footprint", "hfp2022.tif"),
-                              nPointMultiplier = 3, nReps = 3){
+                              nPointMultiplier = 3, nReps = 3,
+                              envLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"))){
 
-  envLayers <- read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"))
+  # envLayers <- read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"))
 
-  # targets::tar_load("tar_occData_rodent")
+  # targets::tar_load("tar_occData_fallow")
   targets::tar_source()
-  # occData <- tar_occData_rodent
+  # occData <- tar_occData_fallow
   hfData <- terra::rast(hfBiasLayer)
 
   gbGADM <- readRDS(here("data", "GIS data", "gadm", "gadm41_GBR_2_pk.rds"))
@@ -100,8 +101,14 @@ create_psuedo_abs <- function(occData, hfBiasLayer = here::here("data", "Human F
 
   print("- bm_PseudoAbsences start")
 
+  envValues <- terra::extract(envLayers, fullRespData, method = "simple")
+
+  envValues <- envValues %>%
+    mutate(across(!starts_with("distance"), as.factor)) %>%
+    select(-ID)
+
   PA.u <- bm_PseudoAbsences(resp.var = fullRespData,
-                            expl.var = envLayers,
+                            expl.var = envValues,
                             strategy = "user.defined",
                             user.table = PAtable)
 

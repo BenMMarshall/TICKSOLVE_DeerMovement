@@ -446,7 +446,9 @@ coreSDMList <- list(
     name = tar_pseudoAbs_fallow,
     command = create_psuedo_abs(tar_occData_fallow,
                                 hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
-                                nPointMultiplier = 3, nReps = 3)
+                                nPointMultiplier = 3, nReps = 3,
+                                envLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
+                                                              tar_sdm_layers))
   ),
   # rodent occ ----
   tar_target(
@@ -457,14 +459,15 @@ coreSDMList <- list(
     name = tar_pseudoAbs_rodent,
     command = create_psuedo_abs(tar_occData_rodent,
                                 hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
-                                nPointMultiplier = 3, nReps = 3)
+                                nPointMultiplier = 3, nReps = 3,
+                                envLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
+                                                              tar_sdm_layers))
   ),
   # fallow SDM ----
   tar_target(
     name = tar_biomodData_fallow,
     command = BIOMOD_FormatingData(resp.var = tar_pseudoAbs_fallow$sp,
-                                   expl.var = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
-                                                                tar_sdm_layers),
+                                   expl.var = tar_pseudoAbs_fallow$env,
                                    resp.xy = tar_pseudoAbs_fallow$xy,
                                    resp.name = "Dama.dama",
                                    #     # advice from biomod2’s team:
@@ -507,10 +510,11 @@ coreSDMList <- list(
     command = BIOMOD_EnsembleModeling(bm.mod = tar_biomodModels_fallow,
                                       models.chosen = "all",
                                       em.by = "all",
-                                      em.algo = c("EMmean", "EMcv", "EMci",
-                                                  "EMmedian", "EMca", "EMwmean"),
+                                      em.algo = c("EMmean", #"EMcv", "EMci",
+                                                  "EMmedian", #"EMca",
+                                                  "EMwmean"),
                                       metric.select = c("TSS"),
-                                      metric.select.thresh = c(0.5),
+                                      metric.select.thresh = c(0.25),
                                       metric.eval = c("TSS", "ROC"),
                                       var.import = 3,
                                       EMci.alpha = 0.05,
@@ -522,7 +526,8 @@ coreSDMList <- list(
                                          proj.name = "CurrentEM",
                                          new.env = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")) %>%
                                            crop(tar_patchList$Wessex),
-                                         models.chosen = "all",
+                                         models.chosen = get_built_models(tar_biomodEns_rodent)[
+                                           stringr::str_detect(get_built_models(tar_biomodEns_rodent), "EMwmeanByTSS")],,
                                          metric.binary = "all",
                                          metric.filter = "all",
                                          output.format = ".tif")
@@ -535,8 +540,7 @@ coreSDMList <- list(
   tar_target(
     name = tar_biomodData_rodent,
     command = BIOMOD_FormatingData(resp.var = tar_pseudoAbs_rodent$sp,
-                                   expl.var = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
-                                                                tar_sdm_layers),
+                                   expl.var = tar_pseudoAbs_rodent$env,
                                    resp.xy = tar_pseudoAbs_rodent$xy,
                                    resp.name = "Rodent",
                                    #     # advice from biomod2’s team:
@@ -579,10 +583,11 @@ coreSDMList <- list(
     command = BIOMOD_EnsembleModeling(bm.mod = tar_biomodModels_rodent,
                                       models.chosen = "all",
                                       em.by = "all",
-                                      em.algo = c("EMmean", "EMcv", "EMci",
-                                                  "EMmedian", "EMca", "EMwmean"),
+                                      em.algo = c("EMmean", #"EMcv", "EMci",
+                                                  "EMmedian", #"EMca",
+                                                  "EMwmean"),
                                       metric.select = c("TSS"),
-                                      metric.select.thresh = c(0.5),
+                                      metric.select.thresh = c(0.25),
                                       metric.eval = c("TSS", "ROC"),
                                       var.import = 3,
                                       EMci.alpha = 0.05,
@@ -594,7 +599,8 @@ coreSDMList <- list(
                                          proj.name = "CurrentEM",
                                          new.env = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")) %>%
                                            crop(tar_patchList$Wessex),
-                                         models.chosen = "all",
+                                         models.chosen = get_built_models(tar_biomodEns_rodent)[
+                                           stringr::str_detect(get_built_models(tar_biomodEns_rodent), "EMwmeanByTSS")],
                                          metric.binary = "all",
                                          metric.filter = "all",
                                          output.format = ".tif")
