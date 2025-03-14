@@ -101,14 +101,14 @@ create_psuedo_abs <- function(occData, hfBiasLayer = here::here("data", "Human F
 
   print("- bm_PseudoAbsences start")
 
-  envValues <- terra::extract(envLayers, fullRespData, method = "simple")
-
-  envValues <- envValues %>%
-    mutate(across(!starts_with("distance"), as.factor)) %>%
-    select(-ID)
+  # envValues <- terra::extract(envLayers, fullRespData, method = "simple")
+  #
+  # envValues <- envValues %>%
+  #   mutate(across(!starts_with("distance"), as.factor)) %>%
+  #   select(-ID)
 
   PA.u <- bm_PseudoAbsences(resp.var = fullRespData,
-                            expl.var = envValues,
+                            expl.var = envLayers,
                             strategy = "user.defined",
                             user.table = PAtable)
 

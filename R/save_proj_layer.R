@@ -18,7 +18,7 @@ save_proj_layer <- function(forecast){
                                    paste0("proj_", forecast@proj.name, "_", forecast@sp.name, "_ensemble.tif")))
 
   projLayer <- forecastTerra %>%
-    dplyr::select(contains("EMmeanByTSS"))
+    dplyr::select(contains("EMwmeanByTSS"))
 
   # convert the 0-1000 to 0-1
   values(projLayer) <- values(projLayer)/1000

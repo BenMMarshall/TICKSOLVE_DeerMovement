@@ -446,7 +446,7 @@ coreSDMList <- list(
     name = tar_pseudoAbs_fallow,
     command = create_psuedo_abs(tar_occData_fallow,
                                 hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
-                                nPointMultiplier = 3, nReps = 3,
+                                nPointMultiplier = 3, nReps = 1,
                                 envLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
                                                               tar_sdm_layers))
   ),
@@ -459,7 +459,7 @@ coreSDMList <- list(
     name = tar_pseudoAbs_rodent,
     command = create_psuedo_abs(tar_occData_rodent,
                                 hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
-                                nPointMultiplier = 3, nReps = 3,
+                                nPointMultiplier = 3, nReps = 1,
                                 envLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
                                                               tar_sdm_layers))
   ),
@@ -489,7 +489,7 @@ coreSDMList <- list(
                               modeling.id = "AllModels",
                               models = c("ANN",
                                          "GBM", "GLM",
-                                         "MAXNET",
+                                         # "MAXNET",
                                          "RF", "XGBOOST"),
                               CV.strategy = "user.defined",
                               CV.user.table = bm_CrossValidation(bm.format = tar_biomodData_fallow,
@@ -510,27 +510,31 @@ coreSDMList <- list(
     command = BIOMOD_EnsembleModeling(bm.mod = tar_biomodModels_fallow,
                                       models.chosen = "all",
                                       em.by = "all",
-                                      em.algo = c("EMmean", #"EMcv", "EMci",
-                                                  "EMmedian", #"EMca",
+                                      em.algo = c("EMmean", "EMcv", "EMci",
+                                                  "EMmedian", "EMca",
                                                   "EMwmean"),
                                       metric.select = c("TSS"),
                                       metric.select.thresh = c(0.25),
                                       metric.eval = c("TSS", "ROC"),
                                       var.import = 3,
                                       EMci.alpha = 0.05,
-                                      EMwmean.decay = "proportional")
+                                      EMwmean.decay = "proportional",
+                                      seed.val = 2025,
+                                      nb.cpu = 6)
   ),
   tar_target(
     name = tar_biomodForecast_fallow,
     command = BIOMOD_EnsembleForecasting(bm.em = tar_biomodEns_fallow,
                                          proj.name = "CurrentEM",
-                                         new.env = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")) %>%
+                                         new.env = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
+                                                                     tar_sdm_layers) %>%
                                            crop(tar_patchList$Wessex),
-                                         models.chosen = get_built_models(tar_biomodEns_rodent)[
-                                           stringr::str_detect(get_built_models(tar_biomodEns_rodent), "EMwmeanByTSS")],,
+                                         models.chosen = get_built_models(tar_biomodEns_fallow)[
+                                           stringr::str_detect(get_built_models(tar_biomodEns_fallow), "EMwmeanByTSS")],
                                          metric.binary = "all",
                                          metric.filter = "all",
-                                         output.format = ".tif")
+                                         output.format = ".tif",
+                                         nb.cpu = 6)
   ),
   tar_target(
     name = tar_projLayer_fallow,
@@ -562,7 +566,7 @@ coreSDMList <- list(
                               modeling.id = "AllModels",
                               models = c("ANN",
                                          "GBM", "GLM",
-                                         "MAXNET",
+                                         # "MAXNET",
                                          "RF", "XGBOOST"),
                               CV.strategy = "user.defined",
                               CV.user.table = bm_CrossValidation(bm.format = tar_biomodData_rodent,
@@ -591,19 +595,23 @@ coreSDMList <- list(
                                       metric.eval = c("TSS", "ROC"),
                                       var.import = 3,
                                       EMci.alpha = 0.05,
-                                      EMwmean.decay = "proportional")
+                                      EMwmean.decay = "proportional",
+                                      seed.val = 2025,
+                                      nb.cpu = 6)
   ),
   tar_target(
     name = tar_biomodForecast_rodent,
     command = BIOMOD_EnsembleForecasting(bm.em = tar_biomodEns_rodent,
                                          proj.name = "CurrentEM",
-                                         new.env = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")) %>%
+                                         new.env = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
+                                                                     tar_sdm_layers) %>%
                                            crop(tar_patchList$Wessex),
                                          models.chosen = get_built_models(tar_biomodEns_rodent)[
                                            stringr::str_detect(get_built_models(tar_biomodEns_rodent), "EMwmeanByTSS")],
                                          metric.binary = "all",
                                          metric.filter = "all",
-                                         output.format = ".tif")
+                                         output.format = ".tif",
+                                         nb.cpu = 6)
   ),
   tar_target(
     name = tar_projLayer_rodent,

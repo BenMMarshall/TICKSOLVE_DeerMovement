@@ -302,10 +302,13 @@ read_stack_layers <- function(layerLoc = here("data", "GIS data", "SDM Layers"),
   i <- 0
   for(f in sdmFiles){
     i <- i+1
-    # f <- sdmFiles[1]
+    # f <- sdmFiles[6]
     readFile <- rast(here("data", "GIS data", "SDM Layers", f))
     print(f)
     # print(st_bbox(readFile))
+    if(!str_detect(names(readFile), "distance")){
+      readFile <- as.factor(readFile)
+    }
     # assign(paste0("layer_", names(readFile)), readFile)
     if(i == 1){
       explLayers <- readFile

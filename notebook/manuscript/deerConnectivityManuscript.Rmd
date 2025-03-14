@@ -64,7 +64,7 @@ We weighted the pseudo-absences using a bias layer to mitigate the impacts of th
 For our bias layer, we used the human footprint index <CITE> that combines a variety of human activities and land conversions into a single metric, and could serve as a proxy for the likelihood of observing our target species.
 
 We used the biomod2 package to manage species distribution modelling <CITE>.
-We fitted a variety of models: Artificial Neural Network, Boosted Regression Trees, Generalized Linear Model, Maximum Entropy, Random Forest, and eXtreme Gradient Boosting Training.
+We fitted a variety of models: Artificial Neural Network, Boosted Regression Trees, Generalized Linear Model, Maximum Entropy, and Random Forest. <!-- and eXtreme Gradient Boosting Training. --> <!-- XGBOOST can't be run with cat vars -->
 We used block cross validation, balanced based on environmental covariates, to evaluate model performance <CITE>.
 We elected to use True Skill Statistic (TSS) as our primary metric of model performance <CITE>.
 Once all models had been complete, we compiled all models into an ensemble model ready for projection to our target landscapes.
