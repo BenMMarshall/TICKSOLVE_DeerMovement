@@ -30,10 +30,12 @@ tar_option_set(
                "gdistance",
                "INLA",
                "performance",
-               # "JuliaCall",
+               "JuliaCall",
                "ggplot2",
                "ggtext",
                "ggridges",
+               "ggrepel",
+               "rnaturalearth",
                "patchwork",
                "terra",
                "tidyterra",
@@ -410,9 +412,18 @@ connectTargetList <- list(
     cue = tar_cue(mode = "always")
   ),
   tar_target(
+    name = tar_location_plot,
+    command = plot_study_locations(
+      deerData = tar_deerData,
+      landuseList = tar_landuseList,
+      patchList = tar_patchList
+    )
+  ),
+  tar_target(
     name = tar_render_connectivity,
     command = render_rmd(fileIN = here::here("notebook", "manuscript", "deerConnectivityManuscript.Rmd"),
                          fileOUT = here::here("notebook", "manuscript", "deerConnectivityManuscript.pdf"),
+                         tar_location_plot,
                          tar_patchPois_summaryPlot,
                          tar_connectivityValue_plots,
                          tar_package_text,

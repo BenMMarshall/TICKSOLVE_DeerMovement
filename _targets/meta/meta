@@ -17,10 +17,10 @@ calculate_akdes|function|2192df08ee8ea6f9|||||||||||||||
 calculate_dbbmm_mse|function|d460657c9b004785|||||||||||||||
 calculate_dbbmms|function|7a6d7321c24e85cf|||||||||||||||
 connectSettings|object|597d46847c0f2126|||||||||||||||
-connectTargetList|object|2110368d72b27f24|||||||||||||||
+connectTargetList|object|b1c1cd8898a60f0a|||||||||||||||
 contourAvialable|object|1fad89499ff2daae|||||||||||||||
-coreSDMList|object|6fe53d1beef590f4|||||||||||||||
-coreTargetList|object|bc217e20cb08b09c|||||||||||||||
+coreSDMList|object|42dedabb5a2ab8fe|||||||||||||||
+coreTargetList|object|91054efc6a0f2dd7|||||||||||||||
 create_package_txt|function|68434bfa00bd3fcc|||||||||||||||
 create_psuedo_abs|function|ae6ece42f7513990|||||||||||||||
 determine_rodent_HR|function|ad26f6614a35b331|||||||||||||||
@@ -54,6 +54,7 @@ plot_patch_MMMconnectivity|function|5f2bb36be4ae0337|||||||||||||||
 plot_patch_summary|function|d2c17bc150c2c021|||||||||||||||
 plot_pois_coefs|function|cfec6b0e59683d07|||||||||||||||
 plot_ssf_coefs|function|1c375e42af7b7f97|||||||||||||||
+plot_study_locations|function|e2f1ab8e34a489b5|||||||||||||||
 plot_variograms|function|7f2e3dc4682f917f|||||||||||||||
 poisFormula|object|7430658a3b1ae991|||||||||||||||
 prepare_circuitscape_data|function|fdd57871e3953e99|||||||||||||||
@@ -266,6 +267,7 @@ tar_funcStruc_plot|stem|d27558ac428f57bd|2f7bf4ac54810195|ef7b86a4c582169e|12853
 tar_homeRange_sizePlot|stem|e9f31e34d48fb01b|5e82fc8c817ea1a4|c44945058ea357b2|-1202349281||t20145.5352092233s|6862b9874cea86dc|14445234|qs|local|vector|||2.047||
 tar_landuse|stem|2514449375f1a5b8|9ade98fbebd966f6|272b3059fc51c7f1|-1042947407||t20059.4104961729s|7b6e260af24ba309|636186|qs|local|vector|||14.297|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_landuseList|stem|1d95ed7f11fb977f|39e1e1b524863f89|56e6620817c20829|1043045520||t20139.8678402794s|741813d4e90a7ce1|9556232|qs|local|vector|||198.656|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
+tar_location_plot|stem|c08c6c60a7b7b1e9|5f68b6eba77f161f|bb0c4da5d164b68a|-292057938||t20161.6439670859s|379d51ae7d12b280|121162349|qs|local|vector|||329.063|Ignoring unknown parameters box.padding|
 tar_longestFallow|stem|33a25b98a95a923d|f17ecc649504a9a6|e5ff4f25c1c3b5f7|-835242355||t20144.5482311371s|d5bf79044af760da|286|qs|local|vector|||0.11|repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant|
 tar_msePois_df|stem|70b97a4f41634ead|613a21b6639ed3e2|f931060e918448b9|451420258||t20143.3671625191s|5a4e1319a8bd5ef4|774|qs|local|vector|||0||
 tar_msePois_list|stem|215a33190b71d939|f58174489d84c8a8|9726446b8f102ae5|-138912978||t20076.5447523246s|92f12605e75fe984|785|qs|local|vector|||0||
