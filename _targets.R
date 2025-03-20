@@ -56,7 +56,7 @@ tar_option_set(
   # to do and exits if 60 seconds pass with no tasks to run.
 
   # controller = crew::crew_controller_local(workers = 3, seconds_idle = 60),
-  # error = "continue",
+  error = "continue",
   #
   format = "qs" # Optionally set the default storage format. qs is fast.
 )
@@ -440,8 +440,8 @@ aggFact_SDM <- NA
 # bs of 7 would be suitable. 7x7=49. Would be ~ four sources per smallest patch. - seems too high
 bs_fallow <- 31
 sr_fallow <- 1500
-bs_rodent <- 31
-sr_rodent <- 100
+bs_rodent <- 15
+sr_rodent <- 150
 
 coreSDMList <- list(
   tar_target(
@@ -656,30 +656,81 @@ coreSDMList <- list(
                                     blockSize = bs_fallow, searchRadius = sr_fallow, reRun = FALSE,
                                     projName = "omniscape_output_fallow")
   ),
+  # fallow plots ----
   tar_target(
-    name = tar_occSDMOmni_plots_fallow,
-    command = plot_occSDMOmni_inOut(hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
-                                    tar_projLayer_fallow,
-                                    tar_predPoisResist_fallow,
-                                    tar_omniLayers_fallow,
-                                    tar_pseudoAbs_fallow,
-                                    sdmLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")))
+    name = tar_biomodSingle_plots_fallow,
+    command = plot_biomodEval_single(tar_biomodModels_fallow)
+  ),
+  tar_target(
+    name = tar_biomodEns_plots_fallow,
+    command = plot_biomodEval_ensemble(tar_biomodEns_fallow, tar_patchList)
+  ),
+  tar_target(
+    name = tar_HFOcc_plots_fallow,
+    command = plot_occSDMOmni_inOut_HFOcc(species = "fallow",
+                                          hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
+                                          tar_pseudoAbs_fallow)
+  ),
+  tar_target(
+    name = tar_SDMin_plots_fallow,
+    command = plot_occSDMOmni_inOut_SDMin(species = "fallow",
+                                          sdmLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")))
+  ),
+  tar_target(
+    name = tar_omniIN_plots_fallow,
+    command = plot_occSDMOmni_inOut_omniIN(species = "fallow",
+                                           tar_projLayer_fallow,
+                                           tar_predPoisResist_fallow)
+  ),
+  tar_target(
+    name = tar_omniOUT_plots_fallow,
+    command = plot_occSDMOmni_inOut_omniOUT(species = "fallow",
+                                            tar_omniLayers_fallow,
+                                            tar_selectedPatchList)
   ),
   # rodent omniscape ----
   tar_target(
-    name = tar_omniLayers_rodent,
-    command = build_omniscape_layer(tar_projLayer_rodent, tar_patchList, #tar_longestrodent,
-                                    blockSize = bs_rodent, searchRadius = sr_rodent, reRun = FALSE,
-                                    projName = "omniscape_output_rodent")
+    name = tar_predPoisResist_rodent,
+    command = build_predResistanceRodent_layer(tar_projLayer_rodent,
+                                               prelimAggFact = aggFact_SDM)
   ),
   tar_target(
-    name = tar_occSDMOmni_plots_rodent,
-    command = plot_occSDMOmni_inOut(hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
-                                    tar_projLayer_rodent,
-                                    tar_predPoisResist_rodent,
-                                    tar_omniLayers_rodent,
-                                    tar_pseudoAbs_rodent,
-                                    sdmLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")))
+    name = tar_omniLayers_rodent,
+    command = build_omniscape_layer(tar_predPoisResist_rodent, tar_patchList, #tar_longestrodent,
+                                    blockSize = bs_rodent, searchRadius = sr_rodent, reRun = TRUE,
+                                    projName = "omniscape_output_rodent")
+  ),
+  # rodent plots ----
+  tar_target(
+    name = tar_biomodSingle_plots_rodent,
+    command = plot_biomodEval_single(tar_biomodModels_rodent)
+  ),
+  tar_target(
+    name = tar_biomodEns_plots_rodent,
+    command = plot_biomodEval_ensemble(tar_biomodEns_rodent, tar_patchList)
+  ),
+  tar_target(
+    name = tar_HFOcc_plots_rodent,
+    command = plot_occSDMOmni_inOut_HFOcc(species = "rodent",
+                                          hfBiasLayer = here("data", "Human Footprint", "hfp2022.tif"),
+                                          tar_pseudoAbs_rodent)
+  ),
+  tar_target(
+    name = tar_SDMin_plots_rodent,
+    command = plot_occSDMOmni_inOut_SDMin(species = "rodent",
+                                          sdmLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")))
+  ),
+  tar_target(
+    name = tar_omniIN_plots_rodent,
+    command = plot_occSDMOmni_inOut_omniIN(species = "rodent",
+                                           tar_projLayer_rodent,
+                                           tar_predPoisResist_rodent)
+  ),
+  tar_target(
+    name = tar_omniOUT_plots_rodent,
+    command = plot_occSDMOmni_inOut_omniOUT(species = "rodent",
+                                            tar_omniLayers_rodent,
+                                            tar_selectedPatchList)
   )
 )
 
