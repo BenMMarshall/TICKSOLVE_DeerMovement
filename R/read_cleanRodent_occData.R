@@ -12,7 +12,8 @@ read_cleanRodent_occData <- function(sdmLayers){
   occGBIFdata <- read.csv(here("data", "GBIF data", "rodentiaUK.csv"),
                           sep = "\t")
 
-  rodentSpp <- c("Myodes glareolus", "Apodemus sylvaticus", "Sciurus carolinensis", "Sciurus vulgaris")
+  rodentSpp <- c("Myodes glareolus", "Apodemus sylvaticus", "Sciurus carolinensis", "Sciurus vulgaris",
+                 "Apodemus flavicollis")
   rodentList <- vector("list", length(rodentSpp))
   names(rodentList) <- rodentSpp
   for(sp in rodentSpp){
@@ -21,16 +22,17 @@ read_cleanRodent_occData <- function(sdmLayers){
       filter(species == sp)
 
     occNBNdataSP <- read.csv(here("data", "NBN Atlas data", sp,
-                                  paste0(sub(" ", "-", sp), "-2025-03-10.csv"))) %>%
+                                  paste0(sub(" ", "-", sp), ".csv"))) %>%
       filter(!Basis.of.record == "PreservedSpecimen") %>%
-      filter(Coordinate.uncertainty..m. <= 25)
+      filter(Coordinate.uncertainty..m. <= 25) %>%
+      mutate(species = sp)
 
     occDataSP <- rbind(occGBIFdataSP %>%
-                       dplyr::select(species, decimalLatitude, decimalLongitude),
-                     occNBNdataSP %>%
-                       dplyr::select(species = Scientific.name,
-                                     decimalLatitude = Latitude..WGS84.,
-                                     decimalLongitude = Longitude..WGS84.))
+                         dplyr::select(species, decimalLatitude, decimalLongitude),
+                       occNBNdataSP %>%
+                         dplyr::select(species,
+                                       decimalLatitude = Latitude..WGS84.,
+                                       decimalLongitude = Longitude..WGS84.))
 
     flags <- clean_coordinates(x = occDataSP,
                                lon = "decimalLongitude",
@@ -76,7 +78,8 @@ read_cleanRodent_occData <- function(sdmLayers){
   occDataGB <- occDataSF[intersects,]
 
   ggplot() +
-    geom_sf(data = occDataGB)
+    geom_sf(data = occDataGB, aes(colour = species)) +
+    facet_wrap(facet = vars(species))
 
   sdmStack <- read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"))
 

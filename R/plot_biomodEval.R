@@ -83,6 +83,54 @@ plot_biomodEval_single <- function(biomodModels){
   ggsave(plot = varImportPlot, filename = here("figures", paste0(species, "_varImportanceModels.png")),
          width = 240, height = 120, units = "mm")
 
+  respCurve <- bm_PlotResponseCurves(bm.out = biomodModels,
+                                     models.chosen = get_built_models(biomodModels),
+                                     fixed.var = 'mean')
+
+  respDistPlot <- respCurve$tab %>%
+    mutate(model.type = str_extract(pred.name, "[^_]+$")) %>%
+    filter(str_detect(expl.name, "distance")) %>%
+    ggplot() +
+    # geom_rect(data = wessexRanges, aes(xmin = min, xmax = max,
+    #                                    ymin = -Inf, ymax = Inf), fill = "#85AB7A", alpha = 0.2) +
+    geom_path(aes(x = expl.val, y = pred.val, group = pred.name, colour = model.type)) +
+    facet_wrap(facet = vars(expl.name), scales = "free") +
+    ggplotThemeCombo +
+    # theme(legend.position = "none") +
+    scale_colour_manual(values = c("#DCBD0A",
+                                   "#CD602A",
+                                   "#9F7E93",
+                                   "#85AB7A")) +
+    scale_fill_manual(values = c("#DCBD0A",
+                                 "#CD602A",
+                                 "#9F7E93",
+                                 "#85AB7A"))
+
+  ggsave(plot = respDistPlot, filename = here("figures", paste0(species, "_responseDistanceSingle.png")),
+         width = 200, height = 120, units = "mm")
+
+  respBinaryPlot <- respCurve$tab %>%
+    mutate(model.type = str_extract(pred.name, "[^_]+$")) %>%
+    filter(!str_detect(expl.name, "distance")) %>%
+    ggplot() +
+    geom_vline(xintercept = c(1,2), linetype = "dashed", alpha = 0.85) +
+    geom_path(aes(x = expl.val, y = pred.val, group = pred.name, colour = model.type)) +
+    facet_wrap(facet = vars(expl.name)) +
+    scale_x_continuous(breaks = c(1, 2),
+                       labels = c("0", "1")) +
+    ggplotThemeCombo +
+    scale_colour_manual(values = c("#DCBD0A",
+                                   "#CD602A",
+                                   "#9F7E93",
+                                   "#85AB7A")) +
+    scale_fill_manual(values = c("#DCBD0A",
+                                 "#CD602A",
+                                 "#9F7E93",
+                                 "#85AB7A"))
+
+  ggsave(plot = respBinaryPlot, filename = here("figures", paste0(species, "_responseBinarySingle.png")),
+         width = 240, height = 120, units = "mm")
+
   return(list(evalPlot = evalPlot, varImportPlot = varImportPlot))
 }
 

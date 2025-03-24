@@ -1,7 +1,7 @@
 # install the HomeRange R package
-install.packages("https://github.com/SHoeks/HomeRange/raw/main/HomeRange_1.07.tar.gz",
-                 repos=NULL,
-                 method="libcurl")
+# install.packages("https://github.com/SHoeks/HomeRange/raw/main/HomeRange_1.07.tar.gz",
+#                  repos=NULL,
+#                  method="libcurl")
 # alternatively, install the HomeRange R package using install_github:
 # remotes::install_github("SHoeks/HomeRange", subdir='pkg')
 # or using the pak package manager
@@ -77,3 +77,11 @@ fallowData %>%
   ggplot() +
   geom_density_ridges(aes(x = Home_Range_km2, y = HR_Method_Simple, fill = Species)) +
   scale_x_log10(labels = scales::comma)
+
+fallowData %>%
+  filter(HR_Level == "Individual") %>%
+  filter(Tracking_Method %in% c("Radio tracking",
+                                "Radio tracking, direct observations",
+                                "Radio tracking, live trapping",
+                                "Satellite tracking (GPS), radio tracking")) %>%
+  pull(Home_Range_km2) %>% max()

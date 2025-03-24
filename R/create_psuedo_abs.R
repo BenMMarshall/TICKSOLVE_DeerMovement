@@ -36,6 +36,26 @@ create_psuedo_abs <- function(occData, hfBiasLayer = here::here("data", "Human F
 
   print("- hf read and disaggregated")
 
+  geodata::gadm(country = "GB",
+                path = here("data", "GIS data"),
+                level = 2,
+                version = "latest")
+  gbGADM <- readRDS(here("data", "GIS data", "gadm", "gadm41_GBR_2_pk.rds"))
+  gbGADM <- st_as_sf(gbGADM)
+  gbGADM <- st_transform(gbGADM, 27700)
+  gbOnly <- gbGADM %>%
+    filter(!GID_1 == "GBR.2_1")
+  gbUnion <- st_union(gbOnly)
+
+  if(occData$species[1] == "Dama dama"){
+    occBuffered <- occData %>%
+      st_buffer(6200)
+    # plot(occBuffered)
+    hfMasked <- mask(hfDataBNG, occBuffered, touches = FALSE)
+  } else {
+    hfMasked <- mask(hfDataBNG, vect(gbUnion), touches = FALSE)
+  }
+
   occDataSimple <- occData %>%
     mutate(x = st_coordinates(occData)[,1],
            y = st_coordinates(occData)[,2]) %>%
@@ -43,12 +63,12 @@ create_psuedo_abs <- function(occData, hfBiasLayer = here::here("data", "Human F
     st_drop_geometry()
 
   weightedRandom <- spatSample(# x = hfData25m,
-                                 x = hfDataBNG,
-                                 # size = 10,
-                                 size = nrow(occData)*nPointMultiplier*nReps,
-                                 method = "weights",
-                                 na.rm = TRUE, as.df = FALSE, values = FALSE,
-                                 xy = TRUE)
+    x = hfMasked,
+    # size = 10,
+    size = nrow(occData)*nPointMultiplier*nReps,
+    method = "weights",
+    na.rm = TRUE, as.df = FALSE, values = FALSE,
+    xy = TRUE)
 
   print("- weigthed sampling complete")
 
