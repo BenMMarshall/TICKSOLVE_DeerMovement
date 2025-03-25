@@ -27,7 +27,7 @@ editor_options:
   markdown: 
     wrap: sentence
 abstract: abstract text
-keywords: roe deer, Capreolus capreolus
+keywords: deer, rodent, connectivity
 ---
 
 # Methods
@@ -44,32 +44,39 @@ inputList <- readRDS(file = here::here("data", "inputList.rds"))
 
 ## Estimating Preference and Probability of Occurrence
 
-For the Roe Deer we made use of previously conducted analysis on their movements that aimed to determine their preference for various land use types, as well as how their movements are altered when within them <CITE>.
+For the Roe Deer we made use of previously conducted analysis on their movements that aimed to determine their preference for various land use types, as well as how their movements are altered when within them <CITE PREPRINT MOVEMENT PAPER>.
 We took the coefficients of the population level poisson habitat preference model as a basis to estimate landscape level Roe Deer functional connectivity.
 
 For Fallow Deer and Rodents, we lacked sufficient movement data to undertake the a similar procedure.
-Instead we followed the workflow outlined by ___ <CITE>, using species distribution modelling to generate reasonable estimations of landscape resistance and then applying a circuit-theory approach <CITE - check wording> to determine how interconnected selected woodland patches were.
+Instead we followed the workflow outlined by @prima_comprehensive_2024, using species distribution modelling to generate reasonable estimations of landscape resistance and then applying a circuit-theory approach <CITE - check wording> to determine how interconnected selected woodland patches were.
 
-We collated occurrence data from GBIF and NBAtlass <CITE> for the Fallow Deer and Rodents, using searches from "Dama dama", "Myodes glareolus", "Apodemus sylvaticus", "Sciurus carolinensis", and "Sciurus vulgaris".
+We collated occurrence data from GBIF and NBN Atlas <CITE> for the Fallow Deer and Rodents, using searches from "*Dama dama*", "*Myodes glareolus*", "*Apodemus flavicollis*", "*Apodemus sylvaticus*", "*Sciurus carolinensis*", and "*Sciurus vulgaris*".
 <!-- GBIF has specific DOIs to add -->
 We downloaded all records within the UK, for all species.
 We filtered the records as to only include those made via human observations, were recorded to sub-25m accuracy, and had verified species identities.
-Once filtered we used CoordinateCleaner <CITE> to eliminate records that likely contained location errors.
+Once filtered we used CoordinateCleaner <CITE> to eliminate records that likely contained location errors on a species-by-species basis.
 Namely we removed records within 10km of a capital, within 1km of a country centroid, had identical decimal latitude and longitudes, had zero in either latitude or longitude, or were identified as outliers. 
 We used the quantile method of identifying outliers, removing those records beyond 5 times the interquartile range of minimum distances to the next neighbour.
 Finally, we thinned the both the Fallow Deer and Rodent data so that no occurrence shared a raster cell with another occurrence.
+This process resulted in __ occurrence locations of Fallow Deer and ___ for rodents (__ *Myodes glareolus*; __ *Apodemus flavicollis*; __ *Apodemus sylvaticus*; __ *Sciurus carolinensis*; __ *Sciurus vulgaris*).
 
-We generated a number pseudo-absences data points for both target taxa equal to three times the number of true-occurrences available; we repeated this process ___ times allowing for multiple model fits.
+We generated a number pseudo-absences data points for both target taxa equal to three times the number of true-occurrences available; we repeated this process ___ times allowing for multiple model fits <!-- biomod2 has reccommendations regarding these numbers: https://biomodhub.github.io/biomod2/articles/vignette_pseudoAbsences.html-->.
+In the case of Fallow Deer we limited the area pseudo-absences could occur to areas within 6.2km of a known Fallow Deer occurrence.
+As Fallow Deer have not uniformly spread across the UK, we excluded areas where they have not as of yet had the opportunity to colonise.
+For rodents we limited the pseudo-absences to Great Britain (minus Shetland and other outlying islands groups such as St. Kilda).
 We weighted the pseudo-absences using a bias layer to mitigate the impacts of the sampling biases associated with the true-occurrence data.
 For our bias layer, we used the human footprint index <CITE> that combines a variety of human activities and land conversions into a single metric, and could serve as a proxy for the likelihood of observing our target species.
 
 We used the biomod2 package to manage species distribution modelling <CITE>.
-We fitted a variety of models: Artificial Neural Network, Boosted Regression Trees, Generalized Linear Model, Maximum Entropy, and Random Forest. <!-- and eXtreme Gradient Boosting Training. --> <!-- XGBOOST can't be run with cat vars -->
-We used block cross validation, balanced based on environmental covariates, to evaluate model performance <CITE>.
+We fitted a variety of models: Artificial Neural Network, Boosted Regression Trees, Generalized Linear Model, and Random Forest. 
+We intended to run Maximum Entropy and eXtreme Gradient Boosting Training, but the inclusion of categoric variables precluded their use.
+<!-- We used block cross validation, balanced based on environmental covariates, to evaluate model performance <CITE>. NO LONGER - SWAPPED TO STRATIFIED -->
+We used stratified cross validation to evaluate model performance, as we were not priorisitisng model transferability <CITE https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.12261>.
+We balanced stratification based on known occurrences both in x and y dimensions.
 We elected to use True Skill Statistic (TSS) as our primary metric of model performance <CITE>.
 Once all models had been complete, we compiled all models into an ensemble model ready for projection to our target landscapes.
-We included all models that obtained TSS scores of over 0.5, and weighted models proportionately to their TSS score.
-Once the ensemble model had been created, we used the highest TSS mean ensemble model to project the probability of occurrence to the Aberdeenshire and Wessex landscapes. <!-- check exactly the wording, might be reprojecting all but only using one -->
+We included all models that obtained TSS scores of over 0.25, and weighted models proportionately to their TSS score.
+Once the TSS weighted mean ensemble model had been created, we used it to project the probability of occurrence to the Aberdeenshire and Wessex landscapes. <!-- check exactly the wording, might be reprojecting all but only using one -->
 
 ## Translating Preferences into Connectivity
 
@@ -82,7 +89,7 @@ For we ignored the uncertainty surrounding the selection estimates, instead rely
 <!-- invert logit to standardise them and flip them to movement ease -->
 
 For the Fallow Deer and Rodents the underlying conductance layer was generated from the final ensemble species distribution model.
-In the case of the Fallow Deer we have sufficient data to parametrise the raod resistance based on the results of the Fallow Deer Poisson model; therefore, we alter the resistance of the cells that corresponded to the presence of a road in the same way as described for the Roe Deer.
+In the case of the Fallow Deer we have sufficient data to parametrise the road resistance based on the results of the Fallow Deer Poisson model; therefore, we alter the resistance of the cells that corresponded to the presence of a road in the same way as described for the Roe Deer.
 We did not have comparable road crossing data for the rodents, meaning that their conductance raster equalled one describing probability of occurrence. 
 
 ```{r conductancePlot, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Conductance map of Aberdeen landscape developed from the coefficients of the Poisson habitat selection model. Higher values indicate easier movement for Roe Deer. Axis are m in British National Grid coordinate system."}
@@ -137,12 +144,45 @@ The model was supplied with the known locations of deer as well as `r inputList$
 We formulated the model to predict whether a point was used or random based on the connectivity values, and we included a random effect for deer ID.
 The expectation was that the model coefficients would indicate that deer locations were positively associated with higher connectivity values.
 
-For the Fallow Deer and Rodents, we followed ___ and used the Omniscape algorithm to generate a map of landscape connectivity <CITE>.
+For the Fallow Deer and Rodents, we followed @prima_comprehensive_2024 and used Omniscape.jl (<!--@Landau2021-->; built on Circuitscape.jl <!--CITE MacRae, CITE --@Anantharaman2020>) to generate a map of landscape connectivity in both landscapes <CITE>.
+<!--- https://doi.org/10.1890/07-1861.1 chould be cited for the guidance it provided --->
 To aid with computation costs, we selected a block size of __ for the Fallow Deer, and __ for the Rodents.
+<!--- prima has point the as long as block is sub 1/10 of search it should be ok --->
 We also varied the search radius between the groups, as each has different movement/dispersal abilities.
-In both instances we based our search radius on previously recorded estimates of home range size, based heavily on the data provide by the home range database <CITE>.
+In both instances we based our search radius on previously recorded estimates of home range size, based heavily on the data provide by the home range database <!--https://doi.org/10.1111/geb.13625; https://doi.org/10.5061/dryad.d2547d85x-->.
 In both case we filtered the home range data to species/group and calculated a mean home range area.
 For the Fallow Deer their mean home range suggested a search radius of ___; whereas for Rodents a search radius of __ was chosen.
+For both groups we used the previously denoted patches as sources/nodes (all with the same strength).
+
+<!-- https://doi.org/10.1890/07-1861.1 -->
+
+<!-- @article{Landau2021, -->
+<!--   doi = {10.21105/joss.02829}, -->
+<!--   url = {https://doi.org/10.21105/joss.02829}, -->
+<!--   year = {2021}, -->
+<!--   publisher = {The Open Journal}, -->
+<!--   volume = {6}, -->
+<!--   number = {57}, -->
+<!--   pages = {2829}, -->
+<!--   author = {Vincent A. Landau and Viral B. Shah and Ranjan Anantharaman and Kimberly R. Hall}, -->
+<!--   title = {Omniscape.jl: Software to compute omnidirectional landscape connectivity}, -->
+<!--   journal = {Journal of Open Source Software} -->
+<!-- } -->
+
+<!-- @article{Anantharaman2020, -->
+<!--   doi = {10.21105/jcon.00058}, -->
+<!--   url = {https://doi.org/10.21105/jcon.00058}, -->
+<!--   year = {2020}, -->
+<!--   publisher = {The Open Journal}, -->
+<!--   volume = {1}, -->
+<!--   number = {1}, -->
+<!--   pages = {58}, -->
+<!--   author = {Ranjan Anantharaman and Kimberly Hall and Viral B. Shah and Alan Edelman}, -->
+<!--   title = {Circuitscape in Julia: High Performance Connectivity Modelling to Support Conservation Decisions}, -->
+<!--   journal = {Proceedings of the JuliaCon Conferences} -->
+<!-- } -->
+
+<!-- McRae, B. H., K. Popper, A. Jones, M. Schindel, S. Buttrick, K. R. Hall, R. S. Unnasch, and J. Platt. 2016. Conserving Nature’s Stage: Mapping Omnidirectional Connectivity for Resilient Terrestrial Landscapes in the Pacific Northwest. The Nature Conservancy, Portland, Oregon. -->
 
 <!-- ## Projecting to Wessex -->
 <!-- We elected to retain the Wessex Roe Deer data for model validation, as compared to Aberdeen the tracking was conducted for a shorter period with fewer individuals. -->
