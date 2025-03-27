@@ -166,7 +166,9 @@ plot_biomodEval_ensemble <- function(biomodEns, patchList){
 
   # useful ------------------------------------------------------------------
   # targets::tar_load("tar_patchList")
-  wessexStack <- read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")) %>%
+  envStack  <- read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"))
+
+  wessexStack <- envStack %>%
     crop(patchList$Wessex)
 
   wessexRanges <- as.data.frame(t(data.frame(

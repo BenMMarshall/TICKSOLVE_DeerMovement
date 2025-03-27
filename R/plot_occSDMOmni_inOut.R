@@ -148,7 +148,17 @@ plot_occSDMOmni_inOut_omniIN <- function(species,
                                          predPoisResist,
                                          ...){
 
-  sourceOmniTerra <- rast(here::here("data", "GIS data", "sourceOmniWessex.tif"))
+  if(str_detect(projName, "rodent")){
+    if(str_detect(projName, "wessex")){
+      sourceOmniTerraLoc <- here::here("data", "GIS data", "sourceOmniWessex.tif")
+    } else {
+      sourceOmniTerraLoc <- here::here("data", "GIS data", "sourceOmniAberdeen.tif")
+    }
+  } else {
+    sourceOmniTerraLoc <- here::here("data", "GIS data", "sourceOmniWessex.tif")
+  }
+
+  sourceOmniTerra <- rast(sourceOmniTerraLoc)
   projLayer <- rast(projLayer)
   predPoisResist <- rast(predPoisResist)
 
@@ -206,7 +216,9 @@ plot_occSDMOmni_inOut_omniIN <- function(species,
   # } else {
   #   plot_layout(projectedLayer_plot / sourceLayer_plot)
   # }
-  ggsave(filename = here("figures", paste0(species, "_omniscapeInputs_plot.png")),
+  ggsave(filename = here("figures", paste0(species, "_",
+                                           str_extract(projLayer, "wessex|aberdeen"),
+                                           "_omniscapeInputs_plot.png")),
          width = 160, height = 300, units = "mm")
 
   return(list(
@@ -226,7 +238,11 @@ plot_occSDMOmni_inOut_omniOUT <- function(species,
   # omniLayers <- tar_omniLayers_fallow
   # selectedPatchList <- tar_selectedPatchList
 
-  focalPatches <- selectedPatchList$Wessex
+  if(str_detect(omniLayers, "wessex")){
+    focalPatches <- selectedPatchList$Wessex
+  } else {
+    focalPatches <- selectedPatchList$Aberdeen
+  }
   omniLayers <- rast(omniLayers)
 
   paletteList <- load_deer_palette()
@@ -278,7 +294,9 @@ plot_occSDMOmni_inOut_omniOUT <- function(species,
     ggplotThemeCombo
 
   plot_layout(cumCurr_plot / potCurr_plot / normCurr_plot)
-  ggsave(filename = here("figures", paste0(species, "_omniscapeOutputs_plot.png")),
+  ggsave(filename = here("figures", paste0(species, "_",
+                                           str_extract(omniLayers, "wessex|aberdeen"),
+                                           "_omniscapeOutputs_plot.png")),
          width = 160, height = 300, units = "mm")
 
   normCurrPatches_plot <- ggplot() +
@@ -293,7 +311,9 @@ plot_occSDMOmni_inOut_omniOUT <- function(species,
     coord_sf(expand = 0, datum = st_crs(27700)) +
     ggplotThemeCombo
 
-  ggsave(filename = here("figures", paste0(species, "_omniscapeNormCurrPatch_plot.png")),
+  ggsave(filename = here("figures", paste0(species, "_",
+                                           str_extract(omniLayers, "wessex|aberdeen"),
+                                           "_omniscapeNormCurrPatch_plot.png")),
          width = 250, height = 250, units = "mm")
 
   return(list(

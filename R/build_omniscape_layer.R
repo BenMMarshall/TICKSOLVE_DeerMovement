@@ -17,7 +17,7 @@ build_omniscape_layer <- function(predRasterLoc, patchList, #longestAxisSummary,
   #                                   max(terra::values(resistanceTerra), na.rm = TRUE),
   #                                   terra::values(resistanceTerra))
 
-  focalPatches <- patchList$Wessex %>%
+  focalPatches <- patchList %>%
     mutate(area_km2 = as.numeric(units::set_units(sf::st_area(.), "km2"))) %>%
     filter(area_km2 > 0.005)
 
@@ -30,11 +30,19 @@ build_omniscape_layer <- function(predRasterLoc, patchList, #longestAxisSummary,
     mutate(Ptch_ID = ifelse(!is.na(Ptch_ID), 1, 0))
 
   if(str_detect(projName, "rodent")){
-    resistanceOmniTerraLoc <- here::here("data", "GIS data", "resistanceOmniWessex_rodent.tif")
+
+    if(str_detect(projName, "wessex")){
+      resistanceOmniTerraLoc <- here::here("data", "GIS data", "resistanceOmniWessex_rodent.tif")
+      sourceOmniTerraLoc <- here::here("data", "GIS data", "sourceOmniWessex.tif")
+    } else {
+      resistanceOmniTerraLoc <- here::here("data", "GIS data", "resistanceOmniAberdeen_rodent.tif")
+      sourceOmniTerraLoc <- here::here("data", "GIS data", "sourceOmniAberdeen.tif")
+    }
+
   } else {
     resistanceOmniTerraLoc <- here::here("data", "GIS data", "resistanceOmniWessex_fallow.tif")
+    sourceOmniTerraLoc <- here::here("data", "GIS data", "sourceOmniWessex.tif")
   }
-  sourceOmniTerraLoc <- here::here("data", "GIS data", "sourceOmniWessex.tif")
 
   # resistanceTerra <- raster::aggregate(resistanceTerra, fact = 10, fun = max)
   # binaryRaster <- raster::aggregate(binaryRaster, fact = 10, fun = max)

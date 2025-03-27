@@ -33,7 +33,7 @@ build_predResistanceRodent_layer <- function(projLayer,
 
   names(projTerra) <- "resistance"
 
-  predRasterLoc <- here("data", "GIS data", "predictionTerraRodent.tif")
+  predRasterLoc <- here("data", "GIS data", paste0("predictionTerraRodent_", str_extract(projLayer, "wessex|aberdeen"), ".tif"))
 
   terra::writeRaster(projTerra,
                      filename = predRasterLoc,

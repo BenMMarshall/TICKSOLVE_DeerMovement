@@ -539,7 +539,7 @@ coreSDMList <- list(
   tar_target(
     name = tar_biomodForecast_fallow,
     command = BIOMOD_EnsembleForecasting(bm.em = tar_biomodEns_fallow,
-                                         proj.name = "CurrentEM",
+                                         proj.name = "CurrentEM_fallow",
                                          new.env = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
                                                                      tar_sdm_layers) %>%
                                            crop(tar_patchList$Wessex),
@@ -617,9 +617,9 @@ coreSDMList <- list(
                                       nb.cpu = 6)
   ),
   tar_target(
-    name = tar_biomodForecast_rodent,
+    name = tar_biomodForecast_rodent_wessex,
     command = BIOMOD_EnsembleForecasting(bm.em = tar_biomodEns_rodent,
-                                         proj.name = "CurrentEM",
+                                         proj.name = "CurrentEM_rodent_wessex",
                                          new.env = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
                                                                      tar_sdm_layers) %>%
                                            crop(tar_patchList$Wessex),
@@ -631,8 +631,26 @@ coreSDMList <- list(
                                          nb.cpu = 6)
   ),
   tar_target(
-    name = tar_projLayer_rodent,
-    command = save_proj_layer(tar_biomodForecast_rodent)
+    name = tar_projLayer_rodent_wessex,
+    command = save_proj_layer(tar_biomodForecast_rodent_wessex)
+  ),
+  tar_target(
+    name = tar_biomodForecast_rodent_aberdeen,
+    command = BIOMOD_EnsembleForecasting(bm.em = tar_biomodEns_rodent,
+                                         proj.name = "CurrentEM_rodent_aberdeen",
+                                         new.env = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
+                                                                     tar_sdm_layers) %>%
+                                           crop(tar_patchList$Aberdeen),
+                                         models.chosen = get_built_models(tar_biomodEns_rodent)[
+                                           stringr::str_detect(get_built_models(tar_biomodEns_rodent), "EMwmeanByTSS")],
+                                         metric.binary = "all",
+                                         metric.filter = "all",
+                                         output.format = ".tif",
+                                         nb.cpu = 6)
+  ),
+  tar_target(
+    name = tar_projLayer_rodent_aberdeen,
+    command = save_proj_layer(tar_biomodForecast_rodent_aberdeen)
   ),
   # fallow Poisson ----
   tar_target(
@@ -658,7 +676,7 @@ coreSDMList <- list(
   # fallow omniscape ----
   tar_target(
     name = tar_omniLayers_fallow,
-    command = build_omniscape_layer(tar_predPoisResist_fallow, tar_patchList, #tar_longestFallow,
+    command = build_omniscape_layer(tar_predPoisResist_fallow, tar_patchList$Wessex, #tar_longestFallow,
                                     blockSize = bs_fallow, searchRadius = sr_fallow, reRun = FALSE,
                                     projName = "omniscape_output_fallow")
   ),
@@ -696,15 +714,26 @@ coreSDMList <- list(
   ),
   # rodent omniscape ----
   tar_target(
-    name = tar_predPoisResist_rodent,
-    command = build_predResistanceRodent_layer(tar_projLayer_rodent,
+    name = tar_predPoisResist_rodent_wessex,
+    command = build_predResistanceRodent_layer(tar_projLayer_rodent_wessex,
                                                prelimAggFact = aggFact_SDM)
   ),
   tar_target(
-    name = tar_omniLayers_rodent,
-    command = build_omniscape_layer(tar_predPoisResist_rodent, tar_patchList, #tar_longestrodent,
+    name = tar_omniLayers_rodent_wessex,
+    command = build_omniscape_layer(tar_predPoisResist_rodent_wessex, tar_patchList$Wessex, #tar_longestrodent,
                                     blockSize = bs_rodent, searchRadius = sr_rodent, reRun = TRUE,
-                                    projName = "omniscape_output_rodent")
+                                    projName = "omniscape_output_rodent_wessex")
+  ),
+  tar_target(
+    name = tar_predPoisResist_rodent_aberdeen,
+    command = build_predResistanceRodent_layer(tar_projLayer_rodent_aberdeen,
+                                               prelimAggFact = aggFact_SDM)
+  ),
+  tar_target(
+    name = tar_omniLayers_rodent_aberdeen,
+    command = build_omniscape_layer(tar_predPoisResist_rodent_aberdeen, tar_patchList$Aberdeen, #tar_longestrodent,
+                                    blockSize = bs_rodent, searchRadius = sr_rodent, reRun = TRUE,
+                                    projName = "omniscape_output_rodent_aberdeen")
   ),
   # rodent plots ----
   tar_target(
@@ -727,15 +756,27 @@ coreSDMList <- list(
                                           sdmLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers")))
   ),
   tar_target(
-    name = tar_omniIN_plots_rodent,
+    name = tar_omniIN_plots_rodent_wessex,
     command = plot_occSDMOmni_inOut_omniIN(species = "rodent",
-                                           tar_projLayer_rodent,
-                                           tar_predPoisResist_rodent)
+                                           tar_projLayer_rodent_wessex,
+                                           tar_predPoisResist_rodent_wessex)
   ),
   tar_target(
-    name = tar_omniOUT_plots_rodent,
+    name = tar_omniOUT_plots_rodent_wessex,
     command = plot_occSDMOmni_inOut_omniOUT(species = "rodent",
-                                            tar_omniLayers_rodent,
+                                            tar_omniLayers_rodent_wessex,
+                                            tar_selectedPatchList)
+  ),
+  tar_target(
+    name = tar_omniIN_plots_rodent_aberdeen,
+    command = plot_occSDMOmni_inOut_omniIN(species = "rodent",
+                                           tar_projLayer_rodent_aberdeen,
+                                           tar_predPoisResist_rodent_aberdeen)
+  ),
+  tar_target(
+    name = tar_omniOUT_plots_rodent_aberdeen,
+    command = plot_occSDMOmni_inOut_omniOUT(species = "rodent",
+                                            tar_omniLayers_rodent_aberdeen,
                                             tar_selectedPatchList)
   )
 )

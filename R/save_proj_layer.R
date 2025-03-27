@@ -24,7 +24,7 @@ save_proj_layer <- function(forecast){
   values(projLayer) <- values(projLayer)/1000
 
   projLayerLoc <- here("data", "GIS data",
-                      paste0("projTerra_", forecast@sp.name, ".tif"))
+                      paste0("projTerra_", sub("CurrentEM_", "", forecast@proj.name), ".tif"))
 
   terra::writeRaster(projLayer,
                      filename = projLayerLoc,
