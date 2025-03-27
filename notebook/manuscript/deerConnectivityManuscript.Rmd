@@ -39,6 +39,8 @@ library(stringr)
 
 inputList <- readRDS(file = here::here("data", "inputList.rds"))
 
+longestAxisSummary <- read.csv(file = here::here("tables", "longestAxisSummary.csv"))
+longestAxisText <- mean(as.numeric(longestAxisSummary$longestAxisRange_m))/2
 
 ```
 
@@ -97,7 +99,7 @@ knitr::include_graphics(here::here("figures", "resistanceConductanceMap_Pois_Abe
 ```
 
 <!-- Random Shortest Paths -->
-For Roe Deer, we used random shortest paths, that consists of generating random walks between locations, to simulate potential connectivity across the landscapes based on the above desribed conductance/resistance raster.
+For Roe Deer, we used random shortest paths, that consists of generating random walks between locations, to simulate potential connectivity across the landscapes based on the above described conductance/resistance raster.
 This method was used to show the connectivity of areas used by reindeer, and offers a mechanism for calibrating the connectivity maps to both the habitat selection and movement path characteristics [@panzacchi_predicting_2016].
 
 We used habitat patches as the sources of our random locations.
