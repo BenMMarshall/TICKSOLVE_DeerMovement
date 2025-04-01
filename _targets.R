@@ -352,11 +352,11 @@ connectTargetList <- list(
     tar_funcStruc_plot,
     plot_funcStruc_comparison(tar_patch_summaryPois)
   ),
-  tar_target(
-    tar_patchPois_summaryPlot,
-    plot_patch_summary(tar_patch_summaryPois, tar_msePois_df, tar_connectPois_list, tar_patchList, tar_selectedPatchList,
-                       REGION = "Aberdeenshire")
-  ),
+  # tar_target(
+  #   tar_patchPois_summaryPlot,
+  #   plot_patch_summary(tar_patch_summaryPois, tar_msePois_df, tar_connectPois_list, tar_patchList, tar_selectedPatchList,
+  #                      REGION = "Aberdeenshire")
+  # ),
   tar_target(
     name = tar_predPoisResist_locationWessex,
     command = build_predResistance_layer(tar_ssf_data, tar_pois_model,
@@ -424,7 +424,7 @@ connectTargetList <- list(
     command = render_rmd(fileIN = here::here("notebook", "manuscript", "deerConnectivityManuscript.Rmd"),
                          fileOUT = here::here("notebook", "manuscript", "deerConnectivityManuscript.pdf"),
                          tar_location_plot,
-                         tar_patchPois_summaryPlot,
+                         # tar_patchPois_summaryPlot,
                          tar_connectivityValue_plots,
                          tar_package_text,
                          tar_poisResist_map,
@@ -508,6 +508,7 @@ coreSDMList <- list(
                               CV.strategy = "user.defined",
                               CV.user.table = bm_CrossValidation(bm.format = tar_biomodData_fallow,
                                                                  strategy = "strat",
+                                                                 k = 4,
                                                                  balance = "presences",
                                                                  strat = "both"),
                               # CV.strategy = "random",
@@ -588,6 +589,7 @@ coreSDMList <- list(
                               CV.strategy = "user.defined",
                               CV.user.table = bm_CrossValidation(bm.format = tar_biomodData_rodent,
                                                                  strategy = "strat",
+                                                                 k = 4,
                                                                  balance = "presences",
                                                                  strat = "both"),
                               # CV.strategy = "random",

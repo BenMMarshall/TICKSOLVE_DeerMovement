@@ -53,7 +53,8 @@ plot_patch_summary <- function(bufferSummaries, MSEdf, connectRasterLocations, p
 
   focalPatches <- focalPatches %>%
     mutate(selected = factor(ifelse(Ptch_ID %in% SELECTEDPATCHES, "Selected", "Not selected"),
-                             levels = c("Not selected", "Selected")))
+                             levels = c("Not selected", "Selected"))) %>%
+    mutate(area_km_sq = units::set_units(st_area(focalPatches), "km2"))
 
   (patchSummaryPlot <- bufferSummaries %>%
     filter(!is.na(connectivity)) %>%
@@ -92,12 +93,12 @@ plot_patch_summary <- function(bufferSummaries, MSEdf, connectRasterLocations, p
     ggplot() +
     geom_vline(xintercept = 0, alpha = 0.2) +
     geom_hline(yintercept = 0, alpha = 0.2) +
-    geom_point(aes(x = area_ha, y = connectivity, colour = selected), alpha = 0.85, size = 0.75) +
+    geom_point(aes(x = area_km_sq, y = connectivity, colour = selected), alpha = 0.85, size = 0.75) +
     scale_x_log10() +
     facet_grid(cols = vars(buffer), rows = vars(summaryMethod)) +
     scale_colour_manual(values = unname(c("#808080",
                                           paletteList$highSigLowSigNoSig[2]))) +
-    labs(y = "Connectivity", x = "Area (ha)", colour = "Selected patches") +
+    labs(y = "Connectivity", x = "Area (km2)", colour = "Selected patches") +
     coord_cartesian(clip = "off") +
     theme_bw() +
     theme(
@@ -156,8 +157,8 @@ plot_patch_summary <- function(bufferSummaries, MSEdf, connectRasterLocations, p
     ggplot() +
     geom_vline(xintercept = 0, alpha = 0.2) +
     geom_hline(yintercept = 0, alpha = 0.2) +
-    geom_point(aes(x = area_ha, y = connectivity, colour = selected), alpha = 0.85, size = 2) +
-    geom_text(aes(x = area_ha, y = connectivity, colour = selected, label = Ptch_ID), alpha = 1,
+    geom_point(aes(x = area_km_sq, y = connectivity, colour = selected), alpha = 0.85, size = 2) +
+    geom_text(aes(x = area_km_sq, y = connectivity, colour = selected, label = Ptch_ID), alpha = 1,
               hjust = 0.5, vjust = 0, fontface = 2) +
     scale_x_log10() +
     # facet_grid(cols = vars(buffer)) +

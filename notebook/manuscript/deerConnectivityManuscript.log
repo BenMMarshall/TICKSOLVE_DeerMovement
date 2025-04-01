@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.17)  27 MAR 2025 15:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.17)  31 MAR 2025 10:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**deerConnectivityManuscript.tex
-(./deerConnectivityManuscript.tex
+**F:/Projects/TICKSOLVE_DeerMovement/notebook/manuscript/deerConnectivityManuscript.tex
+(f:/Projects/TICKSOLVE_DeerMovement/notebook/manuscript/deerConnectivityManuscript.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
@@ -669,15 +669,15 @@ Package rerunfilecheck Info: File `deerConnectivityManuscript.out' has not chang
 (rerunfilecheck)             Checksum: B5D2E0A0D0D7A1C8B69404ED4CADA34C;1841.
  ) 
 Here is how much of TeX's memory you used:
- 14046 strings out of 475172
- 231224 string characters out of 5764330
- 655393 words of memory out of 5000000
+ 14048 strings out of 475172
+ 231442 string characters out of 5764330
+ 655399 words of memory out of 5000000
  36738 multiletter control sequences out of 15000+600000
  625088 words of font info for 73 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 90i,15n,131p,3387b,551s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,15n,131p,3442b,551s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <c:/Users/benja/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit1000.600pk> <c:/Users/benja/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Italic.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on deerConnectivityManuscript.pdf (11 pages, 3597526 bytes).
+Output written on deerConnectivityManuscript.pdf (11 pages, 3597541 bytes).
 PDF statistics:
  436 PDF objects out of 1000 (max. 8388607)
  346 compressed objects within 4 object streams

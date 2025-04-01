@@ -148,8 +148,13 @@ plot_occSDMOmni_inOut_omniIN <- function(species,
                                          predPoisResist,
                                          ...){
 
-  if(str_detect(projName, "rodent")){
-    if(str_detect(projName, "wessex")){
+  # targets::tar_load("tar_projLayer_fallow")
+  # projLayer <- tar_projLayer_fallow
+  # targets::tar_load("tar_predPoisResist_fallow")
+  # predPoisResist <- tar_predPoisResist_fallow
+
+  if(str_detect(projLayer, "rodent")){
+    if(str_detect(projLayer, "wessex")){
       sourceOmniTerraLoc <- here::here("data", "GIS data", "sourceOmniWessex.tif")
     } else {
       sourceOmniTerraLoc <- here::here("data", "GIS data", "sourceOmniAberdeen.tif")
@@ -159,7 +164,7 @@ plot_occSDMOmni_inOut_omniIN <- function(species,
   }
 
   sourceOmniTerra <- rast(sourceOmniTerraLoc)
-  projLayer <- rast(projLayer)
+  projLayerTerra <- rast(projLayer)
   predPoisResist <- rast(predPoisResist)
 
   paletteList <- load_deer_palette()
@@ -182,7 +187,7 @@ plot_occSDMOmni_inOut_omniIN <- function(species,
   # Omni inputs -------------------------------------------------------------
 
   projectedLayer_plot <- ggplot() +
-    geom_spatraster(data = projLayer) +
+    geom_spatraster(data = projLayerTerra) +
     facet_wrap(vars(lyr)) +
     labs(title = "Projected ensemble model preference", fill = "Probability of occurrence")  +
     scale_fill_gradient(high = scales::muted(paletteList$highSigLowSigNoSig[1]),
@@ -233,17 +238,18 @@ plot_occSDMOmni_inOut_omniOUT <- function(species,
                                           omniLayers,
                                           selectedPatchList,
                                           ...){
+  # species <- "rodent"
   # targets::tar_load("tar_selectedPatchList")
-  # targets::tar_load("tar_omniLayers_fallow")
-  # omniLayers <- tar_omniLayers_fallow
+  # targets::tar_load("tar_omniLayers_rodent_aberdeen")
+  # omniLayers <- tar_omniLayers_rodent_aberdeen
   # selectedPatchList <- tar_selectedPatchList
 
-  if(str_detect(omniLayers, "wessex")){
-    focalPatches <- selectedPatchList$Wessex
-  } else {
+  if(str_detect(omniLayers[1], "aberdeen")){
     focalPatches <- selectedPatchList$Aberdeen
+  } else {
+    focalPatches <- selectedPatchList$Wessex
   }
-  omniLayers <- rast(omniLayers)
+  omniLayersTerra <- rast(omniLayers)
 
   paletteList <- load_deer_palette()
 
@@ -265,7 +271,7 @@ plot_occSDMOmni_inOut_omniOUT <- function(species,
   # Omni outputs ------------------------------------------------------------
 
   cumCurr_plot <- ggplot() +
-    geom_spatraster(data = omniLayers, aes(fill = cum_currmap)) +
+    geom_spatraster(data = omniLayersTerra, aes(fill = cum_currmap)) +
     scale_fill_gradient(high = scales::muted(paletteList$highSigLowSigNoSig[1]),
                         low = "#ffffff",
                         na.value = paletteList$baseGrey) +
@@ -274,7 +280,7 @@ plot_occSDMOmni_inOut_omniOUT <- function(species,
     ggplotThemeCombo
 
   potCurr_plot <- ggplot() +
-    geom_spatraster(data = omniLayers, aes(fill = flow_potential)) +
+    geom_spatraster(data = omniLayersTerra, aes(fill = flow_potential)) +
     scale_fill_gradient(high = scales::muted(paletteList$highSigLowSigNoSig[1]),
                         low = "#ffffff",
                         na.value = paletteList$baseGrey) +
@@ -283,7 +289,7 @@ plot_occSDMOmni_inOut_omniOUT <- function(species,
     ggplotThemeCombo
 
   normCurr_plot <- ggplot() +
-    geom_spatraster(data = omniLayers, aes(fill = normalized_cum_currmap)) +
+    geom_spatraster(data = omniLayersTerra, aes(fill = normalized_cum_currmap)) +
     scale_fill_gradient2(high = scales::muted(paletteList$highSigLowSigNoSig[1]),
                          mid = "#ffffff",
                          low = "#202020",
@@ -295,12 +301,12 @@ plot_occSDMOmni_inOut_omniOUT <- function(species,
 
   plot_layout(cumCurr_plot / potCurr_plot / normCurr_plot)
   ggsave(filename = here("figures", paste0(species, "_",
-                                           str_extract(omniLayers, "wessex|aberdeen"),
+                                           str_extract(omniLayers[1], "wessex|aberdeen"),
                                            "_omniscapeOutputs_plot.png")),
          width = 160, height = 300, units = "mm")
 
   normCurrPatches_plot <- ggplot() +
-    geom_spatraster(data = omniLayers, aes(fill = normalized_cum_currmap)) +
+    geom_spatraster(data = omniLayersTerra, aes(fill = normalized_cum_currmap)) +
     geom_sf(data = focalPatches, fill = NA, colour = "black") +
     scale_fill_gradient2(high = scales::muted(paletteList$highSigLowSigNoSig[1]),
                          mid = "#ffffff",
@@ -312,7 +318,7 @@ plot_occSDMOmni_inOut_omniOUT <- function(species,
     ggplotThemeCombo
 
   ggsave(filename = here("figures", paste0(species, "_",
-                                           str_extract(omniLayers, "wessex|aberdeen"),
+                                           str_extract(omniLayers[1], "wessex|aberdeen"),
                                            "_omniscapeNormCurrPatch_plot.png")),
          width = 250, height = 250, units = "mm")
 
