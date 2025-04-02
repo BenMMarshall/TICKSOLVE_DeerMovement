@@ -56,7 +56,7 @@
 \begin{document}
 \pagestyle{fancy}
 
-\title{Tick Deer Connectivity Methods}
+\title{Tick Deer Rodent Connectivity Methods}
 \author[1]{---*}
 \author[2]{---**}
 \author[3]{}
@@ -97,12 +97,12 @@ deer, rodent, connectivity
 \subsection{Estimating Preference and Probability of Occurrence}\label{estimating-preference-and-probability-of-occurrence}
 
 For the Roe Deer we made use of previously conducted analysis on their movements that aimed to determine their preference for various land use types, as well as how their movements are altered when within them .
-We took the coefficients of the population level poisson habitat preference model as a basis to estimate landscape level Roe Deer functional connectivity.
+We took the coefficients of the population level Poisson habitat preference model as a basis to estimate landscape level Roe Deer functional connectivity.
 
 For Fallow Deer and Rodents, we lacked sufficient movement data to undertake the a similar procedure.
-Instead we followed the workflow outlined by Prima et al. (\citeproc{ref-prima_comprehensive_2024}{2024}), using species distribution modelling to generate reasonable estimations of landscape resistance and then applying a circuit-theory approach \textless CITE - check wording\textgreater{} to determine how interconnected selected woodland patches were.
+Instead we followed the workflow outlined by Prima et al. (\citeproc{ref-prima_comprehensive_2024}{2024}), using species distribution modelling to generate reasonable estimations of landscape resistance and then applying a circuit-theory approach to determine how interconnected selected woodland patches were (\citeproc{ref-mcrae_using_2008}{McRae et al., 2008}; \citeproc{ref-mcrae_conserving_2016}{McRae et al., 2016}).
 
-We collated occurrence data from GBIF and NBN Atlas for the Fallow Deer and Rodents, using searches from ``\emph{Dama dama}'', ``\emph{Myodes glareolus}'', ``\emph{Apodemus flavicollis}'', ``\emph{Apodemus sylvaticus}'', ``\emph{Sciurus carolinensis}'', and ``\emph{Sciurus vulgaris}''.
+We collated occurrence data from GBIF and NBN Atlas (\citeproc{ref-gbif_gbiforg_2025}{GBIF, 2025}; \citeproc{ref-nbn_trust_national_2025}{Trust, 2025}) for the Fallow Deer and Rodents, using searches from ``\emph{Dama dama}'', ``\emph{Myodes glareolus}'', ``\emph{Apodemus flavicollis}'', ``\emph{Apodemus sylvaticus}'', ``\emph{Sciurus carolinensis}'', and ``\emph{Sciurus vulgaris}'' (\citeproc{ref-gbif_fallow_2025}{GBIF.Org User, 2025a},\citeproc{ref-gbif_rodent_2025}{b}).
 We downloaded all records within the UK, for all species.
 We filtered the records as to only include those made via human observations, were recorded to sub-25m accuracy, and had verified species identities.
 Once filtered we used CoordinateCleaner to eliminate records that likely contained location errors on a species-by-species basis.
@@ -111,19 +111,19 @@ We used the quantile method of identifying outliers, removing those records beyo
 Finally, we thinned the both the Fallow Deer and Rodent data so that no occurrence shared a raster cell with another occurrence.
 This process resulted in \_\_ occurrence locations of Fallow Deer and \_\_\_ for rodents (\_\_ \emph{Myodes glareolus}; \_\_ \emph{Apodemus flavicollis}; \_\_ \emph{Apodemus sylvaticus}; \_\_ \emph{Sciurus carolinensis}; \_\_ \emph{Sciurus vulgaris}).
 
-We generated a number pseudo-absences data points for both target taxa equal to three times the number of true-occurrences available; we repeated this process \_\_\_ times allowing for multiple model fits .
-In the case of Fallow Deer we limited the area pseudo-absences could occur to areas within 6.2km of a known Fallow Deer occurrence.
-As Fallow Deer have not uniformly spread across the UK, we excluded areas where they have not as of yet had the opportunity to colonise.
+We generated a number pseudo-absences data points for both target taxa equal to three times the number of true-occurrences available; we repeated this process 10 times allowing for multiple model fits .
+In the case of Fallow Deer, we limited the area pseudo-absences generated within to 6.2km of a known Fallow Deer occurrence.
+As Fallow Deer have not uniformly spread across the UK, this limit excluded areas where they have not, as of yet, had the opportunity to colonise.
 For rodents we limited the pseudo-absences to Great Britain (minus Shetland and other outlying islands groups such as St.~Kilda).
 We weighted the pseudo-absences using a bias layer to mitigate the impacts of the sampling biases associated with the true-occurrence data.
-For our bias layer, we used the human footprint index that combines a variety of human activities and land conversions into a single metric, and could serve as a proxy for the likelihood of observing our target species.
+For our bias layer, we used the human footprint index (\citeproc{ref-mu_annual_2021}{Mu et al., 2021}, \citeproc{ref-mu_global_2022}{2022}) that combines a variety of human activities and land conversions into a single metric, and could serve as a proxy for the likelihood of observing our target species.
 
 We used the biomod2 package to manage species distribution modelling .
 We fitted a variety of models: Artificial Neural Network, Boosted Regression Trees, Generalized Linear Model, and Random Forest.
 We intended to run Maximum Entropy and eXtreme Gradient Boosting Training, but the inclusion of categoric variables precluded their use.
-We used stratified cross validation to evaluate model performance, as we were not priorisitisng model transferability \textless CITE \url{https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.12261}\textgreater.
+We used stratified cross validation to evaluate model performance, as we were not priorisitisng model transferability (\citeproc{ref-Muscarella2014}{Muscarella et al., 2014}).
 We balanced stratification based on known occurrences both in x and y dimensions.
-We elected to use True Skill Statistic (TSS) as our primary metric of model performance .
+We elected to use True Skill Statistic (TSS) as our primary metric of model performance (\citeproc{ref-allouche_assessing_2006}{Allouche, Tsoar \& Kadmon, 2006}; \citeproc{ref-shabani_assessing_2018}{Shabani, Kumar \& Ahmadi, 2018}).
 Once all models had been complete, we compiled all models into an ensemble model ready for projection to our target landscapes.
 We included all models that obtained TSS scores of over 0.25, and weighted models proportionately to their TSS score.
 Once the TSS weighted mean ensemble model had been created, we used it to project the probability of occurrence to the Aberdeenshire and Wessex landscapes.
@@ -138,7 +138,9 @@ We replaced any areas with 0 conductance with 1e-12 to avoid any dead-ends or an
 For we ignored the uncertainty surrounding the selection estimates, instead relying on just the point estimates for the resistance mapping.
 
 For the Fallow Deer and Rodents the underlying conductance layer was generated from the final ensemble species distribution model.
-In the case of the Fallow Deer we have sufficient data to parametrise the road resistance based on the results of the Fallow Deer Poisson model; therefore, we alter the resistance of the cells that corresponded to the presence of a road in the same way as described for the Roe Deer.
+In the case of the Fallow Deer we have sufficient data to parametrise the road resistance based on the results of a Fallow Deer Poisson model.
+This modelling process mirrored the procedure undertaken for Roe Deer except only examined hte likelihood of crossing a road.
+We altered the resistance of the cells that corresponded to the presence of a road in the same way as described for the Roe Deer, using values draw from the Poisson model.
 We did not have comparable road crossing data for the rodents, meaning that their conductance raster equalled one describing probability of occurrence.
 
 \begin{figure}[h]
@@ -185,12 +187,13 @@ The model was supplied with the known locations of deer as well as 10 randomly g
 We formulated the model to predict whether a point was used or random based on the connectivity values, and we included a random effect for deer ID.
 The expectation was that the model coefficients would indicate that deer locations were positively associated with higher connectivity values.
 
-For the Fallow Deer and Rodents, we followed Prima et al. (\citeproc{ref-prima_comprehensive_2024}{2024}) and used Omniscape.jl (; built on Circuitscape.jl
-To aid with computation costs, we selected a block size of \_\_ for the Fallow Deer, and \_\_ for the Rodents.
+For the Fallow Deer and Rodents, we followed Prima et al. (\citeproc{ref-prima_comprehensive_2024}{2024}) and used Omniscape.jl (\citeproc{ref-landau_omniscapejl_2021}{Landau et al., 2021}), built on Circuitscape.jl (\citeproc{ref-mcrae_conserving_2016}{McRae et al., 2016}; \citeproc{ref-anantharaman_circuitscape_2020}{Anantharaman et al., 2020}; \citeproc{ref-hall_circuitscape_2021}{Hall et al., 2021}), to generate a map of landscape connectivity in both landscapes (\citeproc{ref-mcrae_using_2008}{McRae et al., 2008}).
+To aid with computation costs, we selected a block size of 31 for the Fallow Deer, and 15 for the Rodents.
+We ensured that the block size was less than one-tenth of the search radius to minimise grid artifacting (\citeproc{ref-phillips_comparison_2021}{Phillips et al., 2021}; \citeproc{ref-prima_comprehensive_2024}{Prima et al., 2024}).
 We also varied the search radius between the groups, as each has different movement/dispersal abilities.
-In both instances we based our search radius on previously recorded estimates of home range size, based heavily on the data provide by the home range database .
+In both instances we based our search radius on previously recorded estimates of home range size, based heavily on the data provide by the home range database (\citeproc{ref-broekman_homerange_2022}{Broekman et al., 2022}; \citeproc{ref-broekman_homerange_2023}{Broekman et al., 2023}).
 In both case we filtered the home range data to species/group and calculated a mean home range area.
-For the Fallow Deer their mean home range suggested a search radius of \_\textbf{; whereas for Rodents a search radius of } was chosen.
+For the Fallow Deer their mean home range suggested a search radius of 1500; whereas for Rodents a search radius of 150 was chosen.
 For both groups we used the previously denoted patches as sources/nodes (all with the same strength).
 
 \clearpage
@@ -205,7 +208,25 @@ For both groups we used the previously denoted patches as sources/nodes (all wit
 \includegraphics[width=1\linewidth]{../../figures/patchConnectivity_Pois_Aberdeenshire} \caption{The resulting connectivity map for the Aberdeen landscape displayed on a cell by cell level and summarised by patch. Selected patches are highlighted in orange. Lower panel shows how the selected (tick sampled) patches relate to the overall distribution of patch connectivity values. N.b. connectivity scale is square-rooted. Axis are m in British National Grid coordinate system.}\label{fig:poisConnect}
 \end{figure}
 
-\subsection{Validation}\label{validation}
+(Fig. \ref{fig:fallowWessexConnect})
+
+\begin{figure}[h]
+\includegraphics[width=0.75\linewidth]{../../figures/fallow_NA_omniscapeOutputs_plot} \caption{Fallow deer, Wessex. Values > 1 are channelised flow. Values ~ 1 are diffuse flow matching general flow potential. Values < 1 are impeded flow}\label{fig:fallowWessexConnect}
+\end{figure}
+
+(Fig. \ref{fig:rodentWessexConnect})
+
+\begin{figure}[h]
+\includegraphics[width=0.75\linewidth]{../../figures/rodent_wessex_omniscapeOutputs_plot} \caption{rodent, Wessex}\label{fig:rodentWessexConnect}
+\end{figure}
+
+(Fig. \ref{fig:rodentAberdeenConnect})
+
+\begin{figure}[h]
+\includegraphics[width=0.75\linewidth]{../../figures/rodent_aberdeen_omniscapeOutputs_plot} \caption{rodent, Aberdeen}\label{fig:rodentAberdeenConnect}
+\end{figure}
+
+\subsection{Roe Deer Connectivity Validation}\label{roe-deer-connectivity-validation}
 
 (Fig. \ref{fig:densityOfConnectivityAberdeen})
 (Fig. \ref{fig:densityOfConnectivityWessex})
@@ -237,6 +258,38 @@ For all analysis we used R (v.4.4.2) (\citeproc{ref-base}{R Core Team, 2024}), a
 
 \section{Supplementary Material}\label{supplementary-material}
 
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{../../figures/fallow_occurrenceData_plot} \caption{fallow deer, occurrence data}\label{fig:fallowOccurence}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{../../figures/rodent_occurrenceData_plot} \caption{rodent, occurrence data}\label{fig:rodentOccurence}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{../../figures/fallow_responseDistanceEnsemble} \caption{fallow, ensemble response, green highlight values that exist in Wessex environment}\label{fig:fallowEnsResponseDistance}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{../../figures/rodent_responseDistanceEnsemble} \caption{rodent, ensemble response, green highlight values that exist in Wessex environment}\label{fig:rodentEnsResponseDistance}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{../../figures/fallow_responseBinaryEnsemble} \caption{fallow, ensemble binary responses}\label{fig:fallowEnsResponseBinary}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{../../figures/rodent_responseBinaryEnsemble} \caption{rodent, ensemble binary responses}\label{fig:rodentEnsResponseBinary}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{../../figures/fallow_varImportanceEnsemble} \caption{fallow, ensemble var importance}\label{fig:fallowEnsVarImp}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=1\linewidth]{../../figures/rodent_varImportanceEnsemble} \caption{rodent, ensemble var importance}\label{fig:rodentEnsVarImp}
+\end{figure}
+
 \clearpage
 
 \section*{References}\label{references}
@@ -253,6 +306,12 @@ Agostinelli C, Lund U. 2024. \emph{\href{https://CRAN.R-project.org/package=circ
 \bibitem[\citeproctext]{ref-rmarkdown2024}
 Allaire J, Xie Y, Dervieux C, McPherson J, Luraschi J, Ushey K, Atkins A, Wickham H, Cheng J, Chang W, Iannone R. 2024. \emph{\href{https://github.com/rstudio/rmarkdown}{{rmarkdown}: Dynamic documents for r}}.
 
+\bibitem[\citeproctext]{ref-allouche_assessing_2006}
+Allouche O, Tsoar A, Kadmon R. 2006. Assessing the accuracy of species distribution models: Prevalence, kappa and the true skill statistic ({TSS}). \emph{Journal of Applied Ecology} 43:1223--1232. DOI: \href{https://doi.org/10.1111/j.1365-2664.2006.01214.x}{10.1111/j.1365-2664.2006.01214.x}.
+
+\bibitem[\citeproctext]{ref-anantharaman_circuitscape_2020}
+Anantharaman R, Hall K, Shah VB, Edelman A. 2020. Circuitscape in {Julia}: {High} {Performance} {Connectivity} {Modelling} to {Support} {Conservation} {Decisions}. \emph{Proceedings of the JuliaCon Conferences} 1:58. DOI: \href{https://doi.org/10.21105/jcon.00058}{10.21105/jcon.00058}.
+
 \bibitem[\citeproctext]{ref-boot2024}
 Angelo Canty, B. D. Ripley. 2024. \emph{{boot}: Bootstrap r (s-plus) functions}.
 
@@ -261,6 +320,12 @@ Bates D, Mächler M, Bolker B, Walker S. 2015. Fitting linear mixed-effects mode
 
 \bibitem[\citeproctext]{ref-sp2013}
 Bivand RS, Pebesma E, Gomez-Rubio V. 2013. \emph{\href{https://asdar-book.org/}{Applied spatial data analysis with {R}, second edition}}. Springer, NY.
+
+\bibitem[\citeproctext]{ref-broekman_homerange_2022}
+Broekman M, Hoeks S, Freriks R, Langendoen M, Runge K, Savenco E, Ter Harmsel R, Huijbregts M, Tucker M. 2022. {HomeRange}: {A} global database of mammalian home ranges. DOI: \href{https://doi.org/10.5061/DRYAD.D2547D85X}{10.5061/DRYAD.D2547D85X}.
+
+\bibitem[\citeproctext]{ref-broekman_homerange_2023}
+Broekman MJE, Hoeks S, Freriks R, Langendoen MM, Runge KM, Savenco E, Ter Harmsel R, Huijbregts MAJ, Tucker MA. 2023. \emph{HomeRange} : {A} global database of mammalian home ranges. \emph{Global Ecology and Biogeography} 32:198--205. DOI: \href{https://doi.org/10.1111/geb.13625}{10.1111/geb.13625}.
 
 \bibitem[\citeproctext]{ref-doParallel}
 Corporation M, Weston S. 2022. \emph{\href{https://CRAN.R-project.org/package=doParallel}{{doParallel}: Foreach parallel adaptor for the {``{parallel}''} package}}.
@@ -279,6 +344,18 @@ Fox J, Weisberg S. 2018. Visualizing fit and lack of fit in complex regression m
 
 \bibitem[\citeproctext]{ref-effects2019}
 Fox J, Weisberg S. 2019. \emph{\href{https://socialsciences.mcmaster.ca/jfox/Books/Companion/index.html}{An r companion to applied regression}}. Thousand Oaks CA: Sage.
+
+\bibitem[\citeproctext]{ref-gbif_gbiforg_2025}
+GBIF. 2025. \href{https://www.gbif.org}{{GBIF}.org}.
+
+\bibitem[\citeproctext]{ref-gbif_fallow_2025}
+GBIF.Org User. 2025a. Occurrence download. DOI: \href{https://doi.org/10.15468/DL.WZ4AZ9}{10.15468/DL.WZ4AZ9}.
+
+\bibitem[\citeproctext]{ref-gbif_rodent_2025}
+GBIF.Org User. 2025b. Occurrence download. DOI: \href{https://doi.org/10.15468/DL.JHGRH7}{10.15468/DL.JHGRH7}.
+
+\bibitem[\citeproctext]{ref-hall_circuitscape_2021}
+Hall KR, Anantharaman R, Landau VA, Clark M, Dickson BG, Jones A, Platt J, Edelman A, Shah VB. 2021. Circuitscape in {Julia}: {Empowering} {Dynamic} {Approaches} to {Connectivity} {Assessment}. \emph{Land} 10:301. DOI: \href{https://doi.org/10.3390/land10030301}{10.3390/land10030301}.
 
 \bibitem[\citeproctext]{ref-R-tidyterra}
 Hernangómez D. 2023. Using the {tidyverse} with {terra} objects: The {tidyterra} package. \emph{Journal of Open Source Software} 8:5751. DOI: \href{https://doi.org/10.21105/joss.05751}{10.21105/joss.05751}.
@@ -310,6 +387,9 @@ Landau WM. 2021a. \emph{{tarchetypes}: Archetypes for targets}.
 \bibitem[\citeproctext]{ref-targets}
 Landau WM. 2021b. \href{https://doi.org/10.21105/joss.02959}{The targets r package: A dynamic make-like function-oriented pipeline toolkit for reproducibility and high-performance computing}. \emph{Journal of Open Source Software} 6:2959.
 
+\bibitem[\citeproctext]{ref-landau_omniscapejl_2021}
+Landau VA, Shah VB, Anantharaman R, Hall KR. 2021. Omniscape.jl: {Software} to compute omnidirectional landscape connectivity. \emph{Journal of Open Source Software} 6:2829. DOI: \href{https://doi.org/10.21105/joss.02829}{10.21105/joss.02829}.
+
 \bibitem[\citeproctext]{ref-INLA2015d}
 Lindgren F, Rue H. 2015. \href{http://www.jstatsoft.org/v63/i19/}{Bayesian spatial modelling with {R}-{INLA}}. \emph{Journal of Statistical Software} 63:1--25.
 
@@ -322,11 +402,26 @@ Lüdecke D, Ben-Shachar MS, Patil I, Waggoner P, Makowski D. 2021. {performance}
 \bibitem[\citeproctext]{ref-INLA2013b}
 Martins TG, Simpson D, Lindgren F, Rue H. 2013. Bayesian computing with {INLA}: {N}ew features. \emph{Computational Statistics and Data Analysis} 67:68--83.
 
+\bibitem[\citeproctext]{ref-mcrae_using_2008}
+McRae BH, Dickson BG, Keitt TH, Shah VB. 2008. {USING} {CIRCUIT} {THEORY} {TO} {MODEL} {CONNECTIVITY} {IN} {ECOLOGY}, {EVOLUTION}, {AND} {CONSERVATION}. \emph{Ecology} 89:2712--2724. DOI: \href{https://doi.org/10.1890/07-1861.1}{10.1890/07-1861.1}.
+
+\bibitem[\citeproctext]{ref-mcrae_conserving_2016}
+McRae B, K. Popper, A. Jones, M. Schindel, S. Buttrick, K. Hall, R.S. Unnasch, J. Platt. 2016. Conserving {Nature}'s {Stage}: {Mapping} {Omnidirectional} {Connectivity} for {Resilient} {Terrestrial} {Landscapes} in the {Pacific} {Northwest}. DOI: \href{https://doi.org/10.13140/RG.2.1.4158.6166}{10.13140/RG.2.1.4158.6166}.
+
 \bibitem[\citeproctext]{ref-foreach}
 Microsoft, Weston S. 2022. \emph{\href{https://CRAN.R-project.org/package=foreach}{{foreach}: Provides foreach looping construct}}.
 
+\bibitem[\citeproctext]{ref-mu_annual_2021}
+Mu H, Li X, Wen Y, Huang J, Du P, Su W, Miao S, Geng M. 2021. An annual global terrestrial {Human} {Footprint} dataset from 2000 to 2018. DOI: \href{https://doi.org/10.6084/m9.figshare.16571064.v7}{10.6084/m9.figshare.16571064.v7}.
+
+\bibitem[\citeproctext]{ref-mu_global_2022}
+Mu H, Li X, Wen Y, Huang J, Du P, Su W, Miao S, Geng M. 2022. A global record of annual terrestrial {Human} {Footprint} dataset from 2000 to 2018. \emph{Scientific Data} 9:176. DOI: \href{https://doi.org/10.1038/s41597-022-01284-8}{10.1038/s41597-022-01284-8}.
+
 \bibitem[\citeproctext]{ref-here}
 Müller K. 2020. \emph{\href{https://CRAN.R-project.org/package=here}{{here}: A simpler way to find your files}}.
+
+\bibitem[\citeproctext]{ref-Muscarella2014}
+Muscarella R, Galante PJ, Soley-Guardia M, Boria RA, Kass JM, Uriarte M, Anderson RP. 2014. {ENMeval}: {An} {R} package for conducting spatially independent evaluations and estimating optimal model complexity for {\textless{}}scp{\textgreater{}}{Maxent}{\textless{}}/scp{\textgreater{}} ecological niche models. \emph{Methods in Ecology and Evolution} 5:1198--1205. DOI: \href{https://doi.org/10.1111/2041-210X.12261}{10.1111/2041-210X.12261}.
 
 \bibitem[\citeproctext]{ref-panzacchi_predicting_2016}
 Panzacchi M, Van Moorter B, Strand O, Saerens M, Kivimäki I, St. Clair CC, Herfindal I, Boitani L. 2016. Predicting the \emph{continuum} between corridors and barriers to animal movements using {Step} {Selection} {Functions} and {Randomized} {Shortest} {Paths}. \emph{Journal of Animal Ecology} 85:32--42. DOI: \href{https://doi.org/10.1111/1365-2656.12386}{10.1111/1365-2656.12386}.
@@ -346,6 +441,9 @@ Pebesma E, Mailund T, Hiebert J. 2016. Measurement units in {R}. \emph{R Journal
 \bibitem[\citeproctext]{ref-patchwork}
 Pedersen TL. 2024. \emph{\href{https://CRAN.R-project.org/package=patchwork}{{patchwork}: The composer of plots}}.
 
+\bibitem[\citeproctext]{ref-phillips_comparison_2021}
+Phillips P, Clark MM, Baral S, Koen EL, Bowman J. 2021. Comparison of methods for estimating omnidirectional landscape connectivity. \emph{Landscape Ecology} 36:1647--1661. DOI: \href{https://doi.org/10.1007/s10980-021-01254-2}{10.1007/s10980-021-01254-2}.
+
 \bibitem[\citeproctext]{ref-rstudio}
 Posit team. 2024. \emph{\href{http://www.posit.co/}{{RStudio}: Integrated development environment for r}}. Boston, MA: Posit Software, PBC.
 
@@ -355,8 +453,14 @@ Prima M, Renaud J, Witté I, Suarez L, Rouveyrol P, Fernando M, Sacchi A, Cosent
 \bibitem[\citeproctext]{ref-base}
 R Core Team. 2024. \emph{\href{https://www.R-project.org/}{{R}: A language and environment for statistical computing}}. Vienna, Austria: R Foundation for Statistical Computing.
 
+\bibitem[\citeproctext]{ref-shabani_assessing_2018}
+Shabani F, Kumar L, Ahmadi M. 2018. Assessing {Accuracy} {Methods} of {Species} {Distribution} {Models}: {AUC}, {Specificity}, {Sensitivity} and the {True} {Skill} {Statistic}. \emph{Global Journal of Human-Social Science: B Geography, Geo-Sciences, Environmental Science \& Disaster Management} 18.
+
 \bibitem[\citeproctext]{ref-amt}
 Signer J, Fieberg J, Avgar T. 2019. Animal movement tools (amt): R package for managing tracking data and conducting habitat selection analyses. \emph{Ecology and Evolution} 9:880--890.
+
+\bibitem[\citeproctext]{ref-nbn_trust_national_2025}
+Trust N. 2025. \href{https://ror.org/00mcxye41}{The {National} {Biodiversity} {Network} ({NBN}) {Atlas}}.
 
 \bibitem[\citeproctext]{ref-gdistance}
 van Etten J. 2017. R package gdistance: Distances and routes on geographical grids. \emph{Journal of Statistical Software} 76:1--21. DOI: \href{https://doi.org/10.18637/jss.v076.i13}{10.18637/jss.v076.i13}.
