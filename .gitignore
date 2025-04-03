@@ -2,11 +2,15 @@
 /data/
 /notebook/extra_papers_reports/
 /notebook/panzacchi_example/
+/notebook/chatterjee_example/
 /notebook/qgis_extras/
 /notebook/satMaps/
 /Dama.dama/
 /GuloGulo/
 /Rodent/
+/omniscape_output*
 /omniscape_output/
 /omniscape_output_rodent/
+/omniscape_output_rodent_aberdeen/
+/omniscape_output_rodent_wessex/
 /omniscape_output_fallow/
