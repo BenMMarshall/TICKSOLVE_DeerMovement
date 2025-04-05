@@ -780,6 +780,22 @@ coreSDMList <- list(
     command = plot_occSDMOmni_inOut_omniOUT(species = "rodent",
                                             tar_omniLayers_rodent_aberdeen,
                                             tar_selectedPatchList)
+  ),
+  # Extract values patch-wise -----------------------------------------------
+  tar_target(
+    name = tar_patch_omniSummary_rodent_wessex,
+    command = extract_patch_omniConnectivity(tar_omniLayers_rodent_wessex, tar_selectedPatchList,
+                                             buffers = buffers)
+  ),
+  tar_target(
+    name = tar_patch_omniSummary_rodent_aberdeen,
+    command = extract_patch_omniConnectivity(tar_omniLayers_rodent_aberdeen, tar_selectedPatchList,
+                                             buffers = buffers)
+  ),
+  tar_target(
+    name = tar_patch_omniSummary_fallow,
+    command = extract_patch_omniConnectivity(tar_omniLayers_fallow, tar_selectedPatchList,
+                                             buffers = buffers)
   )
 )
 
