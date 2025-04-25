@@ -56,13 +56,13 @@ tar_option_set(
   # to do and exits if 60 seconds pass with no tasks to run.
 
   # controller = crew::crew_controller_local(workers = 3, seconds_idle = 60),
-  error = "continue",
+  # error = "continue",
   #
   format = "qs" # Optionally set the default storage format. qs is fast.
 )
 
 # Run the R scripts in the R/ folder with your custom functions:
-tar_source()
+targets::tar_source()
 
 # selectedPatches <- read.csv(file = here::here("data", "GIS data", "abdn_final_patches.csv"))
 # selectedPatches <- selectedPatches$Patch_ID
@@ -165,6 +165,18 @@ coreTargetList <- list(
     command = extract_akde_summaries(tar_deerData, tar_akdeLists)
   ),
   tar_target(
+    name = tar_wrsfakde,
+    command = run_wrsf_models(deerData = tar_deerData,
+                              akdeLists = tar_akdeLists,
+                              landuseList = tar_landuseList,
+                              REGION = "Aberdeenshire",
+                              error = 0.01)
+  ),
+  tar_target(
+    name = tar_wrsf_effects,
+    command = plot_wrsf_effects(tar_wrsfakde)
+  ),
+  tar_target(
     name = tar_distancePatch_plot,
     command = plot_distance_to_patch(tar_deerData, tar_patchList, tar_akdeSummary)
   ),
@@ -177,7 +189,7 @@ coreTargetList <- list(
   ),
   tar_target(
     name = tar_homeRange_sizePlot,
-    command = plot_homeRange_sizes(tar_deerData, tar_akdeLists)
+    command = plot_homeRange_sizes(tar_deerData, tar_akdeLists, tar_wrsfakde)
   ),
   tar_target(
     name = tar_variograms,
@@ -322,12 +334,12 @@ connectTargetList <- list(
   # ),
   tar_combine(
     tar_connectPois_list,
-    coreTargetList[[19]][grep("tar_connectStanPois_location", names(coreTargetList[[19]]))],
+    coreTargetList[[21]][grep("tar_connectStanPois_location", names(coreTargetList[[21]]))],
     command = list(!!!.x)
   ),
   tar_combine(
     tar_msePois_df,
-    coreTargetList[[19]][grep("Pois_dbbmmmse", names(coreTargetList[[19]]))],
+    coreTargetList[[21]][grep("Pois_dbbmmmse", names(coreTargetList[[21]]))],
     command = rbind(!!!.x)
   ),
   tar_target(
@@ -339,18 +351,19 @@ connectTargetList <- list(
     plot_patch_MMMconnectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, tar_selectedPatchList, REGION = "Aberdeenshire")
   ),
   tar_target(
-    tar_patch_summaryPois,
-    extract_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, tar_selectedPatchList, REGION = "Aberdeenshire",
+    tar_patch_summaryPois_aberdeen,
+    extract_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, tar_selectedPatchList,
+                               REGION = "Aberdeenshire",
                                buffers = buffers)
   ),
   tar_target(
     tar_patchPois_plot,
     plot_patch_connectivity(tar_msePois_df, tar_connectPois_list, tar_patchList, tar_selectedPatchList, REGION = "Aberdeenshire",
-                            tar_patch_summaryPois)
+                            tar_patch_summaryPois_aberdeen)
   ),
   tar_target(
     tar_funcStruc_plot,
-    plot_funcStruc_comparison(tar_patch_summaryPois)
+    plot_funcStruc_comparison(tar_patch_summaryPois_aberdeen)
   ),
   # tar_target(
   #   tar_patchPois_summaryPlot,
@@ -377,6 +390,15 @@ connectTargetList <- list(
     command = standardise_connect_layer(tar_connectPois_locationWessex,
                                         REGION = "Wessex",
                                         THETA = NULL, MSEdf = tar_msePois_df)
+  ),
+  tar_target(
+    tar_patch_summaryPois_wessex,
+    extract_patch_connectivity(tar_msePois_df,
+                               tar_connectStanPois_locationWessex,
+                               tar_patchList,
+                               tar_selectedPatchList,
+                               REGION = "Wessex",
+                               buffers = buffers)
   ),
   tar_target(
     name = tar_validation_data,

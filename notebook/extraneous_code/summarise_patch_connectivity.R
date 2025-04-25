@@ -1,12 +1,5 @@
-#' Extract Patch Connectivity
-#'
-#' @name extract_patch_connectivity
-#' @description abc
-#' @return abc
-#'
-#' @export
-extract_patch_connectivity <- function(MSEdf = NULL, connectRasterLocations, patchList, selectedPatchList, REGION,
-                                         buffers){
+# extract_patch_connectivity <- function(MSEdf = NULL, connectRasterLocations, patchList, selectedPatchList, REGION,
+#                                          buffers){
 
   # library(dplyr)
   # library(here)
@@ -146,4 +139,4 @@ extract_patch_connectivity <- function(MSEdf = NULL, connectRasterLocations, pat
 
   return(bufferSummariesAll)
 
-}
+# }

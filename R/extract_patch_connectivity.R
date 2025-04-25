@@ -5,8 +5,12 @@
 #' @return abc
 #'
 #' @export
-extract_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList, selectedPatchList, REGION,
-                                         buffers){
+extract_patch_connectivity <- function(MSEdf,
+                                       connectRasterLocations,
+                                       patchList,
+                                       selectedPatchList,
+                                       REGION,
+                                       buffers){
 
   # library(dplyr)
   # library(here)
@@ -27,30 +31,39 @@ extract_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList,
   # connectRasterLocations <- tar_connectPois_list
   # connectTerra <- terra::rast(tar_connectPois_list[[3]])
   # targets::tar_source()
-  # REGION <- "Aberdeenshire"
+  # REGION <- "Wessex"
   # buffers <- c(0, 750)
 
-  SELECTEDPATCHES <- selectedPatchList$AberdeenSelected$Ptch_ID
+  SELECTEDPATCHES <- selectedPatchList[str_detect(names(selectedPatchList), sub("shire", "", REGION))][[1]]
 
   paletteList <- load_deer_palette()
 
-  meanMSE <- MSEdf %>%
-    group_by(theta) %>%
-    summarise(meanMSE = mean(mse))
+  print(connectRasterLocations)
+  if(REGION == "Wessex"){
+    print(REGION)
+    connectTerraLoc <- connectRasterLocations[[1]]
+    print("Wessex Loaded")
+  } else if(REGION == "Aberdeenshire"){
+    print(REGION)
+    meanMSE <- MSEdf %>%
+      group_by(theta) %>%
+      summarise(meanMSE = mean(mse))
 
-  bestTheta <- meanMSE[meanMSE$meanMSE == min(meanMSE$meanMSE),]$theta
+    bestTheta <- meanMSE[meanMSE$meanMSE == min(meanMSE$meanMSE),]$theta
 
-  connectTerraAddr <- connectRasterLocations[str_detect(names(connectRasterLocations),
-                                                        sub("e-", "e.", as.character(bestTheta)))]
-  connectTerra <- terra::rast(connectTerraAddr[[1]])
+    connectTerraLoc <- connectRasterLocations[str_detect(names(connectRasterLocations),
+                                                          sub("e-", "e.", as.character(bestTheta)))][[1]]
+    print("Aberdeenshire Loaded")
+  }
+  connectTerra <- terra::rast(connectTerraLoc)
 
   paletteListpaletteListpaletteList <- load_deer_palette()
 
   focalPatches <- patchList[[sub("shire", "", REGION)]] %>%
     filter(!duplicated(Ptch_ID))
-  selectedFocalPatches <- selectedPatchList[str_detect(names(selectedPatchList), sub("shire", "", REGION))][[1]]
+  # selectedFocalPatches <- selectedPatchList[str_detect(names(selectedPatchList), sub("shire", "", REGION))][[1]]
 
-  method <- str_extract(connectTerraAddr, "SSF|Pois")
+  method <- str_extract(connectRasterLocations[1], "SSF|Pois")
 
   names(connectTerra) <- "connectivity"
 
@@ -87,8 +100,8 @@ extract_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList,
     #   as.data.frame()
 
     patchesBufferedList[[paste0("buffer_", b)]] <- patchMeanScore # %>%
-      # rbind(patchMaxScore) %>%
-      # rbind(patchMedScore)
+    # rbind(patchMaxScore) %>%
+    # rbind(patchMedScore)
   }
   bufferSummaries <- do.call(rbind, patchesBufferedList)
 
@@ -97,10 +110,10 @@ extract_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList,
   for(b in buffers){
 
     if(b == 0){
-      currPatches <- selectedFocalPatches
+      currPatches <- SELECTEDPATCHES
     }
 
-    currPatches <- st_buffer(selectedFocalPatches, b)
+    currPatches <- st_buffer(SELECTEDPATCHES, b)
 
     patchMeanScore <- terra::extract(connectTerra, currPatches, fun = mean,
                                      bind = TRUE, na.rm = TRUE) %>%
@@ -115,7 +128,7 @@ extract_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList,
 
   # st_crs(patchList$AberdeenSelected) <- st_crs(27700)
   bufferSummaries <- bufferSummaries %>%
-    mutate(selected = factor(ifelse(Ptch_ID %in% as.character(selectedPatchList$AberdeenSelected$Ptch_ID), "Selected", "Not selected"),
+    mutate(selected = factor(ifelse(Ptch_ID %in% as.character(SELECTEDPATCHES$Ptch_ID), "Selected", "Not selected"),
                              levels = c("Not selected", "Selected")))
 
   bufferSummariesAll <- bind_rows(selectedBufferSummaries %>%
@@ -124,15 +137,23 @@ extract_patch_connectivity <- function(MSEdf, connectRasterLocations, patchList,
                                     filter(selected == "Not selected"))
   row.names(bufferSummariesAll) <- NULL
 
+  write.csv(bufferSummariesAll,
+            here("tables", paste0("connectivityValuesAll_Roe_", REGION, ".csv")),
+            row.names = FALSE)
+
+  write.csv(selectedBufferSummaries,
+            here("tables", paste0("connectivityValuesSelected_Roe_", REGION, ".csv")),
+            row.names = FALSE)
+
   # patchAreas <- data.frame(Ptch_ID = as.character(focalPatches$Ptch_ID),
   #                          area_km2 = as.numeric(units::set_units(st_area(focalPatches), "km2")))
 
   bufferSummariesAll <- bufferSummariesAll %>%
     mutate(Ptch_ID = as.character(Ptch_ID)) # %>%
-    # left_join(selectedPatchList$AberdeenSelected %>%
-    #             st_drop_geometry() %>%
-    #             mutate(Ptch_ID = as.character(Ptch_ID))) %>%
-    # left_join(patchAreas)
+  # left_join(selectedPatchList$AberdeenSelected %>%
+  #             st_drop_geometry() %>%
+  #             mutate(Ptch_ID = as.character(Ptch_ID))) %>%
+  # left_join(patchAreas)
 
   return(bufferSummariesAll)
 

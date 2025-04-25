@@ -30,6 +30,34 @@ abstract: abstract text
 keywords: Movement ecology, step selection function, poisson, habitat preference, habitat selection, animal movement, roe deer, Capreolus capreolus
 ---
 
+# Introduction
+<Movement of animals offer insights into requirements, threats, and reactions to landscape change (e.g., fragmentation)>
+
+At a global scale mammal movement is significantly impacted by human presence [@tucker2018moving]. Perhaps most notably are human modification to landscapes in the form of habitat destruction and transformation. Animals responses to relatively novel human dominated landscapes can be hard to predict a priori. Birds can increase their movements in response to habitat homogenisation <CITE other meta-analysis on bird movements here>; whereas other groups, such as mammals and reptiles, broadly see reductions in movements, with vagility limited by human-created barriers (e.g., roads or fencing) [@tucker2018moving; @jerina2012roads; @jones2019fences]. 
+
+<Ungulates are often highly mobile, thereby getting involved in numerous human-wildlife interactions. Examples, such as road collisions and disease transfer are undesirable.>
+
+Within mammals and reptiles, species that need to travel more for resource acquisition may be at greater risk of negative consequences of human modification on their movement. These negative consequences can be direct, such as road mortalities, or indirect, such as greater energetic costs of movement <REFS>.  
+
+Many ungulate species have been demonstrated as being vulnerable to having their movements disrupted by human action and human landscapes. <EXAMPLE HERE>.  
+
+Deer represent a key group of ungulates in Europe, having to contend with high and near comprehensive human land transformation. They are known to react to roads and buildings <ADD DIRECTION OF EFFECT>, with a general tendency to avoid human modification [@coulon2008inferring]. 
+
+<By understanding movement we may be better placed to predict and mitigate harmful interactions for deer and humans.>
+
+Even in the absence of concrete information on deer movements, a myriad of management interventions are often levied at mitigating deer movements, actions, and numbers [@pepper2020management]. Much of these efforts are informed by data concerning <CHECK PAPERS ON FENCING ETC>, that would be complimented by an examination of deer movements in areas yet to see that form of investigation such as the UK. A clear and complete picture of deer ecology would aid in tackling the controversial topic of deer management, and help reach the ultimate goals including forest regeneration and road collision mitigation, while also providing insights into key deer propagated tickborne diseases.  
+
+In the UK, research has investigated the impacts of land use, roads, urban areas and predator removal on deer <REFS>, with a particular focus on Red Deer *Cervus elaphus* due to its commercial value. Comparatively Roe Deer *Capreolus capreolus* remain understudied in parts of the UK such as Scotland [@mitchell1977ecology]. 
+
+Roe deer are the smallest native deer species in the United Kingdom but the most ubiquitous, covering almost all the British mainland from the northern highlands of Scotland to southern Wessex in England [@burbaitee2009roe]. 
+
+Roe deer are ecologically and spatially flexible, able to adapt their spatial use in response to landscape, ques from conspecific, and predator presence [@basak2020human; @jepsen2004modelling]. Examples exist of them using isolated woodlands to outskirts major cities [@basak2020human; @jepsen2004modelling] <CHECK REFS>, and are capable of inhabiting mosaics of both woodland and open country, even when they include human disturbance [@ciach2019ungulates, @ewald2014lidar; @mysterud1999scale]. 
+
+<Roe deer are widely distributed across europe and are known vectors for ticks as well as frequent road collision victims>
+<Compared to Europe, the UK populations of Roe Deer are comparatively less well documented despite the existence of the same human-deer interaction concerns.>
+
+Here we expand the knowledge of Roe Deer movement, targeting two different landscapes in the UK. We aim to document baseline space use of UK Roe Deer, while exploring their movement in relation to various human-created land use types and landscape features, with a particular focus on roads. 
+
 # Methods
 
 ``` {r librariesInputs, echo=FALSE, message=FALSE, warnings=FALSE}
@@ -78,7 +106,7 @@ We retrieved movement data from `r nrow(trackingSummary)` GPS collars worn by Ro
 We re-sampled the Roe Deer data to a more consistent rate, aiming for a standard 3 hour time lag between locations (with a 1 hour tolerance). 
 We additionally filtered out the first week's worth of data to avoid the impacts of capture/immediate post-release movements that may have been atypical (\@ref(tab:trackingSummaryTable)).
 
-## Home Range Esimation
+## Home Range Estimation
 
 ```{r homeRangeSummary, echo=FALSE, message=FALSE}
 akdeSummary <- read.csv(here::here("tables", "allAKDESummary_Aberdeen.csv"))
@@ -178,9 +206,23 @@ As the population Possion model contained all individuals the formula required i
 This formulation, namely the fixed Gaussian processes, as described by @muff_accounting_2020 allows for the efficient estimation of population level selection using integrated nested Laplace approximation (INLA) [@INLA2013b;@INLA2015d]
 <!-- if no movement aspects in formula, can cite Muff et al and Marshall et al (preprint), suggesting that its leads to more vairable estimates  -->
 
+## Habitat Adjusted Home Ranges
+
+To supplement our initial estimates of home range size, we generated estimates that take into account aspects of the discovered habitat selection.
+To accomplish this, we ran weighted resource selection functions [wRSF; @alston_mitigating_2023].
+This approach uses autocorrelation-adjusted weights to estimate the availability of habitat types.
+We passed these models the main co-variates the population Poisson model identified as important: distance to woodland (continuous), Tall Grassland (binary), and Open Shrubland (binary).
+Once we had estimates of selection, we adjusted our original best perfomring autocorrelated kernel density estimates using the wRSF models.
+We also estimated a mean selection for each variable, using the weighted ctmm mean functionality.
+
 \clearpage
 
 # Results
+
+```{r hrAdj, echo=FALSE, message=FALSE}
+HRadjDiff <- read.csv(here::here("tables", "HRadjDiff.csv"))
+
+```
 
 Our GPS collaring of Roe deer resulted in `r sum(trackingSummary$nFixes)` location fixes, with a mean of `r meanDatapointsInText` per individuals, spread across an mean of `r meanDurationInText` days per individual.
 Overall this resulted in an average of `r meanFixDayInText` fixes per day per individual.
@@ -189,8 +231,10 @@ For our Aberdeen Roe Deer home range sizes ranged from `r totalAberRange`ha (95%
 Largely the deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8, Roe Deer 3; Fig. \@ref(fig:variogramPlot)).
 All bar two individuals found OU models to fit best, with the remaining two being better described by OUF models.
 All best fitting models were anisotropic, suggesting these Roe Deer are inhabiting non-uniform home ranges (i.e., not being as wide as they are tall).
+The habitat selection adjusted home ranges were on average `r round(HRadjDiff$meanDiff, digits = 2)` ±SD`r round(HRadjDiff$sdDiff, digits = 2)` ha larger non-adjusted AKDE ranges.
+The largest difference was only `r round(HRadjDiff$maxDiff, digits = 2)` ha.
 
-```{r homeRangeSize, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Home range size as estimated via the Autocorrelated Kernel Density Estimators. Depicted are the 95% contour with 95% confidence intervals surrounding that estimate. The vertical line shows the naive mean of all home range estimates."}
+```{r homeRangeSize, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Home range size as estimated via the Autocorrelated Kernel Density Estimators. Depicted are the 95% contour with 95% confidence intervals surrounding that estimate. The vertical line shows the naive mean of all home range estimates. The lower (and lighter) points and error bars show the areas when adjusted by the wRSF model selection."}
 knitr::include_graphics(here::here("figures", "homeRangeAreaPlot.png"))
 ```
 
@@ -268,6 +312,15 @@ These step lengths in these land uses to be lower, as seen in coeficeints for lo
 Estimates regarding human settlements were paired with very wide confidence intervals (`r humanCoef`), likely a result of minimal interaction with the tracked deer making estimation difficult.
 There are therefore treated as the point estimate suggests as areas of very low conductivity in further analysis.
 
+Weighted resource selection models largely supported and agreed with the Poisson model estimates (Fig. \@ref(fig:wrsfEffects)).
+There was a clear effect of distance from woodland at the population level, even if it was universally significant at an individual level.
+Only two individuals show an opposite effect, suggesting a (non-significant) selection for areas farther from woodland.
+Similarly, we see clear agreement between the approach for the effects of Tall Grassland.
+The effects of Open Shurbland and Tall Grassland were more mixed, with roughly equal number of individuals selected for as against both habitat types.
+For Open Shurbland the overall mean population selection disagreed with Poisson model, suggesting overall avoidance.
+We suspect this lack of agreement is due to a single individual's (Roe 12) strong avoidance.
+Tall Grassland by contrast, did agree with the Poisson model on a population level, but the mix of individuals selecting for and against it leaves the overall conclusion less clear.
+
 <!-- tendency to choose open shubrland and tall grass where possible, but avoiding cropland and needdleleaf forest -->
 <!-- only part of picture as movements tended to be lower in grasslands and cropland as seen in log_sl but with a larger tail to the gamma distribution (i.e, more variable as reflected in the increase in sl_). -->
 
@@ -280,6 +333,31 @@ There are therefore treated as the point estimate suggests as areas of very low 
 ```{r poisCoefPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Coefficient estimates, with 95% confidence intervals, from the Poisson model of habitat selection. Major outlying estimates have been replaced with labels to aid visualisation. Colour highlights and bolding reflect the significantly negative (light orange) and significantly positive (dark orange) coefficients."}
 knitr::include_graphics(here::here("figures", "poisCoef.png"))
 ```
+
+Our tracking of 13 Roe Deer revealed that they have limited home ranges, that are heavily skewed towards deciduous woodland.
+They are willing to exit woodland, making use of open shrubland and grasslands, but these movements tend to be limited to within ~750m.
+Further when entering these more open non-wooded areas they tend to slow down.
+Additionally, we document a reduced chance of individuals crossing roads, indicating that roads reduce the permeability of these landscapes for Roe Deer. 
+
+<contextualise against European findings – Home range size - Can use home range database for quick overview > 
+
+<contextualise against European findings – preference> 
+
+<STRANGE framework paragraph> 
+
+There are several aspects of the study that may limit its generalisability, or that would need to be considered when applying the findings to other contexts.
+Using the STRANGE framework [@webster_how_2020], we highlight key limitations (omitting those that are unquantifiable or of limited relevance).
+**Social background**.
+We have little information on the individuals not tracked that may be impacting the movements of tracked deer.
+Roe Deer will maintain territories <REF>, so it is likely that the interactions with conspecifics could alter the distribution and size of our tracked deer’s movements via competitive exclusion or territorial patrolling.
+**Trappability and self-selection**. While there is not obvious bias to the deer trapping methods we used, there may be an unknown behavioural variation altering the likelihood of a deer being captured.
+If the trappability of a deer is associated with certain movement or behavioural parameters, our sample may be skewed towards those tendencies (e.g., boldness leads to increased capture likelihood, while also being connected to increased chance of crossing roads).
+**Acclimation and habituation**. None of the deer had been previously collared, but there may have been a habituation effect to collars over time.
+Our removal of the first week of data likely have mitigated the largest impact prior to collar-habituation, but as the Wessex deer demonstrate there may be ongoing effects we cannot control for. 
+
+<implications for management?> 
+
+<conclusions / take aways> 
 
 \clearpage
 
@@ -306,6 +384,10 @@ knitr::include_graphics(here::here("figures", "trackingDuration.png"))
 
 ```{r trackingTimelags, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Distribution of time lags after resampling and filtering. N.b. x axis is log scaled."}
 knitr::include_graphics(here::here("figures", "trackingTimelag.png"))
+```
+
+```{r wrsfEffects, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="The coefficients relating to the habitat variables in the weighted resource selection function. The coloured points show estimates where the 95% CI did not overlap zero. Vertical lines show the population mean selection, with 95% CIs."}
+knitr::include_graphics(here::here("figures", "wrsfEffects.png"))
 ```
 
 \clearpage
