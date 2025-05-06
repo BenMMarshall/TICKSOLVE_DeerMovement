@@ -5,139 +5,387 @@
 #' @return abc
 #'
 #' @export
-plot_ssf_coefs <- function(deerData, ssfModels, REGION){
-
+plot_ssf_coefs <- function(ssfExtractList){
+  # targets::tar_load("tar_ssf_extracts")
+  # ssfExtractList <- tar_ssf_extracts
   # library(amt)
   # library(dplyr)
-  #
-  # targets::tar_load("tar_ssf_models")
-  # targets::tar_load("tar_deerData")
-  #
+  # library(IndRSA)
+  # library(tidyr)
+  # library(ggplot2)
+  # library(ggridges)
+  # library(ggtext)
   # targets::tar_source()
-  # deerData <- tar_deerData
-  # ssfModels <- tar_ssf_models
-  # REGION <- "Aberdeenshire"
+
+  list2env(ssfExtractList, envir = environment())
 
   paletteList <- load_deer_palette()
 
-  aberDeer <- deerData %>%
-    filter(region == REGION) %>%
-    pull(Animal_ID) %>% unique()
+  # indiDataframe %>%
+  #   arrange(desc(Animal_ID_colour)) %>%
+  #   mutate(Animal_ID_colour = "<i>Individuals</i>") %>%
+  #   filter(!is.na(est),
+  #          variableType == "Landuse",
+  #          !variableType == "Step",
+  #          !variable == "cos ta_ ") %>%
+  #   ggplot() +
+  #   geom_vline(xintercept = 0, linetype = "dashed", linewidth = 0.25, colour = "grey25") +
+  #   geom_hline(yintercept = 1.5, linetype = "solid", linewidth = 0.25, colour = "grey25") +
+  #   geom_hline(yintercept = 0.5, linetype = "solid", linewidth = 0.25, colour = "grey25") +
+  #   geom_segment(data = popAvg %>%
+  #                  filter(variableType == "Landuse",
+  #                         !variableType == "Step",
+  #                         !variable == "cos ta_ "),
+  #                aes(x = LCI, xend = UCI, y = Animal_ID_colour, yend = Animal_ID_colour, colour = sig),
+  #                linewidth = 1.2) +
+  #   geom_point(data = popAvg %>%
+  #                filter(variableType == "Landuse",
+  #                       !variableType == "Step",
+  #                       !variable == "cos ta_ "),
+  #              aes(x = Mean, y = Animal_ID_colour, colour = sig),
+  #              size = 2) +
+  #   geom_text(data = popAvg %>%
+  #               filter(variableType == "Landuse",
+  #                      !variableType == "Step",
+  #                      !variable == "cos ta_ "),
+  #             aes(x = Inf, y = Animal_ID_colour, colour = sig, label = signif(Mean, digits = 2)),
+  #             hjust = 1, size = 3) +
+    # geom_point(aes(x = est, y = Animal_ID_colour, colour = sig), size = 0.65,
+    #            position = position_jitter(width = 0, height = 0.25)) +
+  #   facet_grid(rows = vars(variable), scales = "free", space = "free", drop = TRUE,
+  #              switch = "y") +
+  #   scale_colour_manual(values = paletteList$highSigLowSigNoSig) +
+  #   labs(x = "Selection Strength Coefficient", y = "") +
+  #   theme_bw() +
+  #   theme(
+  #     text = element_text(colour = "grey25"),
+  #     line = element_line(colour = "grey25"),
+  #     panel.grid.minor = element_blank(),
+  #     panel.border = element_blank(),
+  #     panel.grid = element_blank(),
+  #     legend.position = "none",
+  #     plot.title = element_text(face = 2),
+  #     axis.title = element_text(face = 2),
+  #     axis.ticks = element_blank(),
+  #     axis.text.y = element_markdown(size = 7),
+  #     strip.placement = "outside",
+  #     strip.background = element_blank(),
+  #     strip.text.y.left = element_text(angle = 0, face = 2, hjust = 1, vjust = 1, colour = "grey25")
+  #   ) +
+  #   guides(colour = guide_legend(override.aes = list(linewidth = 0)))
 
-  ssfModels <- ssfModels[aberDeer]
+  coefLanduse <- indiDataframe %>%
+    arrange(desc(Animal_ID_colour)) %>%
+    mutate(Animal_ID_colour = "<i>Individuals</i>") %>%
+    filter(!is.na(est),
+           variableType == "Landuse",
+           !variableType == "Step",
+           !variable == "cos ta_ ") %>%
+    filter(!is.na(est)) %>%
+    ggplot() +
+    geom_vline(xintercept = 0, linetype = "dashed", linewidth = 0.25, colour = "grey25") +
+    geom_hline(yintercept = 1.5, linetype = "solid", linewidth = 0.25, colour = "grey25") +
+    geom_hline(yintercept = 0.5, linetype = "solid", linewidth = 0.25, colour = "grey25") +
+    geom_segment(data = popAvg %>%
+                   filter(variableType == "Landuse",
+                          !variableType == "Step",
+                          !variable == "cos ta_ "),
+                 aes(x = LCI, xend = UCI, y = Animal_ID_colour, yend = Animal_ID_colour, colour = sig),
+                 linewidth = 1.2) +
+    geom_point(data = popAvg %>%
+                 filter(variableType == "Landuse",
+                        !variableType == "Step",
+                        !variable == "cos ta_ "),
+               aes(x = Mean, y = Animal_ID_colour, colour = sig),
+               size = 2) +
+    geom_text(data = popAvg %>%
+                filter(variableType == "Landuse",
+                       !variableType == "Step",
+                       !variable == "cos ta_ "),
+              aes(x = Inf, y = Animal_ID_colour, colour = sig, label = signif(Mean, digits = 2)),
+              hjust = 1.1, size = 3) +
+    geom_point(aes(x = est, y = Animal_ID_colour, colour = sig), size = 0.65,
+               position = position_jitter(width = 0, height = 0.25)) +
+    facet_grid(rows = vars(variable), scales = "free", space = "free", drop = TRUE,
+               switch = "y") +
+    scale_colour_manual(values = paletteList$highSigLowSigNoSig) +
+    labs(x = "Selection Strength Coefficient", y = "") +
+    theme_bw() +
+    theme(
+      text = element_text(colour = "grey25"),
+      line = element_line(colour = "grey25"),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank(),
+      panel.grid = element_blank(),
+      legend.position = "none",
+      plot.title = element_text(face = 2),
+      axis.title = element_text(face = 2),
+      axis.ticks = element_blank(),
+      axis.text.y = element_markdown(size = 8),
+      strip.placement = "outside",
+      strip.background = element_blank(),
+      strip.text.y.left = element_text(angle = 0, face = 2, hjust = 1, vjust = 1, colour = "grey25")
+    ) +
+    guides(colour = guide_legend(override.aes = list(linewidth = 0)))
 
-  ssfCoefs <- do.call(rbind, lapply(names(ssfModels), function(x){
-    mod <- ssfModels[[x]]
-    coef <- coef(mod$model)
-    conf <- confint(mod$model)
-    modelSummary <- cbind(coef, conf) %>%
-      as.data.frame()
-    modelSummary$Animal_ID <- x
-    return(modelSummary)
-  }))
-  ssfCoefs$term <- gsub("[[:digit:]]+$", "", row.names(ssfCoefs))
+  coefDistance <- indiDataframe %>%
+    arrange(desc(Animal_ID_colour)) %>%
+    mutate(Animal_ID_colour = "<i>Individuals</i>") %>%
+    filter(!is.na(est),
+           variableType == "Distance",
+           !variableType == "Step",
+           !variable == "cos ta_ ") %>%
+    filter(!is.na(est)) %>%
+    ggplot() +
+    geom_vline(xintercept = 0, linetype = "dashed", linewidth = 0.25, colour = "grey25") +
+    geom_hline(yintercept = 1.5, linetype = "solid", linewidth = 0.25, colour = "grey25") +
+    geom_hline(yintercept = 0.5, linetype = "solid", linewidth = 0.25, colour = "grey25") +
+    geom_segment(data = popAvg %>%
+                   filter(variableType == "Distance",
+                          !variableType == "Step",
+                          !variable == "cos ta_ "),
+                 aes(x = LCI, xend = UCI, y = Animal_ID_colour, yend = Animal_ID_colour, colour = sig),
+                 linewidth = 1.2) +
+    geom_point(data = popAvg %>%
+                 filter(variableType == "Distance",
+                        !variableType == "Step",
+                        !variable == "cos ta_ "),
+               aes(x = Mean, y = Animal_ID_colour, colour = sig),
+               size = 2) +
+    geom_text(data = popAvg %>%
+                filter(variableType == "Distance",
+                       !variableType == "Step",
+                       !variable == "cos ta_ "),
+              aes(x = Inf, y = Animal_ID_colour, colour = sig, label = signif(Mean, digits = 2)),
+              hjust = 1.1, size = 3) +
+    geom_point(aes(x = est, y = Animal_ID_colour, colour = sig), size = 0.65,
+               position = position_jitter(width = 0, height = 0.25)) +
+    facet_grid(rows = vars(variable), scales = "free", space = "free", drop = TRUE,
+               switch = "y") +
+    scale_colour_manual(values = paletteList$highSigLowSigNoSig) +
+    labs(x = "Selection Strength Coefficient", y = "") +
+    theme_bw() +
+    theme(
+      text = element_text(colour = "grey25"),
+      line = element_line(colour = "grey25"),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank(),
+      panel.grid = element_blank(),
+      legend.position = "none",
+      plot.title = element_text(face = 2),
+      axis.title = element_text(face = 2),
+      axis.ticks = element_blank(),
+      axis.text.y = element_markdown(size = 8),
+      strip.placement = "outside",
+      strip.background = element_blank(),
+      strip.text.y.left = element_text(angle = 0, face = 2, hjust = 1, vjust = 1, colour = "grey25")
+    ) +
+    guides(colour = guide_legend(override.aes = list(linewidth = 0)))
 
-  naiveMeanSsfCoefs <- ssfCoefs %>%
-    group_by(term) %>%
-    summarise(meanEffect = mean(coef, na.rm = TRUE),
-              medianEffect = median(coef, na.rm = TRUE))
+  coefOther <- indiDataframe %>%
+    arrange(desc(Animal_ID_colour)) %>%
+    mutate(Animal_ID_colour = "<i>Individuals</i>") %>%
+    filter(!is.na(est),
+           variableType == "Other",
+           !variableType == "Step",
+           !variable == "cos ta_ ") %>%
+    filter(!is.na(est)) %>%
+    ggplot() +
+    geom_vline(xintercept = 0, linetype = "dashed", linewidth = 0.25, colour = "grey25") +
+    geom_hline(yintercept = 1.5, linetype = "solid", linewidth = 0.25, colour = "grey25") +
+    geom_hline(yintercept = 0.5, linetype = "solid", linewidth = 0.25, colour = "grey25") +
+    geom_segment(data = popAvg %>%
+                   filter(variableType == "Other",
+                          !variableType == "Step",
+                          !variable == "cos ta_ "),
+                 aes(x = LCI, xend = UCI, y = Animal_ID_colour, yend = Animal_ID_colour, colour = sig),
+                 linewidth = 1.2) +
+    geom_point(data = popAvg %>%
+                 filter(variableType == "Other",
+                        !variableType == "Step",
+                        !variable == "cos ta_ "),
+               aes(x = Mean, y = Animal_ID_colour, colour = sig),
+               size = 2) +
+    geom_text(data = popAvg %>%
+                filter(variableType == "Other",
+                       !variableType == "Step",
+                       !variable == "cos ta_ "),
+              aes(x = Inf, y = Animal_ID_colour, colour = sig, label = signif(Mean, digits = 2)),
+              hjust = 1.1, size = 3) +
+    geom_point(aes(x = est, y = Animal_ID_colour, colour = sig), size = 0.65,
+               position = position_jitter(width = 0, height = 0.25)) +
+    facet_grid(rows = vars(variable), scales = "free", space = "free", drop = TRUE,
+               switch = "y") +
+    scale_colour_manual(values = paletteList$highSigLowSigNoSig) +
+    labs(x = "Selection Strength Coefficient", y = "") +
+    theme_bw() +
+    theme(
+      text = element_text(colour = "grey25"),
+      line = element_line(colour = "grey25"),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank(),
+      panel.grid = element_blank(),
+      legend.position = "none",
+      plot.title = element_text(face = 2),
+      axis.title = element_text(face = 2),
+      axis.ticks = element_blank(),
+      axis.text.y = element_markdown(size = 8),
+      strip.placement = "outside",
+      strip.background = element_blank(),
+      strip.text.y.left = element_text(angle = 0, face = 2, hjust = 1, vjust = 1, colour = "grey25")
+    ) +
+    guides(colour = guide_legend(override.aes = list(linewidth = 0)))
 
-  # return(naiveMeanSsfCoefs)
+  # ggsave(
+  #   plot = coefLanduse,
+  #   filename = here::here("figures", "ssfCoef_landuse.png"),
+  #   width = 210, height = 200, units = "mm", dpi = 300,
+  #   device = ragg::agg_png
+  # )
+  # ggsave(
+  #   plot = coefDistance,
+  #   filename = here::here("figures", "ssfCoef_distance.png"),
+  #   width = 210, height = 120, units = "mm", dpi = 300,
+  #   device = ragg::agg_png
+  # )
+  # ggsave(
+  #   plot = coefOther,
+  #   filename = here::here("figures", "ssfCoef_other.png"),
+  #   width = 210, height = 65, units = "mm", dpi = 300,
+  #   device = ragg::agg_png
+  # )
 
-  ssfCoefs_long <- ssfCoefs %>%
-    rename(lower = `2.5 %`, upper = `97.5 %`) %>%
-    # pivot_longer(cols = !contains("Animal_ID"), names_to = "term", values_to = "coef") %>%
-    filter(!term %in% c("landuseOther",
-                        "distanceWoodland:landuseHuman Settlements",
-                        "distanceWoodland:landuseOther",
-                        "landuseOther:log(sl_)")) %>%
-    mutate(termType = case_when(
-      grepl("sl_", term) ~ "Step",
-      grepl("distance", term) ~ "Distance",
-      grepl("landuse", term) ~ "Landuse",
-      TRUE ~ "Other"
+  coefCombo <- (coefDistance +
+    theme(axis.title.x.bottom = element_blank())) /
+  (coefOther +
+    theme(axis.title.x.bottom = element_blank())) /
+  coefLanduse +
+    plot_layout(ncol = 1, heights = c(2,1,9))
+
+  ggsave(
+    plot = coefCombo,
+    filename = here::here("figures", "ssfCoef_indPop.png"),
+    width = 210, height = 200, units = "mm", dpi = 300,
+    device = ragg::agg_png
+  )
+
+  ggsave(
+    plot = coefCombo,
+    filename = here::here("figures", "ssfCoef_indPop.pdf"),
+    width = 210, height = 200, units = "mm"
+  )
+
+  simuSDmeans <- simuSDmeans %>%
+    mutate(variableType = case_when(
+      str_detect(variable, "Distance") ~ "Distance",
+      str_detect(variable, "Road") ~ "Other",
+      variable %in% c("sl_", "cos ta_ ", "log sl_ ") ~ "Core movement",
+      str_detect(variable, "\\:sl_") ~ "Step interactions (sl_)",
+      str_detect(variable, "\\:log.sl_.") ~ "Step interactions (log_sl)",
+      TRUE ~ "Landuse"
     )) %>%
-    mutate(sig = ifelse(lower > 0, "Significant +", ifelse(upper < 0, "Significant -", "Not Significant")))
+    filter(!variableType == "Core movement")
 
-  sigColourDF <- data.frame(colour = paletteList$highSigLowSigNoSig,
-                            sig = names(paletteList$highSigLowSigNoSig))
+  heteroPlot <- simuSD %>%
+    filter(!variableType == "Core movement") %>%
+    ggplot() +
+    geom_vline(xintercept = 0, linetype = "dashed", linewidth = 0.25, colour = "grey25") +
+    geom_boxplot(aes(x = value, y = variable),
+                 fill = "grey95", colour = "grey25",
+                 width = 0.2, position = position_nudge(y = 0),
+                 outliers = FALSE) +
+    geom_text(data = simuSDmeans,
+              aes(x = -Inf, y = variable, label = signif(meanSD, digits = 4)),
+              colour = "grey25", hjust = 0, fontface = 2) +
+    # geom_density_ridges(aes(x = value, y = variable), alpha = 0.5) +
+    facet_wrap(vars(variableType), ncol = 1, drop = TRUE, scales = "free",
+               strip.position = "left") +
+    labs(x = "Heterogeneity\n(individual variation in response)", y = "", title = "Heterogeneity") +
+    scale_x_continuous(limits = c(0, NA), expand = c(0.075,0)) +
+    theme_bw() +
+    theme(
+      text = element_text(colour = "grey25"),
+      line = element_line(colour = "grey25"),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank(),
+      panel.grid = element_blank(),
+      legend.position = "none",
+      plot.title = element_text(face = 2),
+      axis.title = element_text(face = 2),
+      axis.ticks.y = element_blank(),
+      axis.text.y = element_markdown(),
+      strip.placement = "outside",
+      strip.background = element_blank(),
+      strip.text.y.left = element_text(angle = 0, face = 2, hjust = 1, vjust = 1, colour = "grey25")
+    )
 
-  ssfCoefs_long <- ssfCoefs_long %>%
-    left_join(sigColourDF, by = "sig") %>%
-    mutate(Animal_ID_colour = glue::glue("<i style='color:{colour}'>{Animal_ID}</i>"),
-           Animal_ID_colour = ifelse(sig == "Not Significant", Animal_ID_colour,
-                                     glue::glue("<b>{Animal_ID_colour}</b>")))
+  ggsave(
+    plot = heteroPlot,
+    filename = here::here("figures", "ssfCoef_Heterogeneity.png"),
+    width = 320, height = 160, units = "mm", dpi = 300,
+    device = ragg::agg_png
+  )
 
-  ssfTerms <- ssfCoefs_long %>%
-    filter(!is.na(coef)) %>%
-    group_by(term) %>%
-    count() %>%
-    filter(n > 1) %>%
-    pull(term) %>% unique()
-  ssfCoef_plotList <- vector("list", length = length(ssfTerms))
-  names(ssfCoef_plotList) <- ssfTerms
-  for(t in ssfTerms){
-    # t <- ssfTerms[1]
-    ssfCoefs_curr <- ssfCoefs_long %>%
-      filter(term == t) %>%
-      arrange(term, coef) %>%
-      mutate(Animal_ID_colour = factor(Animal_ID_colour, levels = unique(Animal_ID_colour)))
 
-    outQuant <- ssfCoefs_curr %>%
-      pull(coef) %>% quantile(probs = c(0.05, 0.95), na.rm = TRUE)
+  simuSPEmeans <- simuSPEmeans %>%
+    mutate(variableType = case_when(
+      str_detect(variable, "Distance") ~ "Distance",
+      str_detect(variable, "Road") ~ "Other",
+      variable %in% c("sl_", "cos ta_ ", "log sl_ ") ~ "Core movement",
+      str_detect(variable, "\\:sl_") ~ "Step interactions (sl_)",
+      str_detect(variable, "\\:log.sl_.") ~ "Step interactions (log_sl)",
+      TRUE ~ "Landuse"
+    )) %>%
+    filter(!variableType == "Core movement")
 
-    outlierLabs <- ssfCoefs_curr %>%
-      filter(coef < outQuant[1]) %>%
-      mutate(xloc = -Inf, hjust = 0,
-             text = paste0("<", round(coef, digits = 1))) %>%
-      rbind(ssfCoefs_curr %>%
-              filter(coef > outQuant[2]) %>%
-              mutate(xloc = Inf, hjust = 1) %>%
-              mutate(text = paste0(round(coef, digits = 1), ">")))
+  specialPlot <- simuSPE %>%
+    filter(!variableType == "Core movement") %>%
+    ggplot() +
+    geom_vline(xintercept = 0, linetype = "dashed", linewidth = 0.25, colour = "grey25") +
+    geom_boxplot(aes(x = value, y = variable),
+                 fill = "grey95", colour = "grey25",
+                 width = 0.2, position = position_nudge(y = 0),
+                 outliers = FALSE) +
+    geom_text(data = simuSPEmeans,
+              aes(x = -Inf, y = variable, label = signif(meanSPE, digits = 4)),
+              colour = "grey25", hjust = 0, fontface = 2) +
+    # geom_density_ridges(aes(x = value, y = variable), alpha = 0.5) +
+    facet_wrap(vars(variableType), ncol = 1, drop = TRUE, scales = "free",
+               strip.position = "left") +
+    labs(x = "Specialisation\n(magnitude of the response independent of the direction)", y = "", title = "Specialisation") +
+    scale_x_continuous(limits = c(0, NA), expand = c(0.075,0)) +
+    theme_bw() +
+    theme(
+      text = element_text(colour = "grey25"),
+      line = element_line(colour = "grey25"),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank(),
+      panel.grid = element_blank(),
+      legend.position = "none",
+      plot.title = element_text(face = 2),
+      axis.title = element_text(face = 2),
+      axis.ticks.y = element_blank(),
+      axis.text.y = element_markdown(),
+      strip.placement = "outside",
+      strip.background = element_blank(),
+      strip.text.y.left = element_text(angle = 0, face = 2, hjust = 1, vjust = 1, colour = "grey25")
+    )
 
-    ssfCoef_plot <- ssfCoefs_curr %>%
-      filter(coef > outQuant[1] & coef < outQuant[2]) %>%
-      # ssfCoefs_long %>%
-      #   filter(termType == "Distance") %>%
-      ggplot() +
-      geom_vline(xintercept = 0, linetype = 2, color = "grey50") +
-      geom_text(data = outlierLabs,
-                aes(x = xloc, y = Animal_ID_colour, color = sig, label = text, hjust = hjust),
-                fontface = 2) +
-      geom_errorbarh(aes(xmin = lower, xmax = upper, y = Animal_ID_colour, color = sig), height = 0.2,
-                     alpha = 0.35) +
-      geom_point(aes(x = coef, y = Animal_ID_colour, color = sig)) +
-      coord_cartesian(xlim = ssfCoefs_curr %>%
-                        filter(coef > outQuant[1] & coef < outQuant[2]) %>%
-                        pull(coef) %>% range(na.rm = TRUE)) +
-      scale_colour_manual(values = paletteList$highSigLowSigNoSig) +
-      facet_wrap(vars(term), ncol = 1, drop = TRUE, scales = "free_y",
-                 strip.position = "left") +
-      labs(x = "Coefficient", y = "Animal ID") +
-      theme_bw() +
-      theme(
-        text = element_text(colour = "grey25"),
-        line = element_line(colour = "grey25"),
-        panel.grid.minor = element_blank(),
-        panel.border = element_blank(),
-        panel.grid = element_blank(),
-        legend.position = "none",
-        axis.title = element_text(face = 2),
-        axis.ticks.y = element_blank(),
-        axis.text.y = element_markdown(),
-        strip.placement = "outside",
-        strip.background = element_blank(),
-        strip.text.y.left = element_text(angle = 0, face = 2, hjust = 1, vjust = 1)
-      )
+  ggsave(
+    plot = specialPlot,
+    filename = here::here("figures", "ssfCoef_Specialisation.png"),
+    width = 320, height = 160, units = "mm", dpi = 300,
+    device = ragg::agg_png
+  )
 
-    ssfCoef_plotList[[t]] <- ssfCoef_plot
+  plotList <- list(
+    coefLanduse = coefLanduse,
+    coefDistance = coefDistance,
+    coefOther = coefOther,
+    heteroPlot = heteroPlot,
+    specialPlot = specialPlot
+  )
 
-    ggsave(plot = ssfCoef_plot, filename = here::here("modelOutput", paste0("ssfCoef_", sub(":", "__", t), ".png")),
-           width = 210, height = 160, units = "mm", dpi = 300)
-    ggsave(plot = ssfCoef_plot, filename = here::here("modelOutput", paste0("ssfCoef_", sub(":", "__", t), ".pdf")),
-           width = 210, height = 160, units = "mm")
+  return(plotList)
 
-  }
-
-  return(ssfCoef_plotList)
 }

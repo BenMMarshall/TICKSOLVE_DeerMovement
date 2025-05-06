@@ -17,7 +17,6 @@ tar_option_set(
                "here",
                "dplyr",
                "stringr",
-               "sf",
                "ctmm",
                "amt",
                "move",
@@ -29,6 +28,7 @@ tar_option_set(
                "raster",
                "gdistance",
                "INLA",
+               "IndRSA",
                "performance",
                "JuliaCall",
                "ggplot2",
@@ -77,15 +77,14 @@ contourAvialable <- "95%"
 nAvailableSteps <- 10
 slDistribution <- "gamma"
 taDistribution <- "vonmises"
-ssfFormula <- case_ ~ landuse +
-  distanceWoodland +
-  distanceHedges +
-  distanceWoodland:landuse +
-  roadCrossings +
-  sl_ + log(sl_) + cos(ta_) +
-  log(sl_):landuse +
-  log(sl_):distanceWoodland +
-  strata(step_id_)
+# ssfFormula <- case_ ~ landuse +
+#   distanceWoodland +
+#   distanceHedges +
+#   roadCrossings +
+#   sl_ + log(sl_) + cos(ta_) +
+#   sl_:landuse +
+#   log(sl_):landuse +
+#   strata(step_id_)
 
 # dbbmm
 windowSize <- 29 #~ a week
@@ -218,20 +217,6 @@ coreTargetList <- list(
                                nAvail = nAvailableSteps, slDist = slDistribution,
                                taDist = taDistribution)
   ),
-  # tar_target(
-  #   name = tar_ssf_models,
-  #   command = run_ssf_models(tar_ssf_data, ssfFormula = ssfFormula)
-  # ),
-  # tar_target(
-  #   name = tar_ssf_plots,
-  #   command = plot_ssf_coefs(tar_deerData, tar_ssf_models, REGION = "Aberdeenshire")
-  # ),
-  # tar_target(
-  #   name = tar_predSSFResist_location,
-  #   command = build_predResistance_layer(tar_ssf_data, tar_ssf_models,
-  #                                        tar_landuseList, tar_patchList,
-  #                                        tar_deerData, REGION = "Aberdeenshire", prelimAggFact = aggFact)
-  # ),
   tar_target(
     name = tar_pois_model,
     command = run_pois_model(tar_ssf_data)
@@ -300,6 +285,18 @@ coreTargetList <- list(
                                     REGION = "Aberdeenshire",
                                     THETA = THETA)
     )
+  ),
+  tar_target(
+    name = tar_ssf_models,
+    command = run_ssf_models(tar_ssf_data)
+  ),
+  tar_target(
+    name = tar_ssf_extracts,
+    command = extract_ssf_coefs(tar_ssf_models)
+  ),
+  tar_target(
+    name = tar_ssf_plots,
+    command = plot_ssf_coefs(tar_ssf_extracts)
   )
   # tar_target(
   #   name = tar_circuitscape_data,

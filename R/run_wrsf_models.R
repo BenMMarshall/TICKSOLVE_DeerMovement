@@ -9,7 +9,7 @@ run_wrsf_models <- function(deerData,
                             akdeLists,
                             landuseList,
                             REGION,
-                            error = 0.001){
+                            error = 0.01){
 
   # library(here)
   # library(dplyr)
@@ -73,7 +73,7 @@ run_wrsf_models <- function(deerData,
   focalDeer <- deerData %>%
     filter(region == REGION)
   focalDeerIDs <- unique(focalDeer$Animal_ID)
-  # x <- focalDeerIDs[1]
+  # x <- focalDeerIDs[2]
 
   # integrator="MonteCarlo"
   # Time difference of -21.48579 mins

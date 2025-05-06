@@ -206,14 +206,14 @@ As the population Possion model contained all individuals the formula required i
 This formulation, namely the fixed Gaussian processes, as described by @muff_accounting_2020 allows for the efficient estimation of population level selection using integrated nested Laplace approximation (INLA) [@INLA2013b;@INLA2015d]
 <!-- if no movement aspects in formula, can cite Muff et al and Marshall et al (preprint), suggesting that its leads to more vairable estimates  -->
 
-## Habitat Adjusted Home Ranges
-
-To supplement our initial estimates of home range size, we generated estimates that take into account aspects of the discovered habitat selection.
-To accomplish this, we ran weighted resource selection functions [wRSF; @alston_mitigating_2023].
-This approach uses autocorrelation-adjusted weights to estimate the availability of habitat types.
-We passed these models the main co-variates the population Poisson model identified as important: distance to woodland (continuous), Tall Grassland (binary), and Open Shrubland (binary).
-Once we had estimates of selection, we adjusted our original best perfomring autocorrelated kernel density estimates using the wRSF models.
-We also estimated a mean selection for each variable, using the weighted ctmm mean functionality.
+To supplement the population model, we ran individual step-selection models for all deer.
+These models used the the same data as the Poisson model.
+For the individual models, we used a formula that included landuse type, distance to woodland, distance to hedges, a binary describing whether they crossed a road, step length, log step length, and cos of turn angle.
+We used the IndRSA package [@IndRSA_text] to explore the variation of resulting coefficients, specifically specialisation, heterogeneity, and a weighted population mean [@bastillerousseau_simple_2022].
+Specialisation is the absolute magnitude of the coefficients, differences compared to the population mean coefficient could highlight diverging responses to the habitat covariates.
+This can be particularity informative when the diverging responses have resulted in a "neutral" population mean for the coefficient.
+Heterogeneity is the standard deviation of the coefficients; therefore, larger values indicate greater variation in the response.
+To carry forward the uncertainty surrounding the initial habitat coefficients, 10000 replicates of each metric were generated from a normal distribution centred on the original coefficient with a standard deviation equal to the standard error of the coefficient [@bastillerousseau_simple_2022].
 
 \clearpage
 
@@ -231,8 +231,6 @@ For our Aberdeen Roe Deer home range sizes ranged from `r totalAberRange`ha (95%
 Largely the deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8, Roe Deer 3; Fig. \@ref(fig:variogramPlot)).
 All bar two individuals found OU models to fit best, with the remaining two being better described by OUF models.
 All best fitting models were anisotropic, suggesting these Roe Deer are inhabiting non-uniform home ranges (i.e., not being as wide as they are tall).
-The habitat selection adjusted home ranges were on average `r round(HRadjDiff$meanDiff, digits = 2)` ±SD`r round(HRadjDiff$sdDiff, digits = 2)` ha larger non-adjusted AKDE ranges.
-The largest difference was only `r round(HRadjDiff$maxDiff, digits = 2)` ha.
 
 ```{r homeRangeSize, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Home range size as estimated via the Autocorrelated Kernel Density Estimators. Depicted are the 95% contour with 95% confidence intervals surrounding that estimate. The vertical line shows the naive mean of all home range estimates. The lower (and lighter) points and error bars show the areas when adjusted by the wRSF model selection."}
 knitr::include_graphics(here::here("figures", "homeRangeAreaPlot.png"))
@@ -307,19 +305,36 @@ The model also revealed that roads play a significant role in reducing connectiv
 
 Overall selection revealed significant selection for open shrubland (`r shrubCoef`) and tall grassland (`r tallGCoef`), with other relationships being less clear.
 Movement was most impacted by short grassland, tall grassland, and cropland, all showing the same pattern.
-These step lengths in these land uses to be lower, as seen in coeficeints for log step length (short grassland `r shortG_logsl_Coef`; tall grassland `r tallG_logsl_Coef`; cropland `r crop_logsl_Coef`) but with a larger tail to the gamma distribution (i.e, larger coefficient for step lengths (short grassland `r shortG_sl_Coef`; tall grassland `r tallG_sl_Coef`; cropland `r crop_sl_Coef`).
+These step lengths in these land uses to be lower, as seen in coefficients for log step length (short grassland `r shortG_logsl_Coef`; tall grassland `r tallG_logsl_Coef`; cropland `r crop_logsl_Coef`) but with a larger tail to the gamma distribution (i.e, larger coefficient for step lengths (short grassland `r shortG_sl_Coef`; tall grassland `r tallG_sl_Coef`; cropland `r crop_sl_Coef`).
 
 Estimates regarding human settlements were paired with very wide confidence intervals (`r humanCoef`), likely a result of minimal interaction with the tracked deer making estimation difficult.
 There are therefore treated as the point estimate suggests as areas of very low conductivity in further analysis.
 
-Weighted resource selection models largely supported and agreed with the Poisson model estimates (Fig. \@ref(fig:wrsfEffects)).
-There was a clear effect of distance from woodland at the population level, even if it was universally significant at an individual level.
-Only two individuals show an opposite effect, suggesting a (non-significant) selection for areas farther from woodland.
-Similarly, we see clear agreement between the approach for the effects of Tall Grassland.
-The effects of Open Shurbland and Tall Grassland were more mixed, with roughly equal number of individuals selected for as against both habitat types.
-For Open Shurbland the overall mean population selection disagreed with Poisson model, suggesting overall avoidance.
-We suspect this lack of agreement is due to a single individual's (Roe 12) strong avoidance.
-Tall Grassland by contrast, did agree with the Poisson model on a population level, but the mix of individuals selecting for and against it leaves the overall conclusion less clear.
+Further exploration of individual habitat selection models highlights whether the uncertainty in the Poisson model stems from weak responses or diverging responses that average towards a zero effect.
+Distance to woodland shows a marginally higher specialisation `r print("<ADD NUMBERS>")` compared to the population mean `r print("<ADD NUMBERS>")`.
+This difference can almost certainly be entirely explained by the deviating Roe 10 who expressed an opposite response to the majority of other deer.
+Outside of Roe 10, Roe Deer are showing the same clear preference for remaining near woodland as seen in the population Poisson model.
+Roe 10 is also likely the reason the estimated heterogeneity in response to distance to woodland `r print("<ADD NUMBERS>")` is greater than distance to hedges `r print("<ADD NUMBERS>")`.
+Distance to hedges does not see the same consistent response, instead with a number of individuals showing a opposing responses.
+This is reflected in the population mean being close to zero `r print("<ADD NUMBERS>")`, while the specialisation is considerably greater `r print("<ADD NUMBERS>")`.
+The combination of which could indicate two differing responses to hedges in the sampled Roe Deer.
+
+The chance of crossing a road is considerably more consistent, with the vast majority of individuals more opted to avoid crossing roads; this is reflected in a significantly negative population mean `r print("<ADD NUMBERS>")`.
+The elevated specialisation and heterogeneity values are almost entirely driven by two very uncertain estimates from Roe 09 and Roe 11.
+Other than those individuals, we can be confident in a consistently negative response to road crossing in Roe Deer.
+
+Land use variables presented the hardest to obtain confident estimates for due to the variable exposure of different individuals to each type.
+Cropland and Evergreen Needleleaf Forest showed the high rates of significant estimates, and both population estimates matched with the results from the Poisson model `r print("<ADD NUMBERS>")`.
+In both cases a single individual revealed a strong but very uncertain negative response that can explain the heterogeneity `r print("<ADD NUMBERS>")` and specialisation `r print("<ADD NUMBERS>")` values.
+The response to Evergreen Needleleaf Forest appears the least consistent, with multiple individuals expressing significantly negative and positive responses to the landuse.
+Tall Grassland showed similar levels of diverging estimates, with individuals showing a mix of positive and negative responses.
+Unlike the population estimates for Cropland and Evergreen Needleleaf Forest, the population mean for Tall Grassland `r print("<ADD NUMBERS>")` does not match the Poisson model `r print("<ADD NUMBERS>")`.
+This may be indicative that the interaction effects included in the Poisson model are mediating the responses to Tall Grassland.
+A similar reason may explain the clear Open Shurbland response in the Poisson model that is absent in the individual models and the population mean; however, this is more likely to be caused by the limited number of individuals exposed to Open Shrubland and a different handling of Roe 03's strongly negative response.
+The other landuse types are all harder to confidently interpret given the frequency of very uncertain extreme estimates.
+The uncertainty surrounding Human Settlements and Permanent Wetland is well reflected in the Poisson model.
+The high levels of specialisation and heterogeneity are driven by these same extreme estimates.
+The lack of exposure to these landuse types and potentially inconsistent response leaves the a lot of uncertainty concerning Roe Deer response to these landuse types.
 
 <!-- tendency to choose open shubrland and tall grass where possible, but avoiding cropland and needdleleaf forest -->
 <!-- only part of picture as movements tended to be lower in grasslands and cropland as seen in log_sl but with a larger tail to the gamma distribution (i.e, more variable as reflected in the increase in sl_). -->
@@ -333,6 +348,8 @@ Tall Grassland by contrast, did agree with the Poisson model on a population lev
 ```{r poisCoefPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Coefficient estimates, with 95% confidence intervals, from the Poisson model of habitat selection. Major outlying estimates have been replaced with labels to aid visualisation. Colour highlights and bolding reflect the significantly negative (light orange) and significantly positive (dark orange) coefficients."}
 knitr::include_graphics(here::here("figures", "poisCoef.png"))
 ```
+
+# Discussion
 
 Our tracking of 13 Roe Deer revealed that they have limited home ranges, that are heavily skewed towards deciduous woodland.
 They are willing to exit woodland, making use of open shrubland and grasslands, but these movements tend to be limited to within ~750m.
