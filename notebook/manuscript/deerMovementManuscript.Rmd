@@ -33,30 +33,39 @@ keywords: Movement ecology, step selection function, poisson, habitat preference
 # Introduction
 <Movement of animals offer insights into requirements, threats, and reactions to landscape change (e.g., fragmentation)>
 
-At a global scale mammal movement is significantly impacted by human presence [@tucker2018moving]. Perhaps most notably are human modification to landscapes in the form of habitat destruction and transformation. Animals responses to relatively novel human dominated landscapes can be hard to predict a priori. Birds can increase their movements in response to habitat homogenisation <CITE other meta-analysis on bird movements here>; whereas other groups, such as mammals and reptiles, broadly see reductions in movements, with vagility limited by human-created barriers (e.g., roads or fencing) [@tucker2018moving; @jerina2012roads; @jones2019fences]. 
+At a global scale mammal movement is significantly impacted by human presence [@tucker2018moving].
+Perhaps most notably are human modification to landscapes in the form of habitat destruction and transformation.
+Animals responses to relatively novel human dominated landscapes can be hard to predict a priori.
+Birds can increase their movements in response to habitat homogenisation <CITE other meta-analysis on bird movements here>; whereas other groups, such as mammals and reptiles, broadly see reductions in movements, with vagility limited by human-created barriers (e.g., roads or fencing) [@tucker2018moving; @jerina2012roads; @jones2019fences]. 
 
 <Ungulates are often highly mobile, thereby getting involved in numerous human-wildlife interactions. Examples, such as road collisions and disease transfer are undesirable.>
 
-Within mammals and reptiles, species that need to travel more for resource acquisition may be at greater risk of negative consequences of human modification on their movement. These negative consequences can be direct, such as road mortalities, or indirect, such as greater energetic costs of movement <REFS>.  
+Within mammals and reptiles, species that need to travel more for resource acquisition may be at greater risk of negative consequences of human modification on their movement.
+These negative consequences can be direct, such as road mortalities, or indirect, such as greater energetic costs of movement <REFS>.  
 
-Many ungulate species have been demonstrated as being vulnerable to having their movements disrupted by human action and human landscapes. <EXAMPLE HERE>.  
+Many ungulate species have been demonstrated as being vulnerable to having their movements disrupted by human action and human landscapes. <EXAMPLE HERE>.
 
-Deer represent a key group of ungulates in Europe, having to contend with high and near comprehensive human land transformation. They are known to react to roads and buildings <ADD DIRECTION OF EFFECT>, with a general tendency to avoid human modification [@coulon2008inferring]. 
+Deer represent a key group of ungulates in Europe, having to contend with high and near comprehensive human land transformation <HUMAN FOOTRPINT CITE HERE>.
+They are known to react to roads and buildings <ADD DIRECTION OF EFFECT>, with a general tendency to avoid human modification [@coulon2008inferring]. 
 
 <By understanding movement we may be better placed to predict and mitigate harmful interactions for deer and humans.>
 
-Even in the absence of concrete information on deer movements, a myriad of management interventions are often levied at mitigating deer movements, actions, and numbers [@pepper2020management]. Much of these efforts are informed by data concerning <CHECK PAPERS ON FENCING ETC>, that would be complimented by an examination of deer movements in areas yet to see that form of investigation such as the UK. A clear and complete picture of deer ecology would aid in tackling the controversial topic of deer management, and help reach the ultimate goals including forest regeneration and road collision mitigation, while also providing insights into key deer propagated tickborne diseases.  
+Even in the absence of concrete information on deer movements, a myriad of management interventions are often levied at mitigating deer movements, actions, and numbers [@pepper2020management].
+Much of these efforts are informed by data concerning <CHECK PAPERS ON FENCING ETC>, that would be complimented by an examination of deer movements in areas yet to see that form of investigation such as the UK.
+A clear and complete picture of deer ecology would aid in tackling the controversial topic of deer management, and help reach the ultimate goals including forest regeneration and road collision mitigation, while also providing insights into key deer propagated tick-borne diseases.  
 
-In the UK, research has investigated the impacts of land use, roads, urban areas and predator removal on deer <REFS>, with a particular focus on Red Deer *Cervus elaphus* due to its commercial value. Comparatively Roe Deer *Capreolus capreolus* remain understudied in parts of the UK such as Scotland [@mitchell1977ecology]. 
+In the UK, research has investigated the impacts of land use, roads, urban areas and predator removal on deer <REFS>, with a particular focus on Red Deer *Cervus elaphus* due to its commercial value.
+Comparatively Roe Deer *Capreolus capreolus* remain understudied in parts of the UK such as Scotland [@mitchell1977ecology]. 
 
-Roe deer are the smallest native deer species in the United Kingdom but the most ubiquitous, covering almost all the British mainland from the northern highlands of Scotland to southern Wessex in England [@burbaitee2009roe]. 
-
-Roe deer are ecologically and spatially flexible, able to adapt their spatial use in response to landscape, ques from conspecific, and predator presence [@basak2020human; @jepsen2004modelling]. Examples exist of them using isolated woodlands to outskirts major cities [@basak2020human; @jepsen2004modelling] <CHECK REFS>, and are capable of inhabiting mosaics of both woodland and open country, even when they include human disturbance [@ciach2019ungulates, @ewald2014lidar; @mysterud1999scale]. 
+Roe deer are the smallest native deer species in the United Kingdom and the most ubiquitous, covering almost all the British mainland from the northern highlands of Scotland to southern Wessex in England [@burbaitee2009roe]. 
+Roe deer are ecologically and spatially flexible, able to adapt their spatial use in response to landscape, cues from conspecifics, and predator presence [@basak2020human; @jepsen2004modelling].
+Examples exist of them using isolated woodlands to outskirts major cities [@basak2020human; @jepsen2004modelling] <CHECK REFS>, and are capable of inhabiting mosaics of both woodland and open country, even when they include human disturbance [@ciach2019ungulates, @ewald2014lidar; @mysterud1999scale]. 
 
 <Roe deer are widely distributed across europe and are known vectors for ticks as well as frequent road collision victims>
 <Compared to Europe, the UK populations of Roe Deer are comparatively less well documented despite the existence of the same human-deer interaction concerns.>
 
-Here we expand the knowledge of Roe Deer movement, targeting two different landscapes in the UK. We aim to document baseline space use of UK Roe Deer, while exploring their movement in relation to various human-created land use types and landscape features, with a particular focus on roads. 
+Here we expand the knowledge of Roe Deer movement, targeting two different landscapes in the UK.
+We aim to document baseline space use of UK Roe Deer, while exploring their movement in relation to various human-created land use types and landscape features, with a particular focus on roads.
 
 # Methods
 
@@ -502,10 +511,17 @@ knitr::include_graphics(here::here("figures", "ssfCoef_indPop.png"))
 
 Our tracking of 13 Roe Deer revealed that they have limited home ranges, that are heavily skewed towards deciduous woodland.
 They are willing to exit woodland, making use of open shrubland and grasslands, but these movements tend to be limited to within ~750m.
-Further when entering these more open non-wooded areas they tend to slow down.
-Additionally, we document a reduced chance of individuals crossing roads, indicating that roads reduce the permeability of these landscapes for Roe Deer. 
+When entering these more open non-wooded areas they tend to slow down.
+Individual models also highlight the consistency of the woodland preference.
+However, the responses to landuse types was variable between individuals, and their limited exposure to certain landuse types (e.g., human settlement) suggests more study to required to fully characterise UK Roe Deer habitat selection.
+Overall, Roe Deer exhibited a disinclination to cross roads found on a population and individual level.
+The documented chances of individuals crossing roads indicate that roads reduce the permeability of these landscapes for Roe Deer.
 
 <contextualise against European findings – Home range size - Can use home range database for quick overview > 
+Our findings on Roe Deer home range size are remarkably similar to those values reported in the homerange database for Roe Deer, with the database presenting examples of ranges larger and smaller <CITE>.
+A naive mean of those reviewed values suggests a range of 62 ha, that compares well to our 65 ha.
+This coherence is surprising given the rudimentary nature of the comparison, that does not account for differences in sampling protocol, duration, or home range estimation method.
+As such the UK Roe Deer examined here appear largely typical in regards to their use of space.
 
 <contextualise against European findings – preference> 
 
@@ -521,9 +537,16 @@ If the trappability of a deer is associated with certain movement or behavioural
 **Acclimation and habituation**. None of the deer had been previously collared, but there may have been a habituation effect to collars over time.
 Our removal of the first week of data likely have mitigated the largest impact prior to collar-habituation, but as the Wessex deer demonstrate there may be ongoing effects we cannot control for. 
 
-<implications for management?> 
+<implications for management?>
+<road collisions reduced by or are reducing deer likelihood to cross roads?>
 
 <conclusions / take aways> 
+
+Overall, we documented a strong preference for woodland in UK Roe Deer that apparently limits their ranges to areas within 750m of woodland patches.
+However, the resulting home ranges of UK Roe Deer do not appear atypical when compared to other tracked Roe Deer.
+We see a clear and consistent, albeit slight, aversion to crossing roads that may be limiting the permeability of the landscape for Roe Deer.
+Questions remain regarding their responses to certain landuse types that were not adequately represented in areas traversed by the deer.
+Further work could benefit from focusing on UK Roe Deer in areas with a greater urban footprint, or comparing movements against more granular quantifications of human activity [@gomez_understanding_2025]. 
 
 \clearpage
 
