@@ -13,3 +13,17 @@
 "sl_",0.000927569564119122,"Heterogeneity",NA
 "log sl_ ",0.0778725589675121,"Heterogeneity",NA
 "cos ta_ ",0.309286543400064,"Heterogeneity",NA
+"Evergreen Needleleaf Forest",NA,"Specialisation",68.3721755249737
+"Cropland",NA,"Specialisation",107.219427775649
+"Tall Grassland",NA,"Specialisation",0.661994650988251
+"Short Grassland",NA,"Specialisation",6339.97360943185
+"Open Shrubland",NA,"Specialisation",414.138391293808
+"Permanent Wetland",NA,"Specialisation",1911.2309166626
+"Human Settlements",NA,"Specialisation",1523.36904241502
+"Other",NA,"Specialisation",489.538174564327
+"Distance to Woodland",NA,"Specialisation",0.00836705521011651
+"Distance to Hedges",NA,"Specialisation",0.00169815582213027
+"Road Crossing",NA,"Specialisation",134.973774405245
+"sl_",NA,"Specialisation",0.0011496523127381
+"log sl_ ",NA,"Specialisation",0.061214641953189
+"cos ta_ ",NA,"Specialisation",0.408656541242995

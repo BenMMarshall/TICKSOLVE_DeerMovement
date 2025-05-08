@@ -158,7 +158,7 @@ extract_ssf_coefs <- function(ssfModels){
     mutate(variable = factor(variable, levels = unique(variable)))
 
   write.csv(simuSDmeans %>%
-              left_join(simuSPEmeans),
+              full_join(simuSPEmeans),
             file = here::here("tables", "ssf_meanSD_SPE.csv"), row.names = FALSE)
 
   outputList <- list(

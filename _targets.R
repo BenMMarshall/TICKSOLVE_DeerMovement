@@ -163,18 +163,18 @@ coreTargetList <- list(
     name = tar_akdeSummary,
     command = extract_akde_summaries(tar_deerData, tar_akdeLists)
   ),
-  tar_target(
-    name = tar_wrsfakde,
-    command = run_wrsf_models(deerData = tar_deerData,
-                              akdeLists = tar_akdeLists,
-                              landuseList = tar_landuseList,
-                              REGION = "Aberdeenshire",
-                              error = 0.01)
-  ),
-  tar_target(
-    name = tar_wrsf_effects,
-    command = plot_wrsf_effects(tar_wrsfakde)
-  ),
+  # tar_target(
+  #   name = tar_wrsfakde,
+  #   command = run_wrsf_models(deerData = tar_deerData,
+  #                             akdeLists = tar_akdeLists,
+  #                             landuseList = tar_landuseList,
+  #                             REGION = "Aberdeenshire",
+  #                             error = 0.01)
+  # ),
+  # tar_target(
+  #   name = tar_wrsf_effects,
+  #   command = plot_wrsf_effects(tar_wrsfakde)
+  # ),
   tar_target(
     name = tar_distancePatch_plot,
     command = plot_distance_to_patch(tar_deerData, tar_patchList, tar_akdeSummary)
@@ -188,7 +188,8 @@ coreTargetList <- list(
   ),
   tar_target(
     name = tar_homeRange_sizePlot,
-    command = plot_homeRange_sizes(tar_deerData, tar_akdeLists, tar_wrsfakde)
+    command = plot_homeRange_sizes(tar_deerData, tar_akdeLists#, tar_wrsfakde
+                                   )
   ),
   tar_target(
     name = tar_variograms,
@@ -331,12 +332,12 @@ connectTargetList <- list(
   # ),
   tar_combine(
     tar_connectPois_list,
-    coreTargetList[[21]][grep("tar_connectStanPois_location", names(coreTargetList[[21]]))],
+    coreTargetList[[19]][grep("tar_connectStanPois_location", names(coreTargetList[[19]]))],
     command = list(!!!.x)
   ),
   tar_combine(
     tar_msePois_df,
-    coreTargetList[[21]][grep("Pois_dbbmmmse", names(coreTargetList[[21]]))],
+    coreTargetList[[19]][grep("Pois_dbbmmmse", names(coreTargetList[[19]]))],
     command = rbind(!!!.x)
   ),
   tar_target(
