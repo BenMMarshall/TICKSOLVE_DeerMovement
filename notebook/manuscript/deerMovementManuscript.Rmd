@@ -252,6 +252,7 @@ Overall this resulted in an average of `r meanFixDayInText` fixes per day per in
 
 For our Aberdeen Roe Deer home range sizes ranged from `r totalAberRange`ha (95% contour point estimates), with a weighted mean of `r ctmmMean` (Fig. \@ref(fig:homeRangeSize)).
 Largely the deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8, Roe Deer 3; Fig. \@ref(fig:variogramPlot)).
+Effective sample sizes were all high (`r essOverall`), suggesting we can be confident in the home range estimates.
 All bar two individuals found OU models to fit best, with the remaining two being better described by OUF models.
 All best fitting models were anisotropic, suggesting these Roe Deer are inhabiting non-uniform home ranges (i.e., not being as wide as they are tall).
 The distribution of the distance to woodland values that revealed that 95% of all deer movements fell within the mean of half longest dimension of the 99% home range area (`r round(longestAxisText, digits = 0)` m; Fig. \@ref(fig:distanceDistributionPlot)).
