@@ -820,6 +820,41 @@ coreSDMList <- list(
 )
 
 
+# WREN landscape offshoot -------------------------------------------------
+
+wrenList_simplified <- list(
+  tar_target(
+    name = tar_patchList_WREN,
+    command = read_patches_data_WREN()
+  ),
+  tar_target(
+    name = tar_landuseList_WREN,
+    command = read_landuse_data_WREN(tar_patchList_WREN, prelimAggFact = NA)
+  ),
+  tar_target(
+    name = tar_predPoisResist_locationWREN,
+    command = build_predResistance_layer_WREN(tar_ssf_data, tar_pois_model,
+                                         tar_landuseList_WREN, tar_patchList_WREN,
+                                         tar_deerData, prelimAggFact = NA)
+  ),
+  tar_target(
+    name = tar_connectPois_locationWREN,
+    command = build_connect_layer_WREN(tar_predPoisResist_locationWREN, tar_patchList_WREN,
+                                       tar_akdeSummary,
+                                       REGION = "WREN", prelimAggFact = aggFact,
+                                       seed = 2025, repeatsPerPair = connectSettings$repeatsPerPair[1],
+                                       MSEdf = tar_msePois_df,
+                                       MINPATCHSIZE = minPatchSize_m2, cropArea = setCropArea, cores = useCores)
+  ),
+  tar_target(
+    name = tar_connectStanPois_locationWREN,
+    command = standardise_connect_layer(tar_connectPois_locationWREN,
+                                        REGION = "WREN",
+                                        THETA = NULL, MSEdf = tar_msePois_df)
+  )
+)
+
 list(coreTargetList,
      connectTargetList,
-     coreSDMList)
+     coreSDMList,
+     wrenList_simplified)
