@@ -844,14 +844,23 @@ wrenList_simplified <- list(
                                        REGION = "WREN", prelimAggFact = aggFact,
                                        seed = 2025, repeatsPerPair = connectSettings$repeatsPerPair[1],
                                        MSEdf = tar_msePois_df,
-                                       MINPATCHSIZE = minPatchSize_m2, cropArea = setCropArea, cores = useCores)
+                                       MINPATCHSIZE = minPatchSize_m2,
+                                       cropArea = setCropArea, cores = useCores)
   ),
   tar_target(
     name = tar_connectStanPois_locationWREN,
     command = standardise_connect_layer(tar_connectPois_locationWREN,
                                         REGION = "WREN",
                                         THETA = NULL, MSEdf = tar_msePois_df)
-  )
+  ),
+  tar_target(
+    tar_patch_summaryPois_WREN,
+    extract_patch_connectivity_WREN(tar_msePois_df,
+                                    tar_connectStanPois_locationWREN,
+                                    tar_patchList_WREN,
+                                    REGION = "WREN",
+                                    buffers = buffers)
+  ),
 )
 
 list(coreTargetList,
