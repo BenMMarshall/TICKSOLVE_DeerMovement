@@ -25,6 +25,7 @@ tar_option_set(
                "sjmisc",
                "boot",
                "sp",
+               "sf",
                "raster",
                "gdistance",
                "INLA",
@@ -128,6 +129,8 @@ inputList <- list(
 )
 
 saveRDS(inputList, file = here::here("data", "inputList.rds"))
+
+# Core Roe pipeline -------------------------------------------------------
 
 # Replace the target list below with your own:
 coreTargetList <- list(
@@ -310,6 +313,8 @@ coreTargetList <- list(
   #   command = run_julia_circuitscape(model = "pois", tar_circuitscape_data)
   # )
 )
+
+# Roe results combine -----------------------------------------------------
 
 connectTargetList <- list(
   # tar_combine(
@@ -829,7 +834,7 @@ wrenList_simplified <- list(
   ),
   tar_target(
     name = tar_landuseList_WREN,
-    command = read_landuse_data_WREN(tar_patchList_WREN, prelimAggFact = NA)
+    command = read_landuse_data_WREN(tar_patchList_WREN)
   ),
   tar_target(
     name = tar_predPoisResist_locationWREN,
@@ -860,7 +865,7 @@ wrenList_simplified <- list(
                                     tar_patchList_WREN,
                                     REGION = "WREN",
                                     buffers = buffers)
-  ),
+  )
 )
 
 list(coreTargetList,

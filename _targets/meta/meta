@@ -12,16 +12,17 @@ buffers|object|3d27737c1ea4b8a4|||||||||||||||
 build_connect_layer|function|d53c141bcb701ff4|||||||||||||||
 build_omniscape_layer|function|b45d30b1c8747d88|||||||||||||||
 build_predResistance_layer|function|1ee7504347841c09|||||||||||||||
+build_predResistance_layer_WREN|function|1ee7504347841c09|||||||||||||||
 build_predResistanceFallow_layer|function|087147650bb5f310|||||||||||||||
 build_predResistanceRodent_layer|function|fb6a6a85a430f68d|||||||||||||||
 calculate_akdes|function|2192df08ee8ea6f9|||||||||||||||
 calculate_dbbmm_mse|function|d460657c9b004785|||||||||||||||
 calculate_dbbmms|function|7a6d7321c24e85cf|||||||||||||||
 connectSettings|object|597d46847c0f2126|||||||||||||||
-connectTargetList|object|fe98e8162501b54b|||||||||||||||
+connectTargetList|object|2f42319b45b26f87|||||||||||||||
 contourAvialable|object|1fad89499ff2daae|||||||||||||||
-coreSDMList|object|ac97786b58f521eb|||||||||||||||
-coreTargetList|object|608a8a2dee57bcf0|||||||||||||||
+coreSDMList|object|2bd882c8d5525d41|||||||||||||||
+coreTargetList|object|17e6327cb5d4ce6c|||||||||||||||
 create_package_txt|function|68434bfa00bd3fcc|||||||||||||||
 create_psuedo_abs|function|31d31097855db786|||||||||||||||
 determine_rodent_HR|function|ad26f6614a35b331|||||||||||||||
@@ -30,6 +31,7 @@ extract_akde_summaries|function|f056d329a7b7ccfc|||||||||||||||
 extract_akdeFallow_longest|function|e8c62e28c532987b|||||||||||||||
 extract_connectivity_locations|function|944dcaf3b05a04d9|||||||||||||||
 extract_patch_connectivity|function|e29443f880671a62|||||||||||||||
+extract_patch_connectivity_WREN|function|e29443f880671a62|||||||||||||||
 extract_patch_omniConnectivity|function|e93a95273f594b17|||||||||||||||
 extract_rsf_results|function|200d4a2dba9d5e39|||||||||||||||
 extract_ssf_coefs|function|4f7637b1934c3ff4|||||||||||||||
@@ -77,7 +79,9 @@ read_cleanFallow_occData|function|5de2302722a96688|||||||||||||||
 read_cleanRodent_occData|function|0b076d8be4d7f895|||||||||||||||
 read_deer_data|function|51d0f06bc0c39b5d|||||||||||||||
 read_landuse_data|function|509ed78005ba4ef4|||||||||||||||
+read_landuse_data_WREN|function|6c722d7b654a29e6|||||||||||||||
 read_patches_data|function|c8fe2a56a109685c|||||||||||||||
+read_patches_data_WREN|function|fb47439fc4983394|||||||||||||||
 read_selectedPatches_data|function|fe38f0735932c907|||||||||||||||
 read_stack_layers|function|7f6eba34e4f18a1e|||||||||||||||
 render_rmd|function|b9d183184e3f651e|||||||||||||||
@@ -286,6 +290,7 @@ tar_HFOcc_plots_rodent|stem|ef0b8364160ded79|f0cb8554060bd989|e922cc2e6a08e9b5|9
 tar_homeRange_sizePlot|stem|c7aca7a67440daf7|5e82fc8c817ea1a4|cacf76181268ab75|-1202349281||t20216.3603974831s|0057ad292257b678|14384956|qs|local|vector|||0.671||
 tar_landuse|stem|2514449375f1a5b8|9ade98fbebd966f6|272b3059fc51c7f1|-1042947407||t20059.4104961729s|7b6e260af24ba309|636186|qs|local|vector|||14.297|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_landuseList|stem|1d95ed7f11fb977f|39e1e1b524863f89|56e6620817c20829|1043045520||t20139.8678402794s|741813d4e90a7ce1|9556232|qs|local|vector|||198.656|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
+tar_landuseList_WREN|stem|e8874b69be5d7820|a0c405c6b7907143|9a0732ca255142a9|-1710193959||t20223.8105809123s|59791f02dcfa4796|14711638|qs|local|vector|||209.313|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_location_plot|stem|c08c6c60a7b7b1e9|5f68b6eba77f161f|bb0c4da5d164b68a|-292057938||t20161.6439670859s|379d51ae7d12b280|121162349|qs|local|vector|||329.063|Ignoring unknown parameters box.padding|
 tar_longestFallow|stem|33a25b98a95a923d|f17ecc649504a9a6|e5ff4f25c1c3b5f7|-835242355||t20144.5482311371s|d5bf79044af760da|286|qs|local|vector|||0.11|repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant|
 tar_msePois_df|stem|70b97a4f41634ead|613a21b6639ed3e2|f931060e918448b9|451420258||t20143.3671625191s|5a4e1319a8bd5ef4|774|qs|local|vector|||0||
@@ -321,6 +326,7 @@ tar_patch_summaryPois_aberdeen|stem|3ad6abaa60e714ef|4b2081ea46bf8873|d969b9b8fb
 tar_patch_summaryPois_wessex|stem|a4849d58a12ab7fa|96f1e012ac161478|ef7b8f3603cae6e1|-1841925904||t20193.2929812453s|25d00b09bc691c16|105103|qs|local|vector|||70.656|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
 tar_patches|stem|d6d25fc8aed34257|6bdc42673a040198|607a84f6bc21e668|561265787||t20059.3990599721s|2eb739478038e79e|1431127|qs|local|vector|||509.703||
 tar_patchList|stem|7a2196f10fd3acb7|6bdc42673a040198|9e1c7e8d8a6432f1|-2053994115||t20139.8655387974s|f0a2fab4f777e7a1|1165207|qs|local|vector|||10.953||
+tar_patchList_WREN|stem|5a33d3c446ce6a8f|116428780933b992|f3d6c458fe8be233|1509006272||t20223.5320110216s|03aa83b30709b805|1523200|qs|local|vector|||5.359|package terra was built under R version 4.4.3. package fasterRaster was built under R version 4.4.3|
 tar_patchPois_MMMplot|stem|19f0a5efc54e7b45|7b01fd81622d481e|24445023a16a815a|-277519523||t20165.0448696442s|7ca5241a69c87d23|6889921|qs|local|vector|||25.531|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
 tar_patchPois_plot|stem|977e8cab33f9bfe6|ad3562a651dabad5|ba6ba8979e91de97|-155401431||t20193.2661593058s|c966106ccc1dfb8e|4046128|qs|local|vector|||9.266|extract transforming vector data to the CRS of the raster. st_centroid assumes attributes are constant over geometries|
 tar_patchPois_summaryPlot|stem|9b42208de295dc8e|32e27e276ca850ad|6f3cbdb3348ace20|535454467||t20133.5567479482s||6799543|qs|local|vector|||0.89||Problem while computing aesthetics.ℹ Error occurred in the 3rd layer.Caused by error object area_ha not found
@@ -370,3 +376,4 @@ test_validation_data|function|7deacb89460f47c2|||||||||||||||
 typeAvialable|object|684f65380be68543|||||||||||||||
 useCores|object|bfdfb93adc61812f|||||||||||||||
 windowSize|object|ff9fb58342e8c485|||||||||||||||
+wrenList_simplified|object|253a181022f7c724|||||||||||||||
