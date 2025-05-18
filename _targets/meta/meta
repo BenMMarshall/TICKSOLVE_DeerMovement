@@ -12,7 +12,7 @@ buffers|object|3d27737c1ea4b8a4|||||||||||||||
 build_connect_layer|function|d53c141bcb701ff4|||||||||||||||
 build_omniscape_layer|function|b45d30b1c8747d88|||||||||||||||
 build_predResistance_layer|function|1ee7504347841c09|||||||||||||||
-build_predResistance_layer_WREN|function|1ee7504347841c09|||||||||||||||
+build_predResistance_layer_WREN|function|347b760517d103e9|||||||||||||||
 build_predResistanceFallow_layer|function|087147650bb5f310|||||||||||||||
 build_predResistanceRodent_layer|function|fb6a6a85a430f68d|||||||||||||||
 calculate_akdes|function|2192df08ee8ea6f9|||||||||||||||
@@ -31,7 +31,7 @@ extract_akde_summaries|function|f056d329a7b7ccfc|||||||||||||||
 extract_akdeFallow_longest|function|e8c62e28c532987b|||||||||||||||
 extract_connectivity_locations|function|944dcaf3b05a04d9|||||||||||||||
 extract_patch_connectivity|function|e29443f880671a62|||||||||||||||
-extract_patch_connectivity_WREN|function|e29443f880671a62|||||||||||||||
+extract_patch_connectivity_WREN|function|57e2e74694cedb5d|||||||||||||||
 extract_patch_omniConnectivity|function|e93a95273f594b17|||||||||||||||
 extract_rsf_results|function|200d4a2dba9d5e39|||||||||||||||
 extract_ssf_coefs|function|4f7637b1934c3ff4|||||||||||||||
@@ -81,7 +81,7 @@ read_deer_data|function|51d0f06bc0c39b5d|||||||||||||||
 read_landuse_data|function|509ed78005ba4ef4|||||||||||||||
 read_landuse_data_WREN|function|6c722d7b654a29e6|||||||||||||||
 read_patches_data|function|c8fe2a56a109685c|||||||||||||||
-read_patches_data_WREN|function|fb47439fc4983394|||||||||||||||
+read_patches_data_WREN|function|c7e4309223845718|||||||||||||||
 read_selectedPatches_data|function|fe38f0735932c907|||||||||||||||
 read_stack_layers|function|7f6eba34e4f18a1e|||||||||||||||
 render_rmd|function|b9d183184e3f651e|||||||||||||||
@@ -210,6 +210,7 @@ tar_connectPois_location_1e.05_6|stem|bb61e9f8e0f1884f|cf192993d69dbe01|b6111fce
 tar_connectPois_location_1e.06_1_1200|stem|2083497e948f2c4d|175a37d07f9577da|a8ac63e3a07f6355|-1164391183||t20074.6966469151s|c46a94e42a62e426|185|qs|local|vector|||790.344||
 tar_connectPois_location_1e.06_1200|stem|2083497e948f2c4d|c7fae003477f0f4a|3ae7798473a2c3ac|-1247227747||t20074.5105487832s|c46a94e42a62e426|185|qs|local|vector|||1159.766||
 tar_connectPois_locationWessex|stem|daff47d66b1e3987|30c42e2c3e2d7bdb|488e805a36289d1a|-2017631618||t20147.6932493975s|f84fd0305bad89a6|150|qs|local|vector|||34803.578||
+tar_connectPois_locationWREN|stem|6851c968bd0fbdd9|bb7ef9be02e6087f|8e369b655ecf13dd|-712568413||t20226.2083634346s|f4925d1f4bd18266|151|qs|local|vector|||112328.406||
 tar_connectSSF_dbbmmmse_0.001_1|stem|82f990d6e169e3af|f4a2f08320d46188|e7f20e6708748829|-3733486||t20122.7520933919s|0bf64ef51e816249|272|qs|local|vector|||6.063||
 tar_connectSSF_dbbmmmse_0.001_1_1200|stem|6c2ff68b114ce5f6|439ac88a3cf1cfdf|3a8020d07787df0c|194589055||t20074.7237729611s|0d7ff1cbf08dc586|377|qs|local|vector|||4.656||
 tar_connectSSF_dbbmmmse_0.001_1_250|stem|b59bbe0eda402e0d|7cb6e9c94cd05c04|47bca42327ffb065|-1825086899||t20109.6144242912s|7a4f34d5f31c5e1b|378|qs|local|vector|||5.844||
@@ -278,6 +279,7 @@ tar_connectStanPois_location_1e.05_1|stem|d8125088b247c789|4545a17dfdd7af28|db71
 tar_connectStanPois_location_1e.05_3|stem|d8125088b247c789|d6293d0a2f973c1e|80b229ebb6794f9d|-557851158||t20130.5569889354s|5b53d96c56a085a8|163|qs|local|vector|||0.578||
 tar_connectStanPois_location_1e.05_6|stem|d8125088b247c789|02925b71ff6eb906|5efba7da8cfc6762|1518216909||t20143.3659944616s|5b53d96c56a085a8|163|qs|local|vector|||0.281||
 tar_connectStanPois_locationWessex|stem|12fdc2c18e2f3b77|637598758b823b7c|589d73a48575c279|943577448||t20147.6932541699s|62801cc8727d3ecd|162|qs|local|vector|||0.391||
+tar_connectStanPois_locationWREN|stem|1b34a666ffe8904e|469d923f20fc645b|4c960f41edefa54c|1251563617||t20226.3851683712s|5b53d96c56a085a8|163|qs|local|vector|||1.828||
 tar_connectStanSSF_location_0.001_1|stem|6e5d36434bae071d|3cf85b21435532e9|04c7de44b50383f1|-240808609||t20122.7519954204s|fe51d37b9c2ffbfd|161|qs|local|vector|||0.016||
 tar_connectStanSSF_location_0.1_1|stem|4cc25b666c573644|441e8ff76fb3eb6f|108b1dffe6cc24f8|-111109772||t20122.8233510628s|997e63b0c4f07439|157|qs|local|vector|||0.016||
 tar_connectStanSSF_location_1e.05_1|stem|01acf74760573bc3|dbeaef37757f9efa|3174504967ff13f1|1320690415||t20122.8174332031s|fe51d37b9c2ffbfd|161|qs|local|vector|||0.031||
@@ -290,7 +292,7 @@ tar_HFOcc_plots_rodent|stem|ef0b8364160ded79|f0cb8554060bd989|e922cc2e6a08e9b5|9
 tar_homeRange_sizePlot|stem|c7aca7a67440daf7|5e82fc8c817ea1a4|cacf76181268ab75|-1202349281||t20216.3603974831s|0057ad292257b678|14384956|qs|local|vector|||0.671||
 tar_landuse|stem|2514449375f1a5b8|9ade98fbebd966f6|272b3059fc51c7f1|-1042947407||t20059.4104961729s|7b6e260af24ba309|636186|qs|local|vector|||14.297|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_landuseList|stem|1d95ed7f11fb977f|39e1e1b524863f89|56e6620817c20829|1043045520||t20139.8678402794s|741813d4e90a7ce1|9556232|qs|local|vector|||198.656|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
-tar_landuseList_WREN|stem|e8874b69be5d7820|a0c405c6b7907143|9a0732ca255142a9|-1710193959||t20223.8105809123s|59791f02dcfa4796|14711638|qs|local|vector|||209.313|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
+tar_landuseList_WREN|stem|e8874b69be5d7820|a0c405c6b7907143|0915920ad94ac945|-1710193959||t20224.2625613053s|59791f02dcfa4796|14711638|qs|local|vector|||211.531|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_location_plot|stem|c08c6c60a7b7b1e9|5f68b6eba77f161f|bb0c4da5d164b68a|-292057938||t20161.6439670859s|379d51ae7d12b280|121162349|qs|local|vector|||329.063|Ignoring unknown parameters box.padding|
 tar_longestFallow|stem|33a25b98a95a923d|f17ecc649504a9a6|e5ff4f25c1c3b5f7|-835242355||t20144.5482311371s|d5bf79044af760da|286|qs|local|vector|||0.11|repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant|
 tar_msePois_df|stem|70b97a4f41634ead|613a21b6639ed3e2|f931060e918448b9|451420258||t20143.3671625191s|5a4e1319a8bd5ef4|774|qs|local|vector|||0||
@@ -324,9 +326,10 @@ tar_patch_omniSummary_rodent_wessex|stem|d1eb192d465b7b33|344be7669cbebe7d|6c445
 tar_patch_summaryPois|stem|3ad6abaa60e714ef|4b2081ea46bf8873|3123362ff7e430da|-997496096||t20146.4148960948s|9dacdd3691fe3a07|46351|qs|local|vector|||47.813|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
 tar_patch_summaryPois_aberdeen|stem|3ad6abaa60e714ef|4b2081ea46bf8873|d969b9b8fbe95ba9|1487251824||t20193.2921632434s|9dacdd3691fe3a07|46351|qs|local|vector|||49.828|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
 tar_patch_summaryPois_wessex|stem|a4849d58a12ab7fa|96f1e012ac161478|ef7b8f3603cae6e1|-1841925904||t20193.2929812453s|25d00b09bc691c16|105103|qs|local|vector|||70.656|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
+tar_patch_summaryPois_WREN|stem|420ce1fb57c2fb64|1c46f62587dab343|5bcc74d00006d69e|-780473828||t20226.3987687624s|f22be658424d4e64|221393|qs|local|vector|||172.64|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
 tar_patches|stem|d6d25fc8aed34257|6bdc42673a040198|607a84f6bc21e668|561265787||t20059.3990599721s|2eb739478038e79e|1431127|qs|local|vector|||509.703||
 tar_patchList|stem|7a2196f10fd3acb7|6bdc42673a040198|9e1c7e8d8a6432f1|-2053994115||t20139.8655387974s|f0a2fab4f777e7a1|1165207|qs|local|vector|||10.953||
-tar_patchList_WREN|stem|5a33d3c446ce6a8f|116428780933b992|f3d6c458fe8be233|1509006272||t20223.5320110216s|03aa83b30709b805|1523200|qs|local|vector|||5.359|package terra was built under R version 4.4.3. package fasterRaster was built under R version 4.4.3|
+tar_patchList_WREN|stem|e4a05f7d54467f64|116428780933b992|3599e3a85b362f89|1509006272||t20224.2601098171s|e9d4eb5bc655b70b|1550801|qs|local|vector|||5.453|package terra was built under R version 4.4.3. package fasterRaster was built under R version 4.4.3|
 tar_patchPois_MMMplot|stem|19f0a5efc54e7b45|7b01fd81622d481e|24445023a16a815a|-277519523||t20165.0448696442s|7ca5241a69c87d23|6889921|qs|local|vector|||25.531|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
 tar_patchPois_plot|stem|977e8cab33f9bfe6|ad3562a651dabad5|ba6ba8979e91de97|-155401431||t20193.2661593058s|c966106ccc1dfb8e|4046128|qs|local|vector|||9.266|extract transforming vector data to the CRS of the raster. st_centroid assumes attributes are constant over geometries|
 tar_patchPois_summaryPlot|stem|9b42208de295dc8e|32e27e276ca850ad|6f3cbdb3348ace20|535454467||t20133.5567479482s||6799543|qs|local|vector|||0.89||Problem while computing aesthetics.ℹ Error occurred in the 3rd layer.Caused by error object area_ha not found
@@ -338,6 +341,7 @@ tar_poisResist_map|stem|096ef3769fe9fa10|b5b031816c6ba61c|1007dcaa4632b60a|-2042
 tar_predPoisResist_fallow|stem|4d50d3e138bfdab0|6ed2b3be1774e69f|a3f522f4b31ff88b|-1209717757||t20175.2151585648s|5a04a740e1697d34|146|qs|local|vector|||54.484|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_predPoisResist_location|stem|400a06cc9ecf29c9|a68f8146c46b9408|f827fb544020aca1|-837149021||t20140.0218400447s|b6a3947d99208431|149|qs|local|vector|||16.906||
 tar_predPoisResist_locationWessex|stem|6a1330447a91b4e3|f9c0233b8021a1e1|f827fb544020aca1|-460945527||t20140.0221192071s|b6a3947d99208431|149|qs|local|vector|||24.109||
+tar_predPoisResist_locationWREN|stem|fc9c385b1052890c|46a4d6c24f0c643e|7925222a576a6ad0|1650135184||t20224.2632245642s|8c397a474f1bcd79|148|qs|local|vector|||56.453||
 tar_predPoisResist_rodent|stem|ebc333598e095bb8|466e8fe116cc4676|61502e41583ec772|1898611622||t20166.4303591022s|1b577d9c0616ad7b|145|qs|local|vector|||23.078||
 tar_predPoisResist_rodent_aberdeen|stem|b1ec6ccd88034090|5186efed7dcdfbc3|8e2fbad62c54ffa8|404949190||t20175.2156228024s|b6a3947d99208431|149|qs|local|vector|||19.688||
 tar_predPoisResist_rodent_wessex|stem|8567b151ea543866|8b16c5a1583c723c|33e595bc5dc8b768|9972979||t20175.2153946966s|b6a3947d99208431|149|qs|local|vector|||20.391||
@@ -376,4 +380,4 @@ test_validation_data|function|7deacb89460f47c2|||||||||||||||
 typeAvialable|object|684f65380be68543|||||||||||||||
 useCores|object|bfdfb93adc61812f|||||||||||||||
 windowSize|object|ff9fb58342e8c485|||||||||||||||
-wrenList_simplified|object|253a181022f7c724|||||||||||||||
+wrenList_simplified|object|19a02f69f7ecf5e5|||||||||||||||

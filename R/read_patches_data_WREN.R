@@ -9,6 +9,8 @@ read_patches_data_WREN <- function(){
 
   patchesWREN <- read_sf(here("data", "GIS data", "patchesWREN.geoJSON"))
 
+  patchesWREN$Ptch_ID <- patchesWREN$lyr.1
+
   patchList <- list("WREN" = patchesWREN)
 
   return(patchList)
