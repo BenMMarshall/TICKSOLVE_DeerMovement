@@ -12,6 +12,7 @@ allPatches <- st_read(here("data", "GIS data", "WRENLandscape", "all_patches_pol
 plot(allPatches)
 allPatches <- st_transform(allPatches, crs = st_crs(allPoints))
 
+write_sf(obj = allPatches, dsn = here("data", "GIS data", "patchesWREN.geoJSON"))
 
 overallLU <- rast(here("data", "GIS data", "UKCEH_Landcover", "UKCEH_Landcover2023_wr_25res", "data", "LCM.tif"))
 plot(overallLU$LCM_1)

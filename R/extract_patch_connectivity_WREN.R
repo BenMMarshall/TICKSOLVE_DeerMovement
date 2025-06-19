@@ -22,19 +22,21 @@ extract_patch_connectivity_WREN <- function(MSEdf,
   # targets::tar_load("tar_msePois_df")
   # targets::tar_load("tar_connectStanPois_locationWREN")
   # targets::tar_load("tar_patchList_WREN")
-  # patchList <- tar_patchList_WREN
+  # patchList <- list(WREN = read_sf(here("data", "GIS data", "patchesWREN.geoJSON")))
   # MSEdf <- tar_msePois_df
   # connectRasterLocations <- tar_connectStanPois_locationWREN
   # connectTerra <- terra::rast(connectRasterLocations[[1]])
   # targets::tar_source()
   # REGION <- "WREN"
-  # buffers <- c(0, 250, 500, 750)
+  # WRENbuffers <- c(0, 250, 500, 750, 1000, 1500, 2000)
+  # buffers <- WRENbuffers
 
   connectTerra <- terra::rast(connectRasterLocations[1])
 
   paletteListpaletteListpaletteList <- load_deer_palette()
 
   focalPatches <- patchList[[sub("shire", "", REGION)]] %>%
+    rename(Ptch_ID = id) %>%
     filter(!duplicated(Ptch_ID))
   # selectedFocalPatches <- selectedPatchList[str_detect(names(selectedPatchList), sub("shire", "", REGION))][[1]]
 
@@ -80,13 +82,19 @@ extract_patch_connectivity_WREN <- function(MSEdf,
   }
   bufferSummaries <- do.call(rbind, patchesBufferedList)
 
+  patchMetrics <- read.csv(here("data", "GIS data", "wren_site_metrics.csv")) %>%
+    rename(Ptch_ID = patch.id, buffer = buffer_size)
+
   patchAreas <- data.frame(Ptch_ID = focalPatches$Ptch_ID,
                            area_km2 = as.numeric(units::set_units(st_area(focalPatches), "km2")))
 
   bufferSummaries <- bufferSummaries %>%
     left_join(patchAreas, by = "Ptch_ID")
 
-  write.csv(bufferSummaries,
+  bufferSummariesAll <- patchMetrics %>%
+    full_join(bufferSummaries, by = c("Ptch_ID", "buffer"))
+
+  write.csv(bufferSummariesAll,
             here("tables", paste0("connectivityValuesAll_Roe_", REGION, ".csv")),
             row.names = FALSE)
 

@@ -827,6 +827,8 @@ coreSDMList <- list(
 
 # WREN landscape offshoot -------------------------------------------------
 
+WRENbuffers <- c(0, 250, 500, 750, 1000, 1500, 2000)
+
 wrenList_simplified <- list(
   tar_target(
     name = tar_patchList_WREN,
@@ -862,9 +864,9 @@ wrenList_simplified <- list(
     tar_patch_summaryPois_WREN,
     extract_patch_connectivity_WREN(tar_msePois_df,
                                     tar_connectStanPois_locationWREN,
-                                    tar_patchList_WREN,
+                                    list(WREN = read_sf(here("data", "GIS data", "patchesWREN.geoJSON"))),
                                     REGION = "WREN",
-                                    buffers = buffers)
+                                    buffers = WRENbuffers)
   )
 )
 
