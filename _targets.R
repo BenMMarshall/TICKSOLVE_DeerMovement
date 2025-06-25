@@ -860,7 +860,7 @@ wrenList_simplified <- list(
                                     tar_patchList_WREN,
                                     REGION = "WREN",
                                     buffers = buffers)
-  ),
+  )
 )
 
 list(coreTargetList,
