@@ -25,6 +25,7 @@ tar_option_set(
                "sjmisc",
                "boot",
                "sp",
+               "sf",
                "raster",
                "gdistance",
                "INLA",
@@ -128,6 +129,8 @@ inputList <- list(
 )
 
 saveRDS(inputList, file = here::here("data", "inputList.rds"))
+
+# Core Roe pipeline -------------------------------------------------------
 
 # Replace the target list below with your own:
 coreTargetList <- list(
@@ -310,6 +313,8 @@ coreTargetList <- list(
   #   command = run_julia_circuitscape(model = "pois", tar_circuitscape_data)
   # )
 )
+
+# Roe results combine -----------------------------------------------------
 
 connectTargetList <- list(
   # tar_combine(
@@ -822,6 +827,8 @@ coreSDMList <- list(
 
 # WREN landscape offshoot -------------------------------------------------
 
+WRENbuffers <- c(0, 250, 500, 750, 1000, 1500, 2000)
+
 wrenList_simplified <- list(
   tar_target(
     name = tar_patchList_WREN,
@@ -829,23 +836,23 @@ wrenList_simplified <- list(
   ),
   tar_target(
     name = tar_landuseList_WREN,
-    command = read_landuse_data_WREN(tar_patchList_WREN, prelimAggFact = NA)
+    command = read_landuse_data_WREN(tar_patchList_WREN)
   ),
   tar_target(
     name = tar_predPoisResist_locationWREN,
     command = build_predResistance_layer_WREN(tar_ssf_data, tar_pois_model,
                                          tar_landuseList_WREN, tar_patchList_WREN,
-                                         tar_deerData, prelimAggFact = NA)
+                                         tar_deerData, REGION = "WREN", prelimAggFact = NA)
   ),
   tar_target(
     name = tar_connectPois_locationWREN,
-    command = build_connect_layer_WREN(tar_predPoisResist_locationWREN, tar_patchList_WREN,
-                                       tar_akdeSummary,
-                                       REGION = "WREN", prelimAggFact = aggFact,
-                                       seed = 2025, repeatsPerPair = connectSettings$repeatsPerPair[1],
-                                       MSEdf = tar_msePois_df,
-                                       MINPATCHSIZE = minPatchSize_m2,
-                                       cropArea = setCropArea, cores = useCores)
+    command = build_connect_layer(tar_predPoisResist_locationWREN, tar_patchList_WREN,
+                                  tar_akdeSummary,
+                                  REGION = "WREN", prelimAggFact = NA,
+                                  seed = 2025, repeatsPerPair = connectSettings$repeatsPerPair[1],
+                                  MSEdf = tar_msePois_df,
+                                  MINPATCHSIZE = minPatchSize_m2,
+                                  cropArea = setCropArea, cores = useCores)
   ),
   tar_target(
     name = tar_connectStanPois_locationWREN,
@@ -857,9 +864,9 @@ wrenList_simplified <- list(
     tar_patch_summaryPois_WREN,
     extract_patch_connectivity_WREN(tar_msePois_df,
                                     tar_connectStanPois_locationWREN,
-                                    tar_patchList_WREN,
+                                    list(WREN = read_sf(here("data", "GIS data", "patchesWREN.geoJSON"))),
                                     REGION = "WREN",
-                                    buffers = buffers)
+                                    buffers = WRENbuffers)
   )
 )
 

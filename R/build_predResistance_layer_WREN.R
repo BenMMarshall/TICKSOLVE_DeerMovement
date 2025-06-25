@@ -6,7 +6,7 @@
 #'
 #' @export
 build_predResistance_layer_WREN <- function(ssfData, ssfPoismodel, landuseList, patchList, deerData, REGION,
-                                       prelimAggFact, inlaFormula = NULL){
+                                            prelimAggFact, inlaFormula = NULL){
 
   # library(here)
   # library(dplyr)
@@ -24,23 +24,22 @@ build_predResistance_layer_WREN <- function(ssfData, ssfPoismodel, landuseList, 
   # targets::tar_load("tar_pois_model")
   # targets::tar_load("tar_ssf_data")
   # targets::tar_load("tar_deerData")
-  # targets::tar_load("tar_patchList")
-  # targets::tar_load("tar_landuseList")
+  # targets::tar_load("tar_patchList_WREN")
+  # targets::tar_load("tar_landuseList_WREN")
   #
   # ssfData <- tar_ssf_data
   # ssfPoismodel <- tar_ssf_models
   # ssfPoismodel <- tar_pois_model
-  # landuseList <- tar_landuseList
-  # patchList <- tar_patchList
+  # landuseList <- tar_landuseList_WREN
+  # patchList <- tar_patchList_WREN
   # deerData <- tar_deerData
 
-  # REGION <- "Wessex"
-  # REGION <- "Aberdeenshire"
+  # REGION <- "WREN"
 
   focalPatches <- patchList[[sub("shire", "", REGION)]]
 
   focalDeer <- deerData %>%
-    filter(region == REGION)
+    filter(region == "Aberdeenshire")
   # focalData <- ssfData$Roe04_F$steps
   # focalModel <- ssfModels$Roe04_F
 

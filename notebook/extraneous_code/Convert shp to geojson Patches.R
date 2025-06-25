@@ -122,3 +122,12 @@ patchesAberdeen %>%
            xlim = st_bbox(sfDeer[sfDeer$region == "Aberdeen",])[c(1,3)])
 
 
+
+# WREN --------------------------------------------------------------------
+
+WRENPatches <- read_sf(here("data", "GIS data", "WRENLandscape",
+                                "all_patches_polygon.shp"))
+WRENPatches <- st_transform(WRENPatches, st_crs(27700))
+
+st_write(WRENPatches, here("data", "GIS data", "patchesWREN.geoJSON"),
+         driver = "geoJSON", append = FALSE)
