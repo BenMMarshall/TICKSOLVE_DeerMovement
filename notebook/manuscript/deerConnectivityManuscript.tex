@@ -96,20 +96,19 @@ deer, rodent, connectivity
 
 \subsection{Estimating Preference and Probability of Occurrence}\label{estimating-preference-and-probability-of-occurrence}
 
-For the Roe Deer we made use of previously conducted analysis on their movements that aimed to determine their preference for various land use types, as well as how their movements are altered when within them .
+For the Roe Deer we made use of previously conducted analysis on their movements that aimed to determine their preference for various land use types, as well as how their movements are altered when within them \textless{} CITE PREPRINT MOVEMENT PAPER WHEN READY \textgreater.
 We took the coefficients of the population level Poisson habitat preference model as a basis to estimate landscape level Roe Deer functional connectivity.
 
 For Fallow Deer and Rodents, we lacked sufficient movement data to undertake the a similar procedure.
 Instead we followed the workflow outlined by Prima et al. (\citeproc{ref-prima_comprehensive_2024}{2024}), using species distribution modelling to generate reasonable estimations of landscape resistance and then applying a circuit-theory approach to determine how interconnected selected woodland patches were (\citeproc{ref-mcrae_using_2008}{McRae et al., 2008}; \citeproc{ref-mcrae_conserving_2016}{McRae et al., 2016}).
 
 We collated occurrence data from GBIF and NBN Atlas (\citeproc{ref-gbif_gbiforg_2025}{GBIF, 2025}; \citeproc{ref-nbn_trust_national_2025}{Trust, 2025}) for the Fallow Deer and Rodents, using searches from ``\emph{Dama dama}'', ``\emph{Myodes glareolus}'', ``\emph{Apodemus flavicollis}'', ``\emph{Apodemus sylvaticus}'', ``\emph{Sciurus carolinensis}'', and ``\emph{Sciurus vulgaris}'' (\citeproc{ref-gbif_fallow_2025}{GBIF.Org User, 2025a},\citeproc{ref-gbif_rodent_2025}{b}).
-We downloaded all records within the UK, for all species.
+We downloaded all records within the UK, for all species, resulting in 5699 occurrence locations of Fallow Deer and 35903 for rodents (1471 \emph{Myodes glareolus}; 142 \emph{Apodemus flavicollis}; 2381 \emph{Apodemus sylvaticus}; 22254 \emph{Sciurus carolinensis}; 9655 \emph{Sciurus vulgaris}).
 We filtered the records as to only include those made via human observations, were recorded to sub-25m accuracy, and had verified species identities.
-Once filtered we used CoordinateCleaner to eliminate records that likely contained location errors on a species-by-species basis.
+Once filtered we used CoordinateCleaner (\citeproc{ref-coordinatecleaner}{Zizka et al., 2019}) to eliminate records that likely contained location errors on a species-by-species basis.
 Namely we removed records within 10km of a capital, within 1km of a country centroid, had identical decimal latitude and longitudes, had zero in either latitude or longitude, or were identified as outliers.
 We used the quantile method of identifying outliers, removing those records beyond 5 times the interquartile range of minimum distances to the next neighbour.
 Finally, we thinned the both the Fallow Deer and Rodent data so that no occurrence shared a raster cell with another occurrence.
-This process resulted in \_\_ occurrence locations of Fallow Deer and \_\_\_ for rodents (\_\_ \emph{Myodes glareolus}; \_\_ \emph{Apodemus flavicollis}; \_\_ \emph{Apodemus sylvaticus}; \_\_ \emph{Sciurus carolinensis}; \_\_ \emph{Sciurus vulgaris}).
 
 We generated a number pseudo-absences data points for both target taxa equal to three times the number of true-occurrences available; we repeated this process 10 times allowing for multiple model fits .
 In the case of Fallow Deer, we limited the area pseudo-absences generated within to 6.2km of a known Fallow Deer occurrence.
@@ -118,7 +117,7 @@ For rodents we limited the pseudo-absences to Great Britain (minus Shetland and 
 We weighted the pseudo-absences using a bias layer to mitigate the impacts of the sampling biases associated with the true-occurrence data.
 For our bias layer, we used the human footprint index (\citeproc{ref-mu_annual_2021}{Mu et al., 2021}, \citeproc{ref-mu_global_2022}{2022}) that combines a variety of human activities and land conversions into a single metric, and could serve as a proxy for the likelihood of observing our target species.
 
-We used the biomod2 package to manage species distribution modelling .
+We used the biomod2 package to manage species distribution modelling (\citeproc{ref-biomod2}{Thuiller et al., 2025}).
 We fitted a variety of models: Artificial Neural Network, Boosted Regression Trees, Generalized Linear Model, and Random Forest.
 We intended to run Maximum Entropy and eXtreme Gradient Boosting Training, but the inclusion of categoric variables precluded their use.
 We used stratified cross validation to evaluate model performance, as we were not priorisitisng model transferability (\citeproc{ref-Muscarella2014}{Muscarella et al., 2014}).
@@ -130,7 +129,7 @@ Once the TSS weighted mean ensemble model had been created, we used it to projec
 
 \subsection{Translating Preferences into Connectivity}\label{translating-preferences-into-connectivity}
 
-For Roe Deer, once we had estimates of selection and effect for all the environmental aspects of interest, we spatially mapped those estimated covariates back onto the landscape, resulting in a map of conductance (Fig. @ref:(figconductancePlot)).
+For Roe Deer, once we had estimates of selection and effect for all the environmental aspects of interest, we spatially mapped those estimated covariates back onto the landscape, resulting in a map of conductance (Fig. \ref{fig:conductancePlot}).
 This process took the form of generating a model matrix based on all environmental covariates at each cell in the overall landscape raster and using the fitted Poisson model coefficients to calculate predicted deer use for each cell.
 For roads we rasterised the road polyline data and used the road crossing coefficient to create a conductance value for the road cells.
 For the covariates that involved movement interactions, we used the mean step and turn angle in calculations of predicted use.
@@ -139,7 +138,7 @@ For we ignored the uncertainty surrounding the selection estimates, instead rely
 
 For the Fallow Deer and Rodents the underlying conductance layer was generated from the final ensemble species distribution model.
 In the case of the Fallow Deer we have sufficient data to parametrise the road resistance based on the results of a Fallow Deer Poisson model.
-This modelling process mirrored the procedure undertaken for Roe Deer except only examined hte likelihood of crossing a road.
+This modelling process mirrored the procedure undertaken for Roe Deer except only examined the likelihood of crossing a road.
 We altered the resistance of the cells that corresponded to the presence of a road in the same way as described for the Roe Deer, using values draw from the Poisson model.
 We did not have comparable road crossing data for the rodents, meaning that their conductance raster equalled one describing probability of occurrence.
 
@@ -193,7 +192,7 @@ We ensured that the block size was less than one-tenth of the search radius to m
 We also varied the search radius between the groups, as each has different movement/dispersal abilities.
 In both instances we based our search radius on previously recorded estimates of home range size, based heavily on the data provide by the home range database (\citeproc{ref-broekman_homerange_2022}{Broekman et al., 2022}; \citeproc{ref-broekman_homerange_2023}{Broekman et al., 2023}).
 In both case we filtered the home range data to species/group and calculated a mean home range area.
-For the Fallow Deer their mean home range suggested a search radius of 1500; whereas for Rodents a search radius of 150 was chosen.
+For the Fallow Deer their mean home range suggested a search radius of 1500m; whereas for Rodents a search radius of 150m was chosen.
 For both groups we used the previously denoted patches as sources/nodes (all with the same strength).
 
 \clearpage
@@ -459,6 +458,9 @@ Shabani F, Kumar L, Ahmadi M. 2018. Assessing {Accuracy} {Methods} of {Species} 
 \bibitem[\citeproctext]{ref-amt}
 Signer J, Fieberg J, Avgar T. 2019. Animal movement tools (amt): R package for managing tracking data and conducting habitat selection analyses. \emph{Ecology and Evolution} 9:880--890.
 
+\bibitem[\citeproctext]{ref-biomod2}
+Thuiller W, Georges D, Gueguen M, Engler R, Breiner F, Lafourcade B, Patin R, Blancheteau H. 2025. \emph{\href{https://CRAN.R-project.org/package=biomod2}{biomod2: Ensemble platform for species distribution modeling}}.
+
 \bibitem[\citeproctext]{ref-nbn_trust_national_2025}
 Trust N. 2025. \href{https://ror.org/00mcxye41}{The {National} {Biodiversity} {Network} ({NBN}) {Atlas}}.
 
@@ -500,6 +502,9 @@ Xie Y, Allaire JJ, Grolemund G. 2018. \emph{\href{https://bookdown.org/yihui/rma
 
 \bibitem[\citeproctext]{ref-rmarkdown2020}
 Xie Y, Dervieux C, Riederer E. 2020. \emph{\href{https://bookdown.org/yihui/rmarkdown-cookbook}{R markdown cookbook}}. Boca Raton, Florida: Chapman; Hall/CRC.
+
+\bibitem[\citeproctext]{ref-coordinatecleaner}
+Zizka A, Silvestro D, Andermann T, Azevedo J, Duarte Ritter C, Edler D, Farooq H, Herdean A, Ariza M, Scharn R, Svanteson S, Wengstrom N, Zizka V, Antonelli A. 2019. CoordinateCleaner: Standardized cleaning of occurrence records from biological collection databases. \emph{Methods in Ecology and Evolution}:--7. DOI: \href{https://doi.org/10.1111/2041-210X.13152}{10.1111/2041-210X.13152}.
 
 \end{CSLReferences}
 

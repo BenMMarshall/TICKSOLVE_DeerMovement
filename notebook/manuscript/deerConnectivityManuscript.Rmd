@@ -36,14 +36,15 @@ keywords: deer, rodent, connectivity
 library(here, quietly = TRUE, verbose = FALSE)
 library(dplyr, quietly = TRUE, verbose = FALSE)
 library(stringr, quietly = TRUE, verbose = FALSE)
+library(CoordinateCleaner, quietly = TRUE, verbose = FALSE)
 
 inputList <- readRDS(file = here::here("data", "inputList.rds"))
 
 longestAxisSummary <- read.csv(file = here::here("tables", "longestAxisSummary.csv"))
 longestAxisText <- mean(as.numeric(longestAxisSummary$longestAxisRange_m))/2
 
-# targets::tar_load("tar_occData_fallow", store = here::here("_targets"))
-# targets::tar_load("tar_occData_rodent", store = here::here("_targets"))
+targets::tar_load("tar_occData_rodent", store = here::here("_targets"))
+targets::tar_load("tar_occData_fallow", store = here::here("_targets"))
 
 ### need code to extract numbers of individuals used in SDMS
 
@@ -51,7 +52,7 @@ longestAxisText <- mean(as.numeric(longestAxisSummary$longestAxisRange_m))/2
 
 ## Estimating Preference and Probability of Occurrence
 
-For the Roe Deer we made use of previously conducted analysis on their movements that aimed to determine their preference for various land use types, as well as how their movements are altered when within them <CITE PREPRINT MOVEMENT PAPER WHEN READY>.
+For the Roe Deer we made use of previously conducted analysis on their movements that aimed to determine their preference for various land use types, as well as how their movements are altered when within them < CITE PREPRINT MOVEMENT PAPER WHEN READY >.
 We took the coefficients of the population level Poisson habitat preference model as a basis to estimate landscape level Roe Deer functional connectivity.
 
 For Fallow Deer and Rodents, we lacked sufficient movement data to undertake the a similar procedure.
@@ -59,13 +60,12 @@ Instead we followed the workflow outlined by @prima_comprehensive_2024, using sp
 
 We collated occurrence data from GBIF and NBN Atlas [@gbif_gbiforg_2025; @nbn_trust_national_2025] for the Fallow Deer and Rodents, using searches from "*Dama dama*", "*Myodes glareolus*", "*Apodemus flavicollis*", "*Apodemus sylvaticus*", "*Sciurus carolinensis*", and "*Sciurus vulgaris*" [@gbif_fallow_2025; @gbif_rodent_2025].
 <!-- NBN has specific DOIs to add from the README files that came with the download -->
-We downloaded all records within the UK, for all species.
+We downloaded all records within the UK, for all species, resulting in `r nrow(tar_occData_fallow)` occurrence locations of Fallow Deer and `r nrow(tar_occData_rodent)` for rodents (`r table(tar_occData_rodent$species)[["Myodes glareolus"]]` *Myodes glareolus*; `r table(tar_occData_rodent$species)[["Apodemus flavicollis"]]` *Apodemus flavicollis*; `r table(tar_occData_rodent$species)[["Apodemus sylvaticus"]]` *Apodemus sylvaticus*; `r table(tar_occData_rodent$species)[["Sciurus carolinensis"]]` *Sciurus carolinensis*; `r table(tar_occData_rodent$species)[["Sciurus vulgaris"]]` *Sciurus vulgaris*).
 We filtered the records as to only include those made via human observations, were recorded to sub-25m accuracy, and had verified species identities.
-Once filtered we used CoordinateCleaner <CITE> to eliminate records that likely contained location errors on a species-by-species basis.
+Once filtered we used CoordinateCleaner [@coordinatecleaner] to eliminate records that likely contained location errors on a species-by-species basis.
 Namely we removed records within 10km of a capital, within 1km of a country centroid, had identical decimal latitude and longitudes, had zero in either latitude or longitude, or were identified as outliers. 
 We used the quantile method of identifying outliers, removing those records beyond 5 times the interquartile range of minimum distances to the next neighbour.
 Finally, we thinned the both the Fallow Deer and Rodent data so that no occurrence shared a raster cell with another occurrence.
-This process resulted in __ occurrence locations of Fallow Deer and ___ for rodents (__ *Myodes glareolus*; __ *Apodemus flavicollis*; __ *Apodemus sylvaticus*; __ *Sciurus carolinensis*; __ *Sciurus vulgaris*).
 
 We generated a number pseudo-absences data points for both target taxa equal to three times the number of true-occurrences available; we repeated this process 10 <!-- ensure it matches with code --> times allowing for multiple model fits <!-- biomod2 has reccommendations regarding these numbers: https://biomodhub.github.io/biomod2/articles/vignette_pseudoAbsences.html-->.
 In the case of Fallow Deer, we limited the area pseudo-absences generated within to 6.2km of a known Fallow Deer occurrence.
@@ -74,10 +74,9 @@ For rodents we limited the pseudo-absences to Great Britain (minus Shetland and 
 We weighted the pseudo-absences using a bias layer to mitigate the impacts of the sampling biases associated with the true-occurrence data.
 For our bias layer, we used the human footprint index [@mu_annual_2021; @mu_global_2022] that combines a variety of human activities and land conversions into a single metric, and could serve as a proxy for the likelihood of observing our target species.
 
-We used the biomod2 package to manage species distribution modelling <CITE>.
+We used the biomod2 package to manage species distribution modelling [@biomod2].
 We fitted a variety of models: Artificial Neural Network, Boosted Regression Trees, Generalized Linear Model, and Random Forest. 
 We intended to run Maximum Entropy and eXtreme Gradient Boosting Training, but the inclusion of categoric variables precluded their use.
-<!-- We used block cross validation, balanced based on environmental covariates, to evaluate model performance <CITE>. NO LONGER - SWAPPED TO STRATIFIED -->
 We used stratified cross validation to evaluate model performance, as we were not priorisitisng model transferability [@Muscarella2014].
 We balanced stratification based on known occurrences both in x and y dimensions.
 We elected to use True Skill Statistic (TSS) as our primary metric of model performance [@shabani_assessing_2018; @allouche_assessing_2006].
@@ -87,7 +86,7 @@ Once the TSS weighted mean ensemble model had been created, we used it to projec
 
 ## Translating Preferences into Connectivity
 
-For Roe Deer, once we had estimates of selection and effect for all the environmental aspects of interest, we spatially mapped those estimated covariates back onto the landscape, resulting in a map of conductance (Fig. \@ref:(figconductancePlot)).
+For Roe Deer, once we had estimates of selection and effect for all the environmental aspects of interest, we spatially mapped those estimated covariates back onto the landscape, resulting in a map of conductance (Fig. \@ref(fig:conductancePlot)).
 This process took the form of generating a model matrix based on all environmental covariates at each cell in the overall landscape raster and using the fitted Poisson model coefficients to calculate predicted deer use for each cell.
 For roads we rasterised the road polyline data and used the road crossing coefficient to create a conductance value for the road cells.
 For the covariates that involved movement interactions, we used the mean step and turn angle in calculations of predicted use.
@@ -97,7 +96,7 @@ For we ignored the uncertainty surrounding the selection estimates, instead rely
 
 For the Fallow Deer and Rodents the underlying conductance layer was generated from the final ensemble species distribution model.
 In the case of the Fallow Deer we have sufficient data to parametrise the road resistance based on the results of a Fallow Deer Poisson model. 
-This modelling process mirrored the procedure undertaken for Roe Deer except only examined hte likelihood of crossing a road.
+This modelling process mirrored the procedure undertaken for Roe Deer except only examined the likelihood of crossing a road.
 We altered the resistance of the cells that corresponded to the presence of a road in the same way as described for the Roe Deer, using values draw from the Poisson model.
 We did not have comparable road crossing data for the rodents, meaning that their conductance raster equalled one describing probability of occurrence. 
 
@@ -159,7 +158,7 @@ We ensured that the block size was less than one-tenth of the search radius to m
 We also varied the search radius between the groups, as each has different movement/dispersal abilities.
 In both instances we based our search radius on previously recorded estimates of home range size, based heavily on the data provide by the home range database [@broekman_homerange_2023; @broekman_homerange_2022].
 In both case we filtered the home range data to species/group and calculated a mean home range area.
-For the Fallow Deer their mean home range suggested a search radius of 1500<!-- draw from inputList ideally -->; whereas for Rodents a search radius of 150<!-- draw from inputList ideally --> was chosen.
+For the Fallow Deer their mean home range suggested a search radius of 1500m<!-- draw from inputList ideally -->; whereas for Rodents a search radius of 150m<!-- draw from inputList ideally --> was chosen.
 For both groups we used the previously denoted patches as sources/nodes (all with the same strength).
 
 <!-- ## Projecting to Wessex -->
