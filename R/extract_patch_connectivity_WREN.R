@@ -48,6 +48,7 @@ extract_patch_connectivity_WREN <- function(MSEdf,
   names(patchesBufferedList) <- paste0("buffer_", buffers)
   for(b in buffers){
     # b <- buffers[2]
+    print(b)
 
     if(b == 0){
       currPatches <- focalPatches
@@ -62,6 +63,13 @@ extract_patch_connectivity_WREN <- function(MSEdf,
              summaryMethod = "mean") %>%
       as.data.frame()
 
+    patchMedianScore <- terra::extract(connectTerra, currPatches, fun = median,
+                                     bind = TRUE, na.rm = TRUE) %>%
+      dplyr::select(Ptch_ID, connectivity) %>%
+      mutate(buffer = b,
+             summaryMethod = "median") %>%
+      as.data.frame()
+
     # patchMaxScore <- terra::extract(connectTerra, currPatches, fun = max,
     #                                 bind = TRUE, na.rm = TRUE) %>%
     #   dplyr::select(Ptch_ID, connectivity) %>%
@@ -69,16 +77,9 @@ extract_patch_connectivity_WREN <- function(MSEdf,
     #          summaryMethod = "max") %>%
     #   as.data.frame()
 
-    # patchMedScore <- terra::extract(connectTerra, currPatches, fun = median,
-    #                                 bind = TRUE, na.rm = TRUE) %>%
-    #   dplyr::select(Ptch_ID, connectivity) %>%
-    #   mutate(buffer = b,
-    #          summaryMethod = "median") %>%
-    #   as.data.frame()
-
-    patchesBufferedList[[paste0("buffer_", b)]] <- patchMeanScore # %>%
+    patchesBufferedList[[paste0("buffer_", b)]] <- patchMeanScore %>%
     # rbind(patchMaxScore) %>%
-    # rbind(patchMedScore)
+    rbind(patchMedianScore)
   }
   bufferSummaries <- do.call(rbind, patchesBufferedList)
 

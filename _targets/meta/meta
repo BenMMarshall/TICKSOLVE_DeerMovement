@@ -31,7 +31,7 @@ extract_akde_summaries|function|f056d329a7b7ccfc|||||||||||||||
 extract_akdeFallow_longest|function|e8c62e28c532987b|||||||||||||||
 extract_connectivity_locations|function|944dcaf3b05a04d9|||||||||||||||
 extract_patch_connectivity|function|e29443f880671a62|||||||||||||||
-extract_patch_connectivity_WREN|function|57e2e74694cedb5d|||||||||||||||
+extract_patch_connectivity_WREN|function|ae57d672d98205ef|||||||||||||||
 extract_patch_omniConnectivity|function|e93a95273f594b17|||||||||||||||
 extract_rsf_results|function|200d4a2dba9d5e39|||||||||||||||
 extract_ssf_coefs|function|4f7637b1934c3ff4|||||||||||||||
@@ -326,7 +326,7 @@ tar_patch_omniSummary_rodent_wessex|stem|d1eb192d465b7b33|344be7669cbebe7d|6c445
 tar_patch_summaryPois|stem|3ad6abaa60e714ef|4b2081ea46bf8873|3123362ff7e430da|-997496096||t20146.4148960948s|9dacdd3691fe3a07|46351|qs|local|vector|||47.813|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
 tar_patch_summaryPois_aberdeen|stem|3ad6abaa60e714ef|4b2081ea46bf8873|d969b9b8fbe95ba9|1487251824||t20193.2921632434s|9dacdd3691fe3a07|46351|qs|local|vector|||49.828|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
 tar_patch_summaryPois_wessex|stem|a4849d58a12ab7fa|96f1e012ac161478|ef7b8f3603cae6e1|-1841925904||t20193.2929812453s|25d00b09bc691c16|105103|qs|local|vector|||70.656|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
-tar_patch_summaryPois_WREN|stem|420ce1fb57c2fb64|1c46f62587dab343|5bcc74d00006d69e|-780473828||t20226.3987687624s|f22be658424d4e64|221393|qs|local|vector|||172.64|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
+tar_patch_summaryPois_WREN|stem|8a056111b0d56041|4d2cc88b0b3629f0|be743ee06a73e924|-780473828||t20279.3407947795s|0432f125fbb8ecdc|1013878|qs|local|vector|||1899.922|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
 tar_patches|stem|d6d25fc8aed34257|6bdc42673a040198|607a84f6bc21e668|561265787||t20059.3990599721s|2eb739478038e79e|1431127|qs|local|vector|||509.703||
 tar_patchList|stem|7a2196f10fd3acb7|6bdc42673a040198|9e1c7e8d8a6432f1|-2053994115||t20139.8655387974s|f0a2fab4f777e7a1|1165207|qs|local|vector|||10.953||
 tar_patchList_WREN|stem|e4a05f7d54467f64|116428780933b992|3599e3a85b362f89|1509006272||t20224.2601098171s|e9d4eb5bc655b70b|1550801|qs|local|vector|||5.453|package terra was built under R version 4.4.3. package fasterRaster was built under R version 4.4.3|
@@ -380,4 +380,5 @@ test_validation_data|function|7deacb89460f47c2|||||||||||||||
 typeAvialable|object|684f65380be68543|||||||||||||||
 useCores|object|bfdfb93adc61812f|||||||||||||||
 windowSize|object|ff9fb58342e8c485|||||||||||||||
-wrenList_simplified|object|19a02f69f7ecf5e5|||||||||||||||
+WRENbuffers|object|e9e434d79abbf8ec|||||||||||||||
+wrenList_simplified|object|0af2380d0a3cb333|||||||||||||||
