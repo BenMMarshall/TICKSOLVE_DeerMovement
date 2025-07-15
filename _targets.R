@@ -744,7 +744,7 @@ coreSDMList <- list(
   tar_target(
     name = tar_omniLayers_rodent_wessex,
     command = build_omniscape_layer(tar_predPoisResist_rodent_wessex, tar_patchList$Wessex, #tar_longestrodent,
-                                    blockSize = bs_rodent, searchRadius = sr_rodent, reRun = TRUE,
+                                    blockSize = bs_rodent, searchRadius = sr_rodent, reRun = FALSE,
                                     projName = "omniscape_output_rodent_wessex")
   ),
   tar_target(
@@ -755,7 +755,7 @@ coreSDMList <- list(
   tar_target(
     name = tar_omniLayers_rodent_aberdeen,
     command = build_omniscape_layer(tar_predPoisResist_rodent_aberdeen, tar_patchList$Aberdeen, #tar_longestrodent,
-                                    blockSize = bs_rodent, searchRadius = sr_rodent, reRun = TRUE,
+                                    blockSize = bs_rodent, searchRadius = sr_rodent, reRun = FALSE,
                                     projName = "omniscape_output_rodent_aberdeen")
   ),
   # rodent plots ----

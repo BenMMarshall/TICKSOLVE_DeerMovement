@@ -18,10 +18,10 @@ calculate_akdes|function|2192df08ee8ea6f9|||||||||||||||
 calculate_dbbmm_mse|function|d460657c9b004785|||||||||||||||
 calculate_dbbmms|function|7a6d7321c24e85cf|||||||||||||||
 connectSettings|object|597d46847c0f2126|||||||||||||||
-connectTargetList|object|fe98e8162501b54b|||||||||||||||
+connectTargetList|object|5a1c1d5b27916259|||||||||||||||
 contourAvialable|object|1fad89499ff2daae|||||||||||||||
-coreSDMList|object|b080656b684c0e81|||||||||||||||
-coreTargetList|object|608a8a2dee57bcf0|||||||||||||||
+coreSDMList|object|980882018de1bab4|||||||||||||||
+coreTargetList|object|005c9073b3252549|||||||||||||||
 create_package_txt|function|68434bfa00bd3fcc|||||||||||||||
 create_psuedo_abs|function|31d31097855db786|||||||||||||||
 determine_rodent_HR|function|ad26f6614a35b331|||||||||||||||
@@ -46,7 +46,7 @@ minPatchSize_m2|object|4453d6f14899f422|||||||||||||||
 nAvailable|object|d516855f98da7f3d|||||||||||||||
 nAvailableSteps|object|d516855f98da7f3d|||||||||||||||
 patchDistance|object|926fba0b13bbd9f6|||||||||||||||
-plot_biomodEval_ensemble|function|e11d54c881ddc34f|||||||||||||||
+plot_biomodEval_ensemble|function|ee934c4fc444e026|||||||||||||||
 plot_biomodEval_single|function|06b0744064e27955|||||||||||||||
 plot_conductance_map|function|a2c416d29000d428|||||||||||||||
 plot_connectivity_distributions|function|0aab6b43e204be3e|||||||||||||||
@@ -102,23 +102,23 @@ taDistribution|object|1716da92e4275cdd|||||||||||||||
 tar_akdeLists|stem|2951099ef4e0e8c6|51e20b3c1d015bc4|489323ecff14c748|856298492||t20109.5625450174s|e27903b50905bb25|13233398|qs|local|vector|||1297.328||
 tar_akdeSummary|stem|8b43c4997363a751|f3f6fd0e72aeab2c|0d1cc6663f36f5a2|-1306586415||t20133.5525167052s|77d5cda3e9028061|4322|qs|local|vector|||18.875|repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for which they may not be constant. repeating attributes for all subgeometries for|
 tar_biomodData|stem|60b91934e1ab42b9|4c660b7f317f1904|76b5bce85e6c51e4|1903022112||t20143.4461712827s|a27bc3b86e6b2861|86438|qs|local|vector|||0.235||
-tar_biomodData_fallow|stem|f3c949e0e41d60c3|b3f8b20a9f486f7f|3eecad1ef532fa75|-804801279||t20171.3979176978s|7f1b6ef6045d979d|352059|qs|local|vector|||0.062||
-tar_biomodData_rodent|stem|6a5fd88989441c9a|9f19cce332331d98|2e843977e4a5bf74|-1701717743||t20171.3989891068s|39e5ec23de16f3b4|2367059|qs|local|vector|||0.797||
+tar_biomodData_fallow|stem|720582c4579b028f|b3f8b20a9f486f7f|ad0d943bba334027|-804801279||t20276.9334213746s|d00bd3b11f608c1d|558666|qs|local|vector|||0.094||
+tar_biomodData_rodent|stem|983b01533dd7ccec|9f19cce332331d98|a03cdbc302c3a33e|-1701717743||t20276.9334804237s|f43738385dcfa348|2871059|qs|local|vector|||0.343||
 tar_biomodEns|stem|17c39a863bf5d3d4|c75807ad29e26b0a|3548a63a1d032cf0|-1389890781||t20143.451998064s|16c3bffeb8397412|66704|qs|local|vector|||53.031|executing dopar sequentially no parallel backend registered. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim ha|
-tar_biomodEns_fallow|stem|af131e4d8cab5d2d|5c5a6383d1d39459|d057320c4dbf4d99|1291006823||t20175.019384477s|ae4fe838245eefd7|393106|qs|local|vector|||1866.172|Parallelisation with foreach is not available for Windows. Sorry.|
-tar_biomodEns_plots_fallow|stem|140926ed3c21c6f3|9aed20f78ce8d8da|456c9b6ee361d426|2138294811||t20175.1239757193s|70150b93004d901a|4747836|qs|local|vector|||283.625|ROC, TSS evaluation metric.eval automatically selected. Removed 4 rows containing missing values or values outside the scale rangegeom_errorbarh.|
-tar_biomodEns_plots_rodent|stem|4ea75e08e9d94e43|a7442eefc2661f84|5d0d1cdffee7209c|-332048436||t20175.2145164805s|fa6dab89a273f7aa|13369020|qs|local|vector|||273.703|ROC, TSS evaluation metric.eval automatically selected. Removed 3 rows containing missing values or values outside the scale rangegeom_errorbarh.|
-tar_biomodEns_rodent|stem|b49927d898cb9e3a|55bb4f40c3d123f3|882fbac72fb7f761|175584798||t20175.1202152583s|1380619754883cd6|1148101|qs|local|vector|||8699.703|Parallelisation with foreach is not available for Windows. Sorry.|
+tar_biomodEns_fallow|stem|bf7b8a65d46def1f|8b2b411dc19b99c9|a1dd27af481e2c09|1291006823||t20279.5080254579s|13c7de2ee16f35c9|255859|qs|local|vector|||11990.469|Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. executing dopar sequentially no parallel backend registered. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.|
+tar_biomodEns_plots_fallow|stem|c9116f9a81d9bb32|9aed20f78ce8d8da|2a1ae4ef7dcea875|2138294811||t20284.4718309803s|99322cc108291ca1|5382520|qs|local|vector|||308.031|ROC, TSS evaluation metric.eval automatically selected. Removed 3 rows containing missing values or values outside the scale rangegeom_errorbarh.|
+tar_biomodEns_plots_rodent|stem|9c034aa60bb09b35|a7442eefc2661f84|2d745ba5399376fc|-332048436||t20284.4792241311s|675d1e2491a19846|22179864|qs|local|vector|||637.406|ROC, TSS evaluation metric.eval automatically selected. Removed 3 rows containing missing values or values outside the scale rangegeom_errorbarh.|
+tar_biomodEns_rodent|stem|3906715fcd33ef23|55bb4f40c3d123f3|f02eb7a0d1574ce1|175584798||t20281.1938393719s|2ad274351886bfa3|1750058|qs|local|vector|||145655.328|Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.|
 tar_biomodForecast|stem|a5acfef5c4413aa8|b7ce678156245e46|94032f5d1a00ecf6|-248390797||t20143.4646095307s|71cf818916110e63|1168279|qs|local|vector|||9.078|executing dopar sequentially no parallel backend registered. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases|
-tar_biomodForecast_fallow|stem|85d074204809ea44|84926c1ff943ef64|339e546f2d308eeb|440623924||t20175.1465083569s|3d5db75fa9ca834f|10530638|qs|local|vector|||1946.688|Parallelisation with foreach is not available for Windows. Sorry.|
+tar_biomodForecast_fallow|stem|b5194697fefffa16|84926c1ff943ef64|45bce61bfdaea4ce|440623924||t20281.3609282887s|a2be17497ba08ad0|10585019|qs|local|vector|||13729.563|Parallelisation with foreach is not available for Windows. Sorry.|
 tar_biomodForecast_rodent|stem|4522fee3695b83c2|f8c43ec25bb145ae|a74bfbf956bb1430|231755558||t20171.5402546491s|1d97825c57b92222|10704832|qs|local|vector|||1694.594|Parallelisation with foreach is not available for Windows. Sorry.|
-tar_biomodForecast_rodent_aberdeen|stem|b41f937705ef0925|55db99f435a695a3|e2f7202fe20c6383|275698167||t20175.2113410562s|7ef2c3ab3225e74f|6416871|qs|local|vector|||2498.75|Parallelisation with foreach is not available for Windows. Sorry.|
-tar_biomodForecast_rodent_wessex|stem|a5e6d7cb6c03b9d0|188bb76393460735|e2f7202fe20c6383|-1493473054||t20175.1824193026s|260ae68b85f4d757|10557865|qs|local|vector|||3102.578|Parallelisation with foreach is not available for Windows. Sorry.|
+tar_biomodForecast_rodent_aberdeen|stem|ca6f2523af8f1deb|55db99f435a695a3|7ca4c7bff11d373d|275698167||t20281.6418269183s|9f9a74d81af41342|1069|qs|local|vector|||24269.625|Parallelisation with foreach is not available for Windows. Sorry.|
+tar_biomodForecast_rodent_wessex|stem|f0cdb00dcc692b4d|188bb76393460735|7ca4c7bff11d373d|-1493473054||t20281.9949586057s|835e5adb0e3f0a55|1068|qs|local|vector|||30510.562|Parallelisation with foreach is not available for Windows. Sorry.|
 tar_biomodModels|stem|902cb649802c566c|d136c21cf119b9ae|45ff92a8a30b2572|1705484674||t20143.4493447694s|0af8e5cb37bd5a0d|12533|qs|local|vector|||101.625|CV.do.full.model has been disabled because _allData_allRun is not provided in CV.user.table. Parallelisation with foreach is not available for Windows. Sorry.. executing dopar sequentially no parallel backend registered. variable 12 Permanent_Wetland has no variation.. variable 12 Permanent_Wetland has no variation.. variable 12 Permanent_Wetland has no variation.. variable 12 Permanent_Wetland has no variation.. variable 5 Barren has no variation.. variable 12 Permanent_Wetland has no variation.. variable 5 Barren has no variation.. variable 12 Permanent_Wetland has no variation.. variable 5 Barren has no variation.. variable 12 Permanent_Wetland has no variation.. variable 5 Barren has no variation.. variable 12 Permanent_Wetland has no variation.. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit attr, nonestim has doubtful cases. prediction from rankdeficient fit|
-tar_biomodModels_fallow|stem|3cbfdd3811883342|d6898d9dc438ff14|4e14fe15051eda40|-542729538||t20174.905015897s|00b2d9c5900e9262|10583|qs|local|vector|||1142.625|CV.do.full.model has been disabled because _allData_allRun is not provided in CV.user.table. Parallelisation with foreach is not available for Windows. Sorry.. executing dopar sequentially no parallel backend registered|
-tar_biomodModels_rodent|stem|72b2bf11c8e2524f|5c39a90513e096f3|c97f84242756d10f|1527529646||t20174.9977543558s|ac75566d4534815c|10524|qs|local|vector|||8012.594|CV.do.full.model has been disabled because _allData_allRun is not provided in CV.user.table. Parallelisation with foreach is not available for Windows. Sorry.|
-tar_biomodSingle_plots_fallow|stem|bbb03f5e32af6086|f940d3b0ba4c3997|86afed4eaa6eb07a|971768685||t20175.0195231205s|5bb514a2cb0fc522|56807950|qs|local|vector|||11.469|ROC, TSS evaluation metric.eval automatically selected|
-tar_biomodSingle_plots_rodent|stem|7805033d9a45242c|9bcd4115bc206b25|b5dc17ca85d35919|263844230||t20175.1206873505s|e9ee8ef6a063ec5c|290273355|qs|local|vector|||38.563|ROC, TSS evaluation metric.eval automatically selected|
+tar_biomodModels_fallow|stem|69751314807267f6|d6898d9dc438ff14|30ddb17e980d95b9|-542729538||t20277.0672584227s|dfd1078088e4908d|25330|qs|local|vector|||11551.75|CV.do.full.model has been disabled because _allData_allRun is not provided in CV.user.table. Parallelisation with foreach is not available for Windows. Sorry.. executing dopar sequentially no parallel backend registered|
+tar_biomodModels_rodent|stem|5070a41b82ea95af|5c39a90513e096f3|cb41c34175ffad1c|1527529646||t20278.0102403852s|e9dec126cfda1e11|24321|qs|local|vector|||81473.625|CV.do.full.model has been disabled because _allData_allRun is not provided in CV.user.table. Parallelisation with foreach is not available for Windows. Sorry.. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
+tar_biomodSingle_plots_fallow|stem|80557e046992beb8|f940d3b0ba4c3997|f44680b3c9fde065|971768685||t20284.4632403725s|2ee828c5b61ce9d1|574789643|qs|local|vector|||122.532|ROC, TSS evaluation metric.eval automatically selected|
+tar_biomodSingle_plots_rodent|stem|a96664bfe31b253b|9bcd4115bc206b25|4d7fbc470d17966f|263844230||t20284.4682351183s|c9143acf60a58971|2930119462|qs|local|vector|||408.766|ROC, TSS evaluation metric.eval automatically selected|
 tar_circuitscape_data|stem|c53ec5d19e9df266|c1a2566ccea8d572|33d6e01a1af74871|-1895862094||t20104.6318621671s|65517ab569876e8b|212|qs|local|vector|||17.563||
 tar_circuitscape_files|stem|d410eed2bc4c165b|80dea33cc669dfd0|0600ececcf1f7aa8|-490663222||t20104.6138312559s|b6a3947d99208431|149|qs|local|vector|||27.25||
 tar_connect_dbbmmmse_0.001_300|stem|da1cf69197921c06|494756f757e8e662|7f427b2a4112b4ed|-1682529053||t20073.8260868675s|4702e5d68d5cb8ce|360|qs|local|vector|||5.297||
@@ -281,8 +281,8 @@ tar_dbbmmList|stem|4a402d32d77eafba|5354b9a3a6b87439|f923a07537595ab2|-133895032
 tar_deerData|stem|9adef37866d7f82f|566ebced504f0215|1bf6d0d595cb356a|-1039388040||t20115.4977617666s|860323ef24e00859|904393|qs|local|vector|||5.859||
 tar_distancePatch_plot|stem|77b17b1d96023f17|6746b068d96614af|386e02f67bdd3664|-1649390097||t20178.3778235078s|da56a91e20e385dd|3833785|qs|local|vector|||2.5||
 tar_funcStruc_plot|stem|6517ceeda20c549b|45315aa541eba141|64296bb02a4e0113|1285321700||t20193.266167276s|8899141f19c61bc8|230534|qs|local|vector|||0.656||
-tar_HFOcc_plots_fallow|stem|718a1c154d42dcf4|1efd6ea1e6526551|4fa2f90779ef730f|-1699567581||t20171.5673307045s|4ecce39bc0be7d3d|1469669|qs|local|vector|||3.172||
-tar_HFOcc_plots_rodent|stem|ef0b8364160ded79|f0cb8554060bd989|e922cc2e6a08e9b5|984801138||t20171.5672913677s|6a8bf5e913d717ab|7707165|qs|local|vector|||6.766||
+tar_HFOcc_plots_fallow|stem|ba6804006072d4c2|1efd6ea1e6526551|63124a004fddd47d|-1699567581||t20284.4616959263s|858c6a698c7ee0e2|1447135|qs|local|vector|||3.063||
+tar_HFOcc_plots_rodent|stem|f649ae73a4959983|f0cb8554060bd989|f03c853d438519cf|984801138||t20284.4854269862s|866e2b3cacb06563|6445709|qs|local|vector|||7.813||
 tar_homeRange_sizePlot|stem|c7aca7a67440daf7|5e82fc8c817ea1a4|cacf76181268ab75|-1202349281||t20216.3603974831s|0057ad292257b678|14384956|qs|local|vector|||0.671||
 tar_landuse|stem|2514449375f1a5b8|9ade98fbebd966f6|272b3059fc51c7f1|-1042947407||t20059.4104961729s|7b6e260af24ba309|636186|qs|local|vector|||14.297|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
 tar_landuseList|stem|1d95ed7f11fb977f|39e1e1b524863f89|56e6620817c20829|1043045520||t20139.8678402794s|741813d4e90a7ce1|9556232|qs|local|vector|||198.656|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
@@ -298,24 +298,24 @@ tar_occData_rodent|stem|cae0cf09b809c356|d0a63cdb17bb8806|92e1e08b3fa3fa7a|-1693
 tar_occSDMOmni_plots|stem|b72ad0bbe1a9592b|b40f8e571ba7b7c1|2c19a523658c2aa6|249953518||t20151.1782135037s|10d5379435acfdf0|979626|qs|local|vector|||29.734||
 tar_occSDMOmni_plots_fallow|stem|c932e0fbbeacbf6b|8602594b9f38f670|6ed9e26760b500ee|1411498220||t20166.5298632397s||1559305|qs|local|vector|||0||could not find function plot_occSDMOmni_inOut
 tar_occSDMOmni_plots_rodent|stem|0421d07756685626|052973e9712ea675|61bda9b895b828c0|-1561053535||t20166.5329840772s|e162ca3343799aa3|7682236|qs|local|vector|||269.36|Mixed layer classes found in tidyterrageom_spat.|
-tar_omniIN_plots_fallow|stem|ff4777c49abbc254|c7775a25c4c12fc5|0eea706eed7b9128|-1794527335||t20178.3810933939s|b0b744e501f8ef10|646930|qs|local|vector|||5.5||
+tar_omniIN_plots_fallow|stem|255d5d58a03dd8ca|c7775a25c4c12fc5|0eea706eed7b9128|-1794527335||t20284.4797496391s|d747fd2c32570d9f|651974|qs|local|vector|||4.609||
 tar_omniIN_plots_rodent|stem|c8e8a1ccaa68ecd3|fefab26675ed2358|94d772da16b6afcc|1892615317||t20171.562804081s|e65d66d112483d1a|643270|qs|local|vector|||6.687||
-tar_omniIN_plots_rodent_aberdeen|stem|cce0564c4fc69d32|ebd85cede88fe85e|7a5df190792ef682|-1973993826||t20178.3812005421s|469014ecbe955f61|646967|qs|local|vector|||4.343||
-tar_omniIN_plots_rodent_wessex|stem|0a6def92b11874c9|9873f5e4d6805c27|6744570ec1de6098|-1369008707||t20178.3811477873s|21ad15ad80060ae7|646966|qs|local|vector|||4.515||
+tar_omniIN_plots_rodent_aberdeen|stem|2d34ce0e9504fcb6|ebd85cede88fe85e|7a5df190792ef682|-1973993826||t20284.4798041772s|e514a26d737c2e78|651892|qs|local|vector|||4.547||
+tar_omniIN_plots_rodent_wessex|stem|8c31680f7245ad93|9873f5e4d6805c27|6744570ec1de6098|-1369008707||t20284.4798952322s|46a619d9149f1803|652644|qs|local|vector|||5.203||
 tar_omniLayers|stem|605d7141b4c7a1b1|7413958ececf62ea|003e54bfd8884f70|560333710||t20151.1778670339s|f8c1d755d5d31832|173|qs|local|vector|||19286.984||
-tar_omniLayers_fallow|stem|d76ca03734dfd5c4|a1bd7421b9d8a46b|c929a87aeec296bb|-409279746||t20175.8380919602s|42e429e60361e54e|178|qs|local|vector|||53779.125||
+tar_omniLayers_fallow|stem|d76ca03734dfd5c4|a1bd7421b9d8a46b|c929a87aeec296bb|-409279746||t20284.3380107694s|42e429e60361e54e|178|qs|local|vector|||2.766||
 tar_omniLayers_rodent|stem|428a359a9b2ba31c|197cd5364e02381c|c66115f4663cbe9d|1686761131||t20167.7418961892s|42e429e60361e54e|178|qs|local|vector|||2221.031||
-tar_omniLayers_rodent_aberdeen|stem|74c4d4a53256ff2c|fed7ac9a28196861|eacb212f3c850b9e|231704559||t20175.8791441811s|1fa23b41a00fb676|188|qs|local|vector|||1515.531||
-tar_omniLayers_rodent_wessex|stem|c06d65efbc918af2|d9b08d410c43b78e|bffe60ce96e81c59|-1264075165||t20175.8616028391s|c46a94e42a62e426|185|qs|local|vector|||2030.641||
-tar_omniOUT_plots_fallow|stem|de2e0ad181d502ab|f312e3519716760d|f5a238e5d0b20d9c|1458466161||t20178.3989610707s|2764eab9e40cebe4|706205|qs|local|vector|||7.328||
+tar_omniLayers_rodent_aberdeen|stem|74c4d4a53256ff2c|33e44e81bd4189d6|eacb212f3c850b9e|231704559||t20284.4798158027s|1fa23b41a00fb676|188|qs|local|vector|||1||
+tar_omniLayers_rodent_wessex|stem|c06d65efbc918af2|cd5d6e9fd03e4182|bffe60ce96e81c59|-1264075165||t20284.4798328876s|c46a94e42a62e426|185|qs|local|vector|||1.469||
+tar_omniOUT_plots_fallow|stem|16221f1892b3d28e|f312e3519716760d|f5a238e5d0b20d9c|1458466161||t20284.4799854642s|44ee925eb193a9d0|715067|qs|local|vector|||6.265||
 tar_omniOUT_plots_rodent|stem|2f8def1304327975|2a1d2db09164736b|8c27946ba14056d7|1160672662||t20167.7437177014s|3e8da48db9771d48|698927|qs|local|vector|||12.344||
-tar_omniOUT_plots_rodent_aberdeen|stem|7defd8634d3f7e65|4ed0515976412d63|9028c265b629cced|-808520329||t20178.3987897862s|0ac4caaf5aa89a32|723494|qs|local|vector|||8.157||
-tar_omniOUT_plots_rodent_wessex|stem|d57fa11bc5f62bd0|6e52da2fa3949dc4|a36ad8e320f8f22e|396063504||t20178.398874188s|b9969e5290cb4093|706208|qs|local|vector|||7.078||
+tar_omniOUT_plots_rodent_aberdeen|stem|ee0c4ea38f139145|4ed0515976412d63|9028c265b629cced|-808520329||t20284.4800704494s|eca2ebea9773c67a|694446|qs|local|vector|||6.359||
+tar_omniOUT_plots_rodent_wessex|stem|e5dee49311adfaf7|6e52da2fa3949dc4|a36ad8e320f8f22e|396063504||t20284.4801696546s|15d5ba2ca2e31432|715070|qs|local|vector|||7.047||
 tar_overview_maps|stem|1a474f9382271d62|a8b4a0dbc550a557|9788a5f104f72716|951223795||t20164.9345834354s|a2fb96fcfea9a8af|732533407|qs|local|vector|||801.734||
 tar_package_text|stem|703bcee81ed20ff4|3af2cae99fbada6a|6ae16693c6018983|389537711||t20133.5645866525s|0f5cc5be67b9db73|64|qs|local|vector|||5.187||
-tar_patch_omniSummary_fallow|stem|3d2e2d6f6b503519|74c758aad2d2a5d3|a1402ed0844b60f4|1539481818||t20183.5250859956s|835e5adb0e3f0a55|1068|qs|local|vector|||1.422||
-tar_patch_omniSummary_rodent_aberdeen|stem|d93e01322e65de82|fdc9d2e173672812|eec6ea6c19b69963|98217868||t20183.5251092121s|c8eb026e18a8d85b|986|qs|local|vector|||0.672||
-tar_patch_omniSummary_rodent_wessex|stem|d1eb192d465b7b33|344be7669cbebe7d|6c445b3e2c86ae6f|-1595111650||t20183.5251013932s|604be24a3c1f227f|1084|qs|local|vector|||1.328||
+tar_patch_omniSummary_fallow|stem|fabc6852e0a88e8f|74c758aad2d2a5d3|a1402ed0844b60f4|1539481818||t20284.4799108646s|5e9d53203095ada4|1070|qs|local|vector|||1.328||
+tar_patch_omniSummary_rodent_aberdeen|stem|f1a8d9248327c4bd|fdc9d2e173672812|eec6ea6c19b69963|98217868||t20284.4799947477s|8d5a8020674ecafb|988|qs|local|vector|||0.781||
+tar_patch_omniSummary_rodent_wessex|stem|39c9f29f946ab83c|344be7669cbebe7d|6c445b3e2c86ae6f|-1595111650||t20284.4800854425s|604be24a3c1f227f|1084|qs|local|vector|||1.297||
 tar_patch_summaryPois|stem|3ad6abaa60e714ef|4b2081ea46bf8873|3123362ff7e430da|-997496096||t20146.4148960948s|9dacdd3691fe3a07|46351|qs|local|vector|||47.813|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
 tar_patch_summaryPois_aberdeen|stem|3ad6abaa60e714ef|4b2081ea46bf8873|d969b9b8fbe95ba9|1487251824||t20193.2921632434s|9dacdd3691fe3a07|46351|qs|local|vector|||49.828|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
 tar_patch_summaryPois_wessex|stem|a4849d58a12ab7fa|96f1e012ac161478|ef7b8f3603cae6e1|-1841925904||t20193.2929812453s|25d00b09bc691c16|105103|qs|local|vector|||70.656|extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster. extract transforming vector data to the CRS of the raster|
@@ -333,27 +333,27 @@ tar_predPoisResist_fallow|stem|4d50d3e138bfdab0|6ed2b3be1774e69f|a3f522f4b31ff88
 tar_predPoisResist_location|stem|400a06cc9ecf29c9|a68f8146c46b9408|f827fb544020aca1|-837149021||t20140.0218400447s|b6a3947d99208431|149|qs|local|vector|||16.906||
 tar_predPoisResist_locationWessex|stem|6a1330447a91b4e3|f9c0233b8021a1e1|f827fb544020aca1|-460945527||t20140.0221192071s|b6a3947d99208431|149|qs|local|vector|||24.109||
 tar_predPoisResist_rodent|stem|ebc333598e095bb8|466e8fe116cc4676|61502e41583ec772|1898611622||t20166.4303591022s|1b577d9c0616ad7b|145|qs|local|vector|||23.078||
-tar_predPoisResist_rodent_aberdeen|stem|b1ec6ccd88034090|5186efed7dcdfbc3|8e2fbad62c54ffa8|404949190||t20175.2156228024s|b6a3947d99208431|149|qs|local|vector|||19.688||
-tar_predPoisResist_rodent_wessex|stem|8567b151ea543866|8b16c5a1583c723c|33e595bc5dc8b768|9972979||t20175.2153946966s|b6a3947d99208431|149|qs|local|vector|||20.391||
+tar_predPoisResist_rodent_aberdeen|stem|b1ec6ccd88034090|5186efed7dcdfbc3|8e2fbad62c54ffa8|404949190||t20284.4794566571s|b6a3947d99208431|149|qs|local|vector|||20.063||
+tar_predPoisResist_rodent_wessex|stem|8567b151ea543866|8b16c5a1583c723c|33e595bc5dc8b768|9972979||t20284.4796941417s|b6a3947d99208431|149|qs|local|vector|||20.5||
 tar_predResist_location|stem|d0a70c1b24f7a40c|cc02fca1c8844f20|a0aff3ee36a19ad8|1594166547||t20073.6668431018s|f8c1d755d5d31832|173|qs|local|vector|||128.5||
 tar_predSSFResist_location|stem|3454326a2d30f696|4eefafe3ccbcc17a|e4af385af1f9d7f9|-2111250181||t20122.6813340544s|402e589872025b0a|147|qs|local|vector|||385.328||
 tar_proj_layer|stem|80ba1e766969cd7e|bd46f2742d2970f6|65f03d78cd5d9eb6|-1928928823||t20143.6314484267s|b3893c47d2f8b380|144|qs|local|vector|||0.078||
-tar_projLayer_fallow|stem|a172191502481eb5|0d4fc6ed26893760|2e52c34952cf1e77|-52975448||t20175.2145204601s|1b577d9c0616ad7b|145|qs|local|vector|||0.328||
+tar_projLayer_fallow|stem|a172191502481eb5|0d4fc6ed26893760|2902ae819dbe7f33|-52975448||t20282.0026066613s|1b577d9c0616ad7b|145|qs|local|vector|||0.359||
 tar_projLayer_rodent|stem|54a41da7df75a54e|5ad403d5c951bc75|43b68cb31d75aa6f|-1105638667||t20171.5627114244s|1b577d9c0616ad7b|145|qs|local|vector|||0.985||
-tar_projLayer_rodent_aberdeen|stem|e8b79094f64fc83e|391f9b71440b2351|46d06addc826597f|1850307054||t20175.2145274491s|402e589872025b0a|147|qs|local|vector|||0.25||
-tar_projLayer_rodent_wessex|stem|4dcaf969146a3434|fe5c900770c5aa6a|295446f478370cca|718985393||t20175.2145245277s|5a04a740e1697d34|146|qs|local|vector|||0.344||
+tar_projLayer_rodent_aberdeen|stem|e8b79094f64fc83e|391f9b71440b2351|a5467a2c6161aa6d|1850307054||t20282.0026103709s|402e589872025b0a|147|qs|local|vector|||0.312||
+tar_projLayer_rodent_wessex|stem|4dcaf969146a3434|fe5c900770c5aa6a|7009e34696327888|718985393||t20282.0026151453s|5a04a740e1697d34|146|qs|local|vector|||0.391||
 tar_pseudoAbs|stem|bde0f31745189a1f|4cb94ea0c70df639|805ab43dc6fb64a9|333898822||t20143.4434215361s|3d7bc7c1a9144a4a|76953|qs|local|vector|||32.297||
-tar_pseudoAbs_fallow|stem|0b438e064175ee1b|5b4852dd7707726c|6323fefd4756ce47|1514514200||t20171.3962480017s||280951|qs|local|vector|||3.422||could not find function st_bbox
-tar_pseudoAbs_rodent|stem|e2f9e3e7c7e08866|1eec751be61c887f|b931ca4870b29527|300176103||t20171.3931614656s|c09325f8499d6512|1990614|qs|local|vector|||315.797||
-tar_render_connectivity|stem|cb97035846c406f9|0cc73c7c3fdcbebe|7e97c8a8573e8cc0|501806168||t20276.5852435571s|f4925d1f4bd18266|151|qs|local|vector|||15.109|Package xcolor Warning Package option usenames is obsolete and ignored on input line 265.. LaTeX Warning Float too large for page by 21.19653pt on input line 214.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning Float too large for page by 9.19653pt on input line 220.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning Float too large for page by 9.19653pt on input line 226.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. Package xcolor Warning Package option usenames is obsolete and ignored on input line 265.. LaTeX Warning Float too large for page by 10.60158pt on input line 214.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.|
-tar_render_movement|stem|abb6860ebcfbd485|91f0c353f9fd7a49|3386415e38a0c55b|-912747596||t20276.5850226557s|de65cec3ae558fa1|142|qs|local|vector|||2.25||
+tar_pseudoAbs_fallow|stem|1abdd795061e3b81|5b4852dd7707726c|6323fefd4756ce47|1514514200||t20276.9298740063s|a617abadeaa5da50|430984|qs|local|vector|||273.063||
+tar_pseudoAbs_rodent|stem|e633d88140f7bb19|6d6024d08ed7ba53|b931ca4870b29527|300176103||t20276.9334201823s|a1ab9557f8b22b63|2896339|qs|local|vector|||306.328|spatSample requested sample size is larger than the number of cells|
+tar_render_connectivity|stem|cb97035846c406f9|0cc73c7c3fdcbebe|7e97c8a8573e8cc0|501806168||t20284.4860307876s|f4925d1f4bd18266|151|qs|local|vector|||14.766|Package xcolor Warning Package option usenames is obsolete and ignored on input line 265.. LaTeX Warning Float too large for page by 21.19653pt on input line 214.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning Float too large for page by 9.19653pt on input line 220.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning Float too large for page by 9.19653pt on input line 226.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. Package xcolor Warning Package option usenames is obsolete and ignored on input line 265.. LaTeX Warning Float too large for page by 10.60158pt on input line 214.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.|
+tar_render_movement|stem|abb6860ebcfbd485|91f0c353f9fd7a49|3386415e38a0c55b|-912747596||t20284.4858171914s|de65cec3ae558fa1|142|qs|local|vector|||2.235||
 tar_render_out|stem|5119daf42d58e0a7|ec07eaddb568f59a|8aca943a0a259b34|-1423037440||t20133.7231602176s|0f26fa93438a7837|141|qs|local|vector|||2.406|Package xcolor Warning Package option usenames is obsolete and ignored on input line 265.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. Package xcolor Warning Package option usenames is obsolete and ignored on input line 265.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.. LaTeX Warning h float specifier changed to ht.|
 tar_rsf_data|stem|5444f4bddd3fb761|b8ff3dd396a75fdf|400ac252ec1abb61|-314967242||t20074.6608359851s||5286594|qs|local|vector|||3.953||object focalRegion not found
 tar_rsf_models|stem|c6ecc71f79f95feb|8e856f040fb60506|a4ae6cfac77ca1d6|-1738740726||t20067.6069863946s|e38cca700da64d6e|45578797|qs|local|vector|||1.328|glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
 tar_rsf_outputs|stem|bda4b71d8ce3f562|2e7bda5096ec7c26|1074f5150616b4dd|251120470||t20094.5840604937s||85365333|qs|local|vector|||0.016||could not load dependency tar_rsf_data of target tar_rsf_outputs. Expecting a single string value typecharacter extent0.
 tar_sdm_layers|stem|78a3c4c48c1d2b65|2b34ef61a7df169b|262eaa6257f3914d|1222101680||t20182.4372615355s|60a444b58b8e727f|246|qs|local|vector|||65.407|package terra was built under R version 4.4.3. package fasterRaster was built under R version 4.4.3|
-tar_SDMin_plots_fallow|stem|807108508967d5f1|542d401c1b471a82|21bd8dd2c8b0149a|1971156351||t20174.8894622542s|e8a767dd948a217d|624877|qs|local|vector|||285.188|package terra was built under R version 4.4.3. package fasterRaster was built under R version 4.4.3. Mixed layer classes found in tidyterrageom_spat.|
-tar_SDMin_plots_rodent|stem|9e173e4e8951891c|119889a7735aa09d|21bd8dd2c8b0149a|1390674615||t20167.7151311309s|a2e460b5726cfc69|622151|qs|local|vector|||281.062|package terra was built under R version 4.4.3. package fasterRaster was built under R version 4.4.3. Mixed layer classes found in tidyterrageom_spat.|
+tar_SDMin_plots_fallow|stem|f43923b33049e0ec|542d401c1b471a82|21bd8dd2c8b0149a|1971156351||t20284.4616578777s|d2db2b6970300f75|623686|qs|local|vector|||258.61|Mixed layer classes found in tidyterrageom_spat.|
+tar_SDMin_plots_rodent|stem|2842d7ee9a8b8c3d|119889a7735aa09d|21bd8dd2c8b0149a|1390674615||t20284.4586625036s|fd879d5792bb4185|623684|qs|local|vector|||270.094|package terra was built under R version 4.4.3. package fasterRaster was built under R version 4.4.3. Mixed layer classes found in tidyterrageom_spat.|
 tar_selectedPatchList|stem|81541558008a6703|755a9bd2f4b99ba0|727a192a0b995d09|-328935544||t20145.6252030751s|98f2f83d25bab8f2|35583|qs|local|vector|||4.234||
 tar_ssf_data|stem|5912375d0e8b0408|cdfe9500554cf21c|2d0bebfba3a691e4|390394694||t20145.5351837923s|bc7ee4510adbf2d8|8474981|qs|local|vector|||9652.11|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
 tar_ssf_extracts|stem|5d075a37e1cf0fc1|5d40193c67254db8|ac276617e0d12938|1034817943||t20216.3392993935s|2c2520909ded4dc1|2117553|qs|local|vector|||3.344|NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced|
@@ -370,104 +370,3 @@ test_validation_data|function|7deacb89460f47c2|||||||||||||||
 typeAvialable|object|684f65380be68543|||||||||||||||
 useCores|object|bfdfb93adc61812f|||||||||||||||
 windowSize|object|ff9fb58342e8c485|||||||||||||||
-calculate_dbbmm_mse|function|d460657c9b004785
-locationError|object|ff81af095a75741e
-load_deer_palette|function|f1143426f7e122cf
-run_ssf_models|function|bd210f8fc7fac21c
-generate_tracking_table|function|3914ce43cf2850f6
-typeAvialable|object|684f65380be68543
-connectSettings|object|597d46847c0f2126
-nAvailableSteps|object|d516855f98da7f3d
-sr_fallow|object|ec08120faca9b709
-standardise_connect_layer|function|0a3b7be0d9976fb6
-useCores|object|bfdfb93adc61812f
-nAvailable|object|d516855f98da7f3d
-build_predResistanceFallow_layer|function|087147650bb5f310
-calculate_dbbmms|function|7a6d7321c24e85cf
-create_package_txt|function|68434bfa00bd3fcc
-read_stack_layers|function|7f6eba34e4f18a1e
-sr_rodent|object|f84fd0305bad89a6
-render_rmd|function|b9d183184e3f651e
-prepare_circuitscape_data|function|fdd57871e3953e99
-prepare_ssfFallow_data|function|87ef1de10a911b24
-read_cleanFallow_occData|function|5de2302722a96688
-determine_rodent_HR|function|ad26f6614a35b331
-buffers|object|3d27737c1ea4b8a4
-generate_palettes|function|14279570f6a672fe
-prepare_ssf_data|function|5e0d0a690d255b26
-extract_connectivity_locations|function|944dcaf3b05a04d9
-coreTargetList|object|005c9073b3252549
-connectTargetList|object|5a1c1d5b27916259
-read_landuse_data|function|509ed78005ba4ef4
-minPatchSize_m2|object|4453d6f14899f422
-build_connect_layer|function|d53c141bcb701ff4
-run_julia_circuitscape|function|b930d6e805026e1b
-taDistribution|object|1716da92e4275cdd
-windowSize|object|ff9fb58342e8c485
-bs_fallow|object|87c2fdbe3686b6eb
-bs_rodent|object|7bbb389ff0bd9230
-setCropArea|object|9ed1990733649bbf
-read_patches_data|function|c8fe2a56a109685c
-read_selectedPatches_data|function|fe38f0735932c907
-save_proj_layer|function|382fae184272bf05
-test_validation_data|function|7deacb89460f47c2
-slDistribution|object|378daf6acce8eba7
-calculate_akdes|function|2192df08ee8ea6f9
-build_predResistance_layer|function|1ee7504347841c09
-run_rsf_models|function|03740d01fc112cd2
-extract_akdeFallow_longest|function|e8c62e28c532987b
-run_poisFallow_model|function|d58ff01c2b6dd428
-aggFact_SDM|object|18f8c83bc88d6445
-extract_akde_summaries|function|f056d329a7b7ccfc
-contourAvialable|object|1fad89499ff2daae
-build_predResistanceRodent_layer|function|fb6a6a85a430f68d
-extract_rsf_results|function|200d4a2dba9d5e39
-run_wrsf_models|function|ed25e511301d2717
-read_deer_data|function|51d0f06bc0c39b5d
-build_omniscape_layer|function|b45d30b1c8747d88
-run_pois_model|function|897b4b0a0db81d94
-extract_patch_omniConnectivity|function|e93a95273f594b17
-prepare_sdm_layer|function|6bf21a0251d4e9b6
-coreSDMList|object|3603488ace3c7aa3
-aggFact|object|18f8c83bc88d6445
-inputList|object|9b9ee66b2eea9c17
-prepare_rsf_data|function|a7467f485f4157b2
-marginSize|object|c386c7b04396aaec
-generate_tracking_plots|function|ab5f74a24c745970
-extract_patch_connectivity|function|e29443f880671a62
-plot_wrsf_effects|function|1ec877e43ccc01d9
-plot_pois_coefs|function|cfec6b0e59683d07
-plot_distance_to_patch|function|fef52e680206a8e3
-plot_occSDMOmni_inOut_HFOcc|function|81eb830f90ea5960
-plot_funcStruc_comparison|function|61b1f9a16e457063
-plot_occSDMOmni_inOut_omniOUT|function|53967987d7e7164c
-plot_conductance_map|function|a2c416d29000d428
-plot_occSDMOmni_inOut_SDMin|function|a064f9fafffa81d8
-map_connectivity_thetas|function|4b863a5633bab936
-extract_ssf_coefs|function|4f7637b1934c3ff4
-plot_ssf_coefs|function|bc4873a00c16462b
-plot_patch_MMMconnectivity|function|5f2bb36be4ae0337
-plot_occSDMOmni_inOut_omniIN|function|f3d934aa8e1d5705
-plot_patch_summary|function|407e9c459dcbf729
-plot_biomodEval_single|function|06b0744064e27955
-export_pois_coefs|function|22457d22481c5e87
-plot_homeRange_sizes|function|8744d2dc08cc466c
-plot_patch_connectivity|function|868cc251555f97ac
-plot_connectivity_distributions|function|0aab6b43e204be3e
-plot_variograms|function|7f2e3dc4682f917f
-plot_biomodEval_ensemble|function|e11d54c881ddc34f
-create_psuedo_abs|function|31d31097855db786
-plot_study_locations|function|e2f1ab8e34a489b5
-read_cleanRodent_occData|function|0b076d8be4d7f895
-generate_overview_maps|function|c9b608824a68460a
-tar_pseudoAbs_fallow|stem|1abdd795061e3b81|5b4852dd7707726c|6323fefd4756ce47|1514514200||t20276.9298740063s|a617abadeaa5da50|430984|qs|local|vector|||273.063||
-tar_pseudoAbs_rodent|stem|e633d88140f7bb19|6d6024d08ed7ba53|b931ca4870b29527|300176103||t20276.9334201823s|a1ab9557f8b22b63|2896339|qs|local|vector|||306.328|spatSample requested sample size is larger than the number of cells|
-tar_biomodData_fallow|stem|720582c4579b028f|b3f8b20a9f486f7f|ad0d943bba334027|-804801279||t20276.9334213746s|d00bd3b11f608c1d|558666|qs|local|vector|||0.094||
-tar_HFOcc_plots_fallow|stem|da7fd1c4bbe1525a|1efd6ea1e6526551|63124a004fddd47d|-1699567581||t20276.9334757937s|14d2bfb927bc20b0|1448687|qs|local|vector|||4.454||
-tar_biomodData_rodent|stem|983b01533dd7ccec|9f19cce332331d98|a03cdbc302c3a33e|-1701717743||t20276.9334804237s|f43738385dcfa348|2871059|qs|local|vector|||0.343||
-tar_HFOcc_plots_rodent|stem|fcac3b67ab6cfe97|f0cb8554060bd989|f03c853d438519cf|984801138||t20276.9335573437s|d8f102965d906728|6404490|qs|local|vector|||6.391||
-tar_biomodModels_fallow|stem|69751314807267f6|d6898d9dc438ff14|30ddb17e980d95b9|-542729538||t20277.0672584227s|dfd1078088e4908d|25330|qs|local|vector|||11551.75|CV.do.full.model has been disabled because _allData_allRun is not provided in CV.user.table. Parallelisation with foreach is not available for Windows. Sorry.. executing dopar sequentially no parallel backend registered|
-tar_biomodModels_rodent|stem|5070a41b82ea95af|5c39a90513e096f3|cb41c34175ffad1c|1527529646||t20278.0102403852s|e9dec126cfda1e11|24321|qs|local|vector|||81473.625|CV.do.full.model has been disabled because _allData_allRun is not provided in CV.user.table. Parallelisation with foreach is not available for Windows. Sorry.. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred. glm.fit fitted probabilities numerically 0 or 1 occurred|
-tar_render_movement|stem|abb6860ebcfbd485|91f0c353f9fd7a49|3386415e38a0c55b|-912747596||t20278.01031031s|de65cec3ae558fa1|142|qs|local|vector|||3.344||
-tar_biomodEns_fallow|stem|30aef8973a783103|5c5a6383d1d39459|a1dd27af481e2c09|1291006823||t20278.32841201s|cb57fbe15656cc62|788761|qs|local|vector|||27483.906|Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.. Parallelisation with foreach is not available for Windows. Sorry.|
-tar_biomodSingle_plots_fallow|stem|282d387f0e0f19d5|f940d3b0ba4c3997|f44680b3c9fde065|971768685||t20278.3298954282s|a5a2fb0d812c0a0a|574733624|qs|local|vector|||122.797|ROC, TSS evaluation metric.eval automatically selected|

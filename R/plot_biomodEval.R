@@ -137,6 +137,12 @@ plot_biomodEval_single <- function(biomodModels){
 #' @export
 plot_biomodEval_ensemble <- function(biomodEns, patchList){
 
+  # targets::tar_load("tar_biomodEns_rodent")
+  # targets::tar_load("tar_patchList")
+  # targets::tar_source()
+  # biomodEns <- tar_biomodEns_rodent
+  # patchList <- tar_patchList
+
   if(biomodEns@sp.name == "Dama.dama"){
     species <- "fallow"
   } else {
@@ -160,12 +166,7 @@ plot_biomodEval_ensemble <- function(biomodEns, patchList){
       # legend.position = "none"
     )
 
-  # targets::tar_source()
-  # targets::tar_load("tar_biomodEns_rodent")
-  # biomodEns <- tar_biomodEns_rodent
-
   # useful ------------------------------------------------------------------
-  # targets::tar_load("tar_patchList")
   envStack  <- read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"))
 
   wessexStack <- envStack %>%
@@ -262,7 +263,7 @@ plot_biomodEval_ensemble <- function(biomodEns, patchList){
     filter(str_detect(expl.name, "distance")) %>%
     ggplot() +
     geom_rect(data = wessexRanges, aes(xmin = min, xmax = max,
-                                       ymin = -Inf, ymax = Inf), fill = "#85AB7A", alpha = 0.2) +
+                                       ymin = -Inf, ymax = Inf), fill = "#85AB7A", alpha = 0.25) +
     geom_path(aes(x = expl.val, y = pred.val, group = expl.name)) +
     facet_wrap(facet = vars(expl.name), scales = "free") +
     ggplotThemeCombo
