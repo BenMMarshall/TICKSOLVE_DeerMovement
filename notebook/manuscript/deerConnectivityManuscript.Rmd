@@ -8,6 +8,10 @@ corresponding1: "---"
 corresponding2: "---"
 date: "`r Sys.Date()`"
 output:
+  bookdown::html_document2:
+    theme: yeti
+    highlight: monochrome
+    fig_caption: true
   bookdown::pdf_document2:
     template: main.tex
     keep_tex: true
@@ -15,10 +19,6 @@ output:
     fig_caption: true
     dev: pdf
     extra_dependencies: ["float"]
-  bookdown::html_document2:
-    theme: yeti
-    highlight: monochrome
-    fig_caption: true
 link-citations: yes
 linkcolor: gray
 bibliography: [deerMovement_refs.bib, packages_refs.bib, packagesRstudio_refs.bib]
