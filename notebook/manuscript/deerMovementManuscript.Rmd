@@ -30,42 +30,44 @@ abstract: abstract text
 keywords: Movement ecology, step selection function, poisson, habitat preference, habitat selection, animal movement, roe deer, Capreolus capreolus
 ---
 
+<!-- word replacements -->
+<!-- land cover vs land use -->
+<!-- captial Roe Deer -->
+<!-- possion vs population -->
+
 # Introduction
-< Movement of animals offer insights into requirements, threats, and reactions to landscape change (e.g., fragmentation) >
+Animals disproportionately use and move through some areas more than others.
+The study of these processes –i.e. habitat selection and movement– provides insights into the dynamic relationship between an animals' physiology and the set of resources and risks occurring in landscapes [@manly_resource_1993].
+These species-habitat relationships not only determine the spatial distribution of populations, but also fundamentally underpin demographic performance [@matthiopoulos_establishing_2015].
+Accelerating landscape changes in the form of habitat destruction, creation and transformation increases the urgency for understanding if and how animals adjust movements to accommodate landscape changes
 
-At a global scale mammal movement is significantly impacted by human presence [@tucker2018moving].
-Perhaps most notably are human modification to landscapes in the form of habitat destruction and transformation.
-Animals responses to relatively novel human dominated landscapes can be hard to predict a priori.
-Birds can increase their movements in response to habitat homogenisation [@tucker_large_2019]; whereas other groups, such as mammals and reptiles, broadly see reductions in movements, with vagility limited by human-created barriers (e.g., roads or fencing; @tucker2018moving; @jerina2012roads; @jones2019fences]. 
+Animal responses to landscapes can be hard to predict a priori.
+At the global scale, wildlife movement is significantly impacted by human presence [@tucker2018moving].
+Mammals and reptiles broadly experience reductions in movement, with mobility limited by human-created barriers [e.g., roads or fencing; @tucker2018moving; @jerina2012roads; @jones2019fences].
+Similarly, mammal home range sizes are roughly five times smaller in areas with high versus low human disturbance [@broekman_environmental_2024].
+All else being equal, habitat fragmentation can also increase travel time for resource acquisition, resulting in higher energy expenditure [@doherty_coupling_2018], shifts in diets [@redpath_impact_1995], and lower breeding success [@saunders_breeding_1982].
 
-< Ungulates are often highly mobile, thereby getting involved in numerous human-wildlife interactions. Examples, such as road collisions and disease transfer are undesirable. >
+Large herbivores, with relatively high mobility and large home ranges, experience frequent interactions with humans, domesticated animals and infrastructure.
+Due to their economic importance and ecological impact, the space use patterns of large herbivores, and their responses to anthropogenic features, have been relatively well studied.
+Infrastructure such as roads and fences tend to degrade and fragment habitat, altering animal movement paths [@schwandner_predicting_2025; @sawyer_framework_2013], and behaviour [@xu_barrier_2021].
+However, movement responses to specific landscape features can be complex.
+For example, GPS-tagged guanacos in Argentina were attracted to roads for grazing resources and low predation risk, but they strongly avoided crossing roads [@serota_behavioral_2024].
+By understanding movement responses, we may be better placed to predict and mitigate harmful interactions between wildlife and humans.
 
-Within mammals and reptiles, species that need to travel more for resource acquisition may be at greater risk of negative consequences of human modification on their movement.
-These negative consequences can be direct, such as road mortalities, or indirect, such as greater energetic costs of movement < REFS >.  
+Deer live near humans in many temperate regions of the world and, as such, receive considerable attention from land managers [@cederlund_home_1983; @dupke_habitat_2017].
+Even in the absence of concrete information on deer movements, myriad management interventions are levied at controlling deer space use and population density, depending on the local management objectives [@pepper_management_2020].
+Objectives include reducing deer vehicular collisions, reducing herbivory or disease transmission to agriculture, reducing vectors of disease to humans (e.g., ticks), improving forestry productivity, enhancing biodiversity and woodland regeneration, and increasing hunting conditions.
+Many of these activities would be improved by precise knowledge of the movement behaviour and space use of individual deer; such knowledge could provide a more complete understanding from which controversial approaches to deer management can be assessed.
+While there is a long history of individual-level tracking of deer in mainland Europe and North America [@morellet_seasonality_2013], only a handful of similar studies have been carried out on British deer, with most research attention in the UK focused on upland red deer.
+Comparatively, roe deer (*Capreolus capreolus*) remain understudied in parts of the UK such as Scotland [@mitchell1977ecology] despite being the most abundant species in the UK and the one living most closely with humans.
 
-Many ungulate species have been demonstrated as being vulnerable to having their movements disrupted by human action and human landscapes. < EXAMPLE HERE >.
-
-Deer represent a key group of ungulates in Europe, having to contend with high and near comprehensive human land transformation [@mu_global_2022].
-They are known to react to roads and buildings < ADD DIRECTION OF EFFECT >, with a general tendency to avoid human modification [@coulon2008inferring]. 
-
-< By understanding movement we may be better placed to predict and mitigate harmful interactions for deer and humans. >
-
-Even in the absence of concrete information on deer movements, a myriad of management interventions are often levied at mitigating deer movements, actions, and numbers [@pepper2020management].
-Much of these efforts are informed by data concerning < CHECK PAPERS ON FENCING ETC >, that would be complimented by an examination of deer movements in areas yet to see that form of investigation such as the UK.
-A clear and complete picture of deer ecology would aid in tackling the controversial topic of deer management, and help reach the ultimate goals including forest regeneration and road collision mitigation, while also providing insights into key deer propagated tick-borne diseases.  
-
-In the UK, research has investigated the impacts of land use, roads, urban areas and predator removal on deer < REFS >, with a particular focus on Red Deer (*Cervus elaphus*) due to its commercial value.
-Comparatively Roe Deer (*Capreolus capreolus*) remain understudied in parts of the UK such as Scotland [@mitchell1977ecology]. 
-
-Roe deer are the smallest native deer species in the United Kingdom and the most ubiquitous, covering almost all the British mainland from the northern highlands of Scotland to southern Wessex in England [@burbaitee2009roe]. 
-Roe deer are ecologically and spatially flexible, able to adapt their spatial use in response to landscape, cues from conspecifics, and predator presence [@basak2020human; @jepsen2004modelling].
-Examples exist of them using isolated woodlands to outskirts major cities [@basak2020human; @jepsen2004modelling] < CHECK REFS >, and are capable of inhabiting mosaics of both woodland and open country, even when they include human disturbance [@ciach2019ungulates, @ewald2014lidar; @mysterud1999scale]. 
-
-< Roe deer are widely distributed across Europe and are known vectors for ticks as well as frequent road collision victims >
-< Compared to Europe, the UK populations of Roe Deer are comparatively less well documented despite the existence of the same human-deer interaction concerns. >
+Roe deer are the smallest native deer species in the United Kingdom and the most ubiquitous, covering almost all the British mainland from the northern highlands of Scotland to southern Wessex in England [@burbaitee2009roe].
+Roe deer are woodland edge species that use isolated fragments of woodland, open or cultivated habitats near woody cover, and even gardens in and near urban areas.
+Their flexibility in terms of diet and space use allow widespread acclimatisation to a variety of ecological contexts and tolerate high levels of human disturbance [@basak2020human; @jepsen2004modelling; @ewald2014lidar].
 
 Here we expand the knowledge of Roe Deer movement, targeting two different landscapes in the UK.
 We aim to document baseline space use of UK Roe Deer, while exploring their movement in relation to various human-created land use types and landscape features, with a particular focus on roads.
+<!-- In the UK pretty much all land use is human-created, so it would be good to be more specific here. villages/buildings/roads are often termed "anthropogenic infrastructure" if you like that sort of catch-all phrase? -->
 
 # Methods
 
@@ -80,29 +82,45 @@ inputList <- readRDS(file = here::here("data", "inputList.rds"))
 
 ## Roe Deer Tracking
 
-The study was conducted in two locations: Wessex, and Aberdeenshire (Fig. \@ref(fig:studyLocationMapRoe)). Broadly, both locations represent mixed used landscapes housing patches of woodland. We employed a net fence capture method, whereby ... < MORE DETAILS on capture methods > 
+The study was conducted in two regions: in Northeastern Scotland (Aberdeenshire) and in Southern England in and around the New Forest National Park (Wessex; Fig. \@ref(fig:studyLocationMapRoe)).
+Broadly, both locations represent mixed-use landscapes comprised of patches of woodland surrounded by cultivated agriculture, livestock pasture and buildings.
+All deer captures took place in woodland patches, during winter months (January - March in 2022) and (January - March 2023). 
 
-More specifically, we focused deer capture efforts in four Aberdeenshire locations: Muir of Dinnet (2 female deer), Black Hillocks (1 male deer), Wellhouse Woods (2 female and 1 male deer), Moss of Air (2 female deer), and Gask Woods (3 female and 1 male deer). These sites were selected because < JUSTIFCATION HERE >. 
+More specifically, we focused deer capture efforts in four Aberdeenshire locations: Muir of Dinnet National Nature Reserve (2 female deer), Black Hillocks (1 male deer), Wellhouse Woods (2 female and 1 male deer), Moss of Air (2 female deer), and Gask Woods (3 female and 1 male deer).
+In Wessex, we focused deer capture at Bentley Wood, Holly Hatch, and Kings Garn.
+These sites were selected to gain a range of habitats to enable us to address questions about roe deer habitat selection in woodlands, and to be representative of the types of forest and landscape typical of Aberdeenshire and Wessex.
 
-- The Muir of Dinnet is a National Nature Reserve managed by NatureScot which mainly including deciduous woodland, open grassland and bogs. 
-- Black Hillocks is managed by the Glendye estate and includes hilly Scots Pine (Pinus sylvestris) forest, open heathland and bog. 
-- Wellhouse woods consist of pine woodland surrounded by farmland. 
-- Moss of Air consists of a mixed woodland with some open areas and bogs. 
-- Gaskwood is another mixed woodland site and is close to the town of Skene, Scotland. 
+- The Muir of Dinnet is a National Nature Reserve managed by NatureScot, the Scottish Government’s statutory conservation agency, in the east of the Cairngorms National Park.
+The reserve consists of mainly mixed woodland dominated by birch (*Betula spp.*) and Scot's pine (*Pinus sylvestris*) with extensive areas of naturally regenerating aspen, *Populus tremula*, and patches of heath and bogs.
 
-In Wessex, we focused deer capture at Bentley Wood, Holly Hatch, and Kings Garn, due to < JUSTIFCATION HERE >. 
+- Black Hillocks is managed by the Glendye Estate and includes a patch of coniferous forest dominated by Scot's Pine (*Pinus sylvestris*) and European larch, *Larix decidua*, surrounded by open upland heathland.
+Within 300m of the site, is the edge of a large tract of commercial, densely planted, mature conifer forest dominated by exotic species such as Sitka spruce, *Picea sitchensis*.
 
-< WESSEX DETAILS > 
+- Wellhouse Woods is a commercial Sitka spruce (*Picea sitchensis*) plantation surrounded by farmland pasture.
+
+- Moss of Air, near Garlogie is a mixed woodland including Scot's pine and birch, surrounded by a mosaic landscape consisting of patches of commercial conifer forest, arable and pasture farmland. 
+
+- Gaskwood, also near Garlogie, is a commercial conifer forest including Scot's pine and Sitka spruce, within a mosaic landscape of forest and farmland patches, located 1 km across open farmland from Moss of Air.
 
 We captured deer using long netting from January to September of 2023 in Aberdeenshire, and between __ and __ in Wessex. 
 
-We fitted captured adult Roe Deer with GPS-collared (30mm reinforced Tellus GP Light Iridium by Followit) that weighted 276g, representing less than 10% of the deer total body mass.
-We set the collars provide a GPS fix every 3 hours in Aberdeenshire.
-In Wessex the collar fix frequency was increased to __, as a direct response to evidence of collar rubbing on the deer.
-This was implemented to maximise data prior to early collar removal to minimise further harm to the individuals.
-As a result, the Wessex dataset is more limited in overall duration. 
+To capture deer we employed a "long net" capture method (Cockburn 1979) <!-- unknown citations -->, which has been used extensively and safely to capture roe deer in the UK [@gill_changes_1996] and elsewhere [@morellet_effect_2009].
+Briefly, we set up 1-2 km of 2-meter-high nylon nets along paths of opening in the woodland.
+Nets were strung on flexible bamboo poles dropped to the ground when an animal ran into them.
+Nets were placed in the shape of a horseshoe.
+Capture personnel were spaced every ~50m on the inside part of the netting area.
+A team of beaters, spaced every 10-15m, moved slowly from the open side of the horseshoe towards the top of the horseshoe.
+When a deer was caught in the net, the capture team restrained the animal and injected it with a mild sedative (2mg/ml acepromazine), attached a GPS collar and ear tag.
+If many animals were captured, we transferred animals to a wooden retension box after giving sedatives, which helped to calm the animal and allowed monitoring.
+After ~20 minutes, we removed the animal from the box and deployed the collar and ear tag. 
 
-```{r studyLocationMapRoe, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Locations of the study sites in Aberdeenshire and Wessex. Points show the mean location of Roe Deer. Green areas in right panel depict woodland, and grey lines show roads. All maps are north orientated."}
+We fitted captured adult Roe Deer with GPS-collared (30mm reinforced Tellus GP Light Iridium by Followit) that weighed 276g, representing <2% of the deer total body mass.
+Collars collected GPS fixes every 3 hours in Aberdeenshire.
+In Wessex the collar fix frequency set to to every 30 minutes.
+Collars in Wessex were detached after a short duration (~1 month) due to evidence from one animal that the collar may have caused some friction to the neck.
+As a result, the Wessex dataset is more limited in overall duration.
+
+```{r studyLocationMapRoe, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap=" Locations of the study sites in Aberdeenshire and Wessex. Points show the mean location of GPS collared Roe Deer. Green areas in right panel depict woodland, and grey lines show roads. All maps are north orientated."}
 knitr::include_graphics(here::here("figures", "studyLocationMapRoe.png"))
 ```
 
@@ -136,9 +154,9 @@ kableExtra::kbl(trackingSummary, caption = "Summary of tracking data used in ana
 
 ```
 
-We retrieved movement data from `r nrow(trackingSummary)` GPS collars worn by Roe Deer, 13 in Aberdeen, 2 in Wessex.
-We re-sampled the Roe Deer data to a more consistent rate, aiming for a standard 3 hour time lag between locations (with a 1 hour tolerance). 
-We additionally filtered out the first week's worth of data to avoid the impacts of capture/immediate post-release movements that may have been atypical.
+We retrieved movement data from `r nrow(trackingSummary)` GPS collars worn by Roe Deer, 13 in Aberdeenshire, 2 in Wessex.
+We re-sampled the Roe Deer data to a more consistent rate, aiming for a standard 3 hour time lag between locations (with a 1 hour tolerance).
+We additionally filtered out the first weeks' worth of data to avoid the impacts of capture/immediate post-release movements that may have been atypical [@morellet_effect_2009].
 
 ## Home Range Estimation
 
@@ -172,76 +190,74 @@ bestModels <- paste0(paste0(names(bestModels), " ", bestModels), collapse = "; "
 
 ```
 
-We estimated roe deer home range using autocorrelated kernel density estimators [@ctmm; @Calabrese2016; @Fleming2015; @Fleming2017].
-This process consisted of fitting a number of continuous time movement models to an individuals movement data, selecting the best fitting movement model, and extracting a suitable range contour from the resulting utilisation distribution.
+We estimated roe deer home range using Autocorrelated Kernel Density Estimators [AKDE; @ctmm; @Calabrese2016; @Fleming2015; @Fleming2017]; a method of home range area estimation that accounts for the particular structures present in movement data such as autocorrelation and data gaps.
+This process consisted of fitting a number of continuous time movement models to an individual deer's movement data, selecting the best fitting movement model, and extracting a suitable range contour from the resulting utilisation distribution.
 We fit the following models (following the default process provided by the ctmm package): Ornstein-Uhlenbeck (OU), Ornstein–Uhlenbeck Foraging (OUF), and Independent Identically Distributed (IID), all in both isotropic and anisotropic forms.
-We elected to use perturbative hybrid residual maximum likelihood (pHREML) and [@fleming_overcoming_2019; @silva_autocorrelationinformed_2022] AICc to determine the best fitting movement model on an individual basis, and used that single best fitting model for all further estimations.
+We elected to use perturbative hybrid residual maximum likelihood (pHREML) [@fleming_overcoming_2019; @silva_autocorrelationinformed_2022] and AICc to determine the best fitting movement model on an individual basis, and used that single best fitting model for all further estimations.
 
 Before committing to the estimations of home range size we examined whether the roe deer exhibited stable ranges through the visual inspection of variograms.
-A stable range should be reveal by a clear asymptote in the variogram.
-We paired these visual inspections with a judgement of effective sample size to help gauge our confident in the area estimates [effective sample size approximating the overall tracking duration divided by the mean time taken to cross the home range; @silva_autocorrelationinformed_2022].
-All our individuals showed effective sample sizes between `r essOverall`, leading us to be confident in overall home range estimates.
+A stable range should be revealed by a clear asymptote in variogram, where the semi-variance flattens as time lags increase.
+We paired these visual inspections with a judgement of effective sample size to help gauge our confidence in the home range area estimates [effective sample size approximating the overall tracking duration divided by the mean time taken to cross the home range; @silva_autocorrelationinformed_2022].
+All our individuals showed effective sample sizes between `r essOverall`, indicating that the movement data contained a large number of complete home range crossing events, allowing us to be confident in overall home range estimates.
 
-Having determine the data suitability for home range estimations, we extracted the 95% and 99% contours from the weighted AKDE estimate, alongside 95% CI surrounding that contour.
+Having determined the data's suitability for home range estimations, we extracted the 95% and 99% contours from the weighted AKDE estimate, alongside 95% confidence interval surrounding that contour.
 We selected 95% as a balance between a generous estimate of home range, while also avoiding the undue influence of the most extremely outlying movements.
-To generate an overall home range estimate for Aberdeen roe deer, we averaged the home ranges using the weighted mean function provided by the ctmm package [@ctmm; @silva_autocorrelationinformed_2022].
-This way the home range mean is weighted by the confidence (i.e., ESS) surrounding each home range.
+To generate an overall home range estimate for Aberdeenshire roe deer, we averaged the home ranges using the weighted mean function provided by the ctmm package [@ctmm; @silva_autocorrelationinformed_2022].
+This way the home range mean is weighted by the confidence (i.e., effective sample size) surrounding each home range.
 
-We retained 99% estimates help quantify the range at which Roe Deer will range away from woodland patches.
+We retained 99% estimates help quantify the distance from which Roe Deer will range away from woodland patches.
 We calculated the widest dimension of each 99% home range polygon (or largest polygon if the home range area was non-contiguous), and halved that value to quantify the distance deer would be willing to travel beyond their resident patch.
 To support this approach, we determined the distance from patch for every deer location that fell outside a patch.
 
 ## Habitat Selection
 
-<!-- To determine habitat selection of roe deer we focused on the Aberdeen sub-sample as those individuals were tracked for longer periods of time providing the opportunity for a stable overall population estimate.  -->
-<!-- We determined selection using two methods: an integrated step selection function and a poisson model (Muff et al paper CITE). -->
+We used the reformulated Poisson model approach described by @muff_accounting_2020 to generate population level estimates of habitat selection as well as gauge deer's movement capabilities in relation to different aspects of the landscape.
 
-We used the reformulated Poisson model approach described by @muff_accounting_2020 to generate estimates of habitat selection as well as gauge deer's movement capabilities in relation to different aspects of the landscape.
-
-The model required data pertaining to the used locations (i.e., GPS locations of the deer) and comparable data on randomly generated available points (i.e., randomly generated locations the deer could that travelled).
-For each confirmed deer location we generated `r inputList$nAvailableSteps` random alternative locations they could have travelled to.
+The model required data pertaining to the used locations (i.e., GPS locations of the deer) and comparable data on randomly generated available points (i.e., randomly generated locations the deer could have travelled to).
+For each confirmed deer location, we generated `r inputList$nAvailableSteps` random alternative locations they could have travelled to.
 The location of these random locations was governed by two distributions.
-A `r str_to_sentence(inputList$slDistribution)` distribution that random step lengths were drawn from, and a Von Mises distribution that random turn directions were drawn from.
+A `r str_to_sentence(inputList$slDistribution)` distribution from which random step lengths were drawn from, and a Von Mises distribution from which random turn directions were drawn from.
 Both distribution where calibrated (e.g., shape, size, mu, and kappa) by the underlying movement data.
 <!-- The same data was used in both modelling approaches. -->
 
-Once all random locations had been generated we extracted a suite of environmental conditions at all those locations.
+Once all random locations had been generated, we extracted a suite of environmental variables at all those locations, in order to relate Roe Deer space use with land cover and anthropogenic features. 
 First was the land use type as described by the 2023 UKCEH land cover maps, which is a 25m resolution classified raster originally based on Sentinel-2 imagery [@morton_land_2024].
 Validation of these data suggest 83% accuracy [@morton_land_2024].
 The UKCEH land cover data comprises of 21 land cover classes, broadly following the Biodiversity Broad Habitats [@jackson_guidance_2000].
 
-We recategorised these land use types categories into 10 more general categories that reduced instances of limited interaction with the deer movement data thereby aiding habitat selection model convergence and avoided extreme, unstable selection estimates.
-<!-- also made the results compatible with efforts to model deer tick dymanics -->
+We recategorised these 21 land cover types categories into 10 more general categories (see Table X).
+<!-- SUPP TABLE TO SHOW THE TRANSLATIONS -->
+This that reduced instances of limited interaction with the deer movement data thereby aiding habitat selection model convergence and avoided extreme, unstable selection estimates.
 
-In addition to land use types, we also acquired woody linear feature (i.e., hedgerows) data from UKCEH [@scholefield_woody_2016].
-This dataset maps the woody linear features across the UK (e.g., woodland) as polylines, based on Ordnance Survey maps and the 2007 UKCEH Land Cover Map [@morton_final_2011].
+In addition to land cover classes, we also acquired "woody linear feature" (i.e., hedgerows) data from UKCEH [@scholefield_woody_2016], which maps hedgerows across the UK (e.g., woodland) as polylines, based on Ordnance Survey maps and the 2007 UKCEH Land Cover Map [@morton_final_2011].
 
 We converted the polygon spatial data into a raster, where 1 == hedgerow, and used that rasterisation to generate a distance to hedgerow raster for the entire study landscape.
-We conducted the same process to create a distance to woodland raster, where we calculated the distance from any area the UKCEH land use data classed as deciduous or coniferous woodland.
+We conducted the same process to create a distance to woodland raster, where we calculated the distance from any area the UKCEH land cover data classed as deciduous or coniferous woodland.
 These distance rasters allowed for easy extraction of the distance to the nearest hedgerow and woodland for all locations.
+This allowed us to investigate the influence of woodland or hedgerow on the use of open habitats by Roe Deer, as well as the extent to which expanses of open habitats might act as barriers to Roe Deer dispersal. 
 
 We acquired road data from OS map open GOV licensed [@ordnance_survey_os_2024]. 
 We created a binary variable describing crossing events for all steps, with all steps that crossed one or more of the roads being classed as 1.
-This binary variable allowed us to estimate the likelihood deer cross a road and therefore the level of barrier roads present.
+This binary variable allowed us to estimate the likelihood Roe Deer cross a road and therefore the extent to which roads may present a barrier [@serota_behavioral_2024].
 
-To ensure compatibility between all data sources, we ensured all data was projected into the British National Grid (BNG) coordinate reference system (OSGB36, epsg: 27700) before undertaking analysis.
+To ensure compatibility between all data sources, we projected all data into the British National Grid (BNG) coordinate reference system (OSGB36, epsg: 27700) before undertaking analysis.
 
-<!-- Poisson Model -->
-The Poisson model formulae consisted of land use (a 8-term category variable formed into 7 dummy variables, with deciduous woodland placed as the reference category, barren and other excluded), distance to woodland (continuous in m), distance to hedgerow (continuous in m), road crossing (binary).
-In addition to these selection focused predictors, we several movement predictors including step length, log step length, and cos turn angle, as well as the interaction between step length and log of step length with all land use types.
-As the population Possion model contained all individuals the formula required in the inclusion of fixed Gaussian processes accounting for the time step as well as the individual.
-<!-- double check the wording here -->
-This formulation, namely the fixed Gaussian processes, as described by @muff_accounting_2020 allows for the efficient estimation of population level selection using integrated nested Laplace approximation (INLA) [@INLA2013b;@INLA2015d]
-<!-- if no movement aspects in formula, can cite Muff et al and Marshall et al (preprint), suggesting that its leads to more vairable estimates  -->
+The population level model consisted of land cover (a 8-term category variable formed into 7 dummy variables, with deciduous woodland placed as the reference category, barren and other excluded), distance to woodland (continuous in m), distance to hedgerow (continuous in m), road crossing (binary).
+In addition to these habitat selection focused predictors, we included several movement predictors: step length, log step length, and cos turn angle, as well as the interaction between step length and log of step length with all land use types.
+To account for the structure originating from having multiple individuals in the model, we included of fixed Gaussian processes for the time step and the individual in keeping with the approach described by @muff_accounting_2020.
+This formulation, namely the fixed Gaussian processes, as described by @muff_accounting_2020 allows for the efficient estimation of population level selection using integrated nested Laplace approximation (INLA) [@INLA2013b;@INLA2015d].
 
-To supplement the population model, we ran individual step-selection models for all deer.
-These models used the same data as the Poisson model.
-For the individual models, we used a formula that included landuse type, distance to woodland, distance to hedges, a binary describing whether they crossed a road, step length, log step length, and cos of turn angle.
-We used the IndRSA package [@IndRSA_text] to explore the variation of resulting coefficients, specifically specialisation, heterogeneity, and a weighted population mean [@bastillerousseau_simple_2022].
-Specialisation is the absolute magnitude of the coefficients; differences compared to the population mean coefficient could highlight diverging responses to the habitat covariates.
+To supplement the population model, we ran individual level step-selection models each Roe Deer separately.
+These models used the same data as the population level model, but focused on individual level responses relative to the population mean.
+Past studies of wild Roe Deer have found substantial levels of individual variability in behavioural responses to risk [@bonnot_interindividual_2015].  
+For the individual models, we used a formula that included land cover class, distance to woodland, distance to hedgerows, a binary describing whether they crossed a road, step length, log step length, and cos of turn angle.
+Once we had estimated individual responses to the environmental variables, we explore how the variation in individual coefficients could highlight individual variability in selection.
+We used the IndRSA package [@IndRSA_text] to explore the variation of resulting coefficients (i.e., selection or attraction towards environmental characteristics), producing population-level estimates of specialisation, heterogeneity, and a weighted population mean [@bastillerousseau_simple_2022].
+Specialisation is the absolute magnitude of the coefficients; differences compared to the population mean coefficient could highlight diverging responses to the habitat covariates and a bimodal response to a given environmental characteristic.
 This can be particularity informative when the diverging responses have resulted in a "neutral" population mean for the coefficient.
-Heterogeneity is the standard deviation of the coefficients; therefore, larger values indicate greater variation in the response.
-To carry forward the uncertainty surrounding the initial habitat coefficients, 10000 replicates of each metric were generated from a normal distribution centred on the original coefficient with a standard deviation equal to the standard error of the coefficient [@bastillerousseau_simple_2022].
+Heterogeneity is the standard deviation of the coefficients; therefore, larger values indicate greater variation between individual Roe Deer in their response to land cover or landscape features.
+The weighted population mean provides an alternative measure of population level selection to our Poisson model.
+To carry forward the uncertainty surrounding the initial habitat coefficients in the weighted population mean, 10,000 replicates of each metric were generated from a normal distribution centred on the original coefficient with a standard deviation equal to the standard error of the coefficient [@bastillerousseau_simple_2022].
 
 \clearpage
 
