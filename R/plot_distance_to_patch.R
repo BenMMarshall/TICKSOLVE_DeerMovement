@@ -44,21 +44,30 @@ plot_distance_to_patch <- function(deerData, patchList, akdeSummary){
   print("Distance Raster...")
   distanceRaster <- terra::distance(binaryRaster)
 
+  landscapeDists <- data.frame(row = 1:nrow(deersf),
+                               spatSample(distanceRaster, size = nrow(deersf)*10, method = "random")) %>%
+    filter(!is.na(layer), !is.null(layer), layer > 0)
+
   distance2patch <- terra::extract(distanceRaster, deersf)
 
   textLabel <- str_wrap(paste0(round(sum(distance2patch$layer < akdeHRHalf, na.rm = TRUE) /
                                        length(distance2patch$layer[!is.na(akdeHRHalf)]) *100,
                                      digits = 0),
-                               "% of deer locations when outside a patch are within half the mean longest axis of 99% AKDE home range area (",
-                               round(akdeHRHalf, digits = 0), "m)"),
-                        width = 80)
+                               "% of deer locations are within half the mean longest axis of 99% AKDE home range area (",
+                               round(akdeHRHalf, digits = 0), "m) of a woodland."),
+                        width = 60)
 
   distancePlot <- distance2patch %>%
     filter(!is.na(layer), !is.null(layer), layer > 0) %>%
     ggplot() +
+    geom_density(data = landscapeDists,
+                 aes(x = layer),
+                 fill = paletteList$baseGrey[[1]],
+                 colour = NA, alpha = 0.45, n = 10000) +
     geom_density(aes(x = layer), fill = paletteList$deerSexPal[[1]],
-                 colour = NA, alpha = 0.65) +
+                 colour = NA, alpha = 0.65, n = 10000) +
     geom_vline(xintercept = akdeHRHalf, linetype = 2, colour = "grey25") +
+    coord_cartesian(xlim = c(0, 1000)) +
     # annotate("text", x = akdeHRHalf-20, y = 0.0075,
     #          label = textLabel, hjust = 1, vjust = 0, fontface = 3) +
     labs(y = "Density of deer locations", x = "Distance from patch (m)",

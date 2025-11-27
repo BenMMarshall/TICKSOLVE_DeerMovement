@@ -21,11 +21,12 @@ export_pois_coefs <- function(poisModel){
 
   poisFixed <- poisFixed %>%
     mutate(termType = case_when(
-      term %in% c("roadCrossings", "distanceWoodland", "distanceHedges") ~ "Non-landuse",
+      term %in% c("distanceWoodland", "distanceHedges") ~ "Non-land cover",
+      term %in% c("roadCrossings") ~ " ",
       term %in% c("sl_", "cos_ta", "log_sl") ~ "Core movement",
-      str_detect(term, "\\:sl") ~ "Step interactions (sl_)",
-      str_detect(term, "\\:log_sl") ~ "Step interactions (log_sl)",
-      TRUE ~ "Landuse"
+      str_detect(term, "\\:sl") ~ "Step interactions\n(step length)",
+      str_detect(term, "\\:log_sl") ~ "Step interactions\n(log step length)",
+      TRUE ~ "Land cover"
     )) %>%
     rename(lower = `0.025quant`, upper = `0.975quant`) %>%
     mutate(sig = ifelse(lower > 0, "Significant +", ifelse(upper < 0, "Significant -", "Not Significant"))) %>%
@@ -43,10 +44,11 @@ export_pois_coefs <- function(poisModel){
     mutate(term_colour = factor(term_colour, levels = unique(term_colour)),
            termType = factor(termType, levels = c(
              "Core movement",
-             "Non-landuse",
-             "Landuse",
-             "Step interactions (sl_)",
-             "Step interactions (log_sl)"
+             "Non-land cover",
+             " ",
+             "Land cover",
+             "Step interactions\n(step length)",
+             "Step interactions\n(log step length)"
            )))
 
   write.csv(poisFixed, file = here::here("tables", "poisFixed.csv"), row.names = FALSE)
@@ -61,7 +63,9 @@ export_pois_coefs <- function(poisModel){
                                 glue::glue("<b>{term_colour}</b>")))
 
   (poisCoef_plot <- poisFixed %>%
-      filter(!termType == "Core movement") %>%
+    filter(!mean < minY & !mean > maxY) %>%
+      filter(!str_detect(termType, "Core")) %>%
+      # filter(str_detect(term, "Distance")) %>%
       ggplot() +
       geom_vline(xintercept = 0, linetype = 2, color = "grey50") +
       geom_errorbarh(aes(xmin = lower, xmax = upper, y = term_colour, color = sig), height = 0.2,
@@ -71,9 +75,9 @@ export_pois_coefs <- function(poisModel){
                 aes(x = 0, y = term_colour, label = round(mean, digits = 2)),
                 vjust = 0.5, size = 3, colour = "grey25") +
       scale_colour_manual(values = paletteList$highSigLowSigNoSig) +
-      facet_wrap(vars(termType), ncol = 1, drop = TRUE, scales = "free_y",
+      facet_wrap(vars(termType), ncol = 1, drop = TRUE, scales = "free", space = "free_y",
                  strip.position = "left") +
-      coord_cartesian(xlim = c(minY, maxY)) +
+      # coord_cartesian(xlim = c(minY, maxY)) +
       labs(x = "Coefficient", y = "Term", title = "Poisson Model Coefficients") +
       theme_bw() +
       theme(

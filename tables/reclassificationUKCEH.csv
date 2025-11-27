@@ -1,0 +1,22 @@
+﻿UKCEH Land Cover Class,LC Identifier,Reclassified category
+Deciduous woodland,1,Deciduous Broadleaf Forest
+Coniferous woodland ,2,Evergreen Needleleaf Forest
+Arable,3,Cropland
+Improve grassland ,4,Tall Grassland
+Neutral grassland ,5,Short Grassland
+Calcareous grassland,6,Short Grassland
+Acid grassland,7,Short Grassland
+Fen,8,Permanent Wetland
+Heather,9,Open Shrubland
+Heather grassland,10,Open Shrubland
+Bog,11,Permanent Wetland
+Inland rock,12,Barren
+Saltwater,13,Other
+Freshwater,14,Other
+Supralittoral rock,15,Barren
+Supralittoral sediment,16,Barren
+Littoral rock,17,Barren
+Littoral sediment,18,Barren
+Saltmarsh,19,Permanent Wetland
+Urban,20,Human Settlements
+Suburban,21,Human Settlements

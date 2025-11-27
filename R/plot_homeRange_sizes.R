@@ -5,15 +5,16 @@
 #' @return A ggplot object, and saved file.
 #'
 #' @export
-plot_homeRange_sizes <- function(deerData, akdeLists#, wrsfakde
-                                 ){
+plot_homeRange_sizes <- function(deerData, akdeLists,#, wrsfakde
+                                 akdeSummary){
 
   paletteList <- load_deer_palette()
 
   # targets::tar_source()
   # targets::tar_load("tar_akdeLists")
   # targets::tar_load("tar_deerData")
-  #
+  # targets::tar_load("tar_akdeSummary")
+  # akdeSummary <- tar_akdeSummary
   # akdeLists <- tar_akdeLists
   # deerData <- tar_deerData
   # library(here)
@@ -74,12 +75,14 @@ plot_homeRange_sizes <- function(deerData, akdeLists#, wrsfakde
       #            aes(x = Animal_ID, y = est,
       #                colour = Sex, group = as.factor(level), shape = Sex),
       #            position = position_nudge(x = -0.2), alpha = 0.45) +
-      geom_hline(data = allAreas %>%
-                   filter(level == 0.95) %>%
-                   filter(!str_detect(Animal_ID, "Fallow")) %>%
-                   group_by(level) %>%
-                   summarise(mean = mean(est)),
-                 aes(yintercept = mean), linetype = 2, colour = "grey25", alpha = 0.5) +
+      # geom_hline(data = allAreas %>%
+      #              filter(level == 0.95) %>%
+      #              filter(!str_detect(Animal_ID, "Fallow")) %>%
+      #              group_by(level) %>%
+      #              summarise(mean = mean(est)),
+      #            aes(yintercept = mean), linetype = 2, colour = "grey25", alpha = 0.5) +
+      geom_hline(yintercept = summary(akdeSummary$ctmmMean)$CI[1,2],
+                 linetype = 2, colour = "grey25", alpha = 0.5) +
       scale_colour_manual(values = unname(paletteList$highMidLowPal)) +
       coord_flip(ylim = c(0, 200)) +
       facet_grid(rows = vars(region), scales = "free_y", space = "free_y", switch = "y",

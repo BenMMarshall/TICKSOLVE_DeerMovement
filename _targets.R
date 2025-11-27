@@ -189,8 +189,8 @@ coreTargetList <- list(
   ),
   tar_target(
     name = tar_homeRange_sizePlot,
-    command = plot_homeRange_sizes(tar_deerData, tar_akdeLists#, tar_wrsfakde
-                                   )
+    command = plot_homeRange_sizes(tar_deerData, tar_akdeLists,#, tar_wrsfakde
+                                   tar_akdeSummary)
   ),
   tar_target(
     name = tar_variograms,
