@@ -27,7 +27,7 @@ editor_options:
   markdown: 
     wrap: sentence
 abstract: abstract text
-keywords: Movement ecology, step selection function, poisson, habitat preference, habitat selection, animal movement, roe deer, Capreolus capreolus
+keywords: Movement ecology, step selection function, habitat preference, habitat selection, animal movement, Roe Deer, Capreolus capreolus, road crossing
 ---
 
 <!-- word replacements -->
@@ -59,7 +59,7 @@ Even in the absence of concrete information on deer movements, myriad management
 Objectives include reducing deer vehicular collisions, reducing herbivory or disease transmission to agriculture, reducing vectors of disease to humans (e.g., ticks), improving forestry productivity, enhancing biodiversity and woodland regeneration, and increasing hunting conditions.
 Many of these activities would be improved by precise knowledge of the movement behaviour and space use of individual deer; such knowledge could provide a more complete understanding from which controversial approaches to deer management can be assessed.
 While there is a long history of individual-level tracking of deer in mainland Europe and North America [@morellet_seasonality_2013], only a handful of similar studies have been carried out on British deer, with most research attention in the UK focused on upland red deer.
-Comparatively, roe deer (*Capreolus capreolus*) remain understudied in parts of the UK such as Scotland [@mitchell1977ecology] despite being the most abundant species in the UK and the one living most closely with humans.
+Comparatively, Roe Deer (*Capreolus capreolus*) remain understudied in parts of the UK such as Scotland [@mitchell1977ecology] despite being the most abundant species in the UK and the one living most closely with humans.
 
 Roe deer are the smallest native deer species in the United Kingdom and the most ubiquitous, covering almost all the British mainland from the northern highlands of Scotland to southern Wessex in England [@burbaitee2009roe].
 Roe deer are woodland edge species that use isolated fragments of woodland, open or cultivated habitats near woody cover, and even gardens in and near urban areas.
@@ -88,7 +88,7 @@ All deer captures took place in woodland patches, during winter months (January 
 
 More specifically, we focused deer capture efforts in four Aberdeenshire locations: Muir of Dinnet National Nature Reserve (2 female deer), Black Hillocks (1 male deer), Wellhouse Woods (2 female and 1 male deer), Moss of Air (2 female deer), and Gask Woods (3 female and 1 male deer).
 In Wessex, we focused deer capture at Bentley Wood, Holly Hatch, and Kings Garn.
-These sites were selected to gain a range of habitats to enable us to address questions about roe deer habitat selection in woodlands, and to be representative of the types of forest and landscape typical of Aberdeenshire and Wessex.
+These sites were selected to gain a range of habitats to enable us to address questions about Roe Deer habitat selection in woodlands, and to be representative of the types of forest and landscape typical of Aberdeenshire and Wessex.
 
 - The Muir of Dinnet is a National Nature Reserve managed by NatureScot, the Scottish Government’s statutory conservation agency, in the east of the Cairngorms National Park.
 The reserve consists of mainly mixed woodland dominated by birch (*Betula spp.*) and Scot's pine (*Pinus sylvestris*) with extensive areas of naturally regenerating aspen, *Populus tremula*, and patches of heath and bogs.
@@ -104,7 +104,7 @@ Within 300m of the site, is the edge of a large tract of commercial, densely pla
 
 We captured deer using long netting from January to September of 2023 in Aberdeenshire, and between __ and __ in Wessex. 
 
-To capture deer we employed a "long net" capture method (Cockburn 1979) <!-- unknown citations -->, which has been used extensively and safely to capture roe deer in the UK [@gill_changes_1996] and elsewhere [@morellet_effect_2009].
+To capture deer we employed a "long net" capture method (Cockburn 1979) <!-- unknown citations -->, which has been used extensively and safely to capture Roe Deer in the UK [@gill_changes_1996] and elsewhere [@morellet_effect_2009].
 Briefly, we set up 1-2 km of 2-meter-high nylon nets along paths of opening in the woodland.
 Nets were strung on flexible bamboo poles dropped to the ground when an animal ran into them.
 Nets were placed in the shape of a horseshoe.
@@ -196,19 +196,19 @@ bestModels <- paste0(paste0(names(bestModels), " ", bestModels), collapse = "; "
 
 ```
 
-We estimated roe deer home range using Autocorrelated Kernel Density Estimators [AKDE; @ctmm; @Calabrese2016; @Fleming2015; @Fleming2017]; a method of home range area estimation that accounts for the particular structures present in movement data such as autocorrelation and data gaps.
+We estimated Roe Deer home range using Autocorrelated Kernel Density Estimators [AKDE; @ctmm; @Calabrese2016; @Fleming2015; @Fleming2017]; a method of home range area estimation that accounts for the particular structures present in movement data such as autocorrelation and data gaps.
 This process consisted of fitting a number of continuous time movement models to an individual deer's movement data, selecting the best fitting movement model, and extracting a suitable range contour from the resulting utilisation distribution.
 We fit the following models (following the default process provided by the ctmm package): Ornstein-Uhlenbeck (OU), Ornstein–Uhlenbeck Foraging (OUF), and Independent Identically Distributed (IID), all in both isotropic and anisotropic forms.
 We elected to use perturbative hybrid residual maximum likelihood (pHREML) [@fleming_overcoming_2019; @silva_autocorrelationinformed_2022] and AICc to determine the best fitting movement model on an individual basis, and used that single best fitting model for all further estimations.
 
-Before committing to the estimations of home range size we examined whether the roe deer exhibited stable ranges through the visual inspection of variograms.
+Before committing to the estimations of home range size we examined whether the Roe Deer exhibited stable ranges through the visual inspection of variograms.
 A stable range should be revealed by a clear asymptote in variogram, where the semi-variance flattens as time lags increase.
 We paired these visual inspections with a judgement of effective sample size to help gauge our confidence in the home range area estimates [effective sample size approximating the overall tracking duration divided by the mean time taken to cross the home range; @silva_autocorrelationinformed_2022].
 All our individuals showed effective sample sizes between `r essOverall`, indicating that the movement data contained a large number of complete home range crossing events, allowing us to be confident in overall home range estimates.
 
 Having determined the data's suitability for home range estimations, we extracted the 95% and 99% contours from the weighted AKDE estimate, alongside 95% confidence interval surrounding that contour.
 We selected 95% as a balance between a generous estimate of home range, while also avoiding the undue influence of the most extremely outlying movements.
-To generate an overall home range estimate for Aberdeenshire roe deer, we averaged the home ranges using the weighted mean function provided by the ctmm package [@ctmm; @silva_autocorrelationinformed_2022].
+To generate an overall home range estimate for Aberdeenshire Roe Deer, we averaged the home ranges using the weighted mean function provided by the ctmm package [@ctmm; @silva_autocorrelationinformed_2022].
 This way the home range mean is weighted by the confidence (i.e., effective sample size) surrounding each home range.
 
 We retained 99% estimates help quantify the distance from which Roe Deer will range away from woodland patches.
@@ -227,7 +227,7 @@ Both distribution where calibrated (e.g., shape, size, mu, and kappa) by the und
 <!-- The same data was used in both modelling approaches. -->
 
 Once all random locations had been generated, we extracted a suite of environmental variables at all those locations, in order to relate Roe Deer space use with land cover and anthropogenic features. 
-First was the land use type as described by the 2023 UKCEH land cover maps, which is a 25m resolution classified raster originally based on Sentinel-2 imagery [@morton_land_2024].
+First was the land cover type as described by the 2023 UKCEH land cover maps, which is a 25m resolution classified raster originally based on Sentinel-2 imagery [@morton_land_2024].
 Validation of these data suggest 83% accuracy [@morton_land_2024].
 The UKCEH land cover data comprises of 21 land cover classes, broadly following the Biodiversity Broad Habitats [@jackson_guidance_2000].
 
@@ -259,7 +259,7 @@ This binary variable allowed us to estimate the likelihood Roe Deer cross a road
 To ensure compatibility between all data sources, we projected all data into the British National Grid (BNG) coordinate reference system (OSGB36, epsg: 27700) before undertaking analysis.
 
 The population level model consisted of land cover (a 8-term category variable formed into 7 dummy variables, with deciduous woodland placed as the reference category, barren and other excluded), distance to woodland (continuous in m), distance to hedgerow (continuous in m), road crossing (binary).
-In addition to these habitat selection focused predictors, we included several movement predictors: step length, log step length, and cos turn angle, as well as the interaction between step length and log of step length with all land use types.
+In addition to these habitat selection focused predictors, we included several movement predictors: step length, log step length, and cos turn angle, as well as the interaction between step length and log of step length with all land cover types.
 
 To account for the structure originating from having multiple individuals in the model, we included of fixed Gaussian processes for the time step and the individual in keeping with the approach described by @muff_accounting_2020.
 This formulation, namely the fixed Gaussian processes, as described by @muff_accounting_2020 allows for the efficient estimation of population level selection using integrated nested Laplace approximation (INLA) [@INLA2013b;@INLA2015d].
@@ -570,48 +570,62 @@ knitr::include_graphics(here::here("figures", "ssfCoef_indPop.png"))
 
 # Discussion
 
-Our tracking of 13 Roe Deer revealed that they have limited home ranges, that are heavily skewed towards deciduous woodland.
-They are willing to exit woodland, making use of open shrubland and grasslands, but these movements tend to be limited to within ~750m.
-When entering these more open non-wooded areas they tend to slow down.
-Individual models also highlight the consistency of the woodland preference.
-However, the responses to landuse types was variable between individuals, and their limited exposure to certain landuse types (e.g., human settlement) suggests more study to required to fully characterise UK Roe Deer habitat selection.
+Our tracking of 13 Roe Deer revealed that they have limited home ranges, that are heavily skewed towards remaining close to deciduous woodland.
+They are willing to exit woodland, making use of open shrubland and grasslands, but these movements tend to be limited to within ~750m and the vast majority far closer.
+When entering these more open non-wooded areas they tend to slow down, but also exhibit more variable movements.
+Exploration of individual level habitat selection models highlight the consistency of the preferring to remain close to woodland.
+However, their limited exposure to certain land cover types (e.g., human settlement) makes it difficult to fully characterise individual-variability. 
 Overall, Roe Deer exhibited a disinclination to cross roads found on a population and individual level.
-The documented chances of individuals crossing roads indicate that roads reduce the permeability of these landscapes for Roe Deer.
-
-< contextualise against European findings – Home range size - Can use home range database for quick overview >
+The estimated chances of individuals crossing roads indicate that roads somewhat reduce the permeability of these landscapes for Roe Deer, but do not prohibit movement.
 
 Our findings on Roe Deer home range size are remarkably similar to those values reported in the HomeRange database for Roe Deer, with the database presenting examples of ranges larger and smaller [@broekman_homerange_2023; @broekman_homerange_2022; see references in data availability section].
 A naive mean of those reviewed values suggests a range of 62 ha, that compares well to our 65 ha.
-This coherence is surprising given the rudimentary nature of the comparison, that does not account for differences in sampling protocol, duration, or home range estimation method.
+This coherence is surprising given the rudimentary nature of the comparison that does not account for differences in sampling protocol, duration, or home range estimation method, all of which can modify estimated home range size [@silva_reptiles_2020].
 As such the UK Roe Deer examined here appear largely typical in regards to their use of space.
 
-< contextualise against European findings – preference > 
 
-< STRANGE framework paragraph > 
+<!-- more detials here on woodland pref and cropland use in europe/other studies -->
+
+
 There are several aspects of the study that may limit its generalisability, or that would need to be considered when applying the findings to other contexts.
 Using the STRANGE framework [@webster_how_2020], we highlight key limitations (omitting those that are unquantifiable or of limited relevance).
 **Social background**.
 We have little information on the individuals not tracked that may be impacting the movements of tracked deer.
-Roe Deer will maintain territories <REF>, so it is likely that the interactions with conspecifics could alter the distribution and size of our tracked deer’s movements via competitive exclusion or territorial patrolling.
+Roe Deer will maintain territories [@pagon_territorial_2017; @hoem_fighting_2007], so it is likely that the density of and interactions with conspecifics could alter the distribution and size of our tracked deer's movements via competitive exclusion or territorial patrolling.
 **Trappability and self-selection**. While there is not obvious bias to the deer trapping methods we used, there may be an unknown behavioural variation altering the likelihood of a deer being captured.
 If the trappability of a deer is associated with certain movement or behavioural parameters, our sample may be skewed towards those tendencies (e.g., boldness leads to increased capture likelihood, while also being connected to increased chance of crossing roads).
+Long-term studies of individually-tagged Roe Deer in France have detected behavioural and body size differences between deer associated with woodlands versus open or cultivated landcover [@hewison_landscape_2009].
+Given deer were exclusively trapped in woodlands in our study, we may have overestimated the strength of woodland preferences for some Roe Deer, and in areas with more continuous woodlands, deer may prefer open habitat more strongly [@hewison_effects_2001].
+Nonetheless, Roe Deer in general are undoubtedly strongly woodland associated [@gill_changes_1996] and need shrubby or herbaceous cover for hiding and foraging. 
 **Acclimation and habituation**. None of the deer had been previously collared, but there may have been a habituation effect to collars over time.
 Our removal of the first week of data likely have mitigated the largest impact prior to collar-habituation, but as the Wessex deer demonstrate there may be ongoing effects we cannot control for. 
+Further explorations for longer tracking periods and with different age groups may elucidate the collar and human habituation effects.
 
-< implications for management? >
-< road collisions reduced by or are reducing deer likelihood to cross roads? >
+Roe Deer in our study avoided crossing roads more than expected by chance, suggesting roads reduce landscape connectivity.
+Thus, in countries with high densities of roads, such as the UK, even limited road crossing avoidance by deer likely has profound impacts on deer population structure, dispersal, movement of deer-associated parasites (e.g., ticks).
+Despite this avoidance, it was not complete and deer collisions with vehicles remain a key safety issue.
+In Scotland, higher rates of deer-vehicle collisions appear to occur in vicinity of woodland and other semi-natural habitats [@langbein2019deer].
+@nelli_mapping_2018 supports this but also suggests the likelihood of a road section experiencing collisions is tied to traffic flow levels (although traffic levels fails to predict the overall count of collisions).
+While urban areas tend to lower deer-vehicle collision risk, the intersection of urban and natural areas (i.e., suburban) may lead to key hotspots where both deer and traffic collide [@nelli_mapping_2018].
+This non-linear relationship between animal densities, their reaction and activity close to roads, and the intensity of traffic makes road-wildlife collision difficult to completely characterise and generalise [@denneboom_wildlife_2024; @abraham_elevated_2021; @cunningham_permanent_2022; @valero_corrigendum_2015].
+The estimation of Roe Deer crossing tendency here, will help refine our understanding of that relationship in the UK.
+Other Roe Deer investigations have reveal similar preferences for forest and reluctance when crossing roads [@passoni_roads_2021], and that the risks fluctuate over the day and year [@cunningham_permanent_2022; @martz_crossings_2024].
+Once again highlighting the importance of understanding the natural history, ecology, and individual variation of the deer when estimating risk.
 
-< conclusions / take aways > 
-
-Overall, we documented a strong preference for woodland in UK Roe Deer that apparently limits their ranges to areas within 750m of woodland patches.
-However, the resulting home ranges of UK Roe Deer do not appear atypical when compared to other tracked Roe Deer.
+Overall, we documented a tendency for Roe Deer to remain close to woodland in UK Roe Deer.
+This pattern apparently limits their ranges to areas within 750m of woodland patches.
+The resulting home ranges of UK Roe Deer do not appear atypical when compared to other tracked Roe Deer.
 We see a clear and consistent, albeit slight, aversion to crossing roads that may be limiting the permeability of the landscape for Roe Deer.
-Questions remain regarding their responses to certain landuse types that were not adequately represented in areas traversed by the deer.
 Further work could benefit from focusing on UK Roe Deer in areas with a greater urban footprint, or comparing movements against more granular quantifications of human activity [@gomez_understanding_2025]. 
 
 \clearpage
 
 # Acknowledgements
+
+We are indebted to the hundreds of volunteers who assisted in the deployment of deer GPS collars.
+We especially thank Mark Hewison, Jochen Langbein and Andy Page for generous advice in the field and training in capture methods.
+This research forms part of the TickSolve project (https://ticksolve.ceh.ac.uk/) and was funded by UK Research and Innovation through the NERC grant _________________________.
+For permission to conduct the work, we thank NatureScot, ForestryEngland and NaturalEngland.
 
 ## Software availability
 
