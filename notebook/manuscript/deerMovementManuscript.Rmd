@@ -578,7 +578,7 @@ However, their limited exposure to certain land cover types (e.g., human settlem
 Overall, Roe Deer exhibited a disinclination to cross roads found on a population and individual level.
 The estimated chances of individuals crossing roads indicate that roads somewhat reduce the permeability of these landscapes for Roe Deer, but do not prohibit movement.
 
-Our findings on Roe Deer home range size are remarkably similar to those values reported in the HomeRange database for Roe Deer, with the database presenting examples of ranges larger and smaller [@broekman_homerange_2023; @broekman_homerange_2022; see references in data availability section].
+Our findings on Roe Deer home range size are remarkably similar to those values reported in the HomeRange database for Roe Deer (Fig. \@ref(fig:hrCompPlot)), with the database presenting examples of ranges larger and smaller [@broekman_homerange_2023; @broekman_homerange_2022; see references in data availability section].
 A naive mean of those reviewed values suggests a range of 62 ha, that compares well to our 65 ha.
 This coherence is surprising given the rudimentary nature of the comparison that does not account for differences in sampling protocol, duration, or home range estimation method, all of which can modify estimated home range size [@silva_reptiles_2020].
 As such the UK Roe Deer examined here appear largely typical in regards to their use of space.
@@ -592,12 +592,14 @@ Using the STRANGE framework [@webster_how_2020], we highlight key limitations (o
 **Social background**.
 We have little information on the individuals not tracked that may be impacting the movements of tracked deer.
 Roe Deer will maintain territories [@pagon_territorial_2017; @hoem_fighting_2007], so it is likely that the density of and interactions with conspecifics could alter the distribution and size of our tracked deer's movements via competitive exclusion or territorial patrolling.
-**Trappability and self-selection**. While there is not obvious bias to the deer trapping methods we used, there may be an unknown behavioural variation altering the likelihood of a deer being captured.
+**Trappability and self-selection**. 
+While there is not obvious bias to the deer trapping methods we used, there may be an unknown behavioural variation altering the likelihood of a deer being captured.
 If the trappability of a deer is associated with certain movement or behavioural parameters, our sample may be skewed towards those tendencies (e.g., boldness leads to increased capture likelihood, while also being connected to increased chance of crossing roads).
 Long-term studies of individually-tagged Roe Deer in France have detected behavioural and body size differences between deer associated with woodlands versus open or cultivated landcover [@hewison_landscape_2009].
 Given deer were exclusively trapped in woodlands in our study, we may have overestimated the strength of woodland preferences for some Roe Deer, and in areas with more continuous woodlands, deer may prefer open habitat more strongly [@hewison_effects_2001].
 Nonetheless, Roe Deer in general are undoubtedly strongly woodland associated [@gill_changes_1996] and need shrubby or herbaceous cover for hiding and foraging. 
-**Acclimation and habituation**. None of the deer had been previously collared, but there may have been a habituation effect to collars over time.
+**Acclimation and habituation**.
+None of the deer had been previously collared, but there may have been a habituation effect to collars over time.
 Our removal of the first week of data likely have mitigated the largest impact prior to collar-habituation, but as the Wessex deer demonstrate there may be ongoing effects we cannot control for. 
 Further explorations for longer tracking periods and with different age groups may elucidate the collar and human habituation effects.
 
@@ -666,6 +668,10 @@ knitr::include_graphics(here::here("figures", "ssfCoef_Heterogeneity.png"))
 
 ```{r ssfSpecialPlot, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="The simulated specialisation (absolute coefficients) values from individual coefficients and standard errors of the step-selection models."}
 knitr::include_graphics(here::here("figures", "ssfCoef_Specialisation.png"))
+```
+
+```{r hrCompPlot, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="A comparison between reported annual home range sizes present in the HomeRange dataset for Roe Deer, split by estimation method. MCP = Minimum convex polygon, KDE = Kernel Density Estimation, AKDE = Autocorrelated Kernel Density Estimation. Distributions show the spread of individual home range estimates, split by sex. Small points below show the individual estimates (triangles = female; diamonds = male, squares = both/unknown). Larger circle points show the estimates provided as population means (total or split between sexes). Inset map shows the study locations, both points within the UK originate from this study. Note x axis is log scaled to accommodate the spread of ranges, particularly the high outliers."}
+knitr::include_graphics(here::here("figures", "hrStudyComparison.png"))
 ```
 
 \clearpage

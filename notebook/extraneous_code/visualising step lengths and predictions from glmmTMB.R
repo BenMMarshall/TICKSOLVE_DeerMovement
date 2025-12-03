@@ -206,4 +206,5 @@ dataMatrix$pred <- boot::inv.logit(predvals)
 # test plot
 ggplot(dataMatrix) +
   geom_smooth(aes(x = distanceWoodland, y = pred)) +
-  geom_point(aes(x = distanceWoodland, y = pred, colour = roadCrossings))
+  geom_point(aes(x = distanceWoodland, y = pred), alpha = 0.1)
+  # geom_point(aes(x = distanceWoodland, y = pred, colour = roadCrossings))
