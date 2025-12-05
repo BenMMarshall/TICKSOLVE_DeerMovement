@@ -49,6 +49,14 @@
 
 %% lines to get the code chunks working
 
+%% allows restarted numbering for supplementary figures and tables - only works for PDF out
+\newcommand{\beginsupplement}{
+  \setcounter{table}{0}
+  \renewcommand{\thetable}{S\arabic{table}}
+  \setcounter{figure}{0}
+  \renewcommand{\thefigure}{S\arabic{figure}}
+}
+
 %% lines to enable bulletpoints in a new notation style
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -81,13 +89,13 @@
 
 \begin{abstract}
 
-Animals use landscapes unequally and have differential responses to anthropogenic changes such as land cover modification. Such responses are difficult to predict a priori, and requires examination of animal's movements to determine. A full understanding of animals' movements and tendencies are particular valuable in situations where human-animal interaction have implications for either's well-being. Large herbivores, with relatively high mobility, often come in contact with humans as habitat's become more restricted. This can lead to concentrated grazing pressures, animal-vehicle collisions, and increased disease transfer risks. In Europe, Roe Deer (Capreolus capreolus), a large reasonably-human-tolerate ungulate, are one of the more prevalent herbivores that often find themselves interacting with anthropogenic activity. By examining Roe Deer in two mixed use landscapes in the Untied Kingdom, where their movements are comparatively unknown, we add to the knowledge of how widely Roe Deer range and use the available human-modified land covers. Through the GPS tracking of 13 deer, we reveal reasonably limited home ranges that are centred on deciduous woodland patches. We observed forays outside of the woodland patches into open shrub-, crop- and grass- lands, but only to distances up to 750m. When outside of the woodland deer movements appeared to be lower but more variable, potentially indicative of a behavioural change when in open areas. We documented was a consistent, albeit slight, aversion to crossing roads indicating that roads contribute to deer habitat fragmentation. Overall our results highlight UK Roe Deer's connection to woodland patches, and suggests their movements and overall landscape connectivity are closely tied to woodland presence.
+Animals use landscapes unequally and have differential responses to anthropogenic changes such as land cover modification. Such responses are difficult to predict a priori, and requires examination of animal's movements to determine. A full understanding of animals' movements and tendencies are particularly valuable in situations where human-animal interactions have implications for either's well-being. Large herbivores, with relatively high mobility, often come in contact with humans as habitats become more restricted. This can lead to concentrated grazing pressures, animal-vehicle collisions, and increased disease transfer risks. In Europe, Roe Deer (Capreolus capreolus), a large reasonably-human-tolerate ungulate, are one of the more prevalent herbivores that often find themselves interacting with anthropogenic activity. By examining Roe Deer in two mixed use landscapes in the United Kingdom, where their movements are comparatively unknown, we add to the knowledge of how widely Roe Deer range and use the available human-modified land covers. Through the GPS tracking of 13 deer, we reveal reasonably limited home ranges that are centred on deciduous woodland patches. We observed forays outside of the woodland patches into open shrub-, crop- and grass- lands, but only to distances up to 750m. When outside of the woodland deer movements appeared to be lower but more variable, potentially indicative of a behavioural change when in open areas. We documented was a consistent, albeit slight, aversion to crossing roads indicating that roads contribute to deer habitat fragmentation. Overall, our results highlight UK Roe Deer's connection to woodland patches, and suggests their movements and overall landscape connectivity are closely tied to woodland presence.
 
 \end{abstract}
 
 \section*{Keywords}
 
-Movement ecology, step selection function, habitat preference, habitat selection, animal movement, Roe Deer, Capreolus capreolus, road crossing
+Movement ecology, step selection function, habitat preference, habitat selection, animal movement, Roe Deer, Capreolus capreolus, road crossing, United Kingdom
 
 \clearpage
 \pagestyle{fancy}
@@ -153,9 +161,7 @@ These sites were selected to gain a range of habitats to enable us to address qu
   Gaskwood, also near Garlogie, is a commercial conifer forest including Scot's pine and Sitka spruce, within a mosaic landscape of forest and farmland patches, located 1 km across open farmland from Moss of Air.
 \end{itemize}
 
-We captured deer using long netting from January to September of 2023 in Aberdeenshire, and between \_\_ and \_\_ in Wessex.
-
-To capture deer we employed a ``long net'' capture method (Cockburn 1979) , which has been used extensively and safely to capture Roe Deer in the UK (\citeproc{ref-gill_changes_1996}{Gill et al., 1996}) and elsewhere (\citeproc{ref-morellet_effect_2009}{Morellet et al., 2009}).
+To capture deer we employed a ``long net'' capture method (\citeproc{ref-cockburn_comparative_1979}{Cockburn, Fleming \& Wainer, 1979}), which has been used extensively and safely to capture Roe Deer in the UK (\citeproc{ref-gill_changes_1996}{Gill et al., 1996}) and elsewhere (\citeproc{ref-morellet_effect_2009}{Morellet et al., 2009}).
 Briefly, we set up 1-2 km of 2-meter-high nylon nets along paths of opening in the woodland.
 Nets were strung on flexible bamboo poles dropped to the ground when an animal ran into them.
 Nets were placed in the shape of a horseshoe.
@@ -328,7 +334,8 @@ This resulted in an average of 7.133 SD±0.5359 fixes per day per individual (Fi
 For our Aberdeenshire Roe Deer home range sizes ranged from 32.2 to 122.5ha (95\% contour point estimates), with a weighted mean of 65.3 ha (95\% CI 55.5-75.8) (Fig. \ref{fig:homeRangeSize}).
 The deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8 and Roe Deer 3; Fig. \ref{fig:variogramPlot}).
 Effective sample sizes were all high (154.4 and 926.7), suggesting we can be confident in the home range estimates.
-All except for two individuals (Roe Deer 5 and Roe Deer 12) found OU models to fit best, with the remaining two being better described by OUF models.
+All except for two individuals (Roe Deer 5 and Roe Deer 12) found OU models to fit best, with the remaining two being better described by OUF models (Tab. \ref{tab:akdeModelTable}).
+
 All best fitting models were anisotropic, suggesting these Roe Deer are inhabiting non-uniform home ranges (i.e., not being as wide as they are long).
 The placement of home ranges suggest the importance of woodland, with 95\% of all deer movements falling within 756 m of woodland (756 m is half longest dimension of the 99\% home range area; thereby suggesting ranges tend to centre on woodland; Fig. \ref{fig:distanceDistributionPlot}).
 
@@ -337,14 +344,14 @@ The placement of home ranges suggest the importance of woodland, with 95\% of al
 \end{figure}
 
 \begin{figure}[h]
-\includegraphics[width=0.75\linewidth]{../../figures/distanceDistributionPlot} \caption{Distribution of Roe Deer locations in relation to their distance from woodland patches (Orange). The distribution of random location throughout the landscape in relation to their distance from woodland patches (Grey). Locations within woodland are excluded. Vertical dashed line shows the half longest dimension of the 99\% home range area.}\label{fig:distanceDistributionPlot}
+\includegraphics[width=0.75\linewidth]{../../figures/distanceDistributionPlot} \caption{Distribution of Roe Deer locations in relation to their distance from woodland patches (Orange) compared to the distribution of random locations throughout the landscape in relation to their distance from woodland patches (Grey). Locations within woodland are excluded. Vertical dashed line shows the half longest dimension of the 99\% home range area.}\label{fig:distanceDistributionPlot}
 \end{figure}
 
 \subsection{Population level selection}\label{population-level-selection}
 
 The population level habitat selection model revealed a general tendency for Roe Deer to remain closer to the woodland patches (-0.0051; 95\% CI -0.0082 to -0.0022), with no significant selection for hedgerows (-9e-04; 95\% CI -0.0019 to 1e-04; Fig. \ref{fig:poisCoefPlot}).
 The model also revealed that roads play a significant role in reducing connectivity across the landscape: observed deer steps were significantly less likely to cross roads than control steps (-0.76; 95\% CI -1.2 to -0.36).
-The population habitat selection model also revealed significant selection for the land cover classes open shrubland (1.5; 95\% CI 0.62 to 2.2) and tall grassland (0.57; 95\% CI 0.17 to 0.98); other relationships were less clear.
+The population habitat selection model also revealed significant selection for the land cover classes open shrubland (1.5; 95\% CI 0.62 to 2.2) and tall grassland (0.57; 95\% CI 0.17 to 0.98); other relationships were less clear (Tab. \ref{tab:poisTable}).
 
 The model's inclusion of step length and log step length interactions allowed us to examine whether movement was altered by land cover.
 Movement was most impacted by short grassland, tall grassland, and cropland, all showing the same pattern.
@@ -359,7 +366,7 @@ Estimates regarding human settlements were paired with very wide confidence inte
 
 \subsection{Individual level selection and variation in selection}\label{individual-level-selection-and-variation-in-selection}
 
-Further exploration of individual habitat selection models highlights whether the uncertainty in the population level model stems from weak responses or diverging responses that average towards a zero effect.
+Further exploration of individual habitat selection models highlights whether the uncertainty in the population level model stems from weak responses or diverging responses that average towards a zero effect (Tab. \ref{tab:sffTable}; Tab. \ref{tab:sffPopTable}).
 Distance to woodland shows a marginally higher specialisation (0.01) compared to the weighted population mean (-0.005; 95\% CI -0.009 to -0.001; Fig. \ref{fig:ssfCoefPlot}).
 This difference is likely explained by the deviating Roe 10 who expressed an opposite response to the majority of other deer by expressing an aversion to woodland (0.006 ±0.001).
 Apart from Roe 10, Roe Deer are exhibiting the same clear preference for remaining near woodland as seen in the population level model.
@@ -400,13 +407,13 @@ However, their limited exposure to certain land cover types (e.g., human settlem
 Overall, Roe Deer exhibited a disinclination to cross roads found on a population and individual level.
 The estimated chances of individuals crossing roads indicate that roads somewhat reduce the permeability of these landscapes for Roe Deer, but do not prohibit movement.
 
-Our findings on Roe Deer home range size are similar to those values reported in the HomeRange database for Roe Deer (Fig. \ref{fig:hrCompPlot}), with the database presenting examples of ranges larger and smaller {[}Broekman et al. (\citeproc{ref-broekman_homerange_2023}{2023}); Broekman et al. (\citeproc{ref-broekman_homerange_2022}{2022}); see references in data availability section{]}.
+Our findings on Roe Deer home range size are similar to those values reported in the HomeRange database for Roe Deer (Fig. \ref{fig:hrCompPlot}), with the database presenting examples of ranges larger and smaller (Broekman et al. (\citeproc{ref-broekman_homerange_2023}{2023}); Broekman et al. (\citeproc{ref-broekman_homerange_2022}{2022}); see references in data availability section).
 This coherence is surprising given the rudimentary nature of the comparison that does not account for differences in sampling protocol, duration, or home range estimation method, all of which can modify estimated home range size (\citeproc{ref-silva_reptiles_2020}{Silva et al., 2020}).
 As such the UK Roe Deer examined here appear largely typical in regards to their use of space.
-Some of the variation in home range has been suggested to be a product fo food availability and the arrangement of cover from predators (\citeproc{ref-tufto_habitat_1996}{Tufto, Andersen \& Linnell, 1996}).
+Some of the variation in home range has been suggested to be a product of food availability and the arrangement of cover from predators (\citeproc{ref-tufto_habitat_1996}{Tufto, Andersen \& Linnell, 1996}).
 
 Other examinations of Roe Deer have highlighted the importance of risk guiding when Roe Deer leave their core wooded range to make use of more open areas (\citeproc{ref-bonnot_interindividual_2015}{Bonnot et al., 2015}; \citeproc{ref-padie_roe_2015}{Padié et al., 2015}).
-The potential benefits of managing this risk to reap the nutritional benefits afforded by open areas are apparent (\citeproc{ref-hewison_landscape_2009}{Hewison et al., 2009}), and may present a direct trade off against the risks poised by humans.
+The potential benefits of managing this risk to reap the nutritional benefits afforded by open areas are apparent (\citeproc{ref-hewison_landscape_2009}{Hewison et al., 2009}), and may present a direct trade off against the risks posed by humans.
 Humans are likely the UK Roe Deer's primary concern, as other predators such as Lynx, require different risk mitigating decisions, are absent (\citeproc{ref-lone_living_2014}{Lone et al., 2014}).
 The shifts in movements (i.e., step lengths) we report here may be a coarse representation of Roe Deer balancing the risk and benefits in crop- and grasslands.
 Such trade-offs may be more pronounced in more fragmented or riskier landscapes, and could also explain the lack of consistent selection to remain near hedgerows.
@@ -472,7 +479,14 @@ Studies that the HomeRange Database mean was based on: Melis, Cagnacci \& Lovari
 
 \subsection{Author Contributions}\label{author-contributions}
 
+\begin{itemize}
+\tightlist
+\item
+\end{itemize}
+
 \section{Supplementary Material}\label{supplementary-material}
+
+\beginsupplement
 
 \begin{figure}[h]
 \includegraphics[width=0.75\linewidth]{../../figures/trackingDuration} \caption{Dates of data collection and overall duration or deer tracking by individual.}\label{fig:trackingDuration}
@@ -485,6 +499,355 @@ Studies that the HomeRange Database mean was based on: Melis, Cagnacci \& Lovari
 \begin{figure}[h]
 \includegraphics[width=0.75\linewidth]{../../figures/varioRoePlot} \caption{Variograms showing the autocorrelative structure of the Roe Deer movement data; The semi-variance (average square displacement) is show over a specific time lag. Examination reveals the level of range residency displayed by each individual (i.e., flattens to an asymptote). }\label{fig:variogramPlot}
 \end{figure}
+
+\begin{table}[!h]
+\centering
+\caption{\label{tab:akdeModelTable}Overview of the area estimates resulting from the AKDEs. Area units are hectares. ESS = Effective Sample Size}
+\centering
+\begin{tabular}[t]{llrrrrrl}
+\toprule
+Region & Animal ID & Point Estimate & Lower CI & Upper CI & Contour level & ESS & Movement Model\\
+\midrule
+\cellcolor{gray!10}{Wessex} & \cellcolor{gray!10}{Fallow02\_F} & \cellcolor{gray!10}{359.01} & \cellcolor{gray!10}{265.48} & \cellcolor{gray!10}{466.44} & \cellcolor{gray!10}{0.90} & \cellcolor{gray!10}{48.86} & \cellcolor{gray!10}{OUF anisotropic}\\
+Wessex & Fallow02\_F & 527.04 & 389.73 & 684.75 & 0.95 & 48.86 & OUF anisotropic\\
+\cellcolor{gray!10}{Wessex} & \cellcolor{gray!10}{Fallow02\_F} & \cellcolor{gray!10}{843.98} & \cellcolor{gray!10}{624.10} & \cellcolor{gray!10}{1096.54} & \cellcolor{gray!10}{0.99} & \cellcolor{gray!10}{48.86} & \cellcolor{gray!10}{OUF anisotropic}\\
+Wessex & Fallow07\_F & 3552.06 & 1051.16 & 7547.94 & 0.90 & 4.42 & OU anisotropic\\
+\cellcolor{gray!10}{Wessex} & \cellcolor{gray!10}{Fallow07\_F} & \cellcolor{gray!10}{4492.18} & \cellcolor{gray!10}{1329.36} & \cellcolor{gray!10}{9545.63} & \cellcolor{gray!10}{0.95} & \cellcolor{gray!10}{4.42} & \cellcolor{gray!10}{OU anisotropic}\\
+\addlinespace
+Wessex & Fallow07\_F & 6604.65 & 1954.50 & 14034.53 & 0.99 & 4.42 & OU anisotropic\\
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe01\_F} & \cellcolor{gray!10}{58.56} & \cellcolor{gray!10}{54.15} & \cellcolor{gray!10}{63.15} & \cellcolor{gray!10}{0.90} & \cellcolor{gray!10}{650.33} & \cellcolor{gray!10}{OU anisotropic}\\
+Aberdeenshire & Roe01\_F & 76.58 & 70.80 & 82.57 & 0.95 & 650.33 & OU anisotropic\\
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe01\_F} & \cellcolor{gray!10}{113.75} & \cellcolor{gray!10}{105.17} & \cellcolor{gray!10}{122.65} & \cellcolor{gray!10}{0.99} & \cellcolor{gray!10}{650.33} & \cellcolor{gray!10}{OU anisotropic}\\
+Aberdeenshire & Roe02\_F & 54.38 & 50.43 & 58.49 & 0.90 & 700.24 & OU anisotropic\\
+\addlinespace
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe02\_F} & \cellcolor{gray!10}{73.04} & \cellcolor{gray!10}{67.73} & \cellcolor{gray!10}{78.54} & \cellcolor{gray!10}{0.95} & \cellcolor{gray!10}{700.24} & \cellcolor{gray!10}{OU anisotropic}\\
+Aberdeenshire & Roe02\_F & 110.31 & 102.29 & 118.63 & 0.99 & 700.24 & OU anisotropic\\
+\cellcolor{gray!10}{Wessex} & \cellcolor{gray!10}{Roe03\_M} & \cellcolor{gray!10}{91.66} & \cellcolor{gray!10}{71.57} & \cellcolor{gray!10}{114.20} & \cellcolor{gray!10}{0.90} & \cellcolor{gray!10}{70.87} & \cellcolor{gray!10}{OU anisotropic}\\
+Wessex & Roe03\_M & 115.43 & 90.13 & 143.81 & 0.95 & 70.87 & OU anisotropic\\
+\cellcolor{gray!10}{Wessex} & \cellcolor{gray!10}{Roe03\_M} & \cellcolor{gray!10}{162.18} & \cellcolor{gray!10}{126.63} & \cellcolor{gray!10}{202.05} & \cellcolor{gray!10}{0.99} & \cellcolor{gray!10}{70.87} & \cellcolor{gray!10}{OU anisotropic}\\
+\addlinespace
+Aberdeenshire & Roe04\_F & 36.02 & 32.66 & 39.54 & 0.90 & 420.40 & OU anisotropic\\
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe04\_F} & \cellcolor{gray!10}{46.12} & \cellcolor{gray!10}{41.82} & \cellcolor{gray!10}{50.63} & \cellcolor{gray!10}{0.95} & \cellcolor{gray!10}{420.40} & \cellcolor{gray!10}{OU anisotropic}\\
+Aberdeenshire & Roe04\_F & 68.67 & 62.26 & 75.39 & 0.99 & 420.40 & OU anisotropic\\
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe05\_F} & \cellcolor{gray!10}{74.51} & \cellcolor{gray!10}{63.22} & \cellcolor{gray!10}{86.71} & \cellcolor{gray!10}{0.90} & \cellcolor{gray!10}{154.42} & \cellcolor{gray!10}{OUF anisotropic}\\
+Aberdeenshire & Roe05\_F & 93.05 & 78.95 & 108.29 & 0.95 & 154.42 & OUF anisotropic\\
+\addlinespace
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe05\_F} & \cellcolor{gray!10}{130.88} & \cellcolor{gray!10}{111.05} & \cellcolor{gray!10}{152.32} & \cellcolor{gray!10}{0.99} & \cellcolor{gray!10}{154.42} & \cellcolor{gray!10}{OUF anisotropic}\\
+Aberdeenshire & Roe06\_F & 21.74 & 20.11 & 23.43 & 0.90 & 658.77 & OU anisotropic\\
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe06\_F} & \cellcolor{gray!10}{32.19} & \cellcolor{gray!10}{29.78} & \cellcolor{gray!10}{34.69} & \cellcolor{gray!10}{0.95} & \cellcolor{gray!10}{658.77} & \cellcolor{gray!10}{OU anisotropic}\\
+Aberdeenshire & Roe06\_F & 77.81 & 71.98 & 83.86 & 0.99 & 658.77 & OU anisotropic\\
+\cellcolor{gray!10}{Wessex} & \cellcolor{gray!10}{Roe07\_F} & \cellcolor{gray!10}{57.83} & \cellcolor{gray!10}{45.81} & \cellcolor{gray!10}{71.22} & \cellcolor{gray!10}{0.90} & \cellcolor{gray!10}{79.39} & \cellcolor{gray!10}{OU anisotropic}\\
+\addlinespace
+Wessex & Roe07\_F & 70.58 & 55.91 & 86.93 & 0.95 & 79.39 & OU anisotropic\\
+\cellcolor{gray!10}{Wessex} & \cellcolor{gray!10}{Roe07\_F} & \cellcolor{gray!10}{95.50} & \cellcolor{gray!10}{75.65} & \cellcolor{gray!10}{117.62} & \cellcolor{gray!10}{0.99} & \cellcolor{gray!10}{79.39} & \cellcolor{gray!10}{OU anisotropic}\\
+Aberdeenshire & Roe08\_M & 90.73 & 80.94 & 101.07 & 0.90 & 311.78 & OU anisotropic\\
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe08\_M} & \cellcolor{gray!10}{118.77} & \cellcolor{gray!10}{105.95} & \cellcolor{gray!10}{132.31} & \cellcolor{gray!10}{0.95} & \cellcolor{gray!10}{311.78} & \cellcolor{gray!10}{OU anisotropic}\\
+Aberdeenshire & Roe08\_M & 180.55 & 161.07 & 201.14 & 0.99 & 311.78 & OU anisotropic\\
+\addlinespace
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe09\_M} & \cellcolor{gray!10}{40.99} & \cellcolor{gray!10}{38.16} & \cellcolor{gray!10}{43.91} & \cellcolor{gray!10}{0.90} & \cellcolor{gray!10}{780.51} & \cellcolor{gray!10}{OU anisotropic}\\
+Aberdeenshire & Roe09\_M & 55.03 & 51.23 & 58.95 & 0.95 & 780.51 & OU anisotropic\\
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe09\_M} & \cellcolor{gray!10}{84.50} & \cellcolor{gray!10}{78.68} & \cellcolor{gray!10}{90.53} & \cellcolor{gray!10}{0.99} & \cellcolor{gray!10}{780.51} & \cellcolor{gray!10}{OU anisotropic}\\
+Aberdeenshire & Roe10\_F & 40.70 & 36.28 & 45.36 & 0.90 & 308.73 & OU anisotropic\\
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe10\_F} & \cellcolor{gray!10}{53.32} & \cellcolor{gray!10}{47.54} & \cellcolor{gray!10}{59.43} & \cellcolor{gray!10}{0.95} & \cellcolor{gray!10}{308.73} & \cellcolor{gray!10}{OU anisotropic}\\
+\addlinespace
+Aberdeenshire & Roe10\_F & 77.06 & 68.70 & 85.89 & 0.99 & 308.73 & OU anisotropic\\
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe11\_F} & \cellcolor{gray!10}{35.06} & \cellcolor{gray!10}{30.44} & \cellcolor{gray!10}{40.00} & \cellcolor{gray!10}{0.90} & \cellcolor{gray!10}{206.39} & \cellcolor{gray!10}{OU anisotropic}\\
+Aberdeenshire & Roe11\_F & 42.19 & 36.63 & 48.13 & 0.95 & 206.39 & OU anisotropic\\
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe11\_F} & \cellcolor{gray!10}{58.53} & \cellcolor{gray!10}{50.82} & \cellcolor{gray!10}{66.78} & \cellcolor{gray!10}{0.99} & \cellcolor{gray!10}{206.39} & \cellcolor{gray!10}{OU anisotropic}\\
+Aberdeenshire & Roe12\_F & 26.06 & 23.62 & 28.63 & 0.90 & 415.67 & OUF anisotropic\\
+\addlinespace
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe12\_F} & \cellcolor{gray!10}{33.88} & \cellcolor{gray!10}{30.70} & \cellcolor{gray!10}{37.21} & \cellcolor{gray!10}{0.95} & \cellcolor{gray!10}{415.67} & \cellcolor{gray!10}{OUF anisotropic}\\
+Aberdeenshire & Roe12\_F & 51.06 & 46.27 & 56.08 & 0.99 & 415.67 & OUF anisotropic\\
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe13\_F} & \cellcolor{gray!10}{49.35} & \cellcolor{gray!10}{46.22} & \cellcolor{gray!10}{52.58} & \cellcolor{gray!10}{0.90} & \cellcolor{gray!10}{926.67} & \cellcolor{gray!10}{OU anisotropic}\\
+Aberdeenshire & Roe13\_F & 66.55 & 62.34 & 70.91 & 0.95 & 926.67 & OU anisotropic\\
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe13\_F} & \cellcolor{gray!10}{119.95} & \cellcolor{gray!10}{112.35} & \cellcolor{gray!10}{127.79} & \cellcolor{gray!10}{0.99} & \cellcolor{gray!10}{926.67} & \cellcolor{gray!10}{OU anisotropic}\\
+\addlinespace
+Aberdeenshire & Roe14\_M & 83.25 & 72.76 & 94.43 & 0.90 & 226.68 & OU anisotropic\\
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe14\_M} & \cellcolor{gray!10}{122.54} & \cellcolor{gray!10}{107.10} & \cellcolor{gray!10}{139.00} & \cellcolor{gray!10}{0.95} & \cellcolor{gray!10}{226.68} & \cellcolor{gray!10}{OU anisotropic}\\
+Aberdeenshire & Roe14\_M & 223.61 & 195.45 & 253.64 & 0.99 & 226.68 & OU anisotropic\\
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe15\_F} & \cellcolor{gray!10}{25.49} & \cellcolor{gray!10}{23.76} & \cellcolor{gray!10}{27.29} & \cellcolor{gray!10}{0.90} & \cellcolor{gray!10}{803.99} & \cellcolor{gray!10}{OU anisotropic}\\
+Aberdeenshire & Roe15\_F & 33.15 & 30.90 & 35.48 & 0.95 & 803.99 & OU anisotropic\\
+\addlinespace
+\cellcolor{gray!10}{Aberdeenshire} & \cellcolor{gray!10}{Roe15\_F} & \cellcolor{gray!10}{52.71} & \cellcolor{gray!10}{49.13} & \cellcolor{gray!10}{56.41} & \cellcolor{gray!10}{0.99} & \cellcolor{gray!10}{803.99} & \cellcolor{gray!10}{OU anisotropic}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!h]
+\centering
+\caption{\label{tab:poisTable}All fixed coefficients from the Poisson population-level habitat selection model. Significance base on whether CI overlap zero.}
+\centering
+\begin{tabular}[t]{lrrrrl}
+\toprule
+Variable & Mean Estimate & Standard Deviation & Lower CI & Upper CI & Significance\\
+\midrule
+\cellcolor{gray!10}{Road Crossing} & \cellcolor{gray!10}{-0.7618} & \cellcolor{gray!10}{0.2045} & \cellcolor{gray!10}{-1.1747} & \cellcolor{gray!10}{-0.3601} & \cellcolor{gray!10}{Significant -}\\
+cos\_ta & -0.3913 & 0.0834 & -0.5567 & -0.2256 & Significant -\\
+\cellcolor{gray!10}{sl\_} & \cellcolor{gray!10}{0.0007} & \cellcolor{gray!10}{0.0002} & \cellcolor{gray!10}{0.0003} & \cellcolor{gray!10}{0.0011} & \cellcolor{gray!10}{Significant +}\\
+log\_sl & 0.1053 & 0.0270 & 0.0531 & 0.1597 & Significant +\\
+\cellcolor{gray!10}{Human Settlements} & \cellcolor{gray!10}{-69.5327} & \cellcolor{gray!10}{53.9891} & \cellcolor{gray!10}{-175.3711} & \cellcolor{gray!10}{36.3680} & \cellcolor{gray!10}{Not Significant}\\
+\addlinespace
+Evergreen Needleleaf Forest & -0.3746 & 0.3195 & -1.0171 & 0.2463 & Not Significant\\
+\cellcolor{gray!10}{Cropland} & \cellcolor{gray!10}{-0.2166} & \cellcolor{gray!10}{0.3803} & \cellcolor{gray!10}{-0.9880} & \cellcolor{gray!10}{0.5200} & \cellcolor{gray!10}{Not Significant}\\
+Tall Grassland & 0.5660 & 0.2077 & 0.1653 & 0.9843 & Significant +\\
+\cellcolor{gray!10}{Permanent Wetland} & \cellcolor{gray!10}{0.8883} & \cellcolor{gray!10}{1.5102} & \cellcolor{gray!10}{-2.7146} & \cellcolor{gray!10}{3.3639} & \cellcolor{gray!10}{Not Significant}\\
+Short Grassland & 1.4312 & 1.2195 & -0.9736 & 3.8558 & Not Significant\\
+\addlinespace
+\cellcolor{gray!10}{Open Shrubland} & \cellcolor{gray!10}{1.4684} & \cellcolor{gray!10}{0.3958} & \cellcolor{gray!10}{0.6163} & \cellcolor{gray!10}{2.2074} & \cellcolor{gray!10}{Significant +}\\
+Distance to Woodland & -0.0051 & 0.0015 & -0.0082 & -0.0022 & Significant -\\
+\cellcolor{gray!10}{Distance to Hedges} & \cellcolor{gray!10}{-0.0009} & \cellcolor{gray!10}{0.0005} & \cellcolor{gray!10}{-0.0019} & \cellcolor{gray!10}{0.0001} & \cellcolor{gray!10}{Not Significant}\\
+Short Grassland:log\_sl & -0.7587 & 0.2221 & -1.1943 & -0.3234 & Significant -\\
+\cellcolor{gray!10}{Open Shrubland:log\_sl} & \cellcolor{gray!10}{-0.2584} & \cellcolor{gray!10}{0.0477} & \cellcolor{gray!10}{-0.3528} & \cellcolor{gray!10}{-0.1659} & \cellcolor{gray!10}{Significant -}\\
+\addlinespace
+Tall Grassland:log\_sl & -0.1804 & 0.0328 & -0.2448 & -0.1161 & Significant -\\
+\cellcolor{gray!10}{Cropland:log\_sl} & \cellcolor{gray!10}{-0.1591} & \cellcolor{gray!10}{0.0412} & \cellcolor{gray!10}{-0.2398} & \cellcolor{gray!10}{-0.0784} & \cellcolor{gray!10}{Significant -}\\
+Permanent Wetland:log\_sl & -0.1568 & 0.1524 & -0.4560 & 0.1419 & Not Significant\\
+\cellcolor{gray!10}{Evergreen Needleleaf Forest:log\_sl} & \cellcolor{gray!10}{0.0388} & \cellcolor{gray!10}{0.0442} & \cellcolor{gray!10}{-0.0482} & \cellcolor{gray!10}{0.1252} & \cellcolor{gray!10}{Not Significant}\\
+Human Settlements:log\_sl & 17.4673 & 13.2464 & -8.5035 & 43.4470 & Not Significant\\
+\addlinespace
+\cellcolor{gray!10}{Human Settlements:sl\_} & \cellcolor{gray!10}{-0.1214} & \cellcolor{gray!10}{0.0825} & \cellcolor{gray!10}{-0.2835} & \cellcolor{gray!10}{0.0399} & \cellcolor{gray!10}{Not Significant}\\
+Permanent Wetland:sl\_ & -0.0021 & 0.0018 & -0.0056 & 0.0014 & Not Significant\\
+\cellcolor{gray!10}{Evergreen Needleleaf Forest:sl\_} & \cellcolor{gray!10}{-0.0003} & \cellcolor{gray!10}{0.0003} & \cellcolor{gray!10}{-0.0009} & \cellcolor{gray!10}{0.0004} & \cellcolor{gray!10}{Not Significant}\\
+Open Shrubland:sl\_ & 0.0002 & 0.0004 & -0.0005 & 0.0009 & Not Significant\\
+\cellcolor{gray!10}{Tall Grassland:sl\_} & \cellcolor{gray!10}{0.0005} & \cellcolor{gray!10}{0.0002} & \cellcolor{gray!10}{0.0001} & \cellcolor{gray!10}{0.0009} & \cellcolor{gray!10}{Significant +}\\
+\addlinespace
+Cropland:sl\_ & 0.0012 & 0.0003 & 0.0006 & 0.0017 & Significant +\\
+\cellcolor{gray!10}{Short Grassland:sl\_} & \cellcolor{gray!10}{0.0044} & \cellcolor{gray!10}{0.0013} & \cellcolor{gray!10}{0.0018} & \cellcolor{gray!10}{0.0070} & \cellcolor{gray!10}{Significant +}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!h]
+\centering
+\caption{\label{tab:sffTable}All fixed coefficients from the individual-level habitat selection models. Significance base on whether CI overlap zero. Individual estimates that were NA have been filtered out.}
+\centering
+\begin{tabular}[t]{llrrl}
+\toprule
+Animal ID & Variable & Mean Estimate & Standard Error & Significance\\
+\midrule
+\cellcolor{gray!10}{Roe15\_F} & \cellcolor{gray!10}{Cropland} & \cellcolor{gray!10}{0.4000} & \cellcolor{gray!10}{0.1210} & \cellcolor{gray!10}{Significant +}\\
+Roe15\_F & Tall Grassland & 0.0972 & 0.0974 & Not Significant\\
+\cellcolor{gray!10}{Roe15\_F} & \cellcolor{gray!10}{Permanent Wetland} & \cellcolor{gray!10}{-13.9209} & \cellcolor{gray!10}{2064.3382} & \cellcolor{gray!10}{Not Significant}\\
+Roe15\_F & Other & -13.5494 & 1041.3412 & Not Significant\\
+\cellcolor{gray!10}{Roe15\_F} & \cellcolor{gray!10}{Distance to Woodland} & \cellcolor{gray!10}{-0.0115} & \cellcolor{gray!10}{0.0015} & \cellcolor{gray!10}{Significant -}\\
+\addlinespace
+Roe15\_F & Distance to Hedges & -0.0023 & 0.0003 & Significant -\\
+\cellcolor{gray!10}{Roe15\_F} & \cellcolor{gray!10}{Road Crossing} & \cellcolor{gray!10}{-1.3295} & \cellcolor{gray!10}{0.2040} & \cellcolor{gray!10}{Significant -}\\
+Roe15\_F & sl\_ & 0.0013 & 0.0004 & Significant +\\
+\cellcolor{gray!10}{Roe15\_F} & \cellcolor{gray!10}{log sl\_} & \cellcolor{gray!10}{-0.0273} & \cellcolor{gray!10}{0.0425} & \cellcolor{gray!10}{Not Significant}\\
+Roe15\_F & cos ta\_ & -0.5156 & 0.0352 & Significant -\\
+\addlinespace
+\cellcolor{gray!10}{Roe14\_M} & \cellcolor{gray!10}{Evergreen Needleleaf Forest} & \cellcolor{gray!10}{-0.3566} & \cellcolor{gray!10}{0.1422} & \cellcolor{gray!10}{Significant -}\\
+Roe14\_M & Cropland & -2.5724 & 0.3059 & Significant -\\
+\cellcolor{gray!10}{Roe14\_M} & \cellcolor{gray!10}{Tall Grassland} & \cellcolor{gray!10}{-1.1536} & \cellcolor{gray!10}{0.1202} & \cellcolor{gray!10}{Significant -}\\
+Roe14\_M & Short Grassland & -1.8463 & 0.4051 & Significant -\\
+\cellcolor{gray!10}{Roe14\_M} & \cellcolor{gray!10}{Human Settlements} & \cellcolor{gray!10}{-15.6869} & \cellcolor{gray!10}{947.9684} & \cellcolor{gray!10}{Not Significant}\\
+\addlinespace
+Roe14\_M & Distance to Woodland & -0.0041 & 0.0006 & Significant -\\
+\cellcolor{gray!10}{Roe14\_M} & \cellcolor{gray!10}{Distance to Hedges} & \cellcolor{gray!10}{-0.0021} & \cellcolor{gray!10}{0.0004} & \cellcolor{gray!10}{Significant -}\\
+Roe14\_M & Road Crossing & -0.3079 & 0.1548 & Significant -\\
+\cellcolor{gray!10}{Roe14\_M} & \cellcolor{gray!10}{sl\_} & \cellcolor{gray!10}{0.0005} & \cellcolor{gray!10}{0.0003} & \cellcolor{gray!10}{Significant +}\\
+Roe14\_M & log sl\_ & 0.1512 & 0.0443 & Significant +\\
+\addlinespace
+\cellcolor{gray!10}{Roe14\_M} & \cellcolor{gray!10}{cos ta\_} & \cellcolor{gray!10}{-0.2494} & \cellcolor{gray!10}{0.0444} & \cellcolor{gray!10}{Significant -}\\
+Roe13\_F & Evergreen Needleleaf Forest & -0.8290 & 0.8538 & Not Significant\\
+\cellcolor{gray!10}{Roe13\_F} & \cellcolor{gray!10}{Cropland} & \cellcolor{gray!10}{-0.4514} & \cellcolor{gray!10}{0.1075} & \cellcolor{gray!10}{Significant -}\\
+Roe13\_F & Tall Grassland & 0.0918 & 0.0869 & Significant +\\
+\cellcolor{gray!10}{Roe13\_F} & \cellcolor{gray!10}{Human Settlements} & \cellcolor{gray!10}{-14.1980} & \cellcolor{gray!10}{792.3770} & \cellcolor{gray!10}{Not Significant}\\
+\addlinespace
+Roe13\_F & Other & 0.4113 & 0.0990 & Significant +\\
+\cellcolor{gray!10}{Roe13\_F} & \cellcolor{gray!10}{Distance to Woodland} & \cellcolor{gray!10}{-0.0049} & \cellcolor{gray!10}{0.0006} & \cellcolor{gray!10}{Significant -}\\
+Roe13\_F & Distance to Hedges & -0.0002 & 0.0003 & Not Significant\\
+\cellcolor{gray!10}{Roe13\_F} & \cellcolor{gray!10}{Road Crossing} & \cellcolor{gray!10}{-1.1608} & \cellcolor{gray!10}{0.1250} & \cellcolor{gray!10}{Significant -}\\
+Roe13\_F & sl\_ & 0.0008 & 0.0002 & Significant +\\
+\addlinespace
+\cellcolor{gray!10}{Roe13\_F} & \cellcolor{gray!10}{log sl\_} & \cellcolor{gray!10}{0.0278} & \cellcolor{gray!10}{0.0327} & \cellcolor{gray!10}{Not Significant}\\
+Roe13\_F & cos ta\_ & -0.3266 & 0.0349 & Significant -\\
+\cellcolor{gray!10}{Roe12\_F} & \cellcolor{gray!10}{Evergreen Needleleaf Forest} & \cellcolor{gray!10}{0.7455} & \cellcolor{gray!10}{0.4908} & \cellcolor{gray!10}{Significant +}\\
+Roe12\_F & Cropland & -0.0186 & 0.5504 & Not Significant\\
+\cellcolor{gray!10}{Roe12\_F} & \cellcolor{gray!10}{Tall Grassland} & \cellcolor{gray!10}{1.0835} & \cellcolor{gray!10}{0.4904} & \cellcolor{gray!10}{Significant +}\\
+\addlinespace
+Roe12\_F & Human Settlements & -12.7661 & 1361.9153 & Not Significant\\
+\cellcolor{gray!10}{Roe12\_F} & \cellcolor{gray!10}{Distance to Woodland} & \cellcolor{gray!10}{-0.0097} & \cellcolor{gray!10}{0.0011} & \cellcolor{gray!10}{Significant -}\\
+Roe12\_F & Distance to Hedges & -0.0026 & 0.0005 & Significant -\\
+\cellcolor{gray!10}{Roe12\_F} & \cellcolor{gray!10}{Road Crossing} & \cellcolor{gray!10}{-1.5267} & \cellcolor{gray!10}{0.2198} & \cellcolor{gray!10}{Significant -}\\
+Roe12\_F & sl\_ & 0.0024 & 0.0006 & Significant +\\
+\addlinespace
+\cellcolor{gray!10}{Roe12\_F} & \cellcolor{gray!10}{log sl\_} & \cellcolor{gray!10}{-0.0230} & \cellcolor{gray!10}{0.0646} & \cellcolor{gray!10}{Not Significant}\\
+Roe12\_F & cos ta\_ & -0.1448 & 0.0459 & Significant -\\
+\cellcolor{gray!10}{Roe11\_F} & \cellcolor{gray!10}{Evergreen Needleleaf Forest} & \cellcolor{gray!10}{1.9865} & \cellcolor{gray!10}{0.7344} & \cellcolor{gray!10}{Significant +}\\
+Roe11\_F & Cropland & -1.4417 & 1.0209 & Significant -\\
+\cellcolor{gray!10}{Roe11\_F} & \cellcolor{gray!10}{Tall Grassland} & \cellcolor{gray!10}{1.7737} & \cellcolor{gray!10}{0.7350} & \cellcolor{gray!10}{Significant +}\\
+\addlinespace
+Roe11\_F & Short Grassland & 0.3272 & 19511.3285 & Not Significant\\
+\cellcolor{gray!10}{Roe11\_F} & \cellcolor{gray!10}{Human Settlements} & \cellcolor{gray!10}{-16.0515} & \cellcolor{gray!10}{6008.3981} & \cellcolor{gray!10}{Not Significant}\\
+Roe11\_F & Distance to Woodland & -0.0056 & 0.0014 & Significant -\\
+\cellcolor{gray!10}{Roe11\_F} & \cellcolor{gray!10}{Distance to Hedges} & \cellcolor{gray!10}{-0.0024} & \cellcolor{gray!10}{0.0006} & \cellcolor{gray!10}{Significant -}\\
+Roe11\_F & Road Crossing & -17.9883 & 1620.7951 & Not Significant\\
+\addlinespace
+\cellcolor{gray!10}{Roe11\_F} & \cellcolor{gray!10}{sl\_} & \cellcolor{gray!10}{0.0027} & \cellcolor{gray!10}{0.0007} & \cellcolor{gray!10}{Significant +}\\
+Roe11\_F & log sl\_ & -0.0858 & 0.0798 & Significant -\\
+\cellcolor{gray!10}{Roe11\_F} & \cellcolor{gray!10}{cos ta\_} & \cellcolor{gray!10}{0.1259} & \cellcolor{gray!10}{0.0663} & \cellcolor{gray!10}{Significant +}\\
+Roe10\_F & Evergreen Needleleaf Forest & -3.4450 & 1.0068 & Significant -\\
+\cellcolor{gray!10}{Roe10\_F} & \cellcolor{gray!10}{Tall Grassland} & \cellcolor{gray!10}{-1.0916} & \cellcolor{gray!10}{0.1125} & \cellcolor{gray!10}{Significant -}\\
+\addlinespace
+Roe10\_F & Open Shrubland & -0.2218 & 0.1161 & Significant -\\
+\cellcolor{gray!10}{Roe10\_F} & \cellcolor{gray!10}{Other} & \cellcolor{gray!10}{-2.9179} & \cellcolor{gray!10}{0.5000} & \cellcolor{gray!10}{Significant -}\\
+Roe10\_F & Distance to Woodland & 0.0056 & 0.0008 & Significant +\\
+\cellcolor{gray!10}{Roe10\_F} & \cellcolor{gray!10}{Distance to Hedges} & \cellcolor{gray!10}{-0.0037} & \cellcolor{gray!10}{0.0003} & \cellcolor{gray!10}{Significant -}\\
+Roe10\_F & Road Crossing & -1.6043 & 0.2005 & Significant -\\
+\addlinespace
+\cellcolor{gray!10}{Roe10\_F} & \cellcolor{gray!10}{sl\_} & \cellcolor{gray!10}{0.0012} & \cellcolor{gray!10}{0.0004} & \cellcolor{gray!10}{Significant +}\\
+Roe10\_F & log sl\_ & 0.0402 & 0.0442 & Not Significant\\
+\cellcolor{gray!10}{Roe10\_F} & \cellcolor{gray!10}{cos ta\_} & \cellcolor{gray!10}{-0.7981} & \cellcolor{gray!10}{0.0366} & \cellcolor{gray!10}{Significant -}\\
+Roe09\_M & Evergreen Needleleaf Forest & 0.1014 & 0.0796 & Significant +\\
+\cellcolor{gray!10}{Roe09\_M} & \cellcolor{gray!10}{Tall Grassland} & \cellcolor{gray!10}{0.1288} & \cellcolor{gray!10}{0.1342} & \cellcolor{gray!10}{Not Significant}\\
+\addlinespace
+Roe09\_M & Short Grassland & -0.6686 & 0.1918 & Significant -\\
+\cellcolor{gray!10}{Roe09\_M} & \cellcolor{gray!10}{Distance to Woodland} & \cellcolor{gray!10}{-0.0024} & \cellcolor{gray!10}{0.0003} & \cellcolor{gray!10}{Significant -}\\
+Roe09\_M & Distance to Hedges & 0.0001 & 0.0002 & Not Significant\\
+\cellcolor{gray!10}{Roe09\_M} & \cellcolor{gray!10}{Road Crossing} & \cellcolor{gray!10}{17.9570} & \cellcolor{gray!10}{888.3601} & \cellcolor{gray!10}{Not Significant}\\
+Roe09\_M & sl\_ & -0.0004 & 0.0003 & Significant -\\
+\addlinespace
+\cellcolor{gray!10}{Roe09\_M} & \cellcolor{gray!10}{log sl\_} & \cellcolor{gray!10}{0.0731} & \cellcolor{gray!10}{0.0447} & \cellcolor{gray!10}{Significant +}\\
+Roe09\_M & cos ta\_ & -0.0604 & 0.0357 & Significant -\\
+\cellcolor{gray!10}{Roe08\_M} & \cellcolor{gray!10}{Evergreen Needleleaf Forest} & \cellcolor{gray!10}{-1.1324} & \cellcolor{gray!10}{0.5334} & \cellcolor{gray!10}{Significant -}\\
+Roe08\_M & Cropland & -0.5180 & 0.0946 & Significant -\\
+\cellcolor{gray!10}{Roe08\_M} & \cellcolor{gray!10}{Tall Grassland} & \cellcolor{gray!10}{-0.6843} & \cellcolor{gray!10}{0.0997} & \cellcolor{gray!10}{Significant -}\\
+\addlinespace
+Roe08\_M & Permanent Wetland & -14.1362 & 798.9437 & Not Significant\\
+\cellcolor{gray!10}{Roe08\_M} & \cellcolor{gray!10}{Human Settlements} & \cellcolor{gray!10}{-1.6119} & \cellcolor{gray!10}{0.7258} & \cellcolor{gray!10}{Significant -}\\
+Roe08\_M & Distance to Woodland & 0.0001 & 0.0003 & Not Significant\\
+\cellcolor{gray!10}{Roe08\_M} & \cellcolor{gray!10}{Distance to Hedges} & \cellcolor{gray!10}{-0.0015} & \cellcolor{gray!10}{0.0003} & \cellcolor{gray!10}{Significant -}\\
+Roe08\_M & Road Crossing & -0.6407 & 0.0876 & Significant -\\
+\addlinespace
+\cellcolor{gray!10}{Roe08\_M} & \cellcolor{gray!10}{sl\_} & \cellcolor{gray!10}{0.0008} & \cellcolor{gray!10}{0.0003} & \cellcolor{gray!10}{Significant +}\\
+Roe08\_M & log sl\_ & -0.0050 & 0.0402 & Not Significant\\
+\cellcolor{gray!10}{Roe08\_M} & \cellcolor{gray!10}{cos ta\_} & \cellcolor{gray!10}{-0.5853} & \cellcolor{gray!10}{0.0361} & \cellcolor{gray!10}{Significant -}\\
+Roe07\_F & Evergreen Needleleaf Forest & 0.5556 & 0.1887 & Significant +\\
+\cellcolor{gray!10}{Roe07\_F} & \cellcolor{gray!10}{Tall Grassland} & \cellcolor{gray!10}{0.0465} & \cellcolor{gray!10}{1.0541} & \cellcolor{gray!10}{Not Significant}\\
+\addlinespace
+Roe07\_F & Open Shrubland & 0.7409 & 0.2894 & Significant +\\
+\cellcolor{gray!10}{Roe07\_F} & \cellcolor{gray!10}{Distance to Woodland} & \cellcolor{gray!10}{-0.0068} & \cellcolor{gray!10}{0.0021} & \cellcolor{gray!10}{Significant -}\\
+Roe07\_F & Distance to Hedges & 0.0028 & 0.0007 & Significant +\\
+\cellcolor{gray!10}{Roe07\_F} & \cellcolor{gray!10}{Road Crossing} & \cellcolor{gray!10}{-0.2483} & \cellcolor{gray!10}{0.1817} & \cellcolor{gray!10}{Significant -}\\
+Roe07\_F & sl\_ & 0.0019 & 0.0007 & Significant +\\
+\addlinespace
+\cellcolor{gray!10}{Roe07\_F} & \cellcolor{gray!10}{log sl\_} & \cellcolor{gray!10}{-0.0331} & \cellcolor{gray!10}{0.0668} & \cellcolor{gray!10}{Not Significant}\\
+Roe07\_F & cos ta\_ & -0.1223 & 0.0799 & Significant -\\
+\cellcolor{gray!10}{Roe06\_F} & \cellcolor{gray!10}{Evergreen Needleleaf Forest} & \cellcolor{gray!10}{-14.1975} & \cellcolor{gray!10}{1168.4078} & \cellcolor{gray!10}{Not Significant}\\
+Roe06\_F & Cropland & 0.0417 & 0.0817 & Not Significant\\
+\cellcolor{gray!10}{Roe06\_F} & \cellcolor{gray!10}{Tall Grassland} & \cellcolor{gray!10}{-0.0412} & \cellcolor{gray!10}{0.0776} & \cellcolor{gray!10}{Not Significant}\\
+\addlinespace
+Roe06\_F & Permanent Wetland & 1.0868 & 0.1266 & Significant +\\
+\cellcolor{gray!10}{Roe06\_F} & \cellcolor{gray!10}{Human Settlements} & \cellcolor{gray!10}{-13.7704} & \cellcolor{gray!10}{1151.4231} & \cellcolor{gray!10}{Not Significant}\\
+Roe06\_F & Distance to Woodland & -0.0087 & 0.0007 & Significant -\\
+\cellcolor{gray!10}{Roe06\_F} & \cellcolor{gray!10}{Distance to Hedges} & \cellcolor{gray!10}{0.0003} & \cellcolor{gray!10}{0.0003} & \cellcolor{gray!10}{Significant +}\\
+Roe06\_F & Road Crossing & -1.1207 & 0.0940 & Significant -\\
+\addlinespace
+\cellcolor{gray!10}{Roe06\_F} & \cellcolor{gray!10}{sl\_} & \cellcolor{gray!10}{0.0020} & \cellcolor{gray!10}{0.0004} & \cellcolor{gray!10}{Significant +}\\
+Roe06\_F & log sl\_ & 0.0573 & 0.0464 & Significant +\\
+\cellcolor{gray!10}{Roe06\_F} & \cellcolor{gray!10}{cos ta\_} & \cellcolor{gray!10}{-0.4989} & \cellcolor{gray!10}{0.0358} & \cellcolor{gray!10}{Significant -}\\
+Roe05\_F & Evergreen Needleleaf Forest & 0.2232 & 0.2018 & Significant +\\
+\cellcolor{gray!10}{Roe05\_F} & \cellcolor{gray!10}{Cropland} & \cellcolor{gray!10}{-13.0823} & \cellcolor{gray!10}{1476.0604} & \cellcolor{gray!10}{Not Significant}\\
+\addlinespace
+Roe05\_F & Tall Grassland & -0.5082 & 0.1806 & Significant -\\
+\cellcolor{gray!10}{Roe05\_F} & \cellcolor{gray!10}{Open Shrubland} & \cellcolor{gray!10}{0.4109} & \cellcolor{gray!10}{0.1951} & \cellcolor{gray!10}{Significant +}\\
+Roe05\_F & Other & -1.5189 & 0.4414 & Significant -\\
+\cellcolor{gray!10}{Roe05\_F} & \cellcolor{gray!10}{Distance to Woodland} & \cellcolor{gray!10}{-0.0092} & \cellcolor{gray!10}{0.0017} & \cellcolor{gray!10}{Significant -}\\
+Roe05\_F & Distance to Hedges & -0.0011 & 0.0005 & Significant -\\
+\addlinespace
+\cellcolor{gray!10}{Roe05\_F} & \cellcolor{gray!10}{Road Crossing} & \cellcolor{gray!10}{-0.4745} & \cellcolor{gray!10}{0.2430} & \cellcolor{gray!10}{Significant -}\\
+Roe05\_F & sl\_ & 0.0008 & 0.0004 & Significant +\\
+\cellcolor{gray!10}{Roe05\_F} & \cellcolor{gray!10}{log sl\_} & \cellcolor{gray!10}{0.0486} & \cellcolor{gray!10}{0.0579} & \cellcolor{gray!10}{Not Significant}\\
+Roe05\_F & cos ta\_ & 0.0288 & 0.0593 & Not Significant\\
+\cellcolor{gray!10}{Roe04\_F} & \cellcolor{gray!10}{Evergreen Needleleaf Forest} & \cellcolor{gray!10}{0.0639} & \cellcolor{gray!10}{0.0979} & \cellcolor{gray!10}{Not Significant}\\
+\addlinespace
+Roe04\_F & Cropland & 0.2897 & 0.1028 & Significant +\\
+\cellcolor{gray!10}{Roe04\_F} & \cellcolor{gray!10}{Tall Grassland} & \cellcolor{gray!10}{0.0710} & \cellcolor{gray!10}{0.1139} & \cellcolor{gray!10}{Not Significant}\\
+Roe04\_F & Permanent Wetland & -15.2921 & 6251.7909 & Not Significant\\
+\cellcolor{gray!10}{Roe04\_F} & \cellcolor{gray!10}{Human Settlements} & \cellcolor{gray!10}{-15.3252} & \cellcolor{gray!10}{4474.9879} & \cellcolor{gray!10}{Not Significant}\\
+Roe04\_F & Other & -14.2898 & 735.9955 & Not Significant\\
+\addlinespace
+\cellcolor{gray!10}{Roe04\_F} & \cellcolor{gray!10}{Distance to Woodland} & \cellcolor{gray!10}{-0.0016} & \cellcolor{gray!10}{0.0007} & \cellcolor{gray!10}{Significant -}\\
+Roe04\_F & Distance to Hedges & -0.0033 & 0.0005 & Significant -\\
+\cellcolor{gray!10}{Roe04\_F} & \cellcolor{gray!10}{Road Crossing} & \cellcolor{gray!10}{0.0519} & \cellcolor{gray!10}{0.0708} & \cellcolor{gray!10}{Not Significant}\\
+Roe04\_F & sl\_ & 0.0008 & 0.0004 & Significant +\\
+\cellcolor{gray!10}{Roe04\_F} & \cellcolor{gray!10}{log sl\_} & \cellcolor{gray!10}{-0.0323} & \cellcolor{gray!10}{0.0441} & \cellcolor{gray!10}{Not Significant}\\
+\addlinespace
+Roe04\_F & cos ta\_ & -0.4570 & 0.0357 & Significant -\\
+\cellcolor{gray!10}{Roe03\_M} & \cellcolor{gray!10}{Evergreen Needleleaf Forest} & \cellcolor{gray!10}{0.3222} & \cellcolor{gray!10}{0.1669} & \cellcolor{gray!10}{Significant +}\\
+Roe03\_M & Tall Grassland & 1.1273 & 0.6743 & Significant +\\
+\cellcolor{gray!10}{Roe03\_M} & \cellcolor{gray!10}{Short Grassland} & \cellcolor{gray!10}{-9.6499} & \cellcolor{gray!10}{12303.5977} & \cellcolor{gray!10}{Not Significant}\\
+Roe03\_M & Open Shrubland & -13.6255 & 2092.8520 & Not Significant\\
+\addlinespace
+\cellcolor{gray!10}{Roe03\_M} & \cellcolor{gray!10}{Human Settlements} & \cellcolor{gray!10}{-13.6620} & \cellcolor{gray!10}{2704.2926} & \cellcolor{gray!10}{Not Significant}\\
+Roe03\_M & Distance to Woodland & -0.0526 & 0.0206 & Significant -\\
+\cellcolor{gray!10}{Roe03\_M} & \cellcolor{gray!10}{Distance to Hedges} & \cellcolor{gray!10}{0.0009} & \cellcolor{gray!10}{0.0007} & \cellcolor{gray!10}{Significant +}\\
+Roe03\_M & Road Crossing & -0.0118 & 0.1714 & Not Significant\\
+\cellcolor{gray!10}{Roe03\_M} & \cellcolor{gray!10}{sl\_} & \cellcolor{gray!10}{0.0006} & \cellcolor{gray!10}{0.0006} & \cellcolor{gray!10}{Significant +}\\
+\addlinespace
+Roe03\_M & log sl\_ & 0.0015 & 0.0994 & Not Significant\\
+\cellcolor{gray!10}{Roe03\_M} & \cellcolor{gray!10}{cos ta\_} & \cellcolor{gray!10}{-0.8241} & \cellcolor{gray!10}{0.0904} & \cellcolor{gray!10}{Significant -}\\
+Roe02\_F & Evergreen Needleleaf Forest & -0.4986 & 0.0938 & Significant -\\
+\cellcolor{gray!10}{Roe02\_F} & \cellcolor{gray!10}{Cropland} & \cellcolor{gray!10}{-0.9304} & \cellcolor{gray!10}{0.2062} & \cellcolor{gray!10}{Significant -}\\
+Roe02\_F & Tall Grassland & -0.7953 & 0.1182 & Significant -\\
+\addlinespace
+\cellcolor{gray!10}{Roe02\_F} & \cellcolor{gray!10}{Permanent Wetland} & \cellcolor{gray!10}{-15.5219} & \cellcolor{gray!10}{2767.4264} & \cellcolor{gray!10}{Not Significant}\\
+Roe02\_F & Human Settlements & -14.2981 & 897.7726 & Not Significant\\
+\cellcolor{gray!10}{Roe02\_F} & \cellcolor{gray!10}{Other} & \cellcolor{gray!10}{-14.7043} & \cellcolor{gray!10}{1090.5249} & \cellcolor{gray!10}{Not Significant}\\
+Roe02\_F & Distance to Woodland & 0.0002 & 0.0009 & Not Significant\\
+\cellcolor{gray!10}{Roe02\_F} & \cellcolor{gray!10}{Distance to Hedges} & \cellcolor{gray!10}{0.0007} & \cellcolor{gray!10}{0.0003} & \cellcolor{gray!10}{Significant +}\\
+\addlinespace
+Roe02\_F & Road Crossing & -0.0601 & 0.0998 & Not Significant\\
+\cellcolor{gray!10}{Roe02\_F} & \cellcolor{gray!10}{sl\_} & \cellcolor{gray!10}{0.0003} & \cellcolor{gray!10}{0.0003} & \cellcolor{gray!10}{Significant +}\\
+Roe02\_F & log sl\_ & 0.0129 & 0.0436 & Not Significant\\
+\cellcolor{gray!10}{Roe02\_F} & \cellcolor{gray!10}{cos ta\_} & \cellcolor{gray!10}{-0.6223} & \cellcolor{gray!10}{0.0363} & \cellcolor{gray!10}{Significant -}\\
+Roe01\_F & Evergreen Needleleaf Forest & -0.7343 & 0.1979 & Significant -\\
+\addlinespace
+\cellcolor{gray!10}{Roe01\_F} & \cellcolor{gray!10}{Cropland} & \cellcolor{gray!10}{-0.8570} & \cellcolor{gray!10}{0.1910} & \cellcolor{gray!10}{Significant -}\\
+Roe01\_F & Tall Grassland & -0.2884 & 0.1084 & Significant -\\
+\cellcolor{gray!10}{Roe01\_F} & \cellcolor{gray!10}{Permanent Wetland} & \cellcolor{gray!10}{-13.9667} & \cellcolor{gray!10}{2427.6590} & \cellcolor{gray!10}{Not Significant}\\
+Roe01\_F & Human Settlements & -14.1986 & 799.5390 & Not Significant\\
+\cellcolor{gray!10}{Roe01\_F} & \cellcolor{gray!10}{Other} & \cellcolor{gray!10}{-14.3647} & \cellcolor{gray!10}{1424.3502} & \cellcolor{gray!10}{Not Significant}\\
+\addlinespace
+Roe01\_F & Distance to Woodland & -0.0022 & 0.0008 & Significant -\\
+\cellcolor{gray!10}{Roe01\_F} & \cellcolor{gray!10}{Distance to Hedges} & \cellcolor{gray!10}{0.0013} & \cellcolor{gray!10}{0.0003} & \cellcolor{gray!10}{Significant +}\\
+Roe01\_F & Road Crossing & -0.5058 & 0.0994 & Significant -\\
+\cellcolor{gray!10}{Roe01\_F} & \cellcolor{gray!10}{sl\_} & \cellcolor{gray!10}{0.0007} & \cellcolor{gray!10}{0.0002} & \cellcolor{gray!10}{Significant +}\\
+Roe01\_F & log sl\_ & 0.0305 & 0.0382 & Not Significant\\
+\addlinespace
+\cellcolor{gray!10}{Roe01\_F} & \cellcolor{gray!10}{cos ta\_} & \cellcolor{gray!10}{-0.7413} & \cellcolor{gray!10}{0.0372} & \cellcolor{gray!10}{Significant -}\\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{table}[!h]
+\centering
+\caption{\label{tab:sffPopTable}Resulting coefficients from the population mean selection from all the individual-level habitat selection models. Significance base on whether CI overlap zero. Individual estimates that were NA have been filtered out.}
+\centering
+\begin{tabular}[t]{lrrrl}
+\toprule
+Variable & Mean & Lower CI & Upper CI & Significance\\
+\midrule
+\cellcolor{gray!10}{Evergreen Needleleaf Forest} & \cellcolor{gray!10}{-0.0716} & \cellcolor{gray!10}{-0.3109} & \cellcolor{gray!10}{0.1677} & \cellcolor{gray!10}{Not Significant}\\
+Cropland & -0.1911 & -0.5608 & 0.1786 & Not Significant\\
+\cellcolor{gray!10}{Tall Grassland} & \cellcolor{gray!10}{-0.2990} & \cellcolor{gray!10}{-0.5722} & \cellcolor{gray!10}{-0.0257} & \cellcolor{gray!10}{Significant -}\\
+Short Grassland & -0.8843 & -1.7212 & -0.0474 & Significant -\\
+\cellcolor{gray!10}{Open Shrubland} & \cellcolor{gray!10}{0.0284} & \cellcolor{gray!10}{-0.6327} & \cellcolor{gray!10}{0.6895} & \cellcolor{gray!10}{Not Significant}\\
+\addlinespace
+Permanent Wetland & 1.0868 & 1.0836 & 1.0901 & Significant +\\
+\cellcolor{gray!10}{Human Settlements} & \cellcolor{gray!10}{-1.6119} & \cellcolor{gray!10}{-1.6303} & \cellcolor{gray!10}{-1.5935} & \cellcolor{gray!10}{Significant -}\\
+Other & 0.2025 & -0.5225 & 0.9275 & Not Significant\\
+\cellcolor{gray!10}{Distance to Woodland} & \cellcolor{gray!10}{-0.0051} & \cellcolor{gray!10}{-0.0095} & \cellcolor{gray!10}{-0.0008} & \cellcolor{gray!10}{Significant -}\\
+Distance to Hedges & -0.0009 & -0.0019 & 0.0002 & Not Significant\\
+\addlinespace
+\cellcolor{gray!10}{Road Crossing} & \cellcolor{gray!10}{-0.5144} & \cellcolor{gray!10}{-0.8068} & \cellcolor{gray!10}{-0.2221} & \cellcolor{gray!10}{Significant -}\\
+sl\_ & 0.0011 & 0.0006 & 0.0015 & Significant +\\
+\cellcolor{gray!10}{log sl\_} & \cellcolor{gray!10}{0.0245} & \cellcolor{gray!10}{-0.0042} & \cellcolor{gray!10}{0.0533} & \cellcolor{gray!10}{Not Significant}\\
+cos ta\_ & -0.4358 & -0.5811 & -0.2904 & Significant -\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \begin{figure}[h]
 \includegraphics[width=0.75\linewidth]{../../figures/ssfCoef_Heterogeneity} \caption{The simulated heterogeneity (standard deviation) values from coefficients and standard errors of the individual step-selection models.}\label{fig:ssfHeteroPlot}
@@ -576,6 +939,9 @@ Chapman NG, Claydon K, Claydon M, Forde PG, Harris S. 1993. Sympatric population
 
 \bibitem[\citeproctext]{ref-cimino_effects_2003}
 Cimino L, Lovari S. 2003. The effects of food or cover removal on spacing patterns and habitat use in roe deer ( \emph{{Capreolus} capreolus} ). \emph{Journal of Zoology} 261:299--305. DOI: \href{https://doi.org/10.1017/S0952836903004229}{10.1017/S0952836903004229}.
+
+\bibitem[\citeproctext]{ref-cockburn_comparative_1979}
+Cockburn A, Fleming M, Wainer J. 1979. The comparative effectiveness of drift fence pitfall trapping and conventional cage trapping of vertebrates in the big desert, north-western {Victoria}. \emph{Victorian Naturalist (Blackburn)} 963:92--95.
 
 \bibitem[\citeproctext]{ref-doParallel}
 Corporation M, Weston S. 2022. \emph{\href{https://CRAN.R-project.org/package=doParallel}{{doParallel}: Foreach parallel adaptor for the {``{parallel}''} package}}.

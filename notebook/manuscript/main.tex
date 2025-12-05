@@ -54,6 +54,14 @@ $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
 
+%% allows restarted numbering for supplementary figures and tables - only works for PDF out
+\newcommand{\beginsupplement}{
+  \setcounter{table}{0}
+  \renewcommand{\thetable}{S\arabic{table}}
+  \setcounter{figure}{0}
+  \renewcommand{\thefigure}{S\arabic{figure}}
+}
+
 %% lines to enable bulletpoints in a new notation style
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}

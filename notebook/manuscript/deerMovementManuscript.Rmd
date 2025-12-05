@@ -26,8 +26,8 @@ csl: peerj.csl
 editor_options: 
   markdown: 
     wrap: sentence
-abstract: Animals use landscapes unequally and have differential responses to anthropogenic changes such as land cover modification. Such responses are difficult to predict a priori, and requires examination of animal's movements to determine. A full understanding of animals' movements and tendencies are particular valuable in situations where human-animal interaction have implications for either's well-being. Large herbivores, with relatively high mobility, often come in contact with humans as habitat's become more restricted. This can lead to concentrated grazing pressures, animal-vehicle collisions, and increased disease transfer risks. In Europe, Roe Deer (Capreolus capreolus), a large reasonably-human-tolerate ungulate, are one of the more prevalent herbivores that often find themselves interacting with anthropogenic activity. By examining Roe Deer in two mixed use landscapes in the Untied Kingdom, where their movements are comparatively unknown, we add to the knowledge of how widely Roe Deer range and use the available human-modified land covers. Through the GPS tracking of 13 deer, we reveal reasonably limited home ranges that are centred on deciduous woodland patches. We observed forays outside of the woodland patches into open shrub-, crop- and grass- lands, but only to distances up to 750m. When outside of the woodland deer movements appeared to be lower but more variable, potentially indicative of a behavioural change when in open areas. We documented was a consistent, albeit slight, aversion to crossing roads indicating that roads contribute to deer habitat fragmentation. Overall our results highlight UK Roe Deer's connection to woodland patches, and suggests their movements and overall landscape connectivity are closely tied to woodland presence. 
-keywords: Movement ecology, step selection function, habitat preference, habitat selection, animal movement, Roe Deer, Capreolus capreolus, road crossing
+abstract: Animals use landscapes unequally and have differential responses to anthropogenic changes such as land cover modification. Such responses are difficult to predict a priori, and requires examination of animal’s movements to determine. A full understanding of animals’ movements and tendencies are particularly valuable in situations where human-animal interactions have implications for either’s well-being. Large herbivores, with relatively high mobility, often come in contact with humans as habitats become more restricted. This can lead to concentrated grazing pressures, animal-vehicle collisions, and increased disease transfer risks. In Europe, Roe Deer (Capreolus capreolus), a large reasonably-human-tolerate ungulate, are one of the more prevalent herbivores that often find themselves interacting with anthropogenic activity. By examining Roe Deer in two mixed use landscapes in the United Kingdom, where their movements are comparatively unknown, we add to the knowledge of how widely Roe Deer range and use the available human-modified land covers. Through the GPS tracking of 13 deer, we reveal reasonably limited home ranges that are centred on deciduous woodland patches. We observed forays outside of the woodland patches into open shrub-, crop- and grass- lands, but only to distances up to 750m. When outside of the woodland deer movements appeared to be lower but more variable, potentially indicative of a behavioural change when in open areas. We documented was a consistent, albeit slight, aversion to crossing roads indicating that roads contribute to deer habitat fragmentation. Overall, our results highlight UK Roe Deer’s connection to woodland patches, and suggests their movements and overall landscape connectivity are closely tied to woodland presence.  
+keywords: Movement ecology, step selection function, habitat preference, habitat selection, animal movement, Roe Deer, Capreolus capreolus, road crossing, United Kingdom
 ---
 
 # Introduction
@@ -97,9 +97,7 @@ Within 300m of the site, is the edge of a large tract of commercial, densely pla
 
 - Gaskwood, also near Garlogie, is a commercial conifer forest including Scot's pine and Sitka spruce, within a mosaic landscape of forest and farmland patches, located 1 km across open farmland from Moss of Air.
 
-We captured deer using long netting from January to September of 2023 in Aberdeenshire, and between __ and __ in Wessex. 
-
-To capture deer we employed a "long net" capture method (Cockburn 1979) <!-- unknown citations -->, which has been used extensively and safely to capture Roe Deer in the UK [@gill_changes_1996] and elsewhere [@morellet_effect_2009].
+To capture deer we employed a "long net" capture method [@cockburn_comparative_1979], which has been used extensively and safely to capture Roe Deer in the UK [@gill_changes_1996] and elsewhere [@morellet_effect_2009].
 Briefly, we set up 1-2 km of 2-meter-high nylon nets along paths of opening in the woodland.
 Nets were strung on flexible bamboo poles dropped to the ground when an animal ran into them.
 Nets were placed in the shape of a horseshoe.
@@ -282,7 +280,8 @@ This resulted in an average of `r meanFixDayInText` fixes per day per individual
 For our Aberdeenshire Roe Deer home range sizes ranged from `r totalAberRange`ha (95% contour point estimates), with a weighted mean of `r ctmmMean` (Fig. \@ref(fig:homeRangeSize)).
 The deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8 and Roe Deer 3; Fig. \@ref(fig:variogramPlot)).
 Effective sample sizes were all high (`r essOverall`), suggesting we can be confident in the home range estimates.
-All except for two individuals (Roe Deer 5 and Roe Deer 12) found OU models to fit best, with the remaining two being better described by OUF models.
+All except for two individuals (Roe Deer 5 and Roe Deer 12) found OU models to fit best, with the remaining two being better described by OUF models (Tab. \@ref(tab:akdeModelTable)).
+
 All best fitting models were anisotropic, suggesting these Roe Deer are inhabiting non-uniform home ranges (i.e., not being as wide as they are long).
 The placement of home ranges suggest the importance of woodland, with 95% of all deer movements falling within `r round(longestAxisText, digits = 0)` m of woodland (`r round(longestAxisText, digits = 0)` m is half longest dimension of the 99% home range area; thereby suggesting ranges tend to centre on woodland; Fig. \@ref(fig:distanceDistributionPlot)).
 
@@ -290,7 +289,7 @@ The placement of home ranges suggest the importance of woodland, with 95% of all
 knitr::include_graphics(here::here("figures", "homeRangeAreaPlot.png"))
 ```
 
-```{r distanceDistributionPlot, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Distribution of Roe Deer locations in relation to their distance from woodland patches (Orange). The distribution of random location throughout the landscape in relation to their distance from woodland patches (Grey). Locations within woodland are excluded. Vertical dashed line shows the half longest dimension of the 99% home range area."}
+```{r distanceDistributionPlot, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Distribution of Roe Deer locations in relation to their distance from woodland patches (Orange) compared to the distribution of random locations throughout the landscape in relation to their distance from woodland patches (Grey). Locations within woodland are excluded. Vertical dashed line shows the half longest dimension of the 99% home range area."}
 knitr::include_graphics(here::here("figures", "distanceDistributionPlot.png"))
 ```
 
@@ -363,7 +362,7 @@ humanCoef <- poisCoef %>%
 
 The population level habitat selection model revealed a general tendency for Roe Deer to remain closer to the woodland patches (`r distWoodCoef`), with no significant selection for hedgerows (`r distHedgeCoef`; Fig. \@ref(fig:poisCoefPlot)).
 The model also revealed that roads play a significant role in reducing connectivity across the landscape: observed deer steps were significantly less likely to cross roads than control steps (`r roadCrossCoef`).
-The population habitat selection model also revealed significant selection for the land cover classes open shrubland (`r shrubCoef`) and tall grassland (`r tallGCoef`); other relationships were less clear.
+The population habitat selection model also revealed significant selection for the land cover classes open shrubland (`r shrubCoef`) and tall grassland (`r tallGCoef`); other relationships were less clear (Tab. \@ref(tab:poisTable)).
 
 The model's inclusion of step length and log step length interactions allowed us to examine whether movement was altered by land cover.
 Movement was most impacted by short grassland, tall grassland, and cropland, all showing the same pattern.
@@ -532,7 +531,7 @@ openPopAvg <- popAvgCoef %>%
 
 ## Individual level selection and variation in selection
 
-Further exploration of individual habitat selection models highlights whether the uncertainty in the population level model stems from weak responses or diverging responses that average towards a zero effect.
+Further exploration of individual habitat selection models highlights whether the uncertainty in the population level model stems from weak responses or diverging responses that average towards a zero effect (Tab. \@ref(tab:sffTable); Tab. \@ref(tab:sffPopTable)).
 Distance to woodland shows a marginally higher specialisation (`r woodSpecial`) compared to the weighted population mean (`r woodPopAvg`; Fig. \@ref(fig:ssfCoefPlot)).
 This difference is likely explained by the deviating Roe 10 who expressed an opposite response to the majority of other deer by expressing an aversion to woodland (`r wood10coef`).
 Apart from Roe 10, Roe Deer are exhibiting the same clear preference for remaining near woodland as seen in the population level model.
@@ -573,13 +572,13 @@ However, their limited exposure to certain land cover types (e.g., human settlem
 Overall, Roe Deer exhibited a disinclination to cross roads found on a population and individual level.
 The estimated chances of individuals crossing roads indicate that roads somewhat reduce the permeability of these landscapes for Roe Deer, but do not prohibit movement.
 
-Our findings on Roe Deer home range size are similar to those values reported in the HomeRange database for Roe Deer (Fig. \@ref(fig:hrCompPlot)), with the database presenting examples of ranges larger and smaller [@broekman_homerange_2023; @broekman_homerange_2022; see references in data availability section].
+Our findings on Roe Deer home range size are similar to those values reported in the HomeRange database for Roe Deer (Fig. \@ref(fig:hrCompPlot)), with the database presenting examples of ranges larger and smaller (@broekman_homerange_2023; @broekman_homerange_2022; see references in data availability section).
 This coherence is surprising given the rudimentary nature of the comparison that does not account for differences in sampling protocol, duration, or home range estimation method, all of which can modify estimated home range size [@silva_reptiles_2020].
 As such the UK Roe Deer examined here appear largely typical in regards to their use of space.
-Some of the variation in home range has been suggested to be a product fo food availability and the arrangement of cover from predators [@tufto_habitat_1996].
+Some of the variation in home range has been suggested to be a product of food availability and the arrangement of cover from predators [@tufto_habitat_1996].
 
 Other examinations of Roe Deer have highlighted the importance of risk guiding when Roe Deer leave their core wooded range to make use of more open areas [@padie_roe_2015; @bonnot_interindividual_2015].
-The potential benefits of managing this risk to reap the nutritional benefits afforded by open areas are apparent [@hewison_landscape_2009],  and may present a direct trade off against the risks poised by humans.
+The potential benefits of managing this risk to reap the nutritional benefits afforded by open areas are apparent [@hewison_landscape_2009], and may present a direct trade off against the risks posed by humans.
 Humans are likely the UK Roe Deer's primary concern, as other predators such as Lynx, require different risk mitigating decisions, are absent [@lone_living_2014].
 The shifts in movements (i.e., step lengths) we report here may be a coarse representation of Roe Deer balancing the risk and benefits in crop- and grasslands.
 Such trade-offs may be more pronounced in more fragmented or riskier landscapes, and could also explain the lack of consistent selection to remain near hedgerows.
@@ -647,9 +646,11 @@ Studies that the HomeRange Database mean was based on: @melis_male_2005; @biosa_
 
 ## Author Contributions
 
-
+-
 
 # Supplementary Material
+
+\beginsupplement
 
 ```{r trackingDuration, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Dates of data collection and overall duration or deer tracking by individual."}
 knitr::include_graphics(here::here("figures", "trackingDuration.png"))
@@ -666,6 +667,77 @@ knitr::include_graphics(here::here("figures", "varioRoePlot.png"))
 <!-- # ```{r wrsfEffects, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="The coefficients relating to the habitat variables in the weighted resource selection function. The coloured points show estimates where the 95% CI did not overlap zero. Vertical lines show the population mean selection, with 95% CIs."} -->
 <!-- # knitr::include_graphics(here::here("figures", "wrsfEffects.png")) -->
 <!-- # ``` -->
+
+```{r akdeModelTable, echo=FALSE, message=FALSE}
+akdeSummary <- read.csv(here::here("tables", "allAKDESummary.csv"))
+
+akdeSummary <- akdeSummary %>% 
+  select(region, Animal_ID, est, low, high, level, DOF_area, bestModel)
+
+kableExtra::kbl(akdeSummary, caption = "Overview of the area estimates resulting from the AKDEs. Area units are hectares. ESS = Effective Sample Size",
+             col.names = c("Region",
+                           "Animal ID",
+                           "Point Estimate",
+                           "Lower CI",
+                           "Upper CI",
+                           "Contour level",
+                           "ESS",
+                           "Movement Model"
+                           ), booktabs = TRUE, digits=2) %>%
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position"))
+```
+ 
+```{r poisTable, echo=FALSE, message=FALSE}
+poisFixed <- read.csv(here::here("tables", "poisFixed.csv"))
+
+poisFixed <- poisFixed %>% 
+  select(-X0.5quant, -colour, -term_colour, -mode) %>% 
+  select(term, mean, sd, lower, upper, sig)
+
+kableExtra::kbl(poisFixed, caption = "All fixed coefficients from the Poisson population-level habitat selection model. Significance base on whether CI overlap zero.",
+             col.names = c("Variable",
+                           "Mean Estimate",
+                           "Standard Deviation",
+                           "Lower CI",
+                           "Upper CI",
+                           "Significance"
+                           ), booktabs = TRUE, digits=4) %>%
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position", "repeat_header"))
+```
+
+```{r sffTable, echo=FALSE, message=FALSE}
+sffFixed <- read.csv(here::here("tables", "ssf_indiCoef.csv"))
+
+sffFixed <- sffFixed %>% 
+  select(-colour, -Animal_ID_colour) %>% 
+  filter(!is.na(est)) %>% 
+  select(Animal_ID, variable, est, se, sig)
+
+kableExtra::kbl(sffFixed, caption = "All fixed coefficients from the individual-level habitat selection models. Significance base on whether CI overlap zero. Individual estimates that were NA have been filtered out.",
+             col.names = c("Animal ID",
+                           "Variable",
+                           "Mean Estimate",
+                           "Standard Error",
+                           "Significance"
+                           ), booktabs = TRUE, digits=4) %>%
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position"))
+```
+```{r sffPopTable, echo=FALSE, message=FALSE}
+sffPopFixed <- read.csv(here::here("tables", "ssf_popAvgCoef.csv"))
+
+sffPopFixed <- sffPopFixed %>% 
+  select(-Animal_ID, -colour, -Animal_ID_colour) %>% 
+  select(variable, Mean, LCI, UCI, sig)
+
+kableExtra::kbl(sffPopFixed, caption = "Resulting coefficients from the population mean selection from all the individual-level habitat selection models. Significance base on whether CI overlap zero. Individual estimates that were NA have been filtered out.",
+             col.names = c("Variable",
+                           "Mean",
+                           "Lower CI",
+                           "Upper CI",
+                           "Significance"
+                           ), booktabs = TRUE, digits=4) %>%
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position"))
+```
 
 ```{r ssfHeteroPlot, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="The simulated heterogeneity (standard deviation) values from coefficients and standard errors of the individual step-selection models."}
 knitr::include_graphics(here::here("figures", "ssfCoef_Heterogeneity.png"))
