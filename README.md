@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # TICKSOLVE_DeerMovement
 
 Code based used to explore the movements of Roe and Fallow Deer, as well
