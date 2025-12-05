@@ -1,5 +1,5 @@
 ---
-title: "Roe Deer Movement"
+title: "Roe Deer show an affinity for woodland and reluctance to cross roads"
 author1: "---*"
 author2: "---**"
 affiliation1: "---"
@@ -26,14 +26,9 @@ csl: peerj.csl
 editor_options: 
   markdown: 
     wrap: sentence
-abstract: abstract text
+abstract: Animals use landscapes unequally and have differential responses to anthropogenic changes such as land cover modification. Such responses are difficult to predict a priori, and requires examination of animal's movements to determine. A full understanding of animals' movements and tendencies are particular valuable in situations where human-animal interaction have implications for either's well-being. Large herbivores, with relatively high mobility, often come in contact with humans as habitat's become more restricted. This can lead to concentrated grazing pressures, animal-vehicle collisions, and increased disease transfer risks. In Europe, Roe Deer (Capreolus capreolus), a large reasonably-human-tolerate ungulate, are one of the more prevalent herbivores that often find themselves interacting with anthropogenic activity. By examining Roe Deer in two mixed use landscapes in the Untied Kingdom, where their movements are comparatively unknown, we add to the knowledge of how widely Roe Deer range and use the available human-modified land covers. Through the GPS tracking of 13 deer, we reveal reasonably limited home ranges that are centred on deciduous woodland patches. We observed forays outside of the woodland patches into open shrub-, crop- and grass- lands, but only to distances up to 750m. When outside of the woodland deer movements appeared to be lower but more variable, potentially indicative of a behavioural change when in open areas. We documented was a consistent, albeit slight, aversion to crossing roads indicating that roads contribute to deer habitat fragmentation. Overall our results highlight UK Roe Deer's connection to woodland patches, and suggests their movements and overall landscape connectivity are closely tied to woodland presence. 
 keywords: Movement ecology, step selection function, habitat preference, habitat selection, animal movement, Roe Deer, Capreolus capreolus, road crossing
 ---
-
-<!-- word replacements -->
-<!-- land cover vs land use -->
-<!-- captial Roe Deer -->
-<!-- possion vs population -->
 
 # Introduction
 Animals disproportionately use and move through some areas more than others.
@@ -51,7 +46,7 @@ Large herbivores, with relatively high mobility and large home ranges, experienc
 Due to their economic importance and ecological impact, the space use patterns of large herbivores, and their responses to anthropogenic features, have been relatively well studied.
 Infrastructure such as roads and fences tend to degrade and fragment habitat, altering animal movement paths [@schwandner_predicting_2025; @sawyer_framework_2013], and behaviour [@xu_barrier_2021].
 However, movement responses to specific landscape features can be complex.
-For example, GPS-tagged guanacos in Argentina were attracted to roads for grazing resources and low predation risk, but they strongly avoided crossing roads [@serota_behavioral_2024].
+For example, GPS-tagged Guanacos in Argentina were attracted to roads for grazing resources and low predation risk, but they strongly avoided crossing roads [@serota_behavioral_2024].
 By understanding movement responses, we may be better placed to predict and mitigate harmful interactions between wildlife and humans.
 
 Deer live near humans in many temperate regions of the world and, as such, receive considerable attention from land managers [@cederlund_home_1983; @dupke_habitat_2017].
@@ -578,14 +573,30 @@ However, their limited exposure to certain land cover types (e.g., human settlem
 Overall, Roe Deer exhibited a disinclination to cross roads found on a population and individual level.
 The estimated chances of individuals crossing roads indicate that roads somewhat reduce the permeability of these landscapes for Roe Deer, but do not prohibit movement.
 
-Our findings on Roe Deer home range size are remarkably similar to those values reported in the HomeRange database for Roe Deer (Fig. \@ref(fig:hrCompPlot)), with the database presenting examples of ranges larger and smaller [@broekman_homerange_2023; @broekman_homerange_2022; see references in data availability section].
-A naive mean of those reviewed values suggests a range of 62 ha, that compares well to our 65 ha.
+Our findings on Roe Deer home range size are similar to those values reported in the HomeRange database for Roe Deer (Fig. \@ref(fig:hrCompPlot)), with the database presenting examples of ranges larger and smaller [@broekman_homerange_2023; @broekman_homerange_2022; see references in data availability section].
 This coherence is surprising given the rudimentary nature of the comparison that does not account for differences in sampling protocol, duration, or home range estimation method, all of which can modify estimated home range size [@silva_reptiles_2020].
 As such the UK Roe Deer examined here appear largely typical in regards to their use of space.
+Some of the variation in home range has been suggested to be a product fo food availability and the arrangement of cover from predators [@tufto_habitat_1996].
 
+Other examinations of Roe Deer have highlighted the importance of risk guiding when Roe Deer leave their core wooded range to make use of more open areas [@padie_roe_2015; @bonnot_interindividual_2015].
+The potential benefits of managing this risk to reap the nutritional benefits afforded by open areas are apparent [@hewison_landscape_2009],  and may present a direct trade off against the risks poised by humans.
+Humans are likely the UK Roe Deer's primary concern, as other predators such as Lynx, require different risk mitigating decisions, are absent [@lone_living_2014].
+The shifts in movements (i.e., step lengths) we report here may be a coarse representation of Roe Deer balancing the risk and benefits in crop- and grasslands.
+Such trade-offs may be more pronounced in more fragmented or riskier landscapes, and could also explain the lack of consistent selection to remain near hedgerows.
+Compared to other Roe Deer examinations our studied Roe Deer may have easier access to wooded cover in a less fragmented landscape [@morellet_landscape_2011]; thereby, potentially becoming less dependent on hedgerows.
+To tease apart the UK Roe Deer's response to risk a fuller quantifications of human activity would be required, including presence of walkers, dogs, and hunting pressure.
 
-<!-- more detials here on woodland pref and cropland use in europe/other studies -->
-
+Roe Deer in our study avoided crossing roads more than expected by chance, suggesting roads reduce landscape connectivity.
+Thus, in countries with high densities of roads, such as the UK, even limited road crossing avoidance by deer likely has profound impacts on deer population structure, dispersal, movement of deer-associated parasites (e.g., ticks).
+Despite this avoidance, it was not complete and deer collisions with vehicles remain a key safety issue.
+In Scotland, higher rates of deer-vehicle collisions appear to occur in vicinity of woodland and other semi-natural habitats [@langbein2019deer].
+Other examinations have highlighted the importance of road density in Roe Deer home ranges as a key predictor of road crossing frequency [@kammerle_temporal_2017], further supporting the woodland-road proximity connection.
+@nelli_mapping_2018 supports also this but also suggests the likelihood of a road section experiencing collisions is additionally tied to traffic flow levels (although traffic levels fails to predict the overall count of collisions).
+While urban areas tend to lower deer-vehicle collision risk, the intersection of urban and natural areas (i.e., suburban) may lead to key hotspots where both deer and traffic collide [@nelli_mapping_2018].
+This non-linear relationship between animal densities, their reaction and activity close to roads, and the intensity of traffic makes road-wildlife collision difficult to completely characterise and generalise [@denneboom_wildlife_2024; @abraham_elevated_2021; @cunningham_permanent_2022; @valero_corrigendum_2015].
+The estimation of Roe Deer crossing tendency here, will help refine our understanding of that relationship in the UK.
+Other Roe Deer investigations have reveal similar preferences for forest and reluctance when crossing roads [@passoni_roads_2021], and that the risks fluctuate over the day and year [@cunningham_permanent_2022; @martz_crossings_2024].
+Once again highlighting the importance of understanding the natural history, ecology, and individual variation of the deer when estimating risk.
 
 There are several aspects of the study that may limit its generalisability, or that would need to be considered when applying the findings to other contexts.
 Using the STRANGE framework [@webster_how_2020], we highlight key limitations (omitting those that are unquantifiable or of limited relevance).
@@ -603,18 +614,7 @@ None of the deer had been previously collared, but there may have been a habitua
 Our removal of the first week of data likely have mitigated the largest impact prior to collar-habituation, but as the Wessex deer demonstrate there may be ongoing effects we cannot control for. 
 Further explorations for longer tracking periods and with different age groups may elucidate the collar and human habituation effects.
 
-Roe Deer in our study avoided crossing roads more than expected by chance, suggesting roads reduce landscape connectivity.
-Thus, in countries with high densities of roads, such as the UK, even limited road crossing avoidance by deer likely has profound impacts on deer population structure, dispersal, movement of deer-associated parasites (e.g., ticks).
-Despite this avoidance, it was not complete and deer collisions with vehicles remain a key safety issue.
-In Scotland, higher rates of deer-vehicle collisions appear to occur in vicinity of woodland and other semi-natural habitats [@langbein2019deer].
-@nelli_mapping_2018 supports this but also suggests the likelihood of a road section experiencing collisions is tied to traffic flow levels (although traffic levels fails to predict the overall count of collisions).
-While urban areas tend to lower deer-vehicle collision risk, the intersection of urban and natural areas (i.e., suburban) may lead to key hotspots where both deer and traffic collide [@nelli_mapping_2018].
-This non-linear relationship between animal densities, their reaction and activity close to roads, and the intensity of traffic makes road-wildlife collision difficult to completely characterise and generalise [@denneboom_wildlife_2024; @abraham_elevated_2021; @cunningham_permanent_2022; @valero_corrigendum_2015].
-The estimation of Roe Deer crossing tendency here, will help refine our understanding of that relationship in the UK.
-Other Roe Deer investigations have reveal similar preferences for forest and reluctance when crossing roads [@passoni_roads_2021], and that the risks fluctuate over the day and year [@cunningham_permanent_2022; @martz_crossings_2024].
-Once again highlighting the importance of understanding the natural history, ecology, and individual variation of the deer when estimating risk.
-
-Overall, we documented a tendency for Roe Deer to remain close to woodland in UK Roe Deer.
+Overall, we documented a tendency for Roe Deer to remain close to woodland in the UK.
 This pattern apparently limits their ranges to areas within 750m of woodland patches.
 The resulting home ranges of UK Roe Deer do not appear atypical when compared to other tracked Roe Deer.
 We see a clear and consistent, albeit slight, aversion to crossing roads that may be limiting the permeability of the landscape for Roe Deer.
@@ -635,13 +635,19 @@ For permission to conduct the work, we thank NatureScot, ForestryEngland and Nat
 
 ```
 
+The code used to complete this study can be found at https://github.com/BenMMarshall/TICKSOLVE_DeerMovement amongst code for the broader examination of deer's role in these landscapes; and is archived at ||||| TBC |||||.
+
 ## Data availability
 
-< Where is the data going: movebank and somewhere else >
+Aberdeen Roe Deer movement data can be accessed via Movebank (https://www.movebank.org); Movebank ID 2890266958.
+
+New Forest Roe Deer movement data can be accessed via Movebank (https://www.movebank.org); Movebank ID ||||| TBC |||||.
 
 Studies that the HomeRange Database mean was based on: @melis_male_2005; @biosa_relatives_2015; @dupke_habitat_2017; @rossi_home_2003; @focardi_interspecific_2006; @picardi_movement_2019; @ramanzin_seasonal_2007; @mysterud_seasonal_1999; @ranc_preference_2020; @richard_ranging_2008; @aiello_ranging_2013; @morellet_seasonality_2013; @vanpe_access_2009; @pellerin_complementary_2016; @kjellander_experimental_2004; @van_laere_utilisation_1996; @cederlund_home_1983; @said_ecological_2005; @bideau_effects_1993; @cimino_effects_2003; @lamberti_alternative_2001; @lamberti_use_2006; @bevanda_landscape_2015; @pagon_territorial_2017; @debeffe_conditiondependent_2012; @chapman_sympatric_1993; @lamberti_two_2004; @maublanc_experimental_2018; @padie_roe_2015; @said_influence_2005; @carvalho_ranging_2008; @malagnino_reproductive_2021; @linnell_site_1995; @rossi_male_2001; @jeppesen_home_1990.
 
 ## Author Contributions
+
+
 
 # Supplementary Material
 
@@ -649,12 +655,11 @@ Studies that the HomeRange Database mean was based on: @melis_male_2005; @biosa_
 knitr::include_graphics(here::here("figures", "trackingDuration.png"))
 ```
 
-```{r trackingTimelags, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Distribution of time lags after resampling and filtering. N.b. x axis is log scaled."}
+```{r trackingTimelags, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="Distribution of time lags between Roe Deer location fixes. N.b. x axis is log scaled."}
 knitr::include_graphics(here::here("figures", "trackingTimelag.png"))
 ```
 
-
-```{r variogramPlot, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h",  fig.cap="Variograms showing the autocorrelative structure of the Roe Deer movement data, revealing the level of range residency displayed by each individual"}
+```{r variogramPlot, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h",  fig.cap="Variograms showing the autocorrelative structure of the Roe Deer movement data; The semi-variance (average square displacement) is show over a specific time lag. Examination reveals the level of range residency displayed by each individual (i.e., flattens to an asymptote). "}
 knitr::include_graphics(here::here("figures", "varioRoePlot.png"))
 ```
 
@@ -662,7 +667,7 @@ knitr::include_graphics(here::here("figures", "varioRoePlot.png"))
 <!-- # knitr::include_graphics(here::here("figures", "wrsfEffects.png")) -->
 <!-- # ``` -->
 
-```{r ssfHeteroPlot, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="The simulated heterogeneity (standard deviation) values from individual coefficients and standard errors of the step-selection models."}
+```{r ssfHeteroPlot, echo=FALSE, out.width='75%', fig.align="centre", fig.pos = "h", fig.cap="The simulated heterogeneity (standard deviation) values from coefficients and standard errors of the individual step-selection models."}
 knitr::include_graphics(here::here("figures", "ssfCoef_Heterogeneity.png"))
 ```
 

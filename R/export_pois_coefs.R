@@ -78,7 +78,8 @@ export_pois_coefs <- function(poisModel){
       facet_wrap(vars(termType), ncol = 1, drop = TRUE, scales = "free", space = "free_y",
                  strip.position = "left") +
       # coord_cartesian(xlim = c(minY, maxY)) +
-      labs(x = "Coefficient", y = "Term", title = "Poisson Model Coefficients") +
+      labs(x = "Coefficient", y = "Term")+
+           # title = "Poisson Model Coefficients") +
       theme_bw() +
       theme(
         text = element_text(colour = "grey25"),

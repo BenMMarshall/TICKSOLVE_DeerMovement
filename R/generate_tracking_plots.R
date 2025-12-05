@@ -10,6 +10,7 @@ generate_tracking_plots <- function(deerData){
   paletteList <- load_deer_palette()
 
   durationPlot <- deerData %>%
+    filter(str_detect(Animal_ID, "Roe")) %>%
     mutate(Animal_ID = factor(Animal_ID,
                               levels = c(
                                 sort(unique(deerData$Animal_ID),
@@ -38,6 +39,7 @@ generate_tracking_plots <- function(deerData){
     )
 
   timelagPlot <- deerData %>%
+    filter(str_detect(Animal_ID, "Roe")) %>%
     mutate(Animal_ID = factor(Animal_ID,
                               levels = c(
                                 sort(unique(deerData$Animal_ID),

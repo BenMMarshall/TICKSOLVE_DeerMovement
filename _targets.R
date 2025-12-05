@@ -1,11 +1,13 @@
+
+# Overall pipeline settings -----------------------------------------------
+
 # Created by use_targets().
-# Follow the comments below to fill in this target script.
 # Then follow the manual to check and run the pipeline:
 #   https://books.ropensci.org/targets/walkthrough.html#inspect-the-pipeline
 
 # Load packages required to define the pipeline:
 library(targets)
-library(tarchetypes) # Load other packages as needed.
+library(tarchetypes)
 
 dir.create("figures", showWarnings = FALSE)
 dir.create("tables", showWarnings = FALSE)
@@ -45,47 +47,25 @@ tar_option_set(
                "CoordinateCleaner",
                "fasterRaster",
                "biomod2"
-  ), # Packages that your targets need for their tasks.
-  #
-  # Pipelines that take a long time to run may benefit from
-  # optional distributed computing. To use this capability
-  # in tar_make(), supply a {crew} controller
-  # as discussed at https://books.ropensci.org/targets/crew.html.
-  # Choose a controller that suits your needs. For example, the following
-  # sets a controller that scales up to a maximum of two workers
-  # which run as local R processes. Each worker launches when there is work
-  # to do and exits if 60 seconds pass with no tasks to run.
-
+  ), # Packages that targets needs
+  # # option for multi-core worker use
   # controller = crew::crew_controller_local(workers = 3, seconds_idle = 60),
   # error = "continue",
-  #
   format = "qs" # Optionally set the default storage format. qs is fast.
 )
 
 # Run the R scripts in the R/ folder with your custom functions:
 targets::tar_source()
 
-# selectedPatches <- read.csv(file = here::here("data", "GIS data", "abdn_final_patches.csv"))
-# selectedPatches <- selectedPatches$Patch_ID
-
 # OPTIONS AND DECISIONS
 # RSF
 nAvailable <- 10
 typeAvialable <- "random"
 contourAvialable <- "95%"
-# rsfFormula <- case_ ~ distanceWoodland + landuse + distanceWoodland:landuse
 # SSF
 nAvailableSteps <- 10
 slDistribution <- "gamma"
 taDistribution <- "vonmises"
-# ssfFormula <- case_ ~ landuse +
-#   distanceWoodland +
-#   distanceHedges +
-#   roadCrossings +
-#   sl_ + log(sl_) + cos(ta_) +
-#   sl_:landuse +
-#   log(sl_):landuse +
-#   strata(step_id_)
 
 # dbbmm
 windowSize <- 29 #~ a week
@@ -93,12 +73,6 @@ marginSize <- 5 #~ a day
 locationError <- 0.1
 
 # connectivity passage settings
-# connectSettings <- expand.grid(
-#   THETA = c(0.1, 0.01, 0.001, 0.0001, 0.00001, 0.000001),
-#   repeatsPerPair = 1,
-#   patchDistance = c(1200)
-# )
-# patchDistance <- 250
 connectSettings <- expand.grid(
   THETA = c(0.1, 0.001, 0.00001),
   repeatsPerPair = 6
@@ -110,8 +84,10 @@ minPatchSize_m2 <- 5000
 setCropArea <- 750
 useCores <- 12
 
+# buffers for summary of patch-wise stats
 buffers <- c(0, 750)
 
+# store the inputs, ready for export
 inputList <- list(
   nAvailable = nAvailable,
   typeAvialable = typeAvialable,
@@ -127,10 +103,9 @@ inputList <- list(
   setCropArea = setCropArea,
   buffers = buffers
 )
-
 saveRDS(inputList, file = here::here("data", "inputList.rds"))
 
-# Replace the target list below with your own:
+# Deer movement, habitat modelling, and connectivity pipeline --------------------------------
 coreTargetList <- list(
   tar_target(
     name = tar_deerData,
@@ -312,6 +287,7 @@ coreTargetList <- list(
   # )
 )
 
+# Create plots and project connectivity ---------------------------------------------
 connectTargetList <- list(
   # tar_combine(
   #   tar_connectSSF_list,
@@ -423,15 +399,15 @@ connectTargetList <- list(
     name = tar_package_text,
     command = create_package_txt(excludes = c("bestNormalize", "JuliaCall", "recurse", "roxygen2", "suncalc", "survival"))
   ),
-  tar_target(
-    name = tar_render_movement,
-    command = render_rmd(fileIN = here::here("notebook", "manuscript", "deerMovementManuscript.Rmd"),
-                         fileOUT = here::here("notebook", "manuscript", "deerMovementManuscript.html"),
-                         tar_pois_plot,
-                         tar_variograms,
-                         tar_homeRange_sizePlot),
-    cue = tar_cue(mode = "always")
-  ),
+  # tar_target(
+  #   name = tar_render_movement,
+  #   command = render_rmd(fileIN = here::here("notebook", "manuscript", "deerMovementManuscript.Rmd"),
+  #                        fileOUT = here::here("notebook", "manuscript", "deerMovementManuscript.html"),
+  #                        tar_pois_plot,
+  #                        tar_variograms,
+  #                        tar_homeRange_sizePlot),
+  #   cue = tar_cue(mode = "always")
+  # ),
   tar_target(
     name = tar_location_plot,
     command = plot_study_locations(
@@ -439,19 +415,19 @@ connectTargetList <- list(
       landuseList = tar_landuseList,
       patchList = tar_patchList
     )
-  ),
-  tar_target(
-    name = tar_render_connectivity,
-    command = render_rmd(fileIN = here::here("notebook", "manuscript", "deerConnectivityManuscript.Rmd"),
-                         fileOUT = here::here("notebook", "manuscript", "deerConnectivityManuscript.pdf"),
-                         tar_location_plot,
-                         # tar_patchPois_summaryPlot,
-                         tar_connectivityValue_plots,
-                         tar_package_text,
-                         tar_poisResist_map,
-                         tar_connectivityPois_thetaMaps),
-    cue = tar_cue(mode = "always")
-  )
+  )#,
+  # tar_target(
+  #   name = tar_render_connectivity,
+  #   command = render_rmd(fileIN = here::here("notebook", "manuscript", "deerConnectivityManuscript.Rmd"),
+  #                        fileOUT = here::here("notebook", "manuscript", "deerConnectivityManuscript.pdf"),
+  #                        tar_location_plot,
+  #                        # tar_patchPois_summaryPlot,
+  #                        tar_connectivityValue_plots,
+  #                        tar_package_text,
+  #                        tar_poisResist_map,
+  #                        tar_connectivityPois_thetaMaps),
+  #   cue = tar_cue(mode = "always")
+  # )
 )
 
 # SDM pipeline ------------------------------------------------------------
@@ -464,12 +440,14 @@ sr_fallow <- 1500
 bs_rodent <- 15
 sr_rodent <- 150
 
+
+# Preprocessing for SDMs --------------------------------------------------
 coreSDMList <- list(
   tar_target(
     name = tar_sdm_layers,
     command = prepare_sdm_layer(prelimAggFact = aggFact_SDM)
   ),
-  # fallow occ ----
+  # Fallow occ ----
   tar_target(
     name = tar_occData_fallow,
     command = read_cleanFallow_occData(tar_sdm_layers)
@@ -482,7 +460,7 @@ coreSDMList <- list(
                                 envLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
                                                               tar_sdm_layers))
   ),
-  # rodent occ ----
+  # Rodent occ ----
   tar_target(
     name = tar_occData_rodent,
     command = read_cleanRodent_occData(tar_sdm_layers)
@@ -495,7 +473,7 @@ coreSDMList <- list(
                                 envLayers = read_stack_layers(layerLoc = here("data", "GIS data", "SDM Layers"),
                                                               tar_sdm_layers))
   ),
-  # fallow SDM ----
+  # Fallow SDM ----
   tar_target(
     name = tar_biomodData_fallow,
     command = BIOMOD_FormatingData(resp.var = tar_pseudoAbs_fallow$sp,
@@ -576,7 +554,7 @@ coreSDMList <- list(
     name = tar_projLayer_fallow,
     command = save_proj_layer(tar_biomodForecast_fallow)
   ),
-  # rodent SDM ----
+  # Rodent SDM ----
   tar_target(
     name = tar_biomodData_rodent,
     command = BIOMOD_FormatingData(resp.var = tar_pseudoAbs_rodent$sp,
@@ -675,7 +653,7 @@ coreSDMList <- list(
     name = tar_projLayer_rodent_aberdeen,
     command = save_proj_layer(tar_biomodForecast_rodent_aberdeen)
   ),
-  # fallow Poisson ----
+  # Fallow Poisson - largely unused for connectivity ----
   tar_target(
     name = tar_ssfFallow_data,
     command = prepare_ssfFallow_data(tar_deerData, tar_landuseList, tar_patchList, cores = 12,
@@ -696,14 +674,14 @@ coreSDMList <- list(
     name = tar_longestFallow,
     command = extract_akdeFallow_longest(tar_akdeLists)
   ),
-  # fallow omniscape ----
+  # Fallow omniscape ----
   tar_target(
     name = tar_omniLayers_fallow,
     command = build_omniscape_layer(tar_predPoisResist_fallow, tar_patchList$Wessex, #tar_longestFallow,
-                                    blockSize = bs_fallow, searchRadius = sr_fallow, reRun = FALSE,
+                                    blockSize = bs_fallow, searchRadius = sr_fallow, reRun = TRUE,
                                     projName = "omniscape_output_fallow")
   ),
-  # fallow plots ----
+  # Fallow plots ----
   tar_target(
     name = tar_biomodSingle_plots_fallow,
     command = plot_biomodEval_single(tar_biomodModels_fallow)
@@ -735,7 +713,7 @@ coreSDMList <- list(
                                             tar_omniLayers_fallow,
                                             tar_selectedPatchList)
   ),
-  # rodent omniscape ----
+  # Rodent omniscape ----
   tar_target(
     name = tar_predPoisResist_rodent_wessex,
     command = build_predResistanceRodent_layer(tar_projLayer_rodent_wessex,
@@ -758,7 +736,7 @@ coreSDMList <- list(
                                     blockSize = bs_rodent, searchRadius = sr_rodent, reRun = FALSE,
                                     projName = "omniscape_output_rodent_aberdeen")
   ),
-  # rodent plots ----
+  # Rodent plots ----
   tar_target(
     name = tar_biomodSingle_plots_rodent,
     command = plot_biomodEval_single(tar_biomodModels_rodent)
@@ -819,7 +797,6 @@ coreSDMList <- list(
                                              buffers = buffers)
   )
 )
-
 
 list(coreTargetList,
      connectTargetList,

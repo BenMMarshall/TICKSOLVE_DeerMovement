@@ -11,8 +11,6 @@ homRangeData <- read.csv(here("data", "Home Range Database", "HomeRangeData_2023
 
 akdeSummary <- read.csv(here::here("tables", "allAKDESummary.csv"))
 
-paletteList
-
 currentStudyData <- akdeSummary %>%
   filter(level == 0.95) %>%
   select(est, Sex, Animal_ID) %>%
@@ -61,6 +59,8 @@ indiHRData <- roeData %>%
                          TRUE ~ "Both/Unknown")) %>%
   mutate(Sex = factor(Sex, levels = c("Female", "Male", "Both/Unknown")))
 
+mean(indiHRData$Home_Range_km2)*100
+
 popHRData <- roeData %>%
   filter(!HR_Level == "Individual",
          HR_Span == "Annual") %>%
@@ -74,6 +74,7 @@ popHRData <- roeData %>%
                          Sex == "F" ~ "Female")) %>%
   mutate(Sex = factor(Sex, levels = c("Female", "Male", "Both/Unknown")))
 
+mean(popHRData$Home_Range_km2)*100
 
 (hrCompPlot <- indiHRData %>%
     ggplot() +

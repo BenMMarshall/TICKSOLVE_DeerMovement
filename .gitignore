@@ -1,5 +1,4 @@
 .Rproj.user
-/data/
 /notebook/extra_papers_reports/
 /notebook/panzacchi_example/
 /notebook/klappstein_example/
@@ -19,3 +18,19 @@
 /omniscape_output_fallow/
 /modelOutput/ctmmUD/*
 /figures/old/
+
+/data/Deer distribution/*
+/data/deerMovementData.csv
+/data/deerMovementData_processed.csv
+/data/gadm/*
+/data/GBIF data/*
+/data/GIS data/*
+/data/GPS data/*
+/data/Home Range Database/*
+/data/Human Footprint/*
+/data/inputList.rds
+/data/NBN Atlas data/*
+!/data/GIS data/patchesAberdeen.geoJSON
+!/data/GIS data/patchesAberdeen_selected.geoJSON
+!/data/GIS data/patchesWessex.geoJSON
+!/data/GIS data/patchesWessex_selected.geoJSON
