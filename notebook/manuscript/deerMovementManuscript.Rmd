@@ -625,7 +625,7 @@ Further work could benefit from focusing on UK Roe Deer in areas with a greater 
 
 We are indebted to the hundreds of volunteers who assisted in the deployment of deer GPS collars.
 We especially thank Mark Hewison, Jochen Langbein and Andy Page for generous advice in the field and training in capture methods.
-This research forms part of the TickSolve project (https://ticksolve.ceh.ac.uk/) and was funded by UK Research and Innovation through the NERC grant _________________________.
+This research forms part of the TickSolve project (https://ticksolve.ceh.ac.uk/) and was funded by UK Research and Innovation through the NERC grant NE/W003171/1.
 For permission to conduct the work, we thank NatureScot, ForestryEngland and NaturalEngland.
 
 ## Software availability
