@@ -1,0 +1,349 @@
+---
+title: "Tick Deer Rodent Connectivity Methods"
+author1: "---*"
+author2: "---**"
+affiliation1: "---"
+affiliation2: "---"
+corresponding1: "---"
+corresponding2: "---"
+date: "`r Sys.Date()`"
+output:
+  bookdown::html_document2:
+    theme: yeti
+    highlight: monochrome
+    fig_caption: true
+  bookdown::pdf_document2:
+    template: main.tex
+    keep_tex: true
+    highlight: monochrome
+    fig_caption: true
+    dev: pdf
+    extra_dependencies: ["float"]
+link-citations: yes
+linkcolor: gray
+bibliography: [deerMovement_refs.bib, packages_refs.bib, packagesRstudio_refs.bib, occ_refs.bib]
+csl: peerj.csl
+editor_options: 
+  markdown: 
+    wrap: sentence
+abstract: abstract text
+keywords: deer, rodent, connectivity
+---
+
+# Functional Connectivity Methods
+
+``` {r librariesInputs, echo=FALSE, message=FALSE, warnings=FALSE, include=FALSE}
+library(here, quietly = TRUE, verbose = FALSE)
+library(dplyr, quietly = TRUE, verbose = FALSE)
+library(stringr, quietly = TRUE, verbose = FALSE)
+library(CoordinateCleaner, quietly = TRUE, verbose = FALSE)
+
+inputList <- readRDS(file = here::here("data", "inputList.rds"))
+
+longestAxisSummary <- read.csv(file = here::here("tables", "longestAxisSummary.csv"))
+longestAxisText <- mean(as.numeric(longestAxisSummary$longestAxisRange_m))/2
+
+targets::tar_load("tar_occData_rodent", store = here::here("_targets"))
+targets::tar_load("tar_occData_fallow", store = here::here("_targets"))
+
+### need code to extract numbers of individuals used in SDMS
+
+```
+
+## Estimating Preference and Probability of Occurrence
+
+For Roe Deer we used the functional connectivity maps created as part of CITE CAMERA TRAP PAPER that was based on habitat selection models detailed by CITE DEER MOVEMENT PAPER.
+Briefly, this involved creating a population-level habitat selection model, projecting those selection estimates across the landscape, using the selection as a proxy for landscape conductance, and running a series of random shortest-paths between woodland patches.
+The major advantage of this approach was via the ability to calibrate the randomness/diffuseness of the random paths based on the observed movement paths of tracked Roe Deer.
+
+For Fallow Deer, we lacked sufficient movement data to completely generate connectivity based on habitat selection and movement models (i.e., CITE CAMERA TRAP PAPER; CITE DEER MOVEMENT PAPER).
+Instead we followed the workflow outlined by @prima_comprehensive_2024, using species distribution modelling to generate reasonable estimations of landscape resistance and then applying a circuit-theory approach to determine how interconnected selected woodland patches were [@mcrae_using_2008; @mcrae_conserving_2016].
+
+We collated occurrence data from GBIF and NBN Atlas [@gbif_gbiforg_2025; @nbn_trust_national_2025] for the Fallow Deer, using searches for "*Dama dama*" [@gbif_fallow_2025].
+Full data references are provided in subsequent Appendix.
+<!-- NBN has specific DOIs to add from the README files that came with the download -->
+We downloaded all records within the UK, for all species, resulting in `r nrow(tar_occData_fallow)` occurrence locations of Fallow Deer.
+
+We filtered the records as to only include those made via human observations, were recorded to sub-25m accuracy, and had verified species identities.
+Once filtered we used CoordinateCleaner [@coordinatecleaner] to eliminate records that likely contained location errors on a species-by-species basis.
+Namely we removed records within 10km of a capital, within 1km of a country centroid, had identical decimal latitude and longitudes, had zero in either latitude or longitude, or were identified as outliers. 
+We used the quantile method of identifying outliers, removing those records beyond 5 times the interquartile range of minimum distances to the next neighbour.
+Finally, we thinned the both the data so that no occurrence shared a raster cell with another occurrence.
+
+We generated a number pseudo-absences data points for both target taxa equal to three times the number of true-occurrences available; we repeated this process 10 times allowing for multiple model fits [@barbetmassin_selecting_2012].
+We limited the area pseudo-absences generated within to 6.2km of a known Fallow Deer occurrence.
+As Fallow Deer have not uniformly spread across the UK, this limit excluded areas where Fallow Deer have not, as of yet, had the opportunity to colonise.
+We weighted the pseudo-absences using a bias layer to mitigate the impacts of the sampling biases associated with the true-occurrence data.
+For our bias layer, we used the human footprint index [@mu_annual_2021; @mu_global_2022] that combines a variety of human activities and land conversions into a single metric, and could serve as a proxy for the likelihood of observing our target species (Fig. \@ref(fig:fallowOccurence)).
+
+```{r fallowOccurence, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="fallow deer, occurrence data"}
+knitr::include_graphics(here::here("figures", "fallow_occurrenceData_plot.png"))
+```
+
+For valuables in the models we made use of a number of data sources.
+We used land cover type as described by the 2023 UKCEH land cover maps, which is a 25m resolution classified raster originally based on Sentinel-2 imagery [@morton_land_2024].
+The UKCEH land cover data comprises of 21 land cover classes, broadly following the Biodiversity Broad Habitats [@jackson_guidance_2000].
+We recategorised these 21 land cover types categories into 10 more general categories (Tab. \@ref(tab:landcoverTable).
+
+```{r landcoverTable, echo=FALSE, message=FALSE}
+landcoverReclass <- read.csv(here("tables", "reclassificationUKCEH.csv"))
+kableExtra::kbl(landcoverReclass, caption = "Overview of the reclassifcation of UKCEH land cover classes for inclusion into the habitat selection models.",
+             col.names = c("UKCEH land cover class",
+                           "UKCEH land cover identifier",
+                           "Reclassified category"), booktabs = TRUE) %>%
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position"))
+
+```
+
+We used "woody linear feature" (i.e., hedgerows) data from UKCEH [@scholefield_woody_2016] that maps hedgerows across the UK (e.g., woodland) as polylines.
+The features are based on Ordnance Survey maps and the 2007 UKCEH Land Cover Map [@morton_final_2011].
+We acquired road data from OS map open GOV licensed [@ordnance_survey_os_2024].
+
+We included the following variables in the species distribution models: Distance to woodland, Distance to hedgerow, Distance to human settlement (i.e., urban and sub-urban) as continuous variables; and the following as binary variables: Cropland, Deciduous Broadleaf Forest, Tall Grassland, Evergreen Needleleaf Forest, Short Grassland, Open Shrubland, Barren, Permanent Wetland, Other land covers.
+
+We used the biomod2 package to manage species distribution modelling [@biomod2].
+We fitted a variety of models: Artificial Neural Network, Boosted Regression Trees, Generalized Linear Model, and Random Forest. 
+We intended to run Maximum Entropy and eXtreme Gradient Boosting Training, but the inclusion of categoric variables precluded their use.
+We used stratified cross validation to evaluate model performance, as we were not priorisitisng model transferability [@Muscarella2014].
+We balanced stratification based on known occurrences both in x and y dimensions.
+We elected to use True Skill Statistic (TSS) as our primary metric of model performance [@shabani_assessing_2018; @allouche_assessing_2006].
+Once all models had been complete, we compiled all models into an ensemble model ready for projection to our target landscapes.
+We included all models that obtained TSS scores of over 0.25, and weighted models proportionately to their TSS score.
+Once the TSS weighted mean ensemble model had been created, we used it to project the probability of occurrence to the Aberdeenshire and Wessex landscapes.
+
+## Translating Preferences into Connectivity
+
+Once we had estimates of selection and effect for all the environmental aspects of interest, we projected those estimated covariates back onto the landscape, resulting in a map of conductance (Fig. \@ref(fig:conductancePlot)).
+
+Despite not having sufficient movement data to create a comparable movement-data-derived habitat selection model as used for the Roe Deer (CITE DEER MOVEMENT PAPER), we could run a similar model to estimate Fallow Deer road crossings likelihood (Possion model formula: used/available ~ crossed road binary + step length + log step length + cos turn angle).
+This modelling process mirrored the procedure undertaken for Roe Deer except only examined the likelihood of crossing a road.
+For roads we rasterised the road polyline data obtained from @ordnance_survey_os_2024 and used the road crossing coefficient from the Poisson model to create a conductance value for the road cells.
+We replaced any areas with 0 conductance with 1e-12 to avoid any dead-ends or any absolute barriers.
+We ignored the uncertainty surrounding the selection estimates, instead relying on just the point estimates for the resistance mapping.
+
+We elected not to generate start or end points in patches less than 0.5ha in areas. 
+This was due to these patches being unlikely to host deer populations and the reduction in origin patches aided computational costs.
+The 0.5 ha threshold meant that 3415 Aberdeen patches and 7564 Wessex patches were included in the generation of random shortest paths, thereby necessitating optimisations for the sake of compute time.
+
+For the Fallow Deer, we followed @prima_comprehensive_2024 and used Omniscape.jl [@landau_omniscapejl_2021], built on Circuitscape.jl [@mcrae_conserving_2016; @anantharaman_circuitscape_2020; @hall_circuitscape_2021], to generate a map of landscape connectivity in both landscapes [@mcrae_using_2008].
+We used the previously denoted patches as sources/nodes (all with the same strength).
+To aid with computation costs, we selected a block size of 31.
+We ensured that the block size was less than one-tenth of the search radius to minimise grid artifacting [@phillips_comparison_2021; @prima_comprehensive_2024].
+We based the Omniscape search radius on previously recorded estimates of home range size, based heavily on the data provide by the home range database [@broekman_homerange_2023; @broekman_homerange_2022].
+In both case we filtered the home range data to species/group and calculated a mean home range area.
+For the Fallow Deer their mean home range suggested a search radius of 1500m.
+
+Once complete, we elected to use the normalised current maps for all subsequent analysis (see Fig. \@ref(fig:fallowWessexConnect) for an example of Fallow Deer connectivity in Wessex).
+
+```{r fallowWessexConnect, echo=FALSE, out.width='75%', fig.height=5, fig.width=3, fig.align="centre", fig.pos = "h", fig.cap="Example of the resulting connectivity map for Fallow deer, Wessex. Values > 1 are channelised flow. Values ~ 1 are diffuse flow matching general flow potential. Values < 1 are impeded flow"}
+knitr::include_graphics(here::here("figures", "fallow_NA_omniscapeNormCurrPatch_plot.png"))
+```
+
+\clearpage
+
+# Individual National Biodiversity Atlas Citations
+
+The following are the data providers who supplied occurrence data to NBN Atlas.
+Occurrence download via https://nbnatlas.org accessed on 23 February 2025.
+
+Data provided by the following providers:
+
+Records provided by Amphibian and Reptile Conservation, accessed through NBN Atlas website. (). For more information: email enquiries@arc-trust.org, or https://registry.nbnatlas.org/public/show/dp58
+
+Records provided by Bat Conservation Trust, accessed through NBN Atlas website. (). For more information: email enquiries@bats.org.uk, or https://registry.nbnatlas.org/public/show/dp57
+
+Records provided by BIS for Powys & Brecon Beacons National Park, accessed through NBN Atlas website. (). For more information: email info@bis.org.uk, or https://registry.nbnatlas.org/public/show/dp96
+
+Data supplied by Nottinghamshire Wildlife Trust (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC BY-NC Creative Commons Attribution Non-Commercial). For more information: email info@nottswt.co.uk, or https://registry.nbnatlas.org/public/show/dr2581
+
+Leicestershire and Rutland Environmental Records Centre (2025). Leicestershire and Rutland Environmental Records Centre records 2000-2009. Occurrence dataset on the NBN Atlas. (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) LRERC should be acknowledged in any use of the data. The data supplier is contained within the dataset. Further metadata on individual data suppliers datasets can be found by searching for the datasetID at https://my.lerc.online/Datasets.aspx?src=lr). For more information: https://registry.nbnatlas.org/public/show/dr2464
+
+Leicestershire and Rutland Environmental Records Centre (2025). Leicestershire and Rutland Environmental Records Centre records 2010-2014. Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) LRERC should be acknowledged in any use of the data. The data supplier is contained within the dataset. Further metadata on individual data suppliers datasets can be found by searching for the datasetID at https://my.lerc.online/Datasets.aspx?src=lr). For more information: https://registry.nbnatlas.org/public/show/dr2465
+
+Records provided by Record species dataset covering Cheshire, Halton, Warrington & Wirral, accessed through NBN Atlas website. (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC)). For more information: https://registry.nbnatlas.org/public/show/dr3310
+
+Leicestershire and Rutland Environmental Records Centre (2025). Leicestershire and Rutland Environmental Records Centre records pre 2000. Occurrence dataset on the NBN Atlas. (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) LRERC should be acknowledged in any use of the data. The data supplier is contained within the dataset. Further metadata on individual data suppliers datasets can be found by searching for the datasetID at https://my.lerc.online/Datasets.aspx?src=lr). For more information: https://registry.nbnatlas.org/public/show/dr2463
+
+Records provided by Suffolk Biodiversity Information Service, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp121
+
+Gloucestershire Centre for Environmental Records (2025). Gloucestershire Historic Wildlife Sightings prior to 1st Jan 2000. Occurrence dataset on the NBN Atlas (Creative Commons with Attribution 4.0 (CC-BY) CC-BY). For more information: https://registry.nbnatlas.org/public/show/dr1335
+
+Records provided by World Museum, National Museums Liverpool, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp242
+
+Records provided by Natural Resources Wales, accessed through NBN Atlas website. (). For more information: email nbnadmin@cyfoethnaturiolcymru.gov.uk, or https://registry.nbnatlas.org/public/show/dp122
+
+Leicestershire and Rutland Environmental Records Centre (2025). Leicestershire and Rutland Environmental Records Centre records 2015-2019. Occurrence dataset on the NBN Atlas. (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) LRERC should be acknowledged in any use of the data. The data supplier is contained within the dataset. Further metadata on individual data suppliers datasets can be found by searching for the datasetID at https://my.lerc.online/Datasets.aspx?src=lr). For more information: https://registry.nbnatlas.org/public/show/dr2466
+
+Records provided by North East Scotland Biological Records Centre, accessed through NBN Atlas website. (). For more information: email nesbrec@aberdeenshire.gov.uk, or https://registry.nbnatlas.org/public/show/dp123
+
+Records provided by Cambridgeshire and Peterborough Environmental Records Centre data, accessed through NBN Atlas website. (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC)). For more information: https://registry.nbnatlas.org/public/show/dr3116
+
+Shropshire Ecological Data Network (2025). Shropshire Ecological Data Network database. Occurrence dataset on the NBN Atlas (Creative Commons with Attribution 4.0 (CC-BY) CC-BY). For more information: email alex.lockton@gmail.com, or https://registry.nbnatlas.org/public/show/dr782
+
+Rotherham Biological Records Centre (2025). Non-sensitive Records from all taxonomic groups. Occurrence dataset on the NBN Atlas. (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: email Paul.Leonard@rotherham.gov.uk, or https://registry.nbnatlas.org/public/show/dr1216
+
+Records provided by Shropshire Ecological Data Network, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp120
+
+Dorset Environmental Records Centre (2025). Dorset SSSI Species Records 1952 - 2004 (Natural England). Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: email derc@dorsetcc.gov.uk , or https://registry.nbnatlas.org/public/show/dr703
+
+Biological Records Centre (2025). Mammal records from Britain from the Atlas of Mammals (1993), with some subsequent records. Occurrence dataset on the NBN Atlas (Creative Commons with Attribution 4.0 (CC-BY) CC-BY). For more information: email brc@ceh.ac.uk, or https://registry.nbnatlas.org/public/show/dr743
+
+Records provided by South East Wales Biodiversity Records Centre, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp126
+
+Suffolk Biodiversity Information Service (2025). Suffolk Biodiversity Information Service (SBIS) Dataset. Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: email martin.sanford@suffolk.gov.uk, or https://registry.nbnatlas.org/public/show/dr867
+
+Records provided by The Road Lab UK, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp205
+
+Records provided by Argyll Biological Records Centre, accessed through NBN Atlas website. (). For more information: email data@lnhg.org.uk, or https://registry.nbnatlas.org/public/show/dp59
+
+Bristol Regional Environmental Records Centre (2025). BEREC species records from all years at full resolution excluding Notable Species within the last 10 years. Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) BRERC retains copyright. The data is provided via the NBN Atlas for non-commercial purposes.). For more information: email info@brerc.org.uk, or https://registry.nbnatlas.org/public/show/dr938
+
+Records provided by Scottish Wildlife Trust, accessed through NBN Atlas website. (). For more information: email kedata@scottishwildlifetrust.org.uk, or https://registry.nbnatlas.org/public/show/dp2
+
+Argyll Biological Records Centre (2025). Argyll Biological Records Dataset. Occurrence dataset on the NBN Atlas (Creative Commons with Attribution 4.0 (CC-BY) CC-BY). For more information: https://registry.nbnatlas.org/public/show/dr819
+
+Records provided by Natural England, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp83
+
+Records provided by Highland Biological Recording Group, accessed through NBN Atlas website. (). For more information: email chair@hbrg.org.uk, or https://registry.nbnatlas.org/public/show/dp7
+
+Records provided by Glasgow Museums Biological Records Centre, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp160
+
+Records provided by Mammal Society, accessed through NBN Atlas website. (). For more information: email atlas@themammalsociety.org, or https://registry.nbnatlas.org/public/show/dp8
+
+Cofnod (2025). Miscellaneous records held on the Cofnod database. Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: email record@cofnod.org.uk, or https://registry.nbnatlas.org/public/show/dr1420
+
+Invasive Species and Pests, CEDaR (2020) (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC)). For more information: https://registry.nbnatlas.org/public/show/dr2078
+
+Records provided by NatureSpot, accessed through NBN Atlas website. (). For more information: email info@naturespot.org, or https://registry.nbnatlas.org/public/show/dp154
+
+Natural History Museum (2023). Data Portal query on 1 resources https://doi.org/10.5519/qd.i4tk4lrk (Creative Commons Zero v1.0 (CC0) CC0-1.0). For more information: email data@nhm.ac.uk, or https://registry.nbnatlas.org/public/show/dr2677
+
+Records provided by Patrick Roper’s Notebooks, accessed through NBN Atlas website. (Creative Commons Zero v1.0 (CC0)). For more information: https://registry.nbnatlas.org/public/show/dr1742
+
+BIS for Powys and Brecon Beacons National Park (2025). Mongomeryshire Wildlife Trust records held by BIS. Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC)). For more information: https://registry.nbnatlas.org/public/show/dr1786
+
+Records provided by Merseyside BioBank, accessed through NBN Atlas website. (). For more information: email info@merseysidebiobank.org.uk, or https://registry.nbnatlas.org/public/show/dp111
+
+Northern Ireland Environment Agency (NIEA) Collated Species Records, CEDaR (2019) (Open Government Licence (OGL)). For more information: https://registry.nbnatlas.org/public/show/dr1941
+
+Records provided by MammalWeb, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp277
+
+BIS for Powys and Brecon Beacons National Park (2025). Miscellaneous records held by BIS. Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC)). For more information: https://registry.nbnatlas.org/public/show/dr1784
+
+Records provided by Leicestershire and Rutland Environmental Records Centre, accessed through NBN Atlas website. (). For more information: email LRERC@leics.gov.uk, or https://registry.nbnatlas.org/public/show/dp156
+
+Dorset Environmental Records Centre (2025). Dorset Sites of Nature Conservation Interest (SNCI) species records 2000-2008. Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: email derc@dorsetcc.gov.uk , or https://registry.nbnatlas.org/public/show/dr698
+
+Merseyside BioBank (2020) www.merseysidebiobank.org.uk (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: email Info@MerseysideBioBank.org.uk, or https://registry.nbnatlas.org/public/show/dr851
+
+Records provided by Norfolk Biodiversity Information Service, accessed through NBN Atlas website. (). For more information: email enquiries.nbis@norfolk.gov.uk, or https://registry.nbnatlas.org/public/show/dp118
+
+The Road Lab (2025). UK Roadkill Records. Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC)). For more information: https://registry.nbnatlas.org/public/show/dr1628
+
+Glasgow Museums BRC (2025). Glasgow Museums BRC: Mammals. Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: https://registry.nbnatlas.org/public/show/dr1309
+
+Records provided by National Trust, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp116
+
+Records provided by All taxa records for Leicestershire and Rutland, accessed through NBN Atlas website. (Creative Commons with Attribution 4.0 (CC-BY) CC BY Creative Commons Attribution). For more information: https://registry.nbnatlas.org/public/show/dr855
+
+Records provided by Biological Records Centre, accessed through NBN Atlas website. (). For more information: email brc@ceh.ac.uk, or https://registry.nbnatlas.org/public/show/dp77
+
+Records provided by SEWBReC Mammals (South East Wales), accessed through NBN Atlas website. (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: email info@sewbrec.org.uk, or https://registry.nbnatlas.org/public/show/dr807
+
+Records provided by Sussex Biodiversity Record Centre, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp191
+
+Records provided by North East Scotland Terrestrial Mammals 1900-2017 (excluding squirrels, wild cats and marine mammals), accessed through NBN Atlas website. (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: email nesbrec@aberdeenshire.gov.uk, or https://registry.nbnatlas.org/public/show/dr1270
+
+BIS for Powys & Brecon Beacons National Park (2025). Natural Resources Wales Regional Data : Mid-Wales. Occurrence dataset on the NBN Atlas (Open Government Licence (OGL) OGL). For more information: https://registry.nbnatlas.org/public/show/dr1155
+
+South West Scotland Environmental Information Centre (2025). Mammal records for Dumfries and Galloway. Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: email info@dgerc.org.uk, or https://registry.nbnatlas.org/public/show/dr1398
+
+Merseyside BioBank (2025). North Merseyside Local Species Data (DEFRA Grant 23169). Occurrence dataset on the NBN Atlas (Creative Commons with Attribution 4.0 (CC-BY) CC BY). For more information: https://registry.nbnatlas.org/public/show/dr1472
+
+National Museums Liverpool (2025). British mammal skins in the collections of World Museum Liverpool. Occurrence dataset on the NBN Atlas (Creative Commons Zero v1.0 (CC0)). For more information: https://registry.nbnatlas.org/public/show/dr2287
+
+National Trust (2025). National Trust Species Records. Occurrence dataset on the NBN Atlas (Creative Commons Zero v1.0 (CC0) CC0). For more information: https://registry.nbnatlas.org/public/show/dr1236
+
+National Bat Monitoring Programme [date accessed] Sunset/Sunrise Survey, Bat Conservation Trust. (Open Government Licence (OGL) OGL Open Government Licence). For more information: https://registry.nbnatlas.org/public/show/dr2249
+
+Records provided by Natural History Museum, London, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp266
+
+Records provided by Cambridgeshire & Peterborough Environmental Records Centre, accessed through NBN Atlas website. (). For more information: email data@cperc.org.uk, or https://registry.nbnatlas.org/public/show/dp101
+
+Highland Biological Recording Group (2025). Vertebrates (not Badger) Dataset. Occurrence dataset on the NBN Atlas (Creative Commons with Attribution 4.0 (CC-BY) CC-BY). For more information: email records@hbrg.org.uk, or https://registry.nbnatlas.org/public/show/dr885
+  
+Natural Resources Wales. (2025) Stackpole National Nature Reserve Species Inventory and Ad-hoc Sightings from Across Pembrokeshire. Occurrence dataset accessed through the NBNAtlas (Open Government Licence (OGL) © CNC/NRW Data may be re-used under the terms of the Open Government Licence providing it is done so, acknowledging both the source and NRW's copyright. It is the recipient's responsibility to ensure the data is fit for the intended purpose. Attribution statement: Contains Natural Resources Wales information © Natural Resources Wales and Database Right. All rights Reserved.). For more information: https://registry.nbnatlas.org/public/show/dr1312
+
+Records provided by Herefordshire Wildlife Trust, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp260
+
+Records provided by West Wales Biodiversity Information Centre, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp186
+
+Records provided by CEDaR Online Recording, accessed through NBN Atlas website. (Creative Commons with Attribution 4.0 (CC-BY) CC BY Creative Commons Attribution). For more information: https://registry.nbnatlas.org/public/show/dr1954
+
+Records provided by Bristol Regional Environmental Records Centre, accessed through NBN Atlas website. (). For more information: email dataenquiries@brerc.org.uk, or https://registry.nbnatlas.org/public/show/dp107
+
+Records provided by Lancashire Environment Record Network, accessed through NBN Atlas website. (). For more information: email lern@lancashire.gov.uk, or https://registry.nbnatlas.org/public/show/dp109
+
+Records provided by Dorset Environmental Records Centre, accessed through NBN Atlas website. (). For more information: email Enquiries@derc.org.uk, or https://registry.nbnatlas.org/public/show/dp103
+
+Records provided by South West Scotland Environmental Information Centre (formerly DGERC), accessed through NBN Atlas website. (). For more information: email mpollitt@swseic.org.uk, or https://registry.nbnatlas.org/public/show/dp104
+
+Scottish Wildlife Trust (2025). Commissioned surveys and staff surveys and reports for Scottish Wildlife Trust reserves - Verified data. Occurrence dataset on the NBN Atlas (Creative Commons with Attribution 4.0 (CC-BY) CC-BY). For more information: email kedata@scottishwildlifetrust.org.uk, or https://registry.nbnatlas.org/public/show/dr765
+
+West Wales Biodiversity Information Centre (2025). Mammal Records (West Wales). Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: https://registry.nbnatlas.org/public/show/dr1486
+
+Mammal Society [date of download] Mammal Mapper App Sighting Records (Creative Commons with Attribution 4.0 (CC-BY) CC BY Creative Commons Attribution). For more information: email atlas@themammalsociety.org, or https://registry.nbnatlas.org/public/show/dr2451
+
+Lancashire Environment Record Network (2025). LERN Records. Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: email lern@lancashire.gov.uk, or https://registry.nbnatlas.org/public/show/dr1164
+
+Records provided by BTO, accessed through NBN Atlas website (Open Government Licence (OGL)). For more information: https://registry.nbnatlas.org/public/show/dr2331
+
+Hsing, P.-Y., Hill, R. A., Smith, G. C., Bradley, S., Green, S. E., Kent, V. T., Mason, S. S., Rees, J., Whittingham, M. J., Cokill, J., MammalWeb citizen scientists & Stephens, P. A. (2022). Large-scale mammal monitoring: The potential of a citizen science camera-trapping project in the United Kingdom. Ecological Solutions and Evidence, 3, e12180. https://doi.org/10.1002/2688-8319.12180 (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC)). For more information: https://registry.nbnatlas.org/public/show/dr2930
+
+Data supplied by Herefordshire Wildlife Trust (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC BY-NC Creative Commons Attribution Non-Commercial). For more information: email a.nixon@herefordshirewt.co.uk, or https://registry.nbnatlas.org/public/show/dr2578
+
+Records provided by Record, accessed through NBN Atlas website. (). For more information: email Info@record-lrc.co.uk, or https://registry.nbnatlas.org/public/show/dp133
+
+Records provided by Yorkshire Wildlife Trust - Non-sensitive records from all taxonomic groups, accessed through NBN Atlas website. (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: https://registry.nbnatlas.org/public/show/dr1402
+
+Cofnod – North Wales Environmental Information Service (2025). NRW Regional Data: North Wales. Occurrence dataset on the NBN Atlas (Open Government Licence (OGL) OGL). For more information: email record@cofnod.org.uk, or https://registry.nbnatlas.org/public/show/dr1248
+
+Records provided by Rotherham Biological Records Centre, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp177
+
+Natural England iRecord Surveys (2025) (Open Government Licence (OGL) OGL Open Government Licence (OGL 3.0)). For more information: https://registry.nbnatlas.org/public/show/dr1842
+
+Amphibian and Reptile Conservation Trust (2025). Amphibian and Reptile Conservation species database. Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: email johnw.wilkinson@arc-trust.org, or https://registry.nbnatlas.org/public/show/dr236
+
+Bat Conservation Trust (2025) National Bat Monitoring Programme. The BCT/MTUK Bats & Roadside Mammals Survey. Occurrence dataset on the NBN Atlas (Creative Commons with Attribution 4.0 (CC-BY) CC-BY). For more information: email pbriggs@bats.org.uk, or https://registry.nbnatlas.org/public/show/dr353
+
+Records provided by Yorkshire Wildlife Trust, accessed through NBN Atlas website. (). For more information: email info@ywt.org.uk, or https://registry.nbnatlas.org/public/show/dp130
+
+Records provided by Cofnod – North Wales Environmental Information Service, accessed through NBN Atlas website. (). For more information: email contactus@cofnod.org.uk, or https://registry.nbnatlas.org/public/show/dp131
+
+National Mammal Atlas Project, online recording (2025) (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC BY-NC Creative Commons Attribution Non-Commercial). For more information: https://registry.nbnatlas.org/public/show/dr671
+
+World Museum, National Museums Liverpool (2025). British records in the osteology collections of World Museum, National Museums Liverpool. Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC)). For more information: https://registry.nbnatlas.org/public/show/dr2614
+
+Norfolk Biodiversity Information Service (2025). NBIS Records to December 2016. Occurrence dataset on the NBN Atlas (Creative Commons, with Attribution, Non-commercial v4.0 (CC-BY-NC) CC-BY-NC). For more information: email nbis@norfolk.gov.uk, or https://registry.nbnatlas.org/public/show/dr755
+
+Records provided by British Trust for Ornithology, accessed through NBN Atlas website. (). For more information: email info@bto.org, or https://registry.nbnatlas.org/public/show/dp29
+
+Records provided by Gloucestershire Centre for Environmental Records, accessed through NBN Atlas website. (). For more information: email gcer@gloucestershirewildlifetrust.co.uk, or https://registry.nbnatlas.org/public/show/dp137
+
+Records provided by Nottinghamshire Wildlife Trust, accessed through NBN Atlas website. (). For more information: https://registry.nbnatlas.org/public/show/dp259
+
+Records provided by Centre for Environmental Data and Recording, accessed through NBN Atlas website. (). For more information: email cedar.info@nmni.com, or https://registry.nbnatlas.org/public/show/dp139
+
+
+\clearpage
+# Acknowledgements
+
+## Software availability
+
+```{r packageText, child="packageParagraph.txt", eval=TRUE}
+
+```
+
+\clearpage
+
+# References
