@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.8.4)  5 DEC 2025 14:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.13)  13 JAN 2026 17:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **deerMovementManuscript.tex
 (./deerMovementManuscript.tex
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-07-20>
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-29>
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
@@ -71,7 +71,8 @@ LaTeX Font Info:    Setting XCharter-OsF sub-encoding to TS1/0 on input line 37.
 LaTeX Font Info:    Changing XCharter-TOsF sub-encoding to TS1/0 on input line 37.
 \xch@cnt=\count290
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontaxes/fontaxes.sty
-Package: fontaxes 2025-05-24 v2.0.1 Font selection axes (deprecated)
+Package: fontaxes 2026-01-02 v2.0.2 Font selection axes (deprecated)
+Applying: [0000-00-00] Fall back to v1 on input line 76.
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontaxes/fontaxes-v1.sty
 Package: fontaxes 2020/07/21 v1.0e Font selection axes
 LaTeX Info: Redefining \upshape on input line 29.
@@ -518,373 +519,315 @@ Package hyperref Info: Link coloring ON on input line 64.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for OT1+phv on input line 88.
+LaTeX Font Info:    Trying to load font information for OT1+phv on input line 85.
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 )
-LaTeX Font Info:    Calculating math sizes for size <14> on input line 88.
+LaTeX Font Info:    Calculating math sizes for size <14> on input line 85.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 9.79996pt on input line 88.
+(Font)              scaled to size 9.79996pt on input line 85.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 88.
+(Font)              scaled to size 7.0pt on input line 85.
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 85.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 96.
-
-
+(Font)              scaled to size 12.0pt on input line 93.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/sc' will be
-(Font)              scaled to size 10.0pt on input line 100.
-<PDFheaderImage.png, id=64, 835.12pt x 124.465pt>
+(Font)              scaled to size 10.0pt on input line 97.
+<PDFheaderImage.png, id=65, 835.12pt x 124.465pt>
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 100.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 97.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 100.
+(Font)              scaled to size 8.0pt on input line 97.
 [1{c:/Users/benja/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/xcharter/xch_rydp4l.enc}
 
 {c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc} <./PDFheaderImage.png>]
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 128.
+(Font)              scaled to size 10.0pt on input line 125.
 
 LaTeX Font Warning: Font shape `OT1/phv/n/n' undefined
-(Font)              using `OT1/phv/m/n' instead on input line 139.
-
-
+(Font)              using `OT1/phv/m/n' instead on input line 137.
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 148.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 142.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
 [2
 
 ]
-LaTeX Font Info:    Trying to load font information for TS1+XCharter-TLF on input line 151.
+LaTeX Font Info:    Trying to load font information for TS1+XCharter-TLF on input line 149.
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcharter/TS1XCharter-TLF.fd
 File: TS1XCharter-TLF.fd 2020/05/25 (msharpe) Font definitions for TS1/XCharter-TLF.
 )
 LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 151.
-<../../figures/studyLocationMapRoe.png, id=130, 853.5087pt x 654.2844pt>
+(Font)              scaled to size 10.0pt on input line 149.
+<../../figures/studyLocationMapRoe.png, id=139, 853.5087pt x 654.2844pt>
 File: ../../figures/studyLocationMapRoe.png Graphic file (type png)
 <use ../../figures/studyLocationMapRoe.png>
-Package pdftex.def Info: ../../figures/studyLocationMapRoe.png  used on input line 181.
-(pdftex.def)             Requested size: 371.30833pt x 284.63138pt.
+Package pdftex.def Info: ../../figures/studyLocationMapRoe.png  used on input line 180.
+(pdftex.def)             Requested size: 420.81914pt x 322.58888pt.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 181.
+(Font)              scaled to size 10.0pt on input line 184.
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 9.0pt on input line 187.
+LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
+(Font)              scaled to size 9.0pt on input line 194.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (32.32143pt too wide) in paragraph at lines 188--213
- [][] 
+Overfull \hbox (13.55046pt too wide) in alignment at lines 189--212
+ [] [] [] [] [] [] [] 
  []
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-
+ignored error: Infinite glue shrinkage found in box being split
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 230.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 212.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
 [3{c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/xcharter/xch1_co4ru4.enc}]
-
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 235.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 249.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[4 <../../figures/studyLocationMapRoe.png>]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-
+[4]
+ignored error: Infinite glue shrinkage found in box being split
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 314.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 291.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[5]
-
+[5 <../../figures/studyLocationMapRoe.png>]
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 327.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 325.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
 [6]
-<../../figures/homeRangeAreaPlot.pdf, id=208, 511.9125pt x 341.275pt>
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 326.
+(pdftex.def)             Requested size: 80.50957pt x 12.0pt.
+[7]
+<../../figures/homeRangeAreaPlot.pdf, id=223, 511.9125pt x 341.275pt>
 File: ../../figures/homeRangeAreaPlot.pdf Graphic file (type pdf)
 <use ../../figures/homeRangeAreaPlot.pdf>
 Package pdftex.def Info: ../../figures/homeRangeAreaPlot.pdf  used on input line 343.
-(pdftex.def)             Requested size: 371.30833pt x 247.5404pt.
-<../../figures/distanceDistributionPlot.pdf, id=209, 597.23125pt x 341.275pt>
+(pdftex.def)             Requested size: 420.81914pt x 280.54509pt.
+<../../figures/distanceDistributionPlot.pdf, id=224, 597.23125pt x 341.275pt>
 File: ../../figures/distanceDistributionPlot.pdf Graphic file (type pdf)
 <use ../../figures/distanceDistributionPlot.pdf>
-Package pdftex.def Info: ../../figures/distanceDistributionPlot.pdf  used on input line 347.
-(pdftex.def)             Requested size: 371.30833pt x 212.17674pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-
+Package pdftex.def Info: ../../figures/distanceDistributionPlot.pdf  used on input line 352.
+(pdftex.def)             Requested size: 420.81914pt x 240.4687pt.
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 360.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 369.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[7
+[8
 
  <../../figures/homeRangeAreaPlot.pdf>]
-<../../figures/poisCoef.pdf, id=234, 597.23125pt x 540.0175pt>
+<../../figures/poisCoef.pdf, id=246, 597.23125pt x 540.0175pt>
 File: ../../figures/poisCoef.pdf Graphic file (type pdf)
 <use ../../figures/poisCoef.pdf>
-Package pdftex.def Info: ../../figures/poisCoef.pdf  used on input line 364.
+Package pdftex.def Info: ../../figures/poisCoef.pdf  used on input line 374.
 (pdftex.def)             Requested size: 495.07779pt x 447.65408pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 395.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 409.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[8 <../../figures/distanceDistributionPlot.pdf>]
-<../../figures/ssfCoef_indPop.pdf, id=259, 597.23125pt x 568.1225pt>
+[9 <../../figures/distanceDistributionPlot.pdf>]
+<../../figures/ssfCoef_indPop.pdf, id=271, 597.23125pt x 568.1225pt>
 File: ../../figures/ssfCoef_indPop.pdf Graphic file (type pdf)
 <use ../../figures/ssfCoef_indPop.pdf>
-Package pdftex.def Info: ../../figures/ssfCoef_indPop.pdf  used on input line 397.
+Package pdftex.def Info: ../../figures/ssfCoef_indPop.pdf  used on input line 412.
 (pdftex.def)             Requested size: 495.07779pt x 470.95206pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 434.
-(pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[9]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 457.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 453.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
 [10]
-
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 457.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 476.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[11 <../../figures/poisCoef.pdf>]
-
+[11]
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 457.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 476.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[12 <../../figures/ssfCoef_indPop.pdf>]
-Overfull \hbox (12.74576pt too wide) in paragraph at lines 470--471
+[12 <../../figures/poisCoef.pdf>]
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 476.
+(pdftex.def)             Requested size: 80.50957pt x 12.0pt.
+[13 <../../figures/ssfCoef_indPop.pdf>]
+Overfull \hbox (12.74576pt too wide) in paragraph at lines 489--490
 []\T1/XCharter-TLF/m/n/10 The code used to com-plete this study can be found at [][]$\T1/cmtt/m/n/10 https : / / github . com / BenMMarshall / TICKSOLVE _ DeerMovement$[][]
  []
 
-<../../figures/trackingDuration.pdf, id=436, 597.23125pt x 341.275pt>
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 514.
+(pdftex.def)             Requested size: 80.50957pt x 12.0pt.
+[14
+
+]
+<../../figures/trackingDuration.pdf, id=534, 597.23125pt x 341.275pt>
 File: ../../figures/trackingDuration.pdf Graphic file (type pdf)
 <use ../../figures/trackingDuration.pdf>
-Package pdftex.def Info: ../../figures/trackingDuration.pdf  used on input line 492.
-(pdftex.def)             Requested size: 371.30833pt x 212.17674pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/trackingTimelag.pdf, id=437, 511.9125pt x 341.275pt>
+Package pdftex.def Info: ../../figures/trackingDuration.pdf  used on input line 520.
+(pdftex.def)             Requested size: 420.81914pt x 240.4687pt.
+<../../figures/trackingTimelag.pdf, id=535, 511.9125pt x 341.275pt>
 File: ../../figures/trackingTimelag.pdf Graphic file (type pdf)
 <use ../../figures/trackingTimelag.pdf>
-Package pdftex.def Info: ../../figures/trackingTimelag.pdf  used on input line 496.
-(pdftex.def)             Requested size: 371.30833pt x 247.5404pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/varioRoePlot.pdf, id=438, 682.55pt x 540.0175pt>
+Package pdftex.def Info: ../../figures/trackingTimelag.pdf  used on input line 529.
+(pdftex.def)             Requested size: 420.81914pt x 280.54509pt.
+<../../figures/varioRoePlot.pdf, id=536, 682.55pt x 540.0175pt>
 File: ../../figures/varioRoePlot.pdf Graphic file (type pdf)
 <use ../../figures/varioRoePlot.pdf>
-Package pdftex.def Info: ../../figures/varioRoePlot.pdf  used on input line 500.
-(pdftex.def)             Requested size: 371.30833pt x 293.77222pt.
+Package pdftex.def Info: ../../figures/varioRoePlot.pdf  used on input line 538.
+(pdftex.def)             Requested size: 420.81914pt x 332.94514pt.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (21.29149pt too wide) in paragraph at lines 507--574
- [][] 
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Overfull \hbox (24.05144pt too wide) in paragraph at lines 580--618
- [][] 
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: Float too large for page by 1429.24489pt on input line 823.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../../figures/ssfCoef_Heterogeneity.png, id=439, 910.3611pt x 455.0601pt>
-File: ../../figures/ssfCoef_Heterogeneity.png Graphic file (type png)
-<use ../../figures/ssfCoef_Heterogeneity.png>
-Package pdftex.def Info: ../../figures/ssfCoef_Heterogeneity.png  used on input line 853.
-(pdftex.def)             Requested size: 371.30833pt x 185.60373pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/ssfCoef_Specialisation.png, id=440, 910.3611pt x 455.0601pt>
-File: ../../figures/ssfCoef_Specialisation.png Graphic file (type png)
-<use ../../figures/ssfCoef_Specialisation.png>
-Package pdftex.def Info: ../../figures/ssfCoef_Specialisation.png  used on input line 857.
-(pdftex.def)             Requested size: 371.30833pt x 185.60373pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../../figures/hrStudyComparison.pdf, id=441, 682.55pt x 568.1225pt>
-File: ../../figures/hrStudyComparison.pdf Graphic file (type pdf)
-<use ../../figures/hrStudyComparison.pdf>
-Package pdftex.def Info: ../../figures/hrStudyComparison.pdf  used on input line 861.
-(pdftex.def)             Requested size: 371.30833pt x 309.06148pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-
+pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.606 \end{longtable}
+                     
+ignored error: Infinite glue shrinkage found in box being split
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 864.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 606.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[13
-
-]
-
+[15 <../../figures/trackingDuration.pdf>]
+pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.658 \end{longtable}
+                     
+ignored error: Infinite glue shrinkage found in box being split
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 864.
-(pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[14 <../../figures/trackingDuration.pdf> <../../figures/trackingTimelag.pdf>]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 864.
-(pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[15 <../../figures/varioRoePlot.pdf> <../../figures/ssfCoef_Heterogeneity.png>]
-
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 864.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 862.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
 [16]
-
+ignored error: Infinite glue shrinkage found in box being split
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 864.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 862.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[17 <../../figures/ssfCoef_Specialisation.png>]
-
+[17]
+ignored error: Infinite glue shrinkage found in box being split
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 864.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 862.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
 [18]
-
+<../../figures/ssfCoef_Heterogeneity.png, id=559, 910.3611pt x 455.0601pt>
+File: ../../figures/ssfCoef_Heterogeneity.png Graphic file (type png)
+<use ../../figures/ssfCoef_Heterogeneity.png>
+Package pdftex.def Info: ../../figures/ssfCoef_Heterogeneity.png  used on input line 894.
+(pdftex.def)             Requested size: 420.81914pt x 210.3509pt.
+<../../figures/ssfCoef_Specialisation.png, id=560, 910.3611pt x 455.0601pt>
+File: ../../figures/ssfCoef_Specialisation.png Graphic file (type png)
+<use ../../figures/ssfCoef_Specialisation.png>
+Package pdftex.def Info: ../../figures/ssfCoef_Specialisation.png  used on input line 903.
+(pdftex.def)             Requested size: 420.81914pt x 210.3509pt.
+<../../figures/hrStudyComparison.pdf, id=561, 682.55pt x 568.1225pt>
+File: ../../figures/hrStudyComparison.pdf Graphic file (type pdf)
+<use ../../figures/hrStudyComparison.pdf>
+Package pdftex.def Info: ../../figures/hrStudyComparison.pdf  used on input line 912.
+(pdftex.def)             Requested size: 420.81914pt x 350.27313pt.
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 864.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 919.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[19 <../../figures/hrStudyComparison.pdf>]
-
+[19]
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 954.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 919.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[20
+[20 <../../figures/trackingTimelag.pdf> <../../figures/varioRoePlot.pdf>]
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 919.
+(pdftex.def)             Requested size: 80.50957pt x 12.0pt.
+[21 <../../figures/ssfCoef_Heterogeneity.png> <../../figures/ssfCoef_Specialisation.png>]
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 919.
+(pdftex.def)             Requested size: 80.50957pt x 12.0pt.
+[22 <../../figures/hrStudyComparison.pdf>]
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 1009.
+(pdftex.def)             Requested size: 80.50957pt x 12.0pt.
+[23
 
 ]
-Overfull \hbox (24.7689pt too wide) in paragraph at lines 980--981
+Overfull \hbox (24.7689pt too wide) in paragraph at lines 1035--1036
 \T1/XCharter-TLF/m/n/10 habi-tat qual-ity for the Ital-ian roe deer \T1/XCharter-TLF/m/it/10 Capre-o-lus capre-o-lus itali-cus\T1/XCharter-TLF/m/n/10 . \T1/XCharter-TLF/m/it/10 Ecog-ra-phy \T1/XCharter-TLF/m/n/10 29:407--417. DOI: [][]10.1111/j.2006.0906-
  []
 
-
-
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 1036.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 1091.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[21]
-Overfull \hbox (25.61604pt too wide) in paragraph at lines 1052--1053
+[24]
+Overfull \hbox (25.61604pt too wide) in paragraph at lines 1107--1108
 \T1/XCharter-TLF/m/it/10 capre-o-lus \T1/XCharter-TLF/m/n/10 ) in a moun-tain-ous habi-tat. \T1/XCharter-TLF/m/it/10 Ethol-ogy Ecol-ogy & Evo-lu-tion \T1/XCharter-TLF/m/n/10 16:41--53. DOI: [][]10.1080/08927014.2004.9522653[][]. 
  []
 
 
-Overfull \hbox (2.25888pt too wide) in paragraph at lines 1082--1083
+Overfull \hbox (2.25888pt too wide) in paragraph at lines 1137--1138
 \T1/XCharter-TLF/m/n/10 com-par-i-son and test-ing of sta-tis-ti-cal mod-els. \T1/XCharter-TLF/m/it/10 Jour-nal of Open Source Soft-ware \T1/XCharter-TLF/m/n/10 6:3139. DOI: [][]10.21105/joss.03139[][]. 
  []
 
-
-
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 1122.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 1177.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[22]
-Overfull \hbox (57.76714pt too wide) in paragraph at lines 1157--1158
+[25]
+Overfull \hbox (57.76714pt too wide) in paragraph at lines 1215--1216
 []\T1/XCharter-TLF/m/n/10 Pebesma E, Bi-vand R. 2023. \T1/XCharter-TLF/m/it/10 Spa-tial Data Sci-ence: With ap-pli-ca-tions in R\T1/XCharter-TLF/m/n/10 . Chap-man and Hall/CRC. DOI: [][]10.1201/9780429459016[][]. 
  []
 
 
-Overfull \hbox (74.00192pt too wide) in paragraph at lines 1166--1167
+Overfull \hbox (74.00192pt too wide) in paragraph at lines 1224--1225
 \T1/XCharter-TLF/m/n/10 per-sal by three na-tive her-biv-o-rous un-gu-lates in Eu-rope. \T1/XCharter-TLF/m/it/10 Ba-sic and Ap-plied Ecol-ogy \T1/XCharter-TLF/m/n/10 17:321--332. DOI: [][]10.1016/j.baae.2016.01.005[][]. 
  []
 
-
-
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 1210.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 1267.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[23]
-
+[26]
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 1290.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 1354.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[24] 
+[27] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (./deerMovementManuscript.aux)
  ***********
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-07-20>
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-29>
  ***********
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `deerMovementManuscript.out' has not changed.
-(rerunfilecheck)             Checksum: EFDFACF7D196EC8BC1B7D198CC8FE286;2202.
+(rerunfilecheck)             Checksum: 77FBC6FBB3902CF229FBD619FA386CC6;2202.
  ) 
 Here is how much of TeX's memory you used:
- 14480 strings out of 469782
- 240826 string characters out of 5480621
- 893457 words of memory out of 5000000
- 42436 multiletter control sequences out of 15000+600000
- 693799 words of font info for 79 fonts, out of 8000000 for 9000
+ 14505 strings out of 469519
+ 241168 string characters out of 5468256
+ 782066 words of memory out of 5000000
+ 42716 multiletter control sequences out of 15000+600000
+ 702212 words of font info for 84 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 90i,15n,131p,3383b,560s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <c:/Users/benja/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit1000.600pk> <c:/Users/benja/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Italic.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on deerMovementManuscript.pdf (24 pages, 4114296 bytes).
+ 90i,16n,131p,3383b,658s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <c:/Users/benja/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit1000.600pk> <c:/Users/benja/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Italic.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on deerMovementManuscript.pdf (27 pages, 4125970 bytes).
 PDF statistics:
- 873 PDF objects out of 1000 (max. 8388607)
- 754 compressed objects within 8 object streams
- 196 named destinations out of 1000 (max. 500000)
+ 901 PDF objects out of 1000 (max. 8388607)
+ 777 compressed objects within 8 object streams
+ 200 named destinations out of 1000 (max. 500000)
  181 words of extra memory for PDF output out of 10000 (max. 10000000)
 
