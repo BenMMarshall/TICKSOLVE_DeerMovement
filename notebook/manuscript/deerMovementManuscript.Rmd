@@ -1,18 +1,18 @@
 ---
 title: "Roe Deer show an affinity for woodland and reluctance to cross roads"
 author1: "Benjamin Michael Marshall"
-author2: "Caroline Millins"
-author3: "Lucy Gilbert"
+author2: "Lucy Gilbert"
+author3: "John Boyle"
 author4: "Valerio Lhamine"
 author5: "Mark Steven Greener"
 author6: "Robin Gill"
-author7: "John Boyle"
+author7: "Caroline Millins"
 author8: "Thomas Andrew Morrison*"
 affiliation1: "School of Biodiversity, One Health and Veterinary Medicine, University of Glasgow, Glasgow, UK"
-affiliation2: "Department of Livestock and One Health, Institute of Infection, Veterinary and Ecological Sciences, University of Liverpool, Liverpool, UK"
+affiliation2: "Millcroft Veterinary Group, Cockermouth, Cumbria, UK"
 affiliation3: "Medical Entomology and Zoonoses Ecology, UK Health Security Agency, Porton Down, Salisbury, UK"
-affiliation4: "---"
-affiliation5: "---"
+affiliation4: "Forest Research, Alice Holt Lodge, Farnham, UK"
+affiliation5: "Department of Livestock and One Health, Institute of Infection, Veterinary and Ecological Sciences, University of Liverpool, Liverpool, UK"
 corresponding1: "thomas.morrison@glasgow.ac.uk"
 date: "`r Sys.Date()`"
 output:
@@ -34,7 +34,7 @@ csl: peerj.csl
 editor_options: 
   markdown: 
     wrap: sentence
-abstract: Animals use landscapes unequally and have differential responses to anthropogenic changes such as land cover modification. Such responses are difficult to predict a priori, and requires examination of animals' movements to determine. A full understanding of animals' movements and tendencies are particularly valuable in situations where human-animal interactions have implications for either's well-being. Large herbivores, with relatively high mobility, often come in contact with humans as habitats become more restricted. This can lead to concentrated grazing pressures, animal-vehicle collisions, and increased disease transfer risks. In Europe, Roe Deer (Capreolus capreolus), a large reasonably-human-tolerate ungulate, are one of the more prevalent herbivores that often find themselves interacting with anthropogenic activity. By examining Roe Deer in two mixed use landscapes in the United Kingdom, where their movements are comparatively unknown, we add to the knowledge of how widely Roe Deer range and use the available human-modified land covers. Through the GPS tracking of 13 deer, we reveal reasonably limited home ranges that are centred on deciduous woodland patches. We observed forays outside of the woodland patches into open shrub-, crop- and grass- lands, but only to distances up to 750m. When outside of the woodland, deer movements (step lengths) appeared to be lower but more variable, potentially indicative of a behavioural change when in open areas. We documented was a consistent, albeit slight, aversion to crossing roads indicating that roads contribute to deer habitat fragmentation. Overall, our results highlight UK Roe Deer’s connection to woodland patches, and suggests their movements and overall landscape connectivity are closely tied to woodland presence.
+abstract: Animals use landscapes unequally and have differential responses to anthropogenic changes such as land cover modification. Such responses are difficult to predict a priori, and requires examination of animals' movements to determine. A full understanding of animals' movements and tendencies are particularly valuable in situations where human-animal interactions have implications for either's well-being. Large herbivores, with relatively high mobility, often come in contact with humans as habitats become more restricted. This can lead to concentrated grazing pressures, animal-vehicle collisions, and increased disease transfer risks. In Europe, Roe Deer (_Capreolus capreolus_), a large ungulate relatviely tolerate to humans , are one of the more prevalent herbivores that often find themselves interacting with anthropogenic activity. By examining Roe Deer in two mixed use landscapes in the United Kingdom, where their movements are comparatively unknown, we add to the knowledge of how widely Roe Deer range and use the available human-modified land covers. Through the GPS tracking of 15 deer, we reveal reasonably limited home ranges that are centred on woodland patches. We observed forays outside of the woodland patches into open shrub-, crop- and grass- lands, but only to distances up to 750m. When outside of the woodland, deer movements (step lengths) appeared to be lower but more variable, potentially indicative of a behavioural change when in open areas. We documented a consistent, albeit slight, aversion to crossing roads indicating that roads contribute to deer habitat fragmentation. Overall, our results highlight UK Roe Deer’s connection to woodland patches, and suggests their movements and overall landscape connectivity are closely tied to woodland presence.
 keywords: Movement ecology, step selection function, habitat preference, habitat selection, animal movement, Roe Deer, Capreolus capreolus, road crossing, United Kingdom
 ---
 
@@ -59,7 +59,7 @@ By understanding movement responses, we may be better placed to predict and miti
 
 Deer live near humans in many temperate regions of the world and, as such, receive considerable attention from land managers [@cederlund_home_1983; @dupke_habitat_2017].
 Even in the absence of concrete information on deer movements, myriad management interventions are levied at controlling deer space use and population density, depending on the local management objectives [@pepper_management_2020].
-Objectives include reducing deer vehicular collisions, reducing herbivory or disease transmission to agriculture, reducing vectors of disease to humans (e.g., ticks), improving forestry productivity, enhancing biodiversity and woodland regeneration, and increasing hunting conditions [@putman_identifying_2011].
+Objectives include reducing deer vehicular collisions, reducing herbivory or disease transmission to agriculture, reducing vectors of disease to humans (e.g., ticks such as *Ixodes ricinus*), improving forestry productivity, enhancing biodiversity and woodland regeneration, and increasing hunting conditions [@putman_identifying_2011].
 Many of these activities would be improved by precise knowledge of the movement behaviour and space use of individual deer; such knowledge could provide a more complete understanding from which controversial approaches to deer management can be assessed.
 While there is a history of individual-level tracking of deer in mainland Europe and North America [@morellet_seasonality_2013; @mysterud_deer_2025], only a handful of similar studies have been carried out on British deer, with most research attention in the UK focused on other deer species [@staines_desk_1998].
 Comparatively, Roe Deer (*Capreolus capreolus*) movements remain understudied in parts of the UK such as Scotland [@mitchell1977ecology] despite being the most abundant species in the UK and the one living most closely with humans.
@@ -72,6 +72,8 @@ When this adaptability is paired with a lack of natural predators and infrastruc
 Here we expand the knowledge of Roe Deer movement, targeting two different landscapes in the UK.
 We aim to document baseline space use of UK Roe Deer, while exploring their movement in relation to various anthropogenic land cover types (cropland and settlements) and landscape features, with a particular focus on roads.
 <!-- In the UK pretty much all land use is human-created, so it would be good to be more specific here. villages/buildings/roads are often termed "anthropogenic infrastructure" if you like that sort of catch-all phrase? -->
+
+\clearpage
 
 # Methods
 
@@ -90,8 +92,8 @@ The study was conducted in two regions: in Northeastern Scotland (Aberdeenshire)
 Broadly, both locations represent mixed-use landscapes comprised of patches of woodland surrounded by cultivated agriculture, livestock pasture and buildings.
 All deer captures took place in woodland patches, during winter months (January - March in 2023) and (January - March 2024). 
 
-More specifically, we focused deer capture efforts in four Aberdeenshire locations: Muir of Dinnet National Nature Reserve (2 female deer), Black Hillocks (1 male deer), Wellhouse Woods (2 female and 1 male deer), Moss of Air (2 female deer), and Gask Woods (3 female and 1 male deer).
-In Wessex, we focused deer capture at Bentley Wood, Holly Hatch, and Kings Garn.
+More specifically, we focused deer capture efforts in five Aberdeenshire locations: Muir of Dinnet National Nature Reserve (2 female deer), Black Hillocks (1 male deer), Wellhouse Woods (2 female and 1 male deer), Moss of Air (2 female deer), and Gask Woods (3 female and 1 male deer).
+In Wessex, we focused deer capture at Holly Hatch and Kings Garn.
 These sites were selected to gain a range of habitats to enable us to address questions about Roe Deer habitat selection in woodlands, and to be representative of the types of forest and landscape typical of Aberdeenshire and Wessex.
 
 - The Muir of Dinnet is a National Nature Reserve managed by NatureScot, the Scottish Government’s statutory conservation agency, in the east of the Cairngorms National Park.
@@ -106,23 +108,31 @@ Within 300m of the site, is the edge of a large tract of commercial, densely pla
 
 - Gaskwood, also near Garlogie, is a commercial conifer forest including Scot's pine and Sitka spruce, within a mosaic landscape of forest and farmland patches, located 1 km across open farmland from Moss of Air.
 
-To capture deer we employed a "long net" capture method [@cockburn_comparative_1979], which has been used extensively and safely to capture Roe Deer in the UK [@gill_changes_1996] and elsewhere [@morellet_effect_2009].
-Briefly, we set up 1-2 km of 2-meter-high nylon nets along paths of opening in the woodland.
-Nets were strung on flexible bamboo poles dropped to the ground when an animal ran into them.
-Nets were placed in the shape of a horseshoe.
-Capture personnel were spaced every ~50m on the inside part of the netting area.
-A team of beaters, spaced every 10-15m, moved slowly from the open side of the horseshoe towards the top of the horseshoe.
-When a deer was caught in the net, the capture team restrained the animal and injected it with a mild sedative (2mg/ml acepromazine), attached a GPS collar and ear tag.
-If many animals were captured, we transferred animals to a wooden retention box after giving sedatives, which helped to calm the animal and allowed monitoring.
-After 20 minutes to 2 hours, we removed the animal from the box and deployed the collar and ear tag. 
+We captured adult roe deer under Home Office Licence Project licence (PP1285683); a Nature Scot Research Authorisation licence to capture Roe Deer from Nature Scot (16759); and a Natural England licence To Take deer Alive for Science, Education and Relocation to capture Roe and Fallow Deer (2022-63493-SPM-WLM). 
+We employed a "long net" capture method [@cockburn_comparative_1979], which has been used extensively and safely to capture Roe Deer in the UK [@gill_changes_1996] and elsewhere [@morellet_effect_2009].
 
-We fitted captured adult Roe Deer with GPS-collared (30mm reinforced Tellus GP Light Iridium by Followit) that weighed 276g, representing <2% of the average Roe Deer total body mass.
-Collars collected GPS fixes every 3 hours in Aberdeenshire.
-In Wessex the collar fix frequency set to every 30 minutes.
+Briefly, we set up 1-2 km of 2-metre-high nylon nets placed along paths, clearings and the edges of woodland patches.
+Nets were suspended on evenly spaced flexible bamboo poles.
+These nets then dropped off the poles to the ground and entangled the deer when they ran into them.
+Nets were placed in the shape of a horseshoe. 
+Capture personnel were spaced every ~50m on the inside part of the netting area. 
+A team of beaters, spaced every 10-15m, moved slowly from the open side of the horseshoe towards the top of the horseshoe. 
+When a deer was caught in the net, the capture team restrained the animal, checked for any injuries, and for general health, estimated the age as either adult or juvenile and determined the sex. 
+Juvenile deer were released. 
+If the animal was judged to be in adequate health, and an adult it was injected intramuscularly with a sedative (Acepromazine (ACP Injection 2mg/ml, Elanco UK AH Limited), at a dose rate of 0.75ml (1.5mg) per deer. 
+The heart rate, respiratory rate and temperature were monitored at capture, and every 5 minutes during subsequent handling. 
+The deer was transferred to a wooden crate designed and built to safely retain the deer for at least 30 minutes for the sedative to take effect, which helped to calm the animal and reduced stress during subsequent handling. 
+After 30 minutes to 1 hour, we removed the deer from the box and attached a GPS collar. 
+Due to the use of sedative, an ear tag with a unique numeric identifier and "do not eat" was attached, along side an ear notch.
+This tag and notch were used to identify the animal following detachment of the collar and indicate that the deer should not enter the food chain if killed by a stalker.
+The deer was then released in a safe area away from any hazards.
+
+We fitted captured adult Roe Deer with a GPS collar (30mm reinforced Tellus GP Light Iridium by Followit) that weighed 276g, representing <2% of the average Roe Deer total body mass.
+Collars collected GPS fixes every 3 hours in Aberdeenshire, and every 30 minutes in Wessex.
 Collars in Wessex were detached after a short duration (~1 month) due to evidence from one animal that the collar may have caused some friction to the neck.
 As a result, the Wessex dataset is more limited in overall duration.
 
-```{r studyLocationMapRoe, echo=FALSE, out.width='85%', fig.align="center", fig.pos = "ht", fig.cap=" Locations of the study sites in Aberdeenshire and Wessex. Points show the mean location of GPS collared Roe Deer. Green areas in right panel depict woodland, and grey lines show roads. All maps are north orientated."}
+```{r studyLocationMapRoe, echo=FALSE, out.width='95%', fig.align="center", fig.pos = "ht", fig.cap=" Locations of the study sites in Aberdeenshire and Wessex. Points show the mean location of GPS collared Roe Deer. Green areas in right panel depict woodland, and grey lines show roads. All maps are north orientated."}
 knitr::include_graphics(here::here("figures", "studyLocationMapRoe.png"))
 ```
 
@@ -234,7 +244,7 @@ This way the home range mean is weighted by the confidence (i.e., effective samp
 
 We retained 99% estimates to help quantify the distance from which Roe Deer will range away from woodland patches.
 We calculated the widest dimension of each 99% home range polygon (or largest polygon if the home range area was non-contiguous), and halved that value to quantify the distance deer would be willing to travel beyond their resident patch.
-To support this approach, we determined the distance from patch for every deer location that fell outside a patch.
+To support this approach and to produce an overall distribution deer distance away from woodland patches, we determined how far every deer location was from the nearest patch and plotted those values against the distance estimated by the home range models.
 
 ## Habitat Selection
 
@@ -258,7 +268,7 @@ This reduced instances of limited interaction with the deer movement data thereb
 
 ```{r landcoverTable, echo=FALSE, message=FALSE}
 landcoverReclass <- read.csv(here("tables", "reclassificationUKCEH.csv"))
-kableExtra::kbl(landcoverReclass, caption = "Overview of the reclassifcation of UKCEH land cover classes for inclusion into the habitat selection models.",
+kableExtra::kbl(landcoverReclass, caption = "Overview of the reclassification of UKCEH land cover classes for inclusion into the habitat selection models.",
              col.names = c("UKCEH land cover class",
                            "UKCEH land cover identifier",
                            "Reclassified category"), booktabs = TRUE, longtable = TRUE) %>%
@@ -590,12 +600,14 @@ The lack of consistent availability of these land covers and potentially inconsi
 knitr::include_graphics(here::here("figures", "ssfCoef_indPop.png"))
 ```
 
+\clearpage
+
 # Discussion
 
-Our tracking of 13 Roe Deer revealed that they have limited home ranges, that are heavily skewed towards remaining close to deciduous woodland.
+Our tracking of 15 Roe Deer revealed that they have limited home ranges, that are heavily skewed towards remaining close to deciduous woodland.
 They are willing to exit woodland, making use of open shrubland and grasslands, but these movements tend to be limited to within ~750m and the vast majority far closer.
 When entering these more open non-wooded areas they tend to slow down, but also exhibit more variable movements.
-Exploration of individual level habitat selection models highlight the consistency of the preferring to remain close to woodland.
+Exploration of individual level habitat selection models highlight the consistency of preferring to remain close to woodland.
 However, their limited exposure to certain land cover types (e.g., human settlement) makes it difficult to fully characterise individual-variability. 
 Overall, Roe Deer exhibited a disinclination to cross roads found on a population and individual level.
 The estimated chances of individuals crossing roads indicate that roads somewhat reduce the permeability of these landscapes for Roe Deer, but do not prohibit movement.
@@ -605,18 +617,19 @@ This coherence is surprising given the rudimentary nature of the comparison that
 As such the UK Roe Deer examined here appear largely typical in regards to their use of space.
 Some of the variation in home range has been suggested to be a product of food availability and the arrangement of cover from predators [@tufto_habitat_1996].
 
-Other examinations of Roe Deer have highlighted the importance of risk guiding when Roe Deer leave their core wooded range to make use of more open areas [@padie_roe_2015; @bonnot_interindividual_2015].
+Other examinations of Roe Deer have highlighted the importance of risk guiding when Roe Deer leave their core wooded range to make use of more open areas [@padie_roe_2015; @bonnot_interindividual_2015; @venkatesan_drivers_2026].
 The potential benefits of managing this risk to reap the nutritional benefits afforded by open areas are apparent [@hewison_landscape_2009], and may present a direct trade off against the risks posed by humans.
 Humans are likely the UK Roe Deer's primary concern, as other predators such as Lynx, require different risk mitigating decisions, are absent [@lone_living_2014].
 The shifts in movements (i.e., step lengths) we report here may be a coarse representation of Roe Deer balancing the risk and benefits in crop- and grasslands.
 Such trade-offs may be more pronounced in more fragmented or riskier landscapes, and could also explain the lack of consistent selection to remain near hedgerows.
-Compared to other Roe Deer examinations our studied Roe Deer may have easier access to wooded cover in a less fragmented landscape [@morellet_landscape_2011]; thereby, potentially becoming less dependent on hedgerows.
+Compared to other Roe Deer studies, our Roe Deer may have easier access to wooded cover in a less fragmented landscape [@morellet_landscape_2011]; thereby, potentially becoming less dependent on hedgerows.
 To tease apart the UK Roe Deer's response to risk, a more complete quantification of human activity would be required, including presence of walkers, dogs, and hunting pressure.
 
 Roe Deer in our study avoided crossing roads more than expected by chance, suggesting roads reduce landscape connectivity.
-Thus, in countries with high densities of roads, such as the UK, even limited road crossing avoidance by deer likely has profound impacts on deer population structure, dispersal, movement of deer-associated parasites (e.g., ticks).
+Thus, in countries with high densities of roads, such as the UK, even limited road crossing avoidance by deer likely has profound impacts on deer population structure, dispersal, and movement of deer-associated parasites (e.g., ticks).
+Some deer-hosted *Ixodes ricinus* ticks carry pathogens significant for human and livestock health; therefore, this differential landscape permeability may have indirect health implications.
 Despite this avoidance, it was not complete and deer collisions with vehicles remain a key safety issue.
-In Scotland, higher rates of deer-vehicle collisions appear to occur in vicinity of woodland and other semi-natural habitats [@langbein2019deer].
+In Scotland, higher rates of deer-vehicle collisions appear to occur in the vicinity of woodland and other semi-natural habitats [@langbein2019deer].
 Other examinations have highlighted the importance of road density in Roe Deer home ranges as a key predictor of road crossing frequency [@kammerle_temporal_2017], further supporting the woodland-road proximity connection.
 @nelli_mapping_2018 supports also this but also suggests the likelihood of a road section experiencing collisions is additionally tied to traffic flow levels (although traffic levels fails to predict the overall count of collisions).
 While urban areas tend to lower deer-vehicle collision risk, the intersection of urban and natural areas (i.e., suburban) may lead to key hotspots where both deer and traffic collide [@nelli_mapping_2018].
@@ -678,14 +691,14 @@ Conceptualization: Caroline Millins and Thomas A. Morrison.
 Data curation: Thomas A. Morrison.
 Formal analysis: Benjamin M. Marshall.
 Funding acquisition: Caroline Millins, Lucy Gilbert, and Thomas A. Morrison.
-Investigation: Mark S. Greener and Robin Gill.
-Methodology: Benjamin M. Marshall, Mark S. Greener, Robin Gill, and Thomas A. Morrison.
+Investigation: Caroline Millins, Thomas A. Morrison, John Boyle, Mark S. Greener, and Robin Gill.
+Methodology: Caroline Millins, Benjamin M. Marshall, John Boyle, Mark S. Greener, Robin Gill, and Thomas A. Morrison.
 Project administration: Caroline Millins, Lucy Gilbert, and Thomas A. Morrison.
 Resources: Lucy Gilbert.
 Supervision: Lucy Gilbert and Mark S. Greener.
 Visualization: Benjamin M. Marshall.
-Writing - original draft: Benjamin M. Marshall, Valerio Lhamine, and Thomas A. Morrison.
-Writing - review & editing: Benjamin M. Marshall, Caroline Millins, Lucy Gilbert, Valerio Lhamine, Mark S. Greener, Robin Gill, and Thomas A. Morrison.
+Writing - original draft: Benjamin M. Marshall, Valerio Lhamine, Caroline Millins, and Thomas A. Morrison.
+Writing - review & editing: Benjamin M. Marshall, Caroline Millins, Lucy Gilbert, John Boyle, Valerio Lhamine, Mark S. Greener, Robin Gill, and Thomas A. Morrison.
 
 # Supplementary Material
 

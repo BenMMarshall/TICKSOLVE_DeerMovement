@@ -42,39 +42,6 @@ plot_study_locations <- function(deerData, landuseList, patchList){
   gbGADM <- st_as_sf(gbGADM)
   # gbGADM <- st_transform(gbGADM, 27700)
 
-  (euroMap <- ggplot() +
-      geom_sf(data = worldData %>%
-                # st_crop(xmin = -50, xmax = 45,
-                #         ymin = 10, ymax = 73) %>%
-                st_transform(crs = "+proj=moll"),
-              aes(fill = sovereignt == "United Kingdom"),
-              colour = NA) +
-      geom_sf(data = regionLocations,
-              aes(),
-              fill = paletteList$deerSpeciesPal[1], colour = paletteList$baseGrey,
-              size = 5, pch = 21) +
-      geom_sf_label(data = regionLocations, aes(label = region),
-                    size = 4, nudge_y = 75000, hjust = 0, fontface = 4,
-                    colour = paletteList$deerSpeciesPal[1], label.size = 0.75,
-                    box.padding = unit(1, "lines"), label.padding = unit(1.5, "mm")) +
-      annotate("text", x = -600000, y = 6700000, label = "United\nKingdom",
-               size = 6, fontface = 2, hjust = 1, lineheight = 0.95,
-               colour = paletteList$corePal[["Woodland"]]) +
-      scale_fill_manual(values = c(
-        "FALSE" = "#ffffff",
-        "TRUE" = paletteList$corePal[["Woodland"]]
-      ), na.value = "grey85") +
-      scale_x_continuous(limits = c(-1300000, 1200000)) +
-      scale_y_continuous(limits = c(4000000, 7500000)) +
-      coord_sf(crs = "+proj=moll") +
-      theme_minimal() +
-      labs(x = "", y = "") +
-      theme(text = element_text(colour = paletteList$baseGrey),
-            line = element_line(colour = paletteList$baseGrey),
-            panel.background = element_rect(fill = "grey85", colour = NA),
-            panel.border = element_blank(),
-            legend.position = "none")
-  )
 
 
   # Local maps --------------------------------------------------------------
@@ -92,6 +59,45 @@ plot_study_locations <- function(deerData, landuseList, patchList){
   plotList <- vector("list", length(regions))
   names(plotList) <- regions
   for(focalRegion in regions){
+
+    # region <- "Aberdeenshire"
+    regionLocations_sel <- regionLocations[regionLocations$region %in% focalRegion,]
+    (euroMap <- ggplot() +
+        geom_sf(data = worldData %>%
+                  # st_crop(xmin = -50, xmax = 45,
+                  #         ymin = 10, ymax = 73) %>%
+                  st_transform(crs = "+proj=moll"),
+                aes(fill = sovereignt == "United Kingdom"),
+                colour = NA) +
+        geom_sf(data = regionLocations_sel,
+                aes(),
+                fill = paletteList$deerSpeciesPal[1], colour = paletteList$baseGrey,
+                size = 5, pch = 21) +
+        # geom_sf_label(data = regionLocations_sel, aes(label = region),
+        #               size = 4, nudge_y = 75000, hjust = 0, fontface = 4,
+        #               colour = paletteList$deerSpeciesPal[1], label.size = 0.75,
+        #               box.padding = unit(1, "lines"), label.padding = unit(1.5, "mm")) +
+        # annotate("text", x = -600000, y = 6700000, label = "United\nKingdom",
+        #          size = 6, fontface = 2, hjust = 1, lineheight = 0.95,
+        #          colour = paletteList$corePal[["Woodland"]]) +
+        scale_fill_manual(values = c(
+          "FALSE" = "#ffffff",
+          "TRUE" = paletteList$corePal[["Woodland"]]
+        ), na.value = "grey85") +
+        scale_x_continuous(limits = c(-600000, 150000), breaks = seq(-15, 20, 5)) +
+        scale_y_continuous(limits = c(5800000, 6800000), breaks = seq(50, 60, 5)) +
+        coord_sf(crs = "+proj=moll", label_graticule = "NE") +
+        theme_minimal() +
+        labs(x = "", y = "") +
+        theme(text = element_text(colour = paletteList$baseGrey),
+              line = element_line(colour = paletteList$baseGrey),
+              axis.text = element_blank(),
+              panel.grid = element_blank(),
+              plot.background = element_blank(),
+              panel.background = element_rect(fill = "#ffffff", colour = NA),
+              panel.border = element_blank(),
+              legend.position = "none")
+    )
 
     if(focalRegion == "Aberdeenshire" | focalRegion == "Aberdeen"){
       focalPatches <- patchList[["Aberdeen"]]
@@ -161,19 +167,22 @@ plot_study_locations <- function(deerData, landuseList, patchList){
               axis.text = element_blank(),
               axis.line = element_blank(),
               plot.title = element_text(size = 16, face = 4, colour = paletteList$baseGrey),
-              legend.position = "none")) +
-      scale_y_continuous(position = "right")
+              legend.position = "none") +
+      scale_y_continuous(position = "right"))
 
-    plotList[[focalRegion]] <- localMap
+    plotList[[focalRegion]] <- localMap +
+      inset_element(euroMap, left = 0.65, bottom = 0.65, right = 1.15, top = 1, align_to = "full")
 
   }
 
-  fullPlot <- wrap_plots(
-    euroMap + (plotList[[1]] / plotList[[2]])
-  )
+  # fullPlot <- wrap_plots(
+  #   euroMap + (plotList[[1]] / plotList[[2]])
+  # )
+
+  fullPlot <- plotList[[1]] + plotList[[2]]
 
   ggsave(plot = fullPlot, filename = here("figures", "studyLocationMapRoe.png"),
-         width = 300, height = 230, dpi = 300, units = "mm")
+         width = 300, height = 130, dpi = 300, units = "mm")
 
   return(fullPlot)
 

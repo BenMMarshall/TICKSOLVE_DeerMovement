@@ -7,3 +7,34 @@ roe deer habitat use was higher closer to the woodland edge
 Roe deer habitat use was higher in woodlands with higher tree density and wider variation in tree size, supportive of a preference for regenerating woodlands
 
 Human usage of woodlands was associated with lower roe deer use
+
+leaf1
+9dba3c
+3c5511
+
+ll
+#6A350FFF
+hl
+#C6D99EFF
+
+leaf2
+56aa55
+193c17
+
+trunk1
+b47326
+5c2e0d
+
+ll
+4C260BFF
+hl
+D98B2EFF
+
+blend
+BB9465FF
+
+Deer
+core #B9591FFF
+wh #E0C3B2FF
+lightb #B26546FF
+dark brown #341D14FF
