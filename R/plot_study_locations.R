@@ -42,8 +42,6 @@ plot_study_locations <- function(deerData, landuseList, patchList){
   gbGADM <- st_as_sf(gbGADM)
   # gbGADM <- st_transform(gbGADM, 27700)
 
-
-
   # Local maps --------------------------------------------------------------
 
   # targets::tar_load("tar_patchList")
@@ -60,7 +58,7 @@ plot_study_locations <- function(deerData, landuseList, patchList){
   names(plotList) <- regions
   for(focalRegion in regions){
 
-    # region <- "Aberdeenshire"
+    # focalRegion <- "Aberdeenshire"
     regionLocations_sel <- regionLocations[regionLocations$region %in% focalRegion,]
     (euroMap <- ggplot() +
         geom_sf(data = worldData %>%
@@ -112,11 +110,32 @@ plot_study_locations <- function(deerData, landuseList, patchList){
     }
 
     meanLocations <- deerData %>%
-      group_by(Animal_ID, region) %>%
+      left_join(tribble(~Animal_ID, ~woodlandName,
+                        "Roe01_F", "Gask Wood",
+                        "Roe02_F", "Gask Wood",
+                        "Roe03_M", "Kings Garn",
+                        "Roe04_F", "Gask Wood",
+                        "Roe05_F", "Muir of Dinnet",
+                        "Roe06_F", "Moss of Air",
+                        "Roe07_F", "Holly Hatch",
+                        "Roe08_M", "Gask Wood",
+                        "Roe09_M", "Black Hillocks",
+                        "Roe10_F", "Muir of Dinnet",
+                        "Roe11_F", "Well House Wood",
+                        "Roe12_F", "Well House Wood",
+                        "Roe13_F", "Moss of Air",
+                        "Roe14_M", "Well House Wood",
+                        "Roe15_F", "Moss of Air")) %>%
+      group_by(Animal_ID, region, woodlandName) %>%
       summarise(meanx = mean(x),
                 meany = mean(y)) %>%
       filter(region == focalRegion,
              str_detect(Animal_ID, "Roe"))
+
+    woodlandLabels <- meanLocations %>%
+      group_by(woodlandName) %>%
+      summarise(meanWoodlandx = mean(meanx),
+                meanWoodlandy = mean(meany))
 
     scaleLocation <- data.frame(x = c(st_bbox(focalPatches)[[1]] + 1000,
                                       st_bbox(focalPatches)[[1]] + 11000),
@@ -132,7 +151,6 @@ plot_study_locations <- function(deerData, landuseList, patchList){
       y = scaleLocation$y[1],
       yend = scaleLocation$y[2]
     )
-
     (localMap <- ggplot() +
         geom_spatraster(data = croppedStack, aes(fill = Deciduous_Broadleaf_Forest),
                         inherit.aes = TRUE) +
@@ -146,7 +164,13 @@ plot_study_locations <- function(deerData, landuseList, patchList){
         annotate("text", x = scaleLocationXY$x[1], y = scaleLocationXY$y[1],
                  label = "10km", colour = paletteList$baseGrey, size = 5, hjust = 0, vjust = 1.3,
                  fontface = 2) +
-        geom_label_repel(data = meanLocations, aes(x = meanx, y = meany, label = Animal_ID),
+        # geom_label_repel(data = meanLocations, aes(x = meanx, y = meany, label = Animal_ID),
+        #                  colour = paletteList$deerSpeciesPal[1], size = 3, force = 0.2, force_pull = 1,
+        #                  box.padding = unit(0.35, "lines"), label.padding = unit(1.5, "mm"),
+        #                  label.size = 0.75, segment.size = 0.95,
+        #                  max.overlaps = 20, max.iter = 1000000,
+        #                  seed = 2025, fontface = 2) +
+        geom_label_repel(data = woodlandLabels, aes(x = meanWoodlandx, y = meanWoodlandy, label = woodlandName),
                          colour = paletteList$deerSpeciesPal[1], size = 3, force = 0.2, force_pull = 1,
                          box.padding = unit(0.35, "lines"), label.padding = unit(1.5, "mm"),
                          label.size = 0.75, segment.size = 0.95,
