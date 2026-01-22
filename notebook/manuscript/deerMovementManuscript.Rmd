@@ -38,6 +38,11 @@ abstract: Animals use landscapes unequally and have differential responses to an
 keywords: Movement ecology, step selection function, habitat preference, habitat selection, animal movement, Roe Deer, Capreolus capreolus, road crossing, United Kingdom
 ---
 
+# Graphical Abstract {-}
+```{r graphicalAbstract, echo=FALSE, out.width='100%', fig.align="center", fig.pos = "ht", fig.cap=""}
+knitr::include_graphics(here::here("notebook", "manuscript", "graphical abstract", "movement graphical abstract.png"))
+```
+
 # Introduction
 Animals disproportionately use and move through some areas more than others.
 The study of these processes –i.e. habitat selection and movement– provides insights into the dynamic relationship between an animals' physiology and the set of resources and risks occurring in landscapes [@manly_resource_1993].
@@ -108,6 +113,9 @@ Within 300m of the site, is the edge of a large tract of commercial, densely pla
 
 - Gaskwood, also near Garlogie, is a commercial conifer forest including Scot's pine and Sitka spruce, within a mosaic landscape of forest and farmland patches, located 1 km across open farmland from Moss of Air.
 
+- Holly Hatch and Kings Garn in Wessex are a mix of both deciduous (Oak *Quercus spp.* and Beech *Fagus spp.*) and coniferous trees.
+Surrounding the woodlands are areas of pasture and heathland.
+
 We captured adult roe deer under Home Office Licence Project licence (PP1285683); a Nature Scot Research Authorisation licence to capture Roe Deer (16759); and a Natural England licence To Take deer Alive for Science, Education and Relocation to capture Roe and Fallow Deer (2022-63493-SPM-WLM). 
 We employed a "long net" capture method [@cockburn_comparative_1979], which has been used extensively and safely to capture Roe Deer in the UK [@gill_changes_1996] and elsewhere [@morellet_effect_2009].
 
@@ -132,7 +140,7 @@ Collars collected GPS fixes every 3 hours in Aberdeenshire, and every 30 minutes
 Collars in Wessex were detached after a short duration (~1 month) due to evidence from one animal that the collar may have caused some friction to the neck.
 As a result, the Wessex dataset is more limited in overall duration.
 
-```{r studyLocationMapRoe, echo=FALSE, out.width='95%', fig.align="center", fig.pos = "ht", fig.cap=" Locations of the study sites in Aberdeenshire and Wessex. Points show the mean location of GPS collared Roe Deer. Green areas in right panel depict woodland, and grey lines show roads. All maps are north orientated."}
+```{r studyLocationMapRoe, echo=FALSE, out.width='95%', fig.align="center", fig.pos="ht", fig.cap="Locations of the study sites in Aberdeenshire and Wessex. Points show the mean location of GPS collared Roe Deer. Green areas in right panel depict woodland, and grey lines show roads. All maps are north orientated."}
 knitr::include_graphics(here::here("figures", "studyLocationMapRoe.png"))
 ```
 
@@ -677,6 +685,8 @@ For permission to conduct the work, we thank NatureScot, ForestryEngland and Nat
 
 The code used to complete this study can be found at https://github.com/BenMMarshall/TICKSOLVE_DeerMovement amongst code for the broader examination of deer's role in these landscapes; and is archived at ||||| TBC |||||.
 
+We used @blender_2025 and @serif_affinity_2025 to create the graphical abstract visuals.
+
 ## Data availability
 
 Aberdeen Roe Deer movement data can be accessed via Movebank (https://www.movebank.org); Movebank ID 2890266958.
@@ -690,15 +700,15 @@ Studies that the HomeRange Database mean was based on: @melis_male_2005; @biosa_
 Conceptualization: Caroline Millins and Thomas A. Morrison.
 Data curation: Thomas A. Morrison.
 Formal analysis: Benjamin M. Marshall.
-Funding acquisition: Caroline Millins, Lucy Gilbert, and Thomas A. Morrison.
-Investigation: Caroline Millins, Thomas A. Morrison, John Boyle, Mark S. Greener, and Robin Gill.
-Methodology: Caroline Millins, Benjamin M. Marshall, John Boyle, Mark S. Greener, Robin Gill, and Thomas A. Morrison.
-Project administration: Caroline Millins, Lucy Gilbert, and Thomas A. Morrison.
+Funding acquisition: Lucy Gilbert, Caroline Millins, and Thomas A. Morrison.
+Investigation: John Boyle, Mark S. Greener, Robin Gill, Caroline Millins, and Thomas A. Morrison.
+Methodology: Benjamin M. Marshall, John Boyle, Mark S. Greener, Robin Gill, Caroline Millins, and Thomas A. Morrison.
+Project administration: Lucy Gilbert, Caroline Millins, and Thomas A. Morrison.
 Resources: Lucy Gilbert.
 Supervision: Lucy Gilbert and Mark S. Greener.
 Visualization: Benjamin M. Marshall.
 Writing - original draft: Benjamin M. Marshall, Valerio Lhamine, Caroline Millins, and Thomas A. Morrison.
-Writing - review & editing: Benjamin M. Marshall, Caroline Millins, Lucy Gilbert, John Boyle, Valerio Lhamine, Mark S. Greener, Robin Gill, and Thomas A. Morrison.
+Writing - review & editing: Benjamin M. Marshall, Lucy Gilbert, John Boyle, Valerio Lhamine, Mark S. Greener, Robin Gill, Caroline Millins, and Thomas A. Morrison.
 
 # Supplementary Material
 

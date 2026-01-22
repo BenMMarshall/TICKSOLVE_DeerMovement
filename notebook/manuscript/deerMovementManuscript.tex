@@ -97,6 +97,17 @@ Movement ecology, step selection function, habitat preference, habitat selection
 \clearpage
 \pagestyle{fancy}
 
+\section*{Graphical Abstract}\label{graphical-abstract}
+\addcontentsline{toc}{section}{Graphical Abstract}
+
+\begin{figure}[ht]
+
+{\centering \includegraphics[width=1\linewidth]{graphical abstract/movement graphical abstract} 
+
+}
+
+\end{figure}
+
 \section{Introduction}\label{introduction}
 
 Animals disproportionately use and move through some areas more than others.
@@ -159,6 +170,9 @@ These sites were selected to gain a range of habitats to enable us to address qu
   Moss of Air, near Garlogie is a mixed woodland including Scot's pine and birch, surrounded by a mosaic landscape consisting of patches of commercial conifer forest, arable and pasture farmland.
 \item
   Gaskwood, also near Garlogie, is a commercial conifer forest including Scot's pine and Sitka spruce, within a mosaic landscape of forest and farmland patches, located 1 km across open farmland from Moss of Air.
+\item
+  Holly Hatch and Kings Garn in Wessex are a mix of both deciduous (Oak \emph{Quercus spp.} and Beech \emph{Fagus spp.}) and coniferous trees.
+  Surrounding the woodlands are areas of pasture and heathland.
 \end{itemize}
 
 We captured adult roe deer under Home Office Licence Project licence (PP1285683); a Nature Scot Research Authorisation licence to capture Roe Deer (16759); and a Natural England licence To Take deer Alive for Science, Education and Relocation to capture Roe and Fallow Deer (2022-63493-SPM-WLM).
@@ -191,7 +205,7 @@ As a result, the Wessex dataset is more limited in overall duration.
 
 }
 
-\caption{ Locations of the study sites in Aberdeenshire and Wessex. Points show the mean location of GPS collared Roe Deer. Green areas in right panel depict woodland, and grey lines show roads. All maps are north orientated.}\label{fig:studyLocationMapRoe}
+\caption{Locations of the study sites in Aberdeenshire and Wessex. Points show the mean location of GPS collared Roe Deer. Green areas in right panel depict woodland, and grey lines show roads. All maps are north orientated.}\label{fig:studyLocationMapRoe}
 \end{figure}
 
 \begingroup\fontsize{9}{11}\selectfont
@@ -501,6 +515,8 @@ For all analysis we used R (v.4.4.2) (\citeproc{ref-base}{R Core Team, 2024}), a
 
 The code used to complete this study can be found at \url{https://github.com/BenMMarshall/TICKSOLVE_DeerMovement} amongst code for the broader examination of deer's role in these landscapes; and is archived at \textbar\textbar\textbar\textbar\textbar{} TBC \textbar\textbar\textbar\textbar\textbar.
 
+We used Blender Online Community (\citeproc{ref-blender_2025}{2025}) and Serif (\citeproc{ref-serif_affinity_2025}{2025}) to create the graphical abstract visuals.
+
 \subsection{Data availability}\label{data-availability}
 
 Aberdeen Roe Deer movement data can be accessed via Movebank (\url{https://www.movebank.org}); Movebank ID 2890266958.
@@ -514,15 +530,15 @@ Studies that the HomeRange Database mean was based on: Melis, Cagnacci \& Lovari
 Conceptualization: Caroline Millins and Thomas A. Morrison.
 Data curation: Thomas A. Morrison.
 Formal analysis: Benjamin M. Marshall.
-Funding acquisition: Caroline Millins, Lucy Gilbert, and Thomas A. Morrison.
-Investigation: Caroline Millins, Thomas A. Morrison, John Boyle, Mark S. Greener, and Robin Gill.
-Methodology: Caroline Millins, Benjamin M. Marshall, John Boyle, Mark S. Greener, Robin Gill, and Thomas A. Morrison.
-Project administration: Caroline Millins, Lucy Gilbert, and Thomas A. Morrison.
+Funding acquisition: Lucy Gilbert, Caroline Millins, and Thomas A. Morrison.
+Investigation: John Boyle, Mark S. Greener, Robin Gill, Caroline Millins, and Thomas A. Morrison.
+Methodology: Benjamin M. Marshall, John Boyle, Mark S. Greener, Robin Gill, Caroline Millins, and Thomas A. Morrison.
+Project administration: Lucy Gilbert, Caroline Millins, and Thomas A. Morrison.
 Resources: Lucy Gilbert.
 Supervision: Lucy Gilbert and Mark S. Greener.
 Visualization: Benjamin M. Marshall.
 Writing - original draft: Benjamin M. Marshall, Valerio Lhamine, Caroline Millins, and Thomas A. Morrison.
-Writing - review \& editing: Benjamin M. Marshall, Caroline Millins, Lucy Gilbert, John Boyle, Valerio Lhamine, Mark S. Greener, Robin Gill, and Thomas A. Morrison.
+Writing - review \& editing: Benjamin M. Marshall, Lucy Gilbert, John Boyle, Valerio Lhamine, Mark S. Greener, Robin Gill, Caroline Millins, and Thomas A. Morrison.
 
 \section{Supplementary Material}\label{supplementary-material}
 
@@ -978,6 +994,9 @@ Biosa D, Grignolio S, Sica N, Pagon N, Scandura M, Apollonio M. 2015. Do relativ
 \bibitem[\citeproctext]{ref-sp2013}
 Bivand RS, Pebesma E, Gomez-Rubio V. 2013. \emph{\href{https://asdar-book.org/}{Applied spatial data analysis with {R}, second edition}}. Springer, NY.
 
+\bibitem[\citeproctext]{ref-blender_2025}
+Blender Online Community. 2025. \emph{\href{http://www.blender.org}{Blender - a 3D modelling and rendering package}}. Blender Institute, Amsterdam: Blender Foundation.
+
 \bibitem[\citeproctext]{ref-bonnot_interindividual_2015}
 Bonnot N, Verheyden H, Blanchard P, Cote J, Debeffe L, Cargnelutti B, Klein F, Hewison AJM, Morellet N. 2015. Interindividual variability in habitat use: Evidence for a risk management syndrome in roe deer? \emph{Behavioral Ecology} 26:105--114. DOI: \href{https://doi.org/10.1093/beheco/aru169}{10.1093/beheco/aru169}.
 
@@ -1289,6 +1308,9 @@ Scholefield PA, Morton RD, Rowland CS, Henrys PA, Howard DC, Norton LR. 2016. Wo
 
 \bibitem[\citeproctext]{ref-schwandner_predicting_2025}
 Schwandner IA, Morrison TA, Hopcraft JGC, Wall J, Hughey L, Boone RB, Ogutu JO, Jakes AF, Kifugo SC, Limo C, Ndambuki Mwiu S, Nyaga V, Olff H, Ojwang GO, Sairowua W, Sasine J, Senteu JS, Sopia D, Worden J, Stabach JA. 2025. Predicting the impact of targeted fence removal on connectivity in a migratory ecosystem. \emph{Ecological Applications} 35:e3094. DOI: \href{https://doi.org/10.1002/eap.3094}{10.1002/eap.3094}.
+
+\bibitem[\citeproctext]{ref-serif_affinity_2025}
+Serif. 2025. Affinity {Publisher} 2.
 
 \bibitem[\citeproctext]{ref-serota_behavioral_2024}
 Serota MW, Alarcón PAE, Donadio E, Middleton AD. 2024. Behavioral state-dependent selection of roads by guanacos. \emph{Landscape Ecology} 39:110. DOI: \href{https://doi.org/10.1007/s10980-024-01909-w}{10.1007/s10980-024-01909-w}.
