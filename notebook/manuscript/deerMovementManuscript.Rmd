@@ -3,7 +3,7 @@ title: "Roe Deer show an affinity for woodland and reluctance to cross roads"
 author1: "Benjamin Michael Marshall"
 author2: "Lucy Gilbert"
 author3: "John Boyle"
-author4: "Valerio Lhamine"
+author4: "Valerio V. Lhamine"
 author5: "Mark Steven Greener"
 author6: "Robin Gill"
 author7: "Caroline Millins"
@@ -113,8 +113,10 @@ Within 300m of the site, is the edge of a large tract of commercial, densely pla
 
 - Gaskwood, also near Garlogie, is a commercial conifer forest including Scot's pine and Sitka spruce, within a mosaic landscape of forest and farmland patches, located 1 km across open farmland from Moss of Air.
 
-- Holly Hatch and Kings Garn in Wessex are a mix of both deciduous (Oak *Quercus spp.* and Beech *Fagus spp.*) and coniferous trees.
-Surrounding the woodlands are areas of pasture and heathland.
+- Holly Hatch and Kings Garn in Wessex are both within the New Forest National Park.
+Both sites are a mix of mature deciduous (Oak *Quercus spp.* and Beech *Fagus spp.*) and coniferous trees.
+Holly Hatch also has dense stands of spruce saplings, surrounded by heathland.
+Both areas also support other large herbivores, including cattle, ponies, donkeys, Fallow Deer, Red Deer and Muntjac Deer.
 
 We captured adult roe deer under Home Office Licence Project licence (PP1285683); a Nature Scot Research Authorisation licence to capture Roe Deer (16759); and a Natural England licence To Take deer Alive for Science, Education and Relocation to capture Roe and Fallow Deer (2022-63493-SPM-WLM). 
 We employed a "long net" capture method [@cockburn_comparative_1979], which has been used extensively and safely to capture Roe Deer in the UK [@gill_changes_1996] and elsewhere [@morellet_effect_2009].
@@ -136,7 +138,8 @@ This tag and notch were used to identify the animal following detachment of the 
 The deer was then released in a safe area away from any hazards.
 
 We fitted captured adult Roe Deer with a GPS collar (30mm reinforced Tellus GP Light Iridium by Followit) that weighed 276g, representing <2% of the average Roe Deer total body mass.
-Collars collected GPS fixes every 3 hours in Aberdeenshire, and every 30 minutes in Wessex.
+Following release, deer were closely monitored for ~10 days with high frequency (30 minute) GPS fixes and daily data transmission to detect any unusual behaviour (e.g., erratic movements, or small daily displacement) indicative of collar or capture trauma.
+After the initial monitoring period, collars collected GPS fixes every 3 hours in Aberdeenshire, and every 30 minutes in Wessex.
 Collars in Wessex were detached after a short duration (~1 month) due to evidence from one animal that the collar may have caused some friction to the neck.
 As a result, the Wessex dataset is more limited in overall duration.
 
@@ -707,8 +710,8 @@ Project administration: Lucy Gilbert, Caroline Millins, and Thomas A. Morrison.
 Resources: Lucy Gilbert.
 Supervision: Lucy Gilbert and Mark S. Greener.
 Visualization: Benjamin M. Marshall.
-Writing - original draft: Benjamin M. Marshall, Valerio Lhamine, Caroline Millins, and Thomas A. Morrison.
-Writing - review & editing: Benjamin M. Marshall, Lucy Gilbert, John Boyle, Valerio Lhamine, Mark S. Greener, Robin Gill, Caroline Millins, and Thomas A. Morrison.
+Writing - original draft: Benjamin M. Marshall, Valerio V. Lhamine, Caroline Millins, and Thomas A. Morrison.
+Writing - review & editing: Benjamin M. Marshall, Lucy Gilbert, John Boyle, Valerio V. Lhamine, Mark S. Greener, Robin Gill, Caroline Millins, and Thomas A. Morrison.
 
 # Supplementary Material
 
