@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.13)  29 JAN 2026 15:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.13)  18 FEB 2026 17:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -552,7 +552,7 @@ File: graphical abstract/movement graphical abstract.png Graphic file (type png)
 Package pdftex.def Info: graphical abstract/movement graphical abstract.png  used on input line 105.
 (pdftex.def)             Requested size: 495.07779pt x 312.69136pt.
 LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 133.
+(Font)              scaled to size 10.0pt on input line 118.
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
 Package pdftex.def Info: PDFheaderImage.png  used on input line 137.
@@ -846,13 +846,13 @@ Package rerunfilecheck Info: File `deerMovementManuscript.out' has not changed.
 Here is how much of TeX's memory you used:
  14534 strings out of 469519
  242091 string characters out of 5468256
- 785214 words of memory out of 5000000
+ 786272 words of memory out of 5000000
  42735 multiletter control sequences out of 15000+600000
  704098 words of font info for 86 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  90i,15n,131p,3383b,658s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <c:/Users/benja/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit1000.600pk> <c:/Users/benja/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Italic.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on deerMovementManuscript.pdf (30 pages, 5327606 bytes).
+Output written on deerMovementManuscript.pdf (30 pages, 5327641 bytes).
 PDF statistics:
  943 PDF objects out of 1000 (max. 8388607)
  811 compressed objects within 9 object streams

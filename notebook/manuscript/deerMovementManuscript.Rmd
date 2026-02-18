@@ -34,7 +34,7 @@ csl: peerj.csl
 editor_options: 
   markdown: 
     wrap: sentence
-abstract: Animals use landscapes unequally and have differential responses to anthropogenic changes such as land cover modification. Such responses are difficult to predict a priori, and requires examination of animals' movements to determine. A full understanding of animals' movements and tendencies are particularly valuable in situations where human-animal interactions have implications for either's well-being. Large herbivores, with relatively high mobility, often come in contact with humans as habitats become more restricted. This can lead to concentrated grazing pressures, animal-vehicle collisions, and increased disease transfer risks. In Europe, Roe Deer (_Capreolus capreolus_), a large ungulate relatviely tolerate to humans , are one of the more prevalent herbivores that often find themselves interacting with anthropogenic activity. By examining Roe Deer in two mixed use landscapes in the United Kingdom, where their movements are comparatively unknown, we add to the knowledge of how widely Roe Deer range and use the available human-modified land covers. Through the GPS tracking of 15 deer, we reveal reasonably limited home ranges that are centred on woodland patches. We observed forays outside of the woodland patches into open shrub-, crop- and grass- lands, but only to distances up to 750m. When outside of the woodland, deer movements (step lengths) appeared to be lower but more variable, potentially indicative of a behavioural change when in open areas. We documented a consistent, albeit slight, aversion to crossing roads indicating that roads contribute to deer habitat fragmentation. Overall, our results highlight UK Roe Deer’s connection to woodland patches, and suggests their movements and overall landscape connectivity are closely tied to woodland presence.
+abstract: Animals use landscapes unequally and have differential responses to anthropogenic changes such as land cover modification. Responses are difficult to predict _a priori_, and require examination of animals' movements to determine. Understanding animals' movements is particularly valuable in situations where human-animal interactions have implications for either's well-being. Large herbivores, with relatively high mobility, often come in contact with humans as habitats become more restricted. This can lead to concentrated grazing pressures, animal-vehicle collisions, and increased disease transfer risks. In Europe, Roe Deer (_Capreolus capreolus_), a large ungulate relatively tolerate to humans, are one of the more prevalent herbivores that often find themselves interacting with anthropogenic activity. By examining Roe Deer in two mixed use landscapes in the United Kingdom, where their movements are comparatively unknown, we explore how widely Roe Deer range and use the available human-modified land covers. Through the GPS tracking of 15 deer, we reveal reasonably limited home ranges that are centred on woodland patches. We observed forays outside of the woodland patches into open shrub-, crop- and grass- lands, but only to distances up to 750m. When outside of the woodland, deer movements (step lengths) appeared to be lower but more variable, potentially indicative of a behavioural change when in open areas. We documented a consistent, albeit slight, aversion to crossing roads indicating that roads contribute to deer habitat fragmentation. Overall, our results highlight UK Roe Deer’s connection to woodland patches, and suggest their movements and overall landscape connectivity are closely tied to woodland presence.
 keywords: Movement ecology, step selection function, habitat preference, habitat selection, animal movement, Roe Deer, Capreolus capreolus, road crossing, United Kingdom
 ---
 
@@ -49,15 +49,15 @@ The study of these processes –i.e. habitat selection and movement– provides 
 These species-habitat relationships not only determine the spatial distribution of populations, but also fundamentally underpin demographic performance [@matthiopoulos_establishing_2015].
 Accelerating landscape changes in the form of habitat destruction, creation and transformation increases the urgency for understanding if and how animals adjust movements to accommodate landscape changes.
 
-Animal responses to landscapes can be hard to predict a priori.
+Animal responses to landscapes can be hard to predict _a priori_.
 At the global scale, wildlife movement is significantly impacted by human presence [@tucker2018moving].
 Mammals and reptiles broadly experience reductions in movement, with mobility limited by human-created barriers [e.g., roads or fencing; @tucker2018moving; @jerina2012roads; @jones2019fences].
 Similarly, mammal home range sizes are roughly five times smaller in areas with high versus low human disturbance [@broekman_environmental_2024].
 All else being equal, habitat fragmentation can also increase travel time for resource acquisition, resulting in higher energy expenditure [@doherty_coupling_2018], shifts in diets [@redpath_impact_1995], and lower breeding success [@saunders_breeding_1982].
 
 Large herbivores, with relatively high mobility and large home ranges, experience frequent interactions with humans, domesticated animals and infrastructure.
-Due to their economic importance and ecological impact, the space use patterns of large herbivores, and their responses to anthropogenic features, have been relatively well studied.
-Infrastructure such as roads and fences tend to degrade and fragment habitat, altering animal movement paths [@schwandner_predicting_2025; @sawyer_framework_2013], and behaviour [@xu_barrier_2021].
+Due to their economic importance and ecological impact, the space use patterns of large herbivores and their responses to anthropogenic features have been relatively well studied.
+Infrastructure such as roads and fences tend to degrade and fragment habitat, altering animal movement paths [@schwandner_predicting_2025; @sawyer_framework_2013] and behaviour [@xu_barrier_2021].
 However, movement responses to specific landscape features can be complex.
 For example, GPS-tagged Guanacos in Argentina were attracted to roads for grazing resources and low predation risk, but they strongly avoided crossing roads [@serota_behavioral_2024].
 By understanding movement responses, we may be better placed to predict and mitigate harmful interactions between wildlife and humans.
@@ -102,23 +102,23 @@ In Wessex, we focused deer capture at Holly Hatch and Kings Garn.
 These sites were selected to gain a range of habitats to enable us to address questions about Roe Deer habitat selection in woodlands, and to be representative of the types of forest and landscape typical of Aberdeenshire and Wessex.
 
 - The Muir of Dinnet is a National Nature Reserve managed by NatureScot, the Scottish Government’s statutory conservation agency, in the east of the Cairngorms National Park.
-The reserve consists of mainly mixed woodland dominated by birch (*Betula spp.*) and Scot's pine (*Pinus sylvestris*) with extensive areas of naturally regenerating aspen, *Populus tremula*, and patches of heath and bogs.
+The reserve consists of mainly mixed woodland dominated by birch (*Betula spp.*) and Scot's Pine (*Pinus sylvestris*) with extensive areas of naturally regenerating Aspen (*Populus tremula*) and patches of heath and bogs.
 
-- Black Hillocks is managed by the Glendye Estate and includes a patch of coniferous forest dominated by Scot's Pine (*Pinus sylvestris*) and European larch, *Larix decidua*, surrounded by open upland heathland.
-Within 300m of the site, is the edge of a large tract of commercial, densely planted, mature conifer forest dominated by exotic species such as Sitka spruce, *Picea sitchensis*.
+- Black Hillocks is managed by the Glendye Estate and includes a patch of coniferous forest dominated by Scot's Pine and European Larch (*Larix decidua*) surrounded by open upland heathland.
+Within 300m of the site, is the edge of a large tract of commercial, densely planted, mature conifer forest dominated by exotic species such as Sitka Spruce (*Picea sitchensis*).
 
-- Wellhouse Woods is a commercial Sitka spruce (*Picea sitchensis*) plantation surrounded by farmland pasture.
+- Wellhouse Woods is a commercial Sitka Spruce plantation surrounded by farmland pasture.
 
-- Moss of Air, near Garlogie is a mixed woodland including Scot's pine and birch, surrounded by a mosaic landscape consisting of patches of commercial conifer forest, arable and pasture farmland. 
+- Moss of Air, near Garlogie is a mixed woodland including Scot's Pine and birch, surrounded by a mosaic landscape consisting of patches of commercial conifer forest, arable and pasture farmland. 
 
-- Gaskwood, also near Garlogie, is a commercial conifer forest including Scot's pine and Sitka spruce, within a mosaic landscape of forest and farmland patches, located 1 km across open farmland from Moss of Air.
+- Gaskwood, also near Garlogie, is a commercial conifer forest including Scot's Pine and Sitka spruce, within a mosaic landscape of forest and farmland patches, located 1 km across open farmland from Moss of Air.
 
 - Holly Hatch and Kings Garn in Wessex are both within the New Forest National Park.
 Both sites are a mix of mature deciduous (Oak *Quercus spp.* and Beech *Fagus spp.*) and coniferous trees.
 Holly Hatch also has dense stands of spruce saplings, surrounded by heathland.
 Both areas also support other large herbivores, including cattle, ponies, donkeys, Fallow Deer, Red Deer and Muntjac Deer.
 
-We captured adult roe deer under Home Office Licence Project licence (PP1285683); a Nature Scot Research Authorisation licence to capture Roe Deer (16759); and a Natural England licence To Take deer Alive for Science, Education and Relocation to capture Roe and Fallow Deer (2022-63493-SPM-WLM). 
+We captured adult Roe Deer under Home Office Licence Project licence (PP1285683); a Nature Scot Research Authorisation licence to capture Roe Deer (16759); and a Natural England licence To Take deer Alive for Science, Education and Relocation to capture Roe and Fallow Deer (2022-63493-SPM-WLM). 
 We employed a "long net" capture method [@cockburn_comparative_1979], which has been used extensively and safely to capture Roe Deer in the UK [@gill_changes_1996] and elsewhere [@morellet_effect_2009].
 
 Briefly, we set up 1-2 km of 2-metre-high nylon nets placed along paths, clearings and the edges of woodland patches.
@@ -249,11 +249,11 @@ We paired these visual inspections with a judgement of effective sample size to 
 All our individuals showed effective sample sizes between `r essOverall`, indicating that the movement data contained a large number of complete home range crossing events, allowing us to be confident in overall home range estimates.
 
 Having determined the data's suitability for home range estimations, we extracted the 95% and 99% contours from the weighted AKDE estimate, alongside 95% confidence interval surrounding that contour.
-We selected 95% as a balance between a generous estimate of home range, while also avoiding the undue influence of the most extremely outlying movements.
+We selected 95% for further estimate mean ranges as it struck a balance between a generous estimate of home range, while also avoiding the undue influence of the most extremely outlying movements.
 To generate an overall home range estimate for Aberdeenshire Roe Deer, we averaged the home ranges using the weighted mean function provided by the ctmm package [@ctmm; @silva_autocorrelationinformed_2022].
 This way the home range mean is weighted by the confidence (i.e., effective sample size) surrounding each home range.
 
-We retained 99% estimates to help quantify the distance from which Roe Deer will range away from woodland patches.
+We retained 99% contour estimates to help quantify the distance from which Roe Deer will range away from woodland patches.
 We calculated the widest dimension of each 99% home range polygon (or largest polygon if the home range area was non-contiguous), and halved that value to quantify the distance deer would be willing to travel beyond their resident patch.
 To support this approach and to produce an overall distribution deer distance away from woodland patches, we determined how far every deer location was from the nearest patch and plotted those values against the distance estimated by the home range models.
 
@@ -294,7 +294,7 @@ We conducted the same process to create a distance to woodland raster, where we 
 These distance rasters allowed for easy extraction of the distance to the nearest hedgerow and woodland for all locations.
 This allowed us to investigate the influence of woodland or hedgerow on the use of open habitats by Roe Deer, as well as the extent to which expanses of open habitats might act as barriers to Roe Deer dispersal. 
 
-We acquired road data from OS map open GOV licensed [@ordnance_survey_os_2024]. 
+We acquired road data from Ordnance Survey Open Roads dataset [@ordnance_survey_os_2024]. 
 We created a binary variable describing crossing events for all steps, with all steps that crossed one or more of the roads being classed as 1.
 This binary variable allowed us to estimate the likelihood Roe Deer cross a road and therefore the extent to which roads may present a barrier [@serota_behavioral_2024].
 
@@ -410,7 +410,7 @@ humanCoef <- poisCoef %>%
 ## Population level selection
 
 The population level habitat selection model revealed a general tendency for Roe Deer to remain closer to the woodland patches (`r distWoodCoef`), with no significant selection for hedgerows (`r distHedgeCoef`; Fig. \@ref(fig:poisCoefPlot)).
-The model also revealed that roads play a significant role in reducing connectivity across the landscape: observed deer steps were significantly less likely to cross roads than control steps (`r roadCrossCoef`).
+The model also revealed that roads play a significant role in reducing connectivity across the landscape: observed deer steps were significantly less likely to cross roads than random steps (`r roadCrossCoef`).
 The population habitat selection model also revealed significant selection for the land cover classes open shrubland (`r shrubCoef`) and tall grassland (`r tallGCoef`); other relationships were less clear (Tab. \@ref(tab:poisTable)).
 
 The model's inclusion of step length and log step length interactions allowed us to examine whether movement was altered by land cover.
@@ -584,10 +584,10 @@ Further exploration of individual habitat selection models highlights whether th
 Distance to woodland shows a marginally higher specialisation (`r woodSpecial`) compared to the weighted population mean (`r woodPopAvg`; Fig. \@ref(fig:ssfCoefPlot)).
 This difference is likely explained by the deviating Roe 10 who expressed an opposite response to the majority of other deer by expressing an aversion to woodland (`r wood10coef`).
 Apart from Roe 10, Roe Deer are exhibiting the same clear preference for remaining near woodland as seen in the population level model.
-Roe 10 is also likely the reason the estimated heterogeneity in response to distance to woodland (`r woodHetero`) is greater than distance to hedges (`r hedgeHetero`; Fig. \@ref(fig:ssfHeteroPlot)).
+Roe 10 is also likely the reason the estimated heterogeneity in response to distance to woodland (`r woodHetero`) is greater than distance to hedgerows (`r hedgeHetero`; Fig. \@ref(fig:ssfHeteroPlot)).
 
 Distance to hedgerows does not see the same consistent response, instead with a number of individuals showing a opposing responses.
-This is reflected in the population mean being close to zero (`r hedgePopAvg`), while the specialisation is greater (`r hedgeSpecial`; Fig. \@ref(fig:ssfSpecialPlot)), the combination of which could indicate two differing responses to hedges in the sampled Roe Deer.
+This is reflected in the population mean being close to zero (`r hedgePopAvg`), while the specialisation is greater (`r hedgeSpecial`; Fig. \@ref(fig:ssfSpecialPlot)), the combination of which could indicate two differing responses to hedgerows in the sampled Roe Deer.
 
 The chance of crossing a road is considerably more consistent, with the vast majority of individuals preferring not to cross roads; this is reflected in a significantly negative population mean (`r roadsPopAvg`).
 The elevated specialisation (`r roadsSpecial`) and heterogeneity (`r roadsHetero`) values are almost entirely driven by two very uncertain estimates from Roe Deer 09 (`r roads09coef`) and Roe Deer 11 (`r roads11coef`).
@@ -601,7 +601,7 @@ The response to Evergreen Needleleaf Forest appears the least consistent, with m
 Tall Grassland showed similar levels of diverging estimates, with individuals showing a mix of positive and negative responses.
 Unlike the population estimates for Cropland and Evergreen Needleleaf Forest, the weighted population mean for Tall Grassland (`r tgraPopAvg`) does not match the population level model (`r tallGCoef`).
 This may be indicative that the interaction effects included in the population level model are mediating the responses to Tall Grassland.
-A similar reason may explain the clear Open Shrubland response in the population level model `r shrubCoef` that is absent in the individual models and the resulting weighted population mean `r openPopAvg`; however, this is more likely to be caused by the limited number of individuals exposed to Open Shrubland and a different handling of Roe Deer 03's strongly negative response.
+A similar reason may explain the clear Open Shrubland response in the population level model (`r shrubCoef`) that is absent in the individual models and the resulting weighted population mean (`r openPopAvg`); however, this is more likely to be caused by the limited number of individuals exposed to Open Shrubland and a different handling of Roe Deer 03's strongly negative response.
 The other land covers are all harder to confidently interpret given the frequency of very uncertain extreme estimates.
 The uncertainty surrounding Human Settlements and Permanent Wetland is well reflected in the population level model.
 The high levels of specialisation and heterogeneity are driven by these same extreme estimates.
@@ -630,7 +630,7 @@ Some of the variation in home range has been suggested to be a product of food a
 
 Other examinations of Roe Deer have highlighted the importance of risk guiding when Roe Deer leave their core wooded range to make use of more open areas [@padie_roe_2015; @bonnot_interindividual_2015; @venkatesan_drivers_2026].
 The potential benefits of managing this risk to reap the nutritional benefits afforded by open areas are apparent [@hewison_landscape_2009], and may present a direct trade off against the risks posed by humans.
-Humans are likely the UK Roe Deer's primary concern, as other predators such as Lynx, require different risk mitigating decisions, are absent [@lone_living_2014].
+Humans are likely the UK Roe Deer's primary concern, as other predators such as Lynx, which require different risk mitigating decisions, are absent [@lone_living_2014].
 The shifts in movements (i.e., step lengths) we report here may be a coarse representation of Roe Deer balancing the risk and benefits in crop- and grasslands.
 Such trade-offs may be more pronounced in more fragmented or riskier landscapes, and could also explain the lack of consistent selection to remain near hedgerows.
 Compared to other Roe Deer studies, our Roe Deer may have easier access to wooded cover in a less fragmented landscape [@morellet_landscape_2011]; thereby, potentially becoming less dependent on hedgerows.
@@ -677,7 +677,7 @@ Further work could benefit from focusing on UK Roe Deer in areas with a greater 
 
 We are indebted to the hundreds of volunteers who assisted in the deployment of deer GPS collars.
 We especially thank Mark Hewison, Jochen Langbein, Tim Dansie, Andy Page, Sandy Shore and Andy Shore for generous advice in the field and training in capture methods.
-This research forms part of the TickSolve project (https://ticksolve.ceh.ac.uk/) and was funded by UK Research and Innovation through the NERC grant NE/W003171/1.
+This research forms part of the TickSolve project (https://ticksolve.ceh.ac.uk/) and was funded by UK Research and Innovation through the NERC grants NE/W003171/1 and NE/W003244/1.
 For permission to conduct the work, we thank NatureScot, ForestryEngland and NaturalEngland.
 
 ## Software availability
@@ -694,7 +694,7 @@ We used @blender_2025 and @serif_affinity_2025 to create the graphical abstract 
 
 Aberdeen Roe Deer movement data can be accessed via Movebank (https://www.movebank.org); Movebank ID 2890266958.
 
-New Forest Roe Deer movement data can be accessed via Movebank (https://www.movebank.org); Movebank ID ||||| TBC |||||.
+New Forest Roe Deer movement data can be accessed via Movebank (https://www.movebank.org); Movebank ID 8086497234.
 
 Studies that the HomeRange Database mean was based on: @melis_male_2005; @biosa_relatives_2015; @dupke_habitat_2017; @rossi_home_2003; @focardi_interspecific_2006; @picardi_movement_2019; @ramanzin_seasonal_2007; @mysterud_seasonal_1999; @ranc_preference_2020; @richard_ranging_2008; @aiello_ranging_2013; @morellet_seasonality_2013; @vanpe_access_2009; @pellerin_complementary_2016; @kjellander_experimental_2004; @van_laere_utilisation_1996; @cederlund_home_1983; @said_ecological_2005; @bideau_effects_1993; @cimino_effects_2003; @lamberti_alternative_2001; @lamberti_use_2006; @bevanda_landscape_2015; @pagon_territorial_2017; @debeffe_conditiondependent_2012; @chapman_sympatric_1993; @lamberti_two_2004; @maublanc_experimental_2018; @padie_roe_2015; @said_influence_2005; @carvalho_ranging_2008; @malagnino_reproductive_2021; @linnell_site_1995; @rossi_male_2001; @jeppesen_home_1990.
 
