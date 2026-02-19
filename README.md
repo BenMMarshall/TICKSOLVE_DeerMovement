@@ -1,5 +1,7 @@
 # TICKSOLVE_DeerMovement
 
+<a href="https://doi.org/10.5281/zenodo.18701055"><img src="https://zenodo.org/badge/894023189.svg" alt="DOI"></a>
+
 Code based used to explore the movements of Roe and Fallow Deer, as well as estimate functional landscape connectivity for deer and rodent species. The code is used in the following publications that provide additional detail on it's running and motivation:
 
 -   Marshall et al., 2026. Roe Deer show an affinity for woodland and reluctance to cross roads. [[MANUSCRIPT IN PREP]]
@@ -7,6 +9,8 @@ Code based used to explore the movements of Roe and Fallow Deer, as well as esti
 -   Venkatesan et al., 2026. Roe deer prefer more connected patches of woodland with higher tree density in a woodland-agricultural mosaic landscape. [[MANUSCRIPT IN PREP]]
 
 The inter-relationship of functions is governed by the `_targets.R` script, that uses the targets package to organise and operate the entire analysis pipeline. The entire pipeline should be operable using `targets::tar_make()`, provided the data has been made accessible.
+
+This repository is also archived at: https://doi.org/10.5281/zenodo.18701056, that also includes information on how best to cite.
 
 ### Data Required
 
