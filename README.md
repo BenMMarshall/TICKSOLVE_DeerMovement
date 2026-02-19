@@ -6,11 +6,11 @@ Code based used to explore the movements of Roe and Fallow Deer, as well as esti
 
 -   Venkatesan et al., 2026. Roe deer prefer more connected patches of woodland with higher tree density in a woodland-agricultural mosaic landscape. [[MANUSCRIPT IN PREP]]
 
-The inter-relationship of functions is governed by the \_targets.R script, that uses the targets package to organise and operate the entire analysis pipeline. The entire pipeline should be operable usingtargets::tar*\_*make(), provided the data has been made accessible.
+The inter-relationship of functions is governed by the `_targets.R` script, that uses the targets package to organise and operate the entire analysis pipeline. The entire pipeline should be operable using `targets::tar_make()`, provided the data has been made accessible.
 
 ### Data Required
 
-The (most) data required to re-run this analysis could not be shared alongside due to licensing restrictions. They are used in the function with "read\_" prefixes. However, data can be obtained from the following locations, and preprocessed version are available at Core data underlying these analyses can be found at: https://doi.org/10.5281/zenodo.18699746.
+The (most) data required to re-run this analysis could not be shared alongside due to licensing restrictions. They are used in the function with "read" prefixes. However, data can be obtained from the following locations, and preprocessed version are available at Core data underlying these analyses can be found at: https://doi.org/10.5281/zenodo.18699746.
 
 Deer movement is shared as part of this repository, but can be additionally found at Movebank.
 Aberdeen Roe Deer movement data: (<https://www.movebank.org>); Movebank ID 2890266958. 
