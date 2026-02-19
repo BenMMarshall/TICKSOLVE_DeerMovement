@@ -310,7 +310,7 @@ Our final formula was: *y ~ -1 + Distance to woodland (continuous) + Distance to
 
 To supplement the population model, we ran individual level step-selection models for each Roe Deer separately.
 These models used the same data as the population level model, but focused on individual level responses relative to the population mean.
-Past studies of wild Roe Deer have found substantial levels of individual variability in behavioural responses to risk [@bonnot_interindividual_2015].  
+Past studies of wild Roe Deer have found substantial levels of individual variability in behavioural responses to risk [@bonnot_interindividual_2015].
 For the individual models, we used a formula that included land cover class, distance to woodland, distance to hedgerows, a binary describing whether they crossed a road, step length, log step length, and cos of turn angle.
 Once we had estimated individual responses to the environmental variables, we explore how the variation in individual coefficients could highlight individual variability in selection.
 We used the IndRSA package [@IndRSA_text] to explore the variation of resulting coefficients (i.e., selection or attraction towards environmental characteristics), producing population-level estimates of specialisation, heterogeneity, and a weighted population mean [@bastillerousseau_simple_2022].
@@ -686,9 +686,9 @@ For permission to conduct the work, we thank NatureScot, ForestryEngland and Nat
 
 ```
 
-The code used to complete this study can be found at [https://github.com/BenMMarshall/TICKSOLVE_DeerMovement](https://github.com/BenMMarshall/TICKSOLVE_DeerMovement) amongst code for the broader examination of deer's role in these landscapes; and is archived at ||||| TBC |||||.
+The code used to complete this study can be found at [https://github.com/BenMMarshall/TICKSOLVE_DeerMovement](https://github.com/BenMMarshall/TICKSOLVE_DeerMovement) amongst code for the broader examination of deer's role in these landscapes; and is archived at [https://doi.org/10.5281/zenodo.18701055](https://doi.org/10.5281/zenodo.18701055).
 
-We used @blender_2025 and @serif_affinity_2025 to create the graphical abstract visuals.
+We used Blender 4.5 LTS [@blender_2025] and Affinity Publisher 2 [@serif_affinity_2025] to create the graphical abstract visuals.
 
 ## Data availability
 
