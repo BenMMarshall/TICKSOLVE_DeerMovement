@@ -10,11 +10,11 @@ The inter-relationship of functions is governed by the \_targets.R script, that 
 
 ### Data Required
 
-The (most) data required to re-run this analysis could not be shared alongside due to licensing restrictions. They are used in the function with "read\_" prefixes. However, data can be obtained from the following locations:
+The (most) data required to re-run this analysis could not be shared alongside due to licensing restrictions. They are used in the function with "read\_" prefixes. However, data can be obtained from the following locations, and preprocessed version are available at Core data underlying these analyses can be found at: https://doi.org/10.5281/zenodo.18699746.
 
 Deer movement is shared as part of this repository, but can be additionally found at Movebank.
 Aberdeen Roe Deer movement data: (<https://www.movebank.org>); Movebank ID 2890266958. 
-Wessex Deer movement data: (<https://www.movebank.org>); Movebank ID - - - TBC - - - -.
+Wessex Deer movement data: (<https://www.movebank.org>); Movebank ID 8086497234..
 
 OS Road data: <https://osdatahub.os.uk/downloads/open/OpenRoads>
 
