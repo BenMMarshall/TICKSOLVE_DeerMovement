@@ -76,6 +76,25 @@ popHRData <- roeData %>%
 
 mean(popHRData$Home_Range_km2)*100
 
+popHRData %>%
+  group_by(Study_ID)
+
+# TRYING TO GET AN OVERAL NUMBER OF INDIVIDUALS checked orig papers but tricky
+# 113 - 14
+# 281 - 10
+# 372 - 14
+# 1208 - 32
+# 2715 - 24?
+
+indiHRData %>%
+  filter(!Study_ID %in% popHRData$Study_ID) %>%
+  group_by(Study_ID, Ind_ID) %>%
+  slice_head(n = 1) %>%
+  group_by(Study_ID) %>%
+  count()
+
+# 2473 - 11
+
 (hrCompPlot <- indiHRData %>%
     ggplot() +
     geom_density_ridges(aes(x = Home_Range_km2*100, y = HR_Method_Simple, fill = Sex, point_colour = Sex,
