@@ -8,6 +8,8 @@ Code based used to explore the movements of Roe and Fallow Deer, as well as esti
 
 The inter-relationship of functions is governed by the `_targets.R` script, that uses the targets package to organise and operate the entire analysis pipeline. The entire pipeline should be operable using `targets::tar_make()`, provided the data has been made accessible.
 
+This repository is also archived at: https://doi.org/10.5281/zenodo.18701056, that also includes information on how best to cite.
+
 ### Data Required
 
 The (most) data required to re-run this analysis could not be shared alongside due to licensing restrictions. They are used in the function with "read" prefixes. However, data can be obtained from the following locations, and preprocessed version are available at Core data underlying these analyses can be found at: https://doi.org/10.5281/zenodo.18699746.
