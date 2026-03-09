@@ -34,7 +34,7 @@ csl: peerj.csl
 editor_options: 
   markdown: 
     wrap: sentence
-abstract: Animals use landscapes unequally and have differential responses to anthropogenic changes such as land cover modification. Predicting such responses can be challenging, requiring knowledge of animal movements. This knowledge is particularly valuable where human-animal interactions have implications for either's well-being. Large herbivores, with relatively high mobility, often come in contact with humans as habitats become more restricted leading to grazing pressures, animal-vehicle collisions, and disease transfer risks. In much of Europe, Roe Deer (_Capreolus capreolus_) are abundant herbivores often finding themselves in proximity to anthropogenic infrastructure and activity. In the United Kingdom Roe Deer are the most abundant deer species, but there have been few efforts to track their movements. By examining Roe Deer movements in two mixed use landscapes in the United Kingdom, we explore how Roe Deer home range size and hot they use the available land covers. Through the GPS tracking of 15 deer, we reveal reasonably limited home ranges that are centred on woodland patches. We observed forays outside of the woodland patches into open shrub-, crop- and grass- lands, but only to distances up to 750m. When outside of the woodland, deer movements appeared to be lower but more variable, potentially indicative of a behavioural change when in open areas. We documented a consistent, albeit slight, aversion to crossing roads indicating that roads contribute to deer habitat fragmentation. Overall, our results highlight UK Roe Deer’s connection to woodland patches, and suggest their movements and overall landscape connectivity are closely tied to woodland presence.
+abstract: Animals use landscapes unequally and have differential responses to anthropogenic changes such as land cover modification. Predicting such responses can be challenging, requiring knowledge of animal movements. This knowledge is particularly valuable where human-animal interactions have implications for either's well-being. Large herbivores, with relatively high mobility, often come in contact with humans as habitats become more restricted leading to grazing pressures, animal-vehicle collisions, and disease transfer risks. In much of Europe, Roe Deer (_Capreolus capreolus_) are abundant herbivores often finding themselves in proximity to anthropogenic infrastructure and activity. In the United Kingdom Roe Deer are the most abundant deer species, but there have been few efforts to track their movements. By examining Roe Deer movements in two mixed use landscapes in the United Kingdom, we explore Roe Deer home range size and how they use the available land covers. Through the GPS tracking of 15 deer, we reveal reasonably limited home ranges that are centred on woodland patches. We observed forays outside of the woodland patches into open shrub-, crop- and grass- lands, but only to distances up to 750m. When outside of the woodland, deer movements appeared to be lower but more variable, potentially indicative of a behavioural change when in open areas. We documented a consistent, albeit slight, aversion to crossing roads indicating that roads contribute to deer habitat fragmentation. Overall, our results highlight UK Roe Deer’s connection to woodland patches, and suggest their movements and overall landscape connectivity are closely tied to woodland presence.
 keywords: Movement ecology, step selection function, habitat preference, habitat selection, animal movement, Roe Deer, Capreolus capreolus, road crossing, United Kingdom
 ---
 
@@ -153,7 +153,7 @@ knitr::include_graphics(here::here("figures", "studyLocationMapRoe.png"))
 ```{r trackingSummary, echo=FALSE, message=FALSE}
 trackingSummary <- read.csv(here("tables", "trackingSummary.csv")) %>% 
   filter(str_detect(Animal_ID, "Roe"))%>% 
-  mutate(Location = ifelse(Animal_ID %in% c("Roe03_M", "Roe07_F"), "Hampshire", "Aberdeenshie")) %>%
+  mutate(Location = ifelse(Animal_ID %in% c("Roe03_M", "Roe07_F"), "Hampshire", "Aberdeenshire")) %>%
   select(Location, everything()) %>% 
   arrange(Location, Animal_ID) %>% 
   mutate(ForestArea = case_when(
@@ -715,6 +715,8 @@ Visualization: Benjamin M. Marshall.
 Writing - original draft: Benjamin M. Marshall, Valerio V. Lhamine, Caroline Millins, and Thomas A. Morrison.
 Writing - review & editing: Benjamin M. Marshall, Lucy Gilbert, John Boyle, Valerio V. Lhamine, Mark S. Greener, Robin Gill, Caroline Millins, and Thomas A. Morrison.
 
+\clearpage
+
 # Supplementary Material
 
 \beginsupplement
@@ -763,7 +765,7 @@ poisFixed <- poisFixed %>%
   select(-X0.5quant, -colour, -term_colour, -mode) %>% 
   select(term, mean, sd, lower, upper, sig)
 
-kableExtra::kbl(poisFixed, caption = "All fixed coefficients from the Poisson population-level habitat selection model. Significance base on whether CI overlap zero.",
+kableExtra::kbl(poisFixed, caption = "All fixed coefficients from the Poisson population-level habitat selection model. Significance based on whether CI overlap zero.",
              col.names = c("Variable",
                            "Mean Estimate",
                            "Standard Deviation",
@@ -783,7 +785,7 @@ sffFixed <- sffFixed %>%
   filter(!is.na(est)) %>% 
   select(Animal_ID, variable, est, se, sig)
 
-kableExtra::kbl(sffFixed, caption = "All fixed coefficients from the individual-level habitat selection models. Significance base on whether CI overlap zero. Individual estimates that were NA have been filtered out.",
+kableExtra::kbl(sffFixed, caption = "All fixed coefficients from the individual-level habitat selection models. Significance based on whether CI overlap zero. Individual estimates that were NA have been filtered out.",
              col.names = c("Animal ID",
                            "Variable",
                            "Mean Estimate",
@@ -800,7 +802,7 @@ sffPopFixed <- sffPopFixed %>%
   select(-Animal_ID, -colour, -Animal_ID_colour) %>% 
   select(variable, Mean, LCI, UCI, sig)
 
-kableExtra::kbl(sffPopFixed, caption = "Resulting coefficients from the population mean selection from all the individual-level habitat selection models. Significance base on whether CI overlap zero. Individual estimates that were NA have been filtered out.",
+kableExtra::kbl(sffPopFixed, caption = "Resulting coefficients from the population mean selection from all the individual-level habitat selection models. Significance based on whether CI overlap zero. Individual estimates that were NA have been filtered out.",
              col.names = c("Variable",
                            "Mean",
                            "Lower CI",

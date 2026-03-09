@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.1.13)  19 FEB 2026 15:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2026.2.24)  9 MAR 2026 11:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **deerMovementManuscript.tex
 (./deerMovementManuscript.tex
 LaTeX2e <2025-11-01>
-L3 programming layer <2025-12-29>
+L3 programming layer <2026-01-19>
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
@@ -270,7 +270,7 @@ LaTeX Info: Redefining \addtolength on input line 87.
 ) (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/ifmtarg/ifmtarg.sty
 Package: ifmtarg 2018/04/16 v1.2b check for an empty argument
 )) (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
+Package: hyperref 2026-01-29 v7.01p Hypertext links for LaTeX
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
 ) (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
@@ -290,7 +290,7 @@ Package pdftexcmds Info: \pdfdraftmode found.
 )) (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 ) (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2025-06-21 v2.57 Cross-referencing by name of section
+Package: nameref 2026-01-29 v2.58 Cross-referencing by name of section
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
@@ -306,7 +306,7 @@ Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 \Hy@linkcounter=\count311
 \Hy@pagecounter=\count312
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2026-01-29 v7.01p Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 ) (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
@@ -314,23 +314,23 @@ Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
 \Hy@SavedSpaceFactor=\count313
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2026-01-29 v7.01p Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Hyper figures OFF on input line 4195.
-Package hyperref Info: Link nesting OFF on input line 4200.
-Package hyperref Info: Hyper index ON on input line 4203.
-Package hyperref Info: Plain pages OFF on input line 4210.
-Package hyperref Info: Backreferencing OFF on input line 4215.
+Package hyperref Info: Hyper figures OFF on input line 4201.
+Package hyperref Info: Link nesting OFF on input line 4206.
+Package hyperref Info: Hyper index ON on input line 4209.
+Package hyperref Info: Plain pages OFF on input line 4216.
+Package hyperref Info: Backreferencing OFF on input line 4221.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4462.
+Package hyperref Info: Bookmarks ON on input line 4468.
 \c@Hy@tempcnt=\count314
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4801.
+LaTeX Info: Redefining \url on input line 4807.
 \XeTeXLinkMargin=\dimen173
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -340,20 +340,20 @@ Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 \Fld@menulength=\count315
 \Field@Width=\dimen174
 \Fld@charsize=\dimen175
-Package hyperref Info: Hyper figures OFF on input line 6078.
-Package hyperref Info: Link nesting OFF on input line 6083.
-Package hyperref Info: Hyper index ON on input line 6086.
-Package hyperref Info: backreferencing OFF on input line 6093.
-Package hyperref Info: Link coloring OFF on input line 6098.
-Package hyperref Info: Link coloring with OCG OFF on input line 6103.
-Package hyperref Info: PDF/A mode OFF on input line 6108.
+Package hyperref Info: Hyper figures OFF on input line 6084.
+Package hyperref Info: Link nesting OFF on input line 6089.
+Package hyperref Info: Hyper index ON on input line 6092.
+Package hyperref Info: backreferencing OFF on input line 6099.
+Package hyperref Info: Link coloring OFF on input line 6104.
+Package hyperref Info: Link coloring with OCG OFF on input line 6109.
+Package hyperref Info: PDF/A mode OFF on input line 6114.
 \Hy@abspage=\count316
 \c@Item=\count317
 \c@Hfootnote=\count318
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
+File: hpdftex.def 2026-01-29 v7.01p Hyperref driver for pdfTeX
 \Fld@listcount=\count319
 \c@bookmark@seq@number=\count320
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
@@ -444,11 +444,7 @@ LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
 (c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count333
-) (./deerMovementManuscript.aux
-
-LaTeX Warning: Label `tab:poisTable' multiply defined.
-
-)
+) (./deerMovementManuscript.aux)
 \openout1 = `deerMovementManuscript.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
@@ -598,7 +594,7 @@ LaTeX Font Info:    Font shape `T1/XCharter-TLF/m/n' will be
 LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
 (Font)              scaled to size 9.0pt on input line 222.
 
-Overfull \hbox (13.55046pt too wide) in alignment at lines 217--240
+Overfull \hbox (17.11446pt too wide) in alignment at lines 217--240
  [] [] [] [] [] [] [] 
  []
 
@@ -692,176 +688,177 @@ Package pdftex.def Info: PDFheaderImage.png  used on input line 547.
 [16
 
 ]
-<../../figures/trackingDuration.pdf, id=583, 597.23125pt x 341.275pt>
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 548.
+(pdftex.def)             Requested size: 80.50957pt x 12.0pt.
+[17]
+<../../figures/trackingDuration.pdf, id=587, 597.23125pt x 341.275pt>
 File: ../../figures/trackingDuration.pdf Graphic file (type pdf)
 <use ../../figures/trackingDuration.pdf>
-Package pdftex.def Info: ../../figures/trackingDuration.pdf  used on input line 554.
+Package pdftex.def Info: ../../figures/trackingDuration.pdf  used on input line 556.
 (pdftex.def)             Requested size: 420.81914pt x 240.4687pt.
-<../../figures/trackingTimelag.pdf, id=584, 511.9125pt x 341.275pt>
+<../../figures/trackingTimelag.pdf, id=588, 511.9125pt x 341.275pt>
 File: ../../figures/trackingTimelag.pdf Graphic file (type pdf)
 <use ../../figures/trackingTimelag.pdf>
-Package pdftex.def Info: ../../figures/trackingTimelag.pdf  used on input line 563.
+Package pdftex.def Info: ../../figures/trackingTimelag.pdf  used on input line 565.
 (pdftex.def)             Requested size: 420.81914pt x 280.54509pt.
-<../../figures/varioRoePlot.pdf, id=585, 682.55pt x 540.0175pt>
+<../../figures/varioRoePlot.pdf, id=589, 682.55pt x 540.0175pt>
 File: ../../figures/varioRoePlot.pdf Graphic file (type pdf)
 <use ../../figures/varioRoePlot.pdf>
-Package pdftex.def Info: ../../figures/varioRoePlot.pdf  used on input line 572.
+Package pdftex.def Info: ../../figures/varioRoePlot.pdf  used on input line 574.
 (pdftex.def)             Requested size: 420.81914pt x 332.94514pt.
 
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.640 \end{longtable}
+l.642 \end{longtable}
                      
 ignored error: Infinite glue shrinkage found in box being split
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 640.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 642.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[17 <../../figures/trackingDuration.pdf>]
+[18
+
+ <../../figures/trackingDuration.pdf>]
 pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.692 \end{longtable}
+l.694 \end{longtable}
                      
 ignored error: Infinite glue shrinkage found in box being split
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 692.
-(pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[18]
-ignored error: Infinite glue shrinkage found in box being split
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 896.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 898.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
 [19]
 ignored error: Infinite glue shrinkage found in box being split
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 896.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 898.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
 [20]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<../../figures/ssfCoef_Heterogeneity.png, id=609, 910.3611pt x 455.0601pt>
+ignored error: Infinite glue shrinkage found in box being split
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 898.
+(pdftex.def)             Requested size: 80.50957pt x 12.0pt.
+[21]
+<../../figures/ssfCoef_Heterogeneity.png, id=613, 910.3611pt x 455.0601pt>
 File: ../../figures/ssfCoef_Heterogeneity.png Graphic file (type png)
 <use ../../figures/ssfCoef_Heterogeneity.png>
-Package pdftex.def Info: ../../figures/ssfCoef_Heterogeneity.png  used on input line 928.
+Package pdftex.def Info: ../../figures/ssfCoef_Heterogeneity.png  used on input line 930.
 (pdftex.def)             Requested size: 420.81914pt x 210.3509pt.
-<../../figures/ssfCoef_Specialisation.png, id=610, 910.3611pt x 455.0601pt>
+<../../figures/ssfCoef_Specialisation.png, id=614, 910.3611pt x 455.0601pt>
 File: ../../figures/ssfCoef_Specialisation.png Graphic file (type png)
 <use ../../figures/ssfCoef_Specialisation.png>
-Package pdftex.def Info: ../../figures/ssfCoef_Specialisation.png  used on input line 937.
+Package pdftex.def Info: ../../figures/ssfCoef_Specialisation.png  used on input line 939.
 (pdftex.def)             Requested size: 420.81914pt x 210.3509pt.
-<../../figures/hrStudyComparison.pdf, id=611, 682.55pt x 568.1225pt>
+<../../figures/hrStudyComparison.pdf, id=615, 682.55pt x 568.1225pt>
 File: ../../figures/hrStudyComparison.pdf Graphic file (type pdf)
 <use ../../figures/hrStudyComparison.pdf>
-Package pdftex.def Info: ../../figures/hrStudyComparison.pdf  used on input line 946.
+Package pdftex.def Info: ../../figures/hrStudyComparison.pdf  used on input line 948.
 (pdftex.def)             Requested size: 420.81914pt x 350.27313pt.
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 953.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 955.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[21]
+[22]
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 953.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 955.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[22 <../../figures/trackingTimelag.pdf>]
+[23 <../../figures/trackingTimelag.pdf> <../../figures/varioRoePlot.pdf>]
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 953.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 955.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[23 <../../figures/varioRoePlot.pdf> <../../figures/ssfCoef_Heterogeneity.png>]
+[24 <../../figures/ssfCoef_Heterogeneity.png> <../../figures/ssfCoef_Specialisation.png>]
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 953.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 955.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[24 <../../figures/ssfCoef_Specialisation.png> <../../figures/hrStudyComparison.pdf>]
+[25 <../../figures/hrStudyComparison.pdf>]
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 1046.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 1048.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[25
+[26
 
 ]
-Overfull \hbox (24.7689pt too wide) in paragraph at lines 1075--1076
+Overfull \hbox (24.7689pt too wide) in paragraph at lines 1077--1078
 \T1/XCharter-TLF/m/n/10 habi-tat qual-ity for the Ital-ian roe deer \T1/XCharter-TLF/m/it/10 Capre-o-lus capre-o-lus itali-cus\T1/XCharter-TLF/m/n/10 . \T1/XCharter-TLF/m/it/10 Ecog-ra-phy \T1/XCharter-TLF/m/n/10 29:407--417. DOI: [][]10.1111/j.2006.0906-
  []
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 1127.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 1129.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[26]
-Overfull \hbox (25.61604pt too wide) in paragraph at lines 1150--1151
+[27]
+Overfull \hbox (25.61604pt too wide) in paragraph at lines 1152--1153
 \T1/XCharter-TLF/m/it/10 capre-o-lus \T1/XCharter-TLF/m/n/10 ) in a moun-tain-ous habi-tat. \T1/XCharter-TLF/m/it/10 Ethol-ogy Ecol-ogy & Evo-lu-tion \T1/XCharter-TLF/m/n/10 16:41--53. DOI: [][]10.1080/08927014.2004.9522653[][]. 
  []
 
 
-Overfull \hbox (2.25888pt too wide) in paragraph at lines 1180--1181
+Overfull \hbox (2.25888pt too wide) in paragraph at lines 1182--1183
 \T1/XCharter-TLF/m/n/10 com-par-i-son and test-ing of sta-tis-ti-cal mod-els. \T1/XCharter-TLF/m/it/10 Jour-nal of Open Source Soft-ware \T1/XCharter-TLF/m/n/10 6:3139. DOI: [][]10.21105/joss.03139[][]. 
  []
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 1217.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 1219.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[27]
-Overfull \hbox (57.76714pt too wide) in paragraph at lines 1261--1262
+[28]
+Overfull \hbox (57.76714pt too wide) in paragraph at lines 1263--1264
 []\T1/XCharter-TLF/m/n/10 Pebesma E, Bi-vand R. 2023. \T1/XCharter-TLF/m/it/10 Spa-tial Data Sci-ence: With ap-pli-ca-tions in R\T1/XCharter-TLF/m/n/10 . Chap-man and Hall/CRC. DOI: [][]10.1201/9780429459016[][]. 
  []
 
 
-Overfull \hbox (74.00192pt too wide) in paragraph at lines 1270--1271
+Overfull \hbox (74.00192pt too wide) in paragraph at lines 1272--1273
 \T1/XCharter-TLF/m/n/10 per-sal by three na-tive her-biv-o-rous un-gu-lates in Eu-rope. \T1/XCharter-TLF/m/it/10 Ba-sic and Ap-plied Ecol-ogy \T1/XCharter-TLF/m/n/10 17:321--332. DOI: [][]10.1016/j.baae.2016.01.005[][]. 
  []
 
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 1305.
-(pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[28]
-File: PDFheaderImage.png Graphic file (type png)
-<use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 1383.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 1307.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
 [29]
 File: PDFheaderImage.png Graphic file (type png)
 <use PDFheaderImage.png>
-Package pdftex.def Info: PDFheaderImage.png  used on input line 1409.
+Package pdftex.def Info: PDFheaderImage.png  used on input line 1385.
 (pdftex.def)             Requested size: 80.50957pt x 12.0pt.
-[30] 
+[30]
+File: PDFheaderImage.png Graphic file (type png)
+<use PDFheaderImage.png>
+Package pdftex.def Info: PDFheaderImage.png  used on input line 1411.
+(pdftex.def)             Requested size: 80.50957pt x 12.0pt.
+[31] 
 enddocument/afterlastpage (AED): lastpage setting LastPage.
 (./deerMovementManuscript.aux)
  ***********
 LaTeX2e <2025-11-01>
-L3 programming layer <2025-12-29>
+L3 programming layer <2026-01-19>
  ***********
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-
-LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `deerMovementManuscript.out' has not changed.
 (rerunfilecheck)             Checksum: 7D021D301A3488F8C2BE64A9045AD153;2339.
  ) 
 Here is how much of TeX's memory you used:
- 14540 strings out of 469519
- 242228 string characters out of 5468256
- 762163 words of memory out of 5000000
- 42738 multiletter control sequences out of 15000+600000
+ 14541 strings out of 469514
+ 242235 string characters out of 5468199
+ 783184 words of memory out of 5000000
+ 42743 multiletter control sequences out of 15000+600000
  704098 words of font info for 86 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 90i,15n,131p,3383b,668s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,15n,131p,3383b,658s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <c:/Users/benja/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit1000.600pk> <c:/Users/benja/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Italic.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/Users/benja/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on deerMovementManuscript.pdf (30 pages, 5330439 bytes).
+Output written on deerMovementManuscript.pdf (31 pages, 5329878 bytes).
 PDF statistics:
- 969 PDF objects out of 1000 (max. 8388607)
- 835 compressed objects within 9 object streams
- 211 named destinations out of 1000 (max. 500000)
+ 974 PDF objects out of 1000 (max. 8388607)
+ 839 compressed objects within 9 object streams
+ 212 named destinations out of 1000 (max. 500000)
  194 words of extra memory for PDF output out of 10000 (max. 10000000)
 
