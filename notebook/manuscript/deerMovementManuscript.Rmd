@@ -274,7 +274,7 @@ First was the land cover type as described by the 2023 UKCEH land cover maps, wh
 Validation of these data suggest 83% accuracy [@morton_land_2024].
 The UKCEH land cover data comprises of 21 land cover classes, broadly following the Biodiversity Broad Habitats [@jackson_guidance_2000].
 
-We recategorised these 21 land cover types categories into 10 more general categories (Tab. \@ref(tab:landcoverTable).
+We recategorised these 21 land cover types categories into 10 more general categories (Tab. \@ref(tab:landcoverTable)).
 <!-- SUPP TABLE TO SHOW THE TRANSLATIONS -->
 This reduced instances of limited interaction with the deer movement data thereby aiding habitat selection model convergence and avoided extreme, unstable selection estimates.
 
@@ -827,3 +827,5 @@ knitr::include_graphics(here::here("figures", "hrStudyComparison.png"))
 \clearpage
 
 # References
+
+\sloppy
