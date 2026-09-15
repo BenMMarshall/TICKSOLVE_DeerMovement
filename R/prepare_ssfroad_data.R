@@ -1,16 +1,19 @@
 #' Extract data from landscape layers for SSF
 #'
-#' @name prepare_ssf_data
+#' @name prepare_ssfroad_data
 #' @description Extract data from landscape ready for SSF models.
 #' @return A list of available and used dataframes.
 #'
 #' @export
-prepare_ssf_data <- function(deerData, landuseList, patchList,
+prepare_ssfroad_data <- function(deerData, landuseList, patchList,
                              nAvail = 10, slDist = "gamma", taDist = "vonmises"){
 
   # library(dplyr)
   # library(amt)
   # library(stringr)
+  # library(terra)
+  # library(tidyterra)
+  # library(sf)
   # targets::tar_load("tar_deerData")
   # targets::tar_load("tar_landuseList")
   # # targets::tar_load("tar_patchList")
@@ -40,13 +43,19 @@ prepare_ssf_data <- function(deerData, landuseList, patchList,
     #   focalDistancePatch <- terra::rast(patchList$distanceWessex)
     # }
     if(focalRegion == "Aberdeenshire"){
-      focalDistanceWoodland <- terra::rast(landuseList$Aberdeen$distanceWoodland)
-      focalDistanceHedges <- terra::rast(landuseList$Aberdeen$distanceHedges)
-      focalLand <- terra::rast(landuseList$Aberdeen$landuse)
+      focalDistanceWoodland <- terra::rast(here::here("data", "GIS data", "distanceWoodlandAberdeen.tif"))
+      focalDistanceHedges <- terra::rast(here::here("data", "GIS data", "distanceHedgesAberdeen.tif"))
+      focalLand <- terra::rast(here::here("data", "GIS data", "landuseAberdeen.tif"))
+      # focalDistanceWoodland <- terra::rast(landuseList$Aberdeen$distanceWoodland)
+      # focalDistanceHedges <- terra::rast(landuseList$Aberdeen$distanceHedges)
+      # focalLand <- terra::rast(landuseList$Aberdeen$landuse)
     } else {
-      focalDistanceWoodland <- terra::rast(landuseList$Wessex$distanceWoodland)
-      focalDistanceHedges <- terra::rast(landuseList$Wessex$distanceHedges)
-      focalLand <- terra::rast(landuseList$Wessex$landuse)
+      focalDistanceWoodland <- terra::rast(here::here("data", "GIS data", "distanceWoodlandWessex.tif"))
+      focalDistanceHedges <- terra::rast(here::here("data", "GIS data", "distanceHedgesWessex.tif"))
+      focalLand <- terra::rast(here::here("data", "GIS data", "landuseWessex.tif"))
+      # focalDistanceWoodland <- terra::rast(landuseList$Wessex$distanceWoodland)
+      # focalDistanceHedges <- terra::rast(landuseList$Wessex$distanceHedges)
+      # focalLand <- terra::rast(landuseList$Wessex$landuse)
     }
 
     focalLand <- focalLand %>%
@@ -62,32 +71,32 @@ prepare_ssf_data <- function(deerData, landuseList, patchList,
                         sl_distr = amt::fit_distr(focalSteps$sl_, slDist),
                         ta_distr = amt::fit_distr(focalSteps$ta_, taDist)) %>%
       amt::extract_covariates(covariates = focalDistanceWoodland, where = "end") %>%
-      amt::extract_covariates(covariates = focalDistanceHedges, where = "end") %>%
-      amt::extract_covariates(covariates = focalLand, where = "end") %>%
+      # amt::extract_covariates(covariates = focalDistanceHedges, where = "end") %>%
+      # amt::extract_covariates(covariates = focalLand, where = "end") %>%
       mutate(index = row_number()) #%>%
-      # mutate(landuse = factor(case_when(
-      #   LCM_1 %in% 1 ~ "Deciduous Broadleaf Forest",
-      #   LCM_1 %in% 2 ~ "Evergreen Needleleaf Forest",
-      #   LCM_1 %in% 3 ~ "Cropland",
-      #   LCM_1 %in% 4 ~ "Tall Grassland",
-      #   LCM_1 %in% 5:7 ~ "Short Grassland",
-      #   LCM_1 %in% 9:10 ~ "Open Shrubland",
-      #   LCM_1 %in% c(12,15,16,17,18) ~ "Barren",
-      #   LCM_1 %in% c(8,11,19) ~ "Permanent Wetland",
-      #   LCM_1 %in% 20:21 ~ "Human Settlements",
-      #   TRUE ~ "Other"
-      # ), levels = c(
-      #   "Deciduous Broadleaf Forest",
-      #   "Evergreen Needleleaf Forest",
-      #   "Cropland",
-      #   "Tall Grassland",
-      #   "Short Grassland",
-      #   "Open Shrubland",
-      #   "Barren",
-      #   "Permanent Wetland",
-      #   "Human Settlements",
-      #   "Other"
-      # )))
+    # mutate(landuse = factor(case_when(
+    #   LCM_1 %in% 1 ~ "Deciduous Broadleaf Forest",
+    #   LCM_1 %in% 2 ~ "Evergreen Needleleaf Forest",
+    #   LCM_1 %in% 3 ~ "Cropland",
+    #   LCM_1 %in% 4 ~ "Tall Grassland",
+    #   LCM_1 %in% 5:7 ~ "Short Grassland",
+    #   LCM_1 %in% 9:10 ~ "Open Shrubland",
+    #   LCM_1 %in% c(12,15,16,17,18) ~ "Barren",
+    #   LCM_1 %in% c(8,11,19) ~ "Permanent Wetland",
+    #   LCM_1 %in% 20:21 ~ "Human Settlements",
+    #   TRUE ~ "Other"
+    # ), levels = c(
+    #   "Deciduous Broadleaf Forest",
+    #   "Evergreen Needleleaf Forest",
+    #   "Cropland",
+    #   "Tall Grassland",
+    #   "Short Grassland",
+    #   "Open Shrubland",
+    #   "Barren",
+    #   "Permanent Wetland",
+    #   "Human Settlements",
+    #   "Other"
+    # )))
 
     # extract instances of paths crossing roads -------------------------------
 
@@ -96,6 +105,11 @@ prepare_ssf_data <- function(deerData, landuseList, patchList,
     } else {
       focalRoads <- landuseList$Wessex$roads
     }
+
+    table(focalRoads$roadClassification)
+    table(focalRoads$roadSize)
+    table(focalRoads$formOfWay)
+    table(focalRoads$roadFunction)
 
     focalRoadCrossingsList <- vector("list", length = length(unique(focalAllSteps$step_id_)))
     names(focalRoadCrossingsList) <- unique(focalAllSteps$step_id_)
@@ -119,19 +133,56 @@ prepare_ssf_data <- function(deerData, landuseList, patchList,
       })
       # stepLinesUnion <- do.call(st_union, stepLinesList)
 
-      roadCrossings <- unlist(lapply(stepLinesList, function(x){
-        # x <- stepLinesList[[1]]
+      roadCrossings <- lapply(stepLinesList, function(x){
+        # x <- stepLinesList[[4]]
         crossings <- st_crosses(x, focalRoads, sparse = FALSE)
         # print(any(crossings))
-        return(any(crossings))
-      }))
-      print(paste0(sum(roadCrossings), " / ", length(roadCrossings)))
+        # plot(focalRoads[crossings])
+        if(any(crossings)){
+          roadClas <- focalRoads[as.vector(st_crosses(x,
+                                          focalRoads, sparse = FALSE)),]$roadClassification
+          roadSize <- focalRoads[as.vector(st_crosses(x,
+                                          focalRoads, sparse = FALSE)),]$roadSize
+          roadForm <- focalRoads[as.vector(st_crosses(x,
+                                          focalRoads, sparse = FALSE)),]$formOfWay
+          roadFunc <- focalRoads[as.vector(st_crosses(x,
+                                          focalRoads, sparse = FALSE)),]$roadFunction
+          crossings <- any(crossings)
+        } else {
+          roadClas <- NA
+          roadSize <- NA
+          roadForm <- NA
+          roadFunc <- NA
+          crossings <- any(crossings)
+        }
+        crossingData <- data.frame(
+          roadClas = paste(unique(roadClas), collapse = ", "),
+          roadSize = paste(unique(roadSize), collapse = ", "),
+          roadForm = paste(unique(roadForm), collapse = ", "),
+          roadFunc = paste(unique(roadFunc), collapse = ", "),
+          crossings
+        )
+        return(crossingData)
+      })
+      roadData <- do.call(rbind, roadCrossings)
+      print(paste0(sum(roadData$crossings), " / ", length(roadData$crossings)))
 
-      roadCrossingsDF <- data.frame(
-        step_id_ = s,
-        Animal_ID = id,
-        roadCrossings = roadCrossings,
-        index = focalStep$index)
+      # plot(stepLinesList[roadCrossings][[1]])
+      # plot(focalRoads[as.vector(st_crosses(stepLinesList[roadCrossings][[1]],
+      #                                      focalRoads, sparse = FALSE)),], add = TRUE)
+      # focalRoads[as.vector(st_crosses(stepLinesList[roadCrossings][[1]],
+      #                                 focalRoads, sparse = FALSE)),]
+
+      roadData$step_id_ <- s
+      roadData$Animal_ID <- id
+      roadData$index <- focalStep$index
+
+      roadCrossingsDF <- roadData
+      # roadCrossingsDF <- data.frame(
+      #   step_id_ = s,
+      #   Animal_ID = id,
+      #   roadCrossings = roadCrossings,
+      #   index = focalStep$index)
 
       focalRoadCrossingsList[[s]] <- roadCrossingsDF
 

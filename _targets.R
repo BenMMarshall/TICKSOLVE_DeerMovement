@@ -195,8 +195,18 @@ coreTargetList <- list(
                                taDist = taDistribution)
   ),
   tar_target(
+    name = tar_ssfroad_data,
+    command = prepare_ssfroad_data(tar_deerData, tar_landuseList, tar_patchList,
+                                   nAvail = nAvailableSteps, slDist = slDistribution,
+                                   taDist = taDistribution)
+  ),
+  tar_target(
     name = tar_pois_model,
     command = run_pois_model(tar_ssf_data)
+  ),
+  tar_target(
+    name = tar_poisroad_model,
+    command = run_poisroad_model(tar_ssfroad_data)
   ),
   tar_target(
     name = tar_pois_plot,
@@ -309,12 +319,12 @@ connectTargetList <- list(
   # ),
   tar_combine(
     tar_connectPois_list,
-    coreTargetList[[19]][grep("tar_connectStanPois_location", names(coreTargetList[[19]]))],
+    coreTargetList[[21]][grep("tar_connectStanPois_location", names(coreTargetList[[21]]))],
     command = list(!!!.x)
   ),
   tar_combine(
     tar_msePois_df,
-    coreTargetList[[19]][grep("Pois_dbbmmmse", names(coreTargetList[[19]]))],
+    coreTargetList[[21]][grep("Pois_dbbmmmse", names(coreTargetList[[21]]))],
     command = rbind(!!!.x)
   ),
   tar_target(
