@@ -71,32 +71,32 @@ prepare_ssfroad_data <- function(deerData, landuseList, patchList,
                         sl_distr = amt::fit_distr(focalSteps$sl_, slDist),
                         ta_distr = amt::fit_distr(focalSteps$ta_, taDist)) %>%
       amt::extract_covariates(covariates = focalDistanceWoodland, where = "end") %>%
-      # amt::extract_covariates(covariates = focalDistanceHedges, where = "end") %>%
-      # amt::extract_covariates(covariates = focalLand, where = "end") %>%
-      mutate(index = row_number()) #%>%
-    # mutate(landuse = factor(case_when(
-    #   LCM_1 %in% 1 ~ "Deciduous Broadleaf Forest",
-    #   LCM_1 %in% 2 ~ "Evergreen Needleleaf Forest",
-    #   LCM_1 %in% 3 ~ "Cropland",
-    #   LCM_1 %in% 4 ~ "Tall Grassland",
-    #   LCM_1 %in% 5:7 ~ "Short Grassland",
-    #   LCM_1 %in% 9:10 ~ "Open Shrubland",
-    #   LCM_1 %in% c(12,15,16,17,18) ~ "Barren",
-    #   LCM_1 %in% c(8,11,19) ~ "Permanent Wetland",
-    #   LCM_1 %in% 20:21 ~ "Human Settlements",
-    #   TRUE ~ "Other"
-    # ), levels = c(
-    #   "Deciduous Broadleaf Forest",
-    #   "Evergreen Needleleaf Forest",
-    #   "Cropland",
-    #   "Tall Grassland",
-    #   "Short Grassland",
-    #   "Open Shrubland",
-    #   "Barren",
-    #   "Permanent Wetland",
-    #   "Human Settlements",
-    #   "Other"
-    # )))
+      amt::extract_covariates(covariates = focalDistanceHedges, where = "end") %>%
+      amt::extract_covariates(covariates = focalLand, where = "end") %>%
+      mutate(index = row_number()) %>%
+    mutate(landuse = factor(case_when(
+      LCM_1 %in% 1 ~ "Deciduous Broadleaf Forest",
+      LCM_1 %in% 2 ~ "Evergreen Needleleaf Forest",
+      LCM_1 %in% 3 ~ "Cropland",
+      LCM_1 %in% 4 ~ "Tall Grassland",
+      LCM_1 %in% 5:7 ~ "Short Grassland",
+      LCM_1 %in% 9:10 ~ "Open Shrubland",
+      LCM_1 %in% c(12,15,16,17,18) ~ "Barren",
+      LCM_1 %in% c(8,11,19) ~ "Permanent Wetland",
+      LCM_1 %in% 20:21 ~ "Human Settlements",
+      TRUE ~ "Other"
+    ), levels = c(
+      "Deciduous Broadleaf Forest",
+      "Evergreen Needleleaf Forest",
+      "Cropland",
+      "Tall Grassland",
+      "Short Grassland",
+      "Open Shrubland",
+      "Barren",
+      "Permanent Wetland",
+      "Human Settlements",
+      "Other"
+    )))
 
     # extract instances of paths crossing roads -------------------------------
 

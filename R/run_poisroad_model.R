@@ -31,6 +31,15 @@ run_poisroad_model <- function(ssfDataList){
 
   inlaFormula <- y ~ -1 +
     distanceWoodland +
+    # distanceHedges +
+    # Deciduous.Broadleaf.Forest +
+    # Evergreen.Needleleaf.Forest +
+    # Cropland +
+    # Tall.Grassland +
+    # Short.Grassland +
+    # Open.Shrubland +
+    # Permanent.Wetland +
+    # Human.Settlements +
     # Other +
     A_roads +
     B_roads +
@@ -58,9 +67,33 @@ run_poisroad_model <- function(ssfDataList){
     # log_sl:Human.Settlements +
     # random effects
     f(step_id, model="iid", hyper = list(theta = list(initial = log(1e-6), fixed = TRUE))) +
-    f(id1, distanceWoodland, values = 1:length(unique(poisModelData$id)), model="iid",
-      hyper = list(theta = list(initial = log(1), fixed = FALSE,
-                                prior = "pc.prec", param = c(3, 0.05)))) +
+    # f(id1, distanceWoodland, values = 1:length(unique(poisModelData$id)), model="iid",
+    #   hyper = list(theta = list(initial = log(1), fixed = FALSE,
+    #                             prior = "pc.prec", param = c(3, 0.05)))) +
+    # f(id2, distanceHedges, values = 1:length(unique(poisModelData$id)), model="iid",
+    #   hyper = list(theta = list(initial = log(1), fixed = FALSE,
+    #                             prior = "pc.prec", param = c(3, 0.05)))) +
+    # f(id4, Evergreen.Needleleaf.Forest, values = 1:length(unique(poisModelData$id)), model="iid",
+    #   hyper = list(theta = list(initial = log(1), fixed = FALSE,
+    #                             prior = "pc.prec", param = c(3, 0.05)))) +
+    # f(id5, Cropland, values = 1:length(unique(poisModelData$id)), model="iid",
+    #   hyper = list(theta = list(initial = log(1), fixed = FALSE,
+    #                             prior = "pc.prec", param = c(3, 0.05)))) +
+    # f(id6, Tall.Grassland, values = 1:length(unique(poisModelData$id)), model="iid",
+    #   hyper = list(theta = list(initial = log(1), fixed = FALSE,
+    #                             prior = "pc.prec", param = c(3, 0.05)))) +
+    # f(id7, Short.Grassland, values = 1:length(unique(poisModelData$id)), model="iid",
+    #   hyper = list(theta = list(initial = log(1), fixed = FALSE,
+    #                             prior = "pc.prec", param = c(3, 0.05)))) +
+    # f(id8, Open.Shrubland, values = 1:length(unique(poisModelData$id)), model="iid",
+    #   hyper = list(theta = list(initial = log(1), fixed = FALSE,
+    #                             prior = "pc.prec", param = c(3, 0.05)))) +
+    # f(id9, Permanent.Wetland, values = 1:length(unique(poisModelData$id)), model="iid",
+    #   hyper = list(theta = list(initial = log(1), fixed = FALSE,
+    #                             prior = "pc.prec", param = c(3, 0.05)))) +
+    # f(id10, Human.Settlements, values = 1:length(unique(poisModelData$id)), model="iid",
+    #   hyper = list(theta = list(initial = log(1), fixed = FALSE,
+    #                             prior = "pc.prec", param = c(3, 0.05)))) +
     # f(id4, A_roads, values = 1:length(unique(poisModelData$id)), model="iid",
     #   hyper = list(theta = list(initial = log(1), fixed = FALSE,
     #                             prior = "pc.prec", param = c(3, 0.05)))) +
@@ -102,18 +135,53 @@ run_poisroad_model <- function(ssfDataList){
                TRUE ~ "No_crossing"
              ))
 
-  table(poisModelData$roadTypeCrossing)
-  dummyVars <- poisModelData %>%
-    mutate(roadTypeCrossing = as.factor(roadTypeCrossing)) %>%
-    to_dummy(roadTypeCrossing, suffix = "label") %>%
+  write.csv(poisModelData |>
+              filter(case_) |>
+              group_by(roadTypeCrossing) |>
+              summarise(crossingCount = n()),
+            file = here::here("tables", "countOfRoadCrossings.csv"), row.names = FALSE)
+
+  # table(poisModelData$roadTypeCrossing)
+  # dummyVars <- poisModelData %>%
+  #   mutate(roadTypeCrossing = as.factor(roadTypeCrossing)) %>%
+  #   to_dummy(roadTypeCrossing, suffix = "label") %>%
+  #   rename(
+  #     A_roads = roadTypeCrossing_A_roads,
+  #     B_roads = roadTypeCrossing_B_roads,
+  #     C_roads = roadTypeCrossing_C_roads,
+  #     No_crossing = roadTypeCrossing_No_crossing
+  #   )
+  # apply(dummyVars, 2, sum)
+  # poisModelData <- cbind(poisModelData, dummyVars)
+
+  # table(poisModelData$landuse)
+  dummyVars_LU <- poisModelData %>%
+    mutate(landuse = as.factor(landuse)) %>%
+    to_dummy(landuse, suffix = "label") %>%
     rename(
-      A_roads = roadTypeCrossing_A_roads,
-      B_roads = roadTypeCrossing_B_roads,
-      C_roads = roadTypeCrossing_C_roads,
-      No_crossing = roadTypeCrossing_No_crossing
+      Deciduous.Broadleaf.Forest = `landuse_Deciduous Broadleaf Forest`,
+      Evergreen.Needleleaf.Forest = `landuse_Evergreen Needleleaf Forest`,
+      Cropland = landuse_Cropland,
+      Tall.Grassland = `landuse_Tall Grassland`,
+      Short.Grassland = `landuse_Short Grassland`,
+      Open.Shrubland = `landuse_Open Shrubland`,
+      Permanent.Wetland = `landuse_Permanent Wetland`,
+      Human.Settlements = `landuse_Human Settlements`,
+      Other = landuse_Other
     )
-  apply(dummyVars, 2, sum)
-  poisModelData <- cbind(poisModelData, dummyVars)
+  dummyVars_road <- poisModelData %>%
+      mutate(roadTypeCrossing = as.factor(roadTypeCrossing)) %>%
+      to_dummy(roadTypeCrossing, suffix = "label") %>%
+      rename(
+        A_roads = roadTypeCrossing_A_roads,
+        B_roads = roadTypeCrossing_B_roads,
+        C_roads = roadTypeCrossing_C_roads,
+        No_crossing = roadTypeCrossing_No_crossing
+      )
+  # apply(dummyVars, 2, sum)
+
+  poisModelData <- cbind(poisModelData, dummyVars_LU)
+  poisModelData <- cbind(poisModelData, dummyVars_road)
 
   # We can run the INLA model using the priors and set-up from Muff et al.
   # Precision for the priors of slope coefficients

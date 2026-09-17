@@ -1,0 +1,15 @@
+"variable","meanSD","valueMeasure","meanSPE"
+"Distance to Woodland",0.0079324543848677,"Heterogeneity",NA
+"roadTypeCrossingB_roads",1638.69454842719,"Heterogeneity",NA
+"roadTypeCrossingC_roads",1742.99790012379,"Heterogeneity",NA
+"roadTypeCrossingNo_crossing",980.102012290626,"Heterogeneity",NA
+"sl_",0.00073416471933899,"Heterogeneity",NA
+"log sl_ ",0.0653874625980285,"Heterogeneity",NA
+"cos ta_ ",0.309559690884253,"Heterogeneity",NA
+"Distance to Woodland",NA,"Specialisation",0.00731684710874532
+"roadTypeCrossingB_roads",NA,"Specialisation",1126.51740917436
+"roadTypeCrossingC_roads",NA,"Specialisation",1026.75565567286
+"roadTypeCrossingNo_crossing",NA,"Specialisation",500.517726322594
+"sl_",NA,"Specialisation",0.00089377805311622
+"log sl_ ",NA,"Specialisation",0.0517679645926934
+"cos ta_ ",NA,"Specialisation",0.415417684131329

@@ -1,0 +1,8 @@
+"Mean","LCI","UCI","variable","Animal_ID","sig","variableType","colour","Animal_ID_colour"
+-0.00702595729050665,-0.0113754470161547,-0.00267646756485855,"Distance to Woodland","<b>Population</b>","Significant -","Distance","#E79559","<i style='color:#E79559'><b>Population</b></i>"
+-11.1096141536358,-19.408007996301,-2.81122031097067,"roadTypeCrossingB_roads","<b>Population</b>","Significant -","Other","#E79559","<i style='color:#E79559'><b>Population</b></i>"
+-0.71319190660475,-1.59712947554995,0.170745662340446,"roadTypeCrossingC_roads","<b>Population</b>","Not Significant","Other","#505050","<i style='color:#505050'><b>Population</b></i>"
+0.190997028255954,-0.227708592183494,0.609702648695403,"roadTypeCrossingNo_crossing","<b>Population</b>","Not Significant","Other","#505050","<i style='color:#505050'><b>Population</b></i>"
+0.000808250065315823,0.000469903631123164,0.00114659649950848,"sl_","<b>Population</b>","Significant +","Step","#B54D17","<i style='color:#B54D17'><b>Population</b></i>"
+0.0146434209305511,-0.00594009367161349,0.0352269355327156,"log sl_ ","<b>Population</b>","Not Significant","Step","#505050","<i style='color:#505050'><b>Population</b></i>"
+-0.451991969686463,-0.601136116930306,-0.302847822442621,"cos ta_ ","<b>Population</b>","Significant -","Other","#E79559","<i style='color:#E79559'><b>Population</b></i>"

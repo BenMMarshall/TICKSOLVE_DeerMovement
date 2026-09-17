@@ -195,22 +195,27 @@ coreTargetList <- list(
                                taDist = taDistribution)
   ),
   tar_target(
+    name = tar_pois_model,
+    command = run_pois_model(tar_ssf_data)
+  ),
+  tar_target(
+    name = tar_pois_plot,
+    command = export_pois_coefs(tar_pois_model)
+  ),
+  # Additional road model ---------------------------------------------------
+  tar_target(
     name = tar_ssfroad_data,
     command = prepare_ssfroad_data(tar_deerData, tar_landuseList, tar_patchList,
                                    nAvail = nAvailableSteps, slDist = slDistribution,
                                    taDist = taDistribution)
   ),
   tar_target(
-    name = tar_pois_model,
-    command = run_pois_model(tar_ssf_data)
-  ),
-  tar_target(
     name = tar_poisroad_model,
     command = run_poisroad_model(tar_ssfroad_data)
   ),
   tar_target(
-    name = tar_pois_plot,
-    command = export_pois_coefs(tar_pois_model)
+    name = tar_poisroad_plot,
+    command = export_poisroad_coefs(tar_poisroad_model)
   ),
   tar_target(
     name = tar_predPoisResist_location,
@@ -284,6 +289,18 @@ coreTargetList <- list(
   tar_target(
     name = tar_ssf_plots,
     command = plot_ssf_coefs(tar_ssf_extracts)
+  ),
+  tar_target(
+    name = tar_ssfroad_models,
+    command = run_ssfroad_models(tar_ssfroad_data)
+  ),
+  tar_target(
+    name = tar_ssfroad_extracts,
+    command = extract_ssfroad_coefs(tar_ssfroad_models)
+  ),
+  tar_target(
+    name = tar_ssfroad_plots,
+    command = plot_ssfroad_coefs(tar_ssfroad_extracts)
   )
   # tar_target(
   #   name = tar_circuitscape_data,
@@ -319,12 +336,12 @@ connectTargetList <- list(
   # ),
   tar_combine(
     tar_connectPois_list,
-    coreTargetList[[21]][grep("tar_connectStanPois_location", names(coreTargetList[[21]]))],
+    coreTargetList[[22]][grep("tar_connectStanPois_location", names(coreTargetList[[22]]))],
     command = list(!!!.x)
   ),
   tar_combine(
     tar_msePois_df,
-    coreTargetList[[21]][grep("Pois_dbbmmmse", names(coreTargetList[[21]]))],
+    coreTargetList[[22]][grep("Pois_dbbmmmse", names(coreTargetList[[22]]))],
     command = rbind(!!!.x)
   ),
   tar_target(

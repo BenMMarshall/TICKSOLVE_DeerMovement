@@ -269,9 +269,6 @@ tar_sdm_layers|stem|78a3c4c48c1d2b65|2b34ef61a7df169b|262eaa6257f3914d|122210168
 tar_SDMin_plots_fallow|stem|f43923b33049e0ec|542d401c1b471a82|21bd8dd2c8b0149a|1971156351||t20284.4616578777s|d2db2b6970300f75|623686|qs|local|vector|||258.61|Mixed layer classes found in tidyterrageom_spat.|
 tar_SDMin_plots_rodent|stem|2842d7ee9a8b8c3d|119889a7735aa09d|21bd8dd2c8b0149a|1390674615||t20284.4586625036s|fd879d5792bb4185|623684|qs|local|vector|||270.094|package terra was built under R version 4.4.3. package fasterRaster was built under R version 4.4.3. Mixed layer classes found in tidyterrageom_spat.|
 tar_selectedPatchList|stem|81541558008a6703|755a9bd2f4b99ba0|727a192a0b995d09|-328935544||t20145.6252030751s|98f2f83d25bab8f2|35583|qs|local|vector|||4.234||
-tar_ssf_data|stem|5912375d0e8b0408|cdfe9500554cf21c|2d0bebfba3a691e4|390394694||t20145.5351837923s|bc7ee4510adbf2d8|8474981|qs|local|vector|||9652.11|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
-tar_ssf_extracts|stem|5d075a37e1cf0fc1|5d40193c67254db8|ac276617e0d12938|1034817943||t20216.3392993935s|2c2520909ded4dc1|2117553|qs|local|vector|||3.344|NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced|
-tar_ssf_models|stem|c4cba257affaadfc|8628949ef5c2ab2a|c7d82ce4159de7ee|-1267665248||t20214.4253417353s|a9e26cad35d008b9|32109626|qs|local|vector|||5.922|Loglik converged before variable  7,8,9  beta may be infinite. . Loglik converged before variable  7,8,9  beta may be infinite. . Loglik converged before variable  4,5,8  beta may be infinite. . Loglik converged before variable  7,8,9  beta may be infinite. . Loglik converged before variable  2  beta may be infinite. . Loglik converged before variable  1,8  beta may be infinite. . Loglik converged before variable  7  beta may be infinite. . Loglik converged before variable  12  beta may be infinite. . Loglik converged before variable  8,12  beta may be infinite. . Loglik converged before variable  8  beta may be infinite. . Loglik converged before variable  8  beta may be infinite. . Loglik converged before variable  8  beta may be infinite. . Loglik converged before variable  7,9  beta may be infinite.|
 tar_ssf_plots|stem|efab89507afdab91|df400255e20e3654|aa446dcb74e75195|1588734551||t20214.7125354983s|d4ed6ea2e05607c2|13756234|qs|local|vector|||3.078|Removed 10000 rows containing nonfinite outside the scale rangestat_boxplot.. Removed 10000 rows containing nonfinite outside the scale rangestat_boxplot.|
 tar_ssfFallow_data|stem|2f5d863445076fb1|612e047537b76af8|8e2b2bc929504fb5|-351733756||t20143.6244551587s|ae43319cefc54c62|161682|qs|local|vector|||120.469|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
 tar_trackingPlots|stem|e1aed712a2e7cfee|b349b384a931ff92|abbe80a411fd5504|1086976774||t20427.4671489882s|2f6d260e503e887c|8002384|qs|local|vector|||1.86|Removed 15 rows containing nonfinite outside the scale rangestat_density_ridges.. Removed 15 rows containing nonfinite outside the scale rangestat_density_ridges.|
@@ -283,6 +280,15 @@ tar_wrsfakde|stem|febdc013b2c26f56|18a400099c37adf3|f71f81e8c19c1669|2126301352|
 tar_patchList|stem|7a2196f10fd3acb7|6bdc42673a040198|9e1c7e8d8a6432f1|-2053994115||t20139.8655555556s|s1165207b|1165207|qs|local|vector|||10.953||
 tar_deerData|stem|9adef37866d7f82f|566ebced504f0215|1bf6d0d595cb356a|-1039388040||t20115.4977777778s|s904393b|904393|qs|local|vector|||5.859||
 tar_landuseList|stem|1d95ed7f11fb977f|39e1e1b524863f89|56e6620817c20829|1043045520||t20139.8678472222s|s9556232b|9556232|qs|local|vector|||198.656|attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries. attribute variables are assumed to be spatially constant throughout all geometries|
+tar_ssfroad_data|stem|08dd5b2ed5db0da4|b80bf02d57d3f076|ddd89a8b39092ee3|1424843125||t20712.4963744146s|s8867502b|8867502|qs|local|vector|||28662.586|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
+tar_poisroad_model|stem|8366f5de1d897254|a3fe9336a2385bac|2501c6cf060136c5|-1140010900||t20713.3931243059s|s249866733b|249866733|qs|local|vector|||26.155||
+tar_poisroad_plot|stem|e38629b511620468|408360703befcd20|145cc670d31412e3|-2126864977||t20713.393245165s|s250372007b|250372007|qs|local|vector|||1.017|`geom_errorbarh()` was deprecated in ggplot2 4.0.0. ℹ Please use the `orientation` argument of `geom_errorbar()` instead.|
+tar_ssf_data|stem|5912375d0e8b0408|cdfe9500554cf21c|2d0bebfba3a691e4|390394694||t20145.5351851852s|s8474981b|8474981|qs|local|vector|||9652.11|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
+tar_ssf_models|stem|c4cba257affaadfc|8628949ef5c2ab2a|c7d82ce4159de7ee|-1267665248||t20214.4253472222s|s32109626b|32109626|qs|local|vector|||5.922|Loglik converged before variable  7,8,9  beta may be infinite. . Loglik converged before variable  7,8,9  beta may be infinite. . Loglik converged before variable  4,5,8  beta may be infinite. . Loglik converged before variable  7,8,9  beta may be infinite. . Loglik converged before variable  2  beta may be infinite. . Loglik converged before variable  1,8  beta may be infinite. . Loglik converged before variable  7  beta may be infinite. . Loglik converged before variable  12  beta may be infinite. . Loglik converged before variable  8,12  beta may be infinite. . Loglik converged before variable  8  beta may be infinite. . Loglik converged before variable  8  beta may be infinite. . Loglik converged before variable  8  beta may be infinite. . Loglik converged before variable  7,9  beta may be infinite.|
+tar_ssf_extracts|stem|5d075a37e1cf0fc1|5d40193c67254db8|ac276617e0d12938|1034817943||t20216.3393055556s|s2117553b|2117553|qs|local|vector|||3.344|NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced|
+tar_ssfroad_models|stem|98c432a24c13669b|683edd39383539a3|0929921167625b6c|777431195||t20713.4090615113s|s30795485b|30795485|qs|local|vector|||4.992|Loglik converged before variable  2,3,4 ; beta may be infinite. . Loglik converged before variable  2,3 ; beta may be infinite. . Loglik converged before variable  3,4 ; beta may be infinite. . Loglik converged before variable  2 ; beta may be infinite. . Loglik converged before variable  2,3,4 ; beta may be infinite. . Loglik converged before variable  2,3 ; beta may be infinite. . Loglik converged before variable  3 ; beta may be infinite. . Loglik converged before variable  2 ; beta may be infinite. . Ran out of iterations and did not converge. Loglik converged before variable  2,3 ; beta may be infinite.|
+tar_ssfroad_extracts|stem|30db2907d8714e1a|488afc4c443e36bd|9bcca286ee2a0dfd|-381507756||t20713.4090990002s|s996367b|996367|qs|local|vector|||2.675|NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced. NAs produced|
+tar_ssfroad_plots|stem|0fde1df5bd51ccb6|67d2fbadfe43cc4d|42e19295bd876e2c|2055673903||t20713.4198935141s|s5897796b|5897796|qs|local|vector|||4.061||
 inputList|object|9b9ee66b2eea9c17
 run_pois_model|function|897b4b0a0db81d94
 load_deer_palette|function|f1143426f7e122cf
@@ -295,7 +301,7 @@ buffers|object|3d27737c1ea4b8a4
 read_cleanFallow_occData|function|5de2302722a96688
 extract_rsf_results|function|200d4a2dba9d5e39
 nAvailableSteps|object|d516855f98da7f3d
-run_poisroad_model|function|9748222bf08ca0c7
+run_poisroad_model|function|2aeffce13395778c
 extract_akdeFallow_longest|function|e8c62e28c532987b
 marginSize|object|c386c7b04396aaec
 aggFact_SDM|object|18f8c83bc88d6445
@@ -324,6 +330,7 @@ build_predResistance_layer|function|1ee7504347841c09
 save_proj_layer|function|382fae184272bf05
 standardise_connect_layer|function|0a3b7be0d9976fb6
 run_poisFallow_model|function|d58ff01c2b6dd428
+run_ssfroad_models|function|33b71c70f1fcea9a
 read_patches_data|function|c8fe2a56a109685c
 minPatchSize_m2|object|4453d6f14899f422
 run_wrsf_models|function|ed25e511301d2717
@@ -340,13 +347,14 @@ extract_patch_omniConnectivity|function|e93a95273f594b17
 bs_rodent|object|7bbb389ff0bd9230
 useCores|object|bfdfb93adc61812f
 prepare_circuitscape_data|function|fdd57871e3953e99
-prepare_ssfroad_data|function|394123c9ae6fb92a
-nAvailable|object|d516855f98da7f3d
+prepare_ssfroad_data|function|3035731b40a12014
 calculate_dbbmm_mse|function|d460657c9b004785
+nAvailable|object|d516855f98da7f3d
 connectSettings|object|597d46847c0f2126
 extract_connectivity_locations|function|944dcaf3b05a04d9
 extract_patch_connectivity|function|e29443f880671a62
 plot_patch_summary|function|407e9c459dcbf729
+export_poisroad_coefs|function|77202ffe9eca2fff
 plot_patch_connectivity|function|868cc251555f97ac
 plot_occSDMOmni_inOut_omniIN|function|f3d934aa8e1d5705
 plot_conductance_map|function|a2c416d29000d428
@@ -360,11 +368,13 @@ extract_ssf_coefs|function|4f7637b1934c3ff4
 plot_wrsf_effects|function|1ec877e43ccc01d9
 plot_pois_coefs|function|cfec6b0e59683d07
 plot_biomodEval_single|function|06b0744064e27955
+plot_ssfroad_coefs|function|2112c54a21b92ad1
 plot_occSDMOmni_inOut_omniOUT|function|53967987d7e7164c
 plot_homeRange_sizes|function|7465604f35a0669e
 plot_patch_MMMconnectivity|function|5f2bb36be4ae0337
 generate_tracking_plots|function|06d1d823a06321cf
 plot_connectivity_distributions|function|0aab6b43e204be3e
+extract_ssfroad_coefs|function|1c7f99cf5753eeaa
 plot_variograms|function|7f2e3dc4682f917f
 plot_occSDMOmni_inOut_HFOcc|function|81eb830f90ea5960
 generate_overview_maps|function|c9b608824a68460a
@@ -372,4 +382,3 @@ create_psuedo_abs|function|31d31097855db786
 plot_study_locations|function|f20b1c8c46c3357d
 plot_biomodEval_ensemble|function|ee934c4fc444e026
 read_cleanRodent_occData|function|0b076d8be4d7f895
-tar_ssfroad_data|stem|e5976b0a2a49b067|b80bf02d57d3f076|7fe18b4b007ec4d7|1424843125||t20710.5889570652s|s7605879b|7605879|qs|local|vector|||27869.444|NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced. NaNs produced|
