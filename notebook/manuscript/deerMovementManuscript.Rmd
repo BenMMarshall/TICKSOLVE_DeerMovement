@@ -50,7 +50,7 @@ The balance between habitat, energy, risk, and resources determine the spatial d
 Accelerating landscape changes in the form of habitat destruction, creation and transformation increases the urgency for understanding if and how animals adjust movements to accommodate landscape changes.
 
 Animal responses to landscapes can be hard to predict.
-At the global scale, wildlife movement is significantly impacted by human presence [@tucker2018moving].
+At the global scale, wildlife movement is impacted by human presence [@tucker2018moving].
 Mammals and reptiles broadly experience reductions in movement, with mobility limited by human-created barriers [e.g., roads or fencing; @tucker2018moving; @jerina2012roads; @jones2019fences].
 Similarly, examinations of 586 mammal species show that home range sizes are roughly five times smaller in areas with high versus low human disturbance [@broekman_environmental_2024].
 All else being equal, habitat fragmentation can also increase travel time for resource acquisition, resulting in higher energy expenditure [@doherty_coupling_2018], shifts in diets [@redpath_impact_1995], and lower breeding success [@saunders_breeding_1982].
@@ -410,9 +410,9 @@ humanCoef <- poisCoef %>%
 
 ## Population level selection
 
-The population level habitat selection model revealed a general tendency for Roe Deer to remain closer to the woodland patches (`r distWoodCoef`), with no significant selection for hedgerows (`r distHedgeCoef`; Fig. \@ref(fig:poisCoefPlot)).
-The model also revealed that roads play a significant role in reducing connectivity across the landscape: observed deer steps were significantly less likely to cross roads than random steps (`r roadCrossCoef`).
-The population habitat selection model also revealed significant selection for the land cover classes open shrubland (`r shrubCoef`) and tall grassland (`r tallGCoef`); other relationships were less clear (Tab. \@ref(tab:poisTable)).
+The population level habitat selection model revealed a general tendency for Roe Deer to remain closer to the woodland patches (`r distWoodCoef`), with no clear selection for hedgerows (`r distHedgeCoef`; Fig. \@ref(fig:poisCoefPlot)).
+The model also revealed that roads play a role in reducing connectivity across the landscape: observed deer steps were less likely to cross roads than random steps (`r roadCrossCoef`).
+The population habitat selection model also revealed selection for the land cover classes open shrubland (`r shrubCoef`) and tall grassland (`r tallGCoef`); other relationships were less clear (Tab. \@ref(tab:poisTable)).
 
 The model's inclusion of step length and log step length interactions allowed us to examine whether movement was altered by land cover.
 Movement was most impacted by short grassland, tall grassland, and cropland, all showing the same pattern.
@@ -590,7 +590,7 @@ Roe 10 is also likely the reason the estimated heterogeneity in response to dist
 Distance to hedgerows does not see the same consistent response, instead with a number of individuals showing a opposing responses.
 This is reflected in the population mean being close to zero (`r hedgePopAvg`), while the specialisation is greater (`r hedgeSpecial`; Fig. \@ref(fig:ssfSpecialPlot)), the combination of which could indicate two differing responses to hedgerows in the sampled Roe Deer.
 
-The chance of crossing a road is considerably more consistent, with the vast majority of individuals preferring not to cross roads; this is reflected in a significantly negative population mean (`r roadsPopAvg`).
+The chance of crossing a road is considerably more consistent, with the vast majority of individuals preferring not to cross roads; this is reflected in a negative population mean (`r roadsPopAvg`).
 The elevated specialisation (`r roadsSpecial`) and heterogeneity (`r roadsHetero`) values are almost entirely driven by two very uncertain estimates from Roe Deer 09 (`r roads09coef`) and Roe Deer 11 (`r roads11coef`).
 This could have been the result of a lack of exposure; the Roe Deer 09 only crossed roads on two occasions, while Roe Deer 11 never did.
 Other than those individuals, we can be confident in a consistently negative response to road crossing in Roe Deer.
@@ -598,7 +598,7 @@ Other than those individuals, we can be confident in a consistently negative res
 It was difficult to obtain confident estimates for land cover categories due to the variable levels of availability for each individual; some individuals only rarely moved close enough to certain land cover classes so estimations are based on a small section of the movement dataset.
 Cropland and Evergreen Needleleaf Forest showed the high rates of significant estimates, and both weighted population estimates (`r cropPopAvg`; `r everPopAvg`) matched the results from the Poisson population level model (`r cropLCoef`; `r everNCoef`).
 In both cases a single individual revealed a strong but very uncertain negative response that can explain the heterogeneity (`r cropHetero`; `r everHetero`) and specialisation values (`r cropSpecial`; `r everSpecial`) and additionally explain why the effect overlapped zero in the Population level model.
-The response to Evergreen Needleleaf Forest appears the least consistent, with multiple individuals expressing significantly negative and positive responses to the land cover.
+The response to Evergreen Needleleaf Forest appears the least consistent, with multiple individuals expressing negative and positive responses to the land cover.
 Tall Grassland showed similar levels of diverging estimates, with individuals showing a mix of positive and negative responses.
 Unlike the population estimates for Cropland and Evergreen Needleleaf Forest, the weighted population mean for Tall Grassland (`r tgraPopAvg`) does not match the population level model (`r tallGCoef`).
 This may be indicative that the interaction effects included in the population level model are mediating the responses to Tall Grassland.
@@ -653,7 +653,7 @@ There are several aspects of the study that may limit its generalisability, or t
 Using the STRANGE framework [@webster_how_2020], we highlight key limitations (omitting those that are unquantifiable or of limited relevance).
 **Social background**.
 We have little information on the individuals not tracked that may be impacting the movements of tracked deer.
-Roe Deer will maintain territories [@pagon_territorial_2017; @hoem_fighting_2007], so it is likely that the density of and interactions with conspecifics could alter the distribution and size of our tracked deer's movements via competitive exclusion or territorial patrolling.
+Male Roe Deer will maintain territories [@pagon_territorial_2017; @hoem_fighting_2007], so it is likely that the density of and interactions with conspecifics could alter the distribution and size of our tracked deer's movements via competitive exclusion or territorial patrolling.
 **Trappability and self-selection**. 
 While there is not obvious bias to the deer trapping methods we used, there may be an unknown behavioural variation altering the likelihood of a deer being captured.
 If the trappability of a deer is associated with certain movement or behavioural parameters, our sample may be skewed towards those tendencies (e.g., boldness leads to increased capture likelihood, while also being connected to increased chance of crossing roads).
