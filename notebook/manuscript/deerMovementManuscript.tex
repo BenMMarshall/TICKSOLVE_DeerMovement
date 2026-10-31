@@ -116,8 +116,8 @@ The balance between habitat, energy, risk, and resources determine the spatial d
 Accelerating landscape changes in the form of habitat destruction, creation and transformation increases the urgency for understanding if and how animals adjust movements to accommodate landscape changes.
 
 Animal responses to landscapes can be hard to predict.
-At the global scale, wildlife movement is significantly impacted by human presence (\citeproc{ref-tucker2018moving}{Tucker et al., 2018}).
-Mammals and reptiles broadly experience reductions in movement, with mobility limited by human-created barriers {[}e.g., roads or fencing; Tucker et al. (\citeproc{ref-tucker2018moving}{2018}); Jerina (\citeproc{ref-jerina2012roads}{2012}); Jones et al. (\citeproc{ref-jones2019fences}{2019}){]}.
+At the global scale, wildlife movement is impacted by human presence (\citeproc{ref-tucker2018moving}{{Tucker et al.}, 2018}).
+Mammals and reptiles broadly experience reductions in movement, with mobility limited by human-created barriers {[}e.g., roads or fencing; {Tucker et al.} (\citeproc{ref-tucker2018moving}{2018}); Jerina (\citeproc{ref-jerina2012roads}{2012}); Jones et al. (\citeproc{ref-jones2019fences}{2019}){]}.
 Similarly, examinations of 586 mammal species show that home range sizes are roughly five times smaller in areas with high versus low human disturbance (\citeproc{ref-broekman_environmental_2024}{Broekman et al., 2024}).
 All else being equal, habitat fragmentation can also increase travel time for resource acquisition, resulting in higher energy expenditure (\citeproc{ref-doherty_coupling_2018}{Doherty \& Driscoll, 2018}), shifts in diets (\citeproc{ref-redpath_impact_1995}{Redpath, 1995}), and lower breeding success (\citeproc{ref-saunders_breeding_1982}{Saunders, 1982}).
 
@@ -267,7 +267,7 @@ To support this approach and to produce an overall distribution deer distance aw
 
 \subsection{Habitat Selection}\label{habitat-selection}
 
-We used the reformulated Poisson model approach described by Muff, Signer \& Fieberg (\citeproc{ref-muff_accounting_2020}{2020}) to generate population level estimates of habitat selection as well as gauge deer's movement capabilities in relation to different aspects of the landscape.
+We used the reformulated Poisson model approach described by Muff, Signer \& Fieberg (\citeproc{ref-muff_accounting_2020}{2020}) to generate population level estimates of habitat selection (equivalent to integrated step selection models) as well as gauge deer's movement capabilities in relation to different aspects of the landscape.
 
 The model required data pertaining to the used locations (i.e., GPS locations of the deer) and comparable data on randomly generated available points (i.e., randomly generated locations the deer could have travelled to).
 For each confirmed deer location, we generated 10 random alternative locations they could have travelled to.
@@ -286,7 +286,7 @@ This reduced instances of limited interaction with the deer movement data thereb
 \begingroup\fontsize{9}{11}\selectfont
 
 \begin{longtable}[t]{lrl}
-\caption{\label{tab:landcoverTable}Overview of the reclassification of UKCEH land cover classes for inclusion into the habitat selection models.}\\
+\caption{\label{tab:landcoverTable}Overview of the reclassification of UKCEH land cover classes for inclusion into the habitat selection models. Barren and Ohter were not included in the model due to their lack of representation in the data.}\\
 \toprule
 UKCEH land cover class & UKCEH land cover identifier & Reclassified category\\
 \midrule
@@ -334,12 +334,13 @@ To ensure compatibility between all data sources, we projected all data into the
 
 The population level model consisted of land cover (a 8-term category variable formed into 7 dummy variables, with deciduous woodland placed as the reference category, barren and other excluded), distance to woodland (continuous in m), distance to hedgerow (continuous in m), road crossing (binary).
 In addition to these habitat selection focused predictors, we included several movement predictors: step length, log step length, and cos turn angle, as well as the interaction between step length and log of step length with all land cover types.
+Including these movement components and interactions improves the identifiability of habitat selection (\citeproc{ref-avgar_integrated_2016}{Avgar et al., 2016}).
 
 To account for the structure originating from having multiple individuals in the model, we included fixed Gaussian processes for the time step and the individual in keeping with the approach described by Muff, Signer \& Fieberg (\citeproc{ref-muff_accounting_2020}{2020}).
 This formulation, namely the fixed Gaussian processes, as described by Muff, Signer \& Fieberg (\citeproc{ref-muff_accounting_2020}{2020}) allows for the efficient estimation of population level selection using integrated nested Laplace approximation (INLA) (\citeproc{ref-INLA2013b}{Martins et al., 2013}; \citeproc{ref-INLA2015d}{Lindgren \& Rue, 2015}).
 Our final formula was: \emph{y \textasciitilde{} -1 + Distance to woodland (continuous) + Distance to hedgerows (continuous) + Land cover categories (7 binary variables) + Road crossed (binary) + Step length (continuous) + Log step length (continuous) + Cos turn angle (continuous) + Step length interactions with Land cover categories + Log step length interactions with Land cover categories + Gaussian process for deer ID + Gaussian process for time step}.
 
-To supplement the population model, we ran individual level step-selection models for each Roe Deer separately.
+To supplement the population model, we ran individual level integrated step-selection models for each Roe Deer separately.
 These models used the same data as the population level model, but focused on individual level responses relative to the population mean.
 Past studies of wild Roe Deer have found substantial levels of individual variability in behavioural responses to risk (\citeproc{ref-bonnot_interindividual_2015}{Bonnot et al., 2015}).
 For the individual models, we used a formula that included land cover class, distance to woodland, distance to hedgerows, a binary describing whether they crossed a road, step length, log step length, and cos of turn angle.
@@ -356,11 +357,11 @@ To carry forward the uncertainty surrounding the initial habitat coefficients in
 \section{Results}\label{results}
 
 Overall, the 15 GPS collared Roe Deer resulted in 20903 location fixes, with a mean of 1394 SD±627.9 per individual, spread across a mean of 196 SD±90.99 days per individual (Fig. \ref{fig:trackingDuration}).
-This resulted in an average of 7.133 SD±0.5359 fixes per day per individual (Fig. \ref{fig:trackingTimelags}; Tab. \ref{tab:trackingSummaryTable}).
+This resulted in an average of 7.13 SD±0.536 fixes per day per individual (Fig. \ref{fig:trackingTimelags}; Tab. \ref{tab:trackingSummaryTable}).
 
 For our Aberdeenshire Roe Deer home range sizes ranged from 32.2 to 122.5ha (95\% contour point estimates), with a weighted mean of 65.3 ha (95\% CI 55.5-75.8) (Fig. \ref{fig:homeRangeSize}).
-The deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8 and Roe Deer 3; Fig. \ref{fig:variogramPlot}).
-Effective sample sizes were all high (154.4 and 926.7), suggesting we can be confident in the home range estimates.
+The deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8 and Roe Deer 3; i.e., wave-like patterns present in the variograms; Fig. \ref{fig:variogramPlot}).
+Effective sample sizes were all high (154.4 and 926.7), indicating a frequent repeated crossings accross their home ranges and suggesting we can be confident in the home range estimates.
 All except for two individuals (Roe Deer 5 and Roe Deer 12) found OU models to fit best, with the remaining two being better described by OUF models (Tab. \ref{tab:akdeModelTable}).
 
 All best fitting models were anisotropic, suggesting these Roe Deer are inhabiting non-uniform home ranges (i.e., not being as wide as they are long).
@@ -386,9 +387,9 @@ The placement of home ranges suggest the importance of woodland, with 95\% of al
 
 \subsection{Population level selection}\label{population-level-selection}
 
-The population level habitat selection model revealed a general tendency for Roe Deer to remain closer to the woodland patches (-0.0051; 95\% CI -0.0082 to -0.0022), with no significant selection for hedgerows (-9e-04; 95\% CI -0.0019 to 1e-04; Fig. \ref{fig:poisCoefPlot}).
-The model also revealed that roads play a significant role in reducing connectivity across the landscape: observed deer steps were significantly less likely to cross roads than random steps (-0.76; 95\% CI -1.2 to -0.36).
-The population habitat selection model also revealed significant selection for the land cover classes open shrubland (1.5; 95\% CI 0.62 to 2.2) and tall grassland (0.57; 95\% CI 0.17 to 0.98); other relationships were less clear (Tab. \ref{tab:poisTable}).
+The population level habitat selection model revealed a general tendency for Roe Deer to remain closer to the woodland patches (-0.0051; 95\% CI -0.0082 to -0.0022), with no clear selection for hedgerows (-9e-04; 95\% CI -0.0019 to 1e-04; Fig. \ref{fig:poisCoefPlot}).
+The model also revealed that roads play a role in reducing connectivity across the landscape: observed deer steps were less likely to cross roads than random steps (-0.76; 95\% CI -1.2 to -0.36).
+The population habitat selection model also revealed selection for the land cover classes open shrubland (1.5; 95\% CI 0.62 to 2.2) and tall grassland (0.57; 95\% CI 0.17 to 0.98); other relationships were less clear (Tab. \ref{tab:poisTable}).
 
 The model's inclusion of step length and log step length interactions allowed us to examine whether movement was altered by land cover.
 Movement was most impacted by short grassland, tall grassland, and cropland, all showing the same pattern.
@@ -417,7 +418,7 @@ Roe 10 is also likely the reason the estimated heterogeneity in response to dist
 Distance to hedgerows does not see the same consistent response, instead with a number of individuals showing a opposing responses.
 This is reflected in the population mean being close to zero (-0.001; 95\% CI -0.002 to 0), while the specialisation is greater (0.002; Fig. \ref{fig:ssfSpecialPlot}), the combination of which could indicate two differing responses to hedgerows in the sampled Roe Deer.
 
-The chance of crossing a road is considerably more consistent, with the vast majority of individuals preferring not to cross roads; this is reflected in a significantly negative population mean (-0.514; 95\% CI -0.807 to -0.222).
+The chance of crossing a road is considerably more consistent, with the vast majority of individuals preferring not to cross roads; this is reflected in a negative population mean (-0.514; 95\% CI -0.807 to -0.222).
 The elevated specialisation (134.97) and heterogeneity (417.65) values are almost entirely driven by two very uncertain estimates from Roe Deer 09 (17.957 ±888.36) and Roe Deer 11 (-17.988 ±1620.795).
 This could have been the result of a lack of exposure; the Roe Deer 09 only crossed roads on two occasions, while Roe Deer 11 never did.
 Other than those individuals, we can be confident in a consistently negative response to road crossing in Roe Deer.
@@ -425,7 +426,7 @@ Other than those individuals, we can be confident in a consistently negative res
 It was difficult to obtain confident estimates for land cover categories due to the variable levels of availability for each individual; some individuals only rarely moved close enough to certain land cover classes so estimations are based on a small section of the movement dataset.
 Cropland and Evergreen Needleleaf Forest showed the high rates of significant estimates, and both weighted population estimates (-0.191; 95\% CI -0.561 to 0.179; -0.072; 95\% CI -0.311 to 0.168) matched the results from the Poisson population level model (-0.22; 95\% CI -0.99 to 0.52; -0.37; 95\% CI -1 to 0.25).
 In both cases a single individual revealed a strong but very uncertain negative response that can explain the heterogeneity (353.18; 252.83) and specialisation values (107.22; 68.37) and additionally explain why the effect overlapped zero in the Population level model.
-The response to Evergreen Needleleaf Forest appears the least consistent, with multiple individuals expressing significantly negative and positive responses to the land cover.
+The response to Evergreen Needleleaf Forest appears the least consistent, with multiple individuals expressing negative and positive responses to the land cover.
 Tall Grassland showed similar levels of diverging estimates, with individuals showing a mix of positive and negative responses.
 Unlike the population estimates for Cropland and Evergreen Needleleaf Forest, the weighted population mean for Tall Grassland (-0.299; 95\% CI -0.572 to -0.026) does not match the population level model (0.57; 95\% CI 0.17 to 0.98).
 This may be indicative that the interaction effects included in the population level model are mediating the responses to Tall Grassland.
@@ -441,7 +442,7 @@ The lack of consistent availability of these land covers and potentially inconsi
 
 }
 
-\caption{Coefficient estimates for all individual step-selection models for all 15 Roe Deer, along side weighted population means per covariate. Points indicate the estimated coefficients for each individual. Error bars with the population estimates are the 95\% confidence interval. Colour highlights reflect the estimates whose standard errors do not overlap zero, either negatively (light orange) and positively (dark orange). For distance to * variables, lower coefficients indicate that Roe Deer are selecting areas with lower distances from the landscape feature. For the road crossing variable, lower coefficients indicate a lower than chance to cross the road. For land cover variables, positive coefficients indicate of Roe Deer preferentially selecting to be in those areas.}\label{fig:ssfCoefPlot}
+\caption{Coefficient estimates for all individual step-selection models for all 15 Roe Deer, along side standard error weighted population means per covariate. Points indicate the estimated coefficients for each individual. Error bars with the population estimates are the 95\% confidence interval. Colour highlights reflect the estimates whose standard errors do not overlap zero, either negatively (light orange) and positively (dark orange). For distance to * variables, lower coefficients indicate that Roe Deer are selecting areas with lower distances from the landscape feature. For the road crossing variable, lower coefficients indicate a lower than chance to cross the road. For land cover variables, positive coefficients indicate of Roe Deer preferentially selecting to be in those areas.}\label{fig:ssfCoefPlot}
 \end{figure}
 
 \clearpage
@@ -485,7 +486,7 @@ There are several aspects of the study that may limit its generalisability, or t
 Using the STRANGE framework (\citeproc{ref-webster_how_2020}{Webster \& Rutz, 2020}), we highlight key limitations (omitting those that are unquantifiable or of limited relevance).
 \textbf{Social background}.
 We have little information on the individuals not tracked that may be impacting the movements of tracked deer.
-Roe Deer will maintain territories (\citeproc{ref-hoem_fighting_2007}{Hoem et al., 2007}; \citeproc{ref-pagon_territorial_2017}{Pagon et al., 2017}), so it is likely that the density of and interactions with conspecifics could alter the distribution and size of our tracked deer's movements via competitive exclusion or territorial patrolling.
+Male Roe Deer will maintain territories (\citeproc{ref-hoem_fighting_2007}{Hoem et al., 2007}; \citeproc{ref-pagon_territorial_2017}{Pagon et al., 2017}), so it is likely that the density of and interactions with conspecifics could alter the distribution and size of our tracked deer's movements via competitive exclusion or territorial patrolling.
 \textbf{Trappability and self-selection}.
 While there is not obvious bias to the deer trapping methods we used, there may be an unknown behavioural variation altering the likelihood of a deer being captured.
 If the trappability of a deer is associated with certain movement or behavioural parameters, our sample may be skewed towards those tendencies (e.g., boldness leads to increased capture likelihood, while also being connected to increased chance of crossing roads).
@@ -514,7 +515,7 @@ For permission to conduct the work, we thank NatureScot, ForestryEngland and Nat
 
 \subsection{Software availability}\label{software-availability}
 
-For all analysis we used R (v.4.4.2) (\citeproc{ref-base}{R Core Team, 2024}), and R Studio (v.2024.12.0+467) (\citeproc{ref-rstudio}{Posit team, 2024}). For analysis of animal movement data we used amt (v.0.2.2.0) (\citeproc{ref-amt}{Signer, Fieberg \& Avgar, 2019}), ctmm (v.1.2.0) (\citeproc{ref-ctmm}{Fleming \& Calabrese, 2023}), and move (v.4.2.6) (\citeproc{ref-move}{Kranstauber, Smolla \& Scharf, 2024}). For general data manipulation we used glue (v.1.8.0) (\citeproc{ref-glue}{Hester \& Bryan, 2024}), sjmisc (v.2.8.10) (\citeproc{ref-sjmisc}{Lüdecke, 2018}), tidyverse (v.2.0.0) (\citeproc{ref-tidyverse}{Wickham et al., 2019}), and units (v.0.8.5) (\citeproc{ref-units}{Pebesma, Mailund \& Hiebert, 2016}). For project and code management we used here (v.1.0.1) (\citeproc{ref-here}{Müller, 2020}), tarchetypes (v.0.11.0) (\citeproc{ref-tarchetypes}{Landau, 2021a}), and targets (v.1.9.0) (\citeproc{ref-targets}{Landau, 2021b}). For visualisation we used the following as expansions from the tidyverse suite of packages: ggdist (v.3.3.2) (\citeproc{ref-ggdist2024a}{Kay, 2024a},\citeproc{ref-ggdist2024b}{b}), ggridges (v.0.5.6) (\citeproc{ref-ggridges}{Wilke, 2024}), ggtext (v.0.1.2) (\citeproc{ref-ggtext}{Wilke \& Wiernik, 2022}), patchwork (v.1.3.0) (\citeproc{ref-patchwork}{Pedersen, 2024}), and scales (v.1.3.0) (\citeproc{ref-scales}{Wickham, Pedersen \& Seidel, 2023}). Other packages we used were boot (v.1.3.31) (\citeproc{ref-boot1997}{A. C. Davison \& D. V. Hinkley, 1997}; \citeproc{ref-boot2024}{Angelo Canty \& B. D. Ripley, 2024}), circular (v.0.5.1) (\citeproc{ref-circular}{Agostinelli \& Lund, 2024}), doParallel (v.1.0.17) (\citeproc{ref-doParallel}{Corporation \& Weston, 2022}), foreach (v.1.5.2) (\citeproc{ref-foreach}{Microsoft \& Weston, 2022}), knitr (v.1.49) (\citeproc{ref-knitr2014}{Xie, 2014}, \citeproc{ref-knitr2015}{2015}, \citeproc{ref-knitr2024}{2024}), and usethis (v.3.0.0) (\citeproc{ref-usethis}{Wickham et al., 2024}). To generate typeset outputs we used bookdown (v.0.42) (\citeproc{ref-bookdown2016}{Xie, 2016}, \citeproc{ref-bookdown2025}{2025}), and rmarkdown (v.2.29) (\citeproc{ref-rmarkdown2018}{Xie, Allaire \& Grolemund, 2018}; \citeproc{ref-rmarkdown2020}{Xie, Dervieux \& Riederer, 2020}; \citeproc{ref-rmarkdown2024}{Allaire et al., 2024}). To manipulate and manage spatial data we used gdistance (v.1.6.4) (\citeproc{ref-gdistance}{van Etten, 2017}), raster (v.3.6.30) (\citeproc{ref-raster}{Hijmans, 2024a}), sf (v.1.0.19) (\citeproc{ref-sf2018}{Pebesma, 2018}; \citeproc{ref-sf2023}{Pebesma \& Bivand, 2023}), sp (v.2.1.4) (\citeproc{ref-sp2005}{Pebesma \& Bivand, 2005}; \citeproc{ref-sp2013}{Bivand, Pebesma \& Gomez-Rubio, 2013}), terra (v.1.7.83) (\citeproc{ref-terra}{Hijmans, 2024b}), and tidyterra (v.0.6.1) (\citeproc{ref-R-tidyterra}{Hernangómez, 2023}). To run models and explore model outputs we used effects (v.4.2.2) (\citeproc{ref-effects2003}{Fox, 2003}; \citeproc{ref-effects2009}{Fox \& Hong, 2009}; \citeproc{ref-effects2018}{Fox \& Weisberg, 2018}, \citeproc{ref-effects2019}{2019}), INLA (v.24.6.27) (\citeproc{ref-INLA2013b}{Martins et al., 2013}; \citeproc{ref-INLA2015d}{Lindgren \& Rue, 2015}), lme4 (v.1.1.35.5) (\citeproc{ref-lme4}{Bates et al., 2015}), and performance (v.0.12.4) (\citeproc{ref-performance}{Lüdecke et al., 2021}).
+For all analysis we used R (v.4.4.2) (\citeproc{ref-base}{R Core Team, 2024}), and R Studio (v.2024.12.0+467) (\citeproc{ref-rstudio}{Posit team, 2024}). For analysis of animal movement data we used amt (v.0.2.2.0) (\citeproc{ref-amt}{Signer, Fieberg \& Avgar, 2019}), ctmm (v.1.2.0) (\citeproc{ref-ctmm}{Fleming \& Calabrese, 2023}), and move (v.4.2.6) (\citeproc{ref-move}{Kranstauber, Smolla \& Scharf, 2024}). For general data manipulation we used glue (v.1.8.0) (\citeproc{ref-glue}{Hester \& Bryan, 2024}), sjmisc (v.2.8.10) (\citeproc{ref-sjmisc}{Lüdecke, 2018}), tidyverse (v.2.0.0) (\citeproc{ref-tidyverse}{Wickham et al., 2019}), and units (v.0.8.5) (\citeproc{ref-units}{Pebesma, Mailund \& Hiebert, 2016}). For project and code management we used here (v.1.0.1) (\citeproc{ref-here}{Müller, 2020}), tarchetypes (v.0.11.0) (\citeproc{ref-tarchetypes}{Landau, 2021a}), and targets (v.1.9.0) (\citeproc{ref-targets}{Landau, 2021b}). For visualisation we used the following as expansions from the tidyverse suite of packages: ggdist (v.3.3.2) (\citeproc{ref-ggdist2024a}{Kay, 2024a},\citeproc{ref-ggdist2024b}{b}), ggridges (v.0.5.6) (\citeproc{ref-ggridges}{Wilke, 2024}), ggtext (v.0.1.2) (\citeproc{ref-ggtext}{Wilke \& Wiernik, 2022}), patchwork (v.1.3.0) (\citeproc{ref-patchwork}{Pedersen, 2024}), and scales (v.1.3.0) (\citeproc{ref-scales}{Wickham, Pedersen \& Seidel, 2023}). Other packages we used were boot (v.1.3.31) (\citeproc{ref-boot1997}{A. C. Davison \& D. V. Hinkley, 1997}; \citeproc{ref-boot2024}{Angelo Canty \& B. D. Ripley, 2024}), circular (v.0.5.1) (\citeproc{ref-circular}{Agostinelli \& Lund, 2024}), doParallel (v.1.0.17) (\citeproc{ref-doParallel}{Corporation \& Weston, 2022}), foreach (v.1.5.2) (\citeproc{ref-foreach}{Microsoft \& Weston, 2022}), knitr (v.1.49) (\citeproc{ref-knitr2014}{Xie, 2014}, \citeproc{ref-knitr2015}{2015}, \citeproc{ref-knitr2024}{2024}), and usethis (v.3.0.0) (\citeproc{ref-usethis}{Wickham et al., 2024}). To generate typeset outputs we used bookdown (v.0.42) (\citeproc{ref-bookdown2016}{Xie, 2016}, \citeproc{ref-bookdown2025}{2025}), and rmarkdown (v.2.29) (\citeproc{ref-rmarkdown2018}{Xie, Allaire \& Grolemund, 2018}; \citeproc{ref-rmarkdown2020}{Xie, Dervieux \& Riederer, 2020}; \citeproc{ref-rmarkdown2024}{Allaire et al., 2024}). To manipulate and manage spatial data we used gdistance (v.1.6.4) (\citeproc{ref-gdistance}{{van Etten}, 2017}), raster (v.3.6.30) (\citeproc{ref-raster}{Hijmans, 2024a}), sf (v.1.0.19) (\citeproc{ref-sf2018}{Pebesma, 2018}; \citeproc{ref-sf2023}{Pebesma \& Bivand, 2023}), sp (v.2.1.4) (\citeproc{ref-sp2005}{Pebesma \& Bivand, 2005}; \citeproc{ref-sp2013}{Bivand, Pebesma \& Gomez-Rubio, 2013}), terra (v.1.7.83) (\citeproc{ref-terra}{Hijmans, 2024b}), and tidyterra (v.0.6.1) (\citeproc{ref-R-tidyterra}{Hernangómez, 2023}). To run models and explore model outputs we used effects (v.4.2.2) (\citeproc{ref-effects2003}{Fox, 2003}; \citeproc{ref-effects2009}{Fox \& Hong, 2009}; \citeproc{ref-effects2018}{Fox \& Weisberg, 2018}, \citeproc{ref-effects2019}{2019}), INLA (v.24.6.27) (\citeproc{ref-INLA2013b}{Martins et al., 2013}; \citeproc{ref-INLA2015d}{Lindgren \& Rue, 2015}), lme4 (v.1.1.35.5) (\citeproc{ref-lme4}{Bates et al., 2015}), and performance (v.0.12.4) (\citeproc{ref-performance}{Lüdecke et al., 2021}).
 
 The code used to complete this study can be found at \url{https://github.com/BenMMarshall/TICKSOLVE_DeerMovement} amongst code for the broader examination of deer's role in these landscapes; and is archived at \url{https://doi.org/10.5281/zenodo.18701055}.
 
@@ -958,7 +959,7 @@ cos ta\_ & -0.4358 & -0.5811 & -0.2904 & Significant -\\
 
 \sloppy
 
-\phantomsection\label{refs}
+\protect\phantomsection\label{refs}
 \begin{CSLReferences}{1}{0}
 \bibitem[\citeproctext]{ref-boot1997}
 A. C. Davison, D. V. Hinkley. 1997. \emph{\href{https://doi:10.1017/CBO9780511802843}{Bootstrap methods and their applications}}. Cambridge: Cambridge University Press.
@@ -977,6 +978,9 @@ Allaire J, Xie Y, Dervieux C, McPherson J, Luraschi J, Ushey K, Atkins A, Wickha
 
 \bibitem[\citeproctext]{ref-boot2024}
 Angelo Canty, B. D. Ripley. 2024. \emph{{boot}: Bootstrap r (s-plus) functions}.
+
+\bibitem[\citeproctext]{ref-avgar_integrated_2016}
+Avgar T, Potts JR, Lewis MA, Boyce MS. 2016. Integrated step selection analysis: Bridging the gap between resource selection and animal movement. \emph{Methods in Ecology and Evolution} 7:619--630. DOI: \href{https://doi.org/10.1111/2041-210X.12528}{10.1111/2041-210X.12528}.
 
 \bibitem[\citeproctext]{ref-basak2020human}
 Basak SM, Wierzbowska IA, Gajda A, Czarnoleski M, Lesiak M, Widera E. 2020. Human--wildlife conflicts in krakow city, southern poland. \emph{Animals} 10:1014.
@@ -1345,7 +1349,7 @@ Silva I, Fleming CH, Noonan MJ, Alston J, Folta C, Fagan WF, Calabrese JM. 2022.
 Staines B, Palmer S, Wyllie I, Gill R, Mayle B. 1998. Final project report to the ministry of agriculture, fisheries and food: Desk and limited field studies to analyse the major factor influencing regional deer populations and ranging behaviour. \emph{Institute of Terrestrial Ecology, Natural Environmental Research Council} T08093A5 \& B5:1--97.
 
 \bibitem[\citeproctext]{ref-tucker2018moving}
-Tucker MA, Böhning-Gaese K, Fagan WF, Fryxell JM, Van Moorter B, Alberts SC, Ali AH, Allen AM, Attias N, Avgar T, others. 2018. Moving in the anthropocene: Global reductions in terrestrial mammalian movements. \emph{Science} 359:466--469.
+{Tucker MA, Böhning-Gaese K, Fagan WF, Fryxell JM, Van Moorter B, Alberts SC, Ali AH, Allen AM, Attias N, Avgar T, others}. 2018. Moving in the anthropocene: Global reductions in terrestrial mammalian movements. \emph{Science} 359:466--469.
 
 \bibitem[\citeproctext]{ref-tufto_habitat_1996}
 Tufto J, Andersen R, Linnell J. 1996. Habitat {Use} and {Ecological} {Correlates} of {Home} {Range} {Size} in a {Small} {Cervid}: {The} {Roe} {Deer}. \emph{The Journal of Animal Ecology} 65:715. DOI: \href{https://doi.org/10.2307/5670}{10.2307/5670}.
@@ -1354,7 +1358,7 @@ Tufto J, Andersen R, Linnell J. 1996. Habitat {Use} and {Ecological} {Correlates
 Valero E, Picos J, Lagos L, Álvarez X. 2015. Corrigendum to: {Road} and traffic factors correlated to wildlife--vehicle collisions in {Galicia} ({Spain}). \emph{Wildlife Research} 42:717. DOI: \href{https://doi.org/10.1071/WR14060_CO}{10.1071/WR14060\_CO}.
 
 \bibitem[\citeproctext]{ref-gdistance}
-van Etten J. 2017. R package gdistance: Distances and routes on geographical grids. \emph{Journal of Statistical Software} 76:1--21. DOI: \href{https://doi.org/10.18637/jss.v076.i13}{10.18637/jss.v076.i13}.
+{van Etten J}. 2017. R package gdistance: Distances and routes on geographical grids. \emph{Journal of Statistical Software} 76:1--21. DOI: \href{https://doi.org/10.18637/jss.v076.i13}{10.18637/jss.v076.i13}.
 
 \bibitem[\citeproctext]{ref-van_laere_utilisation_1996}
 Van Laere G, Boutin JM, Gaillard JM. 1996. Utilisation de l'espace par le faon de chevreuil, {Capreolus} capreolus {L}. ({Artiodactyla}, {Cervidae}), durant ses premiers mois de vie. \emph{Mammalia} 60. DOI: \href{https://doi.org/10.1515/mamm.1996.60.1.15}{10.1515/mamm.1996.60.1.15}.

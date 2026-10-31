@@ -182,9 +182,9 @@ meanDurationInText <- paste0(signif(mean(trackingSummary$durationDays), digits =
                                " SD±",
                                signif(sd(trackingSummary$durationDays), digits = 4))
 
-meanFixDayInText <- paste0(signif(mean(trackingSummary$fixesPerDay), digits = 4), 
+meanFixDayInText <- paste0(signif(mean(trackingSummary$fixesPerDay), digits = 3), 
                                " SD±",
-                               signif(sd(trackingSummary$fixesPerDay), digits = 4))
+                               signif(sd(trackingSummary$fixesPerDay), digits = 3))
 
 ```
 
@@ -260,7 +260,7 @@ To support this approach and to produce an overall distribution deer distance aw
 
 ## Habitat Selection
 
-We used the reformulated Poisson model approach described by @muff_accounting_2020 to generate population level estimates of habitat selection as well as gauge deer's movement capabilities in relation to different aspects of the landscape.
+We used the reformulated Poisson model approach described by @muff_accounting_2020 to generate population level estimates of habitat selection (equivalent to integrated step selection models) as well as gauge deer's movement capabilities in relation to different aspects of the landscape.
 
 The model required data pertaining to the used locations (i.e., GPS locations of the deer) and comparable data on randomly generated available points (i.e., randomly generated locations the deer could have travelled to).
 For each confirmed deer location, we generated `r inputList$nAvailableSteps` random alternative locations they could have travelled to.
@@ -275,12 +275,11 @@ Validation of these data suggest 83% accuracy [@morton_land_2024].
 The UKCEH land cover data comprises of 21 land cover classes, broadly following the Biodiversity Broad Habitats [@jackson_guidance_2000].
 
 We recategorised these 21 land cover types categories into 10 more general categories (Tab. \@ref(tab:landcoverTable)).
-<!-- SUPP TABLE TO SHOW THE TRANSLATIONS -->
 This reduced instances of limited interaction with the deer movement data thereby aiding habitat selection model convergence and avoided extreme, unstable selection estimates.
 
 ```{r landcoverTable, echo=FALSE, message=FALSE}
 landcoverReclass <- read.csv(here("tables", "reclassificationUKCEH.csv"))
-kableExtra::kbl(landcoverReclass, caption = "Overview of the reclassification of UKCEH land cover classes for inclusion into the habitat selection models.",
+kableExtra::kbl(landcoverReclass, caption = "Overview of the reclassification of UKCEH land cover classes for inclusion into the habitat selection models. Barren and Ohter were not included in the model due to their lack of representation in the data.",
              col.names = c("UKCEH land cover class",
                            "UKCEH land cover identifier",
                            "Reclassified category"), booktabs = TRUE, longtable = TRUE) %>%
@@ -293,7 +292,7 @@ In addition to land cover classes, we also acquired "woody linear feature" (i.e.
 We converted the polygon spatial data into a raster, where 1 == hedgerow, and used that rasterisation to generate a distance to hedgerow raster for the entire study landscape.
 We conducted the same process to create a distance to woodland raster, where we calculated the distance from any area the UKCEH land cover data classed as deciduous or coniferous woodland.
 These distance rasters allowed for easy extraction of the distance to the nearest hedgerow and woodland for all locations.
-This allowed us to investigate the influence of woodland or hedgerow on the use of open habitats by Roe Deer, as well as the extent to which expanses of open habitats might act as barriers to Roe Deer dispersal. 
+This allowed us to investigate the influence of woodland or hedgerow on the use of open habitats by Roe Deer, as well as the extent to which expanses of open habitats might act as barriers to Roe Deer dispersal.
 
 We acquired road data from Ordnance Survey Open Roads dataset [@ordnance_survey_os_2024]. 
 We created a binary variable describing crossing events for all steps, with all steps that crossed one or more of the roads being classed as 1.
@@ -303,12 +302,13 @@ To ensure compatibility between all data sources, we projected all data into the
 
 The population level model consisted of land cover (a 8-term category variable formed into 7 dummy variables, with deciduous woodland placed as the reference category, barren and other excluded), distance to woodland (continuous in m), distance to hedgerow (continuous in m), road crossing (binary).
 In addition to these habitat selection focused predictors, we included several movement predictors: step length, log step length, and cos turn angle, as well as the interaction between step length and log of step length with all land cover types.
+Including these movement components and interactions improves the identifiability of habitat selection [@avgar_integrated_2016].
 
 To account for the structure originating from having multiple individuals in the model, we included fixed Gaussian processes for the time step and the individual in keeping with the approach described by @muff_accounting_2020.
 This formulation, namely the fixed Gaussian processes, as described by @muff_accounting_2020 allows for the efficient estimation of population level selection using integrated nested Laplace approximation (INLA) [@INLA2013b;@INLA2015d].
 Our final formula was: *y ~ -1 + Distance to woodland (continuous) + Distance to hedgerows (continuous) + Land cover categories (7 binary variables) + Road crossed (binary) + Step length (continuous) + Log step length (continuous) + Cos turn angle (continuous) + Step length interactions with Land cover categories + Log step length interactions with Land cover categories + Gaussian process for deer ID + Gaussian process for time step*.
 
-To supplement the population model, we ran individual level step-selection models for each Roe Deer separately.
+To supplement the population model, we ran individual level integrated step-selection models for each Roe Deer separately.
 These models used the same data as the population level model, but focused on individual level responses relative to the population mean.
 Past studies of wild Roe Deer have found substantial levels of individual variability in behavioural responses to risk [@bonnot_interindividual_2015].
 For the individual models, we used a formula that included land cover class, distance to woodland, distance to hedgerows, a binary describing whether they crossed a road, step length, log step length, and cos of turn angle.
@@ -328,8 +328,8 @@ Overall, the `r nrow(trackingSummary)` GPS collared Roe Deer resulted in `r sum(
 This resulted in an average of `r meanFixDayInText` fixes per day per individual (Fig. \@ref(fig:trackingTimelags); Tab. \@ref(tab:trackingSummaryTable)).
 
 For our Aberdeenshire Roe Deer home range sizes ranged from `r totalAberRange`ha (95% contour point estimates), with a weighted mean of `r ctmmMean` (Fig. \@ref(fig:homeRangeSize)).
-The deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8 and Roe Deer 3; Fig. \@ref(fig:variogramPlot)).
-Effective sample sizes were all high (`r essOverall`), suggesting we can be confident in the home range estimates.
+The deer appeared range resident; however, a couple of individuals may show evidence of a range shift during the tracking period (Roe Deer 8 and Roe Deer 3; i.e., wave-like patterns present in the variograms; Fig. \@ref(fig:variogramPlot)).
+Effective sample sizes were all high (`r essOverall`), indicating a frequent repeated crossings accross their home ranges and suggesting we can be confident in the home range estimates.
 All except for two individuals (Roe Deer 5 and Roe Deer 12) found OU models to fit best, with the remaining two being better described by OUF models (Tab. \@ref(tab:akdeModelTable)).
 
 All best fitting models were anisotropic, suggesting these Roe Deer are inhabiting non-uniform home ranges (i.e., not being as wide as they are long).
@@ -608,7 +608,7 @@ The uncertainty surrounding Human Settlements and Permanent Wetland is well refl
 The high levels of specialisation and heterogeneity are driven by these same extreme estimates.
 The lack of consistent availability of these land covers and potentially inconsistent response leaves a lot of uncertainty concerning Roe Deer response to these land covers.
 
-```{r ssfCoefPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="center", fig.pos = "ht", fig.cap="Coefficient estimates for all individual step-selection models for all 15 Roe Deer, along side weighted population means per covariate. Points indicate the estimated coefficients for each individual. Error bars with the population estimates are the 95% confidence interval. Colour highlights reflect the estimates whose standard errors do not overlap zero, either negatively (light orange) and positively (dark orange). For distance to * variables, lower coefficients indicate that Roe Deer are selecting areas with lower distances from the landscape feature. For the road crossing variable, lower coefficients indicate a lower than chance to cross the road. For land cover variables, positive coefficients indicate of Roe Deer preferentially selecting to be in those areas."}
+```{r ssfCoefPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="center", fig.pos = "ht", fig.cap="Coefficient estimates for all individual step-selection models for all 15 Roe Deer, along side standard error weighted population means per covariate. Points indicate the estimated coefficients for each individual. Error bars with the population estimates are the 95% confidence interval. Colour highlights reflect the estimates whose standard errors do not overlap zero, either negatively (light orange) and positively (dark orange). For distance to * variables, lower coefficients indicate that Roe Deer are selecting areas with lower distances from the landscape feature. For the road crossing variable, lower coefficients indicate a lower than chance to cross the road. For land cover variables, positive coefficients indicate of Roe Deer preferentially selecting to be in those areas."}
 knitr::include_graphics(here::here("figures", "ssfCoef_indPop.png"))
 ```
 

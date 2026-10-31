@@ -70,12 +70,37 @@ generate_overview_maps <- function(deerData, akdeLists, landuseList, patches){
     }
 
     if(focalDeer$region[1] == "Aberdeenshire"){
+      # focalLand <- terra::rast(here::here("data", "GIS data", "landuseAberdeen.tif"))
       focalLand <- terra::rast(landuseList$Aberdeen$landuse)
     } else {
+      # focalLand <- terra::rast(here::here("data", "GIS data", "landuseWessex.tif"))
       focalLand <- terra::rast(landuseList$Wessex$landuse)
     }
     focalLand <- focalLand %>%
-      mutate(LCM_1_cat = paste0("LCM_", LCM_1))
+      mutate(LCM_1_cat = paste0("LCM_", LCM_1)) %>%
+      mutate(landuse = factor(case_when(
+        LCM_1 %in% 1 ~ "Deciduous Broadleaf Forest",
+        LCM_1 %in% 2 ~ "Evergreen Needleleaf Forest",
+        LCM_1 %in% 3 ~ "Cropland",
+        LCM_1 %in% 4 ~ "Tall Grassland",
+        LCM_1 %in% 5:7 ~ "Short Grassland",
+        LCM_1 %in% 9:10 ~ "Open Shrubland",
+        LCM_1 %in% c(12,15,16,17,18) ~ "Barren",
+        LCM_1 %in% c(8,11,19) ~ "Permanent Wetland",
+        LCM_1 %in% 20:21 ~ "Human Settlements",
+        TRUE ~ "Other"
+      ), levels = c(
+        "Deciduous Broadleaf Forest",
+        "Evergreen Needleleaf Forest",
+        "Cropland",
+        "Tall Grassland",
+        "Short Grassland",
+        "Open Shrubland",
+        "Barren",
+        "Permanent Wetland",
+        "Human Settlements",
+        "Other"
+      )))
 
     scaleBar <- data.frame(xStart = round(extent(focalDeer)[2], digits = 1),
                            xEnd = round(extent(focalDeer)[2], digits = 1) - 200,
@@ -84,8 +109,9 @@ generate_overview_maps <- function(deerData, akdeLists, landuseList, patches){
 
     LCM1Plot  <- focalSF %>%
       ggplot() +
-      geom_spatraster(data = focalLand, aes(fill = LCM_1_cat)) +
-      scale_fill_manual(values = paletteList$UKCEHcoloursVecColours, labels = paletteList$UKCEHcoloursVecNames,
+      geom_spatraster(data = focalLand, aes(fill = landuse)) +
+      scale_fill_manual(values = paletteList$UKCEHcoloursVecColours,
+                        labels = paletteList$UKCEHcoloursVecNames,
                         na.value = "red") +
       # geom_spatraster(data = focalLand, aes(fill = LCM_2)) +
       # scale_fill_gradient(low = "#becf98", high = "#5d7c0a", na.value = "red") +

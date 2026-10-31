@@ -102,11 +102,13 @@ plot_study_locations <- function(deerData, landuseList, patchList){
       focalRoads <- landuseList$Aberdeen$roads
       croppedStack <- stackLayers %>%
         crop(focalPatches)
+      plottitle <- focalRegion
     } else {
       focalPatches <- patchList[["Wessex"]]
       focalRoads <- landuseList$Wessex$roads
       croppedStack <- stackLayers %>%
         crop(focalPatches)
+      plottitle <- "Hampshire"
     }
 
     meanLocations <- deerData %>%
@@ -151,6 +153,7 @@ plot_study_locations <- function(deerData, landuseList, patchList){
       y = scaleLocation$y[1],
       yend = scaleLocation$y[2]
     )
+
     (localMap <- ggplot() +
         geom_spatraster(data = croppedStack, aes(fill = Deciduous_Broadleaf_Forest),
                         inherit.aes = TRUE) +
@@ -161,7 +164,7 @@ plot_study_locations <- function(deerData, landuseList, patchList){
         geom_segment(data = scaleLocationXY, aes(x = x, y = y,
                                                  xend = xend, yend = yend),
                      colour = paletteList$baseGrey, linewidth = 0.9) +
-        annotate("text", x = scaleLocationXY$x[1], y = scaleLocationXY$y[1],
+        ggplot2::annotate("text", x = scaleLocationXY$x[1], y = scaleLocationXY$y[1],
                  label = "10km", colour = paletteList$baseGrey, size = 5, hjust = 0, vjust = 1.3,
                  fontface = 2) +
         # geom_label_repel(data = meanLocations, aes(x = meanx, y = meany, label = Animal_ID),
@@ -170,7 +173,8 @@ plot_study_locations <- function(deerData, landuseList, patchList){
         #                  label.size = 0.75, segment.size = 0.95,
         #                  max.overlaps = 20, max.iter = 1000000,
         #                  seed = 2025, fontface = 2) +
-        geom_label_repel(data = woodlandLabels, aes(x = meanWoodlandx, y = meanWoodlandy, label = woodlandName),
+        geom_label_repel(data = woodlandLabels, aes(x = meanWoodlandx,
+                                                    y = meanWoodlandy, label = woodlandName),
                          colour = paletteList$deerSpeciesPal[1], size = 3, force = 0.2, force_pull = 1,
                          box.padding = unit(0.35, "lines"), label.padding = unit(1.5, "mm"),
                          label.size = 0.75, segment.size = 0.95,
@@ -184,7 +188,7 @@ plot_study_locations <- function(deerData, landuseList, patchList){
           "1" = paletteList$corePal[["Woodland"]]
         ), na.value = "grey85") +
         coord_sf(expand = 0) +
-        labs(x = "", y = "", fill = "Forested Areas", title = focalRegion) +
+        labs(x = "", y = "", fill = "Forested Areas", title = plottitle) +
         theme_void() +
         theme(text = element_text(colour = paletteList$baseGrey),
               line = element_line(colour = paletteList$baseGrey),
@@ -207,6 +211,8 @@ plot_study_locations <- function(deerData, landuseList, patchList){
 
   ggsave(plot = fullPlot, filename = here("figures", "studyLocationMapRoe.png"),
          width = 300, height = 130, dpi = 300, units = "mm")
+  ggsave(plot = fullPlot, filename = here("figures", "studyLocationMapRoe.pdf"),
+         width = 300, height = 130, units = "mm")
 
   return(fullPlot)
 

@@ -57,19 +57,29 @@ plot_homeRange_sizes <- function(deerData, akdeLists,#, wrsfakde
 
 
   (areaPlot <- allAreas %>%
+      mutate(region = case_when(
+        region == "Wessex" ~ "Hampshire",
+        TRUE ~ region
+      ),
+      Animal_ID = ifelse(str_detect(Animal_ID, "M"), sub("_M", " (Male)", Animal_ID),
+                                                         sub("_F", " (Female)", Animal_ID,))
+      ) |>
       filter(level == 0.95) %>%
       filter(!str_detect(Animal_ID, "Fallow")) %>%
+      arrange(est) |>
+      mutate(Animal_ID = factor(Animal_ID, levels = Animal_ID)) |>
       ggplot() +
       geom_errorbar(aes(x = Animal_ID, ymin = low, ymax = high,
                         colour = Sex, group = as.factor(level)),
-                    position = position_dodge(width = 0.2), width = 0.25) +
+                    position = position_dodge(width = 0.2), width = 0.15) +
       # geom_errorbar(data = allAreas_wrsf %>%
       #                 filter(level == 0.95),
       #               aes(x = Animal_ID, ymin = low, ymax = high,
       #                   colour = Sex, group = as.factor(level)),
       #               position = position_nudge(x = -0.2), width = 0.25, alpha = 0.45) +
       geom_point(aes(x = Animal_ID, y = est,
-                     colour = Sex, group = as.factor(level), shape = Sex), position = position_dodge(width = 0.2)) +
+                     colour = Sex, group = as.factor(level), shape = Sex),
+                 position = position_dodge(width = 0.2), size = 2) +
       # geom_point(data = allAreas_wrsf %>%
       #              filter(level == 0.95),
       #            aes(x = Animal_ID, y = est,
@@ -103,9 +113,9 @@ plot_homeRange_sizes <- function(deerData, akdeLists,#, wrsfakde
       ))
 
   ggsave(areaPlot, filename = here("figures", "homeRangeAreaPlot.png"),
-         width = 180, height = 120, units = "mm", dpi = 300)
+         width = 180, height = 110, units = "mm", dpi = 300)
   ggsave(areaPlot, filename = here("figures", "homeRangeAreaPlot.pdf"),
-         width = 180, height = 120, units = "mm")
+         width = 180, height = 110, units = "mm")
 
   return(areaPlot)
 
