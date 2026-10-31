@@ -343,6 +343,7 @@ knitr::include_graphics(here::here("figures", "homeRangeAreaPlot.png"))
 knitr::include_graphics(here::here("figures", "distanceDistributionPlot.png"))
 ```
 
+
 ```{r poisCoef, echo=FALSE, message=FALSE}
 poisCoef <- read.csv(here::here("tables", "poisFixed.csv"))
 
@@ -410,20 +411,41 @@ humanCoef <- poisCoef %>%
 
 ## Population level selection
 
-The population level habitat selection model revealed a general tendency for Roe Deer to remain closer to the woodland patches (`r distWoodCoef`), with no clear selection for hedgerows (`r distHedgeCoef`; Fig. \@ref(fig:poisCoefPlot)).
+The population level habitat selection model revealed a general tendency for Roe Deer to remain closer to the woodland patches (`r distWoodCoef`), with no clear selection for hedgerows (`r distHedgeCoef`; Fig. \@ref(tab:poisCoefTable)).
 The model also revealed that roads play a role in reducing connectivity across the landscape: observed deer steps were less likely to cross roads than random steps (`r roadCrossCoef`).
 The population habitat selection model also revealed selection for the land cover classes open shrubland (`r shrubCoef`) and tall grassland (`r tallGCoef`); other relationships were less clear (Tab. \@ref(tab:poisTable)).
 
-The model's inclusion of step length and log step length interactions allowed us to examine whether movement was altered by land cover.
+```{r poisCoefTable, echo=FALSE, message=FALSE}
+poisCoef[poisCoef$term == "Road Crossing",]$termType <- "Road Crossing"
+poisCoef |> 
+  filter(!str_detect(termType, "Core")) %>%
+  filter(!str_detect(termType, "Step")) |> 
+  select(`Term Type` = termType, `Term` = term, Mean = mean, SD = sd, Significance = sig) |> 
+  kableExtra::kbl(digits = 3, caption = "Coefficient estimates, with standard deviation (SD), from the population level model of habitat selection for all 15 Roe Deer. For distance to * variables, lower coefficients indicate that Roe Deer are selecting areas with lower distances from the landscape feature. For the road crossing variable, lower coefficients indicate a lower than chance to cross the road. For land cover variables, positive coefficients indicate of Roe Deer preferentially selecting to be in those areas.", booktabs = TRUE, longtable = TRUE) %>%
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position"), font_size = 9)
+```
+
+The model's inclusion of step length and log step length interactions allowed us to examine whether movement was altered by land cover (Tab. \@ref(tab:poisCoefTableInteractions)).
 Movement was most impacted by short grassland, tall grassland, and cropland, all showing the same pattern.
 The step lengths in these land covers tended to be lower (i.e., slower movement), as seen in coefficients for log step length (short grassland `r shortG_logsl_Coef`; tall grassland `r tallG_logsl_Coef`; cropland `r crop_logsl_Coef`) but with a larger tail to the Gamma distribution (i.e., larger coefficient for step lengths; short grassland `r shortG_sl_Coef`; tall grassland `r tallG_sl_Coef`; cropland `r crop_sl_Coef`).
 Combined this could be indicative of more stop-start movements and behaviours.
 
+```{r poisCoefTableInteractions, echo=FALSE, message=FALSE}
+poisCoef |> 
+  filter(!str_detect(termType, "Core")) %>%
+  filter(str_detect(termType, "Step")) |> 
+  mutate(termType = ifelse(str_detect(termType, "log"), "Log step length",
+                           "Step length")) |> 
+  select(`Term Type` = termType, `Term` = term, Mean = mean, SD = sd, Significance = sig) |> 
+  kableExtra::kbl(digits = 4, caption = "Coefficient estimates, with standard deviation (SD), from the population level model of habitat selection for all 15 Roe Deer. For step length interactions, positive coefficient interactions with step lengths indicate a longer tail to the overall distribution of step lengths when Roe Deer are in a given land cover class. A positive coefficient with log step lengths indicate a larger step lengths when Roe Deer are in a given land cover class.", booktabs = TRUE, longtable = TRUE) %>%
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position"), font_size = 9)
+```
+
 Estimates regarding human settlements were paired with very wide confidence intervals (`r humanCoef`), likely a result of minimal overlap between the Roe Deer movement data (and any associated random available points) and human settlements making estimation difficult.
 
-```{r poisCoefPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="center", fig.pos = "ht", fig.cap="Coefficient estimates, with 95% confidence intervals, from the population level model of habitat selection for all 15 Roe Deer. For distance to * variables, lower coefficients indicate that Roe Deer are selecting areas with lower distances from the landscape feature. For the road crossing variable, lower coefficients indicate a lower than chance to cross the road. For land cover variables, positive coefficients indicate of Roe Deer preferentially selecting to be in those areas. For step length interactions, positive coefficient interactions with step lengths indicate a longer tail to the overall distribution of step lengths when Roe Deer are in a given land cover class. A positive coefficient with log step lengths indicate a larger step lengths when Roe Deer are in a given land cover class. Central numeric labels report majorly outlying estimates to aid visualisation. Colour highlights and bolding reflect the significantly negative (light orange) and significantly positive (dark orange) coefficients. Note x axes are different per variable type."}
+<!--- ```{r poisCoefPlot, echo=FALSE, out.width='100%', fig.height=5, fig.width=3, fig.align="center", fig.pos = "ht", fig.cap="Coefficient estimates, with 95% confidence intervals, from the population level model of habitat selection for all 15 Roe Deer. For distance to * variables, lower coefficients indicate that Roe Deer are selecting areas with lower distances from the landscape feature. For the road crossing variable, lower coefficients indicate a lower than chance to cross the road. For land cover variables, positive coefficients indicate of Roe Deer preferentially selecting to be in those areas. For step length interactions, positive coefficient interactions with step lengths indicate a longer tail to the overall distribution of step lengths when Roe Deer are in a given land cover class. A positive coefficient with log step lengths indicate a larger step lengths when Roe Deer are in a given land cover class. Central numeric labels report majorly outlying estimates to aid visualisation. Colour highlights and bolding reflect the significantly negative (light orange) and significantly positive (dark orange) coefficients. Note x axes are different per variable type."}
 knitr::include_graphics(here::here("figures", "poisCoef.png"))
-```
+``` --->
 
 ```{r ssfCoef, echo=FALSE, message=FALSE}
 

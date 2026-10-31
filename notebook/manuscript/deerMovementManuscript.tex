@@ -387,25 +387,65 @@ The placement of home ranges suggest the importance of woodland, with 95\% of al
 
 \subsection{Population level selection}\label{population-level-selection}
 
-The population level habitat selection model revealed a general tendency for Roe Deer to remain closer to the woodland patches (-0.0051; 95\% CI -0.0082 to -0.0022), with no clear selection for hedgerows (-9e-04; 95\% CI -0.0019 to 1e-04; Fig. \ref{fig:poisCoefPlot}).
+The population level habitat selection model revealed a general tendency for Roe Deer to remain closer to the woodland patches (-0.0051; 95\% CI -0.0082 to -0.0022), with no clear selection for hedgerows (-9e-04; 95\% CI -0.0019 to 1e-04; Fig. \ref{tab:poisCoefTable}).
 The model also revealed that roads play a role in reducing connectivity across the landscape: observed deer steps were less likely to cross roads than random steps (-0.76; 95\% CI -1.2 to -0.36).
 The population habitat selection model also revealed selection for the land cover classes open shrubland (1.5; 95\% CI 0.62 to 2.2) and tall grassland (0.57; 95\% CI 0.17 to 0.98); other relationships were less clear (Tab. \ref{tab:poisTable}).
 
-The model's inclusion of step length and log step length interactions allowed us to examine whether movement was altered by land cover.
+\begingroup\fontsize{9}{11}\selectfont
+
+\begin{longtable}[t]{llrrl}
+\caption{\label{tab:poisCoefTable}Coefficient estimates, with standard deviation (SD), from the population level model of habitat selection for all 15 Roe Deer. For distance to * variables, lower coefficients indicate that Roe Deer are selecting areas with lower distances from the landscape feature. For the road crossing variable, lower coefficients indicate a lower than chance to cross the road. For land cover variables, positive coefficients indicate of Roe Deer preferentially selecting to be in those areas.}\\
+\toprule
+Term Type & Term & Mean & SD & Significance\\
+\midrule
+\cellcolor{gray!10}{Road Crossing} & \cellcolor{gray!10}{Road Crossing} & \cellcolor{gray!10}{-0.762} & \cellcolor{gray!10}{0.205} & \cellcolor{gray!10}{Significant -}\\
+Land cover & Human Settlements & -69.533 & 53.989 & Not Significant\\
+\cellcolor{gray!10}{Land cover} & \cellcolor{gray!10}{Evergreen Needleleaf Forest} & \cellcolor{gray!10}{-0.375} & \cellcolor{gray!10}{0.319} & \cellcolor{gray!10}{Not Significant}\\
+Land cover & Cropland & -0.217 & 0.380 & Not Significant\\
+\cellcolor{gray!10}{Land cover} & \cellcolor{gray!10}{Tall Grassland} & \cellcolor{gray!10}{0.566} & \cellcolor{gray!10}{0.208} & \cellcolor{gray!10}{Significant +}\\
+\addlinespace
+Land cover & Permanent Wetland & 0.888 & 1.510 & Not Significant\\
+\cellcolor{gray!10}{Land cover} & \cellcolor{gray!10}{Short Grassland} & \cellcolor{gray!10}{1.431} & \cellcolor{gray!10}{1.220} & \cellcolor{gray!10}{Not Significant}\\
+Land cover & Open Shrubland & 1.468 & 0.396 & Significant +\\
+\cellcolor{gray!10}{Non-land cover} & \cellcolor{gray!10}{Distance to Woodland} & \cellcolor{gray!10}{-0.005} & \cellcolor{gray!10}{0.001} & \cellcolor{gray!10}{Significant -}\\
+Non-land cover & Distance to Hedges & -0.001 & 0.001 & Not Significant\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+
+The model's inclusion of step length and log step length interactions allowed us to examine whether movement was altered by land cover (Tab. \ref{tab:poisCoefTableInteractions}).
 Movement was most impacted by short grassland, tall grassland, and cropland, all showing the same pattern.
 The step lengths in these land covers tended to be lower (i.e., slower movement), as seen in coefficients for log step length (short grassland -0.76; 95\% CI -1.2 to -0.32; tall grassland -0.18; 95\% CI -0.24 to -0.12; cropland -0.16; 95\% CI -0.24 to -0.078) but with a larger tail to the Gamma distribution (i.e., larger coefficient for step lengths; short grassland 0.0044; 95\% CI 0.0018 to 0.007; tall grassland 0.00048; 95\% CI 5.1e-05 to 0.00092; cropland 0.0012; 95\% CI 0.00064 to 0.0017).
 Combined this could be indicative of more stop-start movements and behaviours.
 
+\begingroup\fontsize{9}{11}\selectfont
+
+\begin{longtable}[t]{llrrl}
+\caption{\label{tab:poisCoefTableInteractions}Coefficient estimates, with standard deviation (SD), from the population level model of habitat selection for all 15 Roe Deer. For step length interactions, positive coefficient interactions with step lengths indicate a longer tail to the overall distribution of step lengths when Roe Deer are in a given land cover class. A positive coefficient with log step lengths indicate a larger step lengths when Roe Deer are in a given land cover class.}\\
+\toprule
+Term Type & Term & Mean & SD & Significance\\
+\midrule
+\cellcolor{gray!10}{Log step length} & \cellcolor{gray!10}{Short Grassland:log\_sl} & \cellcolor{gray!10}{-0.7587} & \cellcolor{gray!10}{0.2221} & \cellcolor{gray!10}{Significant -}\\
+Log step length & Open Shrubland:log\_sl & -0.2584 & 0.0477 & Significant -\\
+\cellcolor{gray!10}{Log step length} & \cellcolor{gray!10}{Tall Grassland:log\_sl} & \cellcolor{gray!10}{-0.1804} & \cellcolor{gray!10}{0.0328} & \cellcolor{gray!10}{Significant -}\\
+Log step length & Cropland:log\_sl & -0.1591 & 0.0412 & Significant -\\
+\cellcolor{gray!10}{Log step length} & \cellcolor{gray!10}{Permanent Wetland:log\_sl} & \cellcolor{gray!10}{-0.1568} & \cellcolor{gray!10}{0.1524} & \cellcolor{gray!10}{Not Significant}\\
+\addlinespace
+Log step length & Evergreen Needleleaf Forest:log\_sl & 0.0388 & 0.0442 & Not Significant\\
+\cellcolor{gray!10}{Log step length} & \cellcolor{gray!10}{Human Settlements:log\_sl} & \cellcolor{gray!10}{17.4673} & \cellcolor{gray!10}{13.2464} & \cellcolor{gray!10}{Not Significant}\\
+Step length & Human Settlements:sl\_ & -0.1214 & 0.0825 & Not Significant\\
+\cellcolor{gray!10}{Step length} & \cellcolor{gray!10}{Permanent Wetland:sl\_} & \cellcolor{gray!10}{-0.0021} & \cellcolor{gray!10}{0.0018} & \cellcolor{gray!10}{Not Significant}\\
+Step length & Evergreen Needleleaf Forest:sl\_ & -0.0003 & 0.0003 & Not Significant\\
+\addlinespace
+\cellcolor{gray!10}{Step length} & \cellcolor{gray!10}{Open Shrubland:sl\_} & \cellcolor{gray!10}{0.0002} & \cellcolor{gray!10}{0.0004} & \cellcolor{gray!10}{Not Significant}\\
+Step length & Tall Grassland:sl\_ & 0.0005 & 0.0002 & Significant +\\
+\cellcolor{gray!10}{Step length} & \cellcolor{gray!10}{Cropland:sl\_} & \cellcolor{gray!10}{0.0012} & \cellcolor{gray!10}{0.0003} & \cellcolor{gray!10}{Significant +}\\
+Step length & Short Grassland:sl\_ & 0.0044 & 0.0013 & Significant +\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+
 Estimates regarding human settlements were paired with very wide confidence intervals (-70; 95\% CI -180 to 36), likely a result of minimal overlap between the Roe Deer movement data (and any associated random available points) and human settlements making estimation difficult.
-
-\begin{figure}[ht]
-
-{\centering \includegraphics[width=1\linewidth]{../../figures/poisCoef} 
-
-}
-
-\caption{Coefficient estimates, with 95\% confidence intervals, from the population level model of habitat selection for all 15 Roe Deer. For distance to * variables, lower coefficients indicate that Roe Deer are selecting areas with lower distances from the landscape feature. For the road crossing variable, lower coefficients indicate a lower than chance to cross the road. For land cover variables, positive coefficients indicate of Roe Deer preferentially selecting to be in those areas. For step length interactions, positive coefficient interactions with step lengths indicate a longer tail to the overall distribution of step lengths when Roe Deer are in a given land cover class. A positive coefficient with log step lengths indicate a larger step lengths when Roe Deer are in a given land cover class. Central numeric labels report majorly outlying estimates to aid visualisation. Colour highlights and bolding reflect the significantly negative (light orange) and significantly positive (dark orange) coefficients. Note x axes are different per variable type.}\label{fig:poisCoefPlot}
-\end{figure}
 
 \subsection{Individual level selection and variation in selection}\label{individual-level-selection-and-variation-in-selection}
 
